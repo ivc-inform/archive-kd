@@ -4,7 +4,7 @@
 
 	<xsl:import href="common.xsl"/>
 
-	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd"/>
+	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schema.xsd"/>
 	<xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
 	<xsl:param name="inputBoFile" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp/allBo.xml'"/>
@@ -166,7 +166,7 @@
 					<xsl:if test="not(doc-available($outPath))">
 						<xsl:result-document href="{$outPath}" format="format" validation="strict">
 							<RootPane xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://simpleSys.ru/xml/library/app" xmlns:bo="http://simpleSys.ru/xml/library/bo" xmlns:isc="http://simpleSys.ru/xml/library/ISC"
-							          xsi:schemaLocation="http://simpleSys.ru/xml/library/app http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaApp.xsd">
+							          xsi:schemaLocation="http://simpleSys.ru/xml/library/app http://toucan.simplesys.lan/xml/xsd/schemaApp.xsd">
 								<Bo BoName="{$boName}" GroupName="{$groupName}" BoCaption="{$caption}" GroupCaption="{$groupCaption}" Enabled="true"/>
 								<xsl:variable as="node()*" name="boTreeCaption">
 									<xsl:call-template name="bo:getBoTreeCaption"/>

@@ -52,7 +52,7 @@
     </xsl:template>
 
     <xsl:template match="isc:DataViewSSDyn">
-        <DataViewSSDyn xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://simpleSys.ru/xml/library/ISC" xsi:schemaLocation="http://simpleSys.ru/xml/library/ISC  http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd">
+        <DataViewSSDyn xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://simpleSys.ru/xml/library/ISC" xsi:schemaLocation="http://simpleSys.ru/xml/library/ISC  http://toucan.simplesys.lan/xml/xsd/schemaISC.xsd">
             <xsl:apply-templates/>
         </DataViewSSDyn>
     </xsl:template>

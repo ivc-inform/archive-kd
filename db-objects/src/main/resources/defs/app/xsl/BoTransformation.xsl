@@ -7,8 +7,8 @@
 	<xsl:import href="MergedFiles.xsl"/>
 	<xsl:import href="DefaultTemplates.xsl"/>
 
-	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaApp.xsd"/>
-	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd"/>
+	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schemaApp.xsd"/>
+	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schema.xsd"/>
 
 	<xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
@@ -34,7 +34,7 @@
 	<xsl:param name="generatedDir" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/generated/xml'"/>
 	<xsl:variable name="_generatedDir" as="xs:string" select="common:check-last-slash($generatedDir)"/>
 
-	<xsl:variable select="'http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd'" name="schemaAppPath" as="xs:string"/>
+	<xsl:variable select="'http://toucan.simplesys.lan/xml/xsd/schemaISC.xsd'" name="schemaAppPath" as="xs:string"/>
 
 	<xsl:variable name="docBO" select="doc(concat($_tmpDir,'allBo.xml'))"/>
 	<xsl:variable name="dataSourceBO" select="doc(concat($_tmpDir,'dataSources.xml'))"/>

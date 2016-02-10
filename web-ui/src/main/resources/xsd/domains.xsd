@@ -2,7 +2,7 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0.0" targetNamespace="http://simpleSys.ru/xml/library/domains" xmlns="http://simpleSys.ru/xml/library/domains"
            xmlns:common="http://simpleSys.ru/xml/library/common" xmlns:xsd="undefined">
 
-	<xs:import schemaLocation="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/common.xsd" namespace="http://simpleSys.ru/xml/library/common"/>
+	<xs:import schemaLocation="http://toucan.simplesys.lan/xml/xsd/common.xsd" namespace="http://simpleSys.ru/xml/library/common"/>
 
 	<xs:element name="DataTypes">
 		<xs:complexType>
