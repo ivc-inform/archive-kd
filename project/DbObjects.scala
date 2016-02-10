@@ -26,7 +26,7 @@ trait DbObjects {
     Seq(
       sourceSchemaDir in DevConfig := (resourceDirectory in Compile).value / "defs",
       startPackageName in DevConfig := "ru.simplesys.defs",
-      contextPath in DevConfig := "dm-processing",
+      contextPath in DevConfig := "acrchive-kd",
       maxArity := 254,
       sourceGenerators in Compile <+= (generateBoScalaCode in DevConfig)
     )

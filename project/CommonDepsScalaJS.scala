@@ -5,7 +5,7 @@ import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 
 object CommonDepsScalaJS {
   object versions {
-    val smartclientScalaJSWrapperVersion = "1.0-SNAPSHOT"
+    val smartclientScalaJSWrapperVersion = "1.1-SNAPSHOT"
   }
 
   val smartclientScalaJSWrapper = Def.setting("com.simplesys" %%% "smartclient-wrapper" % versions.smartclientScalaJSWrapperVersion)

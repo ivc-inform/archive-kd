@@ -43,7 +43,7 @@ with WebUIClient
     )
   }
 
-  lazy val root = Project(id = "dm-processing", base = file(".")).enablePlugins(GitVersioning).aggregate(
+  lazy val root = Project(id = "acrchive-kd", base = file(".")).enablePlugins(GitVersioning).aggregate(
     dbObjects,
     webUI,
     webUIClientJS,
@@ -52,8 +52,6 @@ with WebUIClient
     libraryDependencies ++= Seq(
       CommonDeps.scalaTest.value % "test",
       CommonDeps.akkaTestKit.value % "test",
-      CommonDeps.json4sJackson.value % "test",
-      CommonDeps.scalajHttp.value % "test",
       CommonDeps.ssysScalaGen.value % "test",
       CommonDeps.ssysBoneCPWrapper.value % "test"
     )).settings(

@@ -16,11 +16,6 @@ trait WebUI {
   import ru.simplesys.plugins.sourcegen.DevPlugin
   import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 
-  //  import com.earldouglas.xwp.JettyPlugin
-  //  import com.earldouglas.xwp.ContainerPlugin
-
-  //lazy val webUIRef = ProjectRef(id = "web-ui", base = file("web-ui"))
-
   lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
     DevPlugin, SourceGenPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin /*, JettyPlugin*/
   ).dependsOn(
@@ -67,7 +62,7 @@ trait WebUI {
       //dev plugin
       sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",
       startPackageName in DevConfig := "ru.simplesys.defs",
-      contextPath in DevConfig := "dm-processing",
+      contextPath in DevConfig := "acrchive-kd",
       maxArity in DevConfig := 254,
 
       sourceGenerators in Compile <+= generateScalaCode in DevConfig,
@@ -96,17 +91,6 @@ trait WebUI {
       currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
       currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
       merge in MergeWebappConfig <<= (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).dependsOn(generateJS in SourceGenJSConfig),
-//////      (resourceGenerators in Compile) += task[Seq[File]] {Seq((org.scalajs.sbtplugin.ScalaJSPlugin.autoImport.fastOptJS in webUIClientJS).value.data)},
-/////      //resources in Compile += (fastOptJS in Compile in webUIClientJS).value.data,
-//      resourceGenerators in Compile += Def.task {
-//        val scalaJSPath = (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "scalajs"
-//        IO.delete(scalaJSPath)
-//        scalaJSPath.mkdirs()
-//        val trg = scalaJSPath / "webUIClient-scalajs.js"
-//        //(resourceManaged in Compile).value / "/web-ui-client-fastopt.js"
-//        IO.copyFile((fastOptJS in Compile in webUIClientJS).value.data, trg)
-//        Seq(trg)
-//      }.taskValue,
       (resourceGenerators in Compile) += task[Seq[File]] {
 
         val aboutFile: File = (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "MakeAboutData.js"
@@ -139,7 +123,7 @@ trait WebUI {
         }
 
         list ++= Seq(
-          JsonObject("libName" -> "Исполнители :", "libVersion" -> "Устинов Николай, Юдин Андрей"),
+          JsonObject("libName" -> "Исполнители :", "libVersion" -> "Юдин Андрей"),
           JsonObject("libName" -> "Версия :", "libVersion" -> version.value)
         )
 
