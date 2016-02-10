@@ -1,0 +1,47 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<isc:Members xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:isc="http://simpleSys.ru/xml/library/ISC"
+             xsi:schemaLocation="http://simpleSys.ru/xml/library/ISC  http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd">
+    <!--<isc:RibbonGroupDyn>
+            <isc:Group>IfLogged</isc:Group>
+            <isc:useSelfName>true</isc:useSelfName>
+            <isc:AutoDraw>false</isc:AutoDraw>
+            <isc:DefaultLayoutAlign>AlCenter</isc:DefaultLayoutAlign>
+            <isc:Controls>
+                <isc:IconMenuButtonSSDyn>
+                    <isc:Identifier>cetegories1</isc:Identifier>
+                    <isc:useSelfName>true</isc:useSelfName>
+                    <isc:AutoDraw>false</isc:AutoDraw>
+                    <isc:Click>
+                        <isc:FunctionsFileURL>src/main/webapp/managed/javascript/common-webapp/developed/MenuItemsFunctions.js/</isc:FunctionsFileURL>
+                        <isc:FunctionName>showMenu</isc:FunctionName>
+                    </isc:Click>
+                    <isc:Title>Разное</isc:Title>
+                    <isc:IconOrientation>IoCenter</isc:IconOrientation>
+                    <isc:LargeIcon>Misc-Box.png</isc:LargeIcon>
+                    <isc:Orientation>icbtnOrntVertical</isc:Orientation>
+                    <isc:Menu>
+                        <isc:Items>
+                            <isc:MenuItemDyn>
+                                <isc:VisibilityIf>
+                                  <isc:FunctionsFileURL>src/main/webapp/managed/javascript/common-webapp/developed/MenuItemsFunctions.js/</isc:FunctionsFileURL>
+                                  <isc:FunctionName>visibilityAsNotRoot</isc:FunctionName>
+                                </isc:VisibilityIf>
+                                <isc:Click>
+                                    <isc:FunctionsFileURL>src/main/webapp/managed/javascript/common-webapp/developed/MenuItemsFunctions.js/</isc:FunctionsFileURL>
+                                    <isc:FunctionName>getTabHand</isc:FunctionName>
+                                </isc:Click>
+                                &lt;!&ndash;<isc:Icon>cetegories_category.png</isc:Icon>&ndash;&gt;
+                                <isc:Name>Example1</isc:Name>
+                                <isc:Title Ellipsis="true">Пример 1</isc:Title>
+                            </isc:MenuItemDyn>
+                        </isc:Items>
+                    </isc:Menu>
+                    <isc:MenuAnimationEffect>mnuAnimEffctFade</isc:MenuAnimationEffect>
+                </isc:IconMenuButtonSSDyn>
+            </isc:Controls>
+            <isc:NumRows>1</isc:NumRows>
+            <isc:TitleHeight>18</isc:TitleHeight>
+            <isc:Title>Группа (разное)</isc:Title>
+    </isc:RibbonGroupDyn>-->
+</isc:Members>
