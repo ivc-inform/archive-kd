@@ -4,7 +4,7 @@ port in container.Configuration := 8080
 
 webInfIncludeJarPattern in Compile := Some( """.*com\.simplesys.*/*\.jar$|.*ru\.simplesys.*/*\.jar$|.*/classes/.*""")
 
-container.deploy("/dm-processing" -> webUI)
+container.deploy("/archive-kd" -> webUI)
 
 //configurationXml in container.Configuration :=
 //      <session-config>
@@ -21,8 +21,6 @@ warPostProcess in HostingDeploy <<= (target) map {
     (target) => {
         (x) => {
             val webapp = target / "webapp"
-            IO.delete(webapp / "WEB-INF" / "lib" / "opencorpora-data-1.0.jar")
-            IO.delete(webapp / "WEB-INF" / "lib" / "fias-data-1.0.jar")
         }
     }
 }

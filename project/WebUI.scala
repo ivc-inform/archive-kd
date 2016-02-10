@@ -8,9 +8,7 @@ import sbt._
 trait WebUI {
   self: Build
     with DbObjects
-    with Templates
-    with ProcessingCore =>
-    //with WebUIClient =>
+    with WebUIClient =>
 
   import com.simplesys.mergewebapp.MergeWebappPlugin
   import com.simplesys.sourcegenJS.SourceGenPlugin
@@ -26,9 +24,7 @@ trait WebUI {
   lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
     DevPlugin, SourceGenPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin /*, JettyPlugin*/
   ).dependsOn(
-      dbObjects,
-      templates,
-      processingCore//,
+      dbObjects//,
       //webUIClientJVM
     )/*.aggregate(webUIClientJS)*/.settings(
 

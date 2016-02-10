@@ -5,20 +5,10 @@ import ru.simplesys.dmprocessing.sbtbuild._
 import sbt.Keys._
 import sbt._
 
-object DmProcessingBuild extends Build
-with XmlPullHelper
-with DoobieHelpers
-with Tokenizer
-with Classifier
-with Dictionary
+object ArchiveKdBuild extends Build
 with DbObjects
-with Templates
-with ProcessingCore
-with OraEmbeddedHelpers
-with CliTools
 with WebUI
 with WebUIClient
-with CurrencyRates
 {
   override def settings: Seq[Def.Setting[_]] = super.settings ++ CommonSettings.defaultSettings ++ {
     import ru.simplesys.plugins.sourcegen.DevPlugin._
@@ -54,20 +44,10 @@ with CurrencyRates
   }
 
   lazy val root = Project(id = "dm-processing", base = file(".")).enablePlugins(GitVersioning).aggregate(
-    oraEmbeddedHelpers,
-    doobieHelpers,
-    cliTools,
-    xmlPullHelper,
-    tokenizer,
-    classifier,
-    dictionary,
     dbObjects,
-    templates,
-    processingCore,
     webUI,
     webUIClientJS,
-    webUIClientJVM,
-    currencyRates
+    webUIClientJVM
   ).settings(
     libraryDependencies ++= Seq(
       CommonDeps.scalaTest.value % "test",
