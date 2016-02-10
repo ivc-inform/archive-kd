@@ -4,7 +4,7 @@
                 xmlns:domains="http://simpleSys.ru/xml/library/domains" exclude-result-prefixes="common xs isc bo app domains">
 
     <!--<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schemaISC.xsd"/>-->
-    <xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/domains.xsd"/>
+    <xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/domains.xsd"/>
 
     <xsl:param name="tmpDir" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
     <xsl:variable name="dataTypes" select="doc(concat(common:check-last-slash($tmpDir), 'domains.xml'))"/>

@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <mfms:MainView xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mfms="http://simpleSys.ru/xml/library/MFMS" xmlns="http://simpleSys.ru/xml/library/ISC"
-               xsi:schemaLocation="http://simpleSys.ru/xml/library/MFMS  http://toucan.simplesys.lan/xml/xsd/schemaMFMS.xsd">
+               xsi:schemaLocation="http://simpleSys.ru/xml/library/MFMS  http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaMFMS.xsd">
 	<TabSetSSDyn>
 		<Identifier>simpleSyS.app.mainPage.tabsSet</Identifier>
 		<useSelfName>true</useSelfName>

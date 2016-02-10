@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema targetNamespace="http://simpleSys.ru/xml/library/ISC" xmlns="http://simpleSys.ru/xml/library/ISC" xmlns:common="http://simpleSys.ru/xml/library/common" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0.0" xmlns:xsd="undefined">
 
-	<xs:import schemaLocation="http://toucan.simplesys.lan/xml/xsd/common.xsd" namespace="http://simpleSys.ru/xml/library/common"/>
+	<xs:import schemaLocation="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/common.xsd" namespace="http://simpleSys.ru/xml/library/common"/>
 
 	<xs:simpleType name="JSFileURLType">
 		<xs:restriction base="xs:anyURI"/>

@@ -5,8 +5,8 @@
 	<xsl:import href="common.xsl"/>
 	<xsl:import href="commonApp.xsl"/>
 
-	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schema.xsd"/>
-	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schemaISC.xsd"/>
+	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd"/>
+	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd"/>
 
 	<xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
@@ -19,7 +19,7 @@
 		<xsl:variable name="bos" as="node()*">
 			<xsl:document>
 				<xsl:message select="concat('Processing file: ', $inputBoFile)"/>
-				<SimpleTypes xmlns="http://simpleSys.ru/xml/library/ISC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/ISC http://toucan.simplesys.lan/xml/xsd/schemaISC.xsd">
+				<SimpleTypes xmlns="http://simpleSys.ru/xml/library/ISC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/ISC http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd">
 					<!--<xsl:apply-templates select="$FileSource/bo:allClasses/bo:class[@name='ContractorGroup']"/>-->
 					<!--<xsl:apply-templates select="$FileSource/bo:allClasses/bo:class[@name='Gds']"/>-->
 					<!--<xsl:apply-templates select="$FileSource/bo:allClasses/bo:class"/>-->
