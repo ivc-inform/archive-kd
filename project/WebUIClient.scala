@@ -11,30 +11,17 @@ trait WebUIClient {
     settings(
       name := "webUIClient",
       libraryDependencies ++= {
-        Seq(
-          //CommonSettings.cmnDependencies.prickle.value
-          //CommonSettings.cmnDependencies.scalaAsync.value
-          //CommonSettings.cmnDependencies.uTest.value
-        )
+        Seq()
       },
       testFrameworks += new TestFramework("utest.runner.Framework")
     ).
     jvmSettings(
 
       libraryDependencies ++= {
-        Seq(
-          //CommonSettings.jvmDependencies.scalaTest % "test"
-        )
+        Seq()
       }).
     jsSettings(
-      //scalacOptions += "-Xlog-implicits",
-      //persistLauncher := true,
-      //mainClass := Some("ru.simplesys.dmprocess.webuijs.ScalaJSExample"),
-      libraryDependencies ++= Seq(
-        //CommonDepsScalaJS.smartclientScalaJS.value
-        //CommonSettings.jsDependencies.smartClient.value % "provided"
-      )
-      //jsDependencies += "org.example" %% "js-thing" % "0.1" / "foo.js"
+      libraryDependencies ++= Seq()
     )/*.jsConfigure(x => x.dependsOn(macroJsSub)).jvmConfigure(x => x.dependsOn(macroJvmSub))*/
 
   // Needed, so sbt finds the projects

@@ -6,11 +6,6 @@ webInfIncludeJarPattern in Compile := Some( """.*com\.simplesys.*/*\.jar$|.*ru\.
 
 container.deploy("/archive-kd" -> webUI)
 
-//configurationXml in container.Configuration :=
-//      <session-config>
-//          <session-timeout>1</session-timeout>
-//      </session-config>
-
 addCommandAlias("debug-restart", "; packageWar ; container:restart")
 
 val HostingDeploy = config("hostingDeploy") extend (Compile)

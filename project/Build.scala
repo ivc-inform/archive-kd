@@ -27,19 +27,10 @@ with WebUIClient
 
       credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
 
-      //liquibaseUsername in DevConfig   := "test",
       liquibaseUsername in DevConfig := "mosk",
-      //liquibasePassword in DevConfig   := "test",
       liquibasePassword in DevConfig := "m125osk",
-      //liquibaseDriver in DevConfig := "org.postgresql.Driver"
       liquibaseDriver in DevConfig := "oracle.jdbc.OracleDriver",
-      //liquibaseUrl in DevConfig := "jdbc:postgresql://orapg.simplesys.lan:5432/webenzo",
-      liquibaseUrl in DevConfig := "jdbc:oracle:thin:@orapg.simplesys.lan:1521/test"//,
-
-//      autoCompilerPlugins := true,
-//      addCompilerPlugin("com.nativelibs4java" %% "hs" % "0.4-SNAPSHOT"),
-//      scalacOptions += "-Xplugin-require:scalaxy-streams",
-//      scalacOptions in Test += "-Xplugin-disable:scalaxy-streams"
+      liquibaseUrl in DevConfig := "jdbc:oracle:thin:@orapg.simplesys.lan:1521/test"
     )
   }
 
