@@ -7,8 +7,8 @@ object PluginDeps {
   object versions {
     val devPluginVersion = "1.0.10-SNAPSHOT"
     val sourceGenJSVersion = "1.0.3"
-    val transpileCoffeScriptVersion = "1.0.3"
-    val mergeJSVersion = "1.0.4"
+    val transpileCoffeScriptVersion = "1.0.10"
+    val mergeJSVersion = "1.0.4-SNAPSHOT"
 
     val sbtAspectJVersion = "0.10.2"
     val xsbtWebVersion = "0.9.1"
@@ -40,7 +40,7 @@ object CommonDeps {
     val jodaVersion = "2.8.2"
     val jodaConvertVersion = "1.7"
 
-    val jettyVersion = "9.3.7.v20160115"
+    val jettyVersion = "9.3.8.v20160314"
 
     val kamonVersion = "0.5.2"
 
@@ -53,10 +53,10 @@ object CommonDeps {
     val dictionaryMitEduInterfaceVersion = "2.3.3"
 
     //val smartclientVersion = "10.1.1"
-    val smartclientVersion = "10.1-v20151216"
+    val smartclientVersion = "10.1-v20160316"
 
-    val akkaVersion = "2.4.1"
-    val akkaHttpVersion = "2.0.2"
+    val akkaVersion = "2.4.4"
+    //val akkaHttpVersion = "2.0.3"
 
     val servletAPIVersion = "3.1.0"
 
