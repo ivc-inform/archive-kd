@@ -114,6 +114,46 @@
 					</uc>
 				</constraints>
 			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Литеры" name="docliter">
+				<attrs>
+					<attr caption="Код организации" mandatory="false" name="vlrcode" type="sCode"></attr>
+					<attr caption="Наименование организации" mandatory="false" name="vlrname" type="sCaption"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vlrcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Типы" name="doctypes">
+				<attrs>
+					<attr caption="Код организации" mandatory="false" name="vtycode" type="sCode"></attr>
+					<attr caption="Наименование организации" mandatory="false" name="vtyname" type="sCaption"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vtycode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
 		</classes>
 	</group>
 </objectSchema>
