@@ -394,6 +394,27 @@
 					</uc>
 				</constraints>
 			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="" name="autable">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vcodetable" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="false" name="vnametable" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vdesc" type="sCaption"></attr>
+					<attr caption="Вкл" mandatory="false" name="bmain" type="bBoolean"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vcodetable</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
 		</classes>
 	</group>
 </objectSchema>
