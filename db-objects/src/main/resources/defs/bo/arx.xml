@@ -94,6 +94,26 @@
 					</fk>
 				</constraints>
 			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Виды" name="doccats">
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="vctname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="vctcode" type="sCode"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vctcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
 		</classes>
 	</group>
 </objectSchema>
