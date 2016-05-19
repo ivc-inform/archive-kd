@@ -376,6 +376,24 @@
 					</fk>
 				</constraints>
 			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="" name="austat">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование" mandatory="false" name="namest" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>namest</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
 		</classes>
 	</group>
 </objectSchema>
