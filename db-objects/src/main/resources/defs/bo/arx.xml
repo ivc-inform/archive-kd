@@ -8,7 +8,7 @@
 					<attr caption="Код" mandatory="false" name="uscode" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="usrdescr" type="sCaption"></attr>
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dTimestamp"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 					<attr caption="Пароль" mandatory="false" name="password" type="sPasswordPlain"></attr>
 					<attr caption="Пароль" mandatory="false" name="plogin" type="sCode"></attr>
 					<attr caption="Активный" mandatory="false" name="bmain" type="bBoolean"></attr>
@@ -61,6 +61,37 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Абоненты" name="abonents">
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="vabname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="vabcode" type="sCode"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Описание" mandatory="false" name="vabdesc" type="sCaption"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Телефон 1" mandatory="false" name="vphone1" type="sPhone"></attr>
+					<attr caption="Сотрудник" mandatory="false" name="vperson" type="sCaption"></attr>
+					<attr caption="Телефон 2" mandatory="false" name="vphone2" type="sPhone"></attr>
+					<attr caption="Электронная почта" mandatory="false" name="vemail" type="sEMail"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>orgcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk parent="abonents_types" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idabtype" attrNameRemote="id"/>
+					</fk>
+					<fk parent="abonents_org" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idaborg" attrNameRemote="id"/>
+					</fk>
 				</constraints>
 			</classSimple>
 		</classes>
