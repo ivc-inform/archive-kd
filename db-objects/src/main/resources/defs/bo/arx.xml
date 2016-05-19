@@ -2,7 +2,7 @@
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
 	<group prefix="ARX" name="arx" caption="Электоронный архив технической документации">
 		<classes>
-			<classSimple name="гser" autoTableMapping="true" caption="Пользователи">
+			<classSimple name="user" autoTableMapping="true" caption="Пользователи">
 				<attrs>
 					<attr name="usname" type="sCaption" caption="Наименование" mandatory="false"/>
 					<attr name="uscode" caption="Код" type="sCaption" mandatory="false"/>
@@ -22,7 +22,7 @@
 				</defaults>
 				<constraints>
 					<uc uniqueType="pk">
-						<attrName>ID</attrName>
+						<attrName>id</attrName>
 					</uc>
 				</constraints>
 			</classSimple>
