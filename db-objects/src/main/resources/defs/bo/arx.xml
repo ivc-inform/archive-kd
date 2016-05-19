@@ -327,6 +327,24 @@
 					</fk>
 				</constraints>
 			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Состав изделия" name="attachtypes">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование" mandatory="false" name="vattypename" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vattypename</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
 		</classes>
 	</group>
 </objectSchema>
