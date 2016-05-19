@@ -328,7 +328,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Состав изделия" name="attachtypes">
+			<classSimple autoTableMapping="true" caption="Тип вложения" name="attachtypes">
 				<attrs>
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Наименование" mandatory="false" name="vattypename" type="sCaption"></attr>
@@ -343,6 +343,37 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Вложения" name="attach">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vatcode" type="sCode"></attr>
+					<attr caption="Файл вложения" mandatory="false" name="attfile" type="clob"></attr>
+					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDateTime"></attr>
+					<attr caption="Описание" mandatory="false" name="vatdescr" type="sCaption"></attr>
+					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vizcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk parent="card" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idcard" attrNameRemote="id"/>
+					</fk>
+					<fk parent="docizv" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idizv" attrNameRemote="id"/>
+					</fk>
+					<fk parent="attachtypes" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idattypes" attrNameRemote="id"/>
+					</fk>
 				</constraints>
 			</classSimple>
 		</classes>
