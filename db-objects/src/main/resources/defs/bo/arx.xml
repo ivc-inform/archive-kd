@@ -308,7 +308,7 @@
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vcrcode</attrName>
+						<attrName>vizcode</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
