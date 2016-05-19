@@ -1,24 +1,41 @@
-<?xml version="1.1" encoding="UTF-8"?>
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
-	<group prefix="ARX" name="arx" caption="Электоронный архив технической документации">
+	<group caption="Электоронный архив технической документации" name="arx" prefix="ARX">
 		<classes>
-			<classSimple name="user" autoTableMapping="true" caption="Пользователи">
+			<classSimple autoTableMapping="true" caption="Пользователи" name="user">
 				<attrs>
-					<attr name="usname" type="sCaption" caption="Наименование" mandatory="false"/>
-					<attr name="uscode" caption="Код" type="sCaption" mandatory="false"/>
-					<attr name="usrdescr" caption="Описание" type="sCaption" mandatory="false"/>
-					<attr name="id" type="id" mandatory="true" hidden="true" caption="PK" genBySeq="true"/>
-					<attr name="tdatein" caption="Дата записи" type="dTimestamp" mandatory="false"/>
-					<attr name="password" type="sPasswordPlain" caption="Пароль" mandatory="false"/>
-					<attr name="plogin" type="sCode" caption="Пароль" mandatory="false"/>
-					<attr name="bmain" type="bBoolean" caption="Активный" mandatory="false"/>
-					<attr name="idprofile" type="nInt" caption="Код профиля" mandatory="false"/>
+					<attr caption="Наименование" mandatory="false" name="usname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="uscode" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="usrdescr" type="sCaption"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dTimestamp"></attr>
+					<attr caption="Пароль" mandatory="false" name="password" type="sPasswordPlain"></attr>
+					<attr caption="Пароль" mandatory="false" name="plogin" type="sCode"></attr>
+					<attr caption="Активный" mandatory="false" name="bmain" type="bBoolean"></attr>
+					<attr caption="Код профиля" mandatory="false" name="idprofile" type="nInt"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
 						<attrName>uscode</attrName>
 					</showAttrs>
-          <uiSettings uiFormType="singleListGrid"/>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Типы абонентов" name="abonents_types">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Тип абонента" mandatory="false" name="vabontype" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vabontype</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
 				<constraints>
 					<uc uniqueType="pk">
