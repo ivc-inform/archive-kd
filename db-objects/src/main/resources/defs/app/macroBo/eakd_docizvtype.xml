@@ -3,18 +3,18 @@
           xmlns="http://simpleSys.ru/xml/library/app"
           xmlns:isc="http://simpleSys.ru/xml/library/ISC"
           xsi:schemaLocation="http://simpleSys.ru/xml/library/app http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaApp.xsd">
-    <Bo BoName="state"
-        GroupName="arx"
-        BoCaption="Состояния"
+    <Bo BoName="docizvtype"
+        GroupName="eakd"
+        BoCaption="Типы извещения"
         GroupCaption="Электоронный архив технической документации"
         Enabled="true"/>
     <MenuPath>
         <isc:GroupTitle>Электоронный архив технической документации</isc:GroupTitle>
-        <isc:Identifier>arx</isc:Identifier>
+        <isc:Identifier>eakd</isc:Identifier>
         <isc:Title>Электоронный архив технической документации</isc:Title>
         <isc:MenuPath>
-            <isc:Identifier>arx_state</isc:Identifier>
-            <isc:Title>Состояния</isc:Title>
+            <isc:Identifier>eakd_docizvtype</isc:Identifier>
+            <isc:Title>Типы извещения</isc:Title>
         </isc:MenuPath>
     </MenuPath>
     <RootCanvas>
@@ -24,7 +24,7 @@
             <AutoSaveEdits>true</AutoSaveEdits>
             <AutoFitWidthApproach>both</AutoFitWidthApproach>
             <AutoFitFieldWidths>true</AutoFitFieldWidths>
-            <Identifier>editorarx_state</Identifier>
+            <Identifier>editoreakd_docizvtype</Identifier>
             <DataPageSize>simpleSyS.config.dataPageSize</DataPageSize>
             <DrawAheadRatio>simpleSyS.config.drawAheadRatio</DrawAheadRatio>
             <InitialSort>

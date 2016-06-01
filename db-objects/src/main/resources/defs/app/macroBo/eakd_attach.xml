@@ -3,28 +3,28 @@
           xmlns="http://simpleSys.ru/xml/library/app"
           xmlns:isc="http://simpleSys.ru/xml/library/ISC"
           xsi:schemaLocation="http://simpleSys.ru/xml/library/app http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaApp.xsd">
-    <Bo BoName="docizvtype"
-        GroupName="arx"
-        BoCaption="Типы извещения"
+    <Bo BoName="attach"
+        GroupName="eakd"
+        BoCaption="Вложения"
         GroupCaption="Электоронный архив технической документации"
         Enabled="true"/>
     <MenuPath>
         <isc:GroupTitle>Электоронный архив технической документации</isc:GroupTitle>
-        <isc:Identifier>arx</isc:Identifier>
+        <isc:Identifier>eakd</isc:Identifier>
         <isc:Title>Электоронный архив технической документации</isc:Title>
         <isc:MenuPath>
-            <isc:Identifier>arx_docizvtype</isc:Identifier>
-            <isc:Title>Типы извещения</isc:Title>
+            <isc:Identifier>eakd_attach</isc:Identifier>
+            <isc:Title>Вложения</isc:Title>
         </isc:MenuPath>
     </MenuPath>
     <RootCanvas>
         <ListGridEditor>
             <useSelfName>false</useSelfName>
             <AutoFetchData>true</AutoFetchData>
-            <AutoSaveEdits>true</AutoSaveEdits>
+            <AutoSaveEdits>false</AutoSaveEdits>
             <AutoFitWidthApproach>both</AutoFitWidthApproach>
             <AutoFitFieldWidths>true</AutoFitFieldWidths>
-            <Identifier>editorarx_docizvtype</Identifier>
+            <Identifier>editoreakd_attach</Identifier>
             <DataPageSize>simpleSyS.config.dataPageSize</DataPageSize>
             <DrawAheadRatio>simpleSyS.config.drawAheadRatio</DrawAheadRatio>
             <InitialSort>
@@ -35,11 +35,12 @@
             <CanEdit>true</CanEdit>
             <CanSelectCells>false</CanSelectCells>
             <FetchDelay>500</FetchDelay>
+            <RecordComponentPoolingMode>Recycle</RecordComponentPoolingMode>
             <SelectionType>Multiple</SelectionType>
             <ShowAdvancedFilter>false</ShowAdvancedFilter>
             <ShowFilterEditor>true</ShowFilterEditor>
-            <ShowRecordComponents>false</ShowRecordComponents>
-            <ShowRecordComponentsByCell>false</ShowRecordComponentsByCell>
+            <ShowRecordComponents>true</ShowRecordComponents>
+            <ShowRecordComponentsByCell>true</ShowRecordComponentsByCell>
             <TextMatchStyle>txtMchStyleSubstring</TextMatchStyle>
             <WrapCells>true</WrapCells>
         </ListGridEditor>
