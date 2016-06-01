@@ -4,9 +4,9 @@ import sbt.Setting
 
 object CommonSettings {
   object settingValues {
-    val baseVersion = "1.1"
+    val baseVersion = "1.0"
 
-    val scalaVersion = "2.11.7"
+    val scalaVersion = "2.11.8"
     val organization = "com.simplesys.dmprocessing"
     val scalacOptions = Seq(
       "-feature",
@@ -21,8 +21,6 @@ object CommonSettings {
   val defaultSettings = {
     import sbt.Keys._
     Seq(
-      //scalaVersion := settingValues.scalaVersion,
-      //crossScalaVersions := settingValues.crossScalaVersions,
       scalacOptions := settingValues.scalacOptions,
       organization := settingValues.organization
     )

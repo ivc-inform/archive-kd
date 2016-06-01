@@ -405,7 +405,7 @@
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vcodetable</attrName>
+						<attrName>vopcode</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
