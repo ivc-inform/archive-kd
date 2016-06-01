@@ -1,93 +1,282 @@
+
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
 	<group caption="Электоронный архив технической документации" name="eakd" prefix="EAKD">
 		<classes>
 			<classSimple autoTableMapping="true" caption="Абоненты" name="abonents">
-							<attrs>
-								<attr caption="Наименование" mandatory="false" name="vabname" type="sCaption"></attr>
-								<attr caption="Код" mandatory="false" name="vabcode" type="sCode"></attr>
-								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-								<attr caption="Описание" mandatory="false" name="vabdesc" type="sCaption"></attr>
-								<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
-								<attr caption="Телефон 1" mandatory="false" name="vphone1" type="sPhone"></attr>
-								<attr caption="Сотрудник" mandatory="false" name="vperson" type="sCaption"></attr>
-								<attr caption="Телефон 2" mandatory="false" name="vphone2" type="sPhone"></attr>
-								<attr caption="Электронная почта" mandatory="false" name="vemail" type="sEMail"></attr>
-							</attrs>
-							<defaults>
-								<showAttrs>
-									<attrName>orgcode</attrName>
-								</showAttrs>
-								<uiSettings uiFormType="singleListGrid"></uiSettings>
-							</defaults>
-							<constraints>
-								<uc uniqueType="pk">
-									<attrName>id</attrName>
-								</uc>
-								<fk parent="abonents_types" linkType="refIsOwner" mandatory="true">
-									<mapping attrNameLocal="idabtype" attrNameRemote="id"/>
-								</fk>
-								<fk parent="abonents_org" linkType="refIsOwner" mandatory="true">
-									<mapping attrNameLocal="idaborg" attrNameRemote="id"/>
-								</fk>
-							</constraints>
-						</classSimple>
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="vabname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="vabcode" type="sCode"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Описание" mandatory="false" name="vabdesc" type="sCaption"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Телефон 1" mandatory="false" name="vphone1" type="sPhone"></attr>
+					<attr caption="Сотрудник" mandatory="false" name="vperson" type="sCaption"></attr>
+					<attr caption="Телефон 2" mandatory="false" name="vphone2" type="sPhone"></attr>
+					<attr caption="Электронная почта" mandatory="false" name="vemail" type="sEMail"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>orgcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk parent="abonents_types" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idabtype" attrNameRemote="id"/>
+					</fk>
+					<fk parent="abonents_org" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idaborg" attrNameRemote="id"/>
+					</fk>
+				</constraints>
+			</classSimple>
 
 			<classSimple autoTableMapping="true" caption="Организации" name="abonents_org">
-							<attrs>
-								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-								<attr caption="Код организации" mandatory="false" name="orgcode" type="sCode"></attr>
-								<attr caption="Наименование организации" mandatory="false" name="orgname" type="sCaption"></attr>
-							</attrs>
-							<defaults>
-								<showAttrs>
-									<attrName>orgcode</attrName>
-								</showAttrs>
-								<uiSettings uiFormType="singleListGrid"></uiSettings>
-							</defaults>
-							<constraints>
-								<uc uniqueType="pk">
-									<attrName>id</attrName>
-								</uc>
-							</constraints>
-						</classSimple>
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код организации" mandatory="false" name="orgcode" type="sCode"></attr>
+					<attr caption="Наименование организации" mandatory="false" name="orgname" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>orgcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
 
 			<classSimple autoTableMapping="true" caption="Типы абонентов" name="abonents_types">
-							<attrs>
-								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-								<attr caption="Тип абонента" mandatory="false" name="vabontype" type="sCaption"></attr>
-							</attrs>
-							<defaults>
-								<showAttrs>
-									<attrName>vabontype</attrName>
-								</showAttrs>
-								<uiSettings uiFormType="singleListGrid"></uiSettings>
-							</defaults>
-							<constraints>
-								<uc uniqueType="pk">
-									<attrName>id</attrName>
-								</uc>
-							</constraints>
-						</classSimple>
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Тип абонента" mandatory="false" name="vabontype" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vabontype</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Вложения" name="attach">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vatcode" type="sCode"></attr>
+					<attr caption="Файл вложения" mandatory="false" name="attfile" type="clob"></attr>
+					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDateTime"></attr>
+					<attr caption="Описание" mandatory="false" name="vatdescr" type="sCaption"></attr>
+					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vizcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk parent="card" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idcard" attrNameRemote="id"/>
+					</fk>
+					<fk parent="docizv" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idizv" attrNameRemote="id"/>
+					</fk>
+					<fk parent="attachtypes" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idattypes" attrNameRemote="id"/>
+					</fk>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Тип вложения" name="attachtypes">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование" mandatory="false" name="vattypename" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vattypename</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="" name="austat">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование" mandatory="false" name="namest" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>namest</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="" name="autable">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vcodetable" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="false" name="vnametable" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vdesc" type="sCaption"></attr>
+					<attr caption="Вкл" mandatory="false" name="bmain" type="bBoolean"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vopcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
 
 			<classSimple autoTableMapping="true" caption="Карточка учета" name="card">
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="vcrname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
+					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sCaption"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата создания карточки" mandatory="false" name="datecard" type="dDateTime"></attr>
+					<attr caption="Код шифра изделия" mandatory="false" name="iddocitem" type="nInt"></attr>
+					<attr caption="Код документа входимости" mandatory="false" name="idcrd_fk" type="nInt"></attr>
+					<attr caption="Инвентарный номер" mandatory="false" name="vcrinvent" type="sCaption"></attr>
+					<attr caption="Количество листов в карточке" mandatory="false" name="vcrkolpages" type="sCaption"></attr>
+					<attr caption="Код состава" mandatory="false" name="vcrcodeprns" type="sCaption"></attr>
+					<attr caption="Форматы" mandatory="false" name="vformats" type="sCaption"></attr>
+					<attr caption="Идентификатор файла" mandatory="false" name="vfileident" type="sCaption"></attr>
+					<attr caption="Разработчик" mandatory="false" name="vrazr" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vcrcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk parent="docliter" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idliter" attrNameRemote="id"/>
+					</fk>
+					<fk parent="doctypes" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idtype" attrNameRemote="id"/>
+					</fk>
+					<fk parent="doccats" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idcats" attrNameRemote="id"/>
+					</fk>
+					<fk parent="state" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idstate" attrNameRemote="id"/>
+					</fk>
+					<fk parent="groupitem" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idgroup" attrNameRemote="id"/>
+					</fk>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Виды" name="doccats">
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="vctname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="vctcode" type="sCode"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vctcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Форматы" name="docformats">
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="vfmname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="vfmcode" type="sCode"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vctcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Шифр изделия" name="docitem">
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="vitname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="vitcode" type="sCode"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Описание" mandatory="false" name="vdesc" type="sDescription"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vctcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Карточка учета" name="docizv">
 							<attrs>
-								<attr caption="Наименование" mandatory="false" name="vcrname" type="sCaption"></attr>
-								<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
-								<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sCaption"></attr>
+								<attr caption="Наименование" mandatory="false" name="vizname" type="sCaption"></attr>
+								<attr caption="Код" mandatory="false" name="vizcode" type="sCode"></attr>
+								<attr caption="Описание" mandatory="false" name="vizdescr" type="sCaption"></attr>
 								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-								<attr caption="Дата создания карточки" mandatory="false" name="datecard" type="dDateTime"></attr>
-								<attr caption="Код шифра изделия" mandatory="false" name="iddocitem" type="nInt"></attr>
-								<attr caption="Код документа входимости" mandatory="false" name="idcrd_fk" type="nInt"></attr>
-								<attr caption="Инвентарный номер" mandatory="false" name="vcrinvent" type="sCaption"></attr>
-								<attr caption="Количество листов в карточке" mandatory="false" name="vcrkolpages" type="sCaption"></attr>
-								<attr caption="Код состава" mandatory="false" name="vcrcodeprns" type="sCaption"></attr>
-								<attr caption="Форматы" mandatory="false" name="vformats" type="sCaption"></attr>
-								<attr caption="Идентификатор файла" mandatory="false" name="vfileident" type="sCaption"></attr>
-								<attr caption="Разработчик" mandatory="false" name="vrazr" type="sCaption"></attr>
+								<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+								<attr caption="Дата начала действия" mandatory="false" name="dateon" type="dDateTime"></attr>
+								<attr caption="Дата конца действия" mandatory="false" name="dateoff" type="dDateTime"></attr>
+								<attr caption="Файл извещения" mandatory="false" name="izvfile" type="clob"></attr>
 							</attrs>
 							<defaults>
 								<showAttrs>
-									<attrName>vcrcode</attrName>
+									<attrName>vizcode</attrName>
 								</showAttrs>
 								<uiSettings uiFormType="singleListGrid"></uiSettings>
 							</defaults>
@@ -95,34 +284,85 @@
 								<uc uniqueType="pk">
 									<attrName>id</attrName>
 								</uc>
-								<fk parent="docliter" linkType="refIsOwner" mandatory="true">
-									<mapping attrNameLocal="idliter" attrNameRemote="id"/>
+								<fk parent="docizvtype" linkType="refIsOwner" mandatory="true">
+									<mapping attrNameLocal="idtypiz" attrNameRemote="id"/>
 								</fk>
-								<fk parent="doctypes" linkType="refIsOwner" mandatory="true">
-									<mapping attrNameLocal="idtype" attrNameRemote="id"/>
+								<fk parent="docizvstat" linkType="refIsOwner" mandatory="true">
+									<mapping attrNameLocal="idsts" attrNameRemote="id"/>
 								</fk>
-								<fk parent="doccats" linkType="refIsOwner" mandatory="true">
-									<mapping attrNameLocal="idcats" attrNameRemote="id"/>
-								</fk>
-								<fk parent="state" linkType="refIsOwner" mandatory="true">
-									<mapping attrNameLocal="idstate" attrNameRemote="id"/>
-								</fk>
-								<fk parent="groupitem" linkType="refIsOwner" mandatory="true">
-									<mapping attrNameLocal="idgroup" attrNameRemote="id"/>
+								<fk parent="docizvop" linkType="refIsOwner" mandatory="true">
+									<mapping attrNameLocal="iddocizvop" attrNameRemote="id"/>
 								</fk>
 							</constraints>
 						</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Виды" name="doccats">
+			<classSimple autoTableMapping="true" caption="Описи" name="docizvop">
 							<attrs>
-								<attr caption="Наименование" mandatory="false" name="vctname" type="sCaption"></attr>
-								<attr caption="Код" mandatory="false" name="vctcode" type="sCode"></attr>
+								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+								<attr caption="Код" mandatory="false" name="vopcode" type="sCode"></attr>
+								<attr caption="Наименование" mandatory="false" name="vopname" type="sCaption"></attr>
+								<attr caption="Дата" mandatory="false" name="ddate" type="dDateTime"></attr>
+							</attrs>
+							<defaults>
+								<showAttrs>
+									<attrName>vopcode</attrName>
+								</showAttrs>
+								<uiSettings uiFormType="singleListGrid"></uiSettings>
+							</defaults>
+							<constraints>
+								<uc uniqueType="pk">
+									<attrName>id</attrName>
+								</uc>
+							</constraints>
+						</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Статусы извещения" name="docizvstat">
+							<attrs>
+								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+								<attr caption="Наименование" mandatory="false" name="vname" type="sCaption"></attr>
+							</attrs>
+							<defaults>
+								<showAttrs>
+									<attrName>vname</attrName>
+								</showAttrs>
+								<uiSettings uiFormType="singleListGrid"></uiSettings>
+							</defaults>
+							<constraints>
+								<uc uniqueType="pk">
+									<attrName>id</attrName>
+								</uc>
+							</constraints>
+						</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Типы извещения" name="docizvtype">
+							<attrs>
+								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+								<attr caption="Код" mandatory="false" name="vizvcode" type="sCode"></attr>
+								<attr caption="Наименование" mandatory="false" name="vizvname" type="sCaption"></attr>
+							</attrs>
+							<defaults>
+								<showAttrs>
+									<attrName>vizvcode</attrName>
+								</showAttrs>
+								<uiSettings uiFormType="singleListGrid"></uiSettings>
+							</defaults>
+							<constraints>
+								<uc uniqueType="pk">
+									<attrName>id</attrName>
+								</uc>
+							</constraints>
+						</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Литеры" name="docliter">
+							<attrs>
+								<attr caption="Код" mandatory="false" name="vlrcode" type="sCode"></attr>
+								<attr caption="Наименование" mandatory="false" name="vlrname" type="sCaption"></attr>
 								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 								<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 							</attrs>
 							<defaults>
 								<showAttrs>
-									<attrName>vctcode</attrName>
+									<attrName>vlrcode</attrName>
 								</showAttrs>
 								<uiSettings uiFormType="singleListGrid"></uiSettings>
 							</defaults>
@@ -132,28 +372,6 @@
 								</uc>
 							</constraints>
 						</classSimple>
-
-
-			<classSimple autoTableMapping="true" caption="Форматы" name="docformats">
-										<attrs>
-											<attr caption="Наименование" mandatory="false" name="vfmname" type="sCaption"></attr>
-											<attr caption="Код" mandatory="false" name="vfmcode" type="sCode"></attr>
-											<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-											<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
-										</attrs>
-										<defaults>
-											<showAttrs>
-												<attrName>vctcode</attrName>
-											</showAttrs>
-											<uiSettings uiFormType="singleListGrid"></uiSettings>
-										</defaults>
-										<constraints>
-											<uc uniqueType="pk">
-												<attrName>id</attrName>
-											</uc>
-										</constraints>
-									</classSimple>
-
 
 
 
@@ -184,25 +402,7 @@
 
 
 
-			<classSimple autoTableMapping="true" caption="Литеры" name="docliter">
-				<attrs>
-					<attr caption="Код" mandatory="false" name="vlrcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vlrname" type="sCaption"></attr>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vlrcode</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
+
 
 			<classSimple autoTableMapping="true" caption="Типы" name="doctypes">
 				<attrs>
@@ -265,183 +465,9 @@
 
 
 
-			<classSimple autoTableMapping="true" caption="Статусы извещения" name="docizvstat">
-				<attrs>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="false" name="vname" type="sCaption"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vname</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Типы извещения" name="docizvtype">
-				<attrs>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vizvcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vizvname" type="sCaption"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vizvcode</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Описи" name="docizvop">
-				<attrs>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vopcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vopname" type="sCaption"></attr>
-					<attr caption="Дата" mandatory="false" name="ddate" type="dDateTime"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vopcode</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Карточка учета" name="docizv">
-				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vizname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vizcode" type="sCode"></attr>
-					<attr caption="Описание" mandatory="false" name="vizdescr" type="sCaption"></attr>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
-					<attr caption="Дата начала действия" mandatory="false" name="dateon" type="dDateTime"></attr>
-					<attr caption="Дата конца действия" mandatory="false" name="dateoff" type="dDateTime"></attr>
-					<attr caption="Файл извещения" mandatory="false" name="izvfile" type="clob"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vizcode</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-					<fk parent="docizvtype" linkType="refIsOwner" mandatory="true">
-						<mapping attrNameLocal="idtypiz" attrNameRemote="id"/>
-					</fk>
-					<fk parent="docizvstat" linkType="refIsOwner" mandatory="true">
-						<mapping attrNameLocal="idsts" attrNameRemote="id"/>
-					</fk>
-					<fk parent="docizvop" linkType="refIsOwner" mandatory="true">
-						<mapping attrNameLocal="iddocizvop" attrNameRemote="id"/>
-					</fk>
-				</constraints>
-			</classSimple>
-
-			<classSimple autoTableMapping="true" caption="Тип вложения" name="attachtypes">
-				<attrs>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="false" name="vattypename" type="sCaption"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vattypename</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
-
-			<classSimple autoTableMapping="true" caption="Вложения" name="attach">
-				<attrs>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vatcode" type="sCode"></attr>
-					<attr caption="Файл вложения" mandatory="false" name="attfile" type="clob"></attr>
-					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDateTime"></attr>
-					<attr caption="Описание" mandatory="false" name="vatdescr" type="sCaption"></attr>
-					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vizcode</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-					<fk parent="card" linkType="refIsOwner" mandatory="true">
-						<mapping attrNameLocal="idcard" attrNameRemote="id"/>
-					</fk>
-					<fk parent="docizv" linkType="refIsOwner" mandatory="true">
-						<mapping attrNameLocal="idizv" attrNameRemote="id"/>
-					</fk>
-					<fk parent="attachtypes" linkType="refIsOwner" mandatory="true">
-						<mapping attrNameLocal="idattypes" attrNameRemote="id"/>
-					</fk>
-				</constraints>
-			</classSimple>
-
-			<classSimple autoTableMapping="true" caption="" name="austat">
-				<attrs>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="false" name="namest" type="sCaption"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>namest</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
-
-			<classSimple autoTableMapping="true" caption="" name="autable">
-				<attrs>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vcodetable" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vnametable" type="sCaption"></attr>
-					<attr caption="Описание" mandatory="false" name="vdesc" type="sCaption"></attr>
-					<attr caption="Вкл" mandatory="false" name="bmain" type="bBoolean"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>vopcode</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
 
 
 		</classes>
