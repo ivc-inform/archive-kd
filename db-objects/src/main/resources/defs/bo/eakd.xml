@@ -1,3 +1,4 @@
+
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
 	<group caption="Электоронный архив технической документации" name="eakd" prefix="EAKD">
 		<classes>
@@ -492,6 +493,31 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Магнитотека" name="mcard">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="mcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="false" name="mname" type="sCaption"></attr>
+					<attr caption="Наименование файла" mandatory="false" name="mfilecode" type="sCaption"></attr>
+					<attr caption="Дата заптси" mandatory="false" name="mdatein" type="dDateTime"></attr>
+					<attr caption="IDITEM" genBySeq="true" hidden="true" mandatory="true" name="iditem" type="id"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>mtype</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk parent="abonents" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idabon" attrNameRemote="id"/>
+					</fk>
 				</constraints>
 			</classSimple>
 
