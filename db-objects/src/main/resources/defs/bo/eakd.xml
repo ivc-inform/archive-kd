@@ -1,4 +1,3 @@
-
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
 	<group caption="Электоронный архив технической документации" name="eakd" prefix="EAKD">
 		<classes>
@@ -453,6 +452,7 @@
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 					<attr caption="Дата прекращения действия" mandatory="false" name="dateout" type="dDateTime"></attr>
+					<attr caption="Файл версии" mandatory="false" name="docfile" type="clob"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
