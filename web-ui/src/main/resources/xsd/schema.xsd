@@ -14,7 +14,7 @@
 			<xs:enumeration value="dTimestampWithTZ"/>
 			<xs:enumeration value="sCode"/>
 			<xs:enumeration value="sCaption"/>
-			<xs:enumeration value="sDescription"/>
+			<xs:enumeration value="sDescripti		on"/>
 			<xs:enumeration value="sPasswordPlain"/>
 			<xs:enumeration value="sPasswordHashSHA"/>
 			<xs:enumeration value="sBarCode"/>
