@@ -496,6 +496,41 @@
 				</constraints>
 			</classSimple>
 
+			<classSimple autoTableMapping="true" caption="Вложения магнитотеки" name="matf">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Файл" mandatory="false" name="mfile" type="clob"></attr>
+					<attr caption="Версия" mandatory="false" name="mcodever" type="sCaption"></attr>
+					<attr caption="Инв.номер" mandatory="false" name="minvnumber" type="sCaption"></attr>
+					<attr caption="Количество" mandatory="false" name="mkol" type="sCaption"></attr>
+					<attr caption="Дата" mandatory="false" name="ddatein" type="dDateTime"></attr>
+					<attr caption="Д.номер Обозначение" mandatory="false" name="vcrcode" type="sCaption"></attr>
+					<attr caption="Номер книги" mandatory="false" name="mbook" type="sCaption"></attr>
+					<attr caption="Номер ячейки" mandatory="false" name="mboх" type="sCaption"></attr>
+					<attr caption="Номер описи" mandatory="false" name="mlabel" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>mtype</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk parent="mtype" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idmtype" attrNameRemote="id"/>
+					</fk>
+					<fk parent="statversion" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idstatver" attrNameRemote="id"/>
+					</fk>
+					<fk parent="mcard" linkType="refIsOwner" mandatory="true">
+						<mapping attrNameLocal="idmcard" attrNameRemote="id"/>
+					</fk>
+				</constraints>
+			</classSimple>
+
 			<classSimple autoTableMapping="true" caption="Магнитотека" name="mcard">
 				<attrs>
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
