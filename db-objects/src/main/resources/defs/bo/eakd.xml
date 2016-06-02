@@ -73,7 +73,7 @@
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="false" name="vatcode" type="sCode"></attr>
-					<attr caption="Файл вложения" mandatory="false" name="attfile" type="blob"></attr>
+					<attr caption="Файл вложения" mandatory="false" name="attfile" type="clob"></attr>
 					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDateTime"></attr>
 					<attr caption="Описание" mandatory="false" name="vatdescr" type="sCaption"></attr>
 					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption"></attr>
