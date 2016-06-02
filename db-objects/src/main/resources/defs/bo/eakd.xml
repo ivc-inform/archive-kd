@@ -16,7 +16,7 @@
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>orgcode</attrName>
+						<attrName>vabcode</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -81,7 +81,7 @@
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vizcode</attrName>
+						<attrName>vatcode</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -147,7 +147,7 @@
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vopcode</attrName>
+						<attrName>vcodetable</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -231,7 +231,7 @@
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vctcode</attrName>
+						<attrName>vfmcode</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -252,7 +252,7 @@
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vctcode</attrName>
+						<attrName>vitcode</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -403,12 +403,12 @@
 			<classSimple autoTableMapping="true" caption="Рассылка" name="docrass">
 				<attrs>
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Количество экземпляпро" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Количество экземпляпро" mandatory="false" name="vrskol" type="dDateTime"></attr>
 					<attr caption="Дата рассылки" mandatory="false" name="tdatein" type="dDateTime"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vizcode</attrName>
+						<attrName>vrskol</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -476,6 +476,26 @@
 				</constraints>
 			</classSimple>
 
+			<classSimple autoTableMapping="true" caption="Состав изделия" name="groupitem">
+				<attrs>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vgicode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="false" name="vginame" type="sCaption"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vgicode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+
 
 			<classSimple autoTableMapping="true" caption="Пользователи" name="user">
 				<attrs>
@@ -529,32 +549,13 @@
 			</classSimple>
 
 			<classSimple autoTableMapping="true" caption="Состояния" name="statversion">
-							<attrs>
-								<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-								<attr caption="Наименование версии" mandatory="false" name="vsecaption" type="sCaption"></attr>
-							</attrs>
-							<defaults>
-								<showAttrs>
-									<attrName>vsecaption</attrName>
-								</showAttrs>
-								<uiSettings uiFormType="singleListGrid"></uiSettings>
-							</defaults>
-							<constraints>
-								<uc uniqueType="pk">
-									<attrName>id</attrName>
-								</uc>
-							</constraints>
-						</classSimple>
-
-			<classSimple autoTableMapping="true" caption="Состав изделия" name="groupitem">
 				<attrs>
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vgicode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vginame" type="sCaption"></attr>
+					<attr caption="Наименование версии" mandatory="false" name="vsecaption" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vgicode</attrName>
+						<attrName>vsecaption</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
