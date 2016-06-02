@@ -604,39 +604,6 @@
 				</constraints>
 			</classSimple>
 
-
-
-			<classSimple autoTableMapping="true" caption="Пользователи" name="user">
-				<attrs>
-					<attr caption="Наименование" mandatory="false" name="usname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="uscode" type="sCaption"></attr>
-					<attr caption="Описание" mandatory="false" name="usrdescr" type="sCaption"></attr>
-					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
-					<attr caption="Пароль" mandatory="false" name="password" type="sPasswordPlain"></attr>
-					<attr caption="Пароль" mandatory="false" name="plogin" type="sCode"></attr>
-					<attr caption="Активный" mandatory="false" name="bmain" type="bBoolean"></attr>
-					<attr caption="Код профиля" mandatory="false" name="idprofile" type="nInt"></attr>
-				</attrs>
-				<defaults>
-					<showAttrs>
-						<attrName>uscode</attrName>
-					</showAttrs>
-					<uiSettings uiFormType="singleListGrid"></uiSettings>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
-
-
-
-
-
-
-
 			<classSimple autoTableMapping="true" caption="Состояния" name="state">
 				<attrs>
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
@@ -657,6 +624,8 @@
 				</constraints>
 			</classSimple>
 
+
+
 			<classSimple autoTableMapping="true" caption="Состояния" name="statversion">
 				<attrs>
 					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
@@ -665,6 +634,31 @@
 				<defaults>
 					<showAttrs>
 						<attrName>vsecaption</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Пользователи" name="user">
+				<attrs>
+					<attr caption="Наименование" mandatory="false" name="usname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="false" name="uscode" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="usrdescr" type="sCaption"></attr>
+					<attr caption="PK" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Пароль" mandatory="false" name="password" type="sPasswordPlain"></attr>
+					<attr caption="Пароль" mandatory="false" name="plogin" type="sCode"></attr>
+					<attr caption="Активный" mandatory="false" name="bmain" type="bBoolean"></attr>
+					<attr caption="Код профиля" mandatory="false" name="idprofile" type="nInt"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>uscode</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
