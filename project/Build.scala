@@ -26,8 +26,8 @@ with WebUI
 
       credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
 
-      liquibaseUsername in DevConfig := "mosk",
-      liquibasePassword in DevConfig := "m125osk",
+      liquibaseUsername in DevConfig := "eakd",
+      liquibasePassword in DevConfig := "eakd",
       liquibaseDriver in DevConfig := "oracle.jdbc.OracleDriver",
       liquibaseUrl in DevConfig := "jdbc:oracle:thin:@orapg.simplesys.lan:1521/test"
     )
