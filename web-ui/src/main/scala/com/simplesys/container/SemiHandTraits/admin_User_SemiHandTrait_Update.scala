@@ -1,4 +1,4 @@
-// This file is generated automatically (at 02.06.2016 16:03:48), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 03.06.2016 14:32:36), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
 package ru.simplesys.defs.app.scala.container
 
@@ -6,14 +6,14 @@ import com.simplesys.app.SessionContextSupport
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.common.Strings._
-import ru.simplesys.defs.bo.eakd._
+import ru.simplesys.defs.bo.admin._
 
-trait eakd_user_SemiHandTrait_Add extends SessionContextSupport with ServletActorDyn {
+trait admin_User_SemiHandTrait_Update extends SessionContextSupport with ServletActorDyn {
     
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     val requestData = new DSRequestDyn(request)    
     
-    logger debug s"Request for Add: ${newLine + requestData.toPrettyString}"    
+    logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
     
     val dataSet = UserDS(ds)    
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    

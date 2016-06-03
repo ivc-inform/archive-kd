@@ -21,8 +21,6 @@ class EaKdProcWindowMain extends WebApp {
                 RibbonGroupSS.create(
                     new RibbonGroupSSProps{
                       title = "Справочники".opt
-                        numRows = 3.opt
-                        rowHeight = 26
                     }
                 )
             ).opt
