@@ -272,6 +272,8 @@ package object System {
     //    object DrawShape extends SCApplyDrawItem[DrawShape, DrawShapeProps]
     object Shadow extends SCApply4Object[Shadow, ShadowProps]
 
+    object RibbonBar extends SCApply[RibbonBar, RibbonBarProps]
+
     //</editor-fold>
     //</editor-fold>
 
