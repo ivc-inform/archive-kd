@@ -1,10 +1,10 @@
 webSettings
 
-port in container.Configuration := 8080
-
 webInfIncludeJarPattern in Compile := Some( """.*com\.simplesys.*/*\.jar$|.*ru\.simplesys.*/*\.jar$|.*/classes/.*""")
 
 container.deploy("/archive-kd" -> webUI)
+
+port in container.Configuration := 8083
 
 addCommandAlias("debug-restart", "; packageWar ; container:restart")
 

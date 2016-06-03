@@ -71,7 +71,7 @@ trait WebUI {
             //dev plugin
             sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",
             startPackageName in DevConfig := "ru.simplesys.defs",
-            contextPath in DevConfig := "sb-processing-ui",
+            contextPath in DevConfig := "archive-kd",
             maxArity in DevConfig := 254,
 
             sourceGenerators in Compile <+= generateScalaCode in DevConfig,
