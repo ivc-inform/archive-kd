@@ -1,14 +1,13 @@
 import com.typesafe.sbt.SbtGit.git
-import com.typesafe.sbt.{SbtGit, GitVersioning}
-import ru.simplesys.dmprocessing.sbtbuild._
-
+import com.typesafe.sbt.{GitVersioning, SbtGit}
+import ru.simplesys.eakd.sbtbuild._
+import ru.simplesys.eakd.sbtbuild.WebUI
 import sbt.Keys._
 import sbt._
 
 object ArchiveKdBuild extends Build
 with DbObjects
 with WebUI
-with WebUIClient
 {
   override def settings: Seq[Def.Setting[_]] = super.settings ++ CommonSettings.defaultSettings ++ {
     import ru.simplesys.plugins.sourcegen.DevPlugin._
@@ -36,9 +35,7 @@ with WebUIClient
 
   lazy val root = Project(id = "acrchive-kd", base = file(".")).enablePlugins(GitVersioning).aggregate(
     dbObjects,
-    webUI,
-    webUIClientJS,
-    webUIClientJVM
+    webUI
   ).settings(
     libraryDependencies ++= Seq(
       CommonDeps.scalaTest.value % "test",

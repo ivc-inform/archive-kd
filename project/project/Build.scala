@@ -1,6 +1,6 @@
 import com.typesafe.sbt.{GitVersioning, SbtGit}
 import com.typesafe.sbt.SbtGit.git
-import ru.simplesys.dmprocessing.sbtbuild.{PluginDeps, CommonSettings}
+import ru.simplesys.eakd.sbtbuild.{PluginDeps, CommonSettings}
 import sbt.Keys._
 import sbt._
 

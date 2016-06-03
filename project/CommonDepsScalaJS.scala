@@ -1,4 +1,4 @@
-package ru.simplesys.dmprocessing.sbtbuild
+package ru.simplesys.eakd.sbtbuild
 
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt._

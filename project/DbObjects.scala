@@ -1,4 +1,4 @@
-package ru.simplesys.dmprocessing.sbtbuild
+package ru.simplesys.eakd.sbtbuild
 
 import sbt._
 import Keys._

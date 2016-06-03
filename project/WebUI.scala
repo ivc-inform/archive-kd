@@ -1,8 +1,8 @@
-package ru.simplesys.sbprocessingui.sbtbuild
+package ru.simplesys.eakd.sbtbuild
 
 import com.simplesys.json.{JsonList, JsonObject}
 import org.scalajs.sbtplugin.ScalaJSPlugin
-import ru.simplesys.dmprocessing.sbtbuild._
+import ru.simplesys.eakd.sbtbuild._
 import sbt.Keys._
 import sbt._
 
