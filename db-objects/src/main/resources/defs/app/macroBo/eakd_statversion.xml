@@ -5,7 +5,7 @@
           xsi:schemaLocation="http://simpleSys.ru/xml/library/app http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaApp.xsd">
     <Bo BoName="statversion"
         GroupName="eakd"
-        BoCaption="Состояния"
+        BoCaption="Действие версии"
         GroupCaption="Электоронный архив технической документации"
         Enabled="true"/>
     <MenuPath>
@@ -14,7 +14,7 @@
         <isc:Title>Электоронный архив технической документации</isc:Title>
         <isc:MenuPath>
             <isc:Identifier>eakd_statversion</isc:Identifier>
-            <isc:Title>Состояния</isc:Title>
+            <isc:Title>Действие версии</isc:Title>
         </isc:MenuPath>
     </MenuPath>
     <RootCanvas>
