@@ -1,16 +1,19 @@
 package com.simplesys.js.com.simplesys.SmartClient.App
 
-import com.simplesys.SmartClient.DataBinding.DataSourceSSstatic
-import com.simplesys.SmartClient.DataBinding.props.DataViewProps
+import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldProps
+import com.simplesys.SmartClient.DataBinding.props.{DataSourceProps, DataViewProps}
+import com.simplesys.SmartClient.DataBinding.{DataSource, DataSourceSSstatic}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.System.{Canvas, DataView, FileLoader, Page, isc}
-import com.simplesys.System.Types.{PageEvent, Skin}
+import com.simplesys.SmartClient.Grids.props.ListGridProps
+import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
+import com.simplesys.SmartClient.System._
+import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.js.com.simplesys.SmartClient.Tools.WindowsStack
-
-import scala.scalajs.js.annotation.JSExport
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+
+import scala.scalajs.js.annotation.JSExport
 
 trait WebApp {
 
@@ -55,6 +58,53 @@ trait WebApp {
                     }
                 )
             }
+        )
+    }
+
+    private lazy val aboutDS: DataSource =
+        DataSource.create(
+            new DataSourceProps {
+                clientOnly = true.opt
+                dataFormat = DSDataFormat.json.opt
+                cacheData = simpleSyS.aboutData.seq.opt
+                fields = Seq(
+                    new DataSourceFieldProps {
+                        required = true.opt
+                        `type` = FieldType.sCode_SimpleType.opt
+                        title = "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435".opt
+                        primaryKey = true.opt
+                        name = "libName".opt
+                    },
+                    new DataSourceFieldProps {
+                        required = true.opt
+                        `type` = FieldType.sCode_SimpleType.opt
+                        title = "\u0412\u0435\u0440\u0441\u0438\u044F".opt
+                        primaryKey = true.opt
+                        name = "libVersion".opt
+                    }
+                ).opt
+            }
+        )
+
+    protected def getAbout(): Unit = {
+        aboutDS setCacheData simpleSyS.aboutData
+
+        isc.infos(
+            ListGrid(
+                new ListGridProps {
+                    dataSource = aboutDS.opt
+                    fields = Seq(
+                        new ListGridFieldProps {
+                            name = "libName".opt
+                        },
+                        new ListGridFieldProps {
+                            name = "libVersion".opt
+                            align = Alignment.center.opt
+                        }
+                    ).opt
+                }
+            ),
+            "544C01DA-5F30-0126-8546-00F31AC36341"
         )
     }
 }
