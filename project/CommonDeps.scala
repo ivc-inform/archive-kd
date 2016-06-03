@@ -1,116 +1,119 @@
 package ru.simplesys.dmprocessing.sbtbuild
 
+import sbt.Keys._
 import sbt._
-import Keys._
 
 object PluginDeps {
-  object versions {
-    val devPluginVersion = "1.0.11-SNAPSHOT"
-    val sourceGenJSVersion = "1.0.3"
-    val transpileCoffeScriptVersion = "1.0.10"
-    val mergeJSVersion = "1.0.4-SNAPSHOT"
+    object versions {
+        val devPluginVersion = "1.0.11-SNAPSHOT"
+        val sourceGenJSVersion = "1.0.3"
+        val transpileCoffeScriptVersion = "1.0.10"
+        val mergeJSVersion = "1.0.4-SNAPSHOT"
 
-    val sbtAspectJVersion = "0.10.2"
-    val xsbtWebVersion = "0.9.1"
-    val sbtPackVersion = "0.7.7"
+        val sbtAspectJVersion = "0.10.2"
+        val xsbtWebVersion = "0.9.1"
+        val sbtPackVersion = "0.7.7"
 
-    val scalaJSPluginVersion = "0.6.9"
+        val scalaJSPluginVersion = "0.6.9"
 
-    val macroParadiseVersion = "2.0.1"
-    val scalaJSVersion = "1.0-SNAPSHOT"
-  }
+        val macroParadiseVersion = "2.0.1"
+    }
 
-  val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
-  val mergeJS = addSbtPlugin("ru.simplesys" % "merge-js" % versions.mergeJSVersion)
-  val sourceGenJS = addSbtPlugin("com.simplesys" % "source-gen-js" % versions.sourceGenJSVersion)
-  val transpileCoffeeScript = addSbtPlugin("ru.simplesys" % "transpile-coffeescript" % versions.transpileCoffeScriptVersion)
+    val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
+    val mergeJS = addSbtPlugin("ru.simplesys" % "merge-js" % versions.mergeJSVersion)
+    val sourceGenJS = addSbtPlugin("com.simplesys" % "source-gen-js" % versions.sourceGenJSVersion)
+    val transpileCoffeeScript = addSbtPlugin("ru.simplesys" % "transpile-coffeescript" % versions.transpileCoffeScriptVersion)
 
-  val xsbtWeb = addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % versions.xsbtWebVersion)
-  val sbtAspectJ = addSbtPlugin("com.typesafe.sbt" % "sbt-aspectj" % versions.sbtAspectJVersion)
-  val sbtPack = addSbtPlugin("org.xerial.sbt" % "sbt-pack" % versions.sbtPackVersion)
+    val xsbtWeb = addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % versions.xsbtWebVersion)
+    val sbtAspectJ = addSbtPlugin("com.typesafe.sbt" % "sbt-aspectj" % versions.sbtAspectJVersion)
+    val sbtPack = addSbtPlugin("org.xerial.sbt" % "sbt-pack" % versions.sbtPackVersion)
 
-  val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
+    val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
 
-  val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
-
-  val scalaJSWrapper = Def.setting("com.simplesys" %% "common-types" % versions.scalaJSVersion)
+    val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
 }
 
 object CommonDeps {
-  object versions {
-    val scalaModulesVersion = "1.0.4"
+    object versions {
+        val scalaModulesVersion = "1.0.4"
 
-    val jodaVersion = "2.8.2"
-    val jodaConvertVersion = "1.7"
+        val jodaVersion = "2.8.2"
+        val jodaConvertVersion = "1.7"
 
-    val jettyVersion = "9.3.8.v20160314"
+        val jettyVersion = "9.3.8.v20160314"
 
-    val kamonVersion = "0.5.2"
+        val kamonVersion = "0.5.2"
 
-    val doobieVersion = "0.2.3"
+        val doobieVersion = "0.2.3"
 
-    val ssysCoreVersion = "1.2-SNAPSHOT"
-    //val ssysCoreVersion = "1.2.84"
+        val ssysCoreVersion = "1.2-SNAPSHOT"
+        //val ssysCoreVersion = "1.2.84"
 
-    val ssysDictionariesDataVersion = "1.1.2"
-    val dictionaryMitEduInterfaceVersion = "2.3.3"
+        val ssysDictionariesDataVersion = "1.1.2"
+        val dictionaryMitEduInterfaceVersion = "2.3.3"
 
-    //val smartclientVersion = "10.1.1"
-    val smartclientVersion = "11.0-v20160530"
+        //val smartclientVersion = "10.1.1"
+        val smartclientVersion = "11.0-v20160530"
 
-    val akkaVersion = "2.4.6"
-    val akkaHttpVersion = "2.4.6"
+        val akkaVersion = "2.4.6"
+        val akkaHttpVersion = "2.4.6"
 
-    val servletAPIVersion = "3.1.0"
+        val servletAPIVersion = "3.1.0"
 
-    val scalaTestVersion = "2.2.4"
+        val scalaTestVersion = "2.2.4"
+        val scalaJSVersion = "1.0-SNAPSHOT"
 
-  }
+        val scalajsDOMVersion = "0.9.0"
+        val scalajsJQueryVersion = "0.9.0"
+    }
 
-  val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
-    DepsHelper.moduleId(scalaVersion.value, Some("org.scala-lang.modules" %% "scala-xml" % versions.scalaModulesVersion), None)
-  )
-
-
-  val servletAPI = Def.setting("javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion)
-
-  val jodaTime = Def.setting("joda-time" % "joda-time" % versions.jodaVersion)
-  val jodaConvert = Def.setting("org.joda" % "joda-convert" % versions.jodaConvertVersion)
-
-  val akkaActor = Def.setting("com.typesafe.akka" %% "akka-actor" % versions.akkaVersion)
-  val akkaSLF4J = Def.setting("com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion)
-  val akkaPersistence = Def.setting("com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion)  //exclude("org.iq80.leveldb","leveldb"))
-  val akkaTestKit = Def.setting("com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion)
-
-  val jettyWebapp = Def.setting("org.eclipse.jetty" % "jetty-webapp" % versions.jettyVersion)
-  val jettyAnnotations = Def.setting("org.eclipse.jetty" % "jetty-annotations" % versions.jettyVersion)
-  val jettyPlus = Def.setting("org.eclipse.jetty" % "jetty-plus" % versions.jettyVersion)
-
-  val smartclient = Def.setting("com.simplesys" % "smartclient-js" % versions.smartclientVersion)
-
-  val ssysIscComponents = Def.setting("com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion)
-  val ssysCommonWebapp = Def.setting("com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion)
-  val ssysCoreLibrary = Def.setting("com.simplesys.core" %% "core-library" % versions.ssysCoreVersion)
-  val ssysCoreUtils = Def.setting("com.simplesys.core" %% "core-utils" % versions.ssysCoreVersion)
-  val ssysAkkaExtender = Def.setting("com.simplesys.core" %% "akka-extender" % versions.ssysCoreVersion)
-  val ssysConfigWrapper = Def.setting("com.simplesys.core" %% "config-wrapper" % versions.ssysCoreVersion)
-  val ssysCommon = Def.setting("com.simplesys.core" %% "common" % versions.ssysCoreVersion)
-  val ssysScalaIOExtender = Def.setting("com.simplesys.core" %% "scala-io-extender" % versions.ssysCoreVersion)
-  val ssysJsonExtender = Def.setting("com.simplesys.core" %% "json-extender-typesafe" % versions.ssysCoreVersion)
-  val ssysJDBCWrapper = Def.setting("com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion)
-  val ssysCoreDomains = Def.setting("com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion)
-  val ssysScalaGen = Def.setting("com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion)
-  val ssysBoneCPWrapper = Def.setting("com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion)
-  val ssysLogBackWrapper = Def.setting("com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion)
+    val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
+        DepsHelper.moduleId(scalaVersion.value, Some("org.scala-lang.modules" %% "scala-xml" % versions.scalaModulesVersion), None)
+    )
 
 
-  val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
+    val servletAPI = Def.setting("javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion)
+
+    val jodaTime = Def.setting("joda-time" % "joda-time" % versions.jodaVersion)
+    val jodaConvert = Def.setting("org.joda" % "joda-convert" % versions.jodaConvertVersion)
+
+    val akkaActor = Def.setting("com.typesafe.akka" %% "akka-actor" % versions.akkaVersion)
+    val akkaSLF4J = Def.setting("com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion)
+    val akkaPersistence = Def.setting("com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion)
+    //exclude("org.iq80.leveldb","leveldb"))
+    val akkaTestKit = Def.setting("com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion)
+
+    val jettyWebapp = Def.setting("org.eclipse.jetty" % "jetty-webapp" % versions.jettyVersion)
+    val jettyAnnotations = Def.setting("org.eclipse.jetty" % "jetty-annotations" % versions.jettyVersion)
+    val jettyPlus = Def.setting("org.eclipse.jetty" % "jetty-plus" % versions.jettyVersion)
+
+    val smartclient = Def.setting("com.simplesys" % "smartclient-js" % versions.smartclientVersion)
+
+    val ssysIscMisc = Def.setting("com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion)
+    val ssysIscComponents = Def.setting("com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion)
+    val ssysXMLExtender = Def.setting("com.simplesys.core" %% "xml-extender" % versions.ssysCoreVersion)
+    val ssysCommonWebapp = Def.setting("com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion)
+    val ssysCoreLibrary = Def.setting("com.simplesys.core" %% "core-library" % versions.ssysCoreVersion)
+    val ssysCoreUtils = Def.setting("com.simplesys.core" %% "core-utils" % versions.ssysCoreVersion)
+    val ssysAkkaExtender = Def.setting("com.simplesys.core" %% "akka-extender" % versions.ssysCoreVersion)
+    val ssysConfigWrapper = Def.setting("com.simplesys.core" %% "config-wrapper" % versions.ssysCoreVersion)
+    val ssysCommon = Def.setting("com.simplesys.core" %% "common" % versions.ssysCoreVersion)
+    val ssysScalaIOExtender = Def.setting("com.simplesys.core" %% "scala-io-extender" % versions.ssysCoreVersion)
+    val ssysJsonExtender = Def.setting("com.simplesys.core" %% "json-extender-typesafe" % versions.ssysCoreVersion)
+    val ssysJDBCWrapper = Def.setting("com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion)
+    val ssysCoreDomains = Def.setting("com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion)
+    val ssysScalaGen = Def.setting("com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion)
+    val ssysBoneCPWrapper = Def.setting("com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion)
+    val ssysLogBackWrapper = Def.setting("com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion)
+    val scalaJSWrapper = Def.setting("com.simplesys" %% "common-types" % versions.scalaJSVersion)
+
+    val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
 }
 
 object DepsHelper {
-  def moduleId(scalaVer: String, moduleId_2_11: Option[ModuleID], moduleId_2_10: Option[ModuleID]): Option[ModuleID] =
-    CrossVersion.partialVersion(scalaVer) match {
-      case Some((2, scalaMajor)) if scalaMajor >= 11 => moduleId_2_11
-      case _ => moduleId_2_10
-    }
+    def moduleId(scalaVer: String, moduleId_2_11: Option[ModuleID], moduleId_2_10: Option[ModuleID]): Option[ModuleID] =
+        CrossVersion.partialVersion(scalaVer) match {
+            case Some((2, scalaMajor)) if scalaMajor >= 11 => moduleId_2_11
+            case _ => moduleId_2_10
+        }
 }
