@@ -1,13 +1,10 @@
 package ru.simplesys.dmprocessing.sbtbuild
-import sbt._
-import Keys._
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
+import sbt._
 
 object CommonDepsScalaJS {
-  object versions {
-    val scalaJSVersion = "1.0.1"
-  }
 
-  val smartclientScalaJSWrapper = Def.setting("com.simplesys" %%% "smartclient-wrapper" % versions.scalaJSVersion)
+  //val smartclientScalaJSWrapper = Def.setting("com.simplesys" %%% "smartclient-wrapper" % versions.scalaJSVersion)
+  val scalaJSWrapper = Def.setting("com.simplesys" %%% "common-types" % PluginDeps.versions.scalaJSVersion)
 
 }

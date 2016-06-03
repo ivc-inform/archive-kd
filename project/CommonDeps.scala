@@ -17,6 +17,7 @@ object PluginDeps {
     val scalaJSPluginVersion = "0.6.9"
 
     val macroParadiseVersion = "2.0.1"
+    val scalaJSVersion = "1.0-SNAPSHOT"
   }
 
   val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
@@ -31,6 +32,8 @@ object PluginDeps {
   val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
 
   val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
+
+  val scalaJSWrapper = Def.setting("com.simplesys" %% "common-types" % versions.scalaJSVersion)
 }
 
 object CommonDeps {
