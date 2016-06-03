@@ -26,7 +26,7 @@
     <logger name="ru.simplesys.defs.bo.admin.UserDS" level="debug"/>
 
     <!--Вывод регистрации сервлетов-->
-    <logger name="com.simplesys.listener.AppLifeCycleEvent" level="debug"/>
+    <logger name="com.simplesys.listener.AppLifeCycleEvent" level="trace"/>
 
     <!--<logger name="com.simplesys.mfms.containers.ManagerOfFixedTemplates_FetchTemplateActor" level="debug" additivity="false">
         <appender-ref ref="FILE_FETCH"/>
