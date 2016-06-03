@@ -47,16 +47,16 @@ object CommonDeps {
     val doobieVersion = "0.2.3"
 
     val ssysCoreVersion = "1.2-SNAPSHOT"
-    //val ssysCoreVersion = "1.2.63"
+    //val ssysCoreVersion = "1.2.84"
 
     val ssysDictionariesDataVersion = "1.1.2"
     val dictionaryMitEduInterfaceVersion = "2.3.3"
 
     //val smartclientVersion = "10.1.1"
-    val smartclientVersion = "10.1-v20160316"
+    val smartclientVersion = "11.0-v20160530"
 
-    val akkaVersion = "2.4.4"
-    //val akkaHttpVersion = "2.0.3"
+    val akkaVersion = "2.4.6"
+    val akkaHttpVersion = "2.4.6"
 
     val servletAPIVersion = "3.1.0"
 
