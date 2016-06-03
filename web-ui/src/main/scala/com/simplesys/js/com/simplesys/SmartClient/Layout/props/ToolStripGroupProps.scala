@@ -7,8 +7,6 @@ import com.simplesys.System.Types.SCClassName
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
 import com.simplesys.option.{ScNone, ScOption}
 
-import scala.scalajs.js
-
 class ToolStripGroupProps extends VLayoutProps {
     var externalStylesheet: ScOption[String] = ScNone
     var autoSizeToTitle: ScOption[Boolean] = ScNone
@@ -20,6 +18,7 @@ class ToolStripGroupProps extends VLayoutProps {
     var numRows: ScOption[Int] = ScNone
     var rowHeight: ScOption[Int] = ScNone
     var titleAlign: ScOption[Alignment] = ScNone
+    var title: ScOption[String] = ScNone
     var titleHeight: ScOption[Int] = ScNone
     var titleOrientation: ScOption[VerticalAlignment] = ScNone
     var titleProperties: ScOption[Label] = ScNone
