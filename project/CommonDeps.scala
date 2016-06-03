@@ -40,7 +40,7 @@ object CommonDeps {
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
 
-        val jettyVersion = "9.3.8.v20160314"
+        val jettyVersion = "9.3.9.v20160517"
 
         val kamonVersion = "0.5.2"
 
