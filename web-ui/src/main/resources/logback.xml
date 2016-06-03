@@ -6,7 +6,7 @@
             <pattern>%d{HH:mm:ss.SSS} [%t] %-5p %logger{255} - %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <!--<appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>main.log</file>
         <append>false</append>
         <encoder>
@@ -19,56 +19,21 @@
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%t] %-5p %logger{255} - %msg%n</pattern>
         </encoder>
-    </appender>
+    </appender>-->
 
-    <logger name="com.simplesys.isc.templates.LogJS" level="warn"/>
-    <logger name="com.simplesys.json.Json" level="debug"/>
-    <logger name="com.simplesys.isc.templates.logHtmlPageDyn" level="warn"/>
-    <logger name="com.simplesys.isc.system.IscDyn" level="warn"/>
-    <logger name="com.simplesys.isc.templates.logHtmlPageDyn" level="trace"/>
-    <logger name="com.simplesys.servlet.http.HttpServletRequest" level="warn"/>
-    <logger name="com.simplesys.servlet.http.HttpSession" level="debug"/>
-    <logger name="com.simplesys.mfms.listener.HttpSessionListener" level="debug"/>
-    <logger name="com.simplesys.app.SessionContext" level="trace"/>
-    <logger name="com.simplesys.listener.CommonWebAppListener" level="trace"/>
-    <logger name="ru.simplesys.defs.app.scala.mainPageservlet.MainPageServlet" level="warn"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.currency_Currency_FetchActor" level="warn"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.common_ContractorGroup_UpdateActor" level="warn"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.common_ContractorGroup_FetchActor" level="warn"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.common_ContractorGroup_AddActor" level="debug"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.common_Contractor_FetchActor" level="debug"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.ref_RefRefsValues_UpdateActor" level="debug"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.common_JurContractor_FetchActor" level="debug"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.messages_FetchActor" level="debug"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.common_JurContractor_UpdateActor" level="debug"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.data_COM_Data_DM_FetchActor" level="trace"/>
-    <logger name="com.simplesys.mfms.filter.ReLoginFilter" level="trace"/>
-    <logger name="ru.simplesys.defs.bo.common.ContractorBo" level="debug"/>
-    <logger name="ru.simplesys.defs.app.scala.servlet.test_TestPaging_FetchActor" level="warn"/>
-    <logger name="ru.simplesys.defs.bo.data.SAMPLE_1_2013_11_01_02Bo" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.data.Sample_1_2013_06_01_08DS" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.cetegories.CategoryDS" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.cetegories.Category_param_categoryDS" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.data.COM_Data_DMDS" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.admin.UserGroupDS" level="debug"/>
+    <logger name="com.simplesys.servlet.http.HttpServletRequest" level="debug"/>
+    <logger name="ru.simplesys.defs.bo.scenarios.Scr_CmpgnDS" level="debug"/>
     <logger name="ru.simplesys.defs.bo.admin.UserDS" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.cetegories.Category_paramDS" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.data.COM_Data_DMBo" level="debug"/>
-    <logger name="ru.simplesys.defs.bo.common.JurContractorBo" level="debug"/>
-    <logger name="com.simplesys.jdbc.control.DSRequest" level="debug"/>
-    <logger name="com.simplesys.isc.messaging.ISCMessage" level="debug"/>
-    <logger name="com.simplesys.mfms.containers.controlOfRead_UpdateActor" level="debug"/>
-    <logger name="com.simplesys.mfms.containers.ManagerOfFixedTemplates_FetchTemplateActor" level="debug" additivity="false">
-        <appender-ref ref="FILE_FETCH"/>
-    </logger>
 
     <!--Вывод регистрации сервлетов-->
-    <logger name="com.simplesys.mfms.listener.AppLifeCycleEvent" level="вуигп"/>
+    <logger name="com.simplesys.listener.AppLifeCycleEvent" level="debug"/>
 
-    <logger name="com.simplesys.bonecp.BoneCPConfig" level="debug"/>
+    <!--<logger name="com.simplesys.mfms.containers.ManagerOfFixedTemplates_FetchTemplateActor" level="debug" additivity="false">
+        <appender-ref ref="FILE_FETCH"/>
+    </logger>-->
     <!--<root level="">-->
     <root level="debug">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
+        <!--<appender-ref ref="FILE"/>-->
     </root>
 </configuration>
