@@ -36,7 +36,7 @@ trait WebUI {
 
         CommonDeps.scalaTest.value % "test",
 
-        CommonDepsScalaJS.smartclientScalaJSWrapper.value
+        CommonDepsScalaJS.scalaJSWrapper.value
       )
     ).settings(DevPlugin.devPluginGeneratorSettings).settings({
     import com.simplesys.mergewebapp.MergeWebappPlugin._
