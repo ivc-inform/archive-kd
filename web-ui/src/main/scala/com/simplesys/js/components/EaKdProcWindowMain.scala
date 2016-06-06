@@ -7,6 +7,7 @@ import com.simplesys.js.com.simplesys.SmartClient.App.WebApp
 import com.simplesys.js.com.simplesys.SmartClient.Layout.props.RibbonGroupSSProps
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+import com.simplesys.SmartClient.System._
 
 import scala.scalajs.js.annotation.JSExport
 
@@ -19,7 +20,7 @@ class EaKdProcWindowMain extends WebApp {
             members = Seq(
                 RibbonGroupSS.create(
                     new RibbonGroupSSProps {
-                        title = "Справочники".opt
+                        title = "Справочники".ellipsis.opt
                     }
                 )
             ).opt
