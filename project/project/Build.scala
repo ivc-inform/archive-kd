@@ -11,10 +11,10 @@ object PluginsBuild extends Build
     git.baseVersion := CommonSettings.settingValues.baseVersion
   )
 
-  /*lazy val devPlugin = uri("../../build-plugins/dev-plugin")*/
+  lazy val devPlugin = uri("../../build-plugins/dev-plugin")
 
-  lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning)./*dependsOn(devPlugin).*/settings(
-    PluginDeps.devPlugin,
+  lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(devPlugin).settings(
+    //PluginDeps.devPlugin,
     PluginDeps.sourceGenJS,
     PluginDeps.transpileCoffeeScript,
     PluginDeps.mergeJS,
