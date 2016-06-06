@@ -15,7 +15,7 @@ import com.simplesys.xml.factory.XMLLoader
 import scala.io.Codec
 
 @WebListener
-class AppLifeCycleEvent extends CommonWebAppListener with XMLLoader {
+class AppLifeCycleEvent extends CommonWebAppListener {
 
     override def UserContextInitialized(sce: ServletContextEvent) {
 
@@ -55,31 +55,6 @@ class AppLifeCycleEvent extends CommonWebAppListener with XMLLoader {
             case ex: SQLException => throw new RuntimeException(s"Not database conection ${ds.getUsername}")
             case ex: Throwable => throw ex
         }
-
-        val path = s"${sce.ServletContext.RealPath(".").getOrElse("")}/${getString("app.isomorphicDir")}${getString("app.schemasDir")}"
-        val schemasFiles = new File(path).listFiles.filter(_.getName.endsWith("ds.xml")).sortWith(_.getName < _.getName)
-
-        val list = JsonList()
-
-        logger debug "/////////////////////////////////////////////////////////////// Schema files: ///////////////////////////////////////////////////////////////////"
-        schemasFiles.foreach {
-            file =>
-                val componentName = file.getName.replace(".ds.xml", "")
-                val json = Xml.getJS(loadFile(file)(Codec.UTF8), componentName, false).trim
-
-                if (json != "") {
-                    list += JsonObject("component" -> componentName, "jsonStr" -> json)
-                    logger debug s"Parsed schema: $componentName"
-                }
-        }
-        logger debug "/////////////////////////////////////////////////////////////// End Schema files: ///////////////////////////////////////////////////////////////"
-
-        val schemaList = new DSResponseDyn {
-            Status = RPCResponseDyn.statusSuccess
-            Data = list
-        }
-
-        sce.ServletContext.Attribute("schemaList", Some(schemaList))
 
         logger.trace(s"DriverClass: ${ds.getDriverClass}")
 
