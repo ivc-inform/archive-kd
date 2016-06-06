@@ -39,7 +39,7 @@
 					<attr name="lastName" caption="Фамилия" type="sCaption" mandatory="true"/>
 					<attr name="caption" type="sCaption" caption="Имя пользователя" mandatory="true" calculated="true" formula='lastName + firstName.map(" " + _).getOrElse("") + secondName.map(" " + _).getOrElse("")'/>
 					<attr name="password" type="sPasswordPlain" caption="Пароль" mandatory="true"/>
-					<attr name="active" type="bBoolean" caption="Активность" mandatory="false"/>
+					<attr name="active" type="bBoolean" caption="Активность" mandatory="true"/>
 				</attrs>
 				<defaults>
 					<showAttrs>

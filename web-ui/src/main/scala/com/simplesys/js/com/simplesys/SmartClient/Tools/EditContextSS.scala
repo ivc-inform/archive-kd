@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Tools
 
 import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.SmartClient.Tools.{EditContext, EditNode}
+import com.simplesys.SmartClient.Tools._
 import com.simplesys.System.Types._
 import com.simplesys.System._
 
