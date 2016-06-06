@@ -15,11 +15,11 @@ class EaKdProcWindowMain extends WebApp {
     override protected def mainCanvas: Canvas = RibbonBar.create(
         new RibbonBarProps {
             width = "100%"
+            showResizeBar = true.opt
             members = Seq(
                 RibbonGroupSS.create(
                     new RibbonGroupSSProps {
                         title = "Справочники".opt
-                        showResizeBar = true.opt
                     }
                 )
             ).opt
