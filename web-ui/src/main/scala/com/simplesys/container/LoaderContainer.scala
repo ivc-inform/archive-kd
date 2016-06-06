@@ -40,13 +40,5 @@ object LoaderContainer {
     }
 }
 
-@WebServlet(urlPatterns = Array("/isomorphic/LoadSchemas1"))
-class FirstServlet extends HttpServlet {
-
-    override def DoPost(request: HttpServletRequest, response: HttpServletResponse) {
-        response PrintAndFlush "123456"
-    }
-}
-
 
 

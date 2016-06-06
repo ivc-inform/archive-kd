@@ -8,6 +8,7 @@ import com.simplesys.bonecp.BoneCPDataSource
 import com.simplesys.isc.dataBinging.DSResponseDyn
 import com.simplesys.isc.dataBinging.RPC.RPCResponseDyn
 import com.simplesys.json.{JsonList, JsonObject}
+import com.simplesys.play.Xml
 import com.simplesys.servlet.ServletContextEvent
 import com.simplesys.xml.factory.XMLLoader
 
