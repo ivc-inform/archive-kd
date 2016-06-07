@@ -1,4 +1,4 @@
-// This file is generated automatically (at 06.06.2016 18:09:27), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 07.06.2016 15:31:08), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
 package ru.simplesys.defs.app.scala.container
 
@@ -9,6 +9,7 @@ import com.simplesys.common.Strings._
 import akka.actor.Actor
 import ru.simplesys.defs.bo.admin._
 
+ 
 trait admin_UserGroup_SemiHandTrait_Remove extends SessionContextSupport with ServletActorDyn {
     
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
@@ -19,5 +20,5 @@ trait admin_UserGroup_SemiHandTrait_Remove extends SessionContextSupport with Se
     val dataSet = UserGroupDS(ds)    
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
-    def receiveBase: Option[Actor.Receive] = None
+     def receiveBase: Option[Actor.Receive] = None
 }
