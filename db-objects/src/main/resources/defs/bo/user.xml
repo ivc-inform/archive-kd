@@ -60,7 +60,7 @@
 				<constraints>
 					<uc uniqueType="pk">
 						<attrName>di</attrName>
-						<attrName>di1</attrName>
+						<!--<attrName>di1</attrName>-->
 					</uc>
 					<fk parent="UserGroup" linkType="refIsOwner" mandatory="true">
 						<mapping attrNameLocal="group" attrNameRemote="di"/>
