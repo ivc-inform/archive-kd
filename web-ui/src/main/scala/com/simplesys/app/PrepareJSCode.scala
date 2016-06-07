@@ -8,7 +8,8 @@ import scala.scalajs.js.annotation.JSExport
 @JSExport
 class PrepareJSCode extends StaticJSCode{
 
-    @JSExport override def createJS(mode: Int): Unit = {
+    @JSExport
+    override def createJS(): Unit = {
         isc.defineClass(RibbonGroupSS.getClass.getSimpleName, RibbonGroup.getClass.getSimpleName)
     }
 }
