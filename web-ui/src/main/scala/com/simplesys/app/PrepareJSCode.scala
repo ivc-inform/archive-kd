@@ -1,7 +1,6 @@
 package com.simplesys.app
 
-import com.simplesys.SmartClient.System.{DrawOval, RibbonGroup, RibbonGroupSS, isc}
-import com.simplesys.js.com.simplesys.SmartClient.Layout.RibbonGroupSS
+import com.simplesys.SmartClient.System.{RibbonGroup, RibbonGroupSS, isc}
 import com.simplesys.js.com.simplesys.app.StaticJSCode
 
 import scala.scalajs.js.annotation.JSExport
@@ -10,7 +9,7 @@ import scala.scalajs.js.annotation.JSExport
 class PrepareJSCode extends StaticJSCode{
 
     @JSExport
-    override def createJS(): Unit = {
+    override def createJS(mode: Int): Unit = {
         isc.defineClass(RibbonGroupSS.getClass.getSimpleName, RibbonGroup.getClass.getSimpleName)
     }
 }

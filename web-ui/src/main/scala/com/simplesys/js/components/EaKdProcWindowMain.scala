@@ -12,7 +12,7 @@ import com.simplesys.SmartClient.System._
 import scala.scalajs.js.annotation.JSExport
 
 @JSExport
-class EaKdProcWindowMain extends WebApp {
+object EaKdProcWindowMain extends WebApp {
     override protected def mainCanvas: Canvas = RibbonBar.create(
         new RibbonBarProps {
             width = "100%"
