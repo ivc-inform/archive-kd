@@ -1,4 +1,4 @@
-// This file is generated automatically (at 07.06.2016 15:31:08), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 08.06.2016 18:45:49), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
 package ru.simplesys.defs.app.scala.container
 
