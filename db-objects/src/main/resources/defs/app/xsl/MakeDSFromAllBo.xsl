@@ -55,7 +55,7 @@
 				<xsl:value-of select="@fullClassName"/>
 			</isc:fullClassName>
 			<isc:lobName>
-				<xsl:value-of select="@lobNane"/>
+				<xsl:value-of select="@lobName"/>
 			</isc:lobName>
 			<isc:Identifier>
 				<xsl:value-of select="concat($dataSourecId, '_DS')"/>
