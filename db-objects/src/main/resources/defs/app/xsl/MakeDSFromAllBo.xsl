@@ -51,6 +51,9 @@
 			<isc:ID>
 				<xsl:value-of select="concat($dataSourecId, '_DS')"/>
 			</isc:ID>
+			<isc:fullClassName>
+				<xsl:value-of select="@fullClassName"/>
+			</isc:fullClassName>
 			<isc:Identifier>
 				<xsl:value-of select="concat($dataSourecId, '_DS')"/>
 			</isc:Identifier>
