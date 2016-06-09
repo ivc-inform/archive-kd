@@ -1,8 +1,8 @@
 package com.simplesys.SmartClient.Forms.FormsItems
 
-import ch.qos.logback.core.Layout
 import com.simplesys.SmartClient.Control.IButton
 import com.simplesys.SmartClient.Forms.DynamicForm
+import com.simplesys.SmartClient.Layout.Layout
 import com.simplesys.System.Types.MultiComboBoxLayoutStyle.MultiComboBoxLayoutStyle
 import com.simplesys.System.Types.{void, _}
 
