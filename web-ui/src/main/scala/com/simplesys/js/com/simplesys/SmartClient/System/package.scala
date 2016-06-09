@@ -38,12 +38,6 @@ import com.simplesys.SmartClient.Tools.palette.props._
 import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
-import com.simplesys.js.com.simplesys.SmartClient.Control.IButtonSS
-import com.simplesys.js.com.simplesys.SmartClient.Control.props.IButtonSSProps
-import com.simplesys.js.com.simplesys.SmartClient.Forms.FormsItems.{ComboboxItemWithButtons, ComboboxItemWithClearButton, FormItemWithButton, TimerItem}
-import com.simplesys.js.com.simplesys.SmartClient.Forms.FormsItems.props.{ComboboxItemWithButtonsProps, ComboboxItemWithClearButtonProps, FormItemWithButtonProps, TimerItemProps}
-import com.simplesys.js.com.simplesys.SmartClient.Layout.props.{OkPanelProps, RibbonGroupSSProps, SectionStackSSProps}
-import com.simplesys.js.com.simplesys.SmartClient.Layout.{OkPanel, RibbonGroupSS, SectionStackSS}
 
 //import com.simplesys.macros.PropsToDictionary
 import com.simplesys.macros.PropsToDictionary
@@ -195,7 +189,7 @@ package object System {
     //    object HLayout extends SCApply[HLayout, HLayoutProps]
     object HLayoutSS extends SCApply[HLayoutSS, HLayoutSSProps]
     //    object HStack extends SCApply[HStack, HStackProps]
-    //    object IconButton extends SCApply[IconButton, IconButtonProps]
+    object IconButton extends SCApply[IconButton, IconButtonProps]
     //    object IconMenuButton extends SCApply[IconMenuButton, IconMenuButtonProps]
     //    object ImgSplitbar extends SCApply[ImgSplitbar, ImgSplitbarProps]
     //    object Layout extends SCApply[Layout, LayoutProps]
@@ -222,6 +216,7 @@ package object System {
     //    object ToolStripResizer extends SCApply[ToolStripResizer, ToolStripResizerProps]
     object SectionStack extends SCApply[SectionStack, SectionStackProps]
     object SectionStackSS extends SCApply[SectionStackSS, SectionStackSSProps]
+    object LayoutSpacer extends SCApply[LayoutSpacer, LayoutSpacerProps]
     //</editor-fold>
 
     //<editor-fold desc="drawing">
