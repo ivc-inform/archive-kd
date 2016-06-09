@@ -1,4 +1,4 @@
-package com.simplesys.js.com.simplesys.SmartClient.System
+package com.simplesys.SmartClient.System
 
 import com.simplesys.SmartClient.System._
 
@@ -45,4 +45,6 @@ object Common {
     val font = "font.png"
     val shadow = "shadow.png"
     val info = "info.png"
+    val closeProgram = "Windows-Close-Program-icon.png"
+    val approved = "approved.png"
 }

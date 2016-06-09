@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.DataBinding.{AbstractDataSourceSSCompanion, AbstractJSONCompanion, AbstractOfflineSSCompanion}
 import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, AbstractDrawPaneCompanion}
 import com.simplesys.SmartClient.Drawing.drawItem.{AbstractDrawLineCompanion, AbstractDrawRectCompanion}
-import com.simplesys.SmartClient.Forms.FormsItems.AbstractPickListCompanion
+import com.simplesys.SmartClient.Forms.FormsItems.{AbstractPickListCompanion, AbstractTimerItemCompanion}
 import com.simplesys.SmartClient.Foundation.AbstractCanvasCompanion
 import com.simplesys.SmartClient.Grids._
 import com.simplesys.SmartClient.RPC.AbstractRPCManagerCompanion
@@ -12,7 +12,6 @@ import com.simplesys.SmartClient.Tools.EditContextCompanion
 import com.simplesys.SmartClient.math.AbstractAffineTransformCompanion
 import com.simplesys.System.Types.{Callback, ID, void}
 import com.simplesys.System._
-import com.simplesys.js.com.simplesys.SmartClient.Forms.FormsItems.AbstractTimerItemCompanion
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSBracketAccess, JSName}

@@ -4,20 +4,20 @@ import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
 import com.simplesys.bonecp.BoneCPDataSource
+import com.simplesys.js.components.EaKdProcWindowMain
 import com.simplesys.servlet.ServletContextEvent
 
 @WebListener
 class AppLifeCycleEvent extends CommonWebAppListener {
 
-
-    override val loadSchemas: Boolean = true
+    override val loadSchemas: Boolean = EaKdProcWindowMain.loadSchemas
 
     override def UserContextInitialized(sce: ServletContextEvent) {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
         val ds: BoneCPDataSource = getString("dbPool.default") match {
-            case x@"oracleMFMS" => cpStack OracleDataSource x
+            case x@"oracleEAKD" => cpStack OracleDataSource x
             case any => throw new RuntimeException(s"Bad: ${any}")
         }
 

@@ -1,4 +1,4 @@
-package com.simplesys.js.com.simplesys.SmartClient.App
+package com.simplesys.SmartClient.App
 
 import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldProps
 import com.simplesys.SmartClient.DataBinding.props.{DataSourceProps, DataViewProps}
@@ -7,9 +7,9 @@ import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.props.ListGridProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
+import com.simplesys.SmartClient.Tools.WindowsStack
 import com.simplesys.System.Types._
 import com.simplesys.System._
-import com.simplesys.js.com.simplesys.SmartClient.Tools.WindowsStack
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
@@ -18,6 +18,7 @@ import scala.scalajs.js.annotation.JSExport
 trait WebApp {
 
     protected val windowsStack = new WindowsStack
+    val loadSchemas: Boolean
 
     //Можно при наследование объявлять как lazy val
     protected def mainCanvas: Canvas
@@ -42,18 +43,30 @@ trait WebApp {
 
                             FileLoader.loadJSFiles(localeFile, {
                                 () =>
-                                    DataSourceSSstatic.loadComponentSchemas(
-                                        () =>
-                                            DataView.create(
-                                                new DataViewProps {
-                                                    height = "100%"
-                                                    width = "100%"
-                                                    members = Seq(
-                                                        mainCanvas
-                                                    ).opt
-                                                }
-                                            )
-                                    )
+                                    isc debugTrap loadSchemas
+                                    if (loadSchemas)
+                                        DataSourceSSstatic.loadComponentSchemas(
+                                            () =>
+                                                DataView.create(
+                                                    new DataViewProps {
+                                                        height = "100%"
+                                                        width = "100%"
+                                                        members = Seq(
+                                                            mainCanvas
+                                                        ).opt
+                                                    }
+                                                )
+                                        )
+                                    else
+                                        DataView.create(
+                                            new DataViewProps {
+                                                height = "100%"
+                                                width = "100%"
+                                                members = Seq(
+                                                    mainCanvas
+                                                ).opt
+                                            }
+                                        )
                             })
                     }
                 )
