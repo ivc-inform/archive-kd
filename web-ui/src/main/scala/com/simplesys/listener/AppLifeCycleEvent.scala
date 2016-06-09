@@ -16,7 +16,7 @@ class AppLifeCycleEvent extends CommonWebAppListener {
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
         val ds: BoneCPDataSource = getString("dbPool.default") match {
-            case x@"oracleMFMS" => cpStack OracleDataSource x
+            case x@"oracleEAKD" => cpStack OracleDataSource x
             case any => throw new RuntimeException(s"Bad: ${any}")
         }
 
