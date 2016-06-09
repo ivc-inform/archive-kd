@@ -9,6 +9,9 @@ import com.simplesys.servlet.ServletContextEvent
 @WebListener
 class AppLifeCycleEvent extends CommonWebAppListener {
 
+
+    override val loadSchemas: Boolean = true
+
     override def UserContextInitialized(sce: ServletContextEvent) {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
