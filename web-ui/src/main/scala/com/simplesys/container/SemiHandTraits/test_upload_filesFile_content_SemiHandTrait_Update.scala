@@ -7,17 +7,17 @@ import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.common.Strings._
 import akka.actor.Actor
-import ru.simplesys.defs.bo.admin._
+import ru.simplesys.defs.bo.test._
 
  
-trait admin_User_SemiHandTrait_Update extends SessionContextSupport with ServletActorDyn {
+trait test_upload_filesFile_content_SemiHandTrait_Update extends SessionContextSupport with ServletActorDyn {
     
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     val requestData = new DSRequestDyn(request)    
     
     logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = UserDS(ds)    
+    val dataSet = Upload_filesFile_contentDS(ds)    
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None
