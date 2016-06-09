@@ -13,6 +13,9 @@ import scala.scalajs.js.annotation.JSExport
 
 @JSExport
 object EaKdProcWindowMain extends WebApp {
+
+    override val loadSchemas: Boolean = false
+
     override protected def mainCanvas: Canvas = RibbonBar.create(
         new RibbonBarProps {
             width = "100%"

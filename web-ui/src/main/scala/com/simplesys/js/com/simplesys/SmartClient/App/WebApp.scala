@@ -18,6 +18,7 @@ import scala.scalajs.js.annotation.JSExport
 trait WebApp {
 
     protected val windowsStack = new WindowsStack
+    val loadSchemas: Boolean
 
     //Можно при наследование объявлять как lazy val
     protected def mainCanvas: Canvas
@@ -42,18 +43,29 @@ trait WebApp {
 
                             FileLoader.loadJSFiles(localeFile, {
                                 () =>
-                                    DataSourceSSstatic.loadComponentSchemas(
-                                        () =>
-                                            DataView.create(
-                                                new DataViewProps {
-                                                    height = "100%"
-                                                    width = "100%"
-                                                    members = Seq(
-                                                        mainCanvas
-                                                    ).opt
-                                                }
-                                            )
-                                    )
+                                    if (loadSchemas)
+                                        DataSourceSSstatic.loadComponentSchemas(
+                                            () =>
+                                                DataView.create(
+                                                    new DataViewProps {
+                                                        height = "100%"
+                                                        width = "100%"
+                                                        members = Seq(
+                                                            mainCanvas
+                                                        ).opt
+                                                    }
+                                                )
+                                        )
+                                    else
+                                        DataView.create(
+                                            new DataViewProps {
+                                                height = "100%"
+                                                width = "100%"
+                                                members = Seq(
+                                                    mainCanvas
+                                                ).opt
+                                            }
+                                        )
                             })
                     }
                 )
