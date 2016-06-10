@@ -20,15 +20,40 @@ object EaKdProcWindowMain extends WebApp {
 
     override val loadSchemas: Boolean = false
 
-    private val managedGroups = Seq(
+    private val managedUsersGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Пользователь".ellipsis.opt
+                title = "Справочники".ellipsis.opt
             }
         ),
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Администратор".ellipsis.opt
+                title = "Системные".ellipsis.opt
+            }
+        )
+
+    ).map {
+        item =>
+            item.hide()
+            item
+    }
+
+    private val managedAdminsGroups = Seq(
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Справочники".ellipsis.opt
+            }
+        )
+    ).map {
+        item =>
+            item.hide()
+            item
+    }
+
+    private val managedDevsGroups = Seq(
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Misc".ellipsis.opt
             }
         )
     ).map {
@@ -50,64 +75,77 @@ object EaKdProcWindowMain extends WebApp {
         new RibbonBarProps {
             width = "100%"
             showResizeBar = true.opt
-            members = (managedGroups ++ Seq(
-                LayoutSpacer.create(
-                    new LayoutSpacerProps {
-                        width = "*"
-                    }
-                ),
-                RibbonGroupSS.create(
-                    new RibbonGroupSSProps {
-                        title = "Аутентификация".ellipsis.opt
-                        defaultLayoutAlign = Alignment.center
-                        controls = Seq(
-                            IconButton.create(
-                                new IconButtonProps {
-                                    click = {
-                                        (thiz: classHandler) =>
-                                            if (!LoggedGroup.logged) {
-                                                RPCManagerSS.loginRequired({
-                                                    (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
-                                                        if (res) {
+            members = (
+              managedUsersGroups ++
+                managedAdminsGroups ++
+                managedDevsGroups ++
+                Seq(
+                    LayoutSpacer.create(
+                        new LayoutSpacerProps {
+                            width = "*"
+                        }
+                    ),
+                    RibbonGroupSS.create(
+                        new RibbonGroupSSProps {
+                            title = "Аутентификация".ellipsis.opt
+                            defaultLayoutAlign = Alignment.center
+                            controls = Seq(
+                                IconButton.create(
+                                    new IconButtonProps {
+                                        click = {
+                                            (thiz: classHandler) =>
+                                                if (!LoggedGroup.logged) {
+                                                    RPCManagerSS.loginRequired({
+                                                        (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
+                                                            if (res) {
 
-                                                            captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
-                                                            managedGroups.foreach(_.show())
+                                                                captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
+                                                                managedUsersGroups.foreach(_.show())
 
-                                                            LoggedGroup.logged = true
-                                                            LoggedGroup.codeGroup = codeGroup.toOption
-                                                            thiz setTitle "Выход"
-                                                            thiz setIcon Common.closeProgram
-                                                        } else {
-                                                            managedGroups.foreach(_.hide())
-                                                            LoggedGroup.logged = false
-                                                            thiz setTitle "Вход".ellipsis
-                                                            thiz setIcon Common.login
-                                                        }
-                                                }.toFunc)
+                                                                if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
+                                                                    managedAdminsGroups.foreach(_.show())
 
-                                            } else {
-                                                RPCManagerSS.logoutRequired()
-                                                thiz setTitle "Вход".ellipsis
-                                                thiz setIcon Common.login
-                                                LoggedGroup.logged = false
-                                                windowsStack.destroyAll()
-                                            }
-                                            false
-                                    }.toThisFunc.opt
-                                    title = "Выйти".ellipsis.opt
-                                    iconOrientation = IconOrientation.center.opt
-                                    icon = Common.closeProgram.opt
-                                    largeIcon = Common.login.opt
-                                    orientation = "horizontal".opt
-                                }
-                            ),
-                            captionUserLabel
-                        ).opt
-                        numRows = 2.opt
-                        titleHeight = 18.opt
-                    }
-                )
-            )).opt
+                                                                if (LoggedGroup.isDevsGroup())
+                                                                    managedDevsGroups.foreach(_.show())
+
+                                                                LoggedGroup.logged = true
+                                                                LoggedGroup.codeGroup = codeGroup.toOption
+                                                                thiz setTitle "Выход"
+                                                                thiz setIcon Common.closeProgram
+                                                            } else {
+                                                                managedUsersGroups.foreach(_.hide())
+                                                                managedAdminsGroups.foreach(_.hide())
+                                                                managedDevsGroups.foreach(_.hide())
+
+                                                                LoggedGroup.logged = false
+                                                                thiz setTitle "Вход".ellipsis
+                                                                thiz setIcon Common.login
+                                                            }
+                                                    }.toFunc)
+
+                                                } else {
+                                                    RPCManagerSS.logoutRequired()
+                                                    thiz setTitle "Вход".ellipsis
+                                                    thiz setIcon Common.login
+                                                    LoggedGroup.logged = false
+                                                    windowsStack.destroyAll()
+                                                }
+                                                false
+                                        }.toThisFunc.opt
+                                        title = "Выйти".ellipsis.opt
+                                        iconOrientation = IconOrientation.center.opt
+                                        icon = Common.closeProgram.opt
+                                        largeIcon = Common.login.opt
+                                        orientation = "horizontal".opt
+                                    }
+                                ),
+                                captionUserLabel
+                            ).opt
+                            numRows = 2.opt
+                            titleHeight = 18.opt
+                        }
+                    )
+                )).opt
         }
     )
 }
