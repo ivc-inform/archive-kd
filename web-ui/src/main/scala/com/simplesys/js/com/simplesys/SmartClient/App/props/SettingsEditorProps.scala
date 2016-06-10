@@ -4,16 +4,25 @@ import com.simplesys.SmartClient.Forms.DynamicForm
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SkinBoxItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
-import com.simplesys.SmartClient.Layout.props.{TabSetSSProps, WindowSSProps}
+import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
+import com.simplesys.SmartClient.Layout.props.{OkCancelPanelProps, TabSetSSProps, WindowSSProps}
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.{JSAny, JSUndefined, jSUndefined}
 import com.simplesys.System.Types.Skin.Skin
-import com.simplesys.isc.system.typesDyn.Skin
-import com.simplesys.option.ScOption._
+import com.simplesys.System.Types.{ID, Skin}
+import com.simplesys.System.{JSAny, JSUndefined, jSUndefined}
 import com.simplesys.function._
+import com.simplesys.js.com.simplesys.SmartClient.App.SettingsEditor
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption._
+import com.simplesys.option.{ScNone, ScOption}
+
+import scala.scalajs.js
 
 class SettingsEditorProps extends WindowSSProps {
+    type classHandler <: SettingsEditor
+
+    var identifierApp: ScOption[ID] = ScNone
+
     height = 700
     width = 500
     isModal = true.opt
@@ -29,6 +38,7 @@ class SettingsEditorProps extends WindowSSProps {
 
             val oldSkin = simpleSyS.skin
             var skin: JSUndefined[Skin] = jSUndefined
+            val identifierApp = thiz.identifierApp
 
             val commons = DynamicFormSS.create(
                 new DynamicFormSSProps {
@@ -49,10 +59,10 @@ class SettingsEditorProps extends WindowSSProps {
                         SkinBoxItem(
                             new SkinBoxItemProps {
                                 title = "Темы оформления (Skins)".opt
-                                value = simpleSyS.skin.getOrElse(Skin)
+                                value = simpleSyS.skin.getOrElse(Skin.Enterprise).asInstanceOf[JSAny].opt
                                 changed = {
                                     (form: DynamicForm, item: FormItem, value: JSAny) =>
-                                        skin = value
+                                        skin = value.asInstanceOf[Skin]
                                 }.toFunc.opt
                             }
                         )
@@ -61,12 +71,36 @@ class SettingsEditorProps extends WindowSSProps {
             )
 
             val tabSet = TabSetSS.create(
-                new TabSetSSProps{
-                  tabs = Seq(
-
-                  ).opt
+                new TabSetSSProps {
+                    tabs = Seq(
+                        Tab(
+                            new TabProps {
+                                title = "Общие".opt
+                                pane = commons.opt
+                            }
+                        )
+                    ).opt
                 }
             )
+
+            val ed = OkCancelPanel.create(
+                new OkCancelPanelProps {
+                    height = 35
+                    owner = thiz.opt
+                    ownerDestroy = false.opt
+                    okFunction = {
+                        (thiz: classHandler) =>
+                            if (oldSkin != skin) {
+                                simpleSyS.skin = skin
+                                identifierApp.foreach(identifierApp => isc.OfflineSS.put(s"Skin$identifierApp", skin))
+                                js.Dynamic.global.window.location.reload(false)
+                            }
+
+                    }.toThisFunc.opt
+                }
+            )
+
+            thiz.addItems(IscArray(tabSet, ed))
 
     }.toThisFunc.opt
 }
