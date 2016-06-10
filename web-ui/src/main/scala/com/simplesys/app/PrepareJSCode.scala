@@ -1,7 +1,7 @@
 package com.simplesys.app
 
 import com.simplesys.SmartClient.App.StaticJSCode
-import com.simplesys.SmartClient.System.{RibbonGroup, RibbonGroupSS, isc}
+import com.simplesys.SmartClient.System.{RibbonGroup, RibbonGroupSS, SettingsEditor, WindowSS, isc}
 
 import scala.scalajs.js.annotation.JSExport
 
@@ -10,6 +10,10 @@ class PrepareJSCode extends StaticJSCode{
 
     @JSExport
     override def createJS(): Unit = {
-        isc.defineClass(RibbonGroupSS.getClass.getSimpleName, RibbonGroup.getClass.getSimpleName)
+        isc.defineClass(RibbonGroupSS.getClass.getSimpleName,  RibbonGroup.getClass.getSimpleName)
+
+        isc.defineClass(SettingsEditor.getClass.getSimpleName, WindowSS.getClass.getSimpleName)
+
+        //isc.SettingsEditor.addProperties(SettingsEditor(new SettingsEditorProps))
     }
 }

@@ -6,7 +6,7 @@ import com.simplesys.SmartClient.Foundation.props.LabelProps
 import com.simplesys.SmartClient.Layout.props.{IconButtonProps, LayoutSpacerProps, RibbonBarProps, RibbonGroupSSProps}
 import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
-import com.simplesys.System.Types.{Alignment, IconOrientation, Visibility}
+import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -18,6 +18,8 @@ import scala.scalajs.js.annotation.JSExport
 object EaKdProcWindowMain extends WebApp {
 
     override val loadSchemas = com.simplesys.app.loadSchemas
+
+    override val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
 
     private val managedUsersGroups = Seq(
         RibbonGroupSS.create(
@@ -48,6 +50,7 @@ object EaKdProcWindowMain extends WebApp {
                             orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
+                                    getSetting()
                                     false
                             }.toThisFunc.opt
                         }

@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.System
 
+import com.simplesys.SmartClient.App.AbstractSettingsEditorCompanion
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.DataBinding.{AbstractDataSourceSSCompanion, AbstractJSONCompanion, AbstractOfflineSSCompanion}
 import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, AbstractDrawPaneCompanion}
@@ -80,13 +81,14 @@ object isc extends JSObject {
     val OfflineSS: AbstractOfflineSSCompanion = js.native
     val RPCManager: AbstractRPCManagerCompanion = js.native
     val DataSourceSS: AbstractDataSourceSSCompanion = js.native
+    val SettingsEditor: AbstractSettingsEditorCompanion = js.native
 
     def error(message: String, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     def errorDetail(message: String, detailMessage: String, identifier: ID = js.native, detailIdentifier: ID = js.native): void = js.native
     def info(message: String, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     def ok(message: String, identifier: ID = js.native, callback: Callback = js.native): void = js.native
-    def infos(gridProperties: ListGrid, identifier: ID = js.native, callback: Callback = js.native): void = js.native
-    def errors(gridproperties: ListGrid, identifier: ID = js.native, callback: Callback = js.native): void = js.native
+    def infos(gridProperties : ListGrid | ListGridEditor, identifier: ID = js.native, callback: Callback = js.native): void = js.native
+    def errors(gridproperties: ListGrid | ListGridEditor, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     val JSON: AbstractJSONCompanion = js.native
     def debugTrap[T](obj: T*): T = js.native
     def getPropValue[T](obj: JSObject, name: String): JSUndefined[T] = js.native

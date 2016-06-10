@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Layout
 
-import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Canvas}
 import com.simplesys.SmartClient.System.{AbstractClassCompanion, IscArray}
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.LayoutPolicy.LayoutPolicy
@@ -78,7 +78,7 @@ trait Layout extends Canvas {
 }
 
 @js.native
-abstract trait AbstractLayoutCompanion extends AbstractClassCompanion {
+abstract trait AbstractLayoutCompanion extends AbstractCanvasCompanion {
 }
 
 @js.native

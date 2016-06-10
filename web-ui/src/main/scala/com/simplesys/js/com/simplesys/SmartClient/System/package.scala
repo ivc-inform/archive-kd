@@ -1,5 +1,7 @@
 package com.simplesys.SmartClient
 
+import com.simplesys.SmartClient.App.SettingsEditor
+import com.simplesys.SmartClient.App.props.SettingsEditorProps
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props._
@@ -102,6 +104,7 @@ package object System {
     object CanvasItem extends SCApply[CanvasItem, CanvasItemProps]
     object CheckboxItem extends SCApply[CheckboxItem, CheckboxItemProps]
     object ColorItem extends SCApply[ColorItem, ColorItemProps]
+    object SkinBoxItem extends SCApply[SkinBoxItem, SkinBoxItemProps]
     //    object ComboBoxItem extends SCApply[ComboBoxItem, ComboBoxItemProps]
     //    object CycleItem extends SCApply[CycleItem, CycleItemProps]
     //    object DataPathItem extends SCApply[DataPathItem, DataPathItemProps]
@@ -175,7 +178,7 @@ package object System {
 
     //<editor-fold desc="Grids">
     object ListGrid extends SCApply[ListGrid, ListGridProps]
-    //    object ListGridEditor extends SCApply[ListGridEditor, ListGridEditorProps]
+    object ListGridEditor extends SCApply[ListGridEditor, ListGridEditorProps]
     //    object TreeGrid extends SCApply[TreeGrid, TreeGridProps]
     //    object TileGrid extends SCApply[TileGrid, TileGridProps]
     object TreeGridEditor extends SCApply[TreeGridEditor, TreeGridEditorProps]
@@ -273,6 +276,8 @@ package object System {
 
     //</editor-fold>
     //</editor-fold>
+
+    object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
 
 }
 
