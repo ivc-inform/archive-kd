@@ -86,20 +86,20 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
             case _ => throw new RuntimeException(s"Нет DS")
         }
 
-        dsProd = servletContext.Attribute("dsProd") match {
+        /*dsProd = servletContext.Attribute("dsProd") match {
             case Some(value: BoneCPDataSource) => value
             case _ => throw new RuntimeException(s"Нет DSProd")
-        }
+        }*/
 
-        dsSave = servletContext.Attribute("dsSave") match {
+        /*dsSave = servletContext.Attribute("dsSave") match {
             case Some(value: BoneCPDataSource) => value
             case _ => throw new RuntimeException(s"Нет DSSave")
-        }
+        }*/
 
-        dsConfig = servletContext.Attribute("dsConfig") match {
+        /*dsConfig = servletContext.Attribute("dsConfig") match {
             case Some(value: BoneCPDataSource) => value
             case _ => throw new RuntimeException(s"Нет dsConfig")
-        }
+        }*/
 
         /*birtEngine = servletContext.Attribute(s"birtEngine") match {
           case Some(value: IReportEngine) => value
