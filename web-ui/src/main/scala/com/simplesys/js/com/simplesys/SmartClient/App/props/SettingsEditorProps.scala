@@ -21,8 +21,6 @@ import scala.scalajs.js
 class SettingsEditorProps extends WindowSSProps {
     type classHandler <: SettingsEditor
 
-    var identifierApp: ScOption[ID] = ScNone
-
     height = 700
     width = 500
     isModal = true.opt
@@ -37,8 +35,8 @@ class SettingsEditorProps extends WindowSSProps {
             thiz.Super("initWidget", arguments)
 
             val oldSkin = simpleSyS.skin
-            var skin: JSUndefined[Skin] = jSUndefined
-            val identifierApp = thiz.identifierApp
+            var skin: JSUndefined[String] = jSUndefined
+            val identifierApp = thiz.identifier
 
             val commons = DynamicFormSS.create(
                 new DynamicFormSSProps {
@@ -59,10 +57,10 @@ class SettingsEditorProps extends WindowSSProps {
                         SkinBoxItem(
                             new SkinBoxItemProps {
                                 title = "Темы оформления (Skins)".opt
-                                value = simpleSyS.skin.getOrElse(Skin.Enterprise).asInstanceOf[JSAny].opt
+                                value = simpleSyS.skin.getOrElse(Skin.Enterprise.toString).asInstanceOf[JSAny].opt
                                 changed = {
                                     (form: DynamicForm, item: FormItem, value: JSAny) =>
-                                        skin = value.asInstanceOf[Skin]
+                                        skin = value.toString
                                 }.toFunc.opt
                             }
                         )
@@ -92,7 +90,7 @@ class SettingsEditorProps extends WindowSSProps {
                         (thiz: classHandler) =>
                             if (oldSkin != skin) {
                                 simpleSyS.skin = skin
-                                identifierApp.foreach(identifierApp => isc.OfflineSS.put(s"Skin$identifierApp", skin))
+                                isc.OfflineSS.put(s"Skin$identifier", skin)
                                 js.Dynamic.global.window.location.reload(false)
                             }
 

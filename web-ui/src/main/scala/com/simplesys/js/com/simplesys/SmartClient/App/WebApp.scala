@@ -36,9 +36,9 @@ trait WebApp {
 
                 isc.params.locale = "ru_RU"
 
-                val skin: Skin = simpleSyS.skin.toOption match {
+                val skin: String = simpleSyS.skin.toOption match {
                     case Some(skin) => skin
-                    case None => isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise)
+                    case None => isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
                 }
 
                 Page setAppImgDir "managed/images/common-webapp/app/"
@@ -132,11 +132,11 @@ trait WebApp {
         )
     }
 
-//    protected def getSetting(): Unit = {
-//        SettingsEditor.create(
-//            new SettingsEditorProps {
-//                identifierApp = self.identifier.opt
-//            }
-//        )
-//    }
+    protected def getSetting(): Unit = {
+        SettingsEditor.create(
+            new SettingsEditorProps {
+                identifier = self.identifier.opt
+            }
+        )
+    }
 }

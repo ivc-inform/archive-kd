@@ -277,7 +277,7 @@ package object System {
     //</editor-fold>
     //</editor-fold>
 
-    //object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
+    object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
 
 }
 
