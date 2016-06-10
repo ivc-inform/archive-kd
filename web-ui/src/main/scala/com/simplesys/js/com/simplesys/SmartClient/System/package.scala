@@ -40,8 +40,10 @@ import com.simplesys.SmartClient.Tools.palette.props._
 import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
-import com.simplesys.js.com.simplesys.SmartClient.Control.ListGridContextMenu
-import com.simplesys.js.com.simplesys.SmartClient.Control.props.ListGridContextMenuProps
+import com.simplesys.js.com.simplesys.SmartClient.App.User_ComponentMenu
+import com.simplesys.js.com.simplesys.SmartClient.App.props.User_ComponentMenuProps
+import com.simplesys.js.com.simplesys.SmartClient.Control.{ListGridContextMenu, TreeGridContextMenu}
+import com.simplesys.js.com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, TreeGridContextMenuProps}
 import com.simplesys.js.com.simplesys.SmartClient.Layout.IconMenuButtonSS
 import com.simplesys.js.com.simplesys.SmartClient.Layout.props.IconMenuButtonSSProps
 
@@ -284,6 +286,9 @@ package object System {
 
     object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
     object ListGridContextMenu extends SCApply[ListGridContextMenu, ListGridContextMenuProps]
+    object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
+    object User_ComponentMenu extends SCApply[User_ComponentMenu, User_ComponentMenuProps]
+
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
 
 }
