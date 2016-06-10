@@ -76,6 +76,7 @@ object EaKdProcWindowMain extends WebApp {
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
+                            orientation = "vertical".opt
                             icon = Common.ref.opt
                             click = {
                                 (thiz: classHandler) =>
@@ -88,8 +89,8 @@ object EaKdProcWindowMain extends WebApp {
                                         MenuSSItem(
                                             new MenuSSItemProps {
                                                 name = "usersGroups".opt
-                                                icon = Common.admin_UserGroup.opt
-                                                title = "Группы и пользователи".opt
+                                                icon = Common.admin_User.opt
+                                                title = "Группы и пользователи".ellipsis.opt
                                             }
                                         )
                                     ).opt
