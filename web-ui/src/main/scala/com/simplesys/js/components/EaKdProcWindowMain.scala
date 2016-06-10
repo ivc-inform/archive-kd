@@ -71,9 +71,7 @@ object EaKdProcWindowMain extends WebApp {
                                                         if (res) {
 
                                                             captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
-
                                                             managedGroups.foreach(_.show())
-
 
                                                             LoggedGroup.logged = true
                                                             LoggedGroup.codeGroup = codeGroup.toOption
