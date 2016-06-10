@@ -1,8 +1,8 @@
 package com.simplesys.SmartClient.System
 
 import com.simplesys.SmartClient.Control._
-import com.simplesys.SmartClient.Control.menu.MenuSSItem
-import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Control.menu._
+import com.simplesys.SmartClient.Foundation._
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.{Record, void}
 
