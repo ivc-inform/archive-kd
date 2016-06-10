@@ -190,7 +190,7 @@ package object System {
     object HLayoutSS extends SCApply[HLayoutSS, HLayoutSSProps]
     //    object HStack extends SCApply[HStack, HStackProps]
     object IconButton extends SCApply[IconButton, IconButtonProps]
-    //    object IconMenuButton extends SCApply[IconMenuButton, IconMenuButtonProps]
+    object IconMenuButton extends SCApply[IconMenuButton, IconMenuButtonProps]
     //    object ImgSplitbar extends SCApply[ImgSplitbar, ImgSplitbarProps]
     //    object Layout extends SCApply[Layout, LayoutProps]
     //    object LayoutSS extends SCApply[LayoutSS, LayoutSSProps]

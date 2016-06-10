@@ -29,6 +29,30 @@ object EaKdProcWindowMain extends WebApp {
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Системные".ellipsis.opt
+                controls = Seq(
+                    IconButton.create(
+                        new IconButtonProps {
+                            title = "Информация".ellipsis.opt
+                            icon = Common.info.opt
+                            click = {
+                                (thiz: classHandler) =>
+                                    getAbout()
+                                    false
+                            }.toThisFunc.opt
+                        }
+                    ),
+                    IconButton.create(
+                        new IconButtonProps {
+                            title = "Настройки".ellipsis.opt
+                            icon = Common.settings.opt
+                            click = {
+                                (thiz: classHandler) =>
+                                    getAbout()
+                                    false
+                            }.toThisFunc.opt
+                        }
+                    )
+                ).opt
             }
         )
 
