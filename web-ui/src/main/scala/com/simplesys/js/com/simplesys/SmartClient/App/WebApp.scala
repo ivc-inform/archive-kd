@@ -92,14 +92,14 @@ trait WebApp {
                     new DataSourceFieldProps {
                         required = true.opt
                         `type` = FieldType.sCode_SimpleType.opt
-                        title = "\u041D\u0430\u0438\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435".opt
+                        title = "Наименование".opt
                         primaryKey = true.opt
                         name = "libName".opt
                     },
                     new DataSourceFieldProps {
                         required = true.opt
                         `type` = FieldType.sCode_SimpleType.opt
-                        title = "\u0412\u0435\u0440\u0441\u0438\u044F".opt
+                        title = "Версия".opt
                         primaryKey = true.opt
                         name = "libVersion".opt
                     }
