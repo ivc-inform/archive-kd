@@ -3,9 +3,9 @@ package com.simplesys.SmartClient
 import com.simplesys.SmartClient.App.SettingsEditor
 import com.simplesys.SmartClient.App.props.SettingsEditorProps
 import com.simplesys.SmartClient.Control._
-import com.simplesys.SmartClient.Control.menu.MenuSSItem
+import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._
-import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
+import com.simplesys.SmartClient.Control.props.menu.{MenuItemProps, MenuSSItemProps}
 import com.simplesys.SmartClient.DataBinding._
 import com.simplesys.SmartClient.DataBinding.props._
 import com.simplesys.SmartClient.Drawing._
@@ -40,6 +40,8 @@ import com.simplesys.SmartClient.Tools.palette.props._
 import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
+import com.simplesys.js.com.simplesys.SmartClient.Layout.IconMenuButtonSS
+import com.simplesys.js.com.simplesys.SmartClient.Layout.props.IconMenuButtonSSProps
 
 //import com.simplesys.macros.PropsToDictionary
 import com.simplesys.macros.PropsToDictionary
@@ -194,6 +196,7 @@ package object System {
     //    object HStack extends SCApply[HStack, HStackProps]
     object IconButton extends SCApply[IconButton, IconButtonProps]
     object IconMenuButton extends SCApply[IconMenuButton, IconMenuButtonProps]
+    object IconMenuButtonSS extends SCApply[IconMenuButtonSS, IconMenuButtonSSProps]
     //    object ImgSplitbar extends SCApply[ImgSplitbar, ImgSplitbarProps]
     //    object Layout extends SCApply[Layout, LayoutProps]
     //    object LayoutSS extends SCApply[LayoutSS, LayoutSSProps]
@@ -278,6 +281,7 @@ package object System {
     //</editor-fold>
 
     object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
+    object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
 
 }
 

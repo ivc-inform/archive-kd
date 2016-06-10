@@ -48,4 +48,7 @@ object Common {
     val closeProgram = "Windows-Close-Program-icon.png"
     val approved = "approved.png"
     val settings = "settings.png"
+    val ref = "ref.png"
+    val dictionary = "dictionary.png"
+    val admin_UserGroup = "admin_UserGroup.png"
 }
