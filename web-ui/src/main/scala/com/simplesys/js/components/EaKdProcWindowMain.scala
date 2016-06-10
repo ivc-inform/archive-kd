@@ -34,6 +34,7 @@ object EaKdProcWindowMain extends WebApp {
                         new IconButtonProps {
                             title = "Информация".ellipsis.opt
                             icon = Common.info.opt
+                            orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
                                     getAbout()
@@ -45,6 +46,7 @@ object EaKdProcWindowMain extends WebApp {
                         new IconButtonProps {
                             title = "Настройки".ellipsis.opt
                             icon = Common.settings.opt
+                            orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
                                     getAbout()
@@ -91,7 +93,7 @@ object EaKdProcWindowMain extends WebApp {
             showEdges = true.opt
             contents = "Иванов Иван Иванович".opt
             icon = Common.approved.opt
-            wrap = true.opt
+            wrap = false.opt
             visibility = Visibility.hidden.opt
         }
     )
@@ -114,9 +116,11 @@ object EaKdProcWindowMain extends WebApp {
                         new RibbonGroupSSProps {
                             title = "Аутентификация".ellipsis.opt
                             defaultLayoutAlign = Alignment.center
+                            width = 40
                             controls = Seq(
                                 IconButton.create(
                                     new IconButtonProps {
+                                        orientation = "vertical".opt
                                         click = {
                                             (thiz: classHandler) =>
                                                 if (!LoggedGroup.logged) {
@@ -125,7 +129,9 @@ object EaKdProcWindowMain extends WebApp {
                                                             if (res) {
 
                                                                 captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
+                                                                captionUserLabel.show()
                                                                 managedUsersGroups.foreach(_.show())
+                                                                LoggedGroup.codeGroup = codeGroup.toOption
 
                                                                 if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
                                                                     managedAdminsGroups.foreach(_.show())
@@ -134,13 +140,14 @@ object EaKdProcWindowMain extends WebApp {
                                                                     managedDevsGroups.foreach(_.show())
 
                                                                 LoggedGroup.logged = true
-                                                                LoggedGroup.codeGroup = codeGroup.toOption
+
                                                                 thiz setTitle "Выход"
                                                                 thiz setIcon Common.closeProgram
                                                             } else {
                                                                 managedUsersGroups.foreach(_.hide())
                                                                 managedAdminsGroups.foreach(_.hide())
                                                                 managedDevsGroups.foreach(_.hide())
+                                                                captionUserLabel.hide()
 
                                                                 LoggedGroup.logged = false
                                                                 thiz setTitle "Вход".ellipsis
@@ -153,6 +160,10 @@ object EaKdProcWindowMain extends WebApp {
                                                     thiz setTitle "Вход".ellipsis
                                                     thiz setIcon Common.login
                                                     LoggedGroup.logged = false
+                                                    managedUsersGroups.foreach(_.hide())
+                                                    managedAdminsGroups.foreach(_.hide())
+                                                    managedDevsGroups.foreach(_.hide())
+                                                    captionUserLabel.hide()
                                                     windowsStack.destroyAll()
                                                 }
                                                 false
@@ -160,7 +171,6 @@ object EaKdProcWindowMain extends WebApp {
                                         title = "Войти".ellipsis.opt
                                         iconOrientation = IconOrientation.center.opt
                                         icon = Common.login.opt
-                                        orientation = "horizontal".opt
                                     }
                                 ),
                                 captionUserLabel
