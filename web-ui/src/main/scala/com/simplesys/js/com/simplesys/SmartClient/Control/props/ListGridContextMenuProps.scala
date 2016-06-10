@@ -90,6 +90,27 @@ class ListGridContextMenuProps extends MenuSSProps {
         ),
         MenuSSItem(
             new MenuSSItemProps {
+                title = "Сохранить изменения".opt
+                identifier = "saveAll".opt
+                icon = Common.iconSave.opt
+                click = {
+                    (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                        val owner = item.owner.asInstanceOf[ListGridEditor]
+                        simpleSyS checkOwner owner
+                        owner.saveAllEdits()
+
+                        false
+                }.toFunc.opt
+                enableIf = {
+                    (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                        val owner = item.owner.asInstanceOf[ListGridEditor]
+                        simpleSyS checkOwner owner
+                        owner.hasChanges() && !owner.hasErrors()
+                }.toFunc.opt
+            }
+        ),
+        MenuSSItem(
+            new MenuSSItemProps {
                 title = "Отменить изменения".opt
                 identifier = "discardAll".opt
                 icon = Common.delete_icon.opt
@@ -105,7 +126,7 @@ class ListGridContextMenuProps extends MenuSSProps {
                     (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
                         val owner = item.owner.asInstanceOf[ListGridEditor]
                         simpleSyS checkOwner owner
-                        owner.hasChanges() && !owner.hasErrors()
+                        owner.hasChanges()
                 }.toFunc.opt
             }
         )
