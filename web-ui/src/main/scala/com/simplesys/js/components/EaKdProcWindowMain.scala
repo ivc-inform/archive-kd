@@ -6,7 +6,7 @@ import com.simplesys.SmartClient.Foundation.props.LabelProps
 import com.simplesys.SmartClient.Layout.props.{IconButtonProps, LayoutSpacerProps, RibbonBarProps, RibbonGroupSSProps}
 import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
-import com.simplesys.System.Types.{Alignment, IconOrientation}
+import com.simplesys.System.Types.{Alignment, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.js.com.simplesys.SmartClient.App.LoggedGroup
@@ -18,7 +18,7 @@ import scala.scalajs.js.annotation.JSExport
 @JSExport
 object EaKdProcWindowMain extends WebApp {
 
-    override val loadSchemas: Boolean = false
+    override val loadSchemas = com.simplesys.app.loadSchemas
 
     private val managedUsersGroups = Seq(
         RibbonGroupSS.create(
@@ -92,6 +92,7 @@ object EaKdProcWindowMain extends WebApp {
             contents = "Иванов Иван Иванович".opt
             icon = Common.approved.opt
             wrap = true.opt
+            visibility = Visibility.hidden.opt
         }
     )
 
@@ -156,10 +157,9 @@ object EaKdProcWindowMain extends WebApp {
                                                 }
                                                 false
                                         }.toThisFunc.opt
-                                        title = "Выйти".ellipsis.opt
+                                        title = "Войти".ellipsis.opt
                                         iconOrientation = IconOrientation.center.opt
-                                        icon = Common.closeProgram.opt
-                                        largeIcon = Common.login.opt
+                                        icon = Common.login.opt
                                         orientation = "horizontal".opt
                                     }
                                 ),
