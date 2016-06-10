@@ -18,6 +18,7 @@ object simpleSyS extends JSObject {
     def checkOwner(canvas: Canvas): Canvas = js.native
     def _enableDeleteFromTree(menu: MenuSSItem): Boolean = js.native
     def _openFolders(menu: MenuSS): void = js.native
+    def guid(): String = js.native
     var config: Config = js.native
     val aboutData: IscArray[Record] = js.native
 }

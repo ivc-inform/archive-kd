@@ -1,6 +1,6 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.WebApp
+import com.simplesys.SmartClient.App.{LoggedGroup, WebApp}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
 import com.simplesys.SmartClient.Layout.props.{IconButtonProps, LayoutSpacerProps, RibbonBarProps, RibbonGroupSSProps}
@@ -9,7 +9,6 @@ import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.function._
-import com.simplesys.js.com.simplesys.SmartClient.App.LoggedGroup
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
@@ -93,7 +92,7 @@ object EaKdProcWindowMain extends WebApp {
             showEdges = true.opt
             contents = "Иванов Иван Иванович".opt
             icon = Common.approved.opt
-            wrap = false.opt
+            wrap = true.opt
             visibility = Visibility.hidden.opt
         }
     )
@@ -175,7 +174,7 @@ object EaKdProcWindowMain extends WebApp {
                                 ),
                                 captionUserLabel
                             ).opt
-                            numRows = 2.opt
+                            numRows = 3.opt
                             titleHeight = 18.opt
                         }
                     )
