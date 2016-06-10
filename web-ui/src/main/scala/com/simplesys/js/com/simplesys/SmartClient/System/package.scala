@@ -40,6 +40,8 @@ import com.simplesys.SmartClient.Tools.palette.props._
 import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
+import com.simplesys.js.com.simplesys.SmartClient.Control.ListGridContextMenu
+import com.simplesys.js.com.simplesys.SmartClient.Control.props.ListGridContextMenuProps
 import com.simplesys.js.com.simplesys.SmartClient.Layout.IconMenuButtonSS
 import com.simplesys.js.com.simplesys.SmartClient.Layout.props.IconMenuButtonSSProps
 
@@ -281,6 +283,7 @@ package object System {
     //</editor-fold>
 
     object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
+    object ListGridContextMenu extends SCApply[ListGridContextMenu, ListGridContextMenuProps]
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
 
 }

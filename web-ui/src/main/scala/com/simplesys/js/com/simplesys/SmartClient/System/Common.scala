@@ -15,7 +15,7 @@ object Common {
     val iconStatistiq = "global_manager.png"
     val iconEdit = "edit.png"
     val delete_Column = "Delete_Column.png"
-    val Delete_icon = "Delete-icon.png"
+    val delete_icon = "Delete-icon.png"
     val iconSave = "Save-icon.png"
     val iconDiscard = "cancel-icon.png"
     val iconOpenFolder = "openFolder.png"
@@ -51,4 +51,5 @@ object Common {
     val ref = "ref.png"
     val dictionary = "dictionary.png"
     val admin_UserGroup = "admin_UserGroup.png"
+    val Actions_document_edit_icon = "Actions-document-edit-icon.png"
 }

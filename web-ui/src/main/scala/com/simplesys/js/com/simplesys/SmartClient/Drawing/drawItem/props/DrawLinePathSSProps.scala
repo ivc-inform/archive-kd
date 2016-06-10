@@ -271,7 +271,7 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons {
                                                                     new MenuSSItemProps {
                                                                         title = "Удалить контрольную точку".ellipsis.opt
                                                                         identifier = "deleteControlPoint".opt
-                                                                        icon = Common.Delete_icon.opt
+                                                                        icon = Common.delete_icon.opt
                                                                         click = {
                                                                             (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                                                 thiz removeControlPointKnob target.asInstanceOf[DrawKnob]
