@@ -43,7 +43,6 @@ trait WebApp {
 
                             FileLoader.loadJSFiles(localeFile, {
                                 () =>
-                                    isc debugTrap loadSchemas
                                     if (loadSchemas)
                                         DataSourceSSstatic.loadComponentSchemas(
                                             () =>
@@ -100,6 +99,7 @@ trait WebApp {
         )
 
     protected def getAbout(): Unit = {
+        isc debugTrap simpleSyS.aboutData
         aboutDS setCacheData simpleSyS.aboutData
 
         isc.infos(
