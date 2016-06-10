@@ -1,4 +1,4 @@
-package com.simplesys.js.com.simplesys.SmartClient.App
+package com.simplesys.SmartClient.App
 
 object LoggedGroup {
     var logged = false
