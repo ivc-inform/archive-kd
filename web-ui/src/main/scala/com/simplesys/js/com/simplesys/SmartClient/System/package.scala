@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient
 
-import com.simplesys.SmartClient.App.SettingsEditor
-import com.simplesys.SmartClient.App.props.SettingsEditorProps
+import com.simplesys.SmartClient.App.props.{Editoradmin_UserProps, SettingsEditorProps}
+import com.simplesys.SmartClient.App.{Editoradmin_User, SettingsEditor}
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._
@@ -43,12 +43,6 @@ import com.simplesys.SmartClient.Tools.palette.props._
 import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
-import com.simplesys.js.com.simplesys.SmartClient.App.{Editoradmin_User, User_ComponentMenu}
-import com.simplesys.js.com.simplesys.SmartClient.App.props.{Editoradmin_UserProps, User_ComponentMenuProps}
-import com.simplesys.js.com.simplesys.SmartClient.Control.{ListGridContextMenu, TreeGridContextMenu}
-import com.simplesys.js.com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, TreeGridContextMenuProps}
-import com.simplesys.js.com.simplesys.SmartClient.Layout.IconMenuButtonSS
-import com.simplesys.js.com.simplesys.SmartClient.Layout.props.IconMenuButtonSSProps
 
 //import com.simplesys.macros.PropsToDictionary
 import com.simplesys.macros.PropsToDictionary

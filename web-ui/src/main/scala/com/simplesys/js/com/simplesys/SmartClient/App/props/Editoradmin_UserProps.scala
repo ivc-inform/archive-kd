@@ -1,5 +1,6 @@
-package com.simplesys.js.com.simplesys.SmartClient.App.props
+package com.simplesys.SmartClient.App.props
 
+import com.simplesys.SmartClient.App.Editoradmin_User
 import com.simplesys.SmartClient.Forms.FormsItems.props.SelectItemProps
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -8,7 +9,6 @@ import com.simplesys.SmartClient.System._
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.Alignment
 import com.simplesys.function._
-import com.simplesys.js.com.simplesys.SmartClient.App.Editoradmin_User
 import com.simplesys.option.ScOption._
 
 class Editoradmin_UserProps extends TreeListGridEditorProps {

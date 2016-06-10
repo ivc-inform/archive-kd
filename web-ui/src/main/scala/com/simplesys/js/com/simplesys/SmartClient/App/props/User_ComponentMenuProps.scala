@@ -1,13 +1,12 @@
-package com.simplesys.js.com.simplesys.SmartClient.App.props
+package com.simplesys.SmartClient.App.props
 
-import com.simplesys.SmartClient.Control.props.MenuSSProps
+import com.simplesys.SmartClient.App.User_ComponentMenu
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
+import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, MenuSSProps}
 import com.simplesys.SmartClient.Grids.TreeListGridEditor
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.function._
-import com.simplesys.js.com.simplesys.SmartClient.App.User_ComponentMenu
-import com.simplesys.js.com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, TreeGridContextMenuProps}
 import com.simplesys.option.ScOption._
 
 class User_ComponentMenuProps extends MenuSSProps {

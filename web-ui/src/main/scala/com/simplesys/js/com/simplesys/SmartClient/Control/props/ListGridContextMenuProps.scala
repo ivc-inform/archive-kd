@@ -1,4 +1,4 @@
-package com.simplesys.js.com.simplesys.SmartClient.Control.props
+package com.simplesys.SmartClient.Control.props
 
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem

@@ -11,7 +11,6 @@ import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.function._
-import com.simplesys.js.com.simplesys.SmartClient.Layout.props.IconMenuButtonSSProps
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 

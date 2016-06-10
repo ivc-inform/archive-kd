@@ -1,4 +1,4 @@
-package com.simplesys.js.com.simplesys.SmartClient.Layout
+package com.simplesys.SmartClient.Layout
 
 import com.simplesys.SmartClient.Layout.IconMenuButton
 
