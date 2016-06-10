@@ -3,8 +3,9 @@ package com.simplesys.SmartClient.System
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu._
 import com.simplesys.SmartClient.Foundation._
-import com.simplesys.System.JSObject
+import com.simplesys.System.Types.Skin.Skin
 import com.simplesys.System.Types.{Record, void}
+import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
 
@@ -21,4 +22,5 @@ object simpleSyS extends JSObject {
     def guid(): String = js.native
     var config: Config = js.native
     val aboutData: IscArray[Record] = js.native
+    var skin: JSUndefined[Skin] = js.native
 }

@@ -4,10 +4,11 @@ import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldPro
 import com.simplesys.SmartClient.DataBinding.props.{DataSourceProps, DataViewProps}
 import com.simplesys.SmartClient.DataBinding.{DataSource, DataSourceSSstatic}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.props.{ListGridEditorProps, ListGridProps}
+import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.Tools.WindowsStack
+import com.simplesys.System.Types.Skin.Skin
 import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.option.DoubleType._
@@ -18,7 +19,9 @@ import scala.scalajs.js.annotation.JSExport
 trait WebApp {
 
     protected val windowsStack = new WindowsStack
+
     val loadSchemas: Boolean
+    val identifier: ID
 
     //Можно при наследование объявлять как lazy val
     protected def mainCanvas: Canvas
@@ -30,7 +33,10 @@ trait WebApp {
 
                 isc.params.locale = "ru_RU"
 
-                val skin = Skin.Enterprise
+                val skin: Skin = simpleSyS.skin.toOption match {
+                    case Some(skin) => skin
+                    case None => isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise)
+                }
 
                 Page setAppImgDir "managed/images/common-webapp/app/"
 

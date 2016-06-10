@@ -14,11 +14,11 @@ trait Offline extends Class {
 
 @js.native
 abstract trait AbstractOfflineCompanion extends AbstractClassCompanion {
-    def get(key: String): JSAny = js.native
+    def get[T](key: String): T = js.native
     def goOffline(): void = js.native
     def goOnline(): void = js.native
     def isOffline(): Boolean = js.native
-    def put(key: String, value: JSAny | String, recycleEntries: Boolean = js.native): void = js.native
+    def put[T](key: String, value: T, recycleEntries: Boolean = js.native): void = js.native
     def remove(key: String): void = js.native
     def useNativeOfflineDetection(): void = js.native
 }

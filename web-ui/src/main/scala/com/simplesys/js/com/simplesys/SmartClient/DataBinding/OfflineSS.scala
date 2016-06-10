@@ -11,7 +11,7 @@ import scala.scalajs.js.|
 
 @js.native
 abstract trait AbstractOfflineSSCompanion extends AbstractOfflineCompanion {
-    def get(key: String, defValue: JSAny): JSAny = js.native
+    def get[T](key: String, defValue: T): T = js.native
     def getBoolean(key: String, defValue: Boolean): Boolean = js.native
     def putBoolean(key: String, value: Boolean): void = js.native
     def getNumber(key: String, defValue: Double): Double = js.native
