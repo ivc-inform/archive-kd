@@ -99,7 +99,7 @@ trait WebApp {
         )
 
     protected def getAbout(): Unit = {
-        isc debugTrap simpleSyS.aboutData
+        //isc debugTrap simpleSyS.aboutData
         aboutDS setCacheData simpleSyS.aboutData
 
         isc.infos(
