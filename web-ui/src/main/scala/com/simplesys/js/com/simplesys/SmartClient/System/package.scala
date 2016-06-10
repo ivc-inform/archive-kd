@@ -1,5 +1,7 @@
 package com.simplesys.SmartClient
 
+import com.simplesys.SmartClient.App.SettingsEditor
+import com.simplesys.SmartClient.App.props.SettingsEditorProps
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props._
@@ -274,6 +276,8 @@ package object System {
 
     //</editor-fold>
     //</editor-fold>
+
+    object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
 
 }
 

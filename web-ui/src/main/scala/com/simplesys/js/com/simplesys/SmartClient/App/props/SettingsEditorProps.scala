@@ -1,5 +1,6 @@
-package com.simplesys.js.com.simplesys.SmartClient.App.props
+package com.simplesys.SmartClient.App.props
 
+import com.simplesys.SmartClient.App.SettingsEditor
 import com.simplesys.SmartClient.Forms.DynamicForm
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SkinBoxItemProps}
@@ -11,7 +12,6 @@ import com.simplesys.System.Types.Skin.Skin
 import com.simplesys.System.Types.{ID, Skin}
 import com.simplesys.System.{JSAny, JSUndefined, jSUndefined}
 import com.simplesys.function._
-import com.simplesys.js.com.simplesys.SmartClient.App.SettingsEditor
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
