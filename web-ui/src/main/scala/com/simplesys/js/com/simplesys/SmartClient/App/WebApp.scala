@@ -128,4 +128,8 @@ trait WebApp {
             "544C01DA-5F30-0126-8546-00F31AC36341"
         )
     }
+
+    protected def getSetting(): Unit = {
+
+    }
 }

@@ -8,3 +8,7 @@ trait WindowSS extends Window {
     var autoPosition: Boolean
 }
 
+@js.native
+abstract trait AbstractWindowSSCompanion extends AbstractWindowCompanion {
+}
+

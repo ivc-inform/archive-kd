@@ -50,7 +50,7 @@ object EaKdProcWindowMain extends WebApp {
                             orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
-                                    getAbout()
+
                                     false
                             }.toThisFunc.opt
                         }
