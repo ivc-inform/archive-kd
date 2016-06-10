@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.App
 
+import com.simplesys.SmartClient.App.props.SettingsEditorProps
 import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldProps
 import com.simplesys.SmartClient.DataBinding.props.{DataSourceProps, DataViewProps}
 import com.simplesys.SmartClient.DataBinding.{DataSource, DataSourceSSstatic}
@@ -17,6 +18,8 @@ import com.simplesys.option.ScOption._
 import scala.scalajs.js.annotation.JSExport
 
 trait WebApp {
+
+    self =>
 
     protected val windowsStack = new WindowsStack
 
@@ -130,6 +133,10 @@ trait WebApp {
     }
 
     protected def getSetting(): Unit = {
-
+        SettingsEditor.create(
+            new SettingsEditorProps {
+                identifierApp = self.identifier.opt
+            }
+        )
     }
 }

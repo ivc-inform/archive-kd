@@ -14,6 +14,6 @@ class PrepareJSCode extends StaticJSCode{
         isc.defineClass(RibbonGroupSS.getClass.getSimpleName,  WindowSS.getClass.getSimpleName)
         isc.defineClass(SettingsEditor.getClass.getSimpleName, RibbonGroup.getClass.getSimpleName)
 
-        isc.SettingsEditor.addProperties(SettingsEditor(new SettingsEditorProps))
+        //isc.SettingsEditor.addProperties(SettingsEditor(new SettingsEditorProps))
     }
 }
