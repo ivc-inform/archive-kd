@@ -102,6 +102,7 @@ package object System {
     object CanvasItem extends SCApply[CanvasItem, CanvasItemProps]
     object CheckboxItem extends SCApply[CheckboxItem, CheckboxItemProps]
     object ColorItem extends SCApply[ColorItem, ColorItemProps]
+    object SkinBoxItem extends SCApply[SkinBoxItem, SkinBoxItemProps]
     //    object ComboBoxItem extends SCApply[ComboBoxItem, ComboBoxItemProps]
     //    object CycleItem extends SCApply[CycleItem, CycleItemProps]
     //    object DataPathItem extends SCApply[DataPathItem, DataPathItemProps]

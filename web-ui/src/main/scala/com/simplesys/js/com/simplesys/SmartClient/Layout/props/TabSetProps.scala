@@ -33,7 +33,7 @@ class TabSetProps extends CanvasProps {
     var canReorderTabs: ScOption[Boolean] = ScNone
     var locateTabsBy: ScOption[String] = ScNone
     var showTabScroller: ScOption[Boolean] = ScNone
-    var tabs: ScOption[Seq[TabProps]] = ScNone
+    var tabs: ScOption[Seq[Tab]] = ScNone
     //var tabsReordered: ScOption[js.Function0[_]] = ScNone  //После доделки макро--подстановщика аннотация JSNameProps
     var useIOSTabs: ScOption[Boolean] = ScNone
     var useSimpleTabs: ScOption[Boolean] = ScNone
