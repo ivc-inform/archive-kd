@@ -1,4 +1,4 @@
-package com.simplesys.app
+package com.simplesys.js.com.simplesys.SmartClient.App
 
 import com.simplesys.System.JSObject
 
