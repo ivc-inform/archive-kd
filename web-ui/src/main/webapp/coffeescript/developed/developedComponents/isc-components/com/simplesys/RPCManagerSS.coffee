@@ -123,7 +123,7 @@ isc.RPCManager.addClassProperties
             // NOTE use Page.getURL() to support special directories such as "[APPFILES]"
             isc.Page.getURL(
                 request.actionURL || request.url ||
-                request.URL || (this.getActionURL && this.getActionURL())
+                request.URL || (isc.isA.Function(this.getActionURL) && this.getActionURL())
             );
 
         // check if requested transport is available and fall back if necessary
