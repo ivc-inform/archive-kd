@@ -10,7 +10,7 @@ import com.simplesys.servlet.ServletContextEvent
 @WebListener
 class AppLifeCycleEvent extends CommonWebAppListener {
 
-    override val loadSchemas: Boolean = EaKdProcWindowMain.loadSchemas
+    override val loadSchemas = com.simplesys.app.loadSchemas
 
     override def UserContextInitialized(sce: ServletContextEvent) {
 

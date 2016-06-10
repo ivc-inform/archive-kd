@@ -47,4 +47,5 @@ object Common {
     val info = "info.png"
     val closeProgram = "Windows-Close-Program-icon.png"
     val approved = "approved.png"
+    val settings = "settings.png"
 }

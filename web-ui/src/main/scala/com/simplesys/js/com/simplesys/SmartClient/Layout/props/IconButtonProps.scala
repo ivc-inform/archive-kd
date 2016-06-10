@@ -1,13 +1,15 @@
 package com.simplesys.SmartClient.Layout.props
 
 import com.simplesys.SmartClient.Control.props.ButtonProps
+import com.simplesys.SmartClient.Layout.IconButton
 import com.simplesys.System.Types.SCImgURL
-import com.simplesys.option.{ScOption, ScNone}
+import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
-import scala.scalajs.js._
 
 class IconButtonProps extends ButtonProps {
+    type classHandler <: IconButton
+
     var largeIcon: ScOption[SCImgURL] = ScNone
     var largeIconSize: ScOption[Int] = ScNone
     var menuIconClick: ScOption[js.ThisFunction0[classHandler, Boolean]] = ScNone

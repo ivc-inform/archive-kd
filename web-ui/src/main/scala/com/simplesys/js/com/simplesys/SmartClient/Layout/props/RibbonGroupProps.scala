@@ -8,5 +8,5 @@ import com.simplesys.option.{ScNone, ScOption}
 class RibbonGroupProps extends ToolStripGroupProps {
     var newControlConstructor: ScOption[Class] = ScNone
     var newControlDefaults: ScOption[IconButton] = ScNone
-    var colWidths: ScOption[IscArray[JSAny]] = ScNone
+    var colWidths: ScOption[Seq[JSAny]] = ScNone
 }

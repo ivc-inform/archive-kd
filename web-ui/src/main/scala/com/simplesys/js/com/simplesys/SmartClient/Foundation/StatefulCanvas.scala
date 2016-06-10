@@ -10,6 +10,7 @@ import scala.scalajs.js
 
 @js.native
 trait StatefulCanvas extends Canvas {
+
     var actionType: SelectionType
     def addToRadioGroup(groupID: String): void
     var align: Alignment

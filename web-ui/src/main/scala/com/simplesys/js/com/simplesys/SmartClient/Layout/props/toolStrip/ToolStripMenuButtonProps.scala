@@ -6,5 +6,5 @@ import com.simplesys.SmartClient.Layout.toolStrip.ToolStripMenuButton
 import scala.scalajs.js._
 
 class ToolStripMenuButtonProps extends MenuButtonProps {
-    type buttonHandler <: ToolStripMenuButton
+    type classHandler <: ToolStripMenuButton
 }

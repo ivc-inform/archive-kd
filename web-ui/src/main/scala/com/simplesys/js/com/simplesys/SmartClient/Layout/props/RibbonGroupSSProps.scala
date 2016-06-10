@@ -7,5 +7,5 @@ import com.simplesys.option.ScOption._
 class RibbonGroupSSProps extends RibbonGroupProps {
     numRows = 3.opt
     rowHeight = 26.opt
-    colWidths  = IscArray[JSAny](40, "*").opt
+    colWidths  = Seq[JSAny](40, "*").opt
 }
