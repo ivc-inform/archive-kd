@@ -1,10 +1,10 @@
 package com.simplesys.SmartClient.Grids.props
 
 import com.simplesys.SmartClient.DataBinding.DataSource
-import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
+import com.simplesys.SmartClient.Grids.TreeListGridEditor
+import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
-import com.simplesys.SmartClient.Grids.treeGrid.TreeGridField
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.SelectionStyle.SelectionStyle
@@ -13,6 +13,8 @@ import com.simplesys.System.Types._
 import com.simplesys.option.{IntString, ScNone, ScOption}
 
 class TreeListGridEditorProps extends HLayoutSSProps {
+    type classHandler <: TreeListGridEditor
+
     var widthTree: ScOption[IntString[Int, String]] = ScNone
     var widthList: ScOption[IntString[Int, String]] = ScNone
     var fetchTreeDelay: ScOption[Int] = ScNone
@@ -40,7 +42,6 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var showResizeBarList: ScOption[Boolean] = ScNone
     var heightTree: ScOption[IntString[Int, String]] = ScNone
     var heightList: ScOption[IntString[Int, String]] = ScNone
-    var canSelectCellsLis: ScOption[Boolean] = ScNone
     var showTreeRecordComponentsByCell: ScOption[Boolean] = ScNone
     var showListRecordComponentsByCell: ScOption[Boolean] = ScNone
     var canSelectCellsTree: ScOption[Boolean] = ScNone
