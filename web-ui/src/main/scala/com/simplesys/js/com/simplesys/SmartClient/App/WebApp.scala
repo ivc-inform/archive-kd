@@ -132,11 +132,11 @@ trait WebApp {
         )
     }
 
-    protected def getSetting(): Unit = {
-        SettingsEditor.create(
-            new SettingsEditorProps {
-                identifierApp = self.identifier.opt
-            }
-        )
-    }
+//    protected def getSetting(): Unit = {
+//        SettingsEditor.create(
+//            new SettingsEditorProps {
+//                identifierApp = self.identifier.opt
+//            }
+//        )
+//    }
 }
