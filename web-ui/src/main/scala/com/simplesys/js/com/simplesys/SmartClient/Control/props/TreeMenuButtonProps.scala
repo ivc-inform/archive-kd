@@ -1,6 +1,5 @@
 package com.simplesys.SmartClient.Control.props
 
-import com.simplesys.SmartClient.Control.Menu
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Grids.treeGrid.Tree
 import com.simplesys.System.Types.{CSSStyleName, HTMLString, SCClassName}

@@ -120,5 +120,9 @@ trait TreeListGridEditor extends HLayoutSS {
     var defaultFieldsTree : IscArray[TreeGridField]
     var fieldsList : IscArray[ListGridField]
     var defaultFieldsList : IscArray[ListGridField]
+    val treeGrid: TreeGridEditor
+    val listGrid: ListGridEditor
+    val contextMenuListGridEditor: MenuSS
+    val contextMenuTreeGridEditor: MenuSS
 }
 

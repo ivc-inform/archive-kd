@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient
 
-import com.simplesys.SmartClient.App.SettingsEditor
-import com.simplesys.SmartClient.App.props.SettingsEditorProps
+import com.simplesys.SmartClient.App.props.{Editoradmin_UserProps, SettingsEditorProps, User_ComponentMenuProps}
+import com.simplesys.SmartClient.App.{Editoradmin_User, SettingsEditor, User_ComponentMenu}
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._
@@ -21,10 +21,13 @@ import com.simplesys.SmartClient.Forms.props._
 import com.simplesys.SmartClient.Foundation._
 import com.simplesys.SmartClient.Foundation.props._
 import com.simplesys.SmartClient.Grids._
+import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Grids.props._
+import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.tileGrid.SimpleTileProps
+import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.Grids.tileGrid.SimpleTile
-import com.simplesys.SmartClient.Grids.treeGrid.Tree
+import com.simplesys.SmartClient.Grids.treeGrid.{Tree, TreeGridField}
 import com.simplesys.SmartClient.Layout._
 import com.simplesys.SmartClient.Layout.props._
 import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
@@ -40,8 +43,6 @@ import com.simplesys.SmartClient.Tools.palette.props._
 import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
-import com.simplesys.js.com.simplesys.SmartClient.Layout.IconMenuButtonSS
-import com.simplesys.js.com.simplesys.SmartClient.Layout.props.IconMenuButtonSSProps
 
 //import com.simplesys.macros.PropsToDictionary
 import com.simplesys.macros.PropsToDictionary
@@ -281,7 +282,14 @@ package object System {
     //</editor-fold>
 
     object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
+    object ListGridContextMenu extends SCApply[ListGridContextMenu, ListGridContextMenuProps]
+    object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
+    object User_ComponentMenu extends SCApply[User_ComponentMenu, User_ComponentMenuProps]
+    object Editoradmin_User extends SCApply[Editoradmin_User, Editoradmin_UserProps]
+
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
+    object TreeGridField extends SCApply4Object[TreeGridField, TreeGridFieldProps]
+    object ListGridField extends SCApply4Object[ListGridField, ListGridFieldProps]
 
 }
 

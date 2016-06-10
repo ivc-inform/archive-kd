@@ -12,6 +12,8 @@ import scala.scalajs.js
 @js.native
 trait Config extends JSObject {
     val confirmDeleting: String
+    val drawAheadRatio: JSUndefined[Double]
+    val dataPageSize: JSUndefined[Int]
 }
 
 @js.native
