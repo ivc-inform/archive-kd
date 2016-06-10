@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
-import com.simplesys.SmartClient.Layout.props.{IconButtonProps, LayoutSpacerProps, RibbonBarProps, RibbonGroupSSProps}
+import com.simplesys.SmartClient.Layout.props._
 import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
@@ -85,13 +85,11 @@ object EaKdProcWindowMain extends WebApp {
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
-                                        MenuSSItem(
-                                            new MenuSSItemProps {
-                                                name = "usersGroups".opt
-                                                icon = Common.admin_User.opt
-                                                title = "Группы и пользователи".ellipsis.opt
-                                            }
-                                        )
+                                        new MenuSSItemProps {
+                                            name = "usersGroups".opt
+                                            icon = Common.admin_User.opt
+                                            title = "Группы и пользователи".ellipsis.opt
+                                        }
                                     ).opt
                                 }
                             ).opt

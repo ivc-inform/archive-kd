@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient
 
-import com.simplesys.SmartClient.App.props.{Editoradmin_UserProps, SettingsEditorProps}
-import com.simplesys.SmartClient.App.{Editoradmin_User, SettingsEditor}
+import com.simplesys.SmartClient.App.props.{Editoradmin_UserProps, SettingsEditorProps, User_ComponentMenuProps}
+import com.simplesys.SmartClient.App.{Editoradmin_User, SettingsEditor, User_ComponentMenu}
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._

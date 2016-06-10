@@ -45,17 +45,16 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons {
         new MenuSSProps {
             unserialize = true.opt
             items = Seq(
-                MenuSSItem(
-                    new MenuSSItemProps {
-                        title = "Установить контрольную точку".ellipsis.opt
-                        identifier = "controlPoint".opt
-                        icon = Common.insert.opt
-                        click = {
-                            (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                target.asInstanceOf[DrawLinePathSS].insertControlPointKnob()
+                new MenuSSItemProps {
+                    title = "Установить контрольную точку".ellipsis.opt
+                    identifier = "controlPoint".opt
+                    icon = Common.insert.opt
+                    click = {
+                        (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                            target.asInstanceOf[DrawLinePathSS].insertControlPointKnob()
 
-                        }.toFunc.opt
-                    })
+                    }.toFunc.opt
+                }
             ).opt
         }).opt
 
@@ -267,16 +266,15 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons {
                                                         new MenuSSProps {
                                                             unserialize = true.opt
                                                             items = Seq(
-                                                                MenuSSItem(
-                                                                    new MenuSSItemProps {
-                                                                        title = "Удалить контрольную точку".ellipsis.opt
-                                                                        identifier = "deleteControlPoint".opt
-                                                                        icon = Common.delete_icon.opt
-                                                                        click = {
-                                                                            (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                                                thiz removeControlPointKnob target.asInstanceOf[DrawKnob]
-                                                                        }.toFunc.opt
-                                                                    })
+                                                                new MenuSSItemProps {
+                                                                    title = "Удалить контрольную точку".ellipsis.opt
+                                                                    identifier = "deleteControlPoint".opt
+                                                                    icon = Common.delete_icon.opt
+                                                                    click = {
+                                                                        (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                                            thiz removeControlPointKnob target.asInstanceOf[DrawKnob]
+                                                                    }.toFunc.opt
+                                                                }
                                                             ).opt
                                                         }).opt
 
