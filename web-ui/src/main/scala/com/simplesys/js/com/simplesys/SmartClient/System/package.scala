@@ -175,7 +175,7 @@ package object System {
 
     //<editor-fold desc="Grids">
     object ListGrid extends SCApply[ListGrid, ListGridProps]
-    //    object ListGridEditor extends SCApply[ListGridEditor, ListGridEditorProps]
+    object ListGridEditor extends SCApply[ListGridEditor, ListGridEditorProps]
     //    object TreeGrid extends SCApply[TreeGrid, TreeGridProps]
     //    object TileGrid extends SCApply[TileGrid, TileGridProps]
     object TreeGridEditor extends SCApply[TreeGridEditor, TreeGridEditorProps]

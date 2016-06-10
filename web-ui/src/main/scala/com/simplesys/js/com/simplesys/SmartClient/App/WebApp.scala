@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldPro
 import com.simplesys.SmartClient.DataBinding.props.{DataSourceProps, DataViewProps}
 import com.simplesys.SmartClient.DataBinding.{DataSource, DataSourceSSstatic}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.props.ListGridProps
+import com.simplesys.SmartClient.Grids.props.{ListGridEditorProps, ListGridProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.Tools.WindowsStack
@@ -103,8 +103,10 @@ trait WebApp {
         aboutDS setCacheData simpleSyS.aboutData
 
         isc.infos(
-            ListGrid(
-                new ListGridProps {
+            ListGridEditor(
+                new ListGridEditorProps {
+                    identifier = "544C01DA-5F30-0126-8546-00F31AC35541".opt
+                    autoFetchData = true.opt
                     dataSource = aboutDS.opt
                     fields = Seq(
                         new ListGridFieldProps {
