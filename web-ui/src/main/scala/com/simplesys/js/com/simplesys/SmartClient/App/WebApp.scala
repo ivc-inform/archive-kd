@@ -41,6 +41,8 @@ trait WebApp {
                     case None => isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
                 }
 
+                simpleSyS.skin = skin
+
                 Page setAppImgDir "managed/images/common-webapp/app/"
 
                 FileLoader.loadSkin(

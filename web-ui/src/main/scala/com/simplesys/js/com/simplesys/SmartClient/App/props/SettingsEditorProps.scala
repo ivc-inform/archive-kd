@@ -8,13 +8,11 @@ import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
 import com.simplesys.SmartClient.Layout.props.{OkCancelPanelProps, TabSetSSProps, WindowSSProps}
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.Skin.Skin
-import com.simplesys.System.Types.{ID, Skin}
+import com.simplesys.System.Types.Skin
 import com.simplesys.System.{JSAny, JSUndefined, jSUndefined}
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
 
@@ -34,9 +32,9 @@ class SettingsEditorProps extends WindowSSProps {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
             thiz.Super("initWidget", arguments)
 
+            val identifierApp = thiz.identifier
             val oldSkin = simpleSyS.skin
             var skin: JSUndefined[String] = jSUndefined
-            val identifierApp = thiz.identifier
 
             val commons = DynamicFormSS.create(
                 new DynamicFormSSProps {
@@ -90,7 +88,7 @@ class SettingsEditorProps extends WindowSSProps {
                         (thiz: classHandler) =>
                             if (oldSkin != skin) {
                                 simpleSyS.skin = skin
-                                isc.OfflineSS.put(s"Skin$identifier", skin)
+                                isc.OfflineSS.put(s"Skin$identifierApp", skin)
                                 js.Dynamic.global.window.location.reload(false)
                             }
 
