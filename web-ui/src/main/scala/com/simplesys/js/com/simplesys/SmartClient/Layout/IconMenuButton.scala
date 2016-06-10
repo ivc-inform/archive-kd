@@ -9,7 +9,7 @@ import scala.scalajs.js.|
 trait IconMenuButton extends IconButton {
     var menu: Menu
     var menuAnimationEffect: String
-    var showMenu: js.ThisFunction0[classHandler, Boolean]
+    def showMenu(): Boolean
 }
 
 

@@ -20,7 +20,7 @@ import com.simplesys.option.{ScOption, ScSome}
 
 import scala.scalajs.js._
 
-class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons{
+class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons {
     type classHandler <: DrawLinePathSS
 
     var connectorStyle: ScOption[ConnectorStyle] = ConnectorStyle.diagonal.opt
@@ -45,16 +45,17 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons{
         new MenuSSProps {
             unserialize = true.opt
             items = Seq(
-                new MenuSSItemProps {
-                    title = "Установить контрольную точку".ellipsis.opt
-                    identifier = "controlPoint".opt
-                    icon = Common.insert.opt
-                    click = {
-                        (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                            target.asInstanceOf[DrawLinePathSS].insertControlPointKnob()
+                MenuSSItem(
+                    new MenuSSItemProps {
+                        title = "Установить контрольную точку".ellipsis.opt
+                        identifier = "controlPoint".opt
+                        icon = Common.insert.opt
+                        click = {
+                            (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                target.asInstanceOf[DrawLinePathSS].insertControlPointKnob()
 
-                    }.toFunc.opt
-                }
+                        }.toFunc.opt
+                    })
             ).opt
         }).opt
 
@@ -74,7 +75,7 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons{
             thiz.titleRotationMode = TitleRotationMode.withLineAlwaysUp
 
             thiz.cKnobs = IscArray()
-            thiz.controlPoints = IscArray(thiz.points.slice(1, thiz.points.length - 1).map(item => UndefOr.any2undefOrA(item)):_*)
+            thiz.controlPoints = IscArray(thiz.points.slice(1, thiz.points.length - 1).map(item => UndefOr.any2undefOrA(item)): _*)
             //isc debugTrap thiz.controlPoints
             thiz.points = thiz._getSegmentPoints()
 
@@ -266,15 +267,16 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons{
                                                         new MenuSSProps {
                                                             unserialize = true.opt
                                                             items = Seq(
-                                                                new MenuSSItemProps {
-                                                                    title = "Удалить контрольную точку".ellipsis.opt
-                                                                    identifier = "deleteControlPoint".opt
-                                                                    icon = Common.Delete_icon.opt
-                                                                    click = {
-                                                                        (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                                            thiz removeControlPointKnob target.asInstanceOf[DrawKnob]
-                                                                    }.toFunc.opt
-                                                                }
+                                                                MenuSSItem(
+                                                                    new MenuSSItemProps {
+                                                                        title = "Удалить контрольную точку".ellipsis.opt
+                                                                        identifier = "deleteControlPoint".opt
+                                                                        icon = Common.Delete_icon.opt
+                                                                        click = {
+                                                                            (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                                                thiz removeControlPointKnob target.asInstanceOf[DrawKnob]
+                                                                        }.toFunc.opt
+                                                                    })
                                                             ).opt
                                                         }).opt
 

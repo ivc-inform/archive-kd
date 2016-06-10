@@ -31,6 +31,7 @@ class MenuSSItemProps extends ListGridRecordProps {
     var iconWidth: ScOption[Int] = ScNone
     var keys: ScOption[IscArray[KeyIdentifier]] = ScNone
     var keyTitle: ScOption[String] = ScNone
+    var name: ScOption[String] = ScNone
     var submenu: ScOption[MenuSS] = ScNone
     var title: ScOption[HTMLString] = ScNone
 }

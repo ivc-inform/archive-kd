@@ -1,6 +1,8 @@
 package com.simplesys.js.components
 
 import com.simplesys.SmartClient.App.{LoggedGroup, WebApp}
+import com.simplesys.SmartClient.Control.props.MenuSSProps
+import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
 import com.simplesys.SmartClient.Layout.props.{IconButtonProps, LayoutSpacerProps, RibbonBarProps, RibbonGroupSSProps}
@@ -9,6 +11,7 @@ import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.function._
+import com.simplesys.js.com.simplesys.SmartClient.Layout.props.IconMenuButtonSSProps
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
@@ -68,7 +71,34 @@ object EaKdProcWindowMain extends WebApp {
     private val managedAdminsGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Справочники".ellipsis.opt
+                title = "Администратор".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
+                            title = "Справочники".ellipsis.opt
+                            orientation = "vertical".opt
+                            icon = Common.ref.opt
+                            click = {
+                                (thiz: classHandler) =>
+                                    thiz.showMenu()
+                                    false
+                            }.toThisFunc.opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq(
+                                        MenuSSItem(
+                                            new MenuSSItemProps {
+                                                name = "usersGroups".opt
+                                                icon = Common.admin_User.opt
+                                                title = "Группы и пользователи".ellipsis.opt
+                                            }
+                                        )
+                                    ).opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
             }
         )
     ).map {
