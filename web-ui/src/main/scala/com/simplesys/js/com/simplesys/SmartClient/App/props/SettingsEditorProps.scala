@@ -20,6 +20,7 @@ class SettingsEditorProps extends WindowSSProps {
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
             thiz.Super("initWidget", arguments)
+            val oldSkin = simpleSyS.skin
 
     }.toThisFunc.opt
 }

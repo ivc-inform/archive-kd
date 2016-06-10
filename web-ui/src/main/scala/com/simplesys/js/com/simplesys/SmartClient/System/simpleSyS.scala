@@ -23,4 +23,5 @@ object simpleSyS extends JSObject {
     var config: Config = js.native
     val aboutData: IscArray[Record] = js.native
     var skin: JSUndefined[Skin] = js.native
+    var expertMode: JSUndefined[Boolean] = js.native
 }
