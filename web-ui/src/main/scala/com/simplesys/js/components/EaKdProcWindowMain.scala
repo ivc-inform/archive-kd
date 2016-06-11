@@ -23,7 +23,7 @@ object EaKdProcWindowMain extends WebApp {
 
     override val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
 
-    val functionButton = IconMenuButtonSS(
+    val functionButton = IconMenuButtonSS.create(
         new IconMenuButtonSSProps {
             title = "Операции".ellipsis.opt
             icon = Common.iconConstructor.opt
@@ -35,10 +35,8 @@ object EaKdProcWindowMain extends WebApp {
             new RibbonGroupSSProps {
                 title = "Управление".ellipsis.opt
                 controls = Seq(
-                    //functionButton
+                    functionButton
                 ).opt
-                //numRows = 1.opt
-                //titleHeight = 18.opt
             }
         ),
         RibbonGroupSS.create(
