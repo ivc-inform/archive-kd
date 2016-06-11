@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Layout.tabSet
 
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.TabSet
-import com.simplesys.System.JSObject
+import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.System.Types.{HTMLString, SCImgURL, void}
 
 import scala.scalajs.js
@@ -21,7 +21,7 @@ trait Tab extends JSObject {
     var iconSize: Int
     var iconWidth: Int
     var ID: String
-    var name: String
+    var name: JSUndefined[String]
     var pane: String | Canvas
     var paneMargin: Int
     var pickerTitle: HTMLString

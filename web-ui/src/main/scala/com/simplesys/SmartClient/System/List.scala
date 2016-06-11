@@ -20,7 +20,8 @@ trait IscList[A] extends js.Array[A] with Class {
     var dataChanged: Function0[void] = js.native
     def duplicate(): this.type = js.native
     def equals(list: this.type): Boolean = js.native
-    def find(propertyName: String | JSObject | AdvancedCriteria, value: JSObject = js.native): JSObject = js.native
+    @JSName("find")
+    def Find(propertyName: String | JSObject | AdvancedCriteria, value: JSObject = js.native): JSObject = js.native
     def findIndex(propertyName: String | JSObject | AdvancedCriteria, value: JSObject = js.native): Int = js.native
     def findNextIndex(startIndex: Int, propertyName: String | JSObject | AdvancedCriteria, value: JSObject = js.native): Int = js.native
     def findAll(propertyName: String | JSObject | AdvancedCriteria, value: JSObject = js.native, endIndex: Int = js.native): IscArray[JSObject] = js.native
