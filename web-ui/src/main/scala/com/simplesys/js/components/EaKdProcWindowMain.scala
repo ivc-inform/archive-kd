@@ -23,7 +23,24 @@ object EaKdProcWindowMain extends WebApp {
 
     override val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
 
+    val functionButton = IconMenuButtonSS(
+        new IconMenuButtonSSProps {
+            title = "Операции".ellipsis.opt
+            icon = Common.iconConstructor.opt
+        }
+    )
+
     private val managedUsersGroups = Seq(
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Управление".ellipsis.opt
+                controls = Seq(
+                    functionButton
+                ).opt
+                numRows = 1.opt
+                titleHeight = 18.opt
+            }
+        ),
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Справочники".ellipsis.opt
@@ -37,7 +54,6 @@ object EaKdProcWindowMain extends WebApp {
                         new IconButtonProps {
                             title = "Информация".ellipsis.opt
                             icon = Common.info.opt
-                            orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
                                     getAbout()
@@ -49,7 +65,6 @@ object EaKdProcWindowMain extends WebApp {
                         new IconButtonProps {
                             title = "Настройки".ellipsis.opt
                             icon = Common.settings.opt
-                            orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
                                     getSetting()
@@ -75,13 +90,7 @@ object EaKdProcWindowMain extends WebApp {
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
-                            orientation = "vertical".opt
                             icon = Common.ref.opt
-                            click = {
-                                (thiz: classHandler) =>
-                                    thiz.showMenu()
-                                    false
-                            }.toThisFunc.opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
@@ -126,6 +135,12 @@ object EaKdProcWindowMain extends WebApp {
         }
     )
 
+    private val tabSet = TabSetSS.create(
+        new TabSetSSProps {
+
+        }
+    )
+
     override protected def mainCanvas: Canvas =
         VLayoutSS.create(
             new VLayoutSSProps {
@@ -152,7 +167,6 @@ object EaKdProcWindowMain extends WebApp {
                                             controls = Seq(
                                                 IconButton.create(
                                                     new IconButtonProps {
-                                                        orientation = "vertical".opt
                                                         click = {
                                                             (thiz: classHandler) =>
                                                                 if (!LoggedGroup.logged) {
@@ -213,7 +227,8 @@ object EaKdProcWindowMain extends WebApp {
                                     )
                                 )).opt
                         }
-                    )
+                    ),
+                    tabSet
                 ).opt
             }
         )

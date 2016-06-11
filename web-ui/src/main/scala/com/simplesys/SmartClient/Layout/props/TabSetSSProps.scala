@@ -5,13 +5,13 @@ import com.simplesys.SmartClient.Layout.TabSetSS
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.System.isc
 import com.simplesys.System.{JSAny, JSUndefined, jSUndefined}
-import com.simplesys.option.{ScNone, ScOption}
-import com.simplesys.option.ScOption._
 import com.simplesys.function._
+import com.simplesys.option.ScOption._
+import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
+import scala.scalajs.js.ThisFunction1
 import scala.scalajs.js.UndefOr._
-import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 
 class TabSetSSProps extends TabSetProps {
     type classHandler <: TabSetSS

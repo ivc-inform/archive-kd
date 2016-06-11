@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.Control.props.ButtonProps
 import com.simplesys.SmartClient.Layout.IconButton
 import com.simplesys.System.Types.SCImgURL
 import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.option.ScOption._
 
 import scala.scalajs.js
 
@@ -25,4 +26,5 @@ class IconButtonProps extends ButtonProps {
     var showMenuIconOver: ScOption[Boolean] = ScNone
     var showMenuOnClick: ScOption[Boolean] = ScNone
     var showTitle: ScOption[Boolean] = ScNone
+    orientation = "vertical".opt
 }
