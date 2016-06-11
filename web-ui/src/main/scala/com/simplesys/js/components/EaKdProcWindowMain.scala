@@ -35,10 +35,10 @@ object EaKdProcWindowMain extends WebApp {
             new RibbonGroupSSProps {
                 title = "Управление".ellipsis.opt
                 controls = Seq(
-                    functionButton
+                    //functionButton
                 ).opt
-                numRows = 1.opt
-                titleHeight = 18.opt
+                //numRows = 1.opt
+                //titleHeight = 18.opt
             }
         ),
         RibbonGroupSS.create(
