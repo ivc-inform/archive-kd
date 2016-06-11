@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Layout
 
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.System.JSUndefined
+import com.simplesys.System._
 import com.simplesys.System.Types.{ID, void}
 
 import scala.scalajs.js
@@ -23,7 +23,7 @@ trait TabSetSS extends TabSet {
     def getLength(): Int
     def isEmpty(): Boolean
     def isNotEmpty(): Boolean
-    def findTab(): JSUndefined[Tab]
+    def findTab(tab: String| Tab): JSUndefined[Tab]
 }
 
 
