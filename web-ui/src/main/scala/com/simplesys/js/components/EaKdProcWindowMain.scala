@@ -126,88 +126,95 @@ object EaKdProcWindowMain extends WebApp {
         }
     )
 
-    override protected def mainCanvas: Canvas = RibbonBar.create(
-        new RibbonBarProps {
-            width = "100%"
-            showResizeBar = true.opt
-            members = (
-              managedUsersGroups ++
-                managedAdminsGroups ++
-                managedDevsGroups ++
-                Seq(
-                    LayoutSpacer.create(
-                        new LayoutSpacerProps {
-                            width = "*"
-                        }
-                    ),
-                    RibbonGroupSS.create(
-                        new RibbonGroupSSProps {
-                            title = "Аутентификация".ellipsis.opt
-                            defaultLayoutAlign = Alignment.center
-                            width = 40
-                            controls = Seq(
-                                IconButton.create(
-                                    new IconButtonProps {
-                                        orientation = "vertical".opt
-                                        click = {
-                                            (thiz: classHandler) =>
-                                                if (!LoggedGroup.logged) {
-                                                    RPCManagerSS.loginRequired({
-                                                        (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
-                                                            if (res) {
+    override protected def mainCanvas: Canvas =
+        VLayoutSS.create(
+            new VLayoutSSProps {
+                members = Seq(
+                    RibbonBar.create(
+                        new RibbonBarProps {
+                            width = "100%"
+                            showResizeBar = true.opt
+                            members = (
+                              managedUsersGroups ++
+                                managedAdminsGroups ++
+                                managedDevsGroups ++
+                                Seq(
+                                    LayoutSpacer.create(
+                                        new LayoutSpacerProps {
+                                            width = "*"
+                                        }
+                                    ),
+                                    RibbonGroupSS.create(
+                                        new RibbonGroupSSProps {
+                                            title = "Аутентификация".ellipsis.opt
+                                            defaultLayoutAlign = Alignment.center
+                                            width = 40
+                                            controls = Seq(
+                                                IconButton.create(
+                                                    new IconButtonProps {
+                                                        orientation = "vertical".opt
+                                                        click = {
+                                                            (thiz: classHandler) =>
+                                                                if (!LoggedGroup.logged) {
+                                                                    RPCManagerSS.loginRequired({
+                                                                        (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
+                                                                            if (res) {
 
-                                                                captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
-                                                                captionUserLabel.show()
-                                                                managedUsersGroups.foreach(_.show())
-                                                                LoggedGroup.codeGroup = codeGroup.toOption
+                                                                                captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
+                                                                                captionUserLabel.show()
+                                                                                managedUsersGroups.foreach(_.show())
+                                                                                LoggedGroup.codeGroup = codeGroup.toOption
 
-                                                                if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
-                                                                    managedAdminsGroups.foreach(_.show())
+                                                                                if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
+                                                                                    managedAdminsGroups.foreach(_.show())
 
-                                                                if (LoggedGroup.isDevsGroup())
-                                                                    managedDevsGroups.foreach(_.show())
+                                                                                if (LoggedGroup.isDevsGroup())
+                                                                                    managedDevsGroups.foreach(_.show())
 
-                                                                LoggedGroup.logged = true
+                                                                                LoggedGroup.logged = true
 
-                                                                thiz setTitle "Выход"
-                                                                thiz setIcon Common.closeProgram
-                                                            } else {
-                                                                managedUsersGroups.foreach(_.hide())
-                                                                managedAdminsGroups.foreach(_.hide())
-                                                                managedDevsGroups.foreach(_.hide())
-                                                                captionUserLabel.hide()
+                                                                                thiz setTitle "Выход"
+                                                                                thiz setIcon Common.closeProgram
+                                                                            } else {
+                                                                                managedUsersGroups.foreach(_.hide())
+                                                                                managedAdminsGroups.foreach(_.hide())
+                                                                                managedDevsGroups.foreach(_.hide())
+                                                                                captionUserLabel.hide()
 
-                                                                LoggedGroup.logged = false
-                                                                thiz setTitle "Вход".ellipsis
-                                                                thiz setIcon Common.login
-                                                            }
-                                                    }.toFunc)
+                                                                                LoggedGroup.logged = false
+                                                                                thiz setTitle "Вход".ellipsis
+                                                                                thiz setIcon Common.login
+                                                                            }
+                                                                    }.toFunc)
 
-                                                } else {
-                                                    RPCManagerSS.logoutRequired()
-                                                    thiz setTitle "Вход".ellipsis
-                                                    thiz setIcon Common.login
-                                                    LoggedGroup.logged = false
-                                                    managedUsersGroups.foreach(_.hide())
-                                                    managedAdminsGroups.foreach(_.hide())
-                                                    managedDevsGroups.foreach(_.hide())
-                                                    captionUserLabel.hide()
-                                                    windowsStack.destroyAll()
-                                                }
-                                                false
-                                        }.toThisFunc.opt
-                                        title = "Войти".ellipsis.opt
-                                        iconOrientation = IconOrientation.center.opt
-                                        icon = Common.login.opt
-                                    }
-                                ),
-                                captionUserLabel
-                            ).opt
-                            numRows = 3.opt
-                            titleHeight = 18.opt
+                                                                } else {
+                                                                    RPCManagerSS.logoutRequired()
+                                                                    thiz setTitle "Вход".ellipsis
+                                                                    thiz setIcon Common.login
+                                                                    LoggedGroup.logged = false
+                                                                    managedUsersGroups.foreach(_.hide())
+                                                                    managedAdminsGroups.foreach(_.hide())
+                                                                    managedDevsGroups.foreach(_.hide())
+                                                                    captionUserLabel.hide()
+                                                                    windowsStack.destroyAll()
+                                                                }
+                                                                false
+                                                        }.toThisFunc.opt
+                                                        title = "Войти".ellipsis.opt
+                                                        iconOrientation = IconOrientation.center.opt
+                                                        icon = Common.login.opt
+                                                    }
+                                                ),
+                                                captionUserLabel
+                                            ).opt
+                                            numRows = 3.opt
+                                            titleHeight = 18.opt
+                                        }
+                                    )
+                                )).opt
                         }
                     )
-                )).opt
-        }
-    )
+                ).opt
+            }
+        )
 }
