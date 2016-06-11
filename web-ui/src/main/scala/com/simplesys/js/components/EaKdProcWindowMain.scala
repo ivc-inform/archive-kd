@@ -1,10 +1,11 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.{LoggedGroup, WebApp}
+import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
+import com.simplesys.SmartClient.Layout.TabSetSS
 import com.simplesys.SmartClient.Layout.props._
 import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
@@ -17,7 +18,7 @@ import com.simplesys.option.ScOption._
 import scala.scalajs.js.annotation.JSExport
 
 @JSExport
-object EaKdProcWindowMain extends WebApp {
+object EaKdProcWindowMain extends WebApp with TabSetStack {
 
     override val loadSchemas = com.simplesys.app.loadSchemas
 
@@ -133,7 +134,7 @@ object EaKdProcWindowMain extends WebApp {
         }
     )
 
-    private val tabSet = TabSetSS.create(
+    override protected val tabSet = TabSetSS.create(
         new TabSetSSProps {
 
         }
