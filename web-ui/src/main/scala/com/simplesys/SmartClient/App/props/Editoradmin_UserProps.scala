@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.Editoradmin_User
+import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.FormsItems.props.SelectItemProps
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -9,10 +10,14 @@ import com.simplesys.SmartClient.System._
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.Alignment
 import com.simplesys.function._
+import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
 class Editoradmin_UserProps extends TreeListGridEditorProps {
     type classHandler <: Editoradmin_User
+
+    var treeDataSource: ScOption[DataSource] = ScNone
+    var listDataSource: ScOption[DataSource] = ScNone
 
     folderDropImageTree = Common.iconFolder.opt
     autoFetchData = true.opt

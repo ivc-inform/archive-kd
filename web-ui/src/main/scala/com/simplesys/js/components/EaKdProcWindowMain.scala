@@ -16,6 +16,7 @@ import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 import scala.scalajs.js.annotation.JSExport
 
@@ -106,6 +107,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                        Editoradmin_User.create(
                                                            new  Editoradmin_UserProps{
                                                              identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
+                                                             listDataSource =  DataSourcesJS.admin_User_DS.opt
+                                                             treeDataSource =  DataSourcesJS.admin_UserGroup_DS.opt
                                                            }
                                                        ),
                                                        item
