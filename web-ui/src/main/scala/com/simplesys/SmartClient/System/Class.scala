@@ -38,7 +38,7 @@ trait Class extends JSObject {
     def getStackTrace(): String
     def getSuperClass(): String
     def ignore(`object`: JSObject, methodName: String): Boolean
-    var identifier: ID
+    var identifier: JSUndefined[ID]
     //var init: js.ThisFunction1[classHandler, IscArray[JSAny], _]
     def isA(className: String): Boolean
     def isObserving(`object`: JSObject, methodName: String): Boolean

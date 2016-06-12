@@ -493,6 +493,7 @@ abstract class AbstractCanvasCompanion extends AbstractClassCompanion {
     val HANDLE_DRAWN: String = js.native
     val UNDRAWN: String = js.native
     def _getEditProxyPassThruProperties(editContext: JSObject): JSObject = js.native
+    val getFuncMenu: JSUndefined[Function0[MenuSS]]
 }
 
 @js.native
