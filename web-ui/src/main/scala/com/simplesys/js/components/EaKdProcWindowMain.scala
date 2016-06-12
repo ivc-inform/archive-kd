@@ -37,6 +37,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
     val functionGroup = RibbonGroupSS.create(
         new RibbonGroupSSProps {
             title = "Управление".ellipsis.opt
+            visibility = Visibility.hidden.opt
             controls = Seq(
                 functionButton
             ).opt
