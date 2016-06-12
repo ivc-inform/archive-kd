@@ -197,6 +197,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     def getInnerHeight(): Int
     def getInnerHTML(): HTMLString
     def getInnerWidth(): Int
+    val getFuncMenu: JSUndefined[Function0[MenuSS]]
     def getLeft(): Int
     def getMasterCanvas(): Canvas
     def getOffsetX(): Int
@@ -493,7 +494,6 @@ abstract class AbstractCanvasCompanion extends AbstractClassCompanion {
     val HANDLE_DRAWN: String = js.native
     val UNDRAWN: String = js.native
     def _getEditProxyPassThruProperties(editContext: JSObject): JSObject = js.native
-    val getFuncMenu: JSUndefined[Function0[MenuSS]]
 }
 
 @js.native

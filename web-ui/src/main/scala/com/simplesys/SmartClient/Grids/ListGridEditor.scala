@@ -107,7 +107,6 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     def setContextMenu(menu: MenuSS): void
     def getContextMenu(): MenuSS
     def setFuncMenu(menu: MenuSS): void
-    def getFuncMenu(): MenuSS
     var saveItems: IscArray[String | MenuSSItem]
     def setSelectionChanged(func: js.Function2[R, Boolean, _]): void
     def setSelectionUpdated(func: js.Function2[R, IscArray[R], _]): void
