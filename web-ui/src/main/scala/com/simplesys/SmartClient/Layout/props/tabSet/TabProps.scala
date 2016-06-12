@@ -19,7 +19,7 @@ class TabProps extends AbstractClassProps {
     var closeIcon: ScOption[SCImgURL] = ScNone
     var closeIconSize: ScOption[Int] = ScNone
     var disabled: ScOption[Boolean] = ScNone
-    var funcMenu: ScOption[MenuSS]
+    var funcMenu: ScOption[MenuSS] = ScNone
     var icon: ScOption[SCImgURL] = ScNone
     var iconHeight: ScOption[Int] = ScNone
     var iconSize: ScOption[Int] = ScNone
