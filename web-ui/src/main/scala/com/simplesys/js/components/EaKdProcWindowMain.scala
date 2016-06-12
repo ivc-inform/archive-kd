@@ -43,7 +43,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         })
 
     private val managedUsersGroups = Seq(
-        functionGroup,
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Справочники".ellipsis.opt
@@ -169,6 +168,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                               managedUsersGroups ++
                                 managedAdminsGroups ++
                                 managedDevsGroups ++
+                                Seq(functionGroup) ++
                                 Seq(
                                     LayoutSpacer.create(
                                         new LayoutSpacerProps {
