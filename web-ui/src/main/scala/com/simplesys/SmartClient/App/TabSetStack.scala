@@ -1,23 +1,23 @@
 package com.simplesys.SmartClient.App
 
 import com.simplesys.SmartClient.Control.MenuSS
-import com.simplesys.SmartClient.Control.menu.MenuItem
+import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.{IconMenuButtonSS, RibbonGroupSS, TabSet, TabSetSS}
 import com.simplesys.SmartClient.System.{Tab, isc}
-import com.simplesys.System.{JSUndefined, jSUndefined}
 import com.simplesys.System.Types.ID
-import com.simplesys.option.ScOption._
+import com.simplesys.System.{JSUndefined, jSUndefined}
 import com.simplesys.function._
+import com.simplesys.option.ScOption._
 
 trait TabSetStack {
     protected val tabSet: TabSetSS
     protected val functionGroup: RibbonGroupSS
     protected val functionButton: IconMenuButtonSS
 
-    def addTab(canvas: Canvas, menuItem: MenuItem): Unit = {
+    def addTab(canvas: Canvas, menuItem: MenuSSItem): Unit = {
         if (canvas.identifier.isEmpty)
             isc.error(s"Компонент ${canvas.getIdentifier()} не имеет постоянного identifier, поэтому не может быть добавлен.")
         else {

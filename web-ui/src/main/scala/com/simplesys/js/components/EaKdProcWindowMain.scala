@@ -1,5 +1,6 @@
 package com.simplesys.js.components
 
+import com.simplesys.SmartClient.App.props.Editoradmin_UserProps
 import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
@@ -102,7 +103,12 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                    addTab(
-
+                                                       Editoradmin_User.create(
+                                                           new  Editoradmin_UserProps{
+                                                             identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
+                                                           }
+                                                       ),
+                                                       item
                                                    )
                                             }.toFunc.opt
                                         }
