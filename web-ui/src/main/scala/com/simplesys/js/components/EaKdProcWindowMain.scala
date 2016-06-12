@@ -1,6 +1,8 @@
 package com.simplesys.js.components
 
 import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
+import com.simplesys.SmartClient.Control.MenuSS
+import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
@@ -30,15 +32,16 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         }
     )
 
-    val functionGroup = new RibbonGroupSSProps {
-        title = "Управление".ellipsis.opt
-        controls = Seq(
-            functionButton
-        ).opt
-    }
+    val functionGroup = RibbonGroupSS.create(
+        new RibbonGroupSSProps {
+            title = "Управление".ellipsis.opt
+            controls = Seq(
+                functionButton
+            ).opt
+        })
 
     private val managedUsersGroups = Seq(
-        ffunctionGroup,
+        functionGroup,
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Справочники".ellipsis.opt
@@ -96,6 +99,12 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             name = "usersGroups".opt
                                             icon = Common.admin_User.opt
                                             title = "Группы и пользователи".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                   addTab(
+
+                                                   )
+                                            }.toFunc.opt
                                         }
                                     ).opt
                                 }
