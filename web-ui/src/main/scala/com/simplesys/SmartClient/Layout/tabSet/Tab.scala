@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.Layout.tabSet
 
+import com.simplesys.SmartClient.Control.{Menu, MenuSS}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.TabSet
 import com.simplesys.System.{JSObject, JSUndefined}
@@ -16,6 +17,7 @@ trait Tab extends JSObject {
     var closeIcon: SCImgURL
     var closeIconSize: Int
     var disabled: Boolean
+    var funcMenu: JSUndefined[MenuSS| Menu]
     var icon: SCImgURL
     var iconHeight: Int
     var iconSize: Int

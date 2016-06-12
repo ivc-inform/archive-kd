@@ -198,6 +198,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     def getInnerHTML(): HTMLString
     def getInnerWidth(): Int
     val getFuncMenu: JSUndefined[Function0[MenuSS]]
+    val setFuncMenu: JSUndefined[Function1[MenuSS, _]]
     def getLeft(): Int
     def getMasterCanvas(): Canvas
     def getOffsetX(): Int

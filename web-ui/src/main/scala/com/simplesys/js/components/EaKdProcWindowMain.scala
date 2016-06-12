@@ -5,7 +5,6 @@ import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
-import com.simplesys.SmartClient.Layout.TabSetSS
 import com.simplesys.SmartClient.Layout.props._
 import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
@@ -31,15 +30,15 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         }
     )
 
+    val functionGroup = new RibbonGroupSSProps {
+        title = "Управление".ellipsis.opt
+        controls = Seq(
+            functionButton
+        ).opt
+    }
+
     private val managedUsersGroups = Seq(
-        RibbonGroupSS.create(
-            new RibbonGroupSSProps {
-                title = "Управление".ellipsis.opt
-                controls = Seq(
-                    functionButton
-                ).opt
-            }
-        ),
+        ffunctionGroup,
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Справочники".ellipsis.opt
