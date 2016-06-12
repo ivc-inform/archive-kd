@@ -286,6 +286,7 @@ package object System {
     object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
     object User_ComponentMenu extends SCApply[User_ComponentMenu, User_ComponentMenuProps]
     object Editoradmin_User extends SCApply[Editoradmin_User, Editoradmin_UserProps]
+    object TreeListGridEditor extends SCApply[TreeListGridEditor, TreeListGridEditorProps]
 
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
     object TreeGridField extends SCApply4Object[TreeGridField, TreeGridFieldProps]
