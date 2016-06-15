@@ -5,7 +5,7 @@
 			<classSimple name="UserGroup" caption="Группы пользователей" autoTableMapping="true">
 				<attrs>
 					<attr name="di" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true"/>
-					<attr name="codeGroup" type="sCaption" mandatory="true" caption="Код группы" genBySeq="true"/>
+					<attr name="codeGroup" type="sCaption" mandatory="true" caption="Код группы"/>
 					<attr name="captionGroup" type="sCode" mandatory="false" caption="Наименование группы"/>
 					<attr name="descriptionGroup" type="sDescription" mandatory="false" caption="Описание группы"/>
 					<attr name="active" type="bBoolean" caption="Активность" mandatory="false"/>
