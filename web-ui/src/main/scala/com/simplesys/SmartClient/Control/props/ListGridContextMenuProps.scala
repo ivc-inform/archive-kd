@@ -38,7 +38,7 @@ class ListGridContextMenuProps extends MenuSSProps {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
-                    owner.getSelectedRecords().length == 0
+                    owner.getSelectedRecords().length == 1
             }.toFunc.opt
         },
         new MenuSSItemProps {
