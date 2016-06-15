@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.App
 
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
-import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Foundation.{Canvas, CanvasStatic}
 import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.{IconMenuButtonSS, RibbonGroupSS, TabSet, TabSetSS}
@@ -38,7 +38,7 @@ trait TabSetStack {
                         _funcMenu = getFuncMenu()
                 }
 
-                val _title = s"<span>isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title}</span>"
+                val _title = s"${CanvasStatic.imgHTML(menuItem.icon, 16, 14)} ${menuItem.title}"
                 //val _title = menuItem.title
 
                 if (_funcMenu.isDefined) {
