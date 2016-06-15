@@ -67,7 +67,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
             name = "captionGroup".opt
         },
         new TextAreaItemProps {
-            name = "captionGroup".opt
+            name = "descriptionGroup".opt
         }
     ).opt
     initWidget = {
