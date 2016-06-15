@@ -14,6 +14,8 @@ import com.simplesys.option.ScOption._
 import com.simplesys.SmartClient.System._
 
 trait TabSetStack {
+    self =>
+
     protected val tabSet: TabSetSS
     protected val functionGroup: RibbonGroupSS
     protected val functionButton: IconMenuButtonSS
@@ -36,6 +38,9 @@ trait TabSetStack {
                         _funcMenu = getFuncMenu()
                 }
 
+                //val _title = s"<span>isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title.dblQuoted}</span>"
+                val _title = menuItem.title
+
                 if (_funcMenu.isDefined) {
                     tabSet.addTab(
                         Tab(
@@ -47,7 +52,7 @@ trait TabSetStack {
                                 }.toFunc.opt
                                 funcMenu = _funcMenu.get.opt
                                 name = canvas.getIdentifier().opt
-                                title = s"isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title.dblQuoted}".opt
+                                title = _title.opt
                             }
                         ),
                         len + 1
@@ -58,7 +63,7 @@ trait TabSetStack {
                             new TabProps {
                                 pane = canvas.opt
                                 name = canvas.getIdentifier().opt
-                                title = s"<span>isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title.dblQuoted}</span>".opt
+                                title = _title.opt
                             }
                         ),
                         len + 1
