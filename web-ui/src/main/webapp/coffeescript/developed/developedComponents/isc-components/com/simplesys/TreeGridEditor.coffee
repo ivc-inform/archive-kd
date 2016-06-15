@@ -161,7 +161,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		else
 			@grid.startEditing record.rowNum, record.colNum
 		return
-	"canReparentNodes": true
+	"canReparentNodes": false
 	"addData": (newRecord, callback, requestProperties) ->
 		@grid.addData newRecord, callback, requestProperties
 		return
@@ -366,7 +366,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 				@selectFirstRecord()
 				return
 
-		@grid.canReparentNodes = true ##Не убирать
+		@grid.canReparentNodes = false ##Не убирать
 
 		if isc.isA.Function @canSelectRecord
 			@grid.canSelectRecord = @canSelectRecord

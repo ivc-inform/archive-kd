@@ -19,7 +19,7 @@ trait TreeGrid extends Grid[TreeGridField, TreeNode] {
     var autoPreserveOpenState: PreserveOpenState
     var canDropOnLeaves: Boolean
     def canEditCell(): Boolean
-    var canReparentNodes: Boolean
+    var canReparentNodes: JSUndefined[Boolean]
     var cantDragIntoChildMessage: String
     val cantDragIntoSelfMessage: String
     val cascadeSelection: Boolean
