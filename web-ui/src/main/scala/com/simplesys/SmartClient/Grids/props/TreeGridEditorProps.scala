@@ -16,8 +16,7 @@ class TreeGridEditorProps extends GridEditorProps[TreeGridFieldProps, ListGridRe
     var defaultFields: ScOption[Seq[TreeGridFieldProps]] = ScNone
     var folderIcon: ScOption[SCImgURL] = ScNone
     var nodeIcon: ScOption[SCImgURL] = ScNone
-    var canReparentNodes: ScOption[Boolean] = false.opt
-    var anAcceptDroppedRecords: ScOption[Boolean] = false.opt
+    var canReparentNodes: ScOption[Boolean] = ScNone
     var showOpenIcons: ScOption[Boolean] = ScNone
     var data: ScOption[Tree] = ScNone
 }

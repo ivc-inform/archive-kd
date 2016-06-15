@@ -88,16 +88,23 @@ class TreeGridContextMenuProps extends MenuSSProps {
         new MenuSSItemProps {
             title = "Разрешить перемещение групп".ellipsis.opt
             identifier = "enableReparent".opt
+            checkIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    val owner = item.owner.asInstanceOf[TreeGridEditor]
+                    simpleSyS checkOwner owner
+                    owner.canReparentNodes.getOrElse(false)
+
+            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     simpleSyS checkOwner owner
-                    val x = !owner.canReparentNodes
+                    isc debugTrap owner.canReparentNodes.getOrElse(false)
+                    val x: Boolean = !owner.canReparentNodes.getOrElse(false)
+                    isc debugTrap x
                     owner.canReparentNodes = x
                     owner.canAcceptDroppedRecords = x
-                    item.checkIf = {
-                        (target: Canvas, menu: MenuSS, item: MenuSSItem) => x
-                    }
+                    item.checkIf = (target: Canvas, menu: MenuSS, item: MenuSSItem) => x
             }.toFunc.opt
         },
         new MenuSSItemProps {

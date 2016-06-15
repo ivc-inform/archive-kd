@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.treeGrid.{Tree, TreeGridField, TreeNode}
 import com.simplesys.SmartClient.Layout.VLayoutSS
 import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
@@ -13,7 +14,7 @@ trait TreeGridEditor extends VLayoutSS with GridEditor[TreeGridField, TreeNode, 
     var folderIcon: SCImgURL
     var dataProperties: Tree
     var nodeIcon: SCImgURL
-    var canReparentNodes: Boolean
+    var canReparentNodes: JSUndefined[Boolean]
     def startEditingNew(): void
     def startEditing(): void
     var showOpenIcons: Boolean

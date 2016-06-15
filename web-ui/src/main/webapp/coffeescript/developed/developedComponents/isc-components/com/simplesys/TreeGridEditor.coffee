@@ -368,6 +368,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 				return
 
 		@grid.canReparentNodes = false ##Не убирать
+		@grid.canAcceptDroppedRecords = false ##Не убирать
 
 		if isc.isA.Function @canSelectRecord
 			@grid.canSelectRecord = @canSelectRecord
