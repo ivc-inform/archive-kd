@@ -643,6 +643,8 @@ trait Grid[T <: ListGridField, R <: JSObject] extends VLayout with DataBoundComp
     def saveEdits(editCompletionEvent: EditCompletionEvent = js.native, callback: js.Function4[Int, Int, EditCompletionEvent, Boolean, void] = js.native, rowNum: Int = js.native): void
     val saveLocally: Boolean
     var saveRequestProperties: DSRequest
+    var newRequestProperties: JSUndefined[DSRequest]
+    var editRequestProperties: JSUndefined[DSRequest]
     val screenReaderCellSeparator: HTMLString
     val screenReaderRowSeparator: HTMLString
     var scrollRedrawDelay: Int

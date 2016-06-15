@@ -23,7 +23,13 @@ class TreeGridContextMenuProps extends MenuSSProps {
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     simpleSyS checkOwner owner
                     owner.deselectAllRecords()
-                    owner.startEditingNew()
+
+                    owner.grid.newRequestProperties.foreach {
+                        newRequestProperties =>
+                            owner.startEditingInForm(
+                                requestProperties = newRequestProperties
+                            )
+                    }
             }.toFunc.opt
         },
         new MenuSSItemProps {
