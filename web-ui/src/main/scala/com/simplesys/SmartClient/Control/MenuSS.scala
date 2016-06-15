@@ -16,7 +16,7 @@ import scala.scalajs.js.|
 @js.native
 trait MenuSS extends Grid[ListGridField, MenuSSItem] {
     def addItem(item: MenuSSItem, pos: Int): void
-    def addItems(items: IscArray[MenuSSItem], pos: Int): void
+    def addItems(items: IscArray[MenuSSItem], pos: Int = js.native): void
     def addItemProperties(identifier: ID, properties: MenuSS): void
     def removeItem(item: MenuSSItem | ID): void
     def removeItems(items: IscArray[MenuSSItem | ID]): void
