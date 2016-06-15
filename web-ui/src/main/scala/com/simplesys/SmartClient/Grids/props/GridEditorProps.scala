@@ -21,6 +21,9 @@ import com.simplesys.System.Types.SelectionStyle._
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.option.{ScNone, ScOption}
 
+import scala.scalajs.js
+import scala.scalajs.js.ThisFunction0
+
 class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends VLayoutSSProps {
     var canDragSelectText: ScOption[Boolean] = ScNone
     var canAcceptDroppedRecords: ScOption[Boolean] = ScNone
@@ -64,8 +67,8 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var dragDataAction: ScOption[DragDataAction] = ScNone
     var startEditingNewInForm: ScOption[Function4[JSObject, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
     var startEditingInForm: ScOption[Function4[JSObject, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
-    var newRequestProperties: ScOption[DSRequest] = ScNone
-    var editRequestProperties: ScOption[DSRequest] = ScNone
+    var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
+    var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
 }
 

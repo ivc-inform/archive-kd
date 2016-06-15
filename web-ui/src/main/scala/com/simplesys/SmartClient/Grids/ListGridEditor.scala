@@ -122,8 +122,8 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     //var startEditingNewInForm: JSUndefined[Function4[JSObject, IscArray[FormItem], DSCallback, DSRequest, _]]
     def startEditingInForm(obj: JSObject = js.native, fields: IscArray[FormItem] = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     //var startEditingInForm: JSUndefined[Function4[JSObject, IscArray[FormItem], DSCallback, DSRequest, _]]
-    var newRequestProperties: JSUndefined[DSRequest]
-    var editRequestProperties: JSUndefined[DSRequest]
+    var newRequestProperties: JSUndefined[js.Function0[DSRequest]]
+    var editRequestProperties: JSUndefined[js.Function0[DSRequest]]
     var editingFields  : JSUndefined[IscArray[FormItem]]
 }
 

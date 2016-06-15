@@ -54,6 +54,7 @@ import com.simplesys.System._
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
+import scala.scalajs.js.ThisFunction0
 
 class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps with DataBoundComponentProps {
     var advancedFieldPickerThreshold: ScOption[Int] = ScNone
@@ -555,8 +556,8 @@ class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps wi
     var warnOnUnmappedValueFieldChange: ScOption[Boolean] = ScNone
     var wrapCells: ScOption[Boolean] = ScNone
     var wrapHeaderTitles: ScOption[Boolean] = ScNone
-    var newRequestProperties: ScOption[DSRequest] = ScNone
-    var editRequestProperties: ScOption[DSRequest] = ScNone
+    var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
+    var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
 }
 
