@@ -16,6 +16,7 @@ import com.simplesys.System.Types.EnterKeyEditAction.EnterKeyEditAction
 import com.simplesys.System.Types.EscapeKeyEditAction.EscapeKeyEditAction
 import com.simplesys.System.Types.FormItemComponentType.FormItemComponentType
 import com.simplesys.System.Types.HiliteIconPosition.HiliteIconPosition
+import com.simplesys.System.Types.ListGridFieldType._
 import com.simplesys.System.Types.OperatorId.OperatorId
 import com.simplesys.System.Types.RecordSummaryFunction.RecordSummaryFunction
 import com.simplesys.System.Types.SortDirection.SortDirection
@@ -179,6 +180,7 @@ class ListGridFieldProps extends AbstractClassProps {
     var summaryValueTitle: ScOption[String] = ScNone
     var suppressValueIcon: ScOption[Boolean] = ScNone
     var target: ScOption[String] = ScNone
+    var `type`: ScOption[ListGridFieldType] = ScNone
     var timeFormatter: ScOption[TimeDisplayFormat] = ScNone
     var title: ScOption[String] = ScNone
     var userFormula: ScOption[UserFormula] = ScNone

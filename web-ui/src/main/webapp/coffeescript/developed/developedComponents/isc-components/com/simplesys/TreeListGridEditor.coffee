@@ -151,6 +151,8 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 		@listGrid.setContextMenu menu
 		@contextMenuListGridEditor
 
+	"closedIconSuffix" : ""
+
 	"initWidget"                          : ->
 		@Super "initWidget", arguments
 
@@ -188,6 +190,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"showOpenIcons"                   : @showOpenIconsTree
 			"showFilterEditor"                : @showTreeFilterEditor
 			"dataPageSize"                    : @dataPageSizeTree
+			"closedIconSuffix"                : @closedIconSuffix
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return

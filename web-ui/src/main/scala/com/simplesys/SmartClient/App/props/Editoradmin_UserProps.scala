@@ -7,7 +7,7 @@ import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.JSAny
-import com.simplesys.System.Types.Alignment
+import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
 
@@ -39,6 +39,11 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                 IscArray(
                     TreeGridField(
                         new TreeGridFieldProps {
+                            name = "active".opt
+                            `type` = ListGridFieldType.boolean.opt
+                        }),
+                    TreeGridField(
+                        new TreeGridFieldProps {
                             name = "codeGroup".opt
                         }),
                     TreeGridField(
@@ -53,11 +58,6 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                         new TreeGridFieldProps {
                             name = "di".opt
                             hidden = true.opt
-                        }),
-                    TreeGridField(
-                        new TreeGridFieldProps {
-                            name = "active".opt
-                            hidden = true.opt
                         })
                 )
             )
@@ -67,6 +67,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                     ListGridField(
                         new ListGridFieldProps {
                             name = "active".opt
+                            `type` = ListGridFieldType.boolean.opt
                         }),
                     ListGridField(
                         new ListGridFieldProps {
