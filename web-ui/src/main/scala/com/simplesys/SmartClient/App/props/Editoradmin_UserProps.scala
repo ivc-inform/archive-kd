@@ -34,6 +34,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
     showOpenIconsTree = false.opt
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
+
             thiz.Super("initWidget", arguments)
 
             thiz.setTreeFields(
@@ -93,12 +94,12 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                                 new SelectItemProps {
                                     optionDataSource = thiz.listGrid.dataSource.opt
                                     displayField = "captionGroup".opt
-                                    valueField = "group".asInstanceOf[JSAny].opt
+                                    valueField = "di".asInstanceOf[JSAny].opt
                                 }
                             ).opt
                             filterEditorProperties = SelectItem(
                                 new SelectItemProps {
-                                    optionDataSource = thiz.listGrid.dataSource.opt
+                                    optionDataSource = thiz.treeGrid.dataSource.opt
                                 }
                             ).opt
                         }),
@@ -128,5 +129,8 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                     }
                 )
             )
+
+            thiz.getViewState()
+
     }.toThisFunc.opt
 }

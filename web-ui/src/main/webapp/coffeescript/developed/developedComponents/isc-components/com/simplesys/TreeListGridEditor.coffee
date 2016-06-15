@@ -269,4 +269,9 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"getListCriteria": -> @listGrid.getCriteria()
 	"getListGrid": -> @listGrid
 	"getTreeGrid": -> @treeGrid
+	"getViewState": ->
+		@listGrid.getViewState()
+		@treeGrid.getViewState()
+		return
+
 

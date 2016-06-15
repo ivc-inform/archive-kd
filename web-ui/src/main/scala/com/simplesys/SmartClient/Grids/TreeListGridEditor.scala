@@ -123,5 +123,6 @@ trait TreeListGridEditor extends HLayoutSS {
     val listGrid: ListGridEditor
     val contextMenuListGridEditor: MenuSS
     val contextMenuTreeGridEditor: MenuSS
+    def getViewState(): void
 }
 
