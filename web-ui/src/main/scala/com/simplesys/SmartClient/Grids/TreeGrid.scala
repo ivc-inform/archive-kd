@@ -99,7 +99,7 @@ trait TreeGrid extends Grid[TreeGridField, TreeNode] {
     def transferNodes(nodes: IscArray[TreeNode], folder: TreeNode, index: Int, sourceWidget: Canvas, callback: Callback = js.native): void
     val treeFieldTitle:String
     val treeRootValue:JSAny
-    var data: JSUndefined[Tree]
+    var data: Tree
 }
 
 

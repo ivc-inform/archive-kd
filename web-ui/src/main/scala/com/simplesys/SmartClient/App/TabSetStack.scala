@@ -24,7 +24,7 @@ trait TabSetStack {
         if (canvas.identifier.isEmpty)
             isc.error(s"Компонент ${canvas.getIdentifier()} не имеет постоянного identifier, поэтому не может быть добавлен.")
         else {
-            isc debugTrap (canvas, menuItem)
+            //isc debugTrap (canvas, menuItem)
             val tab = tabSet.findTab(canvas.getIdentifier())
             if (tab.isDefined) {
                 tabSet selectTab tab.get

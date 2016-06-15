@@ -40,18 +40,21 @@ class TreeGridContextMenuProps extends MenuSSProps {
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
-                    simpleSyS checkOwner owner
+                    //simpleSyS checkOwner owner
                     if (owner.grid.newRequestProperties.isEmpty)
                         isc error "Нет функции newRequestProperties."
                     else {
-                        val parentIdField = owner.grid.data.map(_.parentIdField)
-                        val request = (owner.grid.newRequestProperties.get) ()
-                        isc debugTrap(parentIdField, request)
+                        val parentIdField = owner.grid.data.parentIdField
+                        val idField = owner.grid.data.idField
 
-                        if (parentIdField.isDefined) {
-                            val parentIdValue = owner.grid.getSelectedRecord().asInstanceOf[JSDynamic](parentIdField.get)
-                            request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField.get)(parentIdValue)
-                        }
+                        val request = (owner.grid.newRequestProperties.get) ()
+                        //isc debugTrap(parentIdField, request)
+
+                        val idValue = owner.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idField)
+                        //isc debugTrap (idValue)
+
+                        request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField)(idValue)
+                        //isc debugTrap (request)
 
                         owner.startEditingInForm(
                             requestProperties = request
