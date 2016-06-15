@@ -645,6 +645,7 @@ trait Grid[T <: ListGridField, R <: JSObject] extends VLayout with DataBoundComp
     var saveRequestProperties: DSRequest
     var newRequestProperties: JSUndefined[DSRequest]
     var editRequestProperties: JSUndefined[DSRequest]
+    var editingFields  : JSUndefined[IscArray[FormItem]]
     val screenReaderCellSeparator: HTMLString
     val screenReaderRowSeparator: HTMLString
     var scrollRedrawDelay: Int

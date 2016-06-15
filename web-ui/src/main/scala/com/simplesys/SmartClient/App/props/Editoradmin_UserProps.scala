@@ -7,7 +7,7 @@ import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{Alignment, DSOperationType, ListGridFieldType}
+import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
@@ -41,6 +41,13 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
+    newTreeRequestProperties = (DSRequest(
+        new DSRequestProps {
+            data = (new NewDSRequestData {
+                override val active = true
+            }).opt
+        }
+    )).opt
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
@@ -139,13 +146,13 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                 )
             )
 
-            thiz.newTreeRequestProperties = DSRequest.create(
-                new DSRequestProps {
-                    data = (new NewDSRequestData {
-                        override val active = true
-                    }).opt
-                }
-            )
+            //            thiz.newTreeRequestProperties = DSRequest(
+            //                new DSRequestProps {
+            //                    data = (new NewDSRequestData {
+            //                        override val active = true
+            //                    }).opt
+            //                }
+            //            )
 
             thiz.getViewState()
 

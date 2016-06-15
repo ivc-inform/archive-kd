@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.Control.{Button, IButton}
 import com.simplesys.SmartClient.DataBinding._
 import com.simplesys.SmartClient.DataBinding.props.{DataBoundComponentProps, SortSpecifierProps}
 import com.simplesys.SmartClient.Forms.DynamicForm
+import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Foundation.canvas.ImgProperties
 import com.simplesys.SmartClient.Foundation.{Canvas, GridRenderer, HTMLFlow, StatefulCanvas}
 import com.simplesys.SmartClient.Grids.listGrid._
@@ -48,7 +49,7 @@ import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
 import com.simplesys.System.Types._
-import com.simplesys.System.{JSAny, JSObject}
+import com.simplesys.System._
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
@@ -555,6 +556,7 @@ class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps wi
     var wrapHeaderTitles: ScOption[Boolean] = ScNone
     var newRequestProperties: ScOption[DSRequest] = ScNone
     var editRequestProperties: ScOption[DSRequest] = ScNone
+    var editingFields  : ScOption[IscArray[FormItem]] = ScNone
 }
 
 class ListGridProps extends GridProps[ListGridField, ListGridRecord] {

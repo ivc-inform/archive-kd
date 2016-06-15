@@ -193,6 +193,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"closedIconSuffix"                : @closedIconSuffix
 			"newRequestProperties"            : @newTreeRequestProperties
 			"editRequestProperties"           : @editTreeRequestProperties
+			"editingFields"                   : @editingTreeFields
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -237,6 +238,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"showFilterEditor"                : @showListFilterEditor
 			"newRequestProperties"            : @newListRequestProperties
 			"editRequestProperties"           : @editListRequestProperties
+			"editingFields"                   : @editingListFields
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"

@@ -108,7 +108,7 @@ isc.ListGrid.addProperties
 
 	"_getEditorWindow": (obj, fields, callback, requestProperties)->
 		if not fields?
-			fields = @fields.map (item) -> @getEditFormItem(item.name)
+			fields = @editingFields
 
 		if not requestProperties?
 			if isc.isA.Object obj

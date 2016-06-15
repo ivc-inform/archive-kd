@@ -3,6 +3,7 @@ package com.simplesys.SmartClient.Grids
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
+import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
 import com.simplesys.SmartClient.Grids.treeGrid.TreeGridField
 import com.simplesys.SmartClient.Layout.HLayoutSS
@@ -128,5 +129,7 @@ trait TreeListGridEditor extends HLayoutSS {
     var editTreeRequestProperties: JSUndefined[DSRequest]
     var newListRequestProperties: JSUndefined[DSRequest]
     var editListRequestProperties: JSUndefined[DSRequest]
+    var editingTreeFields  : JSUndefined[IscArray[FormItem]]
+    var editingListFields  : JSUndefined[IscArray[FormItem]]
 }
 
