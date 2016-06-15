@@ -212,6 +212,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		###console.log "Restore component id: #{id} data: #{dataStr}"###
 		savedState = isc.JSONSS.decode dataStr
 		@grid.setViewState savedState
+		return
 	"width": "100%"
 	"cancelEditingConfirmationMessage": "Выход из режима редактирования повлечет к утере измененных(введенных) данных. Продолжить ?"
 	"getAllRows": -> @grid.data.getAllRows()
