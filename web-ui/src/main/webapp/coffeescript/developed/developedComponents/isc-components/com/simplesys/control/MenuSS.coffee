@@ -23,7 +23,12 @@ isc.defineClass("MenuSS", isc.Menu).addProperties
 		return
 
 	"setItems": (items) ->
-		@Super "setItems", arguments
+		items = items.map (item) ->
+			if not item.name?
+				item.name = item.identifier
+			item
+
+		@Super "setItems", [items]
 		@
 
 	"getMergedContextMenu": ->
