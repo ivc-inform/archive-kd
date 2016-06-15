@@ -32,19 +32,19 @@ class User_ComponentMenuProps extends MenuSSProps {
                 )
             )
 
-            thiz.setItems(
+            thiz.addItems(
                 IscArray(
                     MenuSSItem(
                         new MenuSSItemProps {
                             submenu = topOwner.contextMenuListGridEditor.opt
-                            title = "\u0413\u0440\u0443\u043F\u043F\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439".ellipsis.opt
+                            title = "Группы пользователей".ellipsis.opt
                             icon = Common.ellipsis.opt
                         }
                     ),
                     MenuSSItem(
                         new MenuSSItemProps {
                             submenu = topOwner.contextMenuTreeGridEditor.opt
-                            title = "\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438".ellipsis.opt
+                            title = "Пользователи".ellipsis.opt
                             icon = Common.ellipsis.opt
                         }
                     )
