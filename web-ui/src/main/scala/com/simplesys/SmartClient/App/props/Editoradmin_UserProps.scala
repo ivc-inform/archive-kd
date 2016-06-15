@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.Editoradmin_User
-import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
+import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, SortSpecifierProps}
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -133,11 +133,21 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                                     optionDataSource = thiz.treeGrid.dataSource.opt
                                     displayField = "captionGroup".opt
                                     valueField = "di".asInstanceOf[JSAny].opt
+                                    initialSort = Seq(
+                                        new SortSpecifierProps {
+                                            property = "captionGroup".opt
+                                        }
+                                    ).opt
                                 }
                             ).opt
                             filterEditorProperties = SelectItem(
                                 new SelectItemProps {
                                     optionDataSource = thiz.treeGrid.dataSource.opt
+                                    initialSort = Seq(
+                                        new SortSpecifierProps {
+                                            property = "captionGroup".opt
+                                        }
+                                    ).opt
                                 }
                             ).opt
                         }),
