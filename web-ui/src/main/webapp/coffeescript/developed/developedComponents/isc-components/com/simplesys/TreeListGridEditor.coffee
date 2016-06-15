@@ -151,6 +151,8 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 		@listGrid.setContextMenu menu
 		@contextMenuListGridEditor
 
+	"closedIconSuffix" : ""
+
 	"initWidget"                          : ->
 		@Super "initWidget", arguments
 
@@ -188,6 +190,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"showOpenIcons"                   : @showOpenIconsTree
 			"showFilterEditor"                : @showTreeFilterEditor
 			"dataPageSize"                    : @dataPageSizeTree
+			"closedIconSuffix"                : @closedIconSuffix
 			"newRequestProperties"            : @newTreeRequestProperties
 			"editRequestProperties"           : @editTreeRequestProperties
 			"resized"                         : ->
@@ -270,4 +273,9 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"getListCriteria": -> @listGrid.getCriteria()
 	"getListGrid": -> @listGrid
 	"getTreeGrid": -> @treeGrid
+	"getViewState": ->
+		@listGrid.getViewState()
+		@treeGrid.getViewState()
+		return
+
 

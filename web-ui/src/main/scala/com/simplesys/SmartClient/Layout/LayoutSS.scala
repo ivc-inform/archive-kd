@@ -6,6 +6,5 @@ import scala.scalajs.js
 
 @js.native
 trait LayoutSS extends Layout {
-    def getFuncMenu(): MenuSS
 }
 

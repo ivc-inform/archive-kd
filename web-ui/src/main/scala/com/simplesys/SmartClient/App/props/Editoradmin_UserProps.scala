@@ -7,7 +7,7 @@ import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.JSAny
-import com.simplesys.System.Types.Alignment
+import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
 
@@ -16,25 +16,6 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
 
     folderDropImageTree = Common.iconFolder.opt
     autoFetchData = true.opt
-    fieldsTree = Seq(
-        new TreeGridFieldProps {
-            name = "codeGroup".opt
-        },
-        new TreeGridFieldProps {
-            name = "captionGroup".opt
-        },
-        new TreeGridFieldProps {
-            name = "descriptionGroup".opt
-        },
-        new TreeGridFieldProps {
-            name = "di".opt
-            hidden = true.opt
-        },
-        new TreeGridFieldProps {
-            name = "active".opt
-            hidden = true.opt
-        }
-    ).opt
     wrapTreeCells = true.opt
     drawAheadRatioList = simpleSyS.config.drawAheadRatio.getOrElse(1.3).opt
     drawAheadRatioTree = simpleSyS.config.drawAheadRatio.getOrElse(1.3).opt
@@ -50,15 +31,45 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
     showListRecordComponentsByCell = false.opt
     wrapListCells = true.opt
     wrapTreeCells = true.opt
+    showOpenIconsTree = false.opt
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
+
             thiz.Super("initWidget", arguments)
+
+            thiz.setTreeFields(
+                IscArray(
+                    TreeGridField(
+                        new TreeGridFieldProps {
+                            name = "active".opt
+                            `type` = ListGridFieldType.boolean.opt
+                        }),
+                    TreeGridField(
+                        new TreeGridFieldProps {
+                            name = "codeGroup".opt
+                        }),
+                    TreeGridField(
+                        new TreeGridFieldProps {
+                            name = "captionGroup".opt
+                        }),
+                    TreeGridField(
+                        new TreeGridFieldProps {
+                            name = "descriptionGroup".opt
+                        }),
+                    TreeGridField(
+                        new TreeGridFieldProps {
+                            name = "di".opt
+                            hidden = true.opt
+                        })
+                )
+            )
 
             thiz.setListFields(
                 IscArray(
                     ListGridField(
                         new ListGridFieldProps {
                             name = "active".opt
+                            `type` = ListGridFieldType.boolean.opt
                         }),
                     ListGridField(
                         new ListGridFieldProps {
@@ -78,16 +89,17 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                             name = "group".opt
                             displayField = "captionGroup".opt
                             align = Alignment.center.opt
+                            title = "Наименование группы".opt
                             editorProperties = SelectItem(
                                 new SelectItemProps {
                                     optionDataSource = thiz.listGrid.dataSource.opt
                                     displayField = "captionGroup".opt
-                                    valueField = "group".asInstanceOf[JSAny].opt
+                                    valueField = "di".asInstanceOf[JSAny].opt
                                 }
                             ).opt
                             filterEditorProperties = SelectItem(
                                 new SelectItemProps {
-                                    optionDataSource = thiz.listGrid.dataSource.opt
+                                    optionDataSource = thiz.treeGrid.dataSource.opt
                                 }
                             ).opt
                         }),
@@ -110,9 +122,6 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                 )
             )
 
-            thiz setTreeDataSource thiz.treeDataSource
-            thiz setListDataSource thiz.listDataSource
-
             thiz.setFuncMenu(
                 User_ComponentMenu.create(
                     new User_ComponentMenuProps {
@@ -120,5 +129,8 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                     }
                 )
             )
+
+            thiz.getViewState()
+
     }.toThisFunc.opt
 }

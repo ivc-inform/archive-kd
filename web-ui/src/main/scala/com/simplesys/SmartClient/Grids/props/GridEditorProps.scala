@@ -7,6 +7,8 @@ import com.simplesys.SmartClient.Grids.ListGrid
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.{ListGridFieldProps, ListGridRecordProps}
 import com.simplesys.SmartClient.Layout.props.VLayoutSSProps
+import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.System.Types.AutoFitWidthApproach.AutoFitWidthApproach
 import com.simplesys.System.Types.DragDataAction._
 import com.simplesys.System.Types.DragTrackerMode.DragTrackerMode
@@ -57,6 +59,8 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var canDragRecordsOut: ScOption[Boolean] = ScNone
     var canReorderRecords: ScOption[Boolean] = ScNone
     var dragDataAction: ScOption[DragDataAction] = ScNone
+    var startEditingNewInForm: ScOption[Function4[JSObject, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
+    var startEditingInForm: ScOption[Function4[JSObject, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
     var newRequestProperties: ScOption[DSRequest] = ScNone
     var editRequestProperties: ScOption[DSRequest] = ScNone
 }

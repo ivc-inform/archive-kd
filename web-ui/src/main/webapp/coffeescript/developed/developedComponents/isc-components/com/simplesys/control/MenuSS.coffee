@@ -76,6 +76,7 @@ isc.defineClass("MenuSS", isc.Menu).addProperties
 		if isc.isA.Array(_item) and _item.length > 0
 			_item = _item[0]
 
+		@data = [] unless isc.isA.Array(@data)
 		q_exstty = @data.filter (_item) -> _item.identifier? and item.identifier? and  _item.identifier is item.identifier
 
 		if isc.isA.Array(q_exstty) and q_exstty.length is 0

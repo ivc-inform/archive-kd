@@ -1,6 +1,9 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.{LoggedGroup, WebApp}
+import com.simplesys.SmartClient.App.props.Editoradmin_UserProps
+import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
+import com.simplesys.SmartClient.Control.MenuSS
+import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
@@ -13,15 +16,32 @@ import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 import scala.scalajs.js.annotation.JSExport
 
 @JSExport
-object EaKdProcWindowMain extends WebApp {
+object EaKdProcWindowMain extends WebApp with TabSetStack {
 
     override val loadSchemas = com.simplesys.app.loadSchemas
 
     override val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
+
+    val functionButton = IconMenuButtonSS.create(
+        new IconMenuButtonSSProps {
+            title = "Операции".ellipsis.opt
+            icon = Common.iconConstructor.opt
+        }
+    )
+
+    val functionGroup = RibbonGroupSS.create(
+        new RibbonGroupSSProps {
+            title = "Управление".ellipsis.opt
+            visibility = Visibility.hidden.opt
+            controls = Seq(
+                functionButton
+            ).opt
+        })
 
     private val managedUsersGroups = Seq(
         RibbonGroupSS.create(
@@ -37,7 +57,6 @@ object EaKdProcWindowMain extends WebApp {
                         new IconButtonProps {
                             title = "Информация".ellipsis.opt
                             icon = Common.info.opt
-                            orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
                                     getAbout()
@@ -49,7 +68,6 @@ object EaKdProcWindowMain extends WebApp {
                         new IconButtonProps {
                             title = "Настройки".ellipsis.opt
                             icon = Common.settings.opt
-                            orientation = "vertical".opt
                             click = {
                                 (thiz: classHandler) =>
                                     getSetting()
@@ -67,6 +85,11 @@ object EaKdProcWindowMain extends WebApp {
             item
     }
 
+    override protected lazy val tabSet = TabSetSS.create(
+        new TabSetSSProps {
+        }
+    )
+
     private val managedAdminsGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
@@ -75,13 +98,7 @@ object EaKdProcWindowMain extends WebApp {
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
-                            orientation = "vertical".opt
                             icon = Common.ref.opt
-                            click = {
-                                (thiz: classHandler) =>
-                                    thiz.showMenu()
-                                    false
-                            }.toThisFunc.opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
@@ -89,6 +106,19 @@ object EaKdProcWindowMain extends WebApp {
                                             name = "usersGroups".opt
                                             icon = Common.admin_User.opt
                                             title = "Группы и пользователи".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(
+                                                        Editoradmin_User.create(
+                                                            new Editoradmin_UserProps {
+                                                                identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
+                                                                dataSourceList = DataSourcesJS.admin_User_DS.opt
+                                                                dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
+                                                            }
+                                                        ),
+                                                        item
+                                                    )
+                                            }.toFunc.opt
                                         }
                                     ).opt
                                 }
@@ -126,88 +156,96 @@ object EaKdProcWindowMain extends WebApp {
         }
     )
 
-    override protected def mainCanvas: Canvas = RibbonBar.create(
-        new RibbonBarProps {
-            width = "100%"
-            showResizeBar = true.opt
-            members = (
-              managedUsersGroups ++
-                managedAdminsGroups ++
-                managedDevsGroups ++
-                Seq(
-                    LayoutSpacer.create(
-                        new LayoutSpacerProps {
-                            width = "*"
+    override protected def mainCanvas: Canvas =
+        VLayoutSS.create(
+            new VLayoutSSProps {
+                members = Seq(
+                    RibbonBar.create(
+                        new RibbonBarProps {
+                            width = "100%"
+                            showResizeBar = true.opt
+                            members = (
+                              managedUsersGroups ++
+                                managedAdminsGroups ++
+                                managedDevsGroups ++
+                                Seq(functionGroup) ++
+                                Seq(
+                                    LayoutSpacer.create(
+                                        new LayoutSpacerProps {
+                                            width = "*"
+                                        }
+                                    ),
+                                    RibbonGroupSS.create(
+                                        new RibbonGroupSSProps {
+                                            title = "Аутентификация".ellipsis.opt
+                                            defaultLayoutAlign = Alignment.center
+                                            width = 40
+                                            controls = Seq(
+                                                IconButton.create(
+                                                    new IconButtonProps {
+                                                        click = {
+                                                            (thiz: classHandler) =>
+                                                                if (!LoggedGroup.logged) {
+                                                                    RPCManagerSS.loginRequired({
+                                                                        (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
+                                                                            if (res) {
+
+                                                                                captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
+                                                                                captionUserLabel.show()
+                                                                                managedUsersGroups.foreach(_.show())
+                                                                                LoggedGroup.codeGroup = codeGroup.toOption
+
+                                                                                if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
+                                                                                    managedAdminsGroups.foreach(_.show())
+
+                                                                                if (LoggedGroup.isDevsGroup())
+                                                                                    managedDevsGroups.foreach(_.show())
+
+                                                                                LoggedGroup.logged = true
+
+                                                                                thiz setTitle "Выход"
+                                                                                thiz setIcon Common.closeProgram
+                                                                            } else {
+                                                                                managedUsersGroups.foreach(_.hide())
+                                                                                managedAdminsGroups.foreach(_.hide())
+                                                                                managedDevsGroups.foreach(_.hide())
+                                                                                captionUserLabel.hide()
+
+                                                                                LoggedGroup.logged = false
+                                                                                thiz setTitle "Вход".ellipsis
+                                                                                thiz setIcon Common.login
+                                                                            }
+                                                                    }.toFunc)
+
+                                                                } else {
+                                                                    RPCManagerSS.logoutRequired()
+                                                                    thiz setTitle "Вход".ellipsis
+                                                                    thiz setIcon Common.login
+                                                                    LoggedGroup.logged = false
+                                                                    managedUsersGroups.foreach(_.hide())
+                                                                    managedAdminsGroups.foreach(_.hide())
+                                                                    managedDevsGroups.foreach(_.hide())
+                                                                    captionUserLabel.hide()
+                                                                    windowsStack.destroyAll()
+                                                                }
+                                                                false
+                                                        }.toThisFunc.opt
+                                                        title = "Войти".ellipsis.opt
+                                                        iconOrientation = IconOrientation.center.opt
+                                                        icon = Common.login.opt
+                                                    }
+                                                ),
+                                                captionUserLabel
+                                            ).opt
+                                            numRows = 3.opt
+                                            titleHeight = 18.opt
+                                        }
+                                    )
+                                )).opt
                         }
                     ),
-                    RibbonGroupSS.create(
-                        new RibbonGroupSSProps {
-                            title = "Аутентификация".ellipsis.opt
-                            defaultLayoutAlign = Alignment.center
-                            width = 40
-                            controls = Seq(
-                                IconButton.create(
-                                    new IconButtonProps {
-                                        orientation = "vertical".opt
-                                        click = {
-                                            (thiz: classHandler) =>
-                                                if (!LoggedGroup.logged) {
-                                                    RPCManagerSS.loginRequired({
-                                                        (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
-                                                            if (res) {
-
-                                                                captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
-                                                                captionUserLabel.show()
-                                                                managedUsersGroups.foreach(_.show())
-                                                                LoggedGroup.codeGroup = codeGroup.toOption
-
-                                                                if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
-                                                                    managedAdminsGroups.foreach(_.show())
-
-                                                                if (LoggedGroup.isDevsGroup())
-                                                                    managedDevsGroups.foreach(_.show())
-
-                                                                LoggedGroup.logged = true
-
-                                                                thiz setTitle "Выход"
-                                                                thiz setIcon Common.closeProgram
-                                                            } else {
-                                                                managedUsersGroups.foreach(_.hide())
-                                                                managedAdminsGroups.foreach(_.hide())
-                                                                managedDevsGroups.foreach(_.hide())
-                                                                captionUserLabel.hide()
-
-                                                                LoggedGroup.logged = false
-                                                                thiz setTitle "Вход".ellipsis
-                                                                thiz setIcon Common.login
-                                                            }
-                                                    }.toFunc)
-
-                                                } else {
-                                                    RPCManagerSS.logoutRequired()
-                                                    thiz setTitle "Вход".ellipsis
-                                                    thiz setIcon Common.login
-                                                    LoggedGroup.logged = false
-                                                    managedUsersGroups.foreach(_.hide())
-                                                    managedAdminsGroups.foreach(_.hide())
-                                                    managedDevsGroups.foreach(_.hide())
-                                                    captionUserLabel.hide()
-                                                    windowsStack.destroyAll()
-                                                }
-                                                false
-                                        }.toThisFunc.opt
-                                        title = "Войти".ellipsis.opt
-                                        iconOrientation = IconOrientation.center.opt
-                                        icon = Common.login.opt
-                                    }
-                                ),
-                                captionUserLabel
-                            ).opt
-                            numRows = 3.opt
-                            titleHeight = 18.opt
-                        }
-                    )
-                )).opt
-        }
-    )
+                    tabSet
+                ).opt
+            }
+        )
 }

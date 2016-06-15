@@ -67,7 +67,7 @@ package object System {
     object Slider extends SCApply[Slider, SliderProps]
     //    object RangeSlider extends SCApply[RangeSlider, RangeSliderProps]
     //    object Hover extends SCApply[Hover, HoverProps]
-    //    object Menu extends SCApply[Menu, MenuProps]
+    object Menu extends SCApply[Menu, MenuProps]
     object MenuSS extends SCApply[MenuSS, MenuSSProps]
     object MenuSSItem extends SCApply4Object[MenuSSItem, MenuSSItemProps]
     //    object MenuButton extends SCApply[MenuButton, MenuButtonProps]
@@ -286,6 +286,7 @@ package object System {
     object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
     object User_ComponentMenu extends SCApply[User_ComponentMenu, User_ComponentMenuProps]
     object Editoradmin_User extends SCApply[Editoradmin_User, Editoradmin_UserProps]
+    object TreeListGridEditor extends SCApply[TreeListGridEditor, TreeListGridEditorProps]
 
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
     object TreeGridField extends SCApply4Object[TreeGridField, TreeGridFieldProps]
