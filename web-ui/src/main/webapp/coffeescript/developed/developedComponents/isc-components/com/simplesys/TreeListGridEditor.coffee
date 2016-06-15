@@ -45,6 +45,8 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 		@treeGrid.selectSingleRecordByKey keyValue
 		return
 	"editByCellTree"                      : false
+	"autoSaveListEdits"                   : true
+	"autoSaveTreeEdits"                   : true
 	"editByCellList"                      : false
 	"getListSelectedRecord"               : -> @listGrid.getSelectedRecord()
 	"enableChangeSelectionTree"           : true
@@ -194,6 +196,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"newRequestProperties"            : @newTreeRequestProperties
 			"editRequestProperties"           : @editTreeRequestProperties
 			"editingFields"                   : @editingTreeFields
+			"autoSaveEdits"                   : @autoSaveTreeEdits
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -239,6 +242,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"newRequestProperties"            : @newListRequestProperties
 			"editRequestProperties"           : @editListRequestProperties
 			"editingFields"                   : @editingListFields
+			"autoSaveEdits"                   : @autoSaveListEdits
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"

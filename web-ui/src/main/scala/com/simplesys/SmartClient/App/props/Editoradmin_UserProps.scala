@@ -34,7 +34,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
     folderIconTree = Common.iconFolder.opt
     dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(70).opt
     dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(70).opt
-    autoSaveListEdits = false.opt
+    //autoSaveListEdits = false.opt
     nodeIconTree = Common.iconTreeNode.opt
     canEditList = true.opt
     canEditTree = true.opt
