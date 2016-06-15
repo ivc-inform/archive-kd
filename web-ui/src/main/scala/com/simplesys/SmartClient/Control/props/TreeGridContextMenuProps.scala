@@ -91,7 +91,7 @@ class TreeGridContextMenuProps extends MenuSSProps {
             checkIf = {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
-                    simpleSyS checkOwner owner
+                    //simpleSyS checkOwner owner
                     owner.canReparentNodes.getOrElse(false)
 
             }.toFunc.opt
@@ -99,11 +99,10 @@ class TreeGridContextMenuProps extends MenuSSProps {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     simpleSyS checkOwner owner
-                    isc debugTrap owner.canReparentNodes.getOrElse(false)
+                    //isc debugTrap owner.canReparentNodes.getOrElse(false)
                     val x: Boolean = !owner.canReparentNodes.getOrElse(false)
-                    isc debugTrap x
+                    //isc debugTrap x
                     owner.canReparentNodes = x
-                    owner.canAcceptDroppedRecords = x
                     item.checkIf = (target: Canvas, menu: MenuSS, item: MenuSSItem) => x
             }.toFunc.opt
         },

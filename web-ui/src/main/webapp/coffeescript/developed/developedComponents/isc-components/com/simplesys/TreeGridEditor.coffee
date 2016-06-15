@@ -257,7 +257,6 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"autoDraw"                        : false
 			"initialSort"                     : @initialSort
 			"showOpenIcons"                     : @showOpenIcons
-			"folderDropImage"                 : @folderDropImage
 			"cascadeSelection"                : @cascadeSelection
 			"canEdit"                         : @canEdit
 			"filterOnKeypress"                : @filterOnKeypress
@@ -367,8 +366,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 				@selectFirstRecord()
 				return
 
-		@grid.canReparentNodes = false ##Не убирать
-		@grid.canAcceptDroppedRecords = false ##Не убирать
+		@grid.canReparentNodes = true ##Не убирать
 
 		if isc.isA.Function @canSelectRecord
 			@grid.canSelectRecord = @canSelectRecord
