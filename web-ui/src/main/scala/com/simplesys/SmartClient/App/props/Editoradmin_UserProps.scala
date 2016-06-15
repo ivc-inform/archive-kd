@@ -141,7 +141,6 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
 
             thiz.newTreeRequestProperties = DSRequest.create(
                 new DSRequestProps {
-                    operationType = DSOperationType.add.opt
                     data = (new NewDSRequestData {
                         override val active = true
                     }).opt

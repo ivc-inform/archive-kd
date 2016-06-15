@@ -110,10 +110,15 @@ isc.ListGrid.addProperties
 		if not fields?
 			fields = @fields.map (item) -> @getEditFormItem(item.name)
 
-		if not requestProperties? and isc.isA.Object obj
-			requestProperties =
-				operationType: "add"
-				data: obj
+		if not requestProperties?
+			if isc.isA.Object obj
+				requestProperties =
+					operationType: "add"
+					data: obj
+			else
+				requestProperties = operationType: "add"
+
+		requestProperties.operationType = "add" unless requestProperties.operationType
 
 		updatedOperation = requestProperties.operationType is "update"
 
