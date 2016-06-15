@@ -77,11 +77,6 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                 IscArray(
                     TreeGridField(
                         new TreeGridFieldProps {
-                            name = "active".opt
-                            `type` = ListGridFieldType.boolean.opt
-                        }),
-                    TreeGridField(
-                        new TreeGridFieldProps {
                             name = "codeGroup".opt
                         }),
                     TreeGridField(
@@ -96,17 +91,17 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                         new TreeGridFieldProps {
                             name = "di".opt
                             hidden = true.opt
+                        }),
+                    TreeGridField(
+                        new TreeGridFieldProps {
+                            name = "active".opt
+                            `type` = ListGridFieldType.boolean.opt
                         })
                 )
             )
 
             thiz.setListFields(
                 IscArray(
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "active".opt
-                            `type` = ListGridFieldType.boolean.opt
-                        }),
                     ListGridField(
                         new ListGridFieldProps {
                             name = "caption".opt
@@ -164,6 +159,11 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                     ListGridField(
                         new ListGridFieldProps {
                             name = "secondName".opt
+                        }),
+                    ListGridField(
+                        new ListGridFieldProps {
+                            name = "active".opt
+                            `type` = ListGridFieldType.boolean.opt
                         })
                 )
             )
