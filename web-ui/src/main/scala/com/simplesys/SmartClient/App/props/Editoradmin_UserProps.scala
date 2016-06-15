@@ -1,15 +1,24 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.Editoradmin_User
+import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
 import com.simplesys.SmartClient.Forms.FormsItems.props.SelectItemProps
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.JSAny
-import com.simplesys.System.Types.{Alignment, ListGridFieldType}
+import com.simplesys.System.Types.{Alignment, DSOperationType, ListGridFieldType}
+import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
+
+import scala.scalajs.js.annotation.ScalaJSDefined
+
+
+@ScalaJSDefined
+trait NewDSRequestData extends JSObject {
+    val active: Boolean
+}
 
 class Editoradmin_UserProps extends TreeListGridEditorProps {
     type classHandler <: Editoradmin_User
@@ -128,6 +137,15 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                         owner = thiz.opt
                     }
                 )
+            )
+
+            thiz.newTreeRequestProperties = DSRequest.create(
+                new DSRequestProps {
+                    operationType = DSOperationType.add.opt
+                    data = (new NewDSRequestData {
+                        override val active = true
+                    }).opt
+                }
             )
 
             thiz.getViewState()
