@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.Editoradmin_User
 import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
-import com.simplesys.SmartClient.Forms.FormsItems.props.SelectItemProps
+import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
@@ -11,6 +11,7 @@ import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
+import com.simplesys.option.DoubleType._
 
 import scala.scalajs.js.annotation.ScalaJSDefined
 
@@ -48,6 +49,21 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
             }).opt
         }
     )).opt
+    editingTreeFields = Seq(
+        new CheckboxItemProps {
+            name = "active".opt
+            width = "100%"
+        },
+        new TextItemProps {
+            name = "codeGroup".opt
+        },
+        new TextItemProps {
+            name = "captionGroup".opt
+        },
+        new TextAreaItemProps {
+            name = "captionGroup".opt
+        }
+    ).opt
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 

@@ -5,6 +5,7 @@ import com.simplesys.SmartClient.DataBinding._
 import com.simplesys.SmartClient.DataBinding.props.{DataBoundComponentProps, SortSpecifierProps}
 import com.simplesys.SmartClient.Forms.DynamicForm
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.FormsItems.props.FormItemProps
 import com.simplesys.SmartClient.Foundation.canvas.ImgProperties
 import com.simplesys.SmartClient.Foundation.{Canvas, GridRenderer, HTMLFlow, StatefulCanvas}
 import com.simplesys.SmartClient.Grids.listGrid._
@@ -556,7 +557,7 @@ class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps wi
     var wrapHeaderTitles: ScOption[Boolean] = ScNone
     var newRequestProperties: ScOption[DSRequest] = ScNone
     var editRequestProperties: ScOption[DSRequest] = ScNone
-    var editingFields  : ScOption[IscArray[FormItem]] = ScNone
+    var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
 }
 
 class ListGridProps extends GridProps[ListGridField, ListGridRecord] {
