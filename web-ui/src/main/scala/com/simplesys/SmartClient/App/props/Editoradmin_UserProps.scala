@@ -130,7 +130,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                             title = "Наименование группы".opt
                             editorProperties = SelectItem(
                                 new SelectItemProps {
-                                    optionDataSource = thiz.listGrid.dataSource.opt
+                                    optionDataSource = thiz.treeGrid.dataSource.opt
                                     displayField = "captionGroup".opt
                                     valueField = "di".asInstanceOf[JSAny].opt
                                 }
