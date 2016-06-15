@@ -19,6 +19,7 @@ import scala.scalajs.js.annotation.ScalaJSDefined
 @ScalaJSDefined
 trait NewDSRequestData extends JSObject {
     val active: Boolean
+    val group: JSUndefined[Long]
 }
 
 class Editoradmin_UserProps extends TreeListGridEditorProps {
@@ -48,6 +49,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                 new DSRequestProps {
                     data = (new NewDSRequestData {
                         override val active = true
+                        override val group = jSUndefined
                     }).opt
                 }
             )
