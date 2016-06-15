@@ -27,7 +27,7 @@ class TreeGridContextMenuProps extends MenuSSProps {
                     owner.grid.newRequestProperties.foreach {
                         newRequestProperties =>
                             owner.startEditingInForm(
-                                requestProperties = newRequestProperties
+                                requestProperties = newRequestProperties()
                             )
                     }
             }.toFunc.opt

@@ -10,8 +10,8 @@ import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.function._
-import com.simplesys.option.ScOption._
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption._
 
 import scala.scalajs.js.annotation.ScalaJSDefined
 
@@ -42,13 +42,17 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
-    newTreeRequestProperties = (DSRequest(
-        new DSRequestProps {
-            data = (new NewDSRequestData {
-                override val active = true
-            }).opt
-        }
-    )).opt
+    newTreeRequestProperties = {
+        (thiz: classHandler) =>
+            DSRequest(
+                new DSRequestProps {
+                    data = (new NewDSRequestData {
+                        override val active = true
+                    }).opt
+                }
+            )
+
+    }.toThisFunc.opt
     editingTreeFields = Seq(
         new CheckboxItemProps {
             name = "active".opt

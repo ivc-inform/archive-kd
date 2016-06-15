@@ -14,6 +14,8 @@ import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types._
 import com.simplesys.option.{IntString, ScNone, ScOption}
 
+import scala.scalajs.js.ThisFunction0
+
 class TreeListGridEditorProps extends HLayoutSSProps {
     type classHandler <: TreeListGridEditor
 
@@ -76,10 +78,10 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var defaultFieldsTree: ScOption[Seq[TreeGridFieldProps]] = ScNone
     var fieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var defaultFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
-    var newTreeRequestProperties: ScOption[DSRequest] = ScNone
-    var editTreeRequestProperties: ScOption[DSRequest] = ScNone
-    var newListRequestProperties: ScOption[DSRequest] = ScNone
-    var editListRequestProperties: ScOption[DSRequest] = ScNone
+    var newTreeRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
+    var editTreeRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
+    var newListRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
+    var editListRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingListFields  : ScOption[Seq[FormItemProps]] = ScNone
     var editingTreeFields  : ScOption[Seq[FormItemProps]] = ScNone
 }
