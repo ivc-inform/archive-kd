@@ -8,9 +8,10 @@ import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.{IconMenuButtonSS, RibbonGroupSS, TabSet, TabSetSS}
 import com.simplesys.SmartClient.System.{Tab, isc}
 import com.simplesys.System.Types.ID
-import com.simplesys.System.{JSUndefined, jSUndefined}
+import com.simplesys.System.{JSUndefined, jSUndefined, _}
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
+import com.simplesys.SmartClient.System._
 
 trait TabSetStack {
     protected val tabSet: TabSetSS
@@ -21,6 +22,7 @@ trait TabSetStack {
         if (canvas.identifier.isEmpty)
             isc.error(s"Компонент ${canvas.getIdentifier()} не имеет постоянного identifier, поэтому не может быть добавлен.")
         else {
+            isc debugTrap (canvas, menuItem)
             val tab = tabSet.findTab(canvas.getIdentifier())
             if (tab.isDefined) {
                 tabSet selectTab tab.get
@@ -39,14 +41,13 @@ trait TabSetStack {
                         Tab(
                             new TabProps {
                                 pane = canvas.opt
-                                canClose = true.opt
                                 tabSelected = {
                                     (tabSet: TabSet, tabNum: Int, tabPane: Canvas, ID: ID, tab: Tab, name: String) =>
                                         functionButton.menu = _funcMenu
                                 }.toFunc.opt
                                 funcMenu = _funcMenu.get.opt
                                 name = canvas.getIdentifier().opt
-                                title = s"isc.Canvas.imgHTML(${menuItem.icon}, 16, 14)${menuItem.title}".opt
+                                title = s"isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title.dblQuoted}".opt
                             }
                         ),
                         len + 1
@@ -56,9 +57,8 @@ trait TabSetStack {
                         Tab(
                             new TabProps {
                                 pane = canvas.opt
-                                canClose = true.opt
                                 name = canvas.getIdentifier().opt
-                                title = s"isc.Canvas.imgHTML(${menuItem.icon}, 16, 14)${menuItem.title}".opt
+                                title = s"<span>isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title.dblQuoted}</span>".opt
                             }
                         ),
                         len + 1

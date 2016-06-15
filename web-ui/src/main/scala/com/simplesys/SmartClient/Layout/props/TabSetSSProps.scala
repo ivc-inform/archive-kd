@@ -36,4 +36,6 @@ class TabSetSSProps extends TabSetProps {
 
             res
     }.toThisFunc.opt
+
+    canCloseTabs = true.opt
 }

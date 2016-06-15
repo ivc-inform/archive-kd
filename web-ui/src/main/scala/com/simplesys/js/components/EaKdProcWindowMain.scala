@@ -85,6 +85,11 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             item
     }
 
+    override protected val tabSet = TabSetSS.create(
+        new TabSetSSProps {
+        }
+    )
+
     private val managedAdminsGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
@@ -148,12 +153,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             icon = Common.approved.opt
             wrap = true.opt
             visibility = Visibility.hidden.opt
-        }
-    )
-
-    override protected val tabSet = TabSetSS.create(
-        new TabSetSSProps {
-
         }
     )
 
