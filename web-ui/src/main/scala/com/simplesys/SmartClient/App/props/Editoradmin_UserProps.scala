@@ -16,9 +16,6 @@ import com.simplesys.option.ScOption._
 class Editoradmin_UserProps extends TreeListGridEditorProps {
     type classHandler <: Editoradmin_User
 
-    var treeDataSource: ScOption[DataSource] = ScNone
-    var listDataSource: ScOption[DataSource] = ScNone
-
     folderDropImageTree = Common.iconFolder.opt
     autoFetchData = true.opt
     fieldsTree = Seq(
