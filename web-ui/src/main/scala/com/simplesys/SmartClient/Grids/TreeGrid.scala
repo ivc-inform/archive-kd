@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.Control.{Menu, MenuSS}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.treeGrid.{Tree, TreeGridField, TreeNode}
 import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.System.JSAny
+import com.simplesys.System.{JSAny, JSUndefined}
 import com.simplesys.System.Types.DisplayNodeType.DisplayNodeType
 import com.simplesys.System.Types.PreserveOpenState.PreserveOpenState
 import com.simplesys.System.Types._
@@ -99,7 +99,7 @@ trait TreeGrid extends Grid[TreeGridField, TreeNode] {
     def transferNodes(nodes: IscArray[TreeNode], folder: TreeNode, index: Int, sourceWidget: Canvas, callback: Callback = js.native): void
     val treeFieldTitle:String
     val treeRootValue:JSAny
-    var data: Tree
+    var data: JSUndefined[Tree]
 }
 
 

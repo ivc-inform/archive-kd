@@ -25,10 +25,11 @@ class TreeGridContextMenuProps extends MenuSSProps {
                     owner.deselectAllRecords()
                     if (owner.grid.newRequestProperties.isEmpty)
                         isc error "Нет функции newRequestProperties."
-                    else
+                    else {
                         owner.startEditingInForm(
                             requestProperties = (owner.grid.newRequestProperties.get) ()
                         )
+                    }
 
             }.toFunc.opt
         },
@@ -40,7 +41,28 @@ class TreeGridContextMenuProps extends MenuSSProps {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     simpleSyS checkOwner owner
-                    owner.startEditingNew()
+                    if (owner.grid.newRequestProperties.isEmpty)
+                        isc error "Нет функции newRequestProperties."
+                    else {
+                        val parentIdField = owner.grid.data.map(_.parentIdField)
+                        val request = (owner.grid.newRequestProperties.get) ()
+                        isc debugTrap(parentIdField, request)
+
+                        if (parentIdField.isDefined) {
+                            val parentIdValue = owner.grid.getSelectedRecord().asInstanceOf[JSDynamic](parentIdField.get)
+                            request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField.get)(parentIdValue)
+                        }
+
+                        owner.startEditingInForm(
+                            requestProperties = request
+                        )
+                    }
+            }.toFunc.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    val owner = item.owner.asInstanceOf[TreeGridEditor]
+                    simpleSyS checkOwner owner
+                    owner.getSelectedRecords().length == 1
             }.toFunc.opt
         },
         new MenuSSItemProps {

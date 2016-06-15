@@ -3,6 +3,7 @@ package com.simplesys.SmartClient.Grids.props
 import com.simplesys.SmartClient.DataBinding.DetailViewer
 import com.simplesys.SmartClient.DataBinding.fieldPicker.FieldPickerWindow
 import com.simplesys.SmartClient.DataBinding.props.DataBoundComponentProps
+import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.CanvasProps
 import com.simplesys.SmartClient.Grids.detailViewer.{DetailViewerField, DetailViewerRecord}
 import com.simplesys.SmartClient.System.IscArray
@@ -16,6 +17,8 @@ import com.simplesys.option.{ScNone, ScOption}
 import scala.scalajs.js
 
 class DetailViewerProps extends CanvasProps with DataBoundComponentProps {
+    type classHandler <: Canvas
+
     var blockSeparator: ScOption[HTMLString] = ScNone
     var blockStyle: ScOption[CSSStyleName] = ScNone
     var canPickFields: ScOption[Boolean] = ScNone
