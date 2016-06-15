@@ -38,8 +38,8 @@ trait TabSetStack {
                         _funcMenu = getFuncMenu()
                 }
 
-                //val _title = s"<span>isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title.dblQuoted}</span>"
-                val _title = menuItem.title
+                val _title = s"<span>isc.Canvas.imgHTML(${menuItem.icon.dblQuoted}, 16, 14)${menuItem.title}</span>"
+                //val _title = menuItem.title
 
                 if (_funcMenu.isDefined) {
                     tabSet.addTab(

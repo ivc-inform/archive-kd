@@ -31,6 +31,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
     showListRecordComponentsByCell = false.opt
     wrapListCells = true.opt
     wrapTreeCells = true.opt
+    showOpenIconsTree = false.opt
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
             thiz.Super("initWidget", arguments)
@@ -87,6 +88,7 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                             name = "group".opt
                             displayField = "captionGroup".opt
                             align = Alignment.center.opt
+                            title = "Наименование группы".opt
                             editorProperties = SelectItem(
                                 new SelectItemProps {
                                     optionDataSource = thiz.listGrid.dataSource.opt
