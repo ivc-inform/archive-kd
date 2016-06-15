@@ -281,6 +281,8 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"canReorderRecords"          : @canReorderRecords
 			"canAcceptDroppedRecords"  : @canAcceptDroppedRecords
 			"trackerImage"              : @trackerImage
+			"newRequestProperties"      : @newRequestProperties
+			"editRequestProperties"      : @editRequestProperties
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 

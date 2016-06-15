@@ -10,7 +10,7 @@ import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.SelectionStyle.SelectionStyle
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types._
-import com.simplesys.System.{JSAny, JSObject}
+import com.simplesys.System._
 
 import scala.scalajs.js
 import scala.scalajs.js.|
@@ -91,8 +91,8 @@ trait TreeListGridEditor extends HLayoutSS {
     var filterListOnKeypress: Boolean
     var showOpenIconsTree: Boolean
     var loadDataOnDemandTree: Boolean
-    def setTreeDataSource(dataSource: DataSource):void
-    def setListDataSource(dataSource: DataSource):void
+    def setTreeDataSource(dataSource: DataSource): void
+    def setListDataSource(dataSource: DataSource): void
     var dataPageSizeTree: Int
     var dataPageSizeList: Int
     var autoFetchTextMatchStyleTree: TextMatchStyle
@@ -116,13 +116,17 @@ trait TreeListGridEditor extends HLayoutSS {
     var wrapTreeCells: Boolean
     def getListGrid(): ListGridEditor
     def getTreeGrid(): TreeGridEditor
-    var fieldsTree : IscArray[TreeGridField]
-    var defaultFieldsTree : IscArray[TreeGridField]
-    var fieldsList : IscArray[ListGridField]
-    var defaultFieldsList : IscArray[ListGridField]
+    var fieldsTree: IscArray[TreeGridField]
+    var defaultFieldsTree: IscArray[TreeGridField]
+    var fieldsList: IscArray[ListGridField]
+    var defaultFieldsList: IscArray[ListGridField]
     val treeGrid: TreeGridEditor
     val listGrid: ListGridEditor
     val contextMenuListGridEditor: MenuSS
     val contextMenuTreeGridEditor: MenuSS
+    var newTreeRequestProperties: JSUndefined[DSRequest]
+    var editTreeRequestProperties: JSUndefined[DSRequest]
+    var newListRequestProperties: JSUndefined[DSRequest]
+    var editListRequestProperties: JSUndefined[DSRequest]
 }
 

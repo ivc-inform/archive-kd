@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Grids.props
 
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
-import com.simplesys.SmartClient.DataBinding.DataSource
+import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
 import com.simplesys.SmartClient.Grids.ListGrid
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.{ListGridFieldProps, ListGridRecordProps}
@@ -57,6 +57,8 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var canDragRecordsOut: ScOption[Boolean] = ScNone
     var canReorderRecords: ScOption[Boolean] = ScNone
     var dragDataAction: ScOption[DragDataAction] = ScNone
+    var newRequestProperties: ScOption[DSRequest] = ScNone
+    var editRequestProperties: ScOption[DSRequest] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {

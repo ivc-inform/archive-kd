@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Grids.props
 
-import com.simplesys.SmartClient.DataBinding.DataSource
+import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
 import com.simplesys.SmartClient.Grids.TreeListGridEditor
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -74,4 +74,8 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var defaultFieldsTree: ScOption[Seq[TreeGridFieldProps]] = ScNone
     var fieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var defaultFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
+    var newTreeRequestProperties: ScOption[DSRequest] = ScNone
+    var editTreeRequestProperties: ScOption[DSRequest] = ScNone
+    var newListRequestProperties: ScOption[DSRequest] = ScNone
+    var editListRequestProperties: ScOption[DSRequest] = ScNone
 }
