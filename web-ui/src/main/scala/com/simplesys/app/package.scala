@@ -17,6 +17,7 @@ import com.simplesys.macros.PropsToDictionary
 package object app {
     val loadSchemas = false
     val organization = "organization.png"
+    val guid = "guid.png"
 
     object CommonListGridEditorComponent extends SCApply[CommonListGridEditorComponent, CommonListGridEditorComponentProps]
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]

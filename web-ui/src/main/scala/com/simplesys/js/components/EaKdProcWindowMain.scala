@@ -153,7 +153,19 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Misc".ellipsis.opt
-                //controls
+                controls = Seq(
+                    IconButton.create(
+                        new IconButtonProps {
+                            title = "GUID".opt
+                            icon = app.guid.opt
+                            orientation = "gorizontal".opt
+                            click = {
+                                (thiz: classHandler) =>
+                                    false
+                            }.toThisFunc.opt
+                        }
+                    )
+                ).opt
             }
         )
     ).map {
