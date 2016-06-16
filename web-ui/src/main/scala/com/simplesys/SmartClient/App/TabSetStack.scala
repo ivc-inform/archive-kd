@@ -35,7 +35,6 @@ trait TabSetStack {
                         pane = canvas.opt
                         tabSelected = {
                             (tabSet: TabSet, tabNum: Int, tabPane: Canvas, ID: JSUndefined[ID], tab: Tab, name: JSUndefined[String]) =>
-                                isc debugTrap tabPane
                                 functionButton.menu = tabPane.funcMenu
                         }.toFunc.opt
                         name = canvas.getIdentifier().opt

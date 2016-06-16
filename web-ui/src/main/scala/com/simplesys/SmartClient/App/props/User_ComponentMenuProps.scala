@@ -12,8 +12,10 @@ import com.simplesys.option.ScOption._
 class User_ComponentMenuProps extends MenuSSProps {
     type classHandler <: User_ComponentMenu
 
-    init = {
+    initWidget = {
         (thiz: User_ComponentMenu, arguments: IscArray[JSAny]) =>
+            thiz.Super("initWidget", arguments)
+
             val topOwner = thiz.owner.asInstanceOf[TreeListGridEditor]
 
             val listGridEditorMenu = ListGridContextMenu.create(
@@ -31,8 +33,6 @@ class User_ComponentMenuProps extends MenuSSProps {
             )
 
             topOwner setContextMenuTreeGridEditor treeGridEditorMenu
-
-            isc.debugTrap(listGridEditorMenu, treeGridEditorMenu)
 
             thiz.addItems(
                 IscArray(
@@ -52,6 +52,8 @@ class User_ComponentMenuProps extends MenuSSProps {
                     )
                 )
             )
+
+            isc.debugTrap(listGridEditorMenu, treeGridEditorMenu, thiz)
 
     }.toThisFunc.opt
 }
