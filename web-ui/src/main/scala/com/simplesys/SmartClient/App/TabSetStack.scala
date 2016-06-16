@@ -57,6 +57,8 @@ trait TabSetStack {
                         ),
                         len + 1
                     )
+
+                    functionButton.menu = _funcMenu
                 } else {
                     tabSet.addTab(
                         Tab(
