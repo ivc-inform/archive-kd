@@ -1,5 +1,6 @@
 package com.simplesys.js.components.refs.props
 
+import com.simplesys.SmartClient.Control.props.ListGridContextMenuWithFormNewEditorProps
 import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
 import com.simplesys.SmartClient.Forms.FormsItems.props.{DateTimeItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -9,6 +10,7 @@ import com.simplesys.js.components.props.CommonListGridEditorComponentProps
 import com.simplesys.js.components.refs.Abonents
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
+import com.simplesys.function._
 
 class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
@@ -125,4 +127,19 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "vabdesc"
         }
     ).opt
+
+    initWidget = {
+        (thiz: classHandler, arguments: IscArray[JSAny]) =>
+
+            thiz.Super("initWidget", arguments)
+
+            val funcMenu = ListGridContextMenuWithFormNewEditor.create(
+                new ListGridContextMenuWithFormNewEditorProps {
+                    owner = thiz.opt
+                }
+            )
+
+            thiz setFuncMenu funcMenu
+            thiz setContextMenu funcMenu
+    }.toThisFunc.opt
 }

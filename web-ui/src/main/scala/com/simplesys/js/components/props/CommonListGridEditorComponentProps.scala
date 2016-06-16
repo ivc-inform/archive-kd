@@ -1,6 +1,6 @@
 package com.simplesys.js.components.props
 
-import com.simplesys.SmartClient.Control.props.ListGridContextMenuWithInlineNewEditorProps$
+import com.simplesys.SmartClient.Control.props.ListGridContextMenuWithInlineNewEditorProps
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.SelectionStyle
