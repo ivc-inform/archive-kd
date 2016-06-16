@@ -18,6 +18,7 @@ package object app {
     val loadSchemas = false
     val organization = "organization.png"
     val abonents = "abonents.png"
+    val admin = "admin.png"
     val guid = "guid.png"
 
     object CommonListGridEditorComponent extends SCApply[CommonListGridEditorComponent, CommonListGridEditorComponentProps]
