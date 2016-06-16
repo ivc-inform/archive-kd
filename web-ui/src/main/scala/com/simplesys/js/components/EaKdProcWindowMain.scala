@@ -153,6 +153,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Misc".ellipsis.opt
+                //controls
             }
         )
     ).map {
