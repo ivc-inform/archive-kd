@@ -4,7 +4,10 @@ import com.simplesys.SmartClient.System.SCApply
 import com.simplesys.js.components.CommonListGridEditorComponent
 import com.simplesys.js.components.props.CommonListGridEditorComponentProps
 
+//import com.simplesys.SmartClient.System._
 //import com.simplesys.macros.PropsToDictionary
+
+import com.simplesys.SmartClient.System._
 import com.simplesys.macros.PropsToDictionary
 
 package object app {
