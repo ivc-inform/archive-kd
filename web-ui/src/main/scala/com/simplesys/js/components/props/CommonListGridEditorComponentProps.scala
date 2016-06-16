@@ -1,6 +1,6 @@
 package com.simplesys.js.components.props
 
-import com.simplesys.SmartClient.Control.props.ListGridContextMenuWithInlineNewEditorProps
+import com.simplesys.SmartClient.Control.props.ListGridContextMenuProps
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.SelectionStyle
@@ -24,8 +24,8 @@ class CommonListGridEditorComponentProps extends ListGridEditorProps {
 
             thiz.Super("initWidget", arguments)
 
-            val funcMenu = ListGridContextMenuWithInlineNewEditor.create(
-                new ListGridContextMenuWithInlineNewEditorProps {
+            val funcMenu = ListGridContextMenu.create(
+                new ListGridContextMenuProps {
                     owner = thiz.opt
                 }
             )
