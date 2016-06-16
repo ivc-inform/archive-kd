@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.App
 
-import com.simplesys.SmartClient.System.{Editoradmin_User, ListGridContextMenuWithFormNewEditor, ListGridContextMenuWithInlineNewEditor, MenuSS, RibbonGroup, RibbonGroupSS, SettingsEditor, TreeGridContextMenu, TreeListGridEditor, User_ComponentMenu, WindowSS, isc}
+import com.simplesys.SmartClient.System._
 
 import scala.scalajs.js.annotation.JSExport
 
