@@ -13,6 +13,7 @@ class AbonentsOrgProps extends CommonListGridEditorComponentProps {
     type classHandler <: AbonentsOrg
 
     dataSource = DataSourcesJS.eakd_abonents_org_DS.opt
+    identifier = "A8512DFA-C397-201F-6205-690102F6E1DB".opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>

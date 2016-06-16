@@ -161,6 +161,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             orientation = "gorizontal".opt
                             click = {
                                 (thiz: classHandler) =>
+                                    isc info simpleSyS.guid
                                     false
                             }.toThisFunc.opt
                         }
