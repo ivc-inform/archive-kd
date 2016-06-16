@@ -1,12 +1,8 @@
 package com.simplesys.js.components.refs.props
 
-import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
-import com.simplesys.SmartClient.System._
-import com.simplesys.System._
-import com.simplesys.function._
 import com.simplesys.option.ScOption._
-
-import scala.scalajs.js._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 class AbonentsOrgProps extends CommonListGridEditorComponentProps {
+    dataSource = DataSourcesJS.eakd_abonents_org_DS.opt
 }
