@@ -230,6 +230,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                     captionUserLabel.hide()
                                                                     functionGroup.hide()
                                                                     windowsStack.destroyAll()
+                                                                    tabSet.removeAllTabs()
                                                                 }
                                                                 false
                                                         }.toThisFunc.opt
