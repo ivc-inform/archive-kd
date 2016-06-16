@@ -8,5 +8,5 @@ import com.simplesys.option.ScOption._
 
 import scala.scalajs.js._
 
-class AbonentsOrgProps extends ListGridEditorProps {
+class AbonentsOrgProps extends CommonListGridEditorComponentProps {
 }

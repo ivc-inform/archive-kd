@@ -1,12 +1,11 @@
 package com.simplesys.js.components.refs
 
-import com.simplesys.SmartClient.Grids.ListGridEditor
+import com.simplesys.js.components.CommonListGridEditorComponent
 
 import scala.scalajs.js
-import scala.scalajs.js.|
 
 @js.native
-trait AbonentsOrg extends ListGridEditor {
+trait AbonentsOrg extends CommonListGridEditorComponent {
 }
 
 //@js.native
