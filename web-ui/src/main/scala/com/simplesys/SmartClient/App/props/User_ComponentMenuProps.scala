@@ -16,34 +16,36 @@ class User_ComponentMenuProps extends MenuSSProps {
         (thiz: User_ComponentMenu, arguments: IscArray[JSAny]) =>
             val topOwner = thiz.owner.asInstanceOf[TreeListGridEditor]
 
-            topOwner.setContextMenuListGridEditor(
-                ListGridContextMenu.create(
-                    new ListGridContextMenuProps {
-                        owner = topOwner.listGrid.opt
-                    }
-                )
+            val listGridEditorMenu = ListGridContextMenu.create(
+                new ListGridContextMenuProps {
+                    owner = topOwner.listGrid.opt
+                }
             )
 
-            topOwner.setContextMenuTreeGridEditor(
-                TreeGridContextMenu.create(
-                    new TreeGridContextMenuProps {
-                        owner = topOwner.treeGrid.opt
-                    }
-                )
+            topOwner setContextMenuListGridEditor listGridEditorMenu
+
+            val treeGridEditorMenu = TreeGridContextMenu.create(
+                new TreeGridContextMenuProps {
+                    owner = topOwner.treeGrid.opt
+                }
             )
+
+            topOwner setContextMenuTreeGridEditor treeGridEditorMenu
+
+            isc.debugTrap(listGridEditorMenu, treeGridEditorMenu)
 
             thiz.addItems(
                 IscArray(
                     MenuSSItem(
                         new MenuSSItemProps {
-                            submenu = topOwner.contextMenuListGridEditor.opt
+                            submenu = listGridEditorMenu.opt
                             title = "Группы пользователей".ellipsis.opt
                             icon = Common.ellipsis.opt
                         }
                     ),
                     MenuSSItem(
                         new MenuSSItemProps {
-                            submenu = topOwner.contextMenuTreeGridEditor.opt
+                            submenu = treeGridEditorMenu.opt
                             title = "Пользователи".ellipsis.opt
                             icon = Common.ellipsis.opt
                         }
