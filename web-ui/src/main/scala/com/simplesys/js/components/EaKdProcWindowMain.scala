@@ -63,7 +63,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Организации".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(AbonentsOrg.create(new AbonentsOrgProps), item)
+                                                    //addTab(AbonentsOrg.create(new AbonentsOrgProps), item)
                                             }.toFunc.opt
                                         }
                                     ).opt
