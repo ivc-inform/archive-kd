@@ -44,7 +44,10 @@ import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
 
+
+//Должны быть
 //import com.simplesys.macros.PropsToDictionary
+//
 import com.simplesys.macros.PropsToDictionary
 
 package object System {
