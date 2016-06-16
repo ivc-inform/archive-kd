@@ -1,4 +1,4 @@
-package com.simplesys.filter
+package com.simplesys.SmartClient.App.filter
 
 import javax.servlet.annotation.WebFilter
 
@@ -7,6 +7,7 @@ import com.simplesys.akka.http.filter.AkkaPartialFilter
 import com.simplesys.app._
 import com.simplesys.common.Strings._
 import com.simplesys.common.equality.SimpleEquality._
+import com.simplesys.filter.{FailureAuthentication, LoginRequiredChannel, LoginRequiredResponse, SuccesAuthentication}
 import com.simplesys.isc.dataBinging.DSRequestDyn._
 import com.simplesys.jdbc.control.classBO.Where
 import com.simplesys.jdbc.exception.NoDataFoundException
@@ -18,8 +19,7 @@ import ru.simplesys.defs.bo.admin.{User, UserDS}
 
 import scalaz.{Failure, Success}
 
-@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
-class ReLoginFilter extends AkkaPartialFilter {
+class ReLoginBaseFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
 
@@ -116,7 +116,7 @@ class ReLoginFilter extends AkkaPartialFilter {
                                             LoginedData1("Аутентификация не прошла :-(")
                                         case Failure(e) => e match {
                                             case e: NoDataFoundException =>
-                                                LoginedData1("Возможно введение ROOT пользователя. Введите root/xxxxx-password")
+                                                LoginedData1("Вам предоставляется право ввести ROOT пользователя. Введите обязательный логин root и пароль по Вашему усмотрению")
                                         }
                                     }
                             case None =>
