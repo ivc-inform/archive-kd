@@ -16,6 +16,7 @@ import com.simplesys.macros.PropsToDictionary
 
 package object app {
     val loadSchemas = false
+
     object CommonListGridEditorComponent extends SCApply[CommonListGridEditorComponent, CommonListGridEditorComponentProps]
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
 }
