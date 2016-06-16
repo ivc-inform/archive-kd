@@ -49,6 +49,7 @@ object Common {
     val approved = "approved.png"
     val settings = "settings.png"
     val ref = "ref.png"
+    val ref_RefRefs = "ref_RefRefs.png"
     val dictionary = "dictionary.png"
     val admin_UserGroup = "admin_UserGroup.png"
     val Actions_document_edit_icon = "Actions-document-edit-icon.png"

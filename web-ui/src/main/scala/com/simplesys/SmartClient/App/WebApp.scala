@@ -25,6 +25,7 @@ trait WebApp {
 
     val loadSchemas: Boolean
     val identifier: ID
+    val appImageDir: String
 
     //Можно при наследование объявлять как lazy val
     protected def mainCanvas: Canvas
@@ -43,7 +44,7 @@ trait WebApp {
 
                 simpleSyS.skin = skin
 
-                Page setAppImgDir "managed/images/common-webapp/app/"
+                Page setAppImgDir appImageDir
 
                 FileLoader.loadSkin(
                     skin, {

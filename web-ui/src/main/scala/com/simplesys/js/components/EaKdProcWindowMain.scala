@@ -14,9 +14,9 @@ import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.function._
+import com.simplesys.js.components.refs.props.AbonentsOrgProps
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 import scala.scalajs.js.annotation.JSExport
 
@@ -26,6 +26,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
     override val loadSchemas = com.simplesys.app.loadSchemas
 
     override val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
+
+    override val appImageDir: String = "images/"
 
     val functionButton = IconMenuButtonSS.create(
         new IconMenuButtonSSProps {
@@ -47,6 +49,29 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователь".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
+                            title = "Справочники".ellipsis.opt
+                            icon = Common.ref_RefRefs.opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq(
+                                        new MenuSSItemProps {
+                                            name = "abonents_org".opt
+                                            icon = Common.admin_User.opt
+                                            title = "Организации".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(AbonentsOrg.create(new AbonentsOrgProps), item)
+                                            }.toFunc.opt
+                                        }
+                                    ).opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
             }
         ),
         RibbonGroupSS.create(
@@ -105,16 +130,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Группы и пользователи".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(
-                                                        Editoradmin_User.create(
-                                                            new Editoradmin_UserProps {
-                                                                identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
-                                                                dataSourceList = DataSourcesJS.admin_User_DS.opt
-                                                                dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
-                                                            }
-                                                        ),
-                                                        item
-                                                    )
+                                                    addTab(Editoradmin_User.create(new Editoradmin_UserProps), item)
                                             }.toFunc.opt
                                         }
                                     ).opt
