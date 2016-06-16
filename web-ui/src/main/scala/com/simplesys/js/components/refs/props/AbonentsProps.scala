@@ -1,6 +1,6 @@
 package com.simplesys.js.components.refs.props
 
-import com.simplesys.SmartClient.Control.props.ListGridContextMenuProps
+import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps}
 import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
 import com.simplesys.SmartClient.Forms.FormsItems.props.{DateTimeItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -133,8 +133,8 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
             thiz.Super("initWidget", arguments)
 
-            val funcMenu = ListGridContextMenu.create(
-                new ListGridContextMenuProps {
+            val funcMenu = ListGridContextMenuWithForm.create(
+                new ListGridContextMenuWithFormProps {
                     owner = thiz.opt
                 }
             )
