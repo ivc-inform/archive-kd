@@ -1,45 +1,31 @@
 package com.simplesys.js.components.refs.props
 
+import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
+import com.simplesys.SmartClient.Forms.FormsItems.props.SelectItemProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
-import com.simplesys.SmartClient.System.Implicits
+import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.js.components.props.CommonListGridEditorComponentProps
 import com.simplesys.js.components.refs.Abonents
 import com.simplesys.option.ScOption._
-import com.simplesys.option.{ScOption, ScSome}
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
-class AbonentsProps extends CommonListGridEditorComponentProps with Implicits{
+class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
     type classHandler <: Abonents
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
-    identifier = "60675A00-9949-20BE-D7B6-598C1F0D1439".opt
+    identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
 
     fields = Seq(
-        new ListGridFieldProps {
-            hidden = true
-            name = "id"
-        },
-        new ListGridFieldProps {
-            hidden = true
-            name = "idaborg"
-        },
-        new ListGridFieldProps {
-            hidden = true
-            name = "idabtype"
-        },
-        new ListGridFieldProps {
-            name = "tdatein"
-        },
         new ListGridFieldProps {
             name = "vabcode"
         },
         new ListGridFieldProps {
-            name = "vabdesc"
+            name = "vabname"
         },
         new ListGridFieldProps {
-            name = "vabname"
+            name = "tdatein"
         },
         new ListGridFieldProps {
             name = "vemail"
@@ -55,9 +41,56 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits{
         },
         new ListGridFieldProps {
             name = "vabontype"
+            editorProperties = SelectItem(
+                new SelectItemProps {
+                    optionDataSource = DataSourcesJS.eakd_abonents_types_DS.opt
+                    displayField = "vabontype"
+                    valueField = "id".asInstanceOf[JSAny].opt
+                    initialSort = Seq(
+                        new SortSpecifierProps {
+                            property = "vabontype"
+                        }
+                    ).opt
+                }
+            ).opt
+            filterEditorProperties = SelectItem(
+                new SelectItemProps {
+                    optionDataSource = DataSourcesJS.eakd_abonents_types_DS.opt
+                    initialSort = Seq(
+                        new SortSpecifierProps {
+                            property = "vabontype"
+                        }
+                    ).opt
+                }
+            ).opt
         },
         new ListGridFieldProps {
             name = "orgcode"
+            editorProperties = SelectItem(
+                new SelectItemProps {
+                    optionDataSource = DataSourcesJS.eakd_abonents_org_DS.opt
+                    displayField = "orgcode"
+                    valueField = "id".asInstanceOf[JSAny].opt
+                    initialSort = Seq(
+                        new SortSpecifierProps {
+                            property = "orgcode"
+                        }
+                    ).opt
+                }
+            ).opt
+            filterEditorProperties = SelectItem(
+                new SelectItemProps {
+                    optionDataSource = DataSourcesJS.eakd_abonents_org_DS.opt
+                    initialSort = Seq(
+                        new SortSpecifierProps {
+                            property = "orgcode"
+                        }
+                    ).opt
+                }
+            ).opt
+        },
+        new ListGridFieldProps {
+            name = "vabdesc"
         }
     ).opt
 }
