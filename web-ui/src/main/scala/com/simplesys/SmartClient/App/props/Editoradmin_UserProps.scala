@@ -172,13 +172,11 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                 )
             )
 
-            val funcMenu = User_ComponentMenu.create(
+            thiz setFuncMenu User_ComponentMenu.create(
                 new User_ComponentMenuProps {
                     owner = thiz.opt
                 }
             )
-
-            thiz setFuncMenu funcMenu
 
             thiz.getViewState()
 
