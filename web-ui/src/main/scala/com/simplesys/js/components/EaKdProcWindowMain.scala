@@ -13,6 +13,7 @@ import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
 import com.simplesys.System._
+import com.simplesys.app
 import com.simplesys.app.AbonentsOrg
 import com.simplesys.function._
 import com.simplesys.js.components.refs.props.AbonentsOrgProps
@@ -60,7 +61,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                     items = Seq(
                                         new MenuSSItemProps {
                                             name = "abonents_org".opt
-                                            icon = Common.admin_User.opt
+                                            icon = app.organization.opt
                                             title = "Организации".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>

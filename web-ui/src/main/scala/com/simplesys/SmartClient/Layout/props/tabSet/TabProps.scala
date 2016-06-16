@@ -32,7 +32,7 @@ class TabProps extends AbstractClassProps {
     var pickerTitle: ScOption[HTMLString] = ScNone
     var prompt: ScOption[HTMLString] = ScNone
     var tabDeselected: ScOption[js.Function7[TabSet, Int, Canvas, JSUndefined[ID], Tab, Tab, String, Boolean]] = ScNone
-    var tabSelected: ScOption[js.Function6[TabSet, Int, Canvas, JSUndefined[ID], Tab, String, void]] = ScNone
+    var tabSelected: ScOption[js.Function6[TabSet, Int, Canvas, JSUndefined[ID], Tab, JSUndefined[String], void]] = ScNone
     var title: ScOption[HTMLString] = ScNone
     var width: ScOption[Int] = ScNone
 }
