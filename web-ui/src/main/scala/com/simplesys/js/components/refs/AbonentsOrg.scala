@@ -1,4 +1,4 @@
-package com.simplesys.refs
+package com.simplesys.js.components.refs
 
 import com.simplesys.SmartClient.Grids.ListGridEditor
 

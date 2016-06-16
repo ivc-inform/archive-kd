@@ -1,4 +1,4 @@
-package com.simplesys.refs.props
+package com.simplesys.js.components.refs.props
 
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
