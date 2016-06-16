@@ -54,7 +54,7 @@
 			<classSimple autoTableMapping="true" caption="Типы абонентов" name="abonents_types">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Тип абонента" mandatory="false" name="vabontype" type="sCaption"></attr>
+					<attr caption="Тип абонента" mandatory="true" name="vabontype" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

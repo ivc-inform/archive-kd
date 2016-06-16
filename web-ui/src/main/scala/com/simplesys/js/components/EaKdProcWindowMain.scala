@@ -70,7 +70,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                         },
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
-                                            icon = app.organization.opt
+                                            icon = app.abonents.opt
                                             title = "Типы абонентов".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
