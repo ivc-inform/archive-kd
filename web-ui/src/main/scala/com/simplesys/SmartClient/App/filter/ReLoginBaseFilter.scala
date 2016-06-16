@@ -1,7 +1,5 @@
 package com.simplesys.SmartClient.App.filter
 
-import javax.servlet.annotation.WebFilter
-
 import com.simplesys.akka.http.LoginedData1
 import com.simplesys.akka.http.filter.AkkaPartialFilter
 import com.simplesys.app._
@@ -97,7 +95,7 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                                 _session RemoveAttribute "logged"
 
                                 if (login === "root") {
-                                    user.insertP(User(di = 0L, group = 0L, login = "root", firstName = None, secondName = None, lastName = "root", password = "qwerty", active = true)) result match {
+                                    user.insertP(User(di = 0L, group = None, login = "root", firstName = None, secondName = None, lastName = "root", password = "qwerty", active = true)) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
                                                 _session.Attribute("userId", Some(0))
