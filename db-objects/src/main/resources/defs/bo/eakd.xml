@@ -3,14 +3,14 @@
 		<classes>
 			<classSimple autoTableMapping="true" caption="Абоненты" name="abonents">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vabname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vabcode" type="sCode"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vabcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="false" name="vabname" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="vabdesc" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 					<attr caption="Телефон 1" mandatory="false" name="vphone1" type="sPhone"></attr>
-					<attr caption="Сотрудник" mandatory="false" name="vperson" type="sCaption"></attr>
 					<attr caption="Телефон 2" mandatory="false" name="vphone2" type="sPhone"></attr>
+					<attr caption="Сотрудник" mandatory="false" name="vperson" type="sCaption"></attr>
 					<attr caption="Электронная почта" mandatory="false" name="vemail" type="sEMail"></attr>
 				</attrs>
 				<defaults>
@@ -35,8 +35,8 @@
 			<classSimple autoTableMapping="true" caption="Организации" name="abonents_org">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код организации" mandatory="false" name="orgcode" type="sCode"></attr>
-					<attr caption="Наименование организации" mandatory="false" name="orgname" type="sCaption"></attr>
+					<attr caption="Код организации" mandatory="true" name="orgcode" type="sCode"></attr>
+					<attr caption="Наименование организации" mandatory="true" name="orgname" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
