@@ -53,7 +53,5 @@ class User_ComponentMenuProps extends MenuSSProps {
                 )
             )
 
-            isc.debugTrap(listGridEditorMenu, treeGridEditorMenu, thiz)
-
     }.toThisFunc.opt
 }
