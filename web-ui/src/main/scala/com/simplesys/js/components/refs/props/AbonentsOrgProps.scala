@@ -18,6 +18,8 @@ class AbonentsOrgProps extends CommonListGridEditorComponentProps {
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
+            thiz.Super("initWidget", arguments)
+
             val funcMenu = ListGridContextMenu.create(
                 new ListGridContextMenuProps {
                     owner = thiz.opt
