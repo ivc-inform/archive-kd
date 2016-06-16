@@ -5,5 +5,6 @@ object LoggedGroup {
     var codeGroup: Option[String] = None
     def isDevsGroup(): Boolean = codeGroup.getOrElse(false) == "developers"
     def isAdminsGroup(): Boolean = codeGroup.getOrElse(false) == "admins"
+    def isRoot(): Boolean = codeGroup.isEmpty
 }
 

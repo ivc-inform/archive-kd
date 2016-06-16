@@ -198,6 +198,9 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
                                                                                     managedAdminsGroups.foreach(_.show())
 
+                                                                                if (LoggedGroup.isRoot())
+                                                                                    managedAdminsGroups.foreach(_.show())
+
                                                                                 if (LoggedGroup.isDevsGroup())
                                                                                     managedDevsGroups.foreach(_.show())
 
