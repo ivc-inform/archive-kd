@@ -1,7 +1,7 @@
 package com.simplesys.js.components.refs.props
 
 import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
-import com.simplesys.SmartClient.Forms.FormsItems.props.SelectItemProps
+import com.simplesys.SmartClient.Forms.FormsItems.props.{DateTimeItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
@@ -16,6 +16,38 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
     identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
+    editingFields = Seq(
+        new TextItemProps {
+            name = "vabcode"
+        },
+        new TextItemProps {
+            name = "vabname"
+        },
+        new DateTimeItemProps {
+            name = "tdatein"
+        },
+        new TextItemProps {
+            name = "vemail"
+        },
+        new TextItemProps {
+            name = "vperson"
+        },
+        new TextItemProps {
+            name = "vphone1"
+        },
+        new TextItemProps {
+            name = "vphone2"
+        },
+        new TextItemProps {
+            name = "orgcode"
+        },
+        new TextItemProps {
+            name = "vabontype"
+        },
+        new TextAreaItemProps {
+            name = "vabdesc"
+        }
+    ).opt
 
     fields = Seq(
         new ListGridFieldProps {
