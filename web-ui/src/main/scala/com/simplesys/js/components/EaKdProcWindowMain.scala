@@ -43,7 +43,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             ).opt
         })
 
-    private val managedUsersGroups = Seq(
+    private val managedSystemGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Справочники".ellipsis.opt
@@ -165,7 +165,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             width = "100%"
                             showResizeBar = true.opt
                             members = (
-                              managedUsersGroups ++
+                              managedSystemGroups ++
                                 managedAdminsGroups ++
                                 managedDevsGroups ++
                                 Seq(functionGroup) ++
@@ -192,14 +192,17 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
 
                                                                                 captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
                                                                                 captionUserLabel.show()
-                                                                                managedUsersGroups.foreach(_.show())
+                                                                                managedSystemGroups.foreach(_.show())
                                                                                 LoggedGroup.codeGroup = codeGroup.toOption
+                                                                                isc debugTrap codeGroup
 
                                                                                 if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
                                                                                     managedAdminsGroups.foreach(_.show())
 
-                                                                                if (LoggedGroup.isRoot())
+                                                                                if (LoggedGroup.isRoot()) {
                                                                                     managedAdminsGroups.foreach(_.show())
+                                                                                    managedSystemGroups.foreach(_.hide())
+                                                                                }
 
                                                                                 if (LoggedGroup.isDevsGroup())
                                                                                     managedDevsGroups.foreach(_.show())
@@ -209,7 +212,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 thiz setTitle "Выход"
                                                                                 thiz setIcon Common.closeProgram
                                                                             } else {
-                                                                                managedUsersGroups.foreach(_.hide())
+                                                                                managedSystemGroups.foreach(_.hide())
                                                                                 managedAdminsGroups.foreach(_.hide())
                                                                                 managedDevsGroups.foreach(_.hide())
                                                                                 captionUserLabel.hide()
@@ -225,7 +228,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                     thiz setTitle "Вход".ellipsis
                                                                     thiz setIcon Common.login
                                                                     LoggedGroup.logged = false
-                                                                    managedUsersGroups.foreach(_.hide())
+                                                                    managedSystemGroups.foreach(_.hide())
                                                                     managedAdminsGroups.foreach(_.hide())
                                                                     managedDevsGroups.foreach(_.hide())
                                                                     captionUserLabel.hide()
