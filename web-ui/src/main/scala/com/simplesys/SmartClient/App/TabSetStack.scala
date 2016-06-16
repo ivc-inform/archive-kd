@@ -34,7 +34,7 @@ trait TabSetStack {
                     new TabProps {
                         pane = canvas.opt
                         tabSelected = {
-                            (tabSet: TabSet, tabNum: Int, tabPane: Canvas, ID: ID, tab: JSUndefined[Tab], name: JSUndefined[String]) =>
+                            (tabSet: TabSet, tabNum: Int, tabPane: Canvas, ID: JSUndefined[ID], tab: Tab, name: String) =>
                                 isc debugTrap tabPane
                                 functionButton.menu = tabPane.funcMenu
                         }.toFunc.opt
