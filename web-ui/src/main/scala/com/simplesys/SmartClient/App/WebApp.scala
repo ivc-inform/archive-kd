@@ -9,7 +9,6 @@ import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.Tools.WindowsStack
-import com.simplesys.System.Types.Skin.Skin
 import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.option.DoubleType._
@@ -33,54 +32,55 @@ trait WebApp {
     @JSExport
     def getUIContent() {
         Page.setEvent(
-            PageEvent.load, { (target: JSObject) =>
+            PageEvent.load, {
+                (target: JSObject) =>
 
-                isc.params.locale = "ru_RU"
+                    isc.params.locale = "ru_RU"
 
-                val skin: String = simpleSyS.skin.toOption match {
-                    case Some(skin) => skin
-                    case None => isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
-                }
-
-                simpleSyS.skin = skin
-
-                Page setAppImgDir appImageDir
-
-                FileLoader.loadSkin(
-                    skin, {
-                        () =>
-                            var localeFile = "isomorphic/locales/frameworkMessages.properties"
-                            if (isc.params.locale != "en")
-                                localeFile = "isomorphic/locales/frameworkMessages_" + isc.params.locale + ".properties"
-
-                            FileLoader.loadJSFiles(localeFile, {
-                                () =>
-                                    if (loadSchemas)
-                                        DataSourceSSstatic.loadComponentSchemas(
-                                            () =>
-                                                DataView.create(
-                                                    new DataViewProps {
-                                                        height = "100%"
-                                                        width = "100%"
-                                                        members = Seq(
-                                                            mainCanvas
-                                                        ).opt
-                                                    }
-                                                )
-                                        )
-                                    else
-                                        DataView.create(
-                                            new DataViewProps {
-                                                height = "100%"
-                                                width = "100%"
-                                                members = Seq(
-                                                    mainCanvas
-                                                ).opt
-                                            }
-                                        )
-                            })
+                    val skin: String = simpleSyS.skin.toOption match {
+                        case Some(skin) => skin
+                        case None => isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
                     }
-                )
+
+                    simpleSyS.skin = skin
+
+                    Page setAppImgDir appImageDir
+
+                    FileLoader.loadSkin(
+                        skin, {
+                            () =>
+                                var localeFile = "isomorphic/locales/frameworkMessages.properties"
+                                if (isc.params.locale != "en")
+                                    localeFile = "isomorphic/locales/frameworkMessages_" + isc.params.locale + ".properties"
+
+                                FileLoader.loadJSFiles(localeFile, {
+                                    () =>
+                                        if (loadSchemas)
+                                            DataSourceSSstatic.loadComponentSchemas(
+                                                () =>
+                                                    DataView.create(
+                                                        new DataViewProps {
+                                                            height = "100%"
+                                                            width = "100%"
+                                                            members = Seq(
+                                                                mainCanvas
+                                                            ).opt
+                                                        }
+                                                    )
+                                            )
+                                        else
+                                            DataView.create(
+                                                new DataViewProps {
+                                                    height = "100%"
+                                                    width = "100%"
+                                                    members = Seq(
+                                                        mainCanvas
+                                                    ).opt
+                                                }
+                                            )
+                                })
+                        }
+                    )
             }
         )
     }
