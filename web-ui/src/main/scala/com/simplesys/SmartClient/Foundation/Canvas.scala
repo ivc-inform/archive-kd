@@ -258,6 +258,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     val htmlElement: HTMLElement
     val htmlPosition: DrawPosition
     val ID: String
+    var funcMenu: MenuSS
     def imgHTML(src: SCImgURL, width: Int = js.native, height: Int = js.native, name: String = js.native, extraStuff: String = js.native, imgDir: String = js.native): String
     var initWidget: js.ThisFunction1[classHandler, IscArray[JSAny], _]
     def intersects(other: Canvas): Boolean

@@ -24,7 +24,6 @@ trait TabSetStack {
         if (canvas.identifier.isEmpty)
             isc.error(s"Компонент ${canvas.getIdentifier()} не имеет постоянного identifier, поэтому не может быть добавлен.")
         else {
-            //isc debugTrap (canvas, menuItem)
             val tab = tabSet.findTab(canvas.getIdentifier())
             if (tab.isDefined) {
                 tabSet selectTab tab.get
@@ -33,10 +32,14 @@ trait TabSetStack {
                 val len = tabSet.tabs.length
                 var _funcMenu: JSUndefined[MenuSS] = jSUndefined
 
+                isc debugTrap (canvas.getFuncMenu, canvas.funcMenu)
+
                 canvas.getFuncMenu.foreach {
                     getFuncMenu =>
                         _funcMenu = getFuncMenu()
                 }
+
+                isc debugTrap _funcMenu
 
                 val _title = s"${CanvasStatic.imgHTML(menuItem.icon, 16, 14)} ${menuItem.title}"
                 //val _title = menuItem.title

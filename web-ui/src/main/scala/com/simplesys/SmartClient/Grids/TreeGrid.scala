@@ -52,7 +52,6 @@ trait TreeGrid extends Grid[TreeGridField, TreeNode] {
     var iconSize: Int
     var indentRecordComponents: Boolean
     var indentSize: Int
-    var funcMenu : MenuSS | Menu
     val initialData: IscArray[TreeNode]
     def isOverExtraIcon(): Boolean
     def isOverOpenArea(): Boolean
