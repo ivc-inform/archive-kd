@@ -85,7 +85,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             item
     }
 
-    override protected lazy val tabSet = TabSetSS.create()
+    override protected lazy val tabSet = TabSetSS.create(new TabSetSSProps)
 
     private val managedAdminsGroups = Seq(
         RibbonGroupSS.create(
