@@ -16,7 +16,7 @@ class CommonListGridEditorComponentProps extends ListGridEditorProps {
     dataPageSize = simpleSyS.config.dataPageSize.getOrElse(75).opt
     canEdit = true.opt
     filterOnKeypress = true.opt
-    autoFetchData = false.opt
+    autoFetchData = true.opt
     selectionType = SelectionStyle.multiple.opt
 
     initWidget = {
