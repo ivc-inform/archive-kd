@@ -196,8 +196,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             members = (
                               managedSystemGroups ++
                                 managedAdminsGroups ++
-                                managedDevsGroups ++
                                 Seq(functionGroup) ++
+                                managedDevsGroups ++
                                 Seq(
                                     LayoutSpacer.create(
                                         new LayoutSpacerProps {
