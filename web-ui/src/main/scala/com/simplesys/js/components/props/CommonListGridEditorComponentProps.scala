@@ -1,8 +1,11 @@
 package com.simplesys.js.components.props
 
+import com.simplesys.SmartClient.Control.props.ListGridContextMenuProps
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.SelectionStyle
+import com.simplesys.System._
+import com.simplesys.function._
 import com.simplesys.js.components.CommonListGridEditorComponent
 import com.simplesys.option.ScOption._
 
@@ -15,4 +18,19 @@ class CommonListGridEditorComponentProps extends ListGridEditorProps {
     filterOnKeypress = true.opt
     autoFetchData = false.opt
     selectionType = SelectionStyle.multiple.opt
+
+    initWidget = {
+        (thiz: classHandler, arguments: IscArray[JSAny]) =>
+
+            thiz.Super("initWidget", arguments)
+
+            val funcMenu = ListGridContextMenu.create(
+                new ListGridContextMenuProps {
+                    owner = thiz.opt
+                }
+            )
+
+            thiz setFuncMenu funcMenu
+            thiz setContextMenu funcMenu
+    }.toThisFunc.opt
 }
