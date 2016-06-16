@@ -14,9 +14,9 @@ import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.app
-import com.simplesys.app.AbonentsOrg
+import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
 import com.simplesys.function._
-import com.simplesys.js.components.refs.props.AbonentsOrgProps
+import com.simplesys.js.components.refs.props.{AbonentsOrgProps, AbonentsTypesProps}
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
@@ -66,6 +66,15 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(AbonentsOrg.create(new AbonentsOrgProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
+                                            name = "abonents_types".opt
+                                            icon = app.organization.opt
+                                            title = "Типы абонентов".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(AbonentsTypes.create(new AbonentsTypesProps), item)
                                             }.toFunc.opt
                                         }
                                     ).opt
