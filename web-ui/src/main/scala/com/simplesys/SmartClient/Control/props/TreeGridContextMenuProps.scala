@@ -26,9 +26,12 @@ class TreeGridContextMenuProps extends MenuSSProps {
                     if (owner.grid.newRequestProperties.isEmpty)
                         isc error "Нет функции newRequestProperties."
                     else {
-                        owner.startEditingInForm(
-                            requestProperties = (owner.grid.newRequestProperties.get) ()
-                        )
+                        if (owner.grid.newRequestProperties.isDefined)
+                            owner.startEditingInForm(
+                                requestProperties = (owner.grid.newRequestProperties.get) ()
+                            )
+                        else
+                            owner.startEditingInForm()
                     }
 
             }.toFunc.opt
@@ -47,18 +50,19 @@ class TreeGridContextMenuProps extends MenuSSProps {
                         val parentIdField = owner.grid.data.parentIdField
                         val idField = owner.grid.data.idField
 
-                        val request = (owner.grid.newRequestProperties.get) ()
-                        //isc debugTrap(parentIdField, request)
+                        if (owner.grid.newRequestProperties.isDefined) {
+                            val request = (owner.grid.newRequestProperties.get) ()
+                            val idValue = owner.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idField)
 
-                        val idValue = owner.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idField)
-                        //isc debugTrap (idValue)
+                            request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField)(idValue)
 
-                        request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField)(idValue)
-                        //isc debugTrap (request)
+                            owner.startEditingInForm(
+                                requestProperties = request
+                            )
+                        } else
+                            owner.startEditingInForm()
 
-                        owner.startEditingInForm(
-                            requestProperties = request
-                        )
+
                     }
             }.toFunc.opt
             enableIf = {

@@ -21,6 +21,7 @@ class ListGridContextMenuProps extends MenuSSProps {
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
                     owner.startEditingNew()
+                    //owner.startEditingInForm()
             }.toFunc.opt
         },
         new MenuSSItemProps {
