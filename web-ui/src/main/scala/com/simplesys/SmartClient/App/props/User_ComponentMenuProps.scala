@@ -39,14 +39,14 @@ class User_ComponentMenuProps extends MenuSSProps {
                     MenuSSItem(
                         new MenuSSItemProps {
                             submenu = listGridEditorMenu.opt
-                            title = "Группы пользователей".ellipsis.opt
+                            title = "Пользователи".ellipsis.opt
                             icon = Common.ellipsis.opt
                         }
                     ),
                     MenuSSItem(
                         new MenuSSItemProps {
                             submenu = treeGridEditorMenu.opt
-                            title = "Пользователи".ellipsis.opt
+                            title = "Группы пользователей".ellipsis.opt
                             icon = Common.ellipsis.opt
                         }
                     )
