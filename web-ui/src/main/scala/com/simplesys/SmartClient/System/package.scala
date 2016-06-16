@@ -285,7 +285,8 @@ package object System {
     //</editor-fold>
 
     object SettingsEditor extends SCApply[SettingsEditor, SettingsEditorProps]
-    object ListGridContextMenu extends SCApply[ListGridContextMenu, ListGridContextMenuProps]
+    object ListGridContextMenuWithInlineNewEditor extends SCApply[ListGridContextMenu, ListGridContextMenuWithInlineNewEditorProps]
+    object ListGridContextMenuWithFormNewEditor extends SCApply[ListGridContextMenu, ListGridContextMenuWithFormNewEditorProps]
     object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
     object User_ComponentMenu extends SCApply[User_ComponentMenu, User_ComponentMenuProps]
     object Editoradmin_User extends SCApply[Editoradmin_User, Editoradmin_UserProps]

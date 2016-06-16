@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.User_ComponentMenu
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
-import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, MenuSSProps, TreeGridContextMenuProps}
+import com.simplesys.SmartClient.Control.props.{ListGridContextMenuWithInlineNewEditorProps$, MenuSSProps, TreeGridContextMenuProps}
 import com.simplesys.SmartClient.Grids.TreeListGridEditor
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
@@ -18,8 +18,8 @@ class User_ComponentMenuProps extends MenuSSProps {
 
             val topOwner = thiz.owner.asInstanceOf[TreeListGridEditor]
 
-            val listGridEditorMenu = ListGridContextMenu.create(
-                new ListGridContextMenuProps {
+            val listGridEditorMenu = ListGridContextMenuWithInlineNewEditor.create(
+                new ListGridContextMenuWithInlineNewEditorProps {
                     owner = topOwner.listGrid.opt
                 }
             )

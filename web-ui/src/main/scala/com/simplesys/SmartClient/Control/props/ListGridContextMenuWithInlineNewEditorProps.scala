@@ -10,8 +10,9 @@ import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
 
-class ListGridContextMenuProps extends MenuSSProps {
-    items = Seq(
+object ListGridContextMenuWithInlineNewEditorProps {
+
+    val items1 = Seq(
         new MenuSSItemProps {
             title = "Новый".ellipsis.opt
             identifier = "new".opt
@@ -21,9 +22,25 @@ class ListGridContextMenuProps extends MenuSSProps {
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
                     owner.startEditingNew()
-                    //owner.startEditingInForm()
             }.toFunc.opt
-        },
+        }
+    )
+
+    val items2 = Seq(
+        new MenuSSItemProps {
+            title = "Новый".ellipsis.opt
+            identifier = "new".opt
+            icon = Common.iconAdd.opt
+            click = {
+                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                    val owner = item.owner.asInstanceOf[ListGridEditor]
+                    simpleSyS checkOwner owner
+                    owner.startEditingNewInForm()
+            }.toFunc.opt
+        }
+    )
+
+    val items3 = Seq(
         new MenuSSItemProps {
             title = "Изменить".opt
             identifier = "edit".opt
@@ -116,5 +133,13 @@ class ListGridContextMenuProps extends MenuSSProps {
                     owner.hasChanges()
             }.toFunc.opt
         }
-    ).opt
+    )
+}
+
+class ListGridContextMenuWithInlineNewEditorProps extends MenuSSProps {
+    items = (ListGridContextMenuWithInlineNewEditorProps.items1 ++ ListGridContextMenuWithInlineNewEditorProps.items3).opt
+}
+
+class ListGridContextMenuWithFormNewEditorProps extends MenuSSProps {
+    items = (ListGridContextMenuWithInlineNewEditorProps.items2 ++ ListGridContextMenuWithInlineNewEditorProps.items3).opt
 }
