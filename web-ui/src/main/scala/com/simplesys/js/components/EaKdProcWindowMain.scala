@@ -46,7 +46,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
     private val managedSystemGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Справочники".ellipsis.opt
+                title = "Пользователь".ellipsis.opt
             }
         ),
         RibbonGroupSS.create(
@@ -85,10 +85,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             item
     }
 
-    override protected lazy val tabSet = TabSetSS.create(
-        new TabSetSSProps {
-        }
-    )
+    override protected lazy val tabSet = TabSetSS.create()
 
     private val managedAdminsGroups = Seq(
         RibbonGroupSS.create(
@@ -214,6 +211,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 managedAdminsGroups.foreach(_.hide())
                                                                                 managedDevsGroups.foreach(_.hide())
                                                                                 captionUserLabel.hide()
+                                                                                tabSet.removeAllTabs()
 
                                                                                 LoggedGroup.logged = false
                                                                                 thiz setTitle "Вход".ellipsis
@@ -230,6 +228,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                     managedAdminsGroups.foreach(_.hide())
                                                                     managedDevsGroups.foreach(_.hide())
                                                                     captionUserLabel.hide()
+                                                                    functionGroup.hide()
                                                                     windowsStack.destroyAll()
                                                                 }
                                                                 false
