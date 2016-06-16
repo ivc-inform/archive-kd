@@ -194,14 +194,12 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 captionUserLabel.show()
                                                                                 managedSystemGroups.foreach(_.show())
                                                                                 LoggedGroup.codeGroup = codeGroup.toOption
-                                                                                isc debugTrap codeGroup
 
                                                                                 if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
                                                                                     managedAdminsGroups.foreach(_.show())
 
                                                                                 if (LoggedGroup.isRoot()) {
                                                                                     managedAdminsGroups.foreach(_.show())
-                                                                                    managedSystemGroups.foreach(_.hide())
                                                                                 }
 
                                                                                 if (LoggedGroup.isDevsGroup())
