@@ -17,7 +17,7 @@ trait Tab extends JSObject {
     var closeIcon: SCImgURL
     var closeIconSize: Int
     var disabled: Boolean
-    var funcMenu: JSUndefined[MenuSS| Menu]
+    var funcMenu: JSUndefined[MenuSS]
     var icon: SCImgURL
     var iconHeight: Int
     var iconSize: Int

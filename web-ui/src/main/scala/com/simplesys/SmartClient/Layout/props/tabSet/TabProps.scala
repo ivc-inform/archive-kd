@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.TabSet
 import com.simplesys.SmartClient.Layout.tabSet.Tab
+import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types._
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.props.AbstractClassProps
@@ -31,7 +32,7 @@ class TabProps extends AbstractClassProps {
     var pickerTitle: ScOption[HTMLString] = ScNone
     var prompt: ScOption[HTMLString] = ScNone
     var tabDeselected: ScOption[js.Function7[TabSet, Int, Canvas, String, Tab, Tab, String, Boolean]] = ScNone
-    var tabSelected: ScOption[js.Function6[TabSet, Int, Canvas, String, Tab, String, void]] = ScNone
+    var tabSelected: ScOption[js.Function6[TabSet, Int, Canvas, String, JSUndefined[Tab], JSUndefined[String], void]] = ScNone
     var title: ScOption[HTMLString] = ScNone
     var width: ScOption[Int] = ScNone
 }
