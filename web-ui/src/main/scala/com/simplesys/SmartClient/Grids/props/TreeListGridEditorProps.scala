@@ -83,4 +83,6 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var editListRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingListFields: ScOption[Seq[FormItemProps]] = ScNone
     var editingTreeFields: ScOption[Seq[FormItemProps]] = ScNone
+    var saveByTreeCell : ScOption[Boolean] = ScNone
+    var saveByListCell : ScOption[Boolean] = ScNone
 }

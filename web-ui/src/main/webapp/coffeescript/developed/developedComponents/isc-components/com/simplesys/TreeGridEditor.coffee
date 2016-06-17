@@ -310,13 +310,14 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"dragTrackerMode"                 : @dragTrackerMode
 			"canHover"                        : @canHover
 			"hoverWidth"                      : @hoverWidth
-			"dragDataAction"                :@dragDataAction
-			"canDragRecordsOut"           :@canDragRecordsOut
-			"canReorderRecords"          : @canReorderRecords
-			"trackerImage"              : @trackerImage
-			"newRequestProperties"      : @newRequestProperties
-			"editRequestProperties"      : @editRequestProperties
-			"editingFields"  : @editingFields
+			"dragDataAction"                  : @dragDataAction
+			"canDragRecordsOut"               : @canDragRecordsOut
+			"canReorderRecords"               : @canReorderRecords
+			"trackerImage"                    : @trackerImage
+			"newRequestProperties"            : @newRequestProperties
+			"editRequestProperties"           : @editRequestProperties
+			"editingFields"                   : @editingFields
+			"saveByCell"                      : @saveByCell
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 

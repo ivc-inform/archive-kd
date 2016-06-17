@@ -38,6 +38,7 @@ class EditorUsersProps extends TreeListGridEditorProps {
     dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(75).opt
     dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(75).opt
     //autoSaveListEdits = false.opt
+    saveByListCell = true.opt
     nodeIconTree = Common.iconTreeNode.opt
     canEditList = true.opt
     canEditTree = true.opt
@@ -121,9 +122,9 @@ class EditorUsersProps extends TreeListGridEditorProps {
                     ListGridField(
                         new ListGridFieldProps {
                             name = "group".opt
+                            title = "Группа".opt
                             displayField = "captionGroup".opt
                             align = Alignment.center.opt
-                            title = "Наименование группы".opt
                             editorProperties = SelectItem(
                                 new SelectItemProps {
                                     optionDataSource = thiz.treeGrid.dataSource.opt
