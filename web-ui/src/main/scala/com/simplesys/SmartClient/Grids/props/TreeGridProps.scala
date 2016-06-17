@@ -7,6 +7,7 @@ import com.simplesys.SmartClient.Grids.treeGrid.{Tree, TreeGridField, TreeNode}
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.DisplayNodeType.DisplayNodeType
+import com.simplesys.System.Types.FetchMode._
 import com.simplesys.System.Types.PreserveOpenState.PreserveOpenState
 import com.simplesys.System.Types.{SCImgURL, void}
 import com.simplesys.option.{ScNone, ScOption}

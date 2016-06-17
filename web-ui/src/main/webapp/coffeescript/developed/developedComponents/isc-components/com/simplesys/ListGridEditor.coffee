@@ -2,6 +2,7 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"canDragSelectText"         : true
 	"autoFitFieldWidths"        : true
 	"hoverWidth"                : 300
+	"dataFetchMode"             : "paged"
 	"canResizeFields"         : true
 	"selectionType"         : "single"
 	"findByKey"                 : (keyValue) -> @grid.findByKey keyValue

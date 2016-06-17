@@ -9,7 +9,7 @@ import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{Alignment, ListGridFieldType}
+import com.simplesys.System.Types.{Alignment, FetchMode, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -37,8 +37,13 @@ class EditorUsersProps extends TreeListGridEditorProps {
     canSelectCellsList = false.opt
     showListRecordComponents = false.opt
     folderIconTree = Common.iconFolder.opt
-    dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(75).opt
-    dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(75).opt
+
+    dataFetchModeTree = FetchMode.basic.opt
+    //dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(75).opt
+
+    dataFetchModeList = FetchMode.basic.opt
+    //dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(75).opt
+
     //autoSaveListEdits = false.opt
     //saveByListCell = true.opt
     nodeIconTree = Common.iconTreeNode.opt
@@ -139,10 +144,13 @@ class EditorUsersProps extends TreeListGridEditorProps {
                                     ).opt
                                     changed = {
                                         (form: DynamicForm, item: FormItem, value: JSAny) =>
+                                            val di =  thiz.listGrid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic("di")
+                                            isc debugTrap di
                                             thiz.listGrid.saveAllEdits()
                                             thiz.listGrid.cancelEditing()
                                             thiz.treeGrid.deselectAllRecords()
                                             thiz.treeGrid selectRecordByKey value
+                                            thiz.listGrid selectRecordByKey di
                                     }.toFunc.opt
                                 }
                             ).opt
