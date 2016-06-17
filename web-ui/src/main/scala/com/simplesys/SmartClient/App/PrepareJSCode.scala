@@ -14,8 +14,9 @@ class PrepareJSCode extends StaticJSCode {
         isc.defineClass(ListGridContextMenu.getClass.getSimpleName, MenuSS.getClass.getSimpleName)
         isc.defineClass(ListGridContextMenuWithForm.getClass.getSimpleName, MenuSS.getClass.getSimpleName)
         isc.defineClass(TreeGridContextMenu.getClass.getSimpleName, MenuSS.getClass.getSimpleName)
-        isc.defineClass(User_ComponentMenu.getClass.getSimpleName, MenuSS.getClass.getSimpleName)
-        isc.defineClass(Editoradmin_User.getClass.getSimpleName, TreeListGridEditor.getClass.getSimpleName)
+        isc.defineClass(UserComponentMenu.getClass.getSimpleName, MenuSS.getClass.getSimpleName)
+        isc.defineClass(EditorUsers.getClass.getSimpleName, TreeListGridEditor.getClass.getSimpleName)
+        isc.defineClass(EditorUserGroups.getClass.getSimpleName, TreeGridEditor.getClass.getSimpleName)
     }
 }
 

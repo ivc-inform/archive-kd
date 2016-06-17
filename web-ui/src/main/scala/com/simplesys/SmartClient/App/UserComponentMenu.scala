@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.Control.MenuSS
 import scala.scalajs.js
 
 @js.native
-trait User_ComponentMenu extends MenuSS {
+trait UserComponentMenu extends MenuSS {
 }
 
 //@js.native

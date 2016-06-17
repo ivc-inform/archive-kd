@@ -1,6 +1,6 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.props.Editoradmin_UserProps
+import com.simplesys.SmartClient.App.props.EditorUsersProps
 import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
@@ -150,7 +150,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Группы и пользователи".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(Editoradmin_User.create(new Editoradmin_UserProps), item)
+                                                    addTab(EditorUsers.create(new EditorUsersProps), item)
                                             }.toFunc.opt
                                         }
                                     ).opt

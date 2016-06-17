@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.Grids.TreeListGridEditor
 import scala.scalajs.js
 
 @js.native
-trait Editoradmin_User extends TreeListGridEditor {
+trait EditorUsers extends TreeListGridEditor {
 }
 
 //@js.native

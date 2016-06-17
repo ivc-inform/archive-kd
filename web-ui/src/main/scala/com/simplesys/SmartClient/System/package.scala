@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient
 
-import com.simplesys.SmartClient.App.props.{Editoradmin_UserProps, SettingsEditorProps, User_ComponentMenuProps}
-import com.simplesys.SmartClient.App.{Editoradmin_User, SettingsEditor, User_ComponentMenu}
+import com.simplesys.SmartClient.App.props.{EditorUserGroupsProps, EditorUsersProps, SettingsEditorProps, UserComponentMenuProps}
+import com.simplesys.SmartClient.App.{EditorUserGroups, EditorUsers, SettingsEditor, UserComponentMenu}
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._
@@ -288,8 +288,9 @@ package object System {
     object ListGridContextMenu extends SCApply[ListGridContextMenu, ListGridContextMenuProps]
     object ListGridContextMenuWithForm extends SCApply[ListGridContextMenu, ListGridContextMenuWithFormProps]
     object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
-    object User_ComponentMenu extends SCApply[User_ComponentMenu, User_ComponentMenuProps]
-    object Editoradmin_User extends SCApply[Editoradmin_User, Editoradmin_UserProps]
+    object UserComponentMenu extends SCApply[UserComponentMenu, UserComponentMenuProps]
+    object EditorUsers extends SCApply[EditorUsers, EditorUsersProps]
+    object EditorUserGroups extends SCApply[EditorUserGroups, EditorUserGroupsProps]
     object TreeListGridEditor extends SCApply[TreeListGridEditor, TreeListGridEditorProps]
 
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]

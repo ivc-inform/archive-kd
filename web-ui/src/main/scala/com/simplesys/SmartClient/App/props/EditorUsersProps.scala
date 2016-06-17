@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.App.props
 
-import com.simplesys.SmartClient.App.Editoradmin_User
+import com.simplesys.SmartClient.App.EditorUsers
 import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, SortSpecifierProps}
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
@@ -22,8 +22,8 @@ trait NewDSRequestData extends JSObject {
     val active: Boolean
 }
 
-class Editoradmin_UserProps extends TreeListGridEditorProps {
-    type classHandler <: Editoradmin_User
+class EditorUsersProps extends TreeListGridEditorProps {
+    type classHandler <: EditorUsers
 
     identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
     dataSourceList = DataSourcesJS.admin_User_DS.opt
@@ -172,8 +172,8 @@ class Editoradmin_UserProps extends TreeListGridEditorProps {
                 )
             )
 
-            thiz setFuncMenu User_ComponentMenu.create(
-                new User_ComponentMenuProps {
+            thiz setFuncMenu UserComponentMenu.create(
+                new UserComponentMenuProps {
                     owner = thiz.opt
                 }
             )

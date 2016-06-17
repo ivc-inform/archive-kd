@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.App.props
 
-import com.simplesys.SmartClient.App.User_ComponentMenu
+import com.simplesys.SmartClient.App.UserComponentMenu
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, MenuSSProps, TreeGridContextMenuProps}
 import com.simplesys.SmartClient.Grids.TreeListGridEditor
@@ -9,11 +9,11 @@ import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
 
-class User_ComponentMenuProps extends MenuSSProps {
-    type classHandler <: User_ComponentMenu
+class UserComponentMenuProps extends MenuSSProps {
+    type classHandler <: UserComponentMenu
 
     initWidget = {
-        (thiz: User_ComponentMenu, arguments: IscArray[JSAny]) =>
+        (thiz: UserComponentMenu, arguments: IscArray[JSAny]) =>
             thiz.Super("initWidget", arguments)
 
             val topOwner = thiz.owner.asInstanceOf[TreeListGridEditor]
