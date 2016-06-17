@@ -161,6 +161,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 		@Super "initWidget", arguments
 
 		@treeGrid = isc.TreeGridEditor.create
+		    "data"                            : @dataTree
 			"showRecordComponentsByCell"      : @showTreeRecordComponentsByCell
 			"folderDrop"                      : @folderDropTree
 			"loadDataOnDemand"                : @loadDataOnDemandTree
