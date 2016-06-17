@@ -9,7 +9,7 @@ import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{Alignment, ListGridFieldType, TreeModelType}
+import com.simplesys.System.Types.{Alignment, FetchMode, ListGridFieldType, TreeModelType}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -51,15 +51,6 @@ class EditorUsersProps extends TreeListGridEditorProps {
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
-//    dataTree = ResultTree.create(
-//        new ResultTreeProps {
-//            idField = "di".opt
-//            parentIdField = "parent".opt
-//            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
-//            modelType = TreeModelType.parent.opt
-//            isFolderProperty = "isCampaign".opt
-//        }
-//    ).opt
     newTreeRequestProperties = {
         (thiz: classHandler) =>
             DSRequest(
@@ -152,7 +143,6 @@ class EditorUsersProps extends TreeListGridEditorProps {
                                     changed = {
                                         (form: DynamicForm, item: FormItem, value: JSAny) =>
                                             val di = thiz.listGrid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic("di")
-                                            isc debugTrap di
                                             thiz.listGrid.saveAllEdits()
                                             thiz.listGrid.cancelEditing()
                                             thiz.treeGrid.deselectAllRecords()

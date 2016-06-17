@@ -161,6 +161,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 		@Super "initWidget", arguments
 
 		@treeGrid = isc.TreeGridEditor.create
+		    #"data"                            : if not @dataTree? then undefined else @dataTree
 			"showRecordComponentsByCell"      : @showTreeRecordComponentsByCell
 			"folderDrop"                      : @folderDropTree
 			"loadDataOnDemand"                : @loadDataOnDemandTree
@@ -206,8 +207,6 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 				return
 
 		@treeGrid.setWidth isc.OfflineSS.getNumber "#{@treeGrid.getIdentifier()}.width", @treeGrid.getWidth()
-		if isc.isA.Tree @dataTree?
-			@treeGrid.setData @dataTree
 
 		###simpleSyS._initMenus @treeGrid
 		simpleSyS._RecordComponent @treeGrid, "create"
