@@ -73,14 +73,14 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"startTreeEditingNew"                 : ->
 		@treeGrid.startEditingNew()
 		return
-	"saveListAllEdits"                    : ->
-		@listGrid.saveAllEdits()
+	"saveListAllEdits"                    : (rows, saveCallback)->
+		@listGrid.saveAllEdits(rows, saveCallback)
 		return
 	"cancelEditingConfirmationMessageList": "Выход из режима редактирования повлечет к утере измененных(введенных) данных. Продолжить ?"
 	"cancelEditingConfirmationMessageTree": "Выход из режима редактирования повлечет к утере измененных(введенных) данных. Продолжить ?"
 	"showListAdvancedFilter"              : false
-	"saveTreeAllEdits"                    : ->
-		@treeGrid.saveAllEdits()
+	"saveTreeAllEdits"                    : (rows, saveCallback) ->
+		@treeGrid.saveAllEdits(rows, saveCallback)
 		return
 	"canAcceptDropTree"                   : false
 	"drawAheadRatioList"                  : 1.3

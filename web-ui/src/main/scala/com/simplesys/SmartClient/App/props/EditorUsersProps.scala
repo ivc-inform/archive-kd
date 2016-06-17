@@ -2,6 +2,8 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.EditorUsers
 import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, SortSpecifierProps}
+import com.simplesys.SmartClient.Forms.DynamicForm
+import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -38,7 +40,7 @@ class EditorUsersProps extends TreeListGridEditorProps {
     dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(75).opt
     dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(75).opt
     //autoSaveListEdits = false.opt
-    saveByListCell = true.opt
+    //saveByListCell = true.opt
     nodeIconTree = Common.iconTreeNode.opt
     canEditList = true.opt
     canEditTree = true.opt
@@ -135,6 +137,13 @@ class EditorUsersProps extends TreeListGridEditorProps {
                                             property = "captionGroup".opt
                                         }
                                     ).opt
+                                    changed = {
+                                        (form: DynamicForm, item: FormItem, value: JSAny) =>
+                                            thiz.listGrid.saveAllEdits()
+                                            thiz.listGrid.cancelEditing()
+                                            thiz.treeGrid.deselectAllRecords()
+                                            thiz.treeGrid selectRecordByKey value
+                                    }.toFunc.opt
                                 }
                             ).opt
                             filterEditorProperties = SelectItem(

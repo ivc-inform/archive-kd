@@ -57,8 +57,8 @@ trait TreeListGridEditor extends HLayoutSS {
     def setListFields(fields: IscArray[ListGridField])
     var showTreeAdvancedFilter: Boolean
     def startTreeEditingNew(): void
-    def saveListAllEdits(): void
-    def saveTreeAllEdits(): void
+    def saveListAllEdits(rows: IscArray[Int] = js.native, saveCallback: Callback = js.native): void
+    def saveTreeAllEdits(rows: IscArray[Int] = js.native, saveCallback: Callback = js.native): void
     var cancelEditingConfirmationMessageList: String
     var cancelEditingConfirmationMessageTree: String
     var showListAdvancedFilte: Boolean

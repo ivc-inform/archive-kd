@@ -8,8 +8,8 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"removeData": (removeRecord, callback, requestProperties) ->
 		@grid.removeData removeRecord, callback, requestProperties
 		return
-	"saveAllEdits": ->
-		@grid.saveAllEdits()
+	"saveAllEdits": (rows, saveCallback) ->
+		@grid.saveAllEdits(rows, saveCallback)
 		return
 	"recordComponentPoolingMode": "viewport"
 	"dragTrackerMode" : "icon"
