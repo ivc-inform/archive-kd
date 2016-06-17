@@ -22,6 +22,9 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps {
     folderIcon = Common.iconFolder.opt
     nodeIcon = Common.iconTreeNode.opt
     showOpenIcons = false.opt
+    openIconSuffix = "".opt
+    dropIconSuffix = "".opt
+    closedIconSuffix = "".opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>

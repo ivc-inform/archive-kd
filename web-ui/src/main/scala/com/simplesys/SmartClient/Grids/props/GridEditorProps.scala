@@ -25,6 +25,9 @@ import scala.scalajs.js
 import scala.scalajs.js.ThisFunction0
 
 class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends VLayoutSSProps {
+    var closedIconSuffix: ScOption[String] = ScNone
+    var dropIconSuffix: ScOption[String] = ScNone
+    var openIconSuffix: ScOption[String] = ScNone
     var canDragSelectText: ScOption[Boolean] = ScNone
     var canAcceptDroppedRecords: ScOption[Boolean] = ScNone
     var autoFitFieldWidth: ScOption[Boolean] = ScNone
