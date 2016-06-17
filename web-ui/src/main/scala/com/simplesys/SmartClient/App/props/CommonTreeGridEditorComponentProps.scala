@@ -13,7 +13,6 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps {
 
     type classHandler <: CommonTreeGridEditorComponent
 
-    dataFetchMode = FetchMode.basic.opt
     drawAheadRatio = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt
     dataPageSize = simpleSyS.config.dataPageSize.getOrElse(75).opt
     canEdit = true.opt

@@ -1,7 +1,6 @@
 isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addProperties
 	"hoverWidth" : 300
 	"canDragSelectText" : true
-	"dataFetchMode"     : "paged"
 	"showOpenIcons" : true,
 	"autoFitFieldWidths": true
 	"findByKey": (keyValue) -> @grid.findByKey keyValue

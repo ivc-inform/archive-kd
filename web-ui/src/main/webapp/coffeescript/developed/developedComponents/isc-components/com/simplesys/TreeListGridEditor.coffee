@@ -202,6 +202,9 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"autoSaveEdits"                   : @autoSaveTreeEdits
 			"saveByCell"                      : @saveByTreeCell
 			"dataFetchMode"                   : @dataFetchModeTree
+			"openIconSuffix" : ""
+			"dropIconSuffix" : ""
+			"closedIconSuffix" : ""
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
