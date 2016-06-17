@@ -1,5 +1,7 @@
 isc.defineClass("TabSetSS", isc.TabSet).addProperties
 	"autoDraw": false
+	"afterRemoveTabs" : -> undefined
+	"beforeRemoveTabs" : (tab) -> undefined
 	"filter4Visiblity": (tabs) ->
 		if tabs?
 			if isc.isA.Array(tabs) is false
@@ -38,13 +40,13 @@ isc.defineClass("TabSetSS", isc.TabSet).addProperties
 		else if isc.isA.Object(tabs)
 			 tab = [tabs]
 
-		tab.forEach (item) ->
-			@beforeRemoveTabs?(item)
+		tab.forEach (item) =>
+			@beforeRemoveTabs item
 			item.pane?.beforeRemove?()
 			return
 
 		@Super "removeTab", arguments
-		@afterRemoveTabs?()
+		@afterRemoveTabs()
 		return
 
 	removeAllTabs: () ->
