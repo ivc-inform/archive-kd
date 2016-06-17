@@ -51,15 +51,15 @@ class EditorUsersProps extends TreeListGridEditorProps {
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
-    dataTree = ResultTree.create(
-        new ResultTreeProps {
-            idField = "di".opt
-            parentIdField = "parent".opt
-            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
-            modelType = TreeModelType.parent.opt
-            isFolderProperty = "isCampaign".opt
-        }
-    ).opt
+//    dataTree = ResultTree.create(
+//        new ResultTreeProps {
+//            idField = "di".opt
+//            parentIdField = "parent".opt
+//            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+//            modelType = TreeModelType.parent.opt
+//            isFolderProperty = "isCampaign".opt
+//        }
+//    ).opt
     newTreeRequestProperties = {
         (thiz: classHandler) =>
             DSRequest(
