@@ -1,6 +1,6 @@
 package com.simplesys.js.components.refs
 
-import com.simplesys.js.components.CommonListGridEditorComponent
+import com.simplesys.SmartClient.App.CommonListGridEditorComponent
 
 import scala.scalajs.js
 

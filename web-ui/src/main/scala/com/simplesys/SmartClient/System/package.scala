@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient
 
-import com.simplesys.SmartClient.App.props.{EditorUserGroupsProps, EditorUsersProps, SettingsEditorProps, UserComponentMenuProps}
-import com.simplesys.SmartClient.App.{EditorUserGroups, EditorUsers, SettingsEditor, UserComponentMenu}
+import com.simplesys.SmartClient.App.props._
+import com.simplesys.SmartClient.App._
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._
@@ -296,6 +296,8 @@ package object System {
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
     object TreeGridField extends SCApply4Object[TreeGridField, TreeGridFieldProps]
     object ListGridField extends SCApply4Object[ListGridField, ListGridFieldProps]
+
+    object CommonListGridEditorComponent extends SCApply[CommonListGridEditorComponent, CommonListGridEditorComponentProps]
 
 }
 

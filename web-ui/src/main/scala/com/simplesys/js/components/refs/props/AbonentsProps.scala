@@ -1,18 +1,17 @@
 package com.simplesys.js.components.refs.props
 
-import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps}
+import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
 import com.simplesys.SmartClient.Forms.FormsItems.props.{DateTimeItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
-import com.simplesys.function._
-import com.simplesys.js.components.props.CommonListGridEditorComponentProps
 import com.simplesys.js.components.refs.Abonents
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
+    override val simpleTable = false
 
     type classHandler <: Abonents
 
@@ -127,19 +126,4 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "vabdesc"
         }
     ).opt
-
-    initWidget = {
-        (thiz: classHandler, arguments: IscArray[JSAny]) =>
-
-            thiz.Super("initWidget", arguments)
-
-            val funcMenu = ListGridContextMenuWithForm.create(
-                new ListGridContextMenuWithFormProps {
-                    owner = thiz.opt
-                }
-            )
-
-            thiz setFuncMenu funcMenu
-            thiz setContextMenu funcMenu
-    }.toThisFunc.opt
 }
