@@ -1,11 +1,11 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.EditorUserGroups
-import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
+import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, ResultTreeProps}
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.ListGridFieldType
+import com.simplesys.System.Types.{ListGridFieldType, TreeModelType}
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
@@ -14,8 +14,18 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
     type classHandler <: EditorUserGroups
 
-    dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+    //dataSource = DataSourcesJS.admin_UserGroup_DS.opt
     identifier = "C4C652D1-7823-F191-BD54-88A8A2238DCC".opt
+
+    data = ResultTree.create(
+        new ResultTreeProps {
+            idField = "di".opt
+            parentIdField = "parent".opt
+            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+            modelType = TreeModelType.parent.opt
+            isFolderProperty = "isCampaign".opt
+        }
+    ).opt
 
     newRequestProperties = {
         (thiz: classHandler) =>

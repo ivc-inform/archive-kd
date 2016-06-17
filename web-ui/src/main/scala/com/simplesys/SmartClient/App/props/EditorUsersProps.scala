@@ -38,14 +38,12 @@ class EditorUsersProps extends TreeListGridEditorProps {
     showListRecordComponents = false.opt
     folderIconTree = Common.iconFolder.opt
 
-    dataFetchModeTree = FetchMode.basic.opt
-    //dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(75).opt
+    //dataFetchModeTree = FetchMode.basic.opt
+    dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(75).opt
 
-    dataFetchModeList = FetchMode.basic.opt
-    //dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(75).opt
+    //dataFetchModeList = FetchMode.basic.opt
+    dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(75).opt
 
-    //autoSaveListEdits = false.opt
-    //saveByListCell = true.opt
     nodeIconTree = Common.iconTreeNode.opt
     canEditList = true.opt
     canEditTree = true.opt

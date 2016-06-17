@@ -15,6 +15,7 @@ import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.System.Types.AutoFitWidthApproach.AutoFitWidthApproach
 import com.simplesys.System.Types.DragDataAction._
 import com.simplesys.System.Types.DragTrackerMode.DragTrackerMode
+import com.simplesys.System.Types.FetchMode.FetchMode
 import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
 import com.simplesys.System.Types.SelectionAppearance.SelectionAppearance
 import com.simplesys.System.Types.SelectionStyle._
@@ -74,6 +75,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
     var saveByCell : ScOption[Boolean] = ScNone
+    var dataFetchMode : ScOption[FetchMode] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {
