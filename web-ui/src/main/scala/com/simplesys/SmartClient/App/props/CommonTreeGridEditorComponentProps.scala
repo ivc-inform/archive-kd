@@ -19,6 +19,9 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps {
     filterOnKeypress = true.opt
     autoFetchData = true.opt
     selectionType = SelectionStyle.single.opt
+    folderIcon = Common.iconFolder.opt
+    nodeIcon = Common.iconTreeNode.opt
+    showOpenIcons = false.opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
