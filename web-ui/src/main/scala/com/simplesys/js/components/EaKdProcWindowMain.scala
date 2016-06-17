@@ -1,6 +1,6 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.props.EditorUsersProps
+import com.simplesys.SmartClient.App.props.{EditorUserGroupsProps, EditorUsersProps}
 import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
@@ -145,9 +145,18 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                 new MenuSSProps {
                                     items = Seq(
                                         new MenuSSItemProps {
-                                            name = "usersGroups".opt
+                                            name = "groups".opt
+                                            icon = Common.admin_UserGroup.opt
+                                            title = "Группы".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(EditorUserGroups.create(new EditorUserGroupsProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
+                                            name = "users".opt
                                             icon = Common.admin_User.opt
-                                            title = "Группы и пользователи".ellipsis.opt
+                                            title = "Пользователи".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(EditorUsers.create(new EditorUsersProps), item)
