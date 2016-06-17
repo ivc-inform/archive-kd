@@ -14,18 +14,18 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
     type classHandler <: EditorUserGroups
 
-    //dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+    dataSource = DataSourcesJS.admin_UserGroup_DS.opt
     identifier = "C4C652D1-7823-F191-BD54-88A8A2238DCC".opt
 
-    data = ResultTree.create(
-        new ResultTreeProps {
-            idField = "di".opt
-            parentIdField = "parent".opt
-            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
-            modelType = TreeModelType.parent.opt
-            isFolderProperty = "isCampaign".opt
-        }
-    ).opt
+//    data = ResultTree.create(
+//        new ResultTreeProps {
+//            idField = "di".opt
+//            parentIdField = "parent".opt
+//            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+//            modelType = TreeModelType.parent.opt
+//            isFolderProperty = "isCampaign".opt
+//        }
+//    ).opt
 
     newRequestProperties = {
         (thiz: classHandler) =>
