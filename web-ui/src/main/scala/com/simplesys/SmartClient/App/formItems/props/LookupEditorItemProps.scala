@@ -37,7 +37,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                 name = s"${item.name}_inner".opt
                                 width = "*"
                                 showTitle = false.opt
-                                //value = item.value.opt
+                                value = item.value.opt
                             }
                         )
                     ).opt
