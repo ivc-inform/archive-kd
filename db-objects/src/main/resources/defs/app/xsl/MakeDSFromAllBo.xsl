@@ -92,7 +92,6 @@
 					<xsl:variable name="group" as="xs:string" select="@referenceToGroup"/>
 					<xsl:variable name="class" as="xs:string" select="@referenceTo"/>
 					<xsl:variable name="nameLocal" as="xs:string" select="bo:attrRef/@nameLocal"/>
-					<xsl:variable name="nameRemote" as="xs:string" select="bo:attrRef/@nameRemote"/>
 					<xsl:for-each select="$FileSource/bo:allClasses/bo:class[@group=$group][@name=$class]">
 						<xsl:variable name="bo1" select="."/>
 						<xsl:if test="$group!=$currentGroup or $class!=$currentClass">
@@ -112,7 +111,6 @@
 										<xsl:with-param name="bo" select="$bo1" tunnel="yes"/>
 										<xsl:with-param name="fieldName" select="$fieldName1"/>
 										<xsl:with-param name="nameLocal" select="$nameLocal"/>
-										<xsl:with-param name="nameRemote" select="$nameRemote"/>
 										<xsl:with-param name="captionClassLookup" as="xs:string" select="$captionClassLookup"/>
 										<xsl:with-param name="fieldLookup" as="xs:string" select="'yes'"/>
 									</xsl:call-template>
@@ -238,7 +236,6 @@
 		<xsl:param as="xs:string" name="fieldName"/>
 		<xsl:param as="xs:string" name="fieldLookup"/>
 		<xsl:param as="xs:string" name="nameLocal" select="''"/>
-		<xsl:param as="xs:string" name="nameRemote" select="''"/>
 		<xsl:param as="xs:string" name="captionClassLookup" select="''"/>
 		<xsl:param as="node()*" name="bo" tunnel="yes"/>
 
@@ -272,7 +269,7 @@
 			</xsl:if>
 			<xsl:if test="$fieldLookup='yes'">
 				<isc:ForeignField>
-					<xsl:value-of select="concat($nameLocal, '.', $nameRemote)"/>
+					<xsl:value-of select="$nameLocal"/>
 				</isc:ForeignField>
 			</xsl:if>
 			<xsl:if test="$fieldLookup='no'">
