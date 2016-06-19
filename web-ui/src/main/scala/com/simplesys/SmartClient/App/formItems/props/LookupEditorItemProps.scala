@@ -97,28 +97,35 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                 (thiz: classHandler) =>
 
                                                                     var selectedRecord: JSUndefined[Record] = jSUndefined
+                                                                    var lookupCaption: JSUndefined[String] = jSUndefined
+
                                                                     //isc debugTrap(editor, formItem)
 
-                                                                    if (isc.isA.ListGrid(editor))
-                                                                        selectedRecord = editor.asInstanceOf[ListGrid].getSelectedRecord()
-                                                                    else if (isc.isA.ListGridEditor(editor))
-                                                                        selectedRecord = editor.asInstanceOf[ListGridEditor].getSelectedRecord()
-                                                                    else if (isc.isA.TreeGridEditor(editor))
-                                                                        selectedRecord = editor.asInstanceOf[TreeGridEditor].getSelectedRecord()
+                                                                    if (isc.isA.ListGrid(editor)) {
+                                                                        val _editor = editor.asInstanceOf[ListGrid]
+                                                                        selectedRecord = _editor.getSelectedRecord()
+                                                                        lookupCaption = _editor.getLookupCaption()
+                                                                    }
+                                                                    else if (isc.isA.ListGridEditor(editor)) {
+                                                                        val _editor = editor.asInstanceOf[ListGridEditor]
+                                                                        selectedRecord = _editor.getSelectedRecord()
+                                                                        lookupCaption = _editor.getLookupCaption()
+                                                                    } else if (isc.isA.TreeGridEditor(editor)) {
+                                                                        val _editor = editor.asInstanceOf[TreeGridEditor]
+                                                                        selectedRecord = _editor.getSelectedRecord()
+                                                                        lookupCaption = _editor.getLookupCaption()
+                                                                    }
 
                                                                     if (selectedRecord.isEmpty)
                                                                         isc.error("Не возможно выделить значение для ввода.")
                                                                     else {
-                                                                        isc debugTrap (selectedRecord)
+                                                                        val foreignIdField = form.dataSource.getField(formItem.foreignField.get)
+                                                                        val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+
+                                                                        val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+
+                                                                        textItem setValue lookupCaption
                                                                     }
-
-
-                                                                //                                                                    val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.valueField.get)
-                                                                //                                                                    val valueDisplay = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.displayField.get)
-                                                                //                                                                    textItem setValue valueDisplay
-                                                                //
-                                                                //                                                                    isc debugTrap(selectedRecord, valueId, valueDisplay)
-
                                                             }.toThisFunc.opt
                                                         }
                                                     )

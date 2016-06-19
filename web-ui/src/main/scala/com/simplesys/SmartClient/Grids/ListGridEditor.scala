@@ -124,6 +124,7 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     var newRequestProperties: JSUndefined[js.Function0[DSRequest]]
     var editRequestProperties: JSUndefined[js.Function0[DSRequest]]
     var editingFields  : JSUndefined[IscArray[FormItem]]
+    def getLookupCaption(): String
 }
 
 @js.native

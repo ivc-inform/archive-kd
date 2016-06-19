@@ -38,7 +38,7 @@ trait DataBoundComponent extends Class {
     val dataFetchMode: FetchMode
     val dataField: String
     var dataPageSize: Int
-    var dataSource: DataSource | String
+    var dataSource: DataSource
     var deepCloneOnEdit: Boolean
     var descriptionField: String
     def deselectAllRecords(): void
