@@ -55,6 +55,8 @@ class LookupEditorItemProps extends CanvasItemProps {
                         (thiz: classHandler) =>
                             WindowSS.create(
                                 new WindowSSProps {
+                                    height = 400
+                                    width = 300
                                     isModal = true.opt
                                     autoPosition = true.opt
                                     showMaximizeButton = false.opt
