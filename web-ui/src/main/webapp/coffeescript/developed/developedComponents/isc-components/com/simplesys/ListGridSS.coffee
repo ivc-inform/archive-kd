@@ -156,9 +156,7 @@ isc.ListGrid.addProperties
 			vertical: true
 			members: [form, okCancelPanel]
 
-		window = isc.WindowSS.create
-			height: 200
-			width: 400
+		window = isc.WindowSS.create(
 			isModal: true
 			showMaximizeButton: false
 			showMinimizeButton: false
@@ -168,7 +166,7 @@ isc.ListGrid.addProperties
 				@headerIconPath = if updatedOperation then "edit.png" else "insert.png"
 				@Super("initWidget", arguments)
 				@addItem canvas
-				return
+				return).addProperties @editWindowProperties
 
 		okCancelPanel.owner = window
 		form.clearValues() if requestProperties.operationType is "add"
