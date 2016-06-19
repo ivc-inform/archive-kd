@@ -1,14 +1,12 @@
 package com.simplesys.SmartClient.App.formItems
 
 import com.simplesys.SmartClient.Forms.FormsItems.CanvasItem
+import com.simplesys.System.Types._
+import com.simplesys.System._
 
 import scala.scalajs.js
 
-/**
-  * Created by andrew on 19.06.16.
-  */
-
 @js.native
 trait LookupEditorItem extends CanvasItem{
-
+    var buttonIcon: JSUndefined[SCImgURL]
 }

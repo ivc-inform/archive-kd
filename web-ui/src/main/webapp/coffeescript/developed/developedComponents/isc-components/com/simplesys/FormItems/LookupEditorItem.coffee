@@ -18,7 +18,7 @@ isc.defineClass("LookupEditorItem", isc.CanvasItem).addProperties
 							width: "*"
 							showTitle: false
 							type: "TextItem"
-							canEdit: false
+							#canEdit: false
 							#value: @value
 							###editorEnter: (form, item, value) ->
 								v = value###
@@ -27,12 +27,12 @@ isc.defineClass("LookupEditorItem", isc.CanvasItem).addProperties
 			]
 
 		@textItem = df.getItems()[0]
-		res.addMember isc.IButtonSS.create isc.addProperties
-											   "iconAlign": "center"
-											   "click": =>
-												   #isc.info "Click"
-												   @textItem.setValue "12456"
-												   return
-											   "icon": @buttonIcon
-											   "width": 22
+		button = isc.IButtonSS.create
+					              "iconAlign": "center"
+					              "click": =>
+						              @textItem.setValue "12456"
+						              return
+					              "icon": @buttonIcon
+					              "width": 22
+		res.addMember button
 		res

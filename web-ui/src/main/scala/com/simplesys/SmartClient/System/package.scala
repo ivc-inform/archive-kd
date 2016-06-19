@@ -1,9 +1,9 @@
 package com.simplesys.SmartClient
 
-import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.App._
-import com.simplesys.SmartClient.App.formItems.{LookupEditorItem, TextItemWithFormEdit}
-import com.simplesys.SmartClient.App.formItems.props.{LookupEditorItemProps, TextItemWithFormEditProps}
+import com.simplesys.SmartClient.App.formItems.LookupEditorItem
+import com.simplesys.SmartClient.App.formItems.props.LookupEditorItemProps
+import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._
@@ -49,8 +49,8 @@ import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
 
 //Должны быть
 //import com.simplesys.macros.PropsToDictionary
-//
 import com.simplesys.macros.PropsToDictionary
+//
 
 package object System {
 
@@ -106,7 +106,6 @@ package object System {
     object FormItemWithButton extends SCApply[FormItemWithButton, FormItemWithButtonProps]
     object ComboboxItemWithButtons extends SCApply[ComboboxItemWithButtons, ComboboxItemWithButtonsProps]
     object ComboboxItemWithClearButton extends SCApply[ComboboxItemWithClearButton, ComboboxItemWithClearButtonProps]
-    object TextItemWithFormEdit extends SCApply[TextItemWithFormEdit, TextItemWithFormEditProps]
     object LookupEditorItem extends SCApply[LookupEditorItem, LookupEditorItemProps]
     //</editor-fold>
 

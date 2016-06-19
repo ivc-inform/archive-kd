@@ -56,7 +56,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "orgcode"
             width = "100%"
         },
-        new TextItemWithFormEditProps {
+        new LookupEditorItemProps {
             name = "vabontype"
             width = "100%"
         },
