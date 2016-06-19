@@ -8,7 +8,8 @@ import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
-import com.simplesys.js.components.refs.Abonents
+import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
+import com.simplesys.js.components.refs.{Abonents, AbonentsOrg}
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
@@ -53,11 +54,13 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             canEdit = true
             name = "orgcode"
             width = "100%"
+            editor = AbonentsOrg.create(new AbonentsOrgProps).opt
         }),
         LookupEditorItem(new LookupEditorItemProps {
             name = "vabontype"
             canEdit = true
             width = "100%"
+            editor = AbonentsTypes.create(new AbonentsTypesProps).opt
         }),
         TextAreaItem(new TextAreaItemProps {
             name = "vabdesc"

@@ -20,6 +20,7 @@ import com.simplesys.System.Types.TitleOrientation.TitleOrientation
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
 import com.simplesys.System.Types._
 import com.simplesys.System.{JSAny, JSDictionary, JSObject}
+import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
@@ -75,6 +76,7 @@ trait FormItem extends Class {
     var editorExit: js.Function3[DynamicForm, FormItem, JSAny, _]
     var editorType: FormItem
     var editPendingCSSText: CSSText
+    var editor: Canvas
     var emptyDisplayValue: String
     var emptyValueIcon: String
     def enable()
