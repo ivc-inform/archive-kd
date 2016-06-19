@@ -4,11 +4,16 @@ import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
 import com.simplesys.SmartClient.Forms.FormsItems.props.{DateTimeItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
+import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.js.components.refs.Abonents
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
+import com.simplesys.System._
+import com.simplesys.option.DoubleType._
+import com.simplesys.function._
+import com.simplesys.option.ScOption._
 
 class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     override val simpleTable = false
@@ -125,5 +130,12 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         new ListGridFieldProps {
             name = "vabdesc"
         }
+    ).opt
+
+    editWindowProperties = WindowSS(
+       new WindowSSProps {
+           width = 285
+           height = 425
+       }
     ).opt
 }

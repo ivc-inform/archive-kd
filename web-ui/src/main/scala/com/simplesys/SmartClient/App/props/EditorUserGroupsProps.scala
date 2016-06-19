@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.App.EditorUserGroups
 import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, ResultTreeProps}
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, TextAreaItemProps, TextItemProps}
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
+import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{ListGridFieldType, TreeModelType}
 import com.simplesys.function._
@@ -17,15 +18,15 @@ class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
     dataSource = DataSourcesJS.admin_UserGroup_DS.opt
     identifier = "C4C652D1-7823-F191-BD54-88A8A2238DCC".opt
 
-//    data = ResultTree.create(
-//        new ResultTreeProps {
-//            idField = "di".opt
-//            parentIdField = "parent".opt
-//            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
-//            modelType = TreeModelType.parent.opt
-//            isFolderProperty = "isCampaign".opt
-//        }
-//    ).opt
+    //    data = ResultTree.create(
+    //        new ResultTreeProps {
+    //            idField = "di".opt
+    //            parentIdField = "parent".opt
+    //            dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+    //            modelType = TreeModelType.parent.opt
+    //            isFolderProperty = "isCampaign".opt
+    //        }
+    //    ).opt
 
     newRequestProperties = {
         (thiz: classHandler) =>
@@ -72,6 +73,13 @@ class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
         new TreeGridFieldProps {
             name = "active".opt
             `type` = ListGridFieldType.boolean.opt
+        }
+    ).opt
+
+    editWindowProperties = WindowSS(
+        new WindowSSProps {
+            width = 285
+            height = 285
         }
     ).opt
 }
