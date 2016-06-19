@@ -9,6 +9,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.props.FormItemProps
 import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.{ListGridFieldProps, ListGridRecordProps}
+import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.VLayoutSSProps
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.{JSObject, JSUndefined}
@@ -76,6 +77,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
     var saveByCell : ScOption[Boolean] = ScNone
     var dataFetchMode : ScOption[FetchMode] = ScNone
+    var editWindowProperties: ScOption[WindowSS] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {

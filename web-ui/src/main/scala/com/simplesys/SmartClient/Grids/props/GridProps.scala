@@ -13,7 +13,7 @@ import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.treeGrid.Tree
 import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
 import com.simplesys.SmartClient.Layout.props.VLayoutProps
-import com.simplesys.SmartClient.Layout.{HLayout, Layout, VLayout}
+import com.simplesys.SmartClient.Layout._
 import com.simplesys.SmartClient.System.{Class, IscArray, Selection}
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.AnimationAcceleration.AnimationAcceleration
@@ -559,6 +559,7 @@ class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps wi
     var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
+    var editWindowProperties: ScOption[WindowSS] = ScNone
 }
 
 class ListGridProps extends GridProps[ListGridField, ListGridRecord] {
