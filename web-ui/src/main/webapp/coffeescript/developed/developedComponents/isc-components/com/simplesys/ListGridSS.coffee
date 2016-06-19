@@ -157,16 +157,19 @@ isc.ListGrid.addProperties
 			members: [form, okCancelPanel]
 
 		window = isc.WindowSS.create(
-			isModal: true
-			showMaximizeButton: false
-			showMinimizeButton: false
-			identifier: "#{@identifier}_Window_#{requestProperties.operationType}_#{if requestProperties.componentId? then requestProperties.componentId else ""}"
-			title: if updatedOperation then "Редактирование записи..." else "Новая запись..."
-			initWidget: ->
-				@headerIconPath = if updatedOperation then "edit.png" else "insert.png"
-				@Super("initWidget", arguments)
-				@addItem canvas
-				return).setProperties @editWindowProperties
+			isc.addProperties(
+				{},
+				isModal: true
+				showMaximizeButton: false
+				showMinimizeButton: false
+				identifier: "#{@identifier}_Window_#{requestProperties.operationType}_#{if requestProperties.componentId? then requestProperties.componentId else ""}"
+				title: if updatedOperation then "Редактирование записи..." else "Новая запись..."
+				initWidget: ->
+					@headerIconPath = if updatedOperation then "edit.png" else "insert.png"
+					@Super("initWidget", arguments)
+					@addItem canvas
+					return
+				, @editWindowProperties))
 
 		okCancelPanel.owner = window
 		form.clearValues() if requestProperties.operationType is "add"
