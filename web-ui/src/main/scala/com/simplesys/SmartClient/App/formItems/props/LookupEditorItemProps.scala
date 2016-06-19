@@ -7,6 +7,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.CanvasItem
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
 import com.simplesys.System.Types._
@@ -25,6 +26,7 @@ class LookupEditorItemProps extends CanvasItemProps {
 
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
+            val formItem = thiz
 
             val df = DynamicFormSS.create(
                 new DynamicFormSSProps {
@@ -70,25 +72,54 @@ class LookupEditorItemProps extends CanvasItemProps {
                                             thiz.Super("initWidget", arguments)
                                             val window = thiz
 
-                                            thiz.addItems(
-                                                IscArray(
-                                                    item.editor,
-                                                    OkCancelPanel.create(
-                                                        new OkCancelPanelProps {
-                                                            owner = thiz.opt
-                                                            padding = 5.opt
-                                                            okCaption = "Выбрать".opt
-                                                            ownerDestroy = false.opt
-                                                            ownerHide = false.opt
-                                                            okFunction = {
-                                                                (thiz: classHandler) =>
-                                                                    window.markForDestroy()
 
-                                                            }.toThisFunc.opt
+                                            if (item.editor.isEmpty)
+                                                isc.error("Отсутствует редактор.")
+                                            else
+                                                item.editor.foreach {
+                                                    editor =>
+                                                        var selectedRecord: JSUndefined[Record] = jSUndefined
+                                                        if (isc.isA.ListGrid(editor))
+                                                            selectedRecord = editor.asInstanceOf[ListGrid].getSelectedRecord()
+                                                        else if (isc.isA.ListGridEditor(editor))
+                                                            selectedRecord = editor.asInstanceOf[ListGridEditor].getSelectedRecord()
+                                                        else if (isc.isA.TreeGridEditor(editor))
+                                                            selectedRecord = editor.asInstanceOf[TreeGridEditor].getSelectedRecord()
+
+                                                        if (formItem.valueField.isEmpty)
+                                                            isc.error("Нет значения для valueField.")
+                                                        else if (formItem.displayField.isEmpty)
+                                                            isc.error("Нет значения для displayField.")
+                                                        else if (selectedRecord.isEmpty)
+                                                            isc.error("Не возможно выделить значение для ввода.")
+                                                        else {
+                                                            thiz.addItems(
+                                                                IscArray(
+                                                                    editor,
+                                                                    OkCancelPanel.create(
+                                                                        new OkCancelPanelProps {
+                                                                            owner = thiz.opt
+                                                                            padding = 5.opt
+                                                                            okCaption = "Выбрать".opt
+                                                                            ownerDestroy = false.opt
+                                                                            ownerHide = false.opt
+                                                                            okFunction = {
+                                                                                (thiz: classHandler) =>
+
+                                                                                    val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.valueField.get)
+                                                                                    val valueDisplay = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.displayField.get)
+                                                                                    isc debugTrap (valueId, valueDisplay)
+                                                                                    window.markForDestroy()
+
+                                                                            }.toThisFunc.opt
+                                                                        }
+                                                                    )
+                                                                )
+                                                            )
                                                         }
-                                                    )
-                                                )
-                                            )
+
+
+                                                }
                                     }.toThisFunc.opt
                                 }
                             )

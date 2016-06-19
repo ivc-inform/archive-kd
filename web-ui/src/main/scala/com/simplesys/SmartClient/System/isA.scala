@@ -36,4 +36,7 @@ trait isAStatic extends JSAny {
     def DrawRect(`object`: JSAny): Boolean
     def EditContext(`object`: JSAny): Boolean
     def EditContextSS(`object`: JSAny): Boolean
+    def ListGrid(`object`: JSAny): Boolean
+    def ListGridEditor(`object`: JSAny): Boolean
+    def TreeGridEditor(`object`: JSAny): Boolean
 }

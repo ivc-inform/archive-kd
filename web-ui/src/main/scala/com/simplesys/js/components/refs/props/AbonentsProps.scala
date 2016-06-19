@@ -51,16 +51,18 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             width = "100%"
         }),
         LookupEditorItem(new LookupEditorItemProps {
-            canEdit = true
             name = "orgcode"
             width = "100%"
             editor = AbonentsOrg.create(new AbonentsOrgProps).opt
+            displayField = "orgcode"
+            valueField = "id".opt
         }),
         LookupEditorItem(new LookupEditorItemProps {
             name = "vabontype"
-            canEdit = true
             width = "100%"
             editor = AbonentsTypes.create(new AbonentsTypesProps).opt
+            displayField = "vabontype"
+            valueField = "id".opt
         }),
         TextAreaItem(new TextAreaItemProps {
             name = "vabdesc"
@@ -96,7 +98,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
                 new SelectItemProps {
                     optionDataSource = DataSourcesJS.eakd_abonents_types_DS.opt
                     displayField = "vabontype"
-                    valueField = "id".asInstanceOf[JSAny].opt
+                    valueField = "id".opt
                     initialSort = Seq(
                         new SortSpecifierProps {
                             property = "vabontype"
@@ -121,7 +123,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
                 new SelectItemProps {
                     optionDataSource = DataSourcesJS.eakd_abonents_org_DS.opt
                     displayField = "orgcode"
-                    valueField = "id".asInstanceOf[JSAny].opt
+                    valueField = "id".opt
                     initialSort = Seq(
                         new SortSpecifierProps {
                             property = "orgcode"

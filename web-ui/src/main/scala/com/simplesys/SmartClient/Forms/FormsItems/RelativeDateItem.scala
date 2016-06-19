@@ -41,7 +41,6 @@ trait RelativeDateItem extends CanvasItem {
     var quartersFromNowTitle: String
     val rangePosition: RelativeDateRangePosition
     val useSharedPicker: Boolean
-    val valueField: ComboBoxItem with AutoChild
     val valueFieldWidth: Int | String
     val weeksAgoTitle: String
     val weeksFromNowTitle: String

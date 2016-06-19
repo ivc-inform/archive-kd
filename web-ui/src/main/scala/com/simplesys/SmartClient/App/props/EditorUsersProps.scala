@@ -137,7 +137,7 @@ class EditorUsersProps extends TreeListGridEditorProps {
                                 new SelectItemProps {
                                     optionDataSource = thiz.treeGrid.dataSource.opt
                                     displayField = "captionGroup".opt
-                                    valueField = "di".asInstanceOf[JSAny].opt
+                                    valueField = "di".opt
                                     initialSort = Seq(
                                         new SortSpecifierProps {
                                             property = "captionGroup".opt

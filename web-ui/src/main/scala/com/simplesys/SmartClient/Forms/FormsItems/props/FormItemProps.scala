@@ -208,7 +208,7 @@ class FormItemProps extends ClassProps {
     var vAlign: ScOption[VerticalAlignment] = ScNone
     var value: ScOption[JSAny] = ScNone
     var valueDeselectedCSSText: ScOption[CSSText] = ScNone
-    var valueField: ScOption[JSAny] = ScNone
+    var valueField: ScOption[String] = ScNone
     var valueHover: ScOption[js.Function2[FormItem, DynamicForm, _]] = ScNone
     var valueHoverHTML: ScOption[js.Function2[FormItem, DynamicForm, HTMLString]] = ScNone
     var valueIconClick: ScOption[js.Function3[FormItem, DynamicForm, JSAny, Boolean]] = ScNone

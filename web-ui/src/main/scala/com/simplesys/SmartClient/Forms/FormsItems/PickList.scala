@@ -64,7 +64,6 @@ trait PickList extends Class {
     val specialValues: ValueMap
     var textMatchStyle: TextMatchStyle
     val useClientFiltering: Boolean
-    val valueField: JSAny
     var valueIconField: String
     var _processingFilterComplete: Boolean
     def clearAriaState(state:String):void
