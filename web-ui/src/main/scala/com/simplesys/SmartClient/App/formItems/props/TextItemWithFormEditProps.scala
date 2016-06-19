@@ -8,6 +8,7 @@ import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.System.{Common, DynamicFormSS, HLayoutSS, IButtonSS, TextItem}
+import com.simplesys.System.Types.FormItemComponentType
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -44,4 +45,7 @@ class TextItemWithFormEditProps extends CanvasItemProps {
                 }
             )
     }.toThisFunc.opt
+
+    `type` = FormItemComponentType.TextItemWithFormEdit
+
 }

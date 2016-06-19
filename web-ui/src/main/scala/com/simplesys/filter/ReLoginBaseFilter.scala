@@ -1,11 +1,10 @@
-package com.simplesys.SmartClient.App.filter
+package com.simplesys.filter
 
 import com.simplesys.akka.http.LoginedData1
 import com.simplesys.akka.http.filter.AkkaPartialFilter
 import com.simplesys.app._
 import com.simplesys.common.Strings._
 import com.simplesys.common.equality.SimpleEquality._
-import com.simplesys.filter.{FailureAuthentication, LoginRequiredChannel, LoginRequiredResponse, SuccesAuthentication}
 import com.simplesys.isc.dataBinging.DSRequestDyn._
 import com.simplesys.jdbc.control.classBO.Where
 import com.simplesys.jdbc.exception.NoDataFoundException
