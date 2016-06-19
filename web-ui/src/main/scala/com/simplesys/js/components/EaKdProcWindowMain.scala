@@ -19,6 +19,7 @@ import com.simplesys.function._
 import com.simplesys.js.components.refs.props.{AbonentsOrgProps, AbonentsProps, AbonentsTypesProps}
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 import scala.scalajs.js.annotation.JSExport
 
