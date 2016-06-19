@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.EditorUsers
-import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, ResultTreeProps, SortSpecifierProps}
+import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, SortSpecifierProps}
 import com.simplesys.SmartClient.Forms.DynamicForm
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
@@ -10,12 +10,11 @@ import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{Alignment, FetchMode, ListGridFieldType, TreeModelType}
+import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 import scala.scalajs.js.annotation.ScalaJSDefined
 
