@@ -23,7 +23,6 @@ class LookupEditorItemProps extends CanvasItemProps {
 
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
-            isc debugTrap form
 
             val df = DynamicFormSS.create(
                 new DynamicFormSSProps {
