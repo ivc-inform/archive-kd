@@ -202,6 +202,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"autoSaveEdits"                   : @autoSaveTreeEdits
 			"saveByCell"                      : @saveByTreeCell
 			"dataFetchMode"                   : @dataFetchModeTree
+			"editWindowProperties"            : @editWindowPropertiesTree
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -250,6 +251,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"autoSaveEdits"                   : @autoSaveListEdits
 			"saveByCell"                      : @saveByListCell
 			"dataFetchMode"                   : @dataFetchModeList
+			"editWindowProperties"            : @editWindowPropertiesList
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"

@@ -7,6 +7,7 @@ import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.Grids.treeGrid.Tree
+import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.FetchMode.FetchMode
@@ -90,4 +91,6 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var dataFetchModeList: ScOption[FetchMode] = ScNone
     var dataFetchModeTree: ScOption[FetchMode] = ScNone
     var dataTree: ScOption[Tree] = ScNone
+    var editWindowPropertiesTree: ScOption[WindowSS] = ScNone
+    var editWindowPropertiesList: ScOption[WindowSS] = ScNone
 }
