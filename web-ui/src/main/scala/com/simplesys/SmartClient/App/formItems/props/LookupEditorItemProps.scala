@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.App.formItems.props
 
 import com.simplesys.SmartClient.App.formItems.LookupEditorItem
-import com.simplesys.SmartClient.Control.props.IButtonSSProps
+import com.simplesys.SmartClient.Control.props.{IButtonSSProps, TreeGridContextMenuProps}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.FormsItems.CanvasItem
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
@@ -62,23 +62,34 @@ class LookupEditorItemProps extends CanvasItemProps {
                                     showMaximizeButton = false.opt
                                     showMinimizeButton = false.opt
                                     identifier = s"${form.identifier}_lookup_${item.name}".opt
-                                    title = s"${item.name}".ellipsis.opt
+                                    title = s"${item.title}".ellipsis.opt
                                     headerIconPath = Common.iconEdit.opt
-                                    items = Seq(
-                                        item.editor,
-                                        OkCancelPanel.create(
-                                            new OkCancelPanelProps {
-                                                padding = 5.opt
-                                                okCaption = "Выбрать".opt
-                                                ownerDestroy = false.opt
-                                                ownerHide = false.opt
-                                                okFunction = {
-                                                    (thiz: classHandler) =>
 
-                                                }.toThisFunc.opt
-                                            }
-                                        )
-                                    ).opt
+                                    initWidget = {
+                                        (thiz: classHandler, arguments: IscArray[JSAny]) =>
+                                            thiz.Super("initWidget", arguments)
+                                            val window = thiz
+
+                                            thiz.addItems(
+                                                IscArray(
+                                                    item.editor,
+                                                    OkCancelPanel.create(
+                                                        new OkCancelPanelProps {
+                                                            owner = thiz.opt
+                                                            padding = 5.opt
+                                                            okCaption = "Выбрать".opt
+                                                            ownerDestroy = false.opt
+                                                            ownerHide = false.opt
+                                                            okFunction = {
+                                                                (thiz: classHandler) =>
+                                                                    window.markForDestroy()
+
+                                                            }.toThisFunc.opt
+                                                        }
+                                                    )
+                                                )
+                                            )
+                                    }.toThisFunc.opt
                                 }
                             )
 
