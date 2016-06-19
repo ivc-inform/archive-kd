@@ -62,6 +62,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new TextAreaItemProps {
             name = "vabdesc"
+            width = "100%"
         }
     ).opt
 
