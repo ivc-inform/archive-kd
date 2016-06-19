@@ -99,8 +99,6 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                     var selectedRecord: JSUndefined[Record] = jSUndefined
                                                                     var lookupCaption: JSUndefined[String] = jSUndefined
 
-                                                                    //isc debugTrap(editor, formItem)
-
                                                                     if (isc.isA.ListGrid(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGrid]
                                                                         selectedRecord = _editor.getSelectedRecord()
@@ -108,6 +106,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                     }
                                                                     else if (isc.isA.ListGridEditor(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGridEditor]
+                                                                        isc debugTrap _editor
                                                                         selectedRecord = _editor.getSelectedRecord()
                                                                         lookupCaption = _editor.getLookupCaption()
                                                                     } else if (isc.isA.TreeGridEditor(editor)) {
