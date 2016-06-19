@@ -62,22 +62,11 @@ class LookupEditorItemProps extends CanvasItemProps {
                             else {
                                 formItem.editor.foreach {
                                     editor =>
-                                        var selectedRecord: JSUndefined[Record] = jSUndefined
-                                        isc debugTrap(editor, formItem)
 
-                                        if (isc.isA.ListGrid(editor))
-                                            selectedRecord = editor.asInstanceOf[ListGrid].getSelectedRecord()
-                                        else if (isc.isA.ListGridEditor(editor))
-                                            selectedRecord = editor.asInstanceOf[ListGridEditor].getSelectedRecord()
-                                        else if (isc.isA.TreeGridEditor(editor))
-                                            selectedRecord = editor.asInstanceOf[TreeGridEditor].getSelectedRecord()
-
-                                        if (formItem.lookup.getOrElse(false))
+                                        if (!formItem.lookup.getOrElse(false))
                                             isc.error("Поле не является полем lookup")
                                         else if (formItem.foreignField.isEmpty)
                                             isc.error("Неn foreignField.")
-                                        else if (selectedRecord.isEmpty)
-                                            isc.error("Не возможно выделить значение для ввода.")
                                         else {
                                             val window = WindowSS.create(
                                                 new WindowSSProps {
@@ -102,16 +91,33 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                             padding = 5.opt
                                                             okCaption = "Выбрать".opt
                                                             ownerDestroy = false.opt
-                                                            ownerHide = false.opt
+                                                            ownerHide = true.opt
+                                                            owner = window.opt
                                                             okFunction = {
                                                                 (thiz: classHandler) =>
 
-                                                                    val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.valueField.get)
-                                                                    val valueDisplay = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.displayField.get)
-                                                                    textItem setValue valueDisplay
+                                                                    var selectedRecord: JSUndefined[Record] = jSUndefined
+                                                                    //isc debugTrap(editor, formItem)
 
-                                                                    isc debugTrap(selectedRecord, valueId, valueDisplay)
-                                                                    window.markForDestroy()
+                                                                    if (isc.isA.ListGrid(editor))
+                                                                        selectedRecord = editor.asInstanceOf[ListGrid].getSelectedRecord()
+                                                                    else if (isc.isA.ListGridEditor(editor))
+                                                                        selectedRecord = editor.asInstanceOf[ListGridEditor].getSelectedRecord()
+                                                                    else if (isc.isA.TreeGridEditor(editor))
+                                                                        selectedRecord = editor.asInstanceOf[TreeGridEditor].getSelectedRecord()
+
+                                                                    if (selectedRecord.isEmpty)
+                                                                        isc.error("Не возможно выделить значение для ввода.")
+                                                                    else {
+                                                                        isc debugTrap (selectedRecord)
+                                                                    }
+
+
+                                                                //                                                                    val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.valueField.get)
+                                                                //                                                                    val valueDisplay = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.displayField.get)
+                                                                //                                                                    textItem setValue valueDisplay
+                                                                //
+                                                                //                                                                    isc debugTrap(selectedRecord, valueId, valueDisplay)
 
                                                             }.toThisFunc.opt
                                                         }
