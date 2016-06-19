@@ -1,5 +1,6 @@
 package com.simplesys.js.components.refs.props
 
+import com.simplesys.SmartClient.App.formItems.props.{LookupEditorItemProps, TextItemWithFormEditProps}
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
 import com.simplesys.SmartClient.Forms.FormsItems.props.{DateTimeItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
@@ -25,30 +26,39 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     editingFields = Seq(
         new TextItemProps {
             name = "vabcode"
+            width = "100%"
         },
         new TextItemProps {
             name = "vabname"
+            width = "100%"
         },
         new DateTimeItemProps {
             name = "tdatein"
+            width = "100%"
         },
         new TextItemProps {
             name = "vemail"
+            width = "100%"
         },
         new TextItemProps {
             name = "vperson"
+            width = "100%"
         },
         new TextItemProps {
             name = "vphone1"
+            width = "100%"
         },
         new TextItemProps {
             name = "vphone2"
+            width = "100%"
         },
-        new TextItemProps {
+        new LookupEditorItemProps {
             name = "orgcode"
+            width = "100%"
         },
-        new TextItemProps {
+        new TextItemWithFormEditProps {
             name = "vabontype"
+            width = "100%"
         },
         new TextAreaItemProps {
             name = "vabdesc"

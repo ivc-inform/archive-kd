@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Forms.FormsItems.props
 
-import com.simplesys.SmartClient.Forms.DynamicForm
+import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS}
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.System.Types.FormItemComponentType
@@ -23,7 +23,7 @@ class CanvasItemProps extends FormItemProps {
     var canvasConstructor: ScOption[String] = ScNone
     var canvasDefaults: ScOption[JSObject] = ScNone
     var canvasProperties: ScOption[JSObject] = ScNone
-    var createCanvas: ScOption[ThisFunction2[classHandler, DynamicForm, CanvasItem, Canvas]] = ScNone
+    var createCanvas: ScOption[ThisFunction2[classHandler, DynamicFormSS, CanvasItem, Canvas]] = ScNone
     var _constructor: ScOption[FormItemType_FormItemComponentType[FormItemType, FormItemComponentType]] = ScNone
     var editCriteriaInInnerForm: ScOption[Boolean] = ScNone
     var multiple: ScOption[Boolean] = ScNone
