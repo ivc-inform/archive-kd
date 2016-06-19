@@ -54,15 +54,11 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "orgcode"
             width = "100%"
             editor = AbonentsOrg.create(new AbonentsOrgProps).opt
-            displayField = "orgcode"
-            valueField = "id".opt
         }),
         LookupEditorItem(new LookupEditorItemProps {
             name = "vabontype"
             width = "100%"
             editor = AbonentsTypes.create(new AbonentsTypesProps).opt
-            displayField = "vabontype"
-            valueField = "id".opt
         }),
         TextAreaItem(new TextAreaItemProps {
             name = "vabdesc"

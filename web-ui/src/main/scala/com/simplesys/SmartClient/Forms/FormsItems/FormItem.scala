@@ -29,6 +29,9 @@ import scala.scalajs.js.|
 
 @js.native
 trait FormItem extends Class {
+    val lookup: JSUndefined[Boolean]
+    val captionClassLookup: JSUndefined[String]
+    val foreignField: JSUndefined[String]
     var accessKey: Char
     var align: Alignment
     var allowExpressions: Boolean

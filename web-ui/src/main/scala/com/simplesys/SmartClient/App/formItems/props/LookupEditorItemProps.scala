@@ -55,74 +55,74 @@ class LookupEditorItemProps extends CanvasItemProps {
                     width = 22
                     click = {
                         (thiz: classHandler) =>
-                            WindowSS.create(
-                                new WindowSSProps {
-                                    height = 400
-                                    width = 300
-                                    isModal = true.opt
-                                    autoPosition = true.opt
-                                    showMaximizeButton = false.opt
-                                    showMinimizeButton = false.opt
-                                    identifier = s"${form.identifier}_lookup_${item.name}".opt
-                                    title = s"${item.title}".ellipsis.opt
-                                    headerIconPath = Common.iconEdit.opt
+                            val textItem = df.getItem(0)
 
-                                    initWidget = {
-                                        (thiz: classHandler, arguments: IscArray[JSAny]) =>
-                                            thiz.Super("initWidget", arguments)
-                                            val window = thiz
+                            if (formItem.editor.isEmpty)
+                                isc.error("Отсутствует редактор.")
+                            else {
+                                formItem.editor.foreach {
+                                    editor =>
+                                        var selectedRecord: JSUndefined[Record] = jSUndefined
+                                        isc debugTrap(editor, formItem)
 
+                                        if (isc.isA.ListGrid(editor))
+                                            selectedRecord = editor.asInstanceOf[ListGrid].getSelectedRecord()
+                                        else if (isc.isA.ListGridEditor(editor))
+                                            selectedRecord = editor.asInstanceOf[ListGridEditor].getSelectedRecord()
+                                        else if (isc.isA.TreeGridEditor(editor))
+                                            selectedRecord = editor.asInstanceOf[TreeGridEditor].getSelectedRecord()
 
-                                            if (item.editor.isEmpty)
-                                                isc.error("Отсутствует редактор.")
-                                            else
-                                                item.editor.foreach {
-                                                    editor =>
-                                                        var selectedRecord: JSUndefined[Record] = jSUndefined
-                                                        if (isc.isA.ListGrid(editor))
-                                                            selectedRecord = editor.asInstanceOf[ListGrid].getSelectedRecord()
-                                                        else if (isc.isA.ListGridEditor(editor))
-                                                            selectedRecord = editor.asInstanceOf[ListGridEditor].getSelectedRecord()
-                                                        else if (isc.isA.TreeGridEditor(editor))
-                                                            selectedRecord = editor.asInstanceOf[TreeGridEditor].getSelectedRecord()
-
-                                                        if (formItem.valueField.isEmpty)
-                                                            isc.error("Нет значения для valueField.")
-                                                        else if (formItem.displayField.isEmpty)
-                                                            isc.error("Нет значения для displayField.")
-                                                        else if (selectedRecord.isEmpty)
-                                                            isc.error("Не возможно выделить значение для ввода.")
-                                                        else {
-                                                            thiz.addItems(
-                                                                IscArray(
-                                                                    editor,
-                                                                    OkCancelPanel.create(
-                                                                        new OkCancelPanelProps {
-                                                                            owner = thiz.opt
-                                                                            padding = 5.opt
-                                                                            okCaption = "Выбрать".opt
-                                                                            ownerDestroy = false.opt
-                                                                            ownerHide = false.opt
-                                                                            okFunction = {
-                                                                                (thiz: classHandler) =>
-
-                                                                                    val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.valueField.get)
-                                                                                    val valueDisplay = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.displayField.get)
-                                                                                    isc debugTrap (valueId, valueDisplay)
-                                                                                    window.markForDestroy()
-
-                                                                            }.toThisFunc.opt
-                                                                        }
-                                                                    )
-                                                                )
-                                                            )
-                                                        }
-
-
+                                        if (formItem.lookup.getOrElse(false))
+                                            isc.error("Поле не является полем lookup")
+                                        else if (formItem.foreignField.isEmpty)
+                                            isc.error("Неn foreignField.")
+                                        else if (selectedRecord.isEmpty)
+                                            isc.error("Не возможно выделить значение для ввода.")
+                                        else {
+                                            val window = WindowSS.create(
+                                                new WindowSSProps {
+                                                    height = 400
+                                                    width = 300
+                                                    isModal = true.opt
+                                                    autoPosition = true.opt
+                                                    showMaximizeButton = false.opt
+                                                    showMinimizeButton = false.opt
+                                                    identifier = s"${form.identifier}_lookup_${item.name}".opt
+                                                    title = s"${formItem.captionClassLookup.getOrElse("Неизвестное поле captionClassLookup.")}".ellipsis.opt
+                                                    headerIconPath = Common.iconEdit.opt
                                                 }
-                                    }.toThisFunc.opt
+                                            )
+
+                                            window.addItems(
+                                                IscArray(
+                                                    editor,
+                                                    OkCancelPanel.create(
+                                                        new OkCancelPanelProps {
+                                                            owner = thiz.opt
+                                                            padding = 5.opt
+                                                            okCaption = "Выбрать".opt
+                                                            ownerDestroy = false.opt
+                                                            ownerHide = false.opt
+                                                            okFunction = {
+                                                                (thiz: classHandler) =>
+
+                                                                    val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.valueField.get)
+                                                                    val valueDisplay = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.displayField.get)
+                                                                    textItem setValue valueDisplay
+
+                                                                    isc debugTrap(selectedRecord, valueId, valueDisplay)
+                                                                    window.markForDestroy()
+
+                                                            }.toThisFunc.opt
+                                                        }
+                                                    )
+                                                )
+                                            )
+                                        }
+
+
                                 }
-                            )
+                            }
 
                             false
                     }.toThisFunc.opt

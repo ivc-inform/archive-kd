@@ -92,6 +92,7 @@
 					<xsl:variable name="group" as="xs:string" select="@referenceToGroup"/>
 					<xsl:variable name="class" as="xs:string" select="@referenceTo"/>
 					<xsl:variable name="nameLocal" as="xs:string" select="bo:attrRef/@nameLocal"/>
+					<xsl:variable name="nameRemote" as="xs:string" select="bo:attrRef/@nameRemote"/>
 					<xsl:for-each select="$FileSource/bo:allClasses/bo:class[@group=$group][@name=$class]">
 						<xsl:variable name="bo1" select="."/>
 						<xsl:if test="$group!=$currentGroup or $class!=$currentClass">
