@@ -2,6 +2,8 @@ package com.simplesys.SmartClient
 
 import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.App._
+import com.simplesys.SmartClient.App.formItems.TextItemWithFormEdit
+import com.simplesys.SmartClient.App.formItems.props.TextItemWithFormEditProps
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
 import com.simplesys.SmartClient.Control.props._
@@ -161,6 +163,7 @@ package object System {
     object FormItemWithButton extends SCApply[FormItemWithButton, FormItemWithButtonProps]
     object ComboboxItemWithButtons extends SCApply[ComboboxItemWithButtons, ComboboxItemWithButtonsProps]
     object ComboboxItemWithClearButton extends SCApply[ComboboxItemWithClearButton, ComboboxItemWithClearButtonProps]
+    object TextItemWithFormEdit extends SCApply[TextItemWithFormEdit, TextItemWithFormEditProps]
     //</editor-fold>
 
     //<editor-fold desc="Foundation">
