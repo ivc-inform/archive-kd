@@ -74,7 +74,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var startEditingInForm: ScOption[Function4[JSObject, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
     var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
-    var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
+    var editingFields  : ScOption[Seq[FormItem]] = ScNone
     var saveByCell : ScOption[Boolean] = ScNone
     var dataFetchMode : ScOption[FetchMode] = ScNone
     var editWindowProperties: ScOption[WindowSS] = ScNone

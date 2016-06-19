@@ -29,22 +29,22 @@ class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
     }.toThisFunc.opt
 
     editingFields = Seq(
-        new CheckboxItemProps {
+        CheckboxItem(new CheckboxItemProps {
             name = "active".opt
             width = "100%"
-        },
-        new TextItemProps {
+        }),
+        TextItem(new TextItemProps {
             name = "codeGroup".opt
             width = "100%"
-        },
-        new TextItemProps {
+        }),
+        TextItem(new TextItemProps {
             name = "captionGroup".opt
             width = "100%"
-        },
-        new TextAreaItemProps {
+        }),
+        TextAreaItem(new TextAreaItemProps {
             name = "descriptionGroup".opt
             width = "100%"
-        }
+        })
     ).opt
 
     fields = Seq(

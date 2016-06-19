@@ -558,7 +558,7 @@ class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps wi
     var wrapHeaderTitles: ScOption[Boolean] = ScNone
     var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
-    var editingFields  : ScOption[Seq[FormItemProps]] = ScNone
+    var editingFields  : ScOption[Seq[FormItem]] = ScNone
     var editWindowProperties: ScOption[WindowSS] = ScNone
 }
 

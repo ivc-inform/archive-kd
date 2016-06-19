@@ -251,7 +251,7 @@
 					</xsl:if>
 				</xsl:when>
 				<xsl:otherwise>
-					<isc:CanEdit>false</isc:CanEdit>
+					<isc:CanEdit>true</isc:CanEdit>
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:if test="$fieldLookup='no'">

@@ -21,48 +21,48 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
     identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
     editingFields = Seq(
-        new TextItemProps {
+        TextItem(new TextItemProps {
             name = "vabcode"
             width = "100%"
-        },
-        new TextItemProps {
+        }),
+        TextItem(new TextItemProps {
             name = "vabname"
             width = "100%"
-        },
-        new DateTimeItemProps {
+        }),
+        DateTimeItem(new DateTimeItemProps {
             name = "tdatein"
             width = "100%"
-        },
-        new TextItemProps {
+        }),
+        TextItem(new TextItemProps {
             name = "vemail"
             width = "100%"
-        },
-        new TextItemProps {
+        }),
+        TextItem(new TextItemProps {
             name = "vperson"
             width = "100%"
-        },
-        new TextItemProps {
+        }),
+        TextItem(new TextItemProps {
             name = "vphone1"
             width = "100%"
-        },
-        new TextItemProps {
+        }),
+        TextItem(new TextItemProps {
             name = "vphone2"
             width = "100%"
-        },
-        new LookupEditorItemProps {
+        }),
+        LookupEditorItem(new LookupEditorItemProps {
             canEdit = true
             name = "orgcode"
             width = "100%"
-        },
-        new LookupEditorItemProps {
+        }),
+        LookupEditorItem(new LookupEditorItemProps {
             name = "vabontype"
             canEdit = true
             width = "100%"
-        },
-        new TextAreaItemProps {
+        }),
+        TextAreaItem(new TextAreaItemProps {
             name = "vabdesc"
             width = "100%"
-        }
+        })
     ).opt
 
     fields = Seq(
@@ -143,9 +143,9 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     ).opt
 
     editWindowProperties = WindowSS(
-       new WindowSSProps {
-           width = 285
-           height = 425
-       }
+        new WindowSSProps {
+            width = 285
+            height = 425
+        }
     ).opt
 }
