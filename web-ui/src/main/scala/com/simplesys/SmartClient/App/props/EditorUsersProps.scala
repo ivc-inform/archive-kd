@@ -68,12 +68,15 @@ class EditorUsersProps extends TreeListGridEditorProps {
         },
         new TextItemProps {
             name = "codeGroup".opt
+            width = "100%"
         },
         new TextItemProps {
             name = "captionGroup".opt
+            width = "100%"
         },
         new TextAreaItemProps {
             name = "descriptionGroup".opt
+            width = "100%"
         }
     ).opt
     initWidget = {
