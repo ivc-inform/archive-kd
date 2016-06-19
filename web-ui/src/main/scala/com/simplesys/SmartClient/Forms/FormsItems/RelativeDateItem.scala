@@ -19,7 +19,6 @@ trait RelativeDateItem extends CanvasItem {
     var daysAgoTitle: String
     var daysFromNowTitle: String
     val defaultQuantity: Int
-    val defaultValue: Date
     var endDate: Date
     def getCriterion(absolute: Boolean = js.native): Criterion
     def getEnteredValue(): String

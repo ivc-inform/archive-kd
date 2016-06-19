@@ -22,7 +22,6 @@ trait PickList extends Class {
     var animationTime: Int
     var cachePickListResults: Boolean
     var dataArrived: js.Function3[Int, Int, ResultSet, _]
-    var displayField: String
     var emptyPickListHeight: Int
     var emptyPickListMessage: String
     def fetchData(callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
