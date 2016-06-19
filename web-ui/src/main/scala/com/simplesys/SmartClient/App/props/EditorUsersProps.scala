@@ -8,6 +8,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, Sele
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
+import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, FetchMode, ListGridFieldType, TreeModelType}
 import com.simplesys.System._
@@ -195,4 +196,11 @@ class EditorUsersProps extends TreeListGridEditorProps {
             thiz.getViewState()
 
     }.toThisFunc.opt
+
+    editWindowPropertiesTree = WindowSS(
+        new WindowSSProps {
+            width = 285
+            height = 285
+        }
+    ).opt
 }

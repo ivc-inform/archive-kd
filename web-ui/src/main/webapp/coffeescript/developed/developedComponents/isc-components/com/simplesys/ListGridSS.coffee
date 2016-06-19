@@ -166,7 +166,7 @@ isc.ListGrid.addProperties
 				@headerIconPath = if updatedOperation then "edit.png" else "insert.png"
 				@Super("initWidget", arguments)
 				@addItem canvas
-				return).addProperties @editWindowProperties
+				return).setProperties @editWindowProperties
 
 		okCancelPanel.owner = window
 		form.clearValues() if requestProperties.operationType is "add"
