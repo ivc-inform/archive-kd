@@ -155,7 +155,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 
 	"closedIconSuffix" : ""
 	"dataFetchModeList" : "paged"
-	"dataFetchModeTree" : "paged"
+	"dataFetchModeTree" : "basic"
 
 	"initWidget"                          : ->
 		@Super "initWidget", arguments
