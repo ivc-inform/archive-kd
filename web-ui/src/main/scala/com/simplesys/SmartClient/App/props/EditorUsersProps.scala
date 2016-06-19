@@ -29,8 +29,6 @@ class EditorUsersProps extends TreeListGridEditorProps {
     type classHandler <: EditorUsers
 
     identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
-    dataSourceList = DataSourcesJS.admin_User_DS.opt
-    dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
     autoFetchData = true.opt
     wrapTreeCells = true.opt
     drawAheadRatioList = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt

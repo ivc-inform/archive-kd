@@ -148,7 +148,9 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Группы".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(EditorUserGroups.create(new EditorUserGroupsProps), item)
+                                                    addTab(EditorUserGroups.create(new EditorUserGroupsProps {
+                                                        dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+                                                    }), item)
                                             }.toFunc.opt
                                         },
                                         new MenuSSItemProps {
@@ -157,7 +159,10 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Пользователи".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(EditorUsers.create(new EditorUsersProps), item)
+                                                    addTab(EditorUsers.create(new EditorUsersProps {
+                                                        dataSourceList = DataSourcesJS.admin_User_DS.opt
+                                                        dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
+                                                    }), item)
                                             }.toFunc.opt
                                         }
                                     ).opt

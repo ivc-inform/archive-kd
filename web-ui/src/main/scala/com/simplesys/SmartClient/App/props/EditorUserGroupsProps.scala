@@ -15,7 +15,6 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
     type classHandler <: EditorUserGroups
 
-    dataSource = DataSourcesJS.admin_UserGroup_DS.opt
     identifier = "C4C652D1-7823-F191-BD54-88A8A2238DCC".opt
 
     //    data = ResultTree.create(
