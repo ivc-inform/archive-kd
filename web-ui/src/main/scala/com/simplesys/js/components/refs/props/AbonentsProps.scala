@@ -102,53 +102,9 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new ListGridFieldProps {
             name = "vabontype"
-            editorProperties = SelectItem(
-                new SelectItemProps {
-                    optionDataSource = DataSourcesJS.eakd_abonents_types_DS.opt
-                    displayField = "vabontype"
-                    valueField = "id".opt
-                    initialSort = Seq(
-                        new SortSpecifierProps {
-                            property = "vabontype"
-                        }
-                    ).opt
-                }
-            ).opt
-            filterEditorProperties = SelectItem(
-                new SelectItemProps {
-                    optionDataSource = DataSourcesJS.eakd_abonents_types_DS.opt
-                    initialSort = Seq(
-                        new SortSpecifierProps {
-                            property = "vabontype"
-                        }
-                    ).opt
-                }
-            ).opt
         },
         new ListGridFieldProps {
             name = "orgcode"
-            editorProperties = SelectItem(
-                new SelectItemProps {
-                    optionDataSource = DataSourcesJS.eakd_abonents_org_DS.opt
-                    displayField = "orgcode"
-                    valueField = "id".opt
-                    initialSort = Seq(
-                        new SortSpecifierProps {
-                            property = "orgcode"
-                        }
-                    ).opt
-                }
-            ).opt
-            filterEditorProperties = SelectItem(
-                new SelectItemProps {
-                    optionDataSource = DataSourcesJS.eakd_abonents_org_DS.opt
-                    initialSort = Seq(
-                        new SortSpecifierProps {
-                            property = "orgcode"
-                        }
-                    ).opt
-                }
-            ).opt
         },
         new ListGridFieldProps {
             name = "vabdesc"

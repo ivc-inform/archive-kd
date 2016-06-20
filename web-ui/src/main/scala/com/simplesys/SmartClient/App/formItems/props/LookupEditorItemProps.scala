@@ -24,6 +24,7 @@ class LookupEditorItemProps extends CanvasItemProps {
     var buttonIcon: ScOption[SCImgURL] = ScNone
     var editor: ScOption[Canvas] = ScNone
     var captionLookupFieldName: ScOption[String] = ScNone
+    shouldSaveValue = true.opt
 
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
@@ -129,7 +130,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                             val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
                                                                             textItem setValue lookupCaption
-                                                                            formItem setValue lookupCaption
+                                                                            item setValue lookupCaption
                                                                         }
                                                                     }
                                                             }.toThisFunc.opt
