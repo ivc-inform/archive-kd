@@ -25,6 +25,10 @@ class LookupEditorProps extends HLayoutSSProps {
     var editedFieldName: ScOption[String] = ScNone
     var record: ScOption[Record] = ScNone
 
+    width = "100%"
+    height = 22
+    align = Alignment.center
+
     var setValue: ScOption[ThisFunction1[classHandler, JSAny, _]] = {
         (thiz: classHandler, value: JSAny) =>
             if (thiz.textItem.isEmpty)

@@ -54,7 +54,7 @@ import com.simplesys.System._
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
-import scala.scalajs.js.ThisFunction0
+import scala.scalajs.js.{ThisFunction0, ThisFunction4}
 
 class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps with DataBoundComponentProps {
     var advancedFieldPickerThreshold: ScOption[Int] = ScNone
@@ -534,7 +534,7 @@ class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps wi
     var ungroupText: ScOption[String] = ScNone
     var unremoveIcon: ScOption[SCImgURL] = ScNone
     var unspannedHeaderVAlign: ScOption[VerticalAlignment] = ScNone
-    var updateRecordComponent: ScOption[js.Function4[R, Int, Canvas, Boolean, Canvas]] = ScNone
+    var updateRecordComponent: ScOption[ThisFunction4[classHandler, R, Int, Canvas, Boolean, Canvas]] = ScNone
     var useAdvancedFieldPicker: ScOption[Boolean] = ScNone
     var useCellRollOvers: ScOption[Boolean] = ScNone
     var useCopyPasteShortcuts: ScOption[Boolean] = ScNone
