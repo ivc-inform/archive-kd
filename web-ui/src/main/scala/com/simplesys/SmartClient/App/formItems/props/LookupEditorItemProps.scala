@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.App.formItems.props
 import com.simplesys.SmartClient.App.formItems.LookupEditorItem
 import com.simplesys.SmartClient.Control.props.{IButtonSSProps, TreeGridContextMenuProps}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
+import com.simplesys.SmartClient.Forms.FormsItems.CanvasItem
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
@@ -17,8 +17,6 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
-import scala.scalajs.js.{ThisFunction0, ThisFunction1}
-
 
 class LookupEditorItemProps extends CanvasItemProps {
     type classHandler <: LookupEditorItem
@@ -28,29 +26,9 @@ class LookupEditorItemProps extends CanvasItemProps {
     var captionLookupFieldName: ScOption[String] = ScNone
     shouldSaveValue = true.opt
 
-    var setValue: ScOption[ThisFunction1[classHandler, JSAny, _]] = {
-        (thiz: classHandler, value: JSAny) =>
-            if (thiz.textItem.isEmpty)
-                isc.error("topThiz.textItem.")
-            else
-                thiz.textItem.foreach(_ setValue value)
-
-    }.toThisFunc.opt
-
-    var getValue: ScOption[ThisFunction0[classHandler, JSAny]] = {
-        (thiz: classHandler) =>
-            if (thiz.textItem.isEmpty) {
-                isc.error("topThiz.textItem.")
-                null
-            }
-            else
-                thiz.textItem.get.getValue()
-
-    }.toThisFunc.opt
-
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
-            val topThiz = thiz
+            val formItem = thiz
 
             val df = DynamicFormSS.create(
                 new DynamicFormSSProps {
@@ -72,28 +50,26 @@ class LookupEditorItemProps extends CanvasItemProps {
                 }
             )
 
-            topThiz.textItem = df.getItem(0).asInstanceOf[TextItem]
-
             val button = IButtonSS.create(
                 new IButtonSSProps {
                     iconAlign = "center".opt
-                    icon = topThiz.buttonIcon.getOrElse(Common.ellipsis).opt
+                    icon = thiz.buttonIcon.getOrElse(Common.ellipsis).opt
                     width = 22
                     click = {
                         (thiz: classHandler) =>
                             val textItem = df.getItem(0)
 
-                            if (topThiz.editor.isEmpty)
+                            if (formItem.editor.isEmpty)
                                 isc.error("Отсутствует редактор.")
                             else {
-                                topThiz.editor.foreach {
+                                formItem.editor.foreach {
                                     editor =>
 
-                                        if (!topThiz.lookup.getOrElse(false))
+                                        if (!formItem.lookup.getOrElse(false))
                                             isc.error("Поле не является полем lookup")
-                                        else if (topThiz.foreignField.isEmpty)
+                                        else if (formItem.foreignField.isEmpty)
                                             isc.error("Нет значения для foreignField.")
-                                        else if (topThiz.captionLookupFieldName.isEmpty)
+                                        else if (formItem.captionLookupFieldName.isEmpty)
                                             isc.error("Нет значения для captionLookupFieldName.")
                                         else {
                                             val window = WindowSS.create(
@@ -105,7 +81,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                     showMaximizeButton = false.opt
                                                     showMinimizeButton = false.opt
                                                     identifier = s"${form.identifier}_lookup_${item.name}".opt
-                                                    title = s"${topThiz.captionClassLookup.getOrElse("Неизвестное поле captionClassLookup.")}".ellipsis.opt
+                                                    title = s"${formItem.captionClassLookup.getOrElse("Неизвестное поле captionClassLookup.")}".ellipsis.opt
                                                     headerIconPath = Common.iconEdit.opt
                                                 }
                                             )
@@ -115,7 +91,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                     editor,
                                                     OkCancelPanel.create(
                                                         new OkCancelPanelProps {
-                                                            owner = window.opt
+                                                            owner = thiz.opt
                                                             padding = 5.opt
                                                             okCaption = "Выбрать".opt
                                                             ownerDestroy = false.opt
@@ -141,17 +117,17 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                     if (selectedRecord.isEmpty)
                                                                         isc.error("Не возможно выделить значение для ввода.")
                                                                     else {
-                                                                        val foreignIdField = form.dataSource.getField(topThiz.foreignField.get)
+                                                                        val foreignIdField = form.dataSource.getField(formItem.foreignField.get)
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
 
-                                                                        val idField = form.getItem(topThiz.foreignField.get)
+                                                                        val idField = form.getItem(formItem.foreignField.get)
 
                                                                         if (idField == null)
-                                                                            isc.error(s"Нет поля ${topThiz.foreignField.get}")
+                                                                            isc.error(s"Нет поля ${formItem.foreignField.get}")
                                                                         else {
                                                                             val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
                                                                             idField.setValue(valueId)
-                                                                            val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(topThiz.captionLookupFieldName.get)
+                                                                            val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
                                                                             textItem setValue lookupCaption
                                                                             item setValue lookupCaption
