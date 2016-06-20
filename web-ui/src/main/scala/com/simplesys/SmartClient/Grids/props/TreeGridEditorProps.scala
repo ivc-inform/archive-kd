@@ -22,4 +22,7 @@ class TreeGridEditorProps extends GridEditorProps[TreeGridFieldProps, ListGridRe
     var canReparentNodes: ScOption[Boolean] = ScNone
     var showOpenIcons: ScOption[Boolean] = ScNone
     var data: ScOption[Tree] = ScNone
+
+    var createRecordComponent: ScOption[ThisFunction2[TreeGrid, ListGridRecord, Int, Canvas]] = ScNone
+    var updateRecordComponent: ScOption[ThisFunction4[TreeGrid, ListGridRecord, Int, Canvas, Boolean, Canvas]] = ScNone
 }

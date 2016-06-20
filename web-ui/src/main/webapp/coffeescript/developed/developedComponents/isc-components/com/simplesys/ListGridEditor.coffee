@@ -254,8 +254,8 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"autoFitWidthApproach"            : @autoFitWidthApproach
 			"modalEditing"                    : @modalEditing
 			"selectionAppearance"             : @selectionAppearance
-			"createRecordComponent"           : (record, colNum) => @createRecordComponent? record, colNum
-			"updateRecordComponent"           : (record, colNum, component, recordChanged) => @updateRecordComponent? record, colNum, component, recordChanged
+			"createRecordComponent"           : @createRecordComponent
+			"updateRecordComponent"           : @updateRecordComponent
 			"expansionDetailFieldProperties"  :
 				"canSelectText": @canSelectTextExpandedField
 			"canSelectCells"                  : @canSelectCells

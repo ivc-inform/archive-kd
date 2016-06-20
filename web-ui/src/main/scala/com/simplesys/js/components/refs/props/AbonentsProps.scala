@@ -131,7 +131,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     var column4Editing: ScOption[IscArray[String]] = IscArray("vabontype", "orgcode").opt
 
     createRecordComponent = {
-        (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
+        (thiz: ListGrid, listGridRecord: ListGridRecord, colNum: Int) =>
             isc debugTrap(thiz, colNum)
 //            val colName = thiz.getFieldName(colNum)
 //            isc debugTrap colName
@@ -148,7 +148,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     }.toThisFunc.opt
 
     updateRecordComponent = {
-        (thiz: classHandler, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
+        (thiz: ListGrid, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
             val editor = component.asInstanceOf[LookupEditor]
             editor setValueFromRecord record
             editor
