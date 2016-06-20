@@ -118,15 +118,18 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                     else {
                                                                         val foreignIdField = form.dataSource.getField(formItem.foreignField.get)
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                                                                        val idField = df.getItem(idFieldName)
-                                                                        if (idField.isEmpty)
-                                                                            isc.error(s"Нет поля $idFieldName")
+
+                                                                        val idField = form.getItem(formItem.foreignField.get)
+
+                                                                        if (idField == null)
+                                                                            isc.error(s"Нет поля ${formItem.foreignField.get}")
                                                                         else {
                                                                             val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
-                                                                            //idField.get.setValue(valueId)
+                                                                            idField.setValue(valueId)
                                                                             val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
-                                                                            textItem.get setValue lookupCaption
+                                                                            textItem setValue lookupCaption
+                                                                            formItem setValue lookupCaption
                                                                         }
                                                                     }
                                                             }.toThisFunc.opt

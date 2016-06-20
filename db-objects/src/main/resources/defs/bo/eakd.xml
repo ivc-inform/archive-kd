@@ -4,13 +4,13 @@
 			<classSimple autoTableMapping="true" caption="Абоненты" name="abonents">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vabcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vabname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vabcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vabname" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="vabdesc" type="sCaption"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="true" name="tdatein" type="dDateTime"></attr>
 					<attr caption="Телефон 1" mandatory="false" name="vphone1" type="sPhone"></attr>
 					<attr caption="Телефон 2" mandatory="false" name="vphone2" type="sPhone"></attr>
-					<attr caption="Сотрудник" mandatory="false" name="vperson" type="sCaption"></attr>
+					<attr caption="Сотрудник" mandatory="true" name="vperson" type="sCaption"></attr>
 					<attr caption="Электронная почта" mandatory="false" name="vemail" type="sEMail"></attr>
 				</attrs>
 				<defaults>
