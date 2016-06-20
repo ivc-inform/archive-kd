@@ -2,15 +2,16 @@ package com.simplesys.js.components.refs.props
 
 import com.simplesys.SmartClient.App.formItems.props.LookupEditorItemProps
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
-import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
 import com.simplesys.SmartClient.Forms.FormsItems.props._
+import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.ListGridFieldType
-import com.simplesys.System._
+import com.simplesys.System.Types.{ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
-import com.simplesys.js.components.refs.{Abonents, AbonentsOrg}
+import com.simplesys.function._
+import com.simplesys.js.components.refs.Abonents
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
@@ -60,7 +61,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "orgcode"
             width = "100%"
             editor = AbonentsOrg.create(new AbonentsOrgProps).opt
-            captionLookupFieldName = "orgcode".opt
+            captionLookupFieldName = "orgcode"
         }),
         IntegerItem(new IntegerItemProps {
             name = "idabtype"
@@ -71,7 +72,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "vabontype"
             width = "100%"
             editor = AbonentsTypes.create(new AbonentsTypesProps).opt
-            captionLookupFieldName = "vabontype".opt
+            captionLookupFieldName = "vabontype"
         }),
         TextAreaItem(new TextAreaItemProps {
             name = "vabdesc"
@@ -119,4 +120,18 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             height = 425
         }
     ).opt
+
+    showRecordComponents = true
+    showRecordComponentsByCel = true
+    recordComponentPoolingMode = RecordComponentPoolingMode.recycle.opt
+
+    createRecordComponent = {
+        (record: ListGridRecord, colNum: Int) =>
+
+    }.toThisFunc.opt
+
+    updateRecordComponent = {
+        (record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
+
+    }.toThisFunc.opt
 }

@@ -255,6 +255,7 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"modalEditing"                    : @modalEditing
 			"selectionAppearance"             : @selectionAppearance
 			"createRecordComponent"           : @createRecordComponent
+			"updateRecordComponent"           : @updateRecordComponent
 			"expansionDetailFieldProperties"  :
 				"canSelectText": @canSelectTextExpandedField
 			"canSelectCells"                  : @canSelectCells

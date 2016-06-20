@@ -282,6 +282,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"modalEditing"                    : @modalEditing
 			"selectionAppearance"             : @selectionAppearance
 			"createRecordComponent"           : @createRecordComponent
+			"updateRecordComponent"           : @updateRecordComponent
 			"canSelectText"                   : @canSelectText
 			"expansionDetailFieldProperties"  :
 				"canSelectText": @canSelectTextExpandedField
