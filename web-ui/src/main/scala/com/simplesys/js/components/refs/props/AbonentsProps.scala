@@ -11,7 +11,7 @@ import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System.{LookupEditor, _}
-import com.simplesys.System.Types.{ListGridFieldType, RecordComponentPoolingMode}
+import com.simplesys.System.Types.{FormItemComponentType, ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
 import com.simplesys.function._
 import com.simplesys.js.components.refs.Abonents
@@ -24,6 +24,20 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     override val simpleTable = false
 
     type classHandler <: Abonents
+
+    val orgItem = LookupEditorItem(new LookupEditorItemProps {
+        name = "orgcode"
+        width = "100%"
+        editor = AbonentsOrg.create(new AbonentsOrgProps).opt
+        captionLookupFieldName = "orgcode"
+    })
+
+    val abonTypeItem = LookupEditorItem(new LookupEditorItemProps {
+        name = "vabontype"
+        width = "100%"
+        editor = AbonentsTypes.create(new AbonentsTypesProps).opt
+        captionLookupFieldName = "vabontype"
+    })
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
     identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
@@ -61,23 +75,13 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             width = "100%"
             hidden = true.opt
         }),
-        LookupEditorItem(new LookupEditorItemProps {
-            name = "orgcode"
-            width = "100%"
-            editor = AbonentsOrg.create(new AbonentsOrgProps).opt
-            captionLookupFieldName = "orgcode"
-        }),
+        orgItem,
         IntegerItem(new IntegerItemProps {
             name = "idabtype"
             width = "100%"
             hidden = true.opt
         }),
-        LookupEditorItem(new LookupEditorItemProps {
-            name = "vabontype"
-            width = "100%"
-            editor = AbonentsTypes.create(new AbonentsTypesProps).opt
-            captionLookupFieldName = "vabontype"
-        }),
+        abonTypeItem,
         TextAreaItem(new TextAreaItemProps {
             name = "vabdesc"
             width = "100%"
@@ -109,9 +113,13 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new ListGridFieldProps {
             name = "vabontype"
+            editorType = FormItemComponentType.LookupEditorItem
+            editorProperties = abonTypeItem.opt
         },
         new ListGridFieldProps {
             name = "orgcode"
+            editorType = FormItemComponentType.LookupEditorItem
+            editorProperties = orgItem.opt
         },
         new ListGridFieldProps {
             name = "vabdesc"
@@ -125,31 +133,31 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         }
     ).opt
 
-    showRecordComponents = true
-    showRecordComponentsByCell = true
-    recordComponentPoolingMode = RecordComponentPoolingMode.recycle.opt
-    var column4Editing: ScOption[IscArray[String]] = IscArray("vabontype", "orgcode").opt
+    //    showRecordComponents = true
+    //    showRecordComponentsByCell = true
+    //    recordComponentPoolingMode = RecordComponentPoolingMode.recycle.opt
+    //    var column4Editing: ScOption[IscArray[String]] = IscArray("vabontype", "orgcode").opt
 
-    createRecordComponent = {
-        (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
-            val colName = thiz.getFieldName(colNum)
-            isc debugTrap (thiz, colNum, colName)
-
-            if (thiz.column4Editing.contains(colName)) {
-                LookupEditor.create(
-                    new LookupEditorProps {
-                        editedFieldName = colName.opt
-                        record = listGridRecord.opt
-                    }
-                )
-            } else
-                null
-    }.toThisFunc.opt
-
-    updateRecordComponent = {
-        (thiz: classHandler, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
-            val editor = component.asInstanceOf[LookupEditor]
-            editor setValueFromRecord record
-            editor
-    }.toThisFunc.opt
+    //    createRecordComponent = {
+    //        (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
+    //            val colName = thiz.getFieldName(colNum)
+    //            isc debugTrap (thiz, colNum, colName)
+    //
+    //            if (thiz.column4Editing.contains(colName)) {
+    //                LookupEditor.create(
+    //                    new LookupEditorProps {
+    //                        editedFieldName = colName.opt
+    //                        record = listGridRecord.opt
+    //                    }
+    //                )
+    //            } else
+    //                null
+    //    }.toThisFunc.opt
+    //
+    //    updateRecordComponent = {
+    //        (thiz: classHandler, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
+    //            val editor = component.asInstanceOf[LookupEditor]
+    //            editor setValueFromRecord record
+    //            editor
+    //    }.toThisFunc.opt
 }

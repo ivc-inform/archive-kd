@@ -15,6 +15,7 @@ import com.simplesys.System.Types.EditCompletionEvent.EditCompletionEvent
 import com.simplesys.System.Types.EnterKeyEditAction.EnterKeyEditAction
 import com.simplesys.System.Types.EscapeKeyEditAction.EscapeKeyEditAction
 import com.simplesys.System.Types.FormItemComponentType.FormItemComponentType
+import com.simplesys.System.Types.FormItemType._
 import com.simplesys.System.Types.HiliteIconPosition.HiliteIconPosition
 import com.simplesys.System.Types.ListGridFieldType._
 import com.simplesys.System.Types.OperatorId.OperatorId
@@ -25,7 +26,7 @@ import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types._
 import com.simplesys.System.{JSAny, JSDictionary, JSObject}
-import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.option.{FormItemType_FormItemComponentType, ScNone, ScOption}
 import com.simplesys.props.AbstractClassProps
 
 import scala.scalajs.js
@@ -77,7 +78,7 @@ class ListGridFieldProps extends AbstractClassProps {
     var editorImageURLPrefix: ScOption[String] = ScNone
     var editorImageURLSuffix: ScOption[String] = ScNone
     var editorProperties: ScOption[FormItem] = ScNone
-    var editorType: ScOption[FormItemComponentType] = ScNone
+    var editorType: ScOption[FormItemType_FormItemComponentType[FormItemType, FormItemComponentType]] = ScNone
     var editorValueIconHeight: ScOption[Int] = ScNone
     var editorValueIcons: ScOption[JSObject] = ScNone
     var editorValueIconWidth: ScOption[Int] = ScNone
