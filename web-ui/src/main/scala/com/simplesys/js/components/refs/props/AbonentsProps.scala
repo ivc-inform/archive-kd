@@ -132,18 +132,17 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
     createRecordComponent = {
         (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
-            isc debugTrap(thiz, colNum)
             val colName = thiz.getFieldName(colNum)
-            isc debugTrap colName
+            isc debugTrap (thiz, colNum, colName)
 
-//            if (thiz.column4Editing.contains(colName)) {
-//                LookupEditor.create(
-//                    new LookupEditorProps {
-//                        editedFieldName = colName.opt
-//                        record = listGridRecord.opt
-//                    }
-//                )
-//            } else
+            if (thiz.column4Editing.contains(colName)) {
+                LookupEditor.create(
+                    new LookupEditorProps {
+                        editedFieldName = colName.opt
+                        record = listGridRecord.opt
+                    }
+                )
+            } else
                 null
     }.toThisFunc.opt
 
