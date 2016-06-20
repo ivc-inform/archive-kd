@@ -182,7 +182,6 @@ isc.ListGrid.addProperties
 	"startEditingInForm": (obj,fields, callback, requestProperties)->
 		@_getEditorWindow obj, fields, callback, requestProperties
 		return
-	"getLookupCaption" : -> "Undefined method getLookupCaption"
 
 
 isc.ClassFactory.defineInterface("GridEditorInterface").addInterfaceProperties
@@ -327,6 +326,5 @@ isc.ClassFactory.defineInterface("GridEditorInterface").addInterfaceProperties
 		@grid.startEditingInForm obj, fields, callback, requestProperties
 		return
 
-	"getLookupCaption": -> @grid.getLookupCaption()
 
 

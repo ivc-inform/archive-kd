@@ -23,6 +23,7 @@ class LookupEditorItemProps extends CanvasItemProps {
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
     var editor: ScOption[Canvas] = ScNone
+    var captionLookupFieldName: ScOption[String] = ScNone
 
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
@@ -66,7 +67,9 @@ class LookupEditorItemProps extends CanvasItemProps {
                                         if (!formItem.lookup.getOrElse(false))
                                             isc.error("Поле не является полем lookup")
                                         else if (formItem.foreignField.isEmpty)
-                                            isc.error("Неn foreignField.")
+                                            isc.error("Нет значения для foreignField.")
+                                        else if (formItem.captionLookupFieldName.isEmpty)
+                                            isc.error("Нет значения для captionLookupFieldName.")
                                         else {
                                             val window = WindowSS.create(
                                                 new WindowSSProps {
@@ -97,22 +100,17 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                 (thiz: classHandler) =>
 
                                                                     var selectedRecord: JSUndefined[Record] = jSUndefined
-                                                                    var lookupCaption: JSUndefined[String] = jSUndefined
 
                                                                     if (isc.isA.ListGrid(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGrid]
                                                                         selectedRecord = _editor.getSelectedRecord()
-                                                                        lookupCaption = _editor.getLookupCaption()
                                                                     }
                                                                     else if (isc.isA.ListGridEditor(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGridEditor]
-                                                                        isc debugTrap _editor
                                                                         selectedRecord = _editor.getSelectedRecord()
-                                                                        lookupCaption = _editor.getLookupCaption()
                                                                     } else if (isc.isA.TreeGridEditor(editor)) {
                                                                         val _editor = editor.asInstanceOf[TreeGridEditor]
                                                                         selectedRecord = _editor.getSelectedRecord()
-                                                                        lookupCaption = _editor.getLookupCaption()
                                                                     }
 
                                                                     if (selectedRecord.isEmpty)
@@ -122,6 +120,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
 
                                                                         val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+                                                                        val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
                                                                         textItem setValue lookupCaption
                                                                     }

@@ -860,7 +860,6 @@ trait Grid[T <: ListGridField, R <: JSObject] extends VLayout with DataBoundComp
     var masterListGrid: UndefOr[ListGrid]
     @JSName("masterGrid")
     var masterTreeGrid: UndefOr[TreeGrid]
-    def getLookupCaption(): String
 }
 
 @js.native
