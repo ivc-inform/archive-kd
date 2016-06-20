@@ -4,10 +4,12 @@ import com.simplesys.SmartClient.App.formItems.props.LookupEditorItemProps
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.Forms.FormsItems.props._
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.editors.LookupEditor
+import com.simplesys.SmartClient.Grids.editors.props.LookupEditorProps
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
-import com.simplesys.SmartClient.System._
+import com.simplesys.SmartClient.System.{LookupEditor, _}
 import com.simplesys.System.Types.{ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
 import com.simplesys.function._
@@ -126,12 +128,23 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     recordComponentPoolingMode = RecordComponentPoolingMode.recycle.opt
 
     createRecordComponent = {
-        (record: ListGridRecord, colNum: Int) =>
-
+        (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
+            thiz.grid.getFieldName(colNum) match {
+                case fieldName@("vabontype" | "orgcode") =>
+                    LookupEditor.create(
+                        new LookupEditorProps {
+                            editedFieldName = fieldName.opt
+                            record = listGridRecord.opt
+                        }
+                    )
+                case fieldName => null
+            }
     }.toThisFunc.opt
 
     updateRecordComponent = {
-        (record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
-
+        (thiz: classHandler, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
+            val editor = component.asInstanceOf[LookupEditor]
+            editor setValueFromRecord record
+            editor
     }.toThisFunc.opt
 }
