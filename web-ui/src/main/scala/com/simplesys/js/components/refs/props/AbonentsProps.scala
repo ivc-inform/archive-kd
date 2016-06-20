@@ -3,7 +3,7 @@ package com.simplesys.js.components.refs.props
 import com.simplesys.SmartClient.App.formItems.props.LookupEditorItemProps
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.DataBinding.props.SortSpecifierProps
-import com.simplesys.SmartClient.Forms.FormsItems.props.{DateTimeItemProps, SelectItemProps, TextAreaItemProps, TextItemProps}
+import com.simplesys.SmartClient.Forms.FormsItems.props._
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
@@ -50,11 +50,21 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "vphone2"
             width = "100%"
         }),
+        IntegerItem(new IntegerItemProps {
+            name = "idaborg"
+            width = "100%"
+            hidden = true.opt
+        }),
         LookupEditorItem(new LookupEditorItemProps {
             name = "orgcode"
             width = "100%"
             editor = AbonentsOrg.create(new AbonentsOrgProps).opt
             captionLookupFieldName = "orgcode".opt
+        }),
+        IntegerItem(new IntegerItemProps {
+            name = "idabtype"
+            width = "100%"
+            hidden = true.opt
         }),
         LookupEditorItem(new LookupEditorItemProps {
             name = "vabontype"

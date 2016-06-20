@@ -86,7 +86,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def getFieldErrors(fieldName: String): IscArray[String]
     def getFields(): IscArray[FormItem]
     def getFocusItem(): FormItem
-    def getItem(itemName: String | Int): FormItem
+    def getItem(itemName: String | Int): JSUndefined[FormItem]
     def getItemErrorHTML(item: FormItem, error: IscArray[String]): void
     def getItems(): JSUndefined[IscArray[FormItem]]
     def getOldValues(): JSObject

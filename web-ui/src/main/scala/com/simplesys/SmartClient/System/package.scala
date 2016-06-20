@@ -94,6 +94,7 @@ package object System {
     //    object DateRangeItem extends SCApply[DateRangeItem, DateRangeItemProps]
     object DateTimeItem extends SCApply[DateTimeItem, DateTimeItemProps]
     object DoubleItem extends SCApply[DoubleItem, DoubleItemProps]
+    object IntegerItem extends SCApply[IntegerItem, IntegerItemProps]
     object FloatItem extends SCApply[FloatItem, FloatItemProps]
     object PickList extends SCApply[PickList, PickListProps]
     object SelectItem extends SCApply[SelectItem, SelectItemProps]
