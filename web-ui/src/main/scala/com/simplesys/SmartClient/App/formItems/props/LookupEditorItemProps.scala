@@ -17,7 +17,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
-import scala.scalajs.js.ThisFunction1
+import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 
 
 class LookupEditorItemProps extends CanvasItemProps {
@@ -34,6 +34,17 @@ class LookupEditorItemProps extends CanvasItemProps {
                 isc.error("topThiz.textItem.")
             else
                 thiz.textItem.foreach(_ setValue value)
+
+    }.toThisFunc.opt
+
+    var getValue: ScOption[ThisFunction0[classHandler, JSAny]] = {
+        (thiz: classHandler) =>
+            if (thiz.textItem.isEmpty) {
+                isc.error("topThiz.textItem.")
+                null
+            }
+            else
+                thiz.textItem.get.getValue()
 
     }.toThisFunc.opt
 

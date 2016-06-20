@@ -11,5 +11,4 @@ trait LookupEditorItem extends CanvasItem{
     val buttonIcon: JSUndefined[SCImgURL]
     val captionLookupFieldName: JSUndefined[String]
     var textItem: JSUndefined[TextItem]
-    def setValue(value: JSAny): void
 }
