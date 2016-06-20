@@ -7,6 +7,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.props._
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
+import com.simplesys.System.Types.ListGridFieldType
 import com.simplesys.System._
 import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
 import com.simplesys.js.components.refs.{Abonents, AbonentsOrg}
@@ -87,6 +88,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new ListGridFieldProps {
             name = "tdatein"
+            `type` = ListGridFieldType.date.opt
         },
         new ListGridFieldProps {
             name = "vemail"
