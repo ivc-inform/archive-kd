@@ -29,7 +29,7 @@
             <DrawAheadRatio>simpleSyS.config.drawAheadRatio</DrawAheadRatio>
             <InitialSort>
                 <SortSpecifier>
-                    <Property>id</Property>
+                    <Property>idorg</Property>
                 </SortSpecifier>
             </InitialSort>
             <CanEdit>true</CanEdit>
