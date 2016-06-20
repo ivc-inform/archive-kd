@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.App.formItems.props
 import com.simplesys.SmartClient.App.formItems.LookupEditorItem
 import com.simplesys.SmartClient.Control.props.{IButtonSSProps, TreeGridContextMenuProps}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.CanvasItem
+import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
@@ -28,6 +28,7 @@ class LookupEditorItemProps extends CanvasItemProps {
 
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
+
             val formItem = thiz
 
             val df = DynamicFormSS.create(
@@ -49,6 +50,15 @@ class LookupEditorItemProps extends CanvasItemProps {
                     ).opt
                 }
             )
+
+            val textItem = df.getItem(0).asInstanceOf[TextItem]
+
+            if (textItem != null)
+                form.grid.foreach{
+                    grid =>
+                        val value = grid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(item.name)
+                        textItem setValue value
+                }
 
             val button = IButtonSS.create(
                 new IButtonSSProps {

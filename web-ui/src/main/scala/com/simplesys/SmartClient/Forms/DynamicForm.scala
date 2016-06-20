@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.DataBinding._
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Forms.dynamicForm.FormItemEventInfo
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.Grid
+import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
 import com.simplesys.SmartClient.System.{IscArray, KeyIdentifier}
 import com.simplesys.SmartClient.Workdlow.UserTask
@@ -97,6 +97,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def getValue(fieldName: String): JSAny
     def getValues(): JSObject
     def getValuesAsAdvancedCriteria(textMatchStyle: TextMatchStyle = js.native): AdvancedCriteria
+    val grid: JSUndefined[ListGrid]
     def getValuesAsCriteria(advanced: Boolean, textMatchStyle: TextMatchStyle = js.native): Criteria | AdvancedCriteria
     def handleAsyncValidationReply(success: Boolean, errors: JSObject): void
     var handleHiddenValidationErrors: js.ThisFunction1[DynamicForm, JSObject, Boolean]
