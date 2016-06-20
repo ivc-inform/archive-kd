@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.Grids.props
 
-import com.simplesys.SmartClient.Grids.TreeGrid
+import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.{ListGrid, TreeGrid}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
 import com.simplesys.SmartClient.Grids.treeGrid.{Tree, TreeGridField, TreeNode}
@@ -13,6 +14,7 @@ import com.simplesys.System.Types.{SCImgURL, void}
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
+import scala.scalajs.js.{ThisFunction2, ThisFunction4}
 
 class TreeGridProps extends GridProps[TreeGridField, ListGridRecord] {
     type classHandler <: TreeGrid

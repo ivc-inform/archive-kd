@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.App.formItems.props.LookupEditorItemProps
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.Forms.FormsItems.props._
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.ListGrid
 import com.simplesys.SmartClient.Grids.editors.LookupEditor
 import com.simplesys.SmartClient.Grids.editors.props.LookupEditorProps
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
@@ -128,8 +129,9 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     recordComponentPoolingMode = RecordComponentPoolingMode.recycle.opt
 
     createRecordComponent = {
-        (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
-            thiz.grid.getFieldName(colNum) match {
+        (thiz: ListGrid, listGridRecord: ListGridRecord, colNum: Int) =>
+            isc debugTrap thiz
+            thiz.getFieldName(colNum) match {
                 case fieldName@("vabontype" | "orgcode") =>
                     LookupEditor.create(
                         new LookupEditorProps {
@@ -142,7 +144,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     }.toThisFunc.opt
 
     updateRecordComponent = {
-        (thiz: classHandler, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
+        (thiz: ListGrid, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
             val editor = component.asInstanceOf[LookupEditor]
             editor setValueFromRecord record
             editor
