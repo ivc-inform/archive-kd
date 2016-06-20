@@ -37,7 +37,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var autoFitFieldWidth: ScOption[Boolean] = ScNone
     var canResizeFields: ScOption[Boolean] = ScNone
     var showAllRecords: ScOption[Boolean] = ScNone
-    var showRecordComponentsByCel: ScOption[Boolean] = ScNone
+    var showRecordComponentsByCell: ScOption[Boolean] = ScNone
     var showRecordComponents: ScOption[Boolean] = ScNone
     var filterOnKeypress: ScOption[Boolean] = ScNone
     var drawAheadRatio: ScOption[Double] = ScNone
@@ -81,6 +81,9 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var dataFetchMode: ScOption[FetchMode] = ScNone
     var editWindowProperties: ScOption[WindowSS] = ScNone
     var recordComponentPoolingMode: ScOption[RecordComponentPoolingMode] = ScNone
+
+    var createRecordComponent: ScOption[ThisFunction2[classHandler, ListGridRecord, Int, Canvas]] = ScNone
+    var updateRecordComponent: ScOption[ThisFunction4[classHandler, ListGridRecord, Int, Canvas, Boolean, Canvas]] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {
@@ -89,7 +92,4 @@ class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRe
     var fields: ScOption[Seq[ListGridFieldProps]] = ScNone
     var defaultFields: ScOption[Seq[ListGridFieldProps]] = ScNone
     var data: ScOption[Seq[ListGridRecord]] = ScNone
-
-    var createRecordComponent: ScOption[ThisFunction2[ListGrid, ListGridRecord, Int, Canvas]] = ScNone
-    var updateRecordComponent: ScOption[ThisFunction4[ListGrid, ListGridRecord, Int, Canvas, Boolean, Canvas]] = ScNone
 }

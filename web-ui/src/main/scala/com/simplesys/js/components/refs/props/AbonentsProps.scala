@@ -126,12 +126,12 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     ).opt
 
     showRecordComponents = true
-    showRecordComponentsByCel = true
+    showRecordComponentsByCell = true
     recordComponentPoolingMode = RecordComponentPoolingMode.recycle.opt
     var column4Editing: ScOption[IscArray[String]] = IscArray("vabontype", "orgcode").opt
 
     createRecordComponent = {
-        (thiz: ListGrid, listGridRecord: ListGridRecord, colNum: Int) =>
+        (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
             isc debugTrap(thiz, colNum)
             val colName = thiz.getFieldName(colNum)
             isc debugTrap colName
@@ -148,7 +148,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     }.toThisFunc.opt
 
     updateRecordComponent = {
-        (thiz: ListGrid, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
+        (thiz: classHandler, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
             val editor = component.asInstanceOf[LookupEditor]
             editor setValueFromRecord record
             editor

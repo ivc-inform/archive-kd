@@ -36,7 +36,7 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     def fetchData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def hasChanges(): Boolean
     def getDataLength(): Int
-    var showRecordComponentsByCel: Boolean
+    var showRecordComponentsByCell: Boolean
     var showRecordComponents: Boolean
     var filterOnKeypress: Boolean
     var drawAheadRatio: Double

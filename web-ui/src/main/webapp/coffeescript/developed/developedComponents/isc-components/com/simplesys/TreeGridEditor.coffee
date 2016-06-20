@@ -437,6 +437,6 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"deselectAllRecords": ->
 		@grid.deselectAllRecords()
 		return
-
+	"getFieldName": (colNum)-> @grid.getFieldName colNum
 	"getRowNum": (record) ->
 		@grid.getRowNum record
