@@ -82,6 +82,7 @@ class LookupEditorProps extends HLayoutSSProps {
                     iconAlign = "center".opt
                     icon = topThiz.buttonIcon.getOrElse(Common.ellipsis).opt
                     width = 22
+                    visibility = Visibility.hidden.opt
                     click = {
                         (thiz: classHandler) =>
                             if (topThiz.editor.isEmpty)
