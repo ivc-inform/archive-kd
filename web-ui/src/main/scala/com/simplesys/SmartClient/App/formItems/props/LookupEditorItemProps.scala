@@ -54,7 +54,7 @@ class LookupEditorItemProps extends CanvasItemProps {
             val textItem = df.getItem(0).asInstanceOf[TextItem]
 
             if (textItem != null)
-                form.grid.foreach{
+                form.grid.foreach {
                     grid =>
                         val value = grid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(item.name)
                         textItem setValue value
@@ -127,16 +127,26 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                     if (selectedRecord.isEmpty)
                                                                         isc.error("Не возможно выделить значение для ввода.")
                                                                     else {
+                                                                        //isc debugTrap formItem
                                                                         val foreignIdField = form.dataSource.getField(formItem.foreignField.get)
+                                                                        //isc debugTrap foreignIdField
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                                                                        //isc debugTrap idFieldName
 
                                                                         val idField = form.getItem(formItem.foreignField.get)
+                                                                        //isc debugTrap(form, idField)
 
-                                                                        if (idField == null)
+                                                                        if (idField == null && form.grid.isEmpty)
                                                                             isc.error(s"Нет поля ${formItem.foreignField.get}")
                                                                         else {
                                                                             val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
-                                                                            idField.setValue(valueId)
+                                                                            if (form.grid.isEmpty)
+                                                                                idField.setValue(valueId)
+                                                                            else
+                                                                                form.grid.foreach {
+                                                                                    grid =>
+                                                                                        grid.getSelectedRecord().asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId)
+                                                                                }
                                                                             val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
                                                                             textItem setValue lookupCaption
