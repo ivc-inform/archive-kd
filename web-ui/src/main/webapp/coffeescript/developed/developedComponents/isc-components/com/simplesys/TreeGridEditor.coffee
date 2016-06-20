@@ -230,6 +230,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"getContextMenu": ->
 		@grid.contextMenu
 	"getExpansionComponent": -> null
+	"getFieldName": (colNum)-> @grid.getFieldName colNum
 	"initWidget": ->
 		@Super "initWidget", arguments
 

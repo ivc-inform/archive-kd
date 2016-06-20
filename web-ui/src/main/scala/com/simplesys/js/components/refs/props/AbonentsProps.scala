@@ -16,6 +16,7 @@ import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
 import com.simplesys.function._
 import com.simplesys.js.components.refs.Abonents
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
@@ -127,24 +128,27 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     showRecordComponents = true
     showRecordComponentsByCel = true
     recordComponentPoolingMode = RecordComponentPoolingMode.recycle.opt
+    var column4Editing: ScOption[IscArray[String]] = IscArray("vabontype", "orgcode").opt
 
     createRecordComponent = {
-        (thiz: ListGrid, listGridRecord: ListGridRecord, colNum: Int) =>
-            isc debugTrap thiz
-            thiz.getFieldName(colNum) match {
-                case fieldName@("vabontype" | "orgcode") =>
-                    LookupEditor.create(
-                        new LookupEditorProps {
-                            editedFieldName = fieldName.opt
-                            record = listGridRecord.opt
-                        }
-                    )
-                case fieldName => null
-            }
+        (thiz: classHandler, listGridRecord: ListGridRecord, colNum: Int) =>
+            isc debugTrap(thiz, colNum)
+//            val colName = thiz.getFieldName(colNum)
+//            isc debugTrap colName
+
+//            if (thiz.column4Editing.contains(colName)) {
+//                LookupEditor.create(
+//                    new LookupEditorProps {
+//                        editedFieldName = colName.opt
+//                        record = listGridRecord.opt
+//                    }
+//                )
+//            } else
+                null
     }.toThisFunc.opt
 
     updateRecordComponent = {
-        (thiz: ListGrid, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
+        (thiz: classHandler, record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean) =>
             val editor = component.asInstanceOf[LookupEditor]
             editor setValueFromRecord record
             editor
