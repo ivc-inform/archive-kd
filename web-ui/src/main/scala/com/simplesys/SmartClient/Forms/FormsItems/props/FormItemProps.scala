@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.Forms.FormsItems.props
 import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem}
-import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
+import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
@@ -80,7 +80,7 @@ class FormItemProps extends ClassProps {
     var errorOrientation: ScOption[Alignment] = ScNone
     var exportFormat: ScOption[FormatString] = ScNone
     var filterLocally: ScOption[Boolean] = ScNone
-    var focus: ScOption[js.Function2[DynamicForm, FormItem, _]] = ScNone
+    var focus: ScOption[js.Function2[DynamicFormSS, FormItem, _]] = ScNone
     var foreignDisplayField: ScOption[String] = ScNone
     var form: ScOption[DynamicForm] = ScNone
     var format: ScOption[FormatString] = ScNone

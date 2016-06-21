@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
-import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
+import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
@@ -26,6 +26,11 @@ class LookupEditorItemProps extends CanvasItemProps {
     var editor: ScOption[Canvas] = ScNone
     var captionLookupFieldName: ScOption[String] = ScNone
     shouldSaveValue = true.opt
+
+    focus = {
+        (form: DynamicFormSS, item: FormItem) =>
+            isc debugTrap(form, item)
+    }.toFunc.opt
 
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
