@@ -129,7 +129,6 @@ package object System {
     object TreeGridEditor extends SCApply[TreeGridEditor, TreeGridEditorProps]
     object Tree extends SCApply[Tree, TreeProps]
     object ResultTree extends SCApply[ResultTree, ResultTreeProps]
-    object LookupEditor extends SCApply[LookupEditor, LookupEditorProps]
     //</editor-fold>
 
     //<editor-fold desc="Layout">
