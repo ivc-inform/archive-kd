@@ -17,7 +17,9 @@ package object app {
     val organization = "organization.png"
     val abonents = "abonents.png"
     val admin = "admin.png"
+    val attach = "attach.png"
     val guid = "guid.png"
+    val status = "status.png"
 
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
     object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]

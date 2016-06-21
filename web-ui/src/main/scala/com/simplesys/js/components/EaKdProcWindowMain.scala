@@ -14,9 +14,9 @@ import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
 import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
 import com.simplesys.System._
 import com.simplesys.app
-import com.simplesys.app.{Abonents, AbonentsOrg, AbonentsTypes}
+import com.simplesys.app._
 import com.simplesys.function._
-import com.simplesys.js.components.refs.props.{AbonentsOrgProps, AbonentsProps, AbonentsTypesProps}
+import com.simplesys.js.components.refs.props._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
@@ -85,6 +85,24 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(Abonents.create(new AbonentsProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
+                                            name = "attachtypes".opt
+                                            icon = app.attach.opt
+                                            title = "Тип вложения".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(AttachTypes.create(new AttachTypesProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
+                                            name = "austat".opt
+                                            icon = app.status.opt
+                                            title = "Статусы версий".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(AuStat.create(new AuStatProps), item)
                                             }.toFunc.opt
                                         }
                                     ).opt
