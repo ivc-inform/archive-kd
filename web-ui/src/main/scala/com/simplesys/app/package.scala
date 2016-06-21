@@ -9,6 +9,9 @@ import com.simplesys.js.components.refs.props._
 //import com.simplesys.macros.PropsToDictionary
 //
 
+import com.simplesys.SmartClient.System._
+import com.simplesys.macros.PropsToDictionary
+
 package object app {
     val loadSchemas = false
     val organization = "organization.png"
