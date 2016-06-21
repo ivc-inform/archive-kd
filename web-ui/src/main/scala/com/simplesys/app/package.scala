@@ -21,6 +21,7 @@ package object app {
     val guid = "guid.png"
     val status = "status.png"
     val doctypes = "doctypes.png"
+    val format = "format.png"
 
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
     object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
@@ -28,4 +29,5 @@ package object app {
     object AttachTypes extends SCApply[AttachTypes, AttachTypesProps]
     object AuStat extends SCApply[AuStat, AuStatProps]
     object DocTypes extends SCApply[DocTypes, DocTypesProps]
+    object DocFormats extends SCApply[ DocFormats,  DocFormatsProps]
 }

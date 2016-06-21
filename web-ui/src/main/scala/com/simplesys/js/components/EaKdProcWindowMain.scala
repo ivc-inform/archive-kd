@@ -69,16 +69,25 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(AbonentsOrg.create(new AbonentsOrgProps), item)
                                             }.toFunc.opt
                                         },
-                                        ////////////////////
                                         new MenuSSItemProps {
                                             name = "doctypes".opt
-                                            icon = app.organization.opt
+                                            icon = app.doctypes.opt
                                             title = "Виды документов".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(DocTypes.create(new DocTypesProps), item)
                                             }.toFunc.opt
                                         },
+                                        new MenuSSItemProps {
+                                            name = "docformats".opt
+                                            icon = app.doctypes.opt
+                                            title = "Форматы".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(DocFormats.create(new  DocFormatsProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        ////////////////////
                                         ////////////////////
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
