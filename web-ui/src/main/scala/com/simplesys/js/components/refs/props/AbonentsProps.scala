@@ -83,7 +83,6 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             hidden = true.opt
         }),
         orgCodeItem,
-        orgNameItem,
         IntegerItem(new IntegerItemProps {
             name = "idabtype"
             width = "100%"
