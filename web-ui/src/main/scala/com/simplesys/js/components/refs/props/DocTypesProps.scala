@@ -1,15 +1,15 @@
 package com.simplesys.js.components.refs.props
 
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
-import com.simplesys.js.components.refs.{AttachTypes, AuStat}
+import com.simplesys.js.components.refs.DocTypes
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
-class AuStatProps extends CommonListGridEditorComponentProps {
+class DocTypesProps extends CommonListGridEditorComponentProps {
     override val simpleTable = true
 
-    type classHandler <:  AuStat
+    type classHandler <: DocTypes
 
-    dataSource = DataSourcesJS.eakd_austat_DS.opt
-    identifier = "C5F45CC5-D60B-78BE-998C-43BB45AFF69E".opt
+    dataSource = DataSourcesJS.eakd_doctypes_DS.opt
+    identifier = "D5DE1B68-E433-F7D0-BFA9-7BFDDECDAEDD".opt
 }
