@@ -224,8 +224,8 @@
 
 			<classSimple autoTableMapping="true" caption="Форматы" name="docformats">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vfmname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vfmcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vfmname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vfmcode" type="sCode"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 				</attrs>
@@ -244,8 +244,8 @@
 
 			<classSimple autoTableMapping="true" caption="Шифр изделия" name="docitem">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vitname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vitcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vitname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vitcode" type="sCode"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 					<attr caption="Описание" mandatory="false" name="vdesc" type="sDescription"></attr>
