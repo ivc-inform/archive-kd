@@ -23,8 +23,6 @@ import com.simplesys.SmartClient.Forms.props._
 import com.simplesys.SmartClient.Foundation._
 import com.simplesys.SmartClient.Foundation.props._
 import com.simplesys.SmartClient.Grids._
-import com.simplesys.SmartClient.Grids.editors.LookupEditor
-import com.simplesys.SmartClient.Grids.editors.props.LookupEditorProps
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Grids.props._
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
