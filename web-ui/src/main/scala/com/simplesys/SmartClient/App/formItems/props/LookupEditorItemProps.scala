@@ -2,6 +2,7 @@ package com.simplesys.SmartClient.App.formItems.props
 
 import com.simplesys.SmartClient.App.formItems.LookupEditorItem
 import com.simplesys.SmartClient.Control.props.{IButtonSSProps, TreeGridContextMenuProps}
+import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
@@ -111,16 +112,20 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                 (thiz: classHandler) =>
 
                                                                     var selectedRecord: JSUndefined[Record] = jSUndefined
+                                                                    var editorDataSource: JSUndefined[DataSource] = jSUndefined
 
                                                                     if (isc.isA.ListGrid(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGrid]
+                                                                        editorDataSource = _editor.dataSource
                                                                         selectedRecord = _editor.getSelectedRecord()
                                                                     }
                                                                     else if (isc.isA.ListGridEditor(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGridEditor]
+                                                                        editorDataSource = _editor.dataSource
                                                                         selectedRecord = _editor.getSelectedRecord()
                                                                     } else if (isc.isA.TreeGridEditor(editor)) {
                                                                         val _editor = editor.asInstanceOf[TreeGridEditor]
+                                                                        editorDataSource = _editor.dataSource
                                                                         selectedRecord = _editor.getSelectedRecord()
                                                                     }
 
@@ -151,6 +156,17 @@ class LookupEditorItemProps extends CanvasItemProps {
 
                                                                             textItem setValue lookupCaption
                                                                             item setValue lookupCaption
+
+                                                                            editorDataSource.foreach{
+                                                                                dataSource =>
+                                                                                    dataSource.fields.filter(!_.primaryKey).map(_.name) foreach{
+                                                                                        field =>
+                                                                                            if (form.grid.isEmpty){
+
+                                                                                            }
+
+                                                                                    }
+                                                                            }
                                                                         }
                                                                     }
                                                             }.toThisFunc.opt
