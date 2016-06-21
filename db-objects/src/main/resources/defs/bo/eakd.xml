@@ -119,7 +119,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="" name="austat">
+			<classSimple autoTableMapping="true" caption="Статусы версий" name="austat">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Наименование" mandatory="false" name="namest" type="sCaption"></attr>
@@ -137,7 +137,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="" name="autable">
+			<classSimple autoTableMapping="true" caption="Таблицы схемы" name="autable">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="false" name="vcodetable" type="sCode"></attr>
@@ -202,7 +202,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Виды" name="doccats">
+			<classSimple autoTableMapping="true" caption="Виды документа" name="doccats">
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vctname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vctcode" type="sCode"></attr>
@@ -373,7 +373,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Листы" name="docpages">
+			<classSimple autoTableMapping="true" caption="Листы документа" name="docpages">
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vpgname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vpgcode" type="sCode"></attr>
