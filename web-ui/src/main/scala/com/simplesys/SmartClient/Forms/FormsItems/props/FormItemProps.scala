@@ -84,8 +84,8 @@ class FormItemProps extends ClassProps {
     var foreignDisplayField: ScOption[String] = ScNone
     var form: ScOption[DynamicForm] = ScNone
     var format: ScOption[FormatString] = ScNone
-    var formatEditorValue: ScOption[js.Function4[JSAny, ListGridRecord, DynamicForm, FormItem, String]] = ScNone
-    var formatValue: ScOption[js.Function4[JSAny, ListGridRecord, DynamicForm, FormItem, String]] = ScNone
+    var formatEditorValue: ScOption[js.Function4[JSAny, ListGridRecord, DynamicFormSS, FormItem, String]] = ScNone
+    var formatValue: ScOption[js.Function4[JSAny, ListGridRecord, DynamicFormSS, FormItem, String]] = ScNone
     var globalTabIndex: ScOption[Int] = ScNone
     var height: ScOption[IntString[Int, String]] = ScNone
     var hidden: ScOption[Boolean] = ScNone

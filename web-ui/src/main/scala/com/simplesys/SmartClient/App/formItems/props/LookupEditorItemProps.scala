@@ -8,6 +8,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextIt
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
@@ -27,9 +28,10 @@ class LookupEditorItemProps extends CanvasItemProps {
     var captionLookupFieldName: ScOption[String] = ScNone
     shouldSaveValue = true.opt
 
-    focus = {
-        (form: DynamicFormSS, item: FormItem) =>
-            isc debugTrap(form, item)
+    formatEditorValue = {
+        (value: JSAny, record: ListGridRecord, form: DynamicFormSS, item: FormItem) =>
+            isc debugTrap(value, record, form, item)
+            value.toString
     }.toFunc.opt
 
     createCanvas = {
@@ -62,7 +64,6 @@ class LookupEditorItemProps extends CanvasItemProps {
             if (textItem != null)
                 form.grid.foreach {
                     grid =>
-                        isc debugTrap(grid, grid.getSelectedRecord())
                         val value = grid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(item.name)
                         textItem setValue value
                 }
@@ -135,19 +136,12 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                         selectedRecord = _editor.getSelectedRecord()
                                                                     }
 
-                                                                    isc debugTrap selectedRecord
-
                                                                     if (selectedRecord.isEmpty)
                                                                         isc.error("Не возможно выделить значение для ввода.")
                                                                     else {
-                                                                        //isc debugTrap formItem
                                                                         val foreignIdField = form.dataSource.getField(formItem.foreignField.get)
-                                                                        //isc debugTrap foreignIdField
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                                                                        //isc debugTrap idFieldName
-
                                                                         val idField = form.getItem(formItem.foreignField.get)
-                                                                        //isc debugTrap(form, idField)
 
                                                                         if (idField == null && form.grid.isEmpty)
                                                                             isc.error(s"Нет поля ${formItem.foreignField.get}")
