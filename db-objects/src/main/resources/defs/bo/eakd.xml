@@ -32,11 +32,11 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Организации" name="abonents_org">
+			<classSimple autoTableMapping="true" caption="Предприятия" name="abonents_org">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код организации" mandatory="true" name="orgcode" type="sCode"></attr>
-					<attr caption="Наименование организации" mandatory="true" name="orgname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="orgcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="orgname" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -427,7 +427,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Типы документов" name="doctypes">
+			<classSimple autoTableMapping="true" caption="Виды документов" name="doctypes">
 				<attrs>
 					<attr caption="Код" mandatory="true" name="vtycode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="true" name="vtyname" type="sCaption"></attr>
