@@ -1,11 +1,11 @@
 package com.simplesys.SmartClient.App.formItems.props
 
 import com.simplesys.SmartClient.App.formItems.LookupEditorItem
-import com.simplesys.SmartClient.Control.props.{IButtonSSProps, TreeGridContextMenuProps}
+import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
+import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
@@ -148,23 +148,20 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                             if (form.grid.isEmpty)
                                                                                 idField.setValue(valueId)
                                                                             else
-                                                                                form.grid.foreach {
-                                                                                    grid =>
-                                                                                        grid.getSelectedRecord().asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId)
-                                                                                }
+                                                                                form.grid.foreach(_.getSelectedRecord().asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
                                                                             val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
                                                                             textItem setValue lookupCaption
                                                                             item setValue lookupCaption
 
-                                                                            editorDataSource.foreach{
+                                                                            editorDataSource.foreach {
                                                                                 dataSource =>
-                                                                                    dataSource.fields.filter(!_.primaryKey).map(_.name) foreach{
+                                                                                    dataSource.fields.filter(!_.primaryKey) foreach {
                                                                                         field =>
-                                                                                            if (form.grid.isEmpty){
-
-                                                                                            }
-
+                                                                                            if (form.grid.isEmpty)
+                                                                                                form.setValue(field.name, selectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name))
+                                                                                            else
+                                                                                                form.grid.foreach(_.getSelectedRecord().asInstanceOf[JSDynamic].updateDynamic(field.name)(selectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name)))
                                                                                     }
                                                                             }
                                                                         }
