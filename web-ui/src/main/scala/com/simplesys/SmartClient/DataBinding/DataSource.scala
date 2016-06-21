@@ -26,7 +26,7 @@ import com.simplesys.System.Types.SequenceMode.SequenceMode
 import com.simplesys.System.Types.SummaryFunction.SummaryFunction
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types.{FormItemComponentType, _}
-import com.simplesys.System.{JSAny, JSObject}
+import com.simplesys.System.{JSAny, JSObject, JSUndefined}
 
 import scala.scalajs.js
 import scala.scalajs.js.|
@@ -114,7 +114,7 @@ trait DataSource extends Class {
     def getDataProtocol(dsRequest: DSRequest): DSProtocol
     def getDisplayValue(fieldName: String, value: JSAny): JSAny
     def getFetchDataURL(criteria: Criteria, requestProperties: DSRequest = js.native): String
-    def getField(fieldName: String): DataSourceField
+    def getField(fieldName: String): JSUndefined[DataSourceField]
     def getFieldCriterion(criterion: Criteria, fieldName: String): Criteria
     def getFieldForDataPath(dataPath: DataPath): DataSourceField
     def getFieldNames(excludeHidden: Boolean): IscArray[String]

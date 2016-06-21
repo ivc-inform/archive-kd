@@ -18,6 +18,8 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
+import scala.scalajs.js
+
 
 class LookupEditorItemProps extends CanvasItemProps {
     type classHandler <: LookupEditorItem
@@ -101,7 +103,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                     editor,
                                                     OkCancelPanel.create(
                                                         new OkCancelPanelProps {
-                                                            owner = thiz.opt
+                                                            owner = window.opt
                                                             padding = 5.opt
                                                             okCaption = "Выбрать".opt
                                                             ownerDestroy = false.opt
@@ -131,7 +133,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                     if (editorSelectedRecord.isEmpty)
                                                                         isc.error("Не возможно выделить значение для ввода.")
                                                                     else {
-                                                                        val foreignIdField = form.dataSource.getField(formItem.foreignField.get)
+                                                                        val foreignIdField = form.dataSource.getField(formItem.foreignField.get).get
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
                                                                         val idField = form.getItem(formItem.foreignField.get)
 
@@ -145,20 +147,24 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                                 formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
                                                                             val lookupCaption = editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
-                                                                            textItem setValue lookupCaption
-                                                                            item setValue lookupCaption
+                                                                            //textItem setValue lookupCaption
+                                                                            //item setValue lookupCaption
 
-                                                                            isc debugTrap editorDataSource
-                                                                            editorDataSource.foreach {
-                                                                                dataSource =>
-                                                                                    val fields = dataSource.fields.filter(!_.primaryKey)
-                                                                                    isc debugTrap fields
-                                                                                    fields foreach {
+                                                                            //isc debugTrap editorSelectedRecord
+                                                                            editorSelectedRecord.foreach {
+                                                                                record =>
+                                                                                    val recordFields = js.Object.keys(record)
+                                                                                    //isc debugTrap(editorDataSource, recordFields)
+                                                                                    recordFields.foreach {
                                                                                         field =>
-                                                                                            if (formItem.record.isEmpty)
-                                                                                                form.setValue(field.name, editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name))
-                                                                                            else
-                                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(field.name)(editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name)))
+                                                                                            //isc debugTrap field
+                                                                                            editorDataSource.foreach {
+                                                                                                dataSource =>
+                                                                                                    //isc debugTrap(dataSource.getField(field), dataSource.getField(field).primaryKey.getOrElse(false))
+                                                                                                    if (dataSource.getField(field).isDefined)
+                                                                                                        if (!dataSource.getField(field).get.primaryKey.getOrElse(false))
+                                                                                                            form.setValue(field, editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                            }
                                                                                     }
                                                                             }
                                                                         }

@@ -13,7 +13,7 @@ import com.simplesys.System.Types.OperatorId.OperatorId
 import com.simplesys.System.Types.SummaryFunction.SummaryFunction
 import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types._
-import com.simplesys.System.{JSAny, JSObject}
+import com.simplesys.System.{JSAny, JSObject, JSUndefined}
 
 import scala.scalajs.js
 import scala.scalajs.js.|
@@ -96,7 +96,7 @@ trait DataSourceField extends JSObject {
     val nillable: Boolean
     val nullReplacementValue: JSAny
     var precision: JSAny
-    val primaryKey: Boolean
+    val primaryKey: JSUndefined[Boolean]
     val propertiesOnly: Boolean
     val readOnlyEditorType: FormItem
     val relatedTableAlias: String
