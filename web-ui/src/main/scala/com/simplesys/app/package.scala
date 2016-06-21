@@ -1,10 +1,8 @@
 package com.simplesys
 
-import com.simplesys.SmartClient.App.CommonListGridEditorComponent
-import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.System.SCApply
-import com.simplesys.js.components.refs.{Abonents, AbonentsOrg, AbonentsTypes}
-import com.simplesys.js.components.refs.props.{AbonentsOrgProps, AbonentsProps, AbonentsTypesProps}
+import com.simplesys.js.components.refs._
+import com.simplesys.js.components.refs.props._
 
 //Должны быть
 //import com.simplesys.SmartClient.System._
@@ -25,4 +23,5 @@ package object app {
     object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
     object Abonents extends SCApply[Abonents, AbonentsProps]
     object AttachTypes extends SCApply[AttachTypes, AttachTypesProps]
+    object AuStat extends SCApply[AuStat, AuStatProps]
 }
