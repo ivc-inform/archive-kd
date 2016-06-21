@@ -22,7 +22,6 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         name = "orgcode"
         width = "100%"
         editor = AbonentsOrg.create(new AbonentsOrgProps).opt
-        captionLookupFieldName = "orgcode"
         title = "Код предприятия"
     })
 
@@ -30,7 +29,6 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         name = "orgname"
         width = "100%"
         editor = AbonentsOrg.create(new AbonentsOrgProps).opt
-        captionLookupFieldName = "orgcode"
         title = "Наименование предприятия"
     })
 
@@ -38,7 +36,6 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         name = "vabontype"
         width = "100%"
         editor = AbonentsTypes.create(new AbonentsTypesProps).opt
-        captionLookupFieldName = "vabontype"
     })
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt

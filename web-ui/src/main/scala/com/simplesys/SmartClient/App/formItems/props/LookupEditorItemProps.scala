@@ -26,7 +26,6 @@ class LookupEditorItemProps extends CanvasItemProps {
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
     var editor: ScOption[Canvas] = ScNone
-    var captionLookupFieldName: ScOption[String] = ScNone
     align = Alignment.center.opt
 
     shouldSaveValue = true.opt
@@ -83,8 +82,6 @@ class LookupEditorItemProps extends CanvasItemProps {
                                             isc.error("Поле не является полем lookup")
                                         else if (formItem.foreignField.isEmpty)
                                             isc.error("Нет значения для foreignField.")
-                                        else if (formItem.captionLookupFieldName.isEmpty)
-                                            isc.error("Нет значения для captionLookupFieldName.")
                                         else {
                                             val window = WindowSS.create(
                                                 new WindowSSProps {
@@ -147,22 +144,14 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                                 idField.setValue(valueId)
                                                                             else
                                                                                 formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
-                                                                            val lookupCaption = editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
-                                                                            //textItem setValue lookupCaption
-                                                                            //item setValue lookupCaption
-
-                                                                            //isc debugTrap editorSelectedRecord
                                                                             editorSelectedRecord.foreach {
                                                                                 record =>
                                                                                     val recordFields = js.Object.keys(record)
-                                                                                    //isc debugTrap(editorDataSource, recordFields)
                                                                                     recordFields.foreach {
                                                                                         field =>
-                                                                                            //isc debugTrap field
                                                                                             editorDataSource.foreach {
                                                                                                 dataSource =>
-                                                                                                    //isc debugTrap(dataSource.getField(field), dataSource.getField(field).primaryKey.getOrElse(false))
                                                                                                     if (dataSource.getField(field).isDefined)
                                                                                                         if (!dataSource.getField(field).get.primaryKey.getOrElse(false))
                                                                                                             form.setValue(field, editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(field))
