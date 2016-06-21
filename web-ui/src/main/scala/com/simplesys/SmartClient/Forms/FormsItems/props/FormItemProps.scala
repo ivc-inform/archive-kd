@@ -24,6 +24,7 @@ import com.simplesys.System._
 import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNone, ScOption}
 
 import scala.scalajs.js
+import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 
 class FormItemProps extends ClassProps {
     type classHandler <: FormItem
@@ -155,6 +156,7 @@ class FormItemProps extends ClassProps {
     var saveOnEnter: ScOption[Boolean] = ScNone
     var selectOnClick: ScOption[Boolean] = ScNone
     var selectOnFocus: ScOption[Boolean] = ScNone
+    var setValue: ScOption[ThisFunction1[classHandler, JSAny, _]] = ScNone
     var shouldSaveValue: ScOption[Boolean] = ScNone
     var shouldStopKeyPressBubbling: ScOption[js.Function2[String, Int, Boolean]] = ScNone
     var showClippedTitleOnHover: ScOption[Boolean] = ScNone

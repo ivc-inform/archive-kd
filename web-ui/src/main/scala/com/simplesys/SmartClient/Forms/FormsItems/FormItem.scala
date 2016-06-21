@@ -211,6 +211,7 @@ trait FormItem extends Class {
     var prompt: HTMLString
     var readOnlyDisplay: ReadOnlyDisplayAppearance
     var readOnlyTextBoxStyle: FormItemBaseStyle
+    val record: JSUndefined[ListGridRecord]
     def redraw(reason: String): void
     var redrawOnChange: Boolean
     var rejectInvalidValueOnChange: Boolean

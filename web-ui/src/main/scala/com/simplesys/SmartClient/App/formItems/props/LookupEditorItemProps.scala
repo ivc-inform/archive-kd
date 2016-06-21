@@ -5,10 +5,9 @@ import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
-import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem, TextItem}
+import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
@@ -28,11 +27,11 @@ class LookupEditorItemProps extends CanvasItemProps {
     var captionLookupFieldName: ScOption[String] = ScNone
     shouldSaveValue = true.opt
 
-    formatEditorValue = {
-        (value: JSAny, record: ListGridRecord, form: DynamicFormSS, item: FormItem) =>
-            isc debugTrap(value, record, form, item)
-            value.toString
-    }.toFunc.opt
+    setValue = {
+        (thiz: classHandler, value: JSAny) =>
+            thiz.textItem setValue value
+            thiz.Super("setValue", IscArray(value))
+    }.toThisFunc.opt
 
     createCanvas = {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
@@ -59,14 +58,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                 }
             )
 
-            val textItem = df.getItem(0).asInstanceOf[TextItem]
-
-            if (textItem != null)
-                form.grid.foreach {
-                    grid =>
-                        val value = grid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(item.name)
-                        textItem setValue value
-                }
+            thiz.textItem = df.getItem(0).asInstanceOf[TextItem]
 
             val button = IButtonSS.create(
                 new IButtonSSProps {
@@ -143,14 +135,14 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
                                                                         val idField = form.getItem(formItem.foreignField.get)
 
-                                                                        if (idField == null && form.grid.isEmpty)
+                                                                        if (idField == null && item.record.isEmpty)
                                                                             isc.error(s"Нет поля ${formItem.foreignField.get}")
                                                                         else {
                                                                             val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
-                                                                            if (form.grid.isEmpty)
+                                                                            if (item.record.isEmpty)
                                                                                 idField.setValue(valueId)
                                                                             else
-                                                                                form.grid.foreach(_.getSelectedRecord().asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
+                                                                                item.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
                                                                             val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
                                                                             textItem setValue lookupCaption
@@ -160,10 +152,10 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                                 dataSource =>
                                                                                     dataSource.fields.filter(!_.primaryKey) foreach {
                                                                                         field =>
-                                                                                            if (form.grid.isEmpty)
+                                                                                            if (item.record.isEmpty)
                                                                                                 form.setValue(field.name, selectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name))
                                                                                             else
-                                                                                                form.grid.foreach(_.getSelectedRecord().asInstanceOf[JSDynamic].updateDynamic(field.name)(selectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name)))
+                                                                                                item.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(field.name)(selectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name)))
                                                                                     }
                                                                             }
                                                                         }

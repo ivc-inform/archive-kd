@@ -10,5 +10,5 @@ import scala.scalajs.js
 trait LookupEditorItem extends CanvasItem{
     val buttonIcon: JSUndefined[SCImgURL]
     val captionLookupFieldName: JSUndefined[String]
-    var textItem: JSUndefined[TextItem]
+    var textItem: TextItem
 }
