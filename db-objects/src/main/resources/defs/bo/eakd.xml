@@ -299,8 +299,8 @@
 			<classSimple autoTableMapping="true" caption="Описи" name="docizvop">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vopcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vopname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vopcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vopname" type="sCaption"></attr>
 					<attr caption="Дата" mandatory="false" name="ddate" type="dDateTime"></attr>
 				</attrs>
 				<defaults>
@@ -319,7 +319,7 @@
 			<classSimple autoTableMapping="true" caption="Статусы извещения" name="docizvstat">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="false" name="vname" type="sCaption"></attr>
+					<attr caption="Наименование" mandatory="true" name="vname" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -337,12 +337,13 @@
 			<classSimple autoTableMapping="true" caption="Типы извещения" name="docizvtype">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vizvcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vizvname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vizvcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vizvname" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
 						<attrName>vizvcode</attrName>
+						<attrName>vizvname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -355,14 +356,15 @@
 
 			<classSimple autoTableMapping="true" caption="Литеры" name="docliter">
 				<attrs>
-					<attr caption="Код" mandatory="false" name="vlrcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vlrname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vlrcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vlrname" type="sCaption"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
 						<attrName>vlrcode</attrName>
+						<attrName>vlrname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
