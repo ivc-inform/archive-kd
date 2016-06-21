@@ -76,7 +76,7 @@
 					<attr caption="Код" mandatory="false" name="vatcode" type="sCode"></attr>
 					<attr caption="Файл вложения" mandatory="false" name="attfile" type="blob"></attr>
 					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDateTime"></attr>
-					<attr caption="Описание" mandatory="false" name="vatdescr" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vatdescr" type="sDescription"></attr>
 					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption"></attr>
 				</attrs>
 				<defaults>
@@ -142,7 +142,7 @@
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="true" name="vcodetable" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="true" name="vnametable" type="sCaption"></attr>
-					<attr caption="Описание" mandatory="false" name="vdesc" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vdesc" type="sDescription"></attr>
 					<attr caption="Вкл" mandatory="false" name="bmain" type="bBoolean"></attr>
 				</attrs>
 				<defaults>
@@ -162,7 +162,7 @@
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vcrname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
-					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата создания карточки" mandatory="false" name="datecard" type="dDateTime"></attr>
 					<attr caption="Код шифра изделия" mandatory="false" name="iddocitem" type="nInt"></attr>
@@ -267,7 +267,7 @@
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vizname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vizcode" type="sCode"></attr>
-					<attr caption="Описание" mandatory="false" name="vizdescr" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vizdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 					<attr caption="Дата начала действия" mandatory="false" name="dateon" type="dDateTime"></attr>
@@ -379,7 +379,7 @@
 				<attrs>
 					<attr caption="Наименование" mandatory="true" name="vpgname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="true" name="vpgcode" type="sCode"></attr>
-					<attr caption="Описание" mandatory="false" name="vpgdescr" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vpgdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 				</attrs>
@@ -452,7 +452,7 @@
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vvrname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vvrcode" type="sCode"></attr>
-					<attr caption="Описание" mandatory="false" name="vvrdescr" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vvrdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 					<attr caption="Дата прекращения действия" mandatory="false" name="dateout" type="dDateTime"></attr>
