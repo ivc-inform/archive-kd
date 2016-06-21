@@ -377,8 +377,8 @@
 
 			<classSimple autoTableMapping="true" caption="Листы документа" name="docpages">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vpgname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vpgcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vpgname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vpgcode" type="sCode"></attr>
 					<attr caption="Описание" mandatory="false" name="vpgdescr" type="sCaption"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
@@ -429,13 +429,14 @@
 
 			<classSimple autoTableMapping="true" caption="Типы документов" name="doctypes">
 				<attrs>
-					<attr caption="Код" mandatory="false" name="vtycode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vtyname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vtycode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vtyname" type="sCaption"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
+						<attrName>vtyname</attrName>
 						<attrName>vtyname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
@@ -482,8 +483,8 @@
 			<classSimple autoTableMapping="true" caption="Состав изделия" name="groupitem">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vgicode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vginame" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vgicode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vginame" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -609,8 +610,8 @@
 			<classSimple autoTableMapping="true" caption="Состояния" name="state">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vsecode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vsecaption" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vsecode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vsecaption" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 				</attrs>
 				<defaults>
@@ -628,14 +629,15 @@
 
 			<classSimple autoTableMapping="true" caption="Статус карточки" name="status">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vssname" type="sCaption"></attr>
+					<attr caption="Наименование" mandatory="true" name="vssname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vscode" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vscode" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
 						<attrName>vscode</attrName>
+						<attrName>vssname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -649,7 +651,7 @@
 			<classSimple autoTableMapping="true" caption="Действие версии" name="statversion">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование версии" mandatory="false" name="vsecaption" type="sCaption"></attr>
+					<attr caption="Наименование версии" mandatory="true" name="vsecaption" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
