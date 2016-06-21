@@ -27,6 +27,8 @@ class LookupEditorItemProps extends CanvasItemProps {
     var buttonIcon: ScOption[SCImgURL] = ScNone
     var editor: ScOption[Canvas] = ScNone
     var captionLookupFieldName: ScOption[String] = ScNone
+    align = Alignment.center.opt
+
     shouldSaveValue = true.opt
 
     setValue = {

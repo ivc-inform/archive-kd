@@ -130,7 +130,6 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new ListGridFieldProps {
             name = "vabdesc"
-            editorType = FormItemComponentType.TextAreaItem
         }
     ).opt
 
