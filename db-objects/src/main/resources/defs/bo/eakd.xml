@@ -104,7 +104,7 @@
 			<classSimple autoTableMapping="true" caption="Тип вложения" name="attachtypes">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="false" name="vattypename" type="sCaption"></attr>
+					<attr caption="Наименование" mandatory="true" name="vattypename" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -122,7 +122,7 @@
 			<classSimple autoTableMapping="true" caption="Статусы версий" name="austat">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="false" name="namest" type="sCaption"></attr>
+					<attr caption="Наименование" mandatory="true" name="namest" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -140,8 +140,8 @@
 			<classSimple autoTableMapping="true" caption="Таблицы схемы" name="autable">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vcodetable" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vnametable" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vcodetable" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vnametable" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="vdesc" type="sCaption"></attr>
 					<attr caption="Вкл" mandatory="false" name="bmain" type="bBoolean"></attr>
 				</attrs>
@@ -204,8 +204,8 @@
 
 			<classSimple autoTableMapping="true" caption="Виды документа" name="doccats">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vctname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vctcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vctname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vctcode" type="sCode"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
 				</attrs>
