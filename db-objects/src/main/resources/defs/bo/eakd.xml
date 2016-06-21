@@ -41,6 +41,7 @@
 				<defaults>
 					<showAttrs>
 						<attrName>orgcode</attrName>
+						<attrName>orgname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>

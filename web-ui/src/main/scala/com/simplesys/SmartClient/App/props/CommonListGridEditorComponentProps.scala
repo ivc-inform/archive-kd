@@ -22,7 +22,8 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
     canEdit = true.opt
     filterOnKeypress = true.opt
     autoFetchData = true.opt
-    selectionType = SelectionStyle.multiple.opt
+    //selectionType = SelectionStyle.multiple.opt
+    selectionType = SelectionStyle.single.opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
