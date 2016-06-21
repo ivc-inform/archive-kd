@@ -99,6 +99,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         new ListGridFieldProps {
             name = "tdatein"
             `type` = ListGridFieldType.date.opt
+            format = "MMM dd yyyy"
         },
         new ListGridFieldProps {
             name = "vemail"
