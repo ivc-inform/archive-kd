@@ -25,8 +25,15 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
     type classHandler <: Abonents
 
-    val orgItem = LookupEditorItem(new LookupEditorItemProps {
+    val orgCodeItem = LookupEditorItem(new LookupEditorItemProps {
         name = "orgcode"
+        width = "100%"
+        editor = AbonentsOrg.create(new AbonentsOrgProps).opt
+        captionLookupFieldName = "orgcode"
+    })
+
+    val orgNameItem = LookupEditorItem(new LookupEditorItemProps {
+        name = "orgname"
         width = "100%"
         editor = AbonentsOrg.create(new AbonentsOrgProps).opt
         captionLookupFieldName = "orgcode"
@@ -75,7 +82,8 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             width = "100%"
             hidden = true.opt
         }),
-        orgItem,
+        orgCodeItem,
+        orgNameItem,
         IntegerItem(new IntegerItemProps {
             name = "idabtype"
             width = "100%"
@@ -119,7 +127,12 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         new ListGridFieldProps {
             name = "orgcode"
             editorType = FormItemComponentType.LookupEditorItem
-            editorProperties = orgItem.opt
+            editorProperties = orgCodeItem.opt
+        },
+        new ListGridFieldProps {
+            name = "orgname"
+            editorType = FormItemComponentType.LookupEditorItem
+            editorProperties = orgNameItem.opt
         },
         new ListGridFieldProps {
             name = "vabdesc"
