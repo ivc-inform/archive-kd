@@ -35,4 +35,5 @@ package object app {
     object DocFormats extends SCApply[DocFormats, DocFormatsProps]
     object DocCats extends SCApply[DocCats, DocCatsProps]
     object DocItem extends SCApply[DocItem, DocItemProps]
+    object DocIzvStat extends SCApply[DocIzvStat, DocIzvStatProps]
 }
