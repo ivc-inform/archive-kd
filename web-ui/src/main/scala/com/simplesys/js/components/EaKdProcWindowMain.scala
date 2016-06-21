@@ -79,15 +79,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             }.toFunc.opt
                                         },
                                         new MenuSSItemProps {
-                                            name = "doctypes".opt
-                                            icon = app.doctypes.opt
-                                            title = "Тип документов".ellipsis.opt
-                                            click = {
-                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(DocTypes.create(new DocTypesProps), item)
-                                            }.toFunc.opt
-                                        },
-                                        new MenuSSItemProps {
                                             name = "docformats".opt
                                             icon = app.doctypes.opt
                                             title = "Форматы".ellipsis.opt
@@ -96,8 +87,26 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(DocFormats.create(new DocFormatsProps), item)
                                             }.toFunc.opt
                                         },
+                                        new MenuSSItemProps {
+                                            name = "docitem".opt
+                                            icon = app.docitem.opt
+                                            title = "Изделия".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(DocItem.create(new DocItemProps), item)
+                                            }.toFunc.opt
+                                        },
                                         ////////////////////
                                         ////////////////////
+                                        new MenuSSItemProps {
+                                            name = "doctypes".opt
+                                            icon = app.doctypes.opt
+                                            title = "Тип документов".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(DocTypes.create(new DocTypesProps), item)
+                                            }.toFunc.opt
+                                        },
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
                                             icon = app.abonents.opt

@@ -3,6 +3,7 @@ package com.simplesys
 import com.simplesys.SmartClient.System.SCApply
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
+import ru.simplesys.defs.bo.eakd.Docitem
 
 //Должны быть
 //import com.simplesys.SmartClient.System._
@@ -23,6 +24,7 @@ package object app {
     val doctypes = "doctypes.png"
     val format = "format.png"
     val doccats = "doccats.png"
+    val docitem = "docitem.png"
 
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
     object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
@@ -32,4 +34,5 @@ package object app {
     object DocTypes extends SCApply[DocTypes, DocTypesProps]
     object DocFormats extends SCApply[DocFormats, DocFormatsProps]
     object DocCats extends SCApply[DocCats, DocCatsProps]
+    object DocItem extends SCApply[DocItem, DocItemProps]
 }
