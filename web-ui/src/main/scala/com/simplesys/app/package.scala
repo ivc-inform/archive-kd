@@ -24,4 +24,5 @@ package object app {
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
     object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
     object Abonents extends SCApply[Abonents, AbonentsProps]
+    object AttachTypes extends SCApply[AttachTypes, AttachTypesProps]
 }
