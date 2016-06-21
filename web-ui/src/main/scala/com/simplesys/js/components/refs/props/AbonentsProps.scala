@@ -23,6 +23,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         width = "100%"
         editor = AbonentsOrg.create(new AbonentsOrgProps).opt
         captionLookupFieldName = "orgcode"
+        title = "Код предприятия"
     })
 
     val orgNameItem = LookupEditorItem(new LookupEditorItemProps {
@@ -30,6 +31,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         width = "100%"
         editor = AbonentsOrg.create(new AbonentsOrgProps).opt
         captionLookupFieldName = "orgcode"
+        title = "Наименование предприятия"
     })
 
     val abonTypeItem = LookupEditorItem(new LookupEditorItemProps {
