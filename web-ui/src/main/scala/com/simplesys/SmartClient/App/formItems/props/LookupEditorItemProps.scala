@@ -110,52 +110,55 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                             okFunction = {
                                                                 (thiz: classHandler) =>
 
-                                                                    var selectedRecord: JSUndefined[Record] = jSUndefined
+                                                                    var editorSelectedRecord: JSUndefined[Record] = jSUndefined
                                                                     var editorDataSource: JSUndefined[DataSource] = jSUndefined
 
                                                                     if (isc.isA.ListGrid(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGrid]
                                                                         editorDataSource = _editor.dataSource
-                                                                        selectedRecord = _editor.getSelectedRecord()
+                                                                        editorSelectedRecord = _editor.getSelectedRecord()
                                                                     }
                                                                     else if (isc.isA.ListGridEditor(editor)) {
                                                                         val _editor = editor.asInstanceOf[ListGridEditor]
                                                                         editorDataSource = _editor.dataSource
-                                                                        selectedRecord = _editor.getSelectedRecord()
+                                                                        editorSelectedRecord = _editor.getSelectedRecord()
                                                                     } else if (isc.isA.TreeGridEditor(editor)) {
                                                                         val _editor = editor.asInstanceOf[TreeGridEditor]
                                                                         editorDataSource = _editor.dataSource
-                                                                        selectedRecord = _editor.getSelectedRecord()
+                                                                        editorSelectedRecord = _editor.getSelectedRecord()
                                                                     }
 
-                                                                    if (selectedRecord.isEmpty)
+                                                                    if (editorSelectedRecord.isEmpty)
                                                                         isc.error("Не возможно выделить значение для ввода.")
                                                                     else {
                                                                         val foreignIdField = form.dataSource.getField(formItem.foreignField.get)
                                                                         val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
                                                                         val idField = form.getItem(formItem.foreignField.get)
 
-                                                                        if (idField == null && item.record.isEmpty)
+                                                                        if (idField == null && formItem.record.isEmpty)
                                                                             isc.error(s"Нет поля ${formItem.foreignField.get}")
                                                                         else {
-                                                                            val valueId = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
-                                                                            if (item.record.isEmpty)
+                                                                            val valueId = editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+                                                                            if (formItem.record.isEmpty)
                                                                                 idField.setValue(valueId)
                                                                             else
-                                                                                item.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
-                                                                            val lookupCaption = selectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
+                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
+                                                                            val lookupCaption = editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(formItem.captionLookupFieldName.get)
 
                                                                             textItem setValue lookupCaption
                                                                             item setValue lookupCaption
 
+                                                                            isc debugTrap editorDataSource
                                                                             editorDataSource.foreach {
                                                                                 dataSource =>
-                                                                                    dataSource.fields.filter(!_.primaryKey) foreach {
+                                                                                    val fields = dataSource.fields.filter(!_.primaryKey)
+                                                                                    isc debugTrap fields
+                                                                                    fields foreach {
                                                                                         field =>
-                                                                                            if (item.record.isEmpty)
-                                                                                                form.setValue(field.name, selectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name))
+                                                                                            if (formItem.record.isEmpty)
+                                                                                                form.setValue(field.name, editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name))
                                                                                             else
-                                                                                                item.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(field.name)(selectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name)))
+                                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(field.name)(editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(field.name)))
                                                                                     }
                                                                             }
                                                                         }
