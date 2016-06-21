@@ -425,7 +425,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Типы" name="doctypes">
+			<classSimple autoTableMapping="true" caption="Типы документов" name="doctypes">
 				<attrs>
 					<attr caption="Код" mandatory="false" name="vtycode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="false" name="vtyname" type="sCaption"></attr>
@@ -445,7 +445,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Версии" name="docversion">
+			<classSimple autoTableMapping="true" caption="Версии документов" name="docversion">
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vvrname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vvrcode" type="sCode"></attr>
@@ -662,7 +662,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Действие версии" name="zapros">
+			<classSimple autoTableMapping="true" caption="Запросы" name="zapros">
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vzpname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vzpcode" type="sCaption"></attr>
