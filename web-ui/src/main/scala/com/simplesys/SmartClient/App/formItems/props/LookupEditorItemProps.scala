@@ -57,6 +57,7 @@ class LookupEditorItemProps extends CanvasItemProps {
             if (textItem != null)
                 form.grid.foreach {
                     grid =>
+                        isc debugTrap(grid, grid.getSelectedRecord())
                         val value = grid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(item.name)
                         textItem setValue value
                 }
@@ -128,6 +129,8 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                         editorDataSource = _editor.dataSource
                                                                         selectedRecord = _editor.getSelectedRecord()
                                                                     }
+
+                                                                    isc debugTrap selectedRecord
 
                                                                     if (selectedRecord.isEmpty)
                                                                         isc.error("Не возможно выделить значение для ввода.")
