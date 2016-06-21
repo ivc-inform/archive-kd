@@ -9,9 +9,6 @@ import com.simplesys.js.components.refs.props._
 //import com.simplesys.macros.PropsToDictionary
 //
 
-import com.simplesys.SmartClient.System._
-import com.simplesys.macros.PropsToDictionary
-
 package object app {
     val loadSchemas = false
     val organization = "organization.png"
@@ -22,6 +19,7 @@ package object app {
     val status = "status.png"
     val doctypes = "doctypes.png"
     val format = "format.png"
+    val doccats = "doccats.png"
 
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
     object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
@@ -29,5 +27,6 @@ package object app {
     object AttachTypes extends SCApply[AttachTypes, AttachTypesProps]
     object AuStat extends SCApply[AuStat, AuStatProps]
     object DocTypes extends SCApply[DocTypes, DocTypesProps]
-    object DocFormats extends SCApply[ DocFormats,  DocFormatsProps]
+    object DocFormats extends SCApply[DocFormats, DocFormatsProps]
+    object DocCats extends SCApply[DocCats, DocCatsProps]
 }

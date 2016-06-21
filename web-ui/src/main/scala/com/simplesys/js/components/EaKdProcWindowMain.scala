@@ -70,9 +70,18 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             }.toFunc.opt
                                         },
                                         new MenuSSItemProps {
+                                            name = "doccats".opt
+                                            icon = app.doccats.opt
+                                            title = "Виды документов".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(DocCats.create(new DocCatsProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
                                             name = "doctypes".opt
                                             icon = app.doctypes.opt
-                                            title = "Виды документов".ellipsis.opt
+                                            title = "Тип документов".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(DocTypes.create(new DocTypesProps), item)
@@ -84,7 +93,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Форматы".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(DocFormats.create(new  DocFormatsProps), item)
+                                                    addTab(DocFormats.create(new DocFormatsProps), item)
                                             }.toFunc.opt
                                         },
                                         ////////////////////
