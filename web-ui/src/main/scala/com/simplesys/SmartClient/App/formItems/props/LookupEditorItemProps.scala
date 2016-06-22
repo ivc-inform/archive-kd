@@ -33,6 +33,24 @@ class LookupEditorItemProps extends CanvasItemProps {
     setValue = {
         (thiz: classHandler, value: JSAny) =>
             thiz.textItem setValue value
+
+            isc debugTrap thiz.form
+            val foreignIdField = thiz.form.dataSource.getField(thiz.foreignField.get).get
+            val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+            val idFieldName1 = foreignIdField.name
+
+            thiz.editor.foreach {
+                editor =>
+                    thiz.record.foreach {
+                        record =>
+                            val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
+
+                            val keyValues = js.Object()
+                            keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
+                            editor.selectRecordsByKey(keyValues)
+                    }
+            }
+
             thiz.Super("setValue", IscArray(value))
     }.toThisFunc.opt
 
@@ -97,22 +115,11 @@ class LookupEditorItemProps extends CanvasItemProps {
 
                                             val foreignIdField = form.dataSource.getField(formItem.foreignField.get).get
                                             val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                                            val idFieldName1 = foreignIdField.name
                                             val idField = form.getItem(formItem.foreignField.get)
 
                                             if (idField == null && formItem.record.isEmpty)
                                                 isc.error(s"Нет поля ${formItem.foreignField.get}")
                                             else {
-                                                formItem.record.foreach {
-                                                    record =>
-                                                        val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
-
-                                                        val keyValues = js.Object()
-                                                        keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
-                                                        //isc debugTrap(record, idFieldName1, idFieldName, id, keyValues)
-                                                        editor.selectRecordsByKey(keyValues)
-                                                }
-
                                                 window.addItems(
                                                     IscArray(
                                                         editor,
