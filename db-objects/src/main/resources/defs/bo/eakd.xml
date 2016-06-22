@@ -164,7 +164,7 @@
 					<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
 					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата создания карточки" mandatory="false" name="datecard" type="dDateTime"></attr>
+					<attr caption="Дата создания" mandatory="false" name="datecard" type="dDateTime"></attr>
 					<attr caption="Код шифра изделия" mandatory="false" name="iddocitem" type="nInt"></attr>
 					<attr caption="Код документа входимости" mandatory="false" name="idcrd_fk" type="nInt"></attr>
 					<attr caption="Инвентарный номер" mandatory="false" name="vcrinvent" type="sCaption"></attr>
