@@ -97,11 +97,22 @@ class LookupEditorItemProps extends CanvasItemProps {
 
                                             val foreignIdField = form.dataSource.getField(formItem.foreignField.get).get
                                             val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                                            val idFieldName1 = foreignIdField.name
                                             val idField = form.getItem(formItem.foreignField.get)
 
                                             if (idField == null && formItem.record.isEmpty)
                                                 isc.error(s"Нет поля ${formItem.foreignField.get}")
                                             else {
+                                                formItem.record.foreach {
+                                                    record =>
+                                                        val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
+
+                                                        val keyValues = js.Object()
+                                                        keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
+                                                        //isc debugTrap(record, idFieldName1, idFieldName, id, keyValues)
+                                                        editor.selectRecordsByKey(keyValues)
+                                                }
+
                                                 window.addItems(
                                                     IscArray(
                                                         editor,

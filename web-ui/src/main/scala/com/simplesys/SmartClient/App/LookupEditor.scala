@@ -10,7 +10,7 @@ import scala.scalajs.js
 
 @js.native
 trait LookupEditor extends Canvas {
-    def selectRecordsByKey(keyValues: JSObject, newState: Boolean): Record
+    def selectRecordsByKey(keyValues: JSObject, newState: Boolean = js.native): Record
     def getSelectedRecord(): JSUndefined[Record]
     def getDataSource(): JSUndefined[DataSource]
 }
