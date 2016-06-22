@@ -70,8 +70,6 @@ class LookupEditorItemProps extends CanvasItemProps {
                     width = 22
                     click = {
                         (thiz: classHandler) =>
-                            val textItem = df.getItem(0)
-
                             if (formItem.editor.isEmpty)
                                 isc.error("Отсутствует редактор.")
                             else {
