@@ -35,7 +35,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
     val functionButton = IconMenuButtonSS.create(
         new IconMenuButtonSSProps {
             title = "Операции".ellipsis.opt
-            icon = Common.iconConstructor.opt
+            icon = app.iconConstructor.opt
         }
     )
 
@@ -56,7 +56,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
-                            icon = Common.ref_RefRefs.opt
+                            icon = app.ref_RefRefs.opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
@@ -185,7 +185,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(MVid.create(new MVidProps), item)
                                             }.toFunc.opt
-                                        },
+                                        } /*,
 
 
                                         new MenuSSItemProps {
@@ -223,8 +223,62 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(AuStat.create(new AuStatProps), item)
                                             }.toFunc.opt
-                                        }
+                                        }*/
                                     ).opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
+            }
+        ),
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Пользователь".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
+                            title = "Выдача копий".ellipsis.opt
+                            icon = app.copyProduct.opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq().opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
+            }
+        ),
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Пользователь".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
+                            title = "Отчеты".ellipsis.opt
+                            icon = app.reports.opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq().opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
+            }
+        ),
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Пользователь".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
+                            title = "Магнитотека".ellipsis.opt
+                            icon = app.recorder.opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq().opt
                                 }
                             ).opt
                         }
@@ -239,7 +293,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                     IconButton.create(
                         new IconButtonProps {
                             title = "Информация".ellipsis.opt
-                            icon = Common.info.opt
+                            icon = app.info.opt
                             click = {
                                 (thiz: classHandler) =>
                                     getAbout()
@@ -250,7 +304,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                     IconButton.create(
                         new IconButtonProps {
                             title = "Настройки".ellipsis.opt
-                            icon = Common.settings.opt
+                            icon = app.settings.opt
                             click = {
                                 (thiz: classHandler) =>
                                     getSetting()
@@ -276,13 +330,13 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
-                            icon = Common.ref.opt
+                            icon = app.ref.opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
                                         new MenuSSItemProps {
                                             name = "groups".opt
-                                            icon = Common.admin_UserGroup.opt
+                                            icon = app.admin_UserGroup.opt
                                             title = "Группы".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
@@ -293,7 +347,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                         },
                                         new MenuSSItemProps {
                                             name = "users".opt
-                                            icon = Common.admin_User.opt
+                                            icon = app.admin_User.opt
                                             title = "Пользователи".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
@@ -347,7 +401,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         new LabelProps {
             showEdges = true.opt
             contents = "Иванов Иван Иванович".opt
-            icon = Common.approved.opt
+            icon = app.approved.opt
             wrap = true.opt
             visibility = Visibility.hidden.opt
         }
@@ -405,7 +459,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 LoggedGroup.logged = true
 
                                                                                 thiz setTitle "Выход"
-                                                                                thiz setIcon Common.closeProgram
+                                                                                thiz setIcon app.closeProgram
                                                                             } else {
                                                                                 managedSystemGroups.foreach(_.hide())
                                                                                 managedAdminsGroups.foreach(_.hide())
@@ -415,14 +469,14 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
 
                                                                                 LoggedGroup.logged = false
                                                                                 thiz setTitle "Вход".ellipsis
-                                                                                thiz setIcon Common.login
+                                                                                thiz setIcon app.login
                                                                             }
                                                                     }.toFunc)
 
                                                                 } else {
                                                                     RPCManagerSS.logoutRequired()
                                                                     thiz setTitle "Вход".ellipsis
-                                                                    thiz setIcon Common.login
+                                                                    thiz setIcon app.login
                                                                     LoggedGroup.logged = false
                                                                     managedSystemGroups.foreach(_.hide())
                                                                     managedAdminsGroups.foreach(_.hide())
@@ -436,7 +490,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                         }.toThisFunc.opt
                                                         title = "Войти".ellipsis.opt
                                                         iconOrientation = IconOrientation.center.opt
-                                                        icon = Common.login.opt
+                                                        icon = app.login.opt
                                                     }
                                                 ),
                                                 captionUserLabel
