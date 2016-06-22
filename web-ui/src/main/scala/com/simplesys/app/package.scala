@@ -26,6 +26,7 @@ package object app {
     val format = "format.png"
     val doccats = "doccats.png"
     val docitem = "docitem.png"
+    val docliter = "docliter.png"
 
     object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
     object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
@@ -38,4 +39,5 @@ package object app {
     object DocItem extends SCApply[DocItem, DocItemProps]
     object DocIzvStat extends SCApply[DocIzvStat, DocIzvStatProps]
     object DocIzvType extends SCApply[DocIzvType, DocIzvTypeProps]
+    object DocLiter extends SCApply[DocLiter, DocLiterProps]
 }

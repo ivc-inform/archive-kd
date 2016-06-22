@@ -21,5 +21,6 @@ class PrepareJSCode extends StaticJSCode{
         isc.defineClass(DocItem.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)
         isc.defineClass(DocIzvStat.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)
         isc.defineClass(DocIzvType.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)
+        isc.defineClass(DocLiter.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)
     }
 }

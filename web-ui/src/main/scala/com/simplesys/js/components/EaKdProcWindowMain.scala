@@ -105,7 +105,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(DocIzvStat.create(new DocIzvStatProps), item)
                                             }.toFunc.opt
                                         },
-                                        ////////////////////
                                         new MenuSSItemProps {
                                             name = "docizvtype".opt
                                             icon = app.docizvtype.opt
@@ -113,6 +112,16 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(DocIzvType.create(new DocIzvTypeProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        ////////////////////
+                                        new MenuSSItemProps {
+                                            name = "docliter".opt
+                                            icon = app.docliter.opt
+                                            title = "Литеры".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(DocLiter.create(new DocLiterProps), item)
                                             }.toFunc.opt
                                         },
                                         ////////////////////
