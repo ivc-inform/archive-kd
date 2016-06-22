@@ -8,7 +8,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextIt
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
+import com.simplesys.SmartClient.Grids.{Grid, ListGrid, ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
 import com.simplesys.System.Types._
@@ -97,47 +97,47 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                 }
                                             )
 
-                                            window.addItems(
-                                                IscArray(
-                                                    editor,
-                                                    OkCancelPanel.create(
-                                                        new OkCancelPanelProps {
-                                                            owner = window.opt
-                                                            padding = 5.opt
-                                                            okCaption = "Выбрать".opt
-                                                            ownerDestroy = false.opt
-                                                            ownerHide = true.opt
-                                                            owner = window.opt
-                                                            okFunction = {
-                                                                (thiz: classHandler) =>
+                                            val foreignIdField = form.dataSource.getField(formItem.foreignField.get).get
+                                            val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                                            val idField = form.getItem(formItem.foreignField.get)
 
-                                                                    var editorSelectedRecord: JSUndefined[Record] = jSUndefined
-                                                                    var editorDataSource: JSUndefined[DataSource] = jSUndefined
+                                            if (idField == null && formItem.record.isEmpty)
+                                                isc.error(s"Нет поля ${formItem.foreignField.get}")
+                                            else {
+                                                window.addItems(
+                                                    IscArray(
+                                                        editor,
+                                                        OkCancelPanel.create(
+                                                            new OkCancelPanelProps {
+                                                                owner = window.opt
+                                                                padding = 5.opt
+                                                                okCaption = "Выбрать".opt
+                                                                ownerDestroy = false.opt
+                                                                ownerHide = true.opt
+                                                                owner = window.opt
+                                                                okFunction = {
+                                                                    (thiz: classHandler) =>
 
-                                                                    if (isc.isA.ListGrid(editor)) {
-                                                                        val _editor = editor.asInstanceOf[ListGrid]
-                                                                        editorDataSource = _editor.dataSource
-                                                                        editorSelectedRecord = _editor.getSelectedRecord()
-                                                                    }
-                                                                    else if (isc.isA.ListGridEditor(editor)) {
-                                                                        val _editor = editor.asInstanceOf[ListGridEditor]
-                                                                        editorDataSource = _editor.dataSource
-                                                                        editorSelectedRecord = _editor.getSelectedRecord()
-                                                                    } else if (isc.isA.TreeGridEditor(editor)) {
-                                                                        val _editor = editor.asInstanceOf[TreeGridEditor]
-                                                                        editorDataSource = _editor.dataSource
-                                                                        editorSelectedRecord = _editor.getSelectedRecord()
-                                                                    }
+                                                                        var editorSelectedRecord: JSUndefined[Record] = jSUndefined
+                                                                        var editorDataSource: JSUndefined[DataSource] = jSUndefined
 
-                                                                    if (editorSelectedRecord.isEmpty)
-                                                                        isc.error("Не возможно выделить значение для ввода.")
-                                                                    else {
-                                                                        val foreignIdField = form.dataSource.getField(formItem.foreignField.get).get
-                                                                        val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                                                                        val idField = form.getItem(formItem.foreignField.get)
+                                                                        if (isc.isA.ListGrid(editor)) {
+                                                                            val _editor = editor.asInstanceOf[ListGrid]
+                                                                            editorDataSource = _editor.dataSource
+                                                                            editorSelectedRecord = _editor.getSelectedRecord()
+                                                                        }
+                                                                        else if (isc.isA.ListGridEditor(editor)) {
+                                                                            val _editor = editor.asInstanceOf[ListGridEditor]
+                                                                            editorDataSource = _editor.dataSource
+                                                                            editorSelectedRecord = _editor.getSelectedRecord()
+                                                                        } else if (isc.isA.TreeGridEditor(editor)) {
+                                                                            val _editor = editor.asInstanceOf[TreeGridEditor]
+                                                                            editorDataSource = _editor.dataSource
+                                                                            editorSelectedRecord = _editor.getSelectedRecord()
+                                                                        }
 
-                                                                        if (idField == null && formItem.record.isEmpty)
-                                                                            isc.error(s"Нет поля ${formItem.foreignField.get}")
+                                                                        if (editorSelectedRecord.isEmpty)
+                                                                            isc.error("Не возможно выделить значение для ввода.")
                                                                         else {
                                                                             val valueId = editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
                                                                             if (formItem.record.isEmpty)
@@ -159,12 +159,12 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                                     }
                                                                             }
                                                                         }
-                                                                    }
-                                                            }.toThisFunc.opt
-                                                        }
+                                                                }.toThisFunc.opt
+                                                            }
+                                                        )
                                                     )
                                                 )
-                                            )
+                                            }
                                         }
 
 
