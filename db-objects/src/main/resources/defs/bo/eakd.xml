@@ -7,7 +7,7 @@
 					<attr caption="Код" mandatory="true" name="vabcode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="true" name="vabname" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="vabdesc" type="sDescription"></attr>
-					<attr caption="Дата записи" mandatory="true" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="true" name="tdatein" type="dDate"></attr>
 					<attr caption="Телефон 1" mandatory="false" name="vphone1" type="sPhone"></attr>
 					<attr caption="Телефон 2" mandatory="false" name="vphone2" type="sPhone"></attr>
 					<attr caption="Сотрудник" mandatory="true" name="vperson" type="sCaption"></attr>
@@ -75,7 +75,7 @@
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="false" name="vatcode" type="sCode"></attr>
 					<attr caption="Файл вложения" mandatory="false" name="attfile" type="blob"></attr>
-					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Описание" mandatory="false" name="vatdescr" type="sDescription"></attr>
 					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption"></attr>
 				</attrs>
@@ -164,7 +164,7 @@
 					<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="false" name="vcrname" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
-					<attr caption="Дата создания" mandatory="false" name="datecard" type="dDateTime"></attr>
+					<attr caption="Дата создания" mandatory="false" name="datecard" type="dDate"></attr>
 					<attr caption="Код шифра изделия" mandatory="false" name="iddocitem" type="nInt"></attr>
 					<attr caption="Код документа входимости" mandatory="false" name="idcrd_fk" type="nInt"></attr>
 					<attr caption="Инвентарный номер" mandatory="false" name="vcrinvent" type="sCaption"></attr>
@@ -227,7 +227,7 @@
 					<attr caption="Наименование" mandatory="true" name="vfmname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="true" name="vfmcode" type="sCode"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -247,7 +247,7 @@
 					<attr caption="Наименование" mandatory="true" name="vitname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="true" name="vitcode" type="sCode"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="Описание" mandatory="false" name="vdesc" type="sDescription"></attr>
 				</attrs>
 				<defaults>
@@ -269,9 +269,9 @@
 					<attr caption="Код" mandatory="false" name="vizcode" type="sCode"></attr>
 					<attr caption="Описание" mandatory="false" name="vizdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
-					<attr caption="Дата начала действия" mandatory="false" name="dateon" type="dDateTime"></attr>
-					<attr caption="Дата конца действия" mandatory="false" name="dateoff" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
+					<attr caption="Дата начала действия" mandatory="false" name="dateon" type="dDate"></attr>
+					<attr caption="Дата конца действия" mandatory="false" name="dateoff" type="dDate"></attr>
 					<attr caption="Файл извещения" mandatory="false" name="izvfile" type="clob"></attr>
 				</attrs>
 				<defaults>
@@ -301,7 +301,7 @@
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="true" name="vopcode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="true" name="vopname" type="sCaption"></attr>
-					<attr caption="Дата" mandatory="false" name="ddate" type="dDateTime"></attr>
+					<attr caption="Дата" mandatory="false" name="ddate" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -359,7 +359,7 @@
 					<attr caption="Код" mandatory="true" name="vlrcode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="true" name="vlrname" type="sCaption"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -381,7 +381,7 @@
 					<attr caption="Код" mandatory="true" name="vpgcode" type="sCode"></attr>
 					<attr caption="Описание" mandatory="false" name="vpgdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -405,8 +405,8 @@
 			<classSimple autoTableMapping="true" caption="Рассылка" name="docrass">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Количество экземпляпро" mandatory="false" name="vrskol" type="dDateTime"></attr>
-					<attr caption="Дата рассылки" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Количество экземпляпро" mandatory="false" name="vrskol" type="dDate"></attr>
+					<attr caption="Дата рассылки" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -432,7 +432,7 @@
 					<attr caption="Код" mandatory="true" name="vtycode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="true" name="vtyname" type="sCaption"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -454,8 +454,8 @@
 					<attr caption="Код" mandatory="false" name="vvrcode" type="sCode"></attr>
 					<attr caption="Описание" mandatory="false" name="vvrdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
-					<attr caption="Дата прекращения действия" mandatory="false" name="dateout" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
+					<attr caption="Дата прекращения действия" mandatory="false" name="dateout" type="dDate"></attr>
 					<attr caption="Файл версии" mandatory="false" name="docfile" type="clob"></attr>
 				</attrs>
 				<defaults>
@@ -506,7 +506,7 @@
 					<attr caption="Версия" mandatory="false" name="mcodever" type="sCaption"></attr>
 					<attr caption="Инв.номер" mandatory="false" name="minvnumber" type="sCaption"></attr>
 					<attr caption="Количество" mandatory="false" name="mkol" type="sCaption"></attr>
-					<attr caption="Дата" mandatory="false" name="ddatein" type="dDateTime"></attr>
+					<attr caption="Дата" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Д.номер Обозначение" mandatory="false" name="vcrcode" type="sCaption"></attr>
 					<attr caption="Номер книги" mandatory="false" name="mbook" type="sCaption"></attr>
 					<attr caption="Номер ячейки" mandatory="false" name="mboх" type="sCaption"></attr>
@@ -540,7 +540,7 @@
 					<attr caption="Код" mandatory="false" name="mcode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="false" name="mname" type="sCaption"></attr>
 					<attr caption="Наименование файла" mandatory="false" name="mfilecode" type="sCaption"></attr>
-					<attr caption="Дата заптси" mandatory="false" name="mdatein" type="dDateTime"></attr>
+					<attr caption="Дата заптси" mandatory="false" name="mdatein" type="dDate"></attr>
 					<attr caption="IDITEM" genBySeq="true" hidden="true" mandatory="true" name="iditem" type="id"></attr>
 				</attrs>
 				<defaults>
@@ -606,7 +606,7 @@
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="true" name="vsecode" type="sCode"></attr>
 					<attr caption="Наименование" mandatory="true" name="vsecaption" type="sCaption"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -624,7 +624,7 @@
 			<classSimple autoTableMapping="true" caption="Статус запроса" name="status">
 				<attrs>
 					<attr caption="Наименование" mandatory="true" name="vssname" type="sCaption"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="true" name="vscode" type="sCaption"></attr>
 				</attrs>
@@ -666,9 +666,9 @@
 					<attr caption="Код" mandatory="false" name="vzpcode" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="vzpdesc" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата оформления" mandatory="false" name="tdatein" type="dDateTime"></attr>
-					<attr caption="Дата исполнения" mandatory="false" name="ddatein" type="dDateTime"></attr>
-					<attr caption="Дата закрытия" mandatory="false" name="ddateout" type="dDateTime"></attr>
+					<attr caption="Дата оформления" mandatory="false" name="tdatein" type="dDate"></attr>
+					<attr caption="Дата исполнения" mandatory="false" name="ddatein" type="dDate"></attr>
+					<attr caption="Дата закрытия" mandatory="false" name="ddateout" type="dDate"></attr>
 					<attr caption="Код приоритета" mandatory="false" name="idprior" type="id"></attr>
 					<attr caption="Код выданной версии листа" mandatory="false" name="idvers" type="id"></attr>
 				</attrs>
@@ -718,7 +718,7 @@
 								<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 								<attr caption="Наименование" mandatory="false" name="vname" type="sCaption"></attr>
 								<attr caption="VRSKOL" mandatory="false" name="vrskol" type="nInt"></attr>
-								<attr caption="DATEOUT" mandatory="false" name="dateout" type="dDateTime"></attr>
+								<attr caption="DATEOUT" mandatory="false" name="dateout" type="dDate"></attr>
 							</attrs>
 							<defaults>
 								<showAttrs>
