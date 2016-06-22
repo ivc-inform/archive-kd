@@ -14,10 +14,11 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"dragTrackerMode" : "icon"
 	"showAllRecords": false
 	"canAcceptDroppedRecords": false
+	"selectFirstRecordAfterFetch" : true
 	"fetchData": (criteria, callback, requestProperties) ->
 		if @useClientFilteringSorting is false
 			_callback = (dsResponse, data, dsRequest) =>								
-				@grid.selectFirstRecord()
+				@grid.selectFirstRecord() if @selectFirstRecordAfterFetch
 				@fireCallback callback
 				return
 				

@@ -20,10 +20,11 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"selectSingleRecordByKey" : (keyValue, newStyle) ->
 		@selectRecord @findByKey keyValue, newStyle
 		return
+	"selectFirstRecordAfterFetch" : true
 	"fetchData": (criteria, callback, requestProperties) ->
 		if @useClientFilteringSorting is false
 			_callback = (dsResponse, data, dsRequest) =>
-				@grid.selectFirstRecord()
+				@grid.selectFirstRecord() if @selectFirstRecordAfterFetch
 				@fireCallback callback
 				return
 			

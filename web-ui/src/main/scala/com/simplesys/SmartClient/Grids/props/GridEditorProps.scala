@@ -84,6 +84,8 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
 
     var createRecordComponent: ScOption[ThisFunction2[classHandler, ListGridRecord, Int, Canvas]] = ScNone
     var updateRecordComponent: ScOption[ThisFunction4[classHandler, ListGridRecord, Int, Canvas, Boolean, Canvas]] = ScNone
+
+    var selectFirstRecordAfterFetch: ScOption[Boolean] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {

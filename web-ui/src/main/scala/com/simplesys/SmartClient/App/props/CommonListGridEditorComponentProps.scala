@@ -24,6 +24,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
     autoFetchData = true.opt
     //selectionType = SelectionStyle.multiple.opt
     selectionType = SelectionStyle.single.opt
+    selectFirstRecordAfterFetch = false.opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>

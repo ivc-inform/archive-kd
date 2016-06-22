@@ -28,6 +28,7 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps {
     openIconSuffix = "".opt
     dropIconSuffix = "".opt
     closedIconSuffix = "".opt
+    selectFirstRecordAfterFetch = false.opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
