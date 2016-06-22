@@ -22,6 +22,7 @@ package object app {
     val guid = "guid.png"
     val status = "status.png"
     val doctypes = "doctypes.png"
+    val docizvtype = "docizvtype.png"
     val format = "format.png"
     val doccats = "doccats.png"
     val docitem = "docitem.png"
@@ -36,4 +37,5 @@ package object app {
     object DocCats extends SCApply[DocCats, DocCatsProps]
     object DocItem extends SCApply[DocItem, DocItemProps]
     object DocIzvStat extends SCApply[DocIzvStat, DocIzvStatProps]
+    object DocIzvType extends SCApply[DocIzvType, DocIzvTypeProps]
 }
