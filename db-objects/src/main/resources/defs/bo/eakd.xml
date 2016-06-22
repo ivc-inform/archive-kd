@@ -562,7 +562,7 @@
 			<classSimple autoTableMapping="true" caption="Тип носителя" name="mtype">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Тип носителя" mandatory="false" name="mtype" type="sCaption"></attr>
+					<attr caption="Тип носителя" mandatory="true" name="mtype" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -574,12 +574,6 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
-					<fk linkType="refIsOwner" mandatory="true" parent="card">
-						<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
-					</fk>
-					<fk linkType="refIsOwner" mandatory="true" parent="abonents">
-						<mapping attrNameLocal="idabon" attrNameRemote="id"></mapping>
-					</fk>
 				</constraints>
 			</classSimple>
 
