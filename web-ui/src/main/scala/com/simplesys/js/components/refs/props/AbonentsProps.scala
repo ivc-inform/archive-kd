@@ -117,17 +117,17 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new ListGridFieldProps {
             name = "vabontype"
-            editorType = FormItemComponentType.LookupEditorItem
+            editorType = FormItemComponentType.LookupListGridEditorItem
             editorProperties = abonTypeItem.opt
         },
         new ListGridFieldProps {
             name = "orgcode"
-            editorType = FormItemComponentType.LookupEditorItem
+            editorType = FormItemComponentType.LookupListGridEditorItem
             editorProperties = orgCodeItem.opt
         },
         new ListGridFieldProps {
             name = "orgname"
-            editorType = FormItemComponentType.LookupEditorItem
+            editorType = FormItemComponentType.LookupListGridEditorItem
             editorProperties = orgNameItem.opt
         },
         new ListGridFieldProps {

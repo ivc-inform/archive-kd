@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.ListGrid
+import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
 import com.simplesys.SmartClient.System._
@@ -79,7 +79,7 @@ trait FormItem extends Class {
     var editorExit: js.Function3[DynamicForm, FormItem, JSAny, _]
     var editorType: FormItem
     var editPendingCSSText: CSSText
-    var editor: JSUndefined[ListGrid]
+    var listGridEditor: JSUndefined[ListGridEditor]
     var emptyDisplayValue: String
     var emptyValueIcon: String
     def enable()

@@ -33,7 +33,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, value: JSAny) =>
             thiz.textItem setValue value
 
-            thiz.editor.foreach {
+            thiz.listGridEditor.foreach {
                 editor =>
                     thiz.record.foreach {
                         record =>
@@ -88,12 +88,12 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                     width = 22
                     click = {
                         (thiz: classHandler) =>
-                            if (formItem.editor.isEmpty)
+                            if (formItem.listGridEditor.isEmpty)
                                 isc.error("Отсутствует редактор.")
                             else {
-                                formItem.editor.foreach {
+                                formItem.listGridEditor.foreach {
                                     editor =>
-                                        isc debugTrap editor
+                                        //isc debugTrap editor
 
                                         if (!formItem.lookup.getOrElse(false))
                                             isc.error("Поле не является полем lookup")
@@ -180,5 +180,5 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
             )
     }.toThisFunc.opt
 
-    `type` = FormItemComponentType.LookupEditorItem
+    `type` = FormItemComponentType.LookupListGridEditorItem
 }
