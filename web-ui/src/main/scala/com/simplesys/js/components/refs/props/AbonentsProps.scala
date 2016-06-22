@@ -24,21 +24,21 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     val orgCodeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "orgcode"
         width = "100%"
-        editorListGrid = abonentOrg.opt
+        listGridEditor = abonentOrg.opt
         title = "Код предприятия"
     })
 
     val orgNameItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "orgname"
         width = "100%"
-        editorListGrid = abonentOrg.opt
+        listGridEditor = abonentOrg.opt
         title = "Наименование предприятия"
     })
 
     val abonTypeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "vabontype"
         width = "100%"
-        editorListGrid = abonentType.opt
+        listGridEditor = abonentType.opt
     })
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
