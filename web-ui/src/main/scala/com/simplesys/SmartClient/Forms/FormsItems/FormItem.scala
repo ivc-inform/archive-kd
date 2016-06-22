@@ -1,11 +1,10 @@
 package com.simplesys.SmartClient.Forms.FormsItems
 
-import com.simplesys.SmartClient.App.LookupEditor
 import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.{ListGrid, TreeGrid}
+import com.simplesys.SmartClient.Grids.ListGrid
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
 import com.simplesys.SmartClient.System._
@@ -22,7 +21,6 @@ import com.simplesys.System.Types.TitleOrientation.TitleOrientation
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
 import com.simplesys.System.Types._
 import com.simplesys.System.{JSAny, JSDictionary, JSObject, JSUndefined}
-import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
@@ -81,7 +79,7 @@ trait FormItem extends Class {
     var editorExit: js.Function3[DynamicForm, FormItem, JSAny, _]
     var editorType: FormItem
     var editPendingCSSText: CSSText
-    var editor: JSUndefined[LookupEditor]
+    var editor: JSUndefined[ListGrid]
     var emptyDisplayValue: String
     var emptyValueIcon: String
     def enable()

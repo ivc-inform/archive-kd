@@ -1,6 +1,6 @@
 package com.simplesys.js.components.refs.props
 
-import com.simplesys.SmartClient.App.formItems.props.LookupEditorItemProps
+import com.simplesys.SmartClient.App.formItems.props.LookupListGridEditorItemProps
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.SmartClient.Forms.FormsItems.props._
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
@@ -18,24 +18,27 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
     type classHandler <: Abonents
 
-    val orgCodeItem = LookupEditorItem(new LookupEditorItemProps {
+    val abonentOrg = AbonentsOrg.create(new AbonentsOrgProps)
+    val abonentType = AbonentsTypes.create(new AbonentsTypesProps)
+
+    val orgCodeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "orgcode"
         width = "100%"
-        editor = AbonentsOrg.create(new AbonentsOrgProps).opt
+        editorListGrid = abonentOrg.opt
         title = "Код предприятия"
     })
 
-    val orgNameItem = LookupEditorItem(new LookupEditorItemProps {
+    val orgNameItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "orgname"
         width = "100%"
-        editor = AbonentsOrg.create(new AbonentsOrgProps).opt
+        editorListGrid = abonentOrg.opt
         title = "Наименование предприятия"
     })
 
-    val abonTypeItem = LookupEditorItem(new LookupEditorItemProps {
+    val abonTypeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "vabontype"
         width = "100%"
-        editor = AbonentsTypes.create(new AbonentsTypesProps).opt
+        editorListGrid = abonentType.opt
     })
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt

@@ -1,14 +1,13 @@
 package com.simplesys.SmartClient.App.formItems.props
 
-import com.simplesys.SmartClient.App.formItems.LookupEditorItem
+import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
 import com.simplesys.SmartClient.Control.props.IButtonSSProps
-import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
+import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
 import com.simplesys.System.Types._
@@ -21,11 +20,11 @@ import com.simplesys.option.{ScNone, ScOption}
 import scala.scalajs.js
 
 
-class LookupEditorItemProps extends CanvasItemProps {
-    type classHandler <: LookupEditorItem
+class LookupListGridEditorItemProps extends CanvasItemProps {
+    type classHandler <: LookupListGridEditorItem
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
-    var editor: ScOption[Canvas] = ScNone
+    var editorListGrid: ScOption[ListGridEditor] = ScNone
     align = Alignment.center.opt
 
     shouldSaveValue = true.opt
@@ -34,20 +33,21 @@ class LookupEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, value: JSAny) =>
             thiz.textItem setValue value
 
-            val foreignIdField = thiz.form.dataSource.getField(thiz.foreignField.get).get
-            val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-            val idFieldName1 = foreignIdField.name
-
             thiz.editor.foreach {
                 editor =>
                     thiz.record.foreach {
                         record =>
+                            val foreignIdField = thiz.form.dataSource.getField(thiz.foreignField.get).get
+                            val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                            val idFieldName1 = foreignIdField.name
+
                             val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
 
                             val keyValues = js.Object()
                             keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
-                            isc debugTrap keyValues
-                            editor.selectRecordsByKey(keyValues)
+                            //isc debugTrap editor
+                            editor.deselectAllRecords()
+                            editor selectRecordsByKey keyValues
                     }
             }
 
@@ -93,6 +93,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                             else {
                                 formItem.editor.foreach {
                                     editor =>
+                                        isc debugTrap editor
 
                                         if (!formItem.lookup.getOrElse(false))
                                             isc.error("Поле не является полем lookup")
@@ -119,9 +120,9 @@ class LookupEditorItemProps extends CanvasItemProps {
 
                                             if (idField == null && formItem.record.isEmpty)
                                                 isc.error(s"Нет поля ${formItem.foreignField.get}")
-                                            else {
+                                            else
                                                 window.addItems(
-                                                    IscArray(
+                                                    IscArray[Canvas](
                                                         editor,
                                                         OkCancelPanel.create(
                                                             new OkCancelPanelProps {
@@ -134,7 +135,7 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                 okFunction = {
                                                                     (thiz: classHandler) =>
 
-                                                                        if (editor.getSelectedRecord().isEmpty)
+                                                                        if (editor.getSelectedRecords().length != 1)
                                                                             isc.error("Не возможно выделить значение для ввода.")
                                                                         else {
                                                                             val valueId = editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idFieldName)
@@ -143,30 +144,24 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                             else
                                                                                 formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
 
-                                                                            editor.getSelectedRecord().foreach {
-                                                                                record =>
-                                                                                    val recordFields = js.Object.keys(record)
-                                                                                    recordFields.foreach {
-                                                                                        field =>
-                                                                                            editor.getDataSource().foreach {
-                                                                                                dataSource =>
-                                                                                                    if (dataSource.getField(field).isDefined)
-                                                                                                        if (!dataSource.getField(field).get.primaryKey.getOrElse(false))
-                                                                                                            form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
-                                                                                            }
-                                                                                    }
-                                                                            }
+                                                                            val record = editor.getSelectedRecord()
 
+                                                                            val recordFields = js.Object.keys(record)
+                                                                            recordFields.foreach {
+                                                                                field =>
+                                                                                    val dataSource = editor.dataSource
+
+                                                                                    if (dataSource.getField(field).isDefined)
+                                                                                        if (!dataSource.getField(field).get.primaryKey.getOrElse(false))
+                                                                                            form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                            }
                                                                         }
                                                                 }.toThisFunc.opt
                                                             }
                                                         )
                                                     )
                                                 )
-                                            }
                                         }
-
-
                                 }
                             }
 

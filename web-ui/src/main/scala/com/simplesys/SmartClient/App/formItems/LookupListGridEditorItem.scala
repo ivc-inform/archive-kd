@@ -7,7 +7,7 @@ import com.simplesys.System._
 import scala.scalajs.js
 
 @js.native
-trait LookupEditorItem extends CanvasItem{
+trait LookupListGridEditorItem extends CanvasItem{
     val buttonIcon: JSUndefined[SCImgURL]
     var textItem: TextItem
 }

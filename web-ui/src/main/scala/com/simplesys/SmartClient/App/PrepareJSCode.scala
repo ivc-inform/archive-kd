@@ -19,8 +19,7 @@ class PrepareJSCode extends StaticJSCode {
         isc.defineClass(EditorUserGroups.getClass.getSimpleName, TreeGridEditor.getClass.getSimpleName)
         isc.defineClass(CommonListGridEditorComponent.getClass.getSimpleName, ListGridEditor.getClass.getSimpleName)
         isc.defineClass(CommonTreeGridEditorComponent.getClass.getSimpleName, TreeGridEditor.getClass.getSimpleName)
-        isc.defineClass(LookupEditorItem.getClass.getSimpleName, CanvasItem.getClass.getSimpleName)
-        isc.defineClass(LookupEditor.getClass.getSimpleName, Canvas.getClass.getSimpleName)
+        isc.defineClass(LookupListGridEditorItem.getClass.getSimpleName, CanvasItem.getClass.getSimpleName)
     }
 }
 

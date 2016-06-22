@@ -1,8 +1,8 @@
 package com.simplesys.SmartClient
 
 import com.simplesys.SmartClient.App._
-import com.simplesys.SmartClient.App.formItems.LookupEditorItem
-import com.simplesys.SmartClient.App.formItems.props.LookupEditorItemProps
+import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
+import com.simplesys.SmartClient.App.formItems.props.LookupListGridEditorItemProps
 import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
@@ -107,12 +107,11 @@ package object System {
     object FormItemWithButton extends SCApply[FormItemWithButton, FormItemWithButtonProps]
     object ComboboxItemWithButtons extends SCApply[ComboboxItemWithButtons, ComboboxItemWithButtonsProps]
     object ComboboxItemWithClearButton extends SCApply[ComboboxItemWithClearButton, ComboboxItemWithClearButtonProps]
-    object LookupEditorItem extends SCApply[LookupEditorItem, LookupEditorItemProps]
+    object LookupListGridEditorItem extends SCApply[LookupListGridEditorItem, LookupListGridEditorItemProps]
     //</editor-fold>
 
     //<editor-fold desc="Foundation">
     object Canvas extends SCApply[Canvas, CanvasProps]
-    object LookupEditor extends SCApply[LookupEditor, LookupEditorProps]
     object Label extends SCApply[Label, LabelProps]
     object HTMLFlow extends SCApply[HTMLFlow, HTMLFlowProps]
     //</editor-fold>
