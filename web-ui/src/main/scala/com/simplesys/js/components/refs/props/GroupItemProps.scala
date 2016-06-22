@@ -10,6 +10,6 @@ class GroupItemProps extends CommonListGridEditorComponentProps {
 
     type classHandler <: GroupItem
 
-    dataSource = DataSourcesJS.eakd_mtype_DS.opt
+    dataSource = DataSourcesJS.eakd_groupitem_DS.opt
     identifier = "D5151B68-E433-F7D0-BFA9-725DDECDAEDD".opt
 }
