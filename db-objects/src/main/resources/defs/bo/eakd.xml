@@ -480,7 +480,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Состав изделия" name="groupitem">
+			<classSimple autoTableMapping="true" caption="Группы" name="groupitem">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код" mandatory="true" name="vgicode" type="sCode"></attr>

@@ -132,6 +132,15 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(DocTypes.create(new DocTypesProps), item)
                                             }.toFunc.opt
                                         },
+                                        new MenuSSItemProps {
+                                            name = "groupitem".opt
+                                            icon = app.groupitem.opt
+                                            title = "Группы".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(GroupItem.create(new GroupItemProps), item)
+                                            }.toFunc.opt
+                                        },
                                         ////////////////////
                                         ////////////////////
                                         new MenuSSItemProps {
