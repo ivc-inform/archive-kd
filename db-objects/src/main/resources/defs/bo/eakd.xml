@@ -627,7 +627,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Статус карточки" name="status">
+			<classSimple autoTableMapping="true" caption="Статус запроса" name="status">
 				<attrs>
 					<attr caption="Наименование" mandatory="true" name="vssname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>

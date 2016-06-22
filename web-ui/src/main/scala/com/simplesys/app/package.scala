@@ -3,7 +3,6 @@ package com.simplesys
 import com.simplesys.SmartClient.System.SCApply
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
-import ru.simplesys.defs.bo.eakd.Docitem
 
 //Должны быть
 //import com.simplesys.SmartClient.System._
@@ -46,4 +45,5 @@ package object app {
     object GroupItem extends SCApply[GroupItem, GroupItemProps]
     object MType extends SCApply[MType, MTypeProps]
     object State extends SCApply[State, StateProps]
+    object Status extends SCApply[Status, StatusProps]
 }
