@@ -648,7 +648,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Статус версии" name="statversion">
+			<classSimple autoTableMapping="true" caption="Статус ревизий" name="statversion">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Наименование версии" mandatory="true" name="vsecaption" type="sCaption"></attr>

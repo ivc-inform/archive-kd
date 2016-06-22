@@ -162,7 +162,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                         new MenuSSItemProps {
                                             name = "status".opt
                                             icon = app.status.opt
-                                            title = "Статус запрса".ellipsis.opt
+                                            title = "Статус запроса".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(Status.create(new StatusProps), item)
@@ -171,7 +171,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                         new MenuSSItemProps {
                                             name = "statusversion".opt
                                             icon = app.statusversion.opt
-                                            title = "Статус версии".ellipsis.opt
+                                            title = "Статус ревизий".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(StatVersion.create(new StatVersionProps), item)
@@ -186,6 +186,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(MVid.create(new MVidProps), item)
                                             }.toFunc.opt
                                         },
+
+
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
                                             icon = app.abonents.opt
