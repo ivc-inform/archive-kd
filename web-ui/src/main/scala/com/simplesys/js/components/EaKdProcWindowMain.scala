@@ -168,7 +168,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(Status.create(new StatusProps), item)
                                             }.toFunc.opt
                                         },
-
                                         new MenuSSItemProps {
                                             name = "statusversion".opt
                                             icon = app.statusversion.opt
@@ -178,8 +177,15 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(StatVersion.create(new StatVersionProps), item)
                                             }.toFunc.opt
                                         },
-                                        ////////////////////
-                                        ////////////////////
+                                        new MenuSSItemProps {
+                                            name = "mvid".opt
+                                            icon = app.mvid.opt
+                                            title = "Вид носителя".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(MVid.create(new MVidProps), item)
+                                            }.toFunc.opt
+                                        },
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
                                             icon = app.abonents.opt

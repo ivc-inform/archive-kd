@@ -21,6 +21,7 @@ package object app {
     val guid = "guid.png"
     val status = "status.png"
     val statusversion = "statusversion.png"
+    val mvid = "mvid.png"
     val doctypes = "doctypes.png"
     val groupitem = "groupitem.png"
     val docizvtype = "docizvtype.png"
@@ -48,4 +49,5 @@ package object app {
     object State extends SCApply[State, StateProps]
     object Status extends SCApply[Status, StatusProps]
     object StatVersion extends SCApply[StatVersion, StatVersionProps]
+    object MVid extends SCApply[MVid, MVidProps]
 }
