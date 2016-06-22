@@ -160,10 +160,10 @@
 
 			<classSimple autoTableMapping="true" caption="Карточка учета" name="card">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vcrname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
-					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="false" name="vcrname" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
 					<attr caption="Дата создания" mandatory="false" name="datecard" type="dDateTime"></attr>
 					<attr caption="Код шифра изделия" mandatory="false" name="iddocitem" type="nInt"></attr>
 					<attr caption="Код документа входимости" mandatory="false" name="idcrd_fk" type="nInt"></attr>

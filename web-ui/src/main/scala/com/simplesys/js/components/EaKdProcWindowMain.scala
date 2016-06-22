@@ -186,8 +186,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(MVid.create(new MVidProps), item)
                                             }.toFunc.opt
                                         } /*,
-
-
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
                                             icon = app.abonents.opt
