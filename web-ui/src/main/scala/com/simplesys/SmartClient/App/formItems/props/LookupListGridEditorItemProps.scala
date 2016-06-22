@@ -140,21 +140,23 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                             isc.error("Не возможно выделить значение для ввода.")
                                                                         else {
                                                                             val valueId = editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+                                                                            //isc debugTrap(formItem.foreignField.get, item.name, valueId, formItem.record)
+
                                                                             if (formItem.record.isEmpty)
                                                                                 idField.setValue(valueId)
                                                                             else
-                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
+                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(valueId))
 
                                                                             val record = editor.getSelectedRecord()
 
                                                                             val recordFields = js.Object.keys(record)
                                                                             recordFields.foreach {
                                                                                 field =>
-                                                                                    val dataSource = editor.dataSource
-
-                                                                                    if (dataSource.getField(field).isDefined)
-                                                                                        if (!dataSource.getField(field).get.primaryKey.getOrElse(false))
+                                                                                    if (editor.dataSource.getField(field).isDefined)
+                                                                                        if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
+                                                                                            isc debugTrap (field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
                                                                                             form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                        }
                                                                             }
                                                                         }
                                                                 }.toThisFunc.opt
