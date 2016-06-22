@@ -207,7 +207,7 @@
 					<attr caption="Наименование" mandatory="true" name="vctname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="true" name="vctcode" type="sCode"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDateTime"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

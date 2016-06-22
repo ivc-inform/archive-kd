@@ -7,8 +7,7 @@ import scala.scalajs.js.annotation.JSExport
 @JSExport
 class PrepareJSCode extends StaticJSCode {
 
-    @JSExport
-    override def createJS(): Unit = {
+    @JSExport override def createJS(): Unit = {
         isc.defineClass(RibbonGroupSS.getClass.getSimpleName, RibbonGroup.getClass.getSimpleName)
         isc.defineClass(SettingsEditor.getClass.getSimpleName, WindowSS.getClass.getSimpleName)
         isc.defineClass(ListGridContextMenu.getClass.getSimpleName, MenuSS.getClass.getSimpleName)
