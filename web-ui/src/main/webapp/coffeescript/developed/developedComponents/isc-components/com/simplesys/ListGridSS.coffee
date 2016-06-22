@@ -231,6 +231,7 @@ isc.ClassFactory.defineInterface("GridEditorInterface").addInterfaceProperties
 		return
 
 	"selectRecordsByKey": (keyValues, newState) ->
+		@deselectAllRecords()
 		if not isc.isA.Array(keyValues)
 			keyValues = [keyValues]
 		for keyValue in keyValues

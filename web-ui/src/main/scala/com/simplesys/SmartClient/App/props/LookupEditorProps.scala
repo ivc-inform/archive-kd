@@ -22,21 +22,12 @@ class LookupEditorProps extends CanvasProps {
         (thiz: classHandler, keyValues: JSObject, newState: Boolean) =>
 
             var res: JSUndefined[Record] = jSUndefined
-            if (isc.isA.ListGrid(thiz)) {
-                val grid = thiz.asInstanceOf[ListGrid]
-                grid.deselectAllRecords()
-                res = grid.selectRecordsByKey(keyValues, newState)
-            }
-            else if (isc.isA.ListGridEditor(thiz)) {
-                val grid = thiz.asInstanceOf[ListGridEditor].grid
-                grid.deselectAllRecords()
-                res = grid.selectRecordsByKey(keyValues, newState)
-            }
-            else if (isc.isA.TreeGridEditor(thiz)) {
-                val grid = thiz.asInstanceOf[TreeGridEditor].grid
-                grid.deselectAllRecords()
-                res = grid.selectRecordsByKey(keyValues, newState)
-            }
+            if (isc.isA.ListGrid(thiz))
+                res = thiz.asInstanceOf[ListGrid].selectRecordsByKey(keyValues, newState)
+            else if (isc.isA.ListGridEditor(thiz))
+                res = thiz.asInstanceOf[ListGridEditor].grid.selectRecordsByKey(keyValues, newState)
+            else if (isc.isA.TreeGridEditor(thiz))
+                res = thiz.asInstanceOf[TreeGridEditor].grid.selectRecordsByKey(keyValues, newState)
 
             res
 
