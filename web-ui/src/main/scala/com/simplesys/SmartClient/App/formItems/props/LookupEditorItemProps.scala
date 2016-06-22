@@ -34,7 +34,6 @@ class LookupEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, value: JSAny) =>
             thiz.textItem setValue value
 
-            isc debugTrap thiz.form
             val foreignIdField = thiz.form.dataSource.getField(thiz.foreignField.get).get
             val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
             val idFieldName1 = foreignIdField.name
@@ -47,6 +46,7 @@ class LookupEditorItemProps extends CanvasItemProps {
 
                             val keyValues = js.Object()
                             keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
+                            isc debugTrap keyValues
                             editor.selectRecordsByKey(keyValues)
                     }
             }
