@@ -114,7 +114,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(DocIzvType.create(new DocIzvTypeProps), item)
                                             }.toFunc.opt
                                         },
-                                        ////////////////////
                                         new MenuSSItemProps {
                                             name = "docliter".opt
                                             icon = app.docliter.opt
@@ -124,7 +123,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(DocLiter.create(new DocLiterProps), item)
                                             }.toFunc.opt
                                         },
-                                        ////////////////////
                                         new MenuSSItemProps {
                                             name = "doctypes".opt
                                             icon = app.doctypes.opt
@@ -134,6 +132,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(DocTypes.create(new DocTypesProps), item)
                                             }.toFunc.opt
                                         },
+                                        ////////////////////
+                                        ////////////////////
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
                                             icon = app.abonents.opt
