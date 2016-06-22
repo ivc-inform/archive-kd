@@ -8,7 +8,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextIt
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.{Grid, ListGrid, ListGridEditor, TreeGridEditor}
+import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
 import com.simplesys.System.Types._
@@ -116,46 +116,29 @@ class LookupEditorItemProps extends CanvasItemProps {
                                                                 okFunction = {
                                                                     (thiz: classHandler) =>
 
-                                                                        var editorSelectedRecord: JSUndefined[Record] = jSUndefined
-                                                                        var editorDataSource: JSUndefined[DataSource] = jSUndefined
-
-                                                                        if (isc.isA.ListGrid(editor)) {
-                                                                            val _editor = editor.asInstanceOf[ListGrid]
-                                                                            editorDataSource = _editor.dataSource
-                                                                            editorSelectedRecord = _editor.getSelectedRecord()
-                                                                        }
-                                                                        else if (isc.isA.ListGridEditor(editor)) {
-                                                                            val _editor = editor.asInstanceOf[ListGridEditor]
-                                                                            editorDataSource = _editor.dataSource
-                                                                            editorSelectedRecord = _editor.getSelectedRecord()
-                                                                        } else if (isc.isA.TreeGridEditor(editor)) {
-                                                                            val _editor = editor.asInstanceOf[TreeGridEditor]
-                                                                            editorDataSource = _editor.dataSource
-                                                                            editorSelectedRecord = _editor.getSelectedRecord()
-                                                                        }
-
-                                                                        if (editorSelectedRecord.isEmpty)
+                                                                        if (editor.getSelectedRecord().isEmpty)
                                                                             isc.error("Не возможно выделить значение для ввода.")
                                                                         else {
-                                                                            val valueId = editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+                                                                            val valueId = editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idFieldName)
                                                                             if (formItem.record.isEmpty)
                                                                                 idField.setValue(valueId)
                                                                             else
                                                                                 formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(item.name)(valueId))
 
-                                                                            editorSelectedRecord.foreach {
+                                                                            editor.getSelectedRecord().foreach {
                                                                                 record =>
                                                                                     val recordFields = js.Object.keys(record)
                                                                                     recordFields.foreach {
                                                                                         field =>
-                                                                                            editorDataSource.foreach {
+                                                                                            editor.getDataSource().foreach {
                                                                                                 dataSource =>
                                                                                                     if (dataSource.getField(field).isDefined)
                                                                                                         if (!dataSource.getField(field).get.primaryKey.getOrElse(false))
-                                                                                                            form.setValue(field, editorSelectedRecord.asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                            form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
                                                                                             }
                                                                                     }
                                                                             }
+
                                                                         }
                                                                 }.toThisFunc.opt
                                                             }

@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.Forms.FormsItems
 
+import com.simplesys.SmartClient.App.LookupEditor
 import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
@@ -80,7 +81,7 @@ trait FormItem extends Class {
     var editorExit: js.Function3[DynamicForm, FormItem, JSAny, _]
     var editorType: FormItem
     var editPendingCSSText: CSSText
-    var editor: JSUndefined[Canvas]
+    var editor: JSUndefined[LookupEditor]
     var emptyDisplayValue: String
     var emptyValueIcon: String
     def enable()

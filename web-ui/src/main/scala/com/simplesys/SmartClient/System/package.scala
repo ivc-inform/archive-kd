@@ -112,6 +112,7 @@ package object System {
 
     //<editor-fold desc="Foundation">
     object Canvas extends SCApply[Canvas, CanvasProps]
+    object LookupEditor extends SCApply[LookupEditor, LookupEditorProps]
     object Label extends SCApply[Label, LabelProps]
     object HTMLFlow extends SCApply[HTMLFlow, HTMLFlowProps]
     //</editor-fold>
