@@ -1,10 +1,11 @@
 isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addProperties
 	"canDragSelectText"         : true
 	"autoFitFieldWidths"        : false
+	"canAutoFitWidth"           : false
 	"hoverWidth"                : 300
 	"dataFetchMode"             : "paged"
-	"canResizeFields"         : true
-	"selectionType"         : "single"
+	"canResizeFields"           : true
+	"selectionType"             : "single"
 	"findByKey"                 : (keyValue) -> @grid.findByKey keyValue
 	"removeData"                : (removeRecord, callback, requestProperties) ->
 		@grid.removeData removeRecord, callback, requestProperties
