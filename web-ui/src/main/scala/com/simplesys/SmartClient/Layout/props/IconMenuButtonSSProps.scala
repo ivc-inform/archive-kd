@@ -21,6 +21,7 @@ class IconMenuButtonSSProps extends IconMenuButtonProps {
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
             thiz.iconSmall = thiz.icon
+            thiz.title1 = thiz.title
             thiz.Super("initWidget", args)
 
     }.toThisFunc.opt

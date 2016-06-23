@@ -101,7 +101,7 @@ trait TabSetStack extends TabSetsStack{
                 }
                 else {
                     val len = tabGroupSet.tabs.length
-                    val _title = if (groupButton.iconSmall.isDefined) s"${CanvasStatic.imgHTML(groupButton.iconSmall.get, 16, 14)} ${"groupButton.title"}" else groupButton.title
+                    val _title = if (groupButton.iconSmall.isDefined) s"${CanvasStatic.imgHTML(groupButton.iconSmall.get, 16, 14)} ${groupButton.title1}" else groupButton.title
 
                     val tab = Tab(
                         new TabProps {

@@ -24,6 +24,7 @@ trait StatefulCanvas extends Canvas {
     def getTitle(): HTMLString
     var icon: SCImgURL
     var iconSmall: JSUndefined[SCImgURL]
+    var title1: JSUndefined[String]
     val iconHeight: Int
     val iconOrientation: String
     val iconSize: Int
