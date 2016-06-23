@@ -2,8 +2,8 @@ package com.simplesys.SmartClient.Layout.props
 
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Layout.IconMenuButtonSS
-import com.simplesys.SmartClient.System.isc
-import com.simplesys.System.JSDynamic
+import com.simplesys.SmartClient.System.{IscArray, isc}
+import com.simplesys.System.JSAny
 import com.simplesys.System.Types.IconOrientation
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
@@ -17,6 +17,14 @@ class IconMenuButtonSSProps extends IconMenuButtonProps {
             thiz.showMenu()
             false
     }.toThisFunc.opt
+
+    initWidget = {
+        (thiz: classHandler, args: IscArray[JSAny]) =>
+            thiz.iconSmall = thiz.icon
+            thiz.Super("initWidget", args)
+
+    }.toThisFunc.opt
+
     showMenu = {
         (thiz: classHandler) =>
             if (thiz.menu.isEmpty || thiz.menu.get == null)
@@ -33,10 +41,13 @@ class IconMenuButtonSSProps extends IconMenuButtonProps {
                 } else
                     true
 
-
                 if (res) {
                     val menu: MenuSS = thiz.menu.get
-                    menu.items.foreach(_.owner1 = thiz)
+                    menu.items = IscArray(menu.items.sortWith(_.title > _.title).map {
+                        menuItem =>
+                            menuItem.owner1 = thiz
+                            menuItem
+                    }: _*)
 
                     menu._showOffscreen()
                     val left = thiz.getPageLeft()

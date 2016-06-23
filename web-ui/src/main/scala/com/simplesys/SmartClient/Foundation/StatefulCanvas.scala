@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.Foundation
 
+import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.SelectionType.SelectionType
 import com.simplesys.System.Types.State._
@@ -22,6 +23,7 @@ trait StatefulCanvas extends Canvas {
     def getStateSuffix(): String
     def getTitle(): HTMLString
     var icon: SCImgURL
+    var iconSmall: JSUndefined[SCImgURL]
     val iconHeight: Int
     val iconOrientation: String
     val iconSize: Int
