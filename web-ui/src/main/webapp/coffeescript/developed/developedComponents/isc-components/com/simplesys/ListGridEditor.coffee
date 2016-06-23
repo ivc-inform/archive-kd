@@ -1,6 +1,6 @@
 isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addProperties
 	"canDragSelectText"         : true
-	"autoFitFieldWidths"        : true
+	"autoFitFieldWidths"        : false
 	"hoverWidth"                : 300
 	"dataFetchMode"             : "paged"
 	"canResizeFields"         : true

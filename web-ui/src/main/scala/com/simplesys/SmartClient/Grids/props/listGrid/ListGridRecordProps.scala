@@ -2,13 +2,14 @@ package com.simplesys.SmartClient.Grids.props.listGrid
 
 import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.System.Types.{CSSStyleName, HTMLString}
-import com.simplesys.option.{ScOption, ScNone}
+import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.props.AbstractClassProps
 
-import scala.scalajs.js._
-
 class ListGridRecordProps extends AbstractClassProps {
+    type classHandler <: ListGridRecord
+
     var _baseStyle: ScOption[CSSStyleName] = ScNone
     var _canEdit: ScOption[Boolean] = ScNone
     var _canRemove: ScOption[Boolean] = ScNone

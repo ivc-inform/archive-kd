@@ -2,7 +2,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"hoverWidth" : 300
 	"canDragSelectText" : true
 	"showOpenIcons" : true,
-	"autoFitFieldWidths": true
+	"autoFitFieldWidths": false
 	"findByKey": (keyValue) -> @grid.findByKey keyValue
 	"removeData": (removeRecord, callback, requestProperties) ->
 		@grid.removeData removeRecord, callback, requestProperties
