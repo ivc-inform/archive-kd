@@ -405,7 +405,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     def shouldDragScroll(): void
     var shouldPrint: Boolean
     def shouldSnapOnDrop(dragTarget: Canvas): Boolean
-    def show(): void
+    def show(animationEffect: JSUndefined[String] = js.native): void
     def showClickMask(clickAction: Callback, mode: ClickMaskMode, unmaskedTargets: Canvas | IscArray[Canvas]): String
     def showComponentMask(unmaskedChildren: IscArray[Canvas] = js.native): void
     def showContextMenu(): Boolean

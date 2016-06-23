@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.System.{IscArray, KeyIdentifier}
+import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
@@ -11,7 +12,8 @@ import scala.scalajs.js
 
 @js.native
 trait MenuSSItem extends ListGridRecord {
-    var owner: Canvas
+    var owner: JSUndefined[Canvas]
+    var owner1: JSUndefined[Canvas]
     var identifier: ID
     var action: js.Function1[void, _]
     var canSelectParent: Boolean

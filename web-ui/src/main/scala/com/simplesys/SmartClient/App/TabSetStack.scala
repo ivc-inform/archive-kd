@@ -6,11 +6,13 @@ import com.simplesys.SmartClient.Layout.props.TabSetSSProps
 import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.{IconMenuButtonSS, RibbonGroupSS, TabSet}
-import com.simplesys.SmartClient.System.{Tab, TabSetSS, isc}
+import com.simplesys.SmartClient.System.{IconMenuButtonSS, Tab, TabSetSS, isc}
 import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types.ID
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
+
+import scala.scalajs.js.UndefOr
 
 trait TabSetStack {
     self =>
@@ -18,18 +20,18 @@ trait TabSetStack {
     protected val functionGroup: RibbonGroupSS
     protected val functionButton: IconMenuButtonSS
 
-    protected lazy val tabGroupSet = TabSetSS.create(
-        new TabSetSSProps {
-            afterRemoveTabs = {
-                (thiz: classHandler) =>
-                    if (thiz.tabs.length == 0)
-                        functionGroup.hide()
+//    protected lazy val tabGroupSet = TabSetSS.create(
+//        new TabSetSSProps {
+//            afterRemoveTabs = {
+//                (thiz: classHandler) =>
+//                    if (thiz.tabs.length == 0)
+//                        functionGroup.hide()
+//
+//            }.toThisFunc.opt
+//        }
+//    )
 
-            }.toThisFunc.opt
-        }
-    )
-
-    private lazy val tabSet = TabSetSS.create(
+    protected lazy val tabSet = TabSetSS.create(
         new TabSetSSProps {
             afterRemoveTabs = {
                 (thiz: classHandler) =>
@@ -43,8 +45,12 @@ trait TabSetStack {
     def addTab(canvas: Canvas, menuItem: MenuSSItem): Unit = {
         if (canvas.identifier.isEmpty)
             isc.error(s"Компонент ${canvas.getIdentifier()} не имеет постоянного identifier, поэтому не может быть добавлен.")
-        else {
-            //isc debugTrap (canvas, menuItem)
+        else if (menuItem.owner1.map(_.asInstanceOf[IconMenuButtonSS]).isEmpty)
+            isc.error(s"Нет привязки к owner1: IconMenuButtonSS")
+        else{
+            val groupButton = menuItem.owner1.map(_.asInstanceOf[IconMenuButtonSS]).get
+
+            isc debugTrap groupButton
             val tab = tabSet.findTab(canvas.getIdentifier())
             if (tab.isDefined) {
                 tabSet selectTab tab.get

@@ -8,7 +8,7 @@ import scala.scalajs.js
 @js.native
 trait IconMenuButton extends IconButton {
     var menu: JSUndefined[MenuSS]
-    var menuAnimationEffect: String
+    var menuAnimationEffect: JSUndefined[String]
     def showMenu(): Boolean
 }
 
