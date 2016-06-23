@@ -35,7 +35,7 @@ trait TabSetsStack {
         }
 
         val tab = tabSet.findTab(canvas.getIdentifier())
-        isc debugTrap tab
+        //isc debugTrap tab
 
         if (tab.isDefined) {
             tabSet selectTab tab.get
@@ -61,7 +61,7 @@ trait TabSetsStack {
             functionGroup.show()
         }
 
-        isc debugTrap tabSet
+        //isc debugTrap tabSet
         tabSet
     }
 }
@@ -97,7 +97,7 @@ trait TabSetStack extends TabSetsStack {
                 val tabGroup = tabGroupSet.findTab(groupButton.getIdentifier())
                 if (tabGroup.isDefined) {
                     tabGroupSet selectTab tabGroup.get
-                    isc debugTrap tabGroup
+                    //isc debugTrap tabGroup
                     checkInnerTabSet(groupButton.getIdentifier(), canvas, menuItem)
                 }
                 else {
