@@ -36,6 +36,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
         new IconMenuButtonSSProps {
             title = "Операции".ellipsis.opt
             icon = app.iconConstructor.opt
+            identifier = "33EE1839-8D4D-FFA0-E491-22B54F212772A".opt
         }
     )
 
@@ -57,6 +58,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                         new IconMenuButtonSSProps {
                             title = "Картотека".ellipsis.opt
                             icon = app.cards.opt
+                            identifier = "33EE1839-8D4D-FFA0-E491-22B54F55772A".opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
@@ -104,6 +106,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                         new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
                             icon = app.ref_RefRefs.opt
+                            identifier = "33EE1839-8D4D-FFA0-E491-85B54F2C772A".opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
@@ -285,6 +288,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                         new IconMenuButtonSSProps {
                             title = "Выдача копий".ellipsis.opt
                             icon = app.copyProduct.opt
+                            identifier = "33121839-8D4D-FFA0-E491-22B54F2C772A".opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq().opt
@@ -303,6 +307,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                         new IconMenuButtonSSProps {
                             title = "Отчеты".ellipsis.opt
                             icon = app.reports.opt
+                            identifier = "33EE1839-810D-FFA0-E491-22B54F2C772A".opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq().opt
@@ -321,6 +326,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                         new IconMenuButtonSSProps {
                             title = "Магнитотека".ellipsis.opt
                             icon = app.recorder.opt
+                            identifier = "33EE1839-8D4D-F550-E491-22B54F2C772A".opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq().opt
@@ -376,6 +382,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                         new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
                             icon = app.ref.opt
+                            identifier = "33EE1839-8D4D-FFA0-E491-22B54F2C772A".opt
                             menu = MenuSS.create(
                                 new MenuSSProps {
                                     items = Seq(
@@ -510,7 +517,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 managedAdminsGroups.foreach(_.hide())
                                                                                 managedDevsGroups.foreach(_.hide())
                                                                                 captionUserLabel.hide()
-                                                                                tabSet.removeAllTabs()
+                                                                                tabGroupSet.removeAllTabs()
 
                                                                                 LoggedGroup.logged = false
                                                                                 thiz setTitle "Вход".ellipsis
@@ -529,7 +536,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                     captionUserLabel.hide()
                                                                     functionGroup.hide()
                                                                     windowsStack.destroyAll()
-                                                                    tabSet.removeAllTabs()
+                                                                    tabGroupSet.removeAllTabs()
                                                                 }
                                                                 false
                                                         }.toThisFunc.opt
@@ -547,7 +554,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                 )).opt
                         }
                     ),
-                    tabSet
+                    tabGroupSet
                 ).opt
             }
         )
