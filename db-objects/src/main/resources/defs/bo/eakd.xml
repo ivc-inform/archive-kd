@@ -162,12 +162,11 @@
 			<classSimple autoTableMapping="true" caption="Карточка учета" name="card">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код" mandatory="false" name="vcrcode" type="sCode"></attr>
-					<attr caption="Наименование" mandatory="false" name="vcrname" type="sCaption"></attr>
+					<attr caption="Код" mandatory="true" name="vcrcode" type="sCode"></attr>
+					<attr caption="Наименование" mandatory="true" name="vcrname" type="sCaption"></attr>
 					<attr caption="Описание" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
 					<attr caption="Дата создания" mandatory="false" name="datecard" type="dDate"></attr>
-					<attr caption="Код шифра изделия" mandatory="false" name="iddocitem" type="nInt"></attr>
-					<attr caption="Код документа входимости" mandatory="false" name="idcrd_fk" type="nInt"></attr>
+					<attr caption="Код документа входимости" mandatory="true" name="idcrd_fk" type="nInt"></attr>
 					<attr caption="Инвентарный номер" mandatory="false" name="vcrinvent" type="sCaption"></attr>
 					<attr caption="Количество листов в карточке" mandatory="false" name="vcrkolpages" type="sCaption"></attr>
 					<attr caption="Код состава" mandatory="false" name="vcrcodeprns" type="sCaption"></attr>
@@ -199,6 +198,9 @@
 					</fk>
 					<fk linkType="refIsOwner" mandatory="true" parent="groupitem">
 						<mapping attrNameLocal="idgroup" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="true" parent="docitem">
+						<mapping attrNameLocal="iddocitem" attrNameRemote="id"></mapping>
 					</fk>
 				</constraints>
 			</classSimple>
