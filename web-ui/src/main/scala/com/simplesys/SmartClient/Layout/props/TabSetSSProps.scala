@@ -40,4 +40,5 @@ class TabSetSSProps extends TabSetProps {
     }.toThisFunc.opt
 
     canCloseTabs = true.opt
+    canReorderTabs = true.opt
 }
