@@ -381,7 +381,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
-                            title = "Справочники".ellipsis.opt
+                            title = "Администрирование".ellipsis.opt
                             icon = app.ref.opt
                             identifier = "33EE1839-8D4D-FFA0-E491-22B54F2C772A".opt
                             menu = MenuSS.create(
