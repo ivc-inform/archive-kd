@@ -30,7 +30,6 @@ import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 class FormItemProps extends ClassProps {
     type classHandler <: FormItem
 
-    width = "100%"
     var accessKey: ScOption[Char] = ScNone
     var align: ScOption[Alignment] = ScNone
     var allowExpressions: ScOption[Boolean] = ScNone
@@ -224,7 +223,7 @@ class FormItemProps extends ClassProps {
     var valueIcons: ScOption[JSDictionary[String]] = ScNone
     var valueMap: ScOption[ValueMap] = ScNone
     var visible: ScOption[Boolean] = ScNone
-    var width: ScOption[IntString[Int, String]] = ScNone
+    var width: ScOption[IntString[Int, String]] = "100%"
     var wrapTitle: ScOption[Boolean] = ScNone
     var `type`: ScOption[FormItemType_FormItemComponentType[FormItemType, FormItemComponentType]] = ScNone
 }
