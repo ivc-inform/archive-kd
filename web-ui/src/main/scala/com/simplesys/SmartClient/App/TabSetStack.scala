@@ -12,17 +12,12 @@ import com.simplesys.System.Types.ID
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
 
-import scala.collection.mutable.ArrayBuffer
-
 trait TabSetsStack {
     self: TabSetStack =>
 
-    private val tabSets = ArrayBuffer.empty[TabSetSS]
-
     def checkInnerTabSet(groupIdentifier: ID, canvas: Canvas, menuItem: MenuSSItem): TabSetSS = {
-        isc debugTrap(groupIdentifier, canvas, menuItem)
 
-        val tabSet = tabSets.find(_.identifier == groupIdentifier) match {
+        val tabSet = tabGroupSet.tabs.map(_.pane.asInstanceOf[TabSetSS]).find(_.identifier == groupIdentifier) match {
             case None =>
                 TabSetSS.create(
                     new TabSetSSProps {
