@@ -18,18 +18,18 @@ trait TabSetStack {
     protected val functionGroup: RibbonGroupSS
     protected val functionButton: IconMenuButtonSS
 
-//    protected lazy val tabGroupSet = TabSetSS.create(
-//        new TabSetSSProps {
-//            afterRemoveTabs = {
-//                (thiz: classHandler) =>
-//                    if (thiz.tabs.length == 0)
-//                        functionGroup.hide()
-//
-//            }.toThisFunc.opt
-//        }
-//    )
+    protected lazy val tabGroupSet = TabSetSS.create(
+        new TabSetSSProps {
+            afterRemoveTabs = {
+                (thiz: classHandler) =>
+                    if (thiz.tabs.length == 0)
+                        functionGroup.hide()
 
-    protected lazy val tabSet = TabSetSS.create(
+            }.toThisFunc.opt
+        }
+    )
+
+    private lazy val tabSet = TabSetSS.create(
         new TabSetSSProps {
             afterRemoveTabs = {
                 (thiz: classHandler) =>

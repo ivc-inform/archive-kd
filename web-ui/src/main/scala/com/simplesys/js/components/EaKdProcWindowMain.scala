@@ -510,7 +510,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 managedAdminsGroups.foreach(_.hide())
                                                                                 managedDevsGroups.foreach(_.hide())
                                                                                 captionUserLabel.hide()
-                                                                                tabSet.removeAllTabs()
+                                                                                tabGroupSet.removeAllTabs()
 
                                                                                 LoggedGroup.logged = false
                                                                                 thiz setTitle "Вход".ellipsis
@@ -529,7 +529,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                     captionUserLabel.hide()
                                                                     functionGroup.hide()
                                                                     windowsStack.destroyAll()
-                                                                    tabSet.removeAllTabs()
+                                                                    tabGroupSet.removeAllTabs()
                                                                 }
                                                                 false
                                                         }.toThisFunc.opt
@@ -547,7 +547,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                 )).opt
                         }
                     ),
-                    tabSet
+                    tabGroupSet
                 ).opt
             }
         )
