@@ -8,8 +8,8 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 class ZaprosProps extends CommonListGridEditorComponentProps {
     override val simpleTable = true
 
-        type classHandler <: Zapros
+    type classHandler <: Zapros
 
-        dataSource = DataSourcesJS.eakd_zapros_DS.opt
-        identifier = "0B8857B1-844D-33E2-57AD-6D763F2AECCF".opt
+    dataSource = DataSourcesJS.eakd_zapros_DS.opt
+    identifier = "0B8857B1-844D-33E2-57AD-6D763F2AECCF".opt
 }
