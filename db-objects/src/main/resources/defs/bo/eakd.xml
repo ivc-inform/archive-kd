@@ -264,7 +264,7 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Карточка учета" name="docizv">
+			<classSimple autoTableMapping="true" caption="Извещения" name="docizv">
 				<attrs>
 					<attr caption="Наименование" mandatory="false" name="vizname" type="sCaption"></attr>
 					<attr caption="Код" mandatory="false" name="vizcode" type="sCode"></attr>
@@ -663,10 +663,10 @@
 
 			<classSimple autoTableMapping="true" caption="Запросы" name="zapros">
 				<attrs>
-					<attr caption="Наименование" mandatory="false" name="vzpname" type="sCaption"></attr>
-					<attr caption="Код" mandatory="false" name="vzpcode" type="sCaption"></attr>
-					<attr caption="Описание" mandatory="false" name="vzpdesc" type="sDescription"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код" mandatory="false" name="vzpcode" type="sCaption"></attr>
+					<attr caption="Наименование" mandatory="false" name="vzpname" type="sCaption"></attr>
+					<attr caption="Описание" mandatory="false" name="vzpdesc" type="sDescription"></attr>
 					<attr caption="Дата оформления" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="Дата исполнения" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Дата закрытия" mandatory="false" name="ddateout" type="dDate"></attr>

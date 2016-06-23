@@ -24,6 +24,8 @@ package object app {
     val mvid = "mvid.png"
     val doctypes = "doctypes.png"
     val card = "card.png"
+    val zapros = "card.png"
+    val docizv = "docizv.png"
     val groupitem = "groupitem.png"
     val docizvtype = "docizvtype.png"
     val format = "format.png"

@@ -68,7 +68,26 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
 
                                             }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
+                                            name = "zapros".opt
+                                            icon = app.zapros.opt
+                                            title = "Запросы".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+
+                                            }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
+                                            name = "docizv".opt
+                                            icon = app.docizv.opt
+                                            title = "Извещения".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+
+                                            }.toFunc.opt
                                         }
+
                                     ).opt
                                 }
                             ).opt
