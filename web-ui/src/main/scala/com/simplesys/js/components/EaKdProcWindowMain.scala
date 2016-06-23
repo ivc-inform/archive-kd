@@ -16,7 +16,7 @@ import com.simplesys.System._
 import com.simplesys.app
 import com.simplesys.app._
 import com.simplesys.function._
-import com.simplesys.js.components.cards.props.{CardsProps, ZaprosProps}
+import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
@@ -87,7 +87,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Извещения".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-
+                                                    addTab(DocIzv.create(new DocIzvProps), item)
                                             }.toFunc.opt
                                         }
 

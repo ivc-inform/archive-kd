@@ -1,14 +1,9 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
-import com.simplesys.SmartClient.System._
-import com.simplesys.System._
-import com.simplesys.function._
-import com.simplesys.js.components.cards.{DocIzv, Zapros}
+import com.simplesys.js.components.cards.DocIzv
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
-
-import scala.scalajs.js._
 
 class DocIzvProps extends CommonListGridEditorComponentProps {
     override val simpleTable = true

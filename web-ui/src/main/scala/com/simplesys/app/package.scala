@@ -1,8 +1,8 @@
 package com.simplesys
 
 import com.simplesys.SmartClient.System.SCApply
-import com.simplesys.js.components.cards.{Cards, Zapros}
-import com.simplesys.js.components.cards.props.{CardsProps, ZaprosProps}
+import com.simplesys.js.components.cards.{Cards, DocIzv, Zapros}
+import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
 
@@ -110,4 +110,5 @@ package object app {
     object MVid extends SCApply[MVid, MVidProps]
     object Cards extends SCApply[Cards, CardsProps]
     object Zapros extends SCApply[Zapros, ZaprosProps]
+    object DocIzv extends SCApply[DocIzv, DocIzvProps]
 }
