@@ -20,13 +20,20 @@ trait TabSetsStack {
     private val tabSets = ArrayBuffer.empty[TabSetSS]
 
     def checkInnerTabSet(groupIdentifier: ID, canvas: Canvas, menuItem: MenuSSItem): TabSetSS = {
-        isc debugTrap (groupIdentifier, canvas, menuItem)
+        isc debugTrap(groupIdentifier, canvas, menuItem)
 
         val tabSet = tabSets.find(_.identifier == groupIdentifier) match {
             case None =>
                 TabSetSS.create(
                     new TabSetSSProps {
                         identifier = groupIdentifier.opt
+                        afterRemoveTabs = {
+                            (thiz: classHandler) =>
+                                val res: Int = tabGroupSet.tabs.foldLeft(0)((qty: Int, tab: Tab) => qty + tab.pane.asInstanceOf[TabSetSS].tabs.length)
+                                if (res == 0)
+                                    functionGroup.hide()
+
+                        }.toThisFunc.opt
                     }
                 )
             case Some(tabSet) => tabSet
@@ -64,7 +71,7 @@ trait TabSetsStack {
     }
 }
 
-trait TabSetStack extends TabSetsStack{
+trait TabSetStack extends TabSetsStack {
     self =>
 
     protected val functionGroup: RibbonGroupSS
@@ -92,11 +99,10 @@ trait TabSetStack extends TabSetsStack{
             if (groupButton.identifier.isEmpty)
                 isc.error(s"Компонент ${groupButton.getIdentifier()} не имеет постоянного identifier.")
             else {
-                isc debugTrap groupButton
                 val tabGroup = tabGroupSet.findTab(groupButton.getIdentifier())
-                isc debugTrap tabGroup
                 if (tabGroup.isDefined) {
                     tabGroupSet selectTab tabGroup.get
+                    isc debugTrap tabGroup
                     checkInnerTabSet(groupButton.getIdentifier(), canvas, menuItem)
                 }
                 else {
