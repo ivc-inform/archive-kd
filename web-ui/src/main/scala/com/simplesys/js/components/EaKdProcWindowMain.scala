@@ -16,7 +16,7 @@ import com.simplesys.System._
 import com.simplesys.app
 import com.simplesys.app._
 import com.simplesys.function._
-import com.simplesys.js.components.cards.props.CardsProps
+import com.simplesys.js.components.cards.props.{CardsProps, ZaprosProps}
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
@@ -70,7 +70,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(Cards.create(new CardsProps), item)
-
                                             }.toFunc.opt
                                         },
                                         new MenuSSItemProps {
@@ -79,7 +78,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Запросы".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-
+                                                    addTab(Zapros.create(new ZaprosProps), item)
                                             }.toFunc.opt
                                         },
                                         new MenuSSItemProps {
