@@ -1,3 +1,4 @@
+
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
 	<group caption="Электоронный архив технической документации" name="eakd" prefix="EAKD">
 		<classes>
@@ -714,33 +715,33 @@
 			</classSimple>
 
 			<classSimple autoTableMapping="true" caption="Рассылка запроса" name="zaprosrass">
-							<attrs>
-								<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-								<attr caption="Наименование" mandatory="false" name="vname" type="sCaption"></attr>
-								<attr caption="VRSKOL" mandatory="false" name="vrskol" type="nInt"></attr>
-								<attr caption="DATEOUT" mandatory="false" name="dateout" type="dDate"></attr>
-							</attrs>
-							<defaults>
-								<showAttrs>
-									<attrName>vsecaption</attrName>
-								</showAttrs>
-								<uiSettings uiFormType="singleListGrid"></uiSettings>
-							</defaults>
-							<constraints>
-								<uc uniqueType="pk">
-									<attrName>id</attrName>
-								</uc>
-								<fk linkType="refIsOwner" mandatory="true" parent="zapros">
-									<mapping attrNameLocal="idzapr" attrNameRemote="id"></mapping>
-								</fk>
-								<fk linkType="refIsOwner" mandatory="true" parent="card">
-																	<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
-																</fk>
-								<fk linkType="refIsOwner" mandatory="true" parent="abonents">
-																	<mapping attrNameLocal="idabon" attrNameRemote="id"></mapping>
-																</fk>
-							</constraints>
-						</classSimple>
+				<attrs>
+					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование" mandatory="false" name="vname" type="sCaption"></attr>
+					<attr caption="VRSKOL" mandatory="false" name="vrskol" type="nInt"></attr>
+					<attr caption="DATEOUT" mandatory="false" name="dateout" type="dDate"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vsecaption</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk linkType="refIsOwner" mandatory="true" parent="zapros">
+						<mapping attrNameLocal="idzapr" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="true" parent="card">
+						<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="true" parent="abonents">
+						<mapping attrNameLocal="idabon" attrNameRemote="id"></mapping>
+					</fk>
+				</constraints>
+			</classSimple>
 		</classes>
 	</group>
 </objectSchema>

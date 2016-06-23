@@ -14,9 +14,9 @@
 					<uc uniqueType="pk">
 						<attrName>di</attrName>
 					</uc>
-						<uc uniqueType="uq">
-							<attrName>codeGroup</attrName>
-						</uc>
+					<uc uniqueType="uq">
+						<attrName>codeGroup</attrName>
+					</uc>
 					<fk parent="UserGroup" linkType="refIsOwner" mandatory="false">
 						<mapping attrNameLocal="parent" attrNameRemote="di"/>
 					</fk>
@@ -34,7 +34,7 @@
 				<attrs>
 					<attr name="di" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true"/>
 					<!--<attr name="di1" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true"/>-->
-					<attr name="login" type="sCode" caption="Логин" mandatory="true" />
+					<attr name="login" type="sCode" caption="Логин" mandatory="true"/>
 					<attr name="firstName" caption="Имя" type="sCaption" mandatory="false"/>
 					<attr name="secondName" caption="Отчество" type="sCaption" mandatory="false"/>
 					<attr name="lastName" caption="Фамилия" type="sCaption" mandatory="true"/>
@@ -51,7 +51,6 @@
 					</classifier>
 					<uiSettings uiFormType="masterTreeDetailedListGrid"/>
 					<!--<uiSettings uiFormType="singleListGrid"/>-->
-
 				</defaults>
 				<constraints>
 					<uc uniqueType="pk">
