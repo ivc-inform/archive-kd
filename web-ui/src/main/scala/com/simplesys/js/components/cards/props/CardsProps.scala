@@ -148,10 +148,6 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "datecard"
         },
         new ListGridFieldProps {
-            name = "vcrsdescr"
-            title = "Описание"
-        },
-        new ListGridFieldProps {
             name = "vcrcodeprns"
         },
         new ListGridFieldProps {
@@ -195,6 +191,10 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new ListGridFieldProps {
             name = "vitcode"
+        },
+        new ListGridFieldProps {
+            name = "vcrsdescr"
+            title = "Описание"
         }
     ).opt
 }
