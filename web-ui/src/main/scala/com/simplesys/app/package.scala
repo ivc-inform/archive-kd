@@ -1,6 +1,8 @@
 package com.simplesys
 
 import com.simplesys.SmartClient.System.SCApply
+import com.simplesys.js.components.cards.Cards
+import com.simplesys.js.components.cards.props.CardsProps
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
 
@@ -106,4 +108,5 @@ package object app {
     object Status extends SCApply[Status, StatusProps]
     object StatVersion extends SCApply[StatVersion, StatVersionProps]
     object MVid extends SCApply[MVid, MVidProps]
+    object Cards extends SCApply[Cards, CardsProps]
 }
