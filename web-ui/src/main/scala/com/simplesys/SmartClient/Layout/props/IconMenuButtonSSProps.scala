@@ -44,6 +44,8 @@ class IconMenuButtonSSProps extends IconMenuButtonProps {
 
                 if (res) {
                     val menu: MenuSS = thiz.menu.get
+
+                    //todo Не работает ((((
                     menu.items = IscArray(menu.items.sortWith(_.title > _.title).map {
                         menuItem =>
                             menuItem.owner1 = thiz
