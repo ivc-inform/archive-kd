@@ -17,7 +17,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     editWindowProperties = WindowSS(
         new WindowSSProps {
             width = 290
-            height = 595
+            height = 645
         }
     ).opt
 
