@@ -55,6 +55,24 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
+                            title = "Картотека".ellipsis.opt
+                            icon = app.cards.opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq().opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
+            }
+        ),
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Пользователь".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
                             title = "Справочники".ellipsis.opt
                             icon = app.ref_RefRefs.opt
                             menu = MenuSS.create(

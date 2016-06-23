@@ -78,6 +78,7 @@ package object app {
     val ref = "ref.png"
     val ref_RefRefs = "ref_RefRefs.png"
     val copyProduct = "copyproduct.png"
+    val cards = "cards.png"
     val reports = "reports.png"
     val recorder = "recorder.png"
     val dictionary = "dictionary.png"
