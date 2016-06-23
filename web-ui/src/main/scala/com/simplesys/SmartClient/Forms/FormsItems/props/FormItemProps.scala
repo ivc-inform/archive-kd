@@ -22,6 +22,7 @@ import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
 import com.simplesys.System.Types.{SCImgURL, _}
 import com.simplesys.System._
 import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNone, ScOption}
+import com.simplesys.option.DoubleType._
 
 import scala.scalajs.js
 import scala.scalajs.js.{ThisFunction0, ThisFunction1}
@@ -29,6 +30,7 @@ import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 class FormItemProps extends ClassProps {
     type classHandler <: FormItem
 
+    width = "100%"
     var accessKey: ScOption[Char] = ScNone
     var align: ScOption[Alignment] = ScNone
     var allowExpressions: ScOption[Boolean] = ScNone

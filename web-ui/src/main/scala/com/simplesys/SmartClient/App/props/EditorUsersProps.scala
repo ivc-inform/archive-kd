@@ -64,19 +64,15 @@ class EditorUsersProps extends TreeListGridEditorProps {
     editingTreeFields = Seq(
         CheckboxItem(new CheckboxItemProps {
             name = "active".opt
-            width = "100%"
         }),
         TextItem(new TextItemProps {
             name = "codeGroup".opt
-            width = "100%"
         }),
         TextItem(new TextItemProps {
             name = "captionGroup".opt
-            width = "100%"
         }),
         TextAreaItem(new TextAreaItemProps {
             name = "descriptionGroup".opt
-            width = "100%"
         })
     ).opt
 

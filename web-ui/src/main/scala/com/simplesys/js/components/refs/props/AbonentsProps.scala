@@ -23,21 +23,18 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
     val orgCodeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "orgcode"
-        width = "100%"
         listGridEditor = abonentOrg.opt
         title = "Код предприятия"
     })
 
     val orgNameItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "orgname"
-        width = "100%"
         listGridEditor = abonentOrg.opt
         title = "Наименование предприятия"
     })
 
     val abonTypeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
         name = "vabontype"
-        width = "100%"
         listGridEditor = abonentType.opt
     })
 
@@ -46,48 +43,38 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     editingFields = Seq(
         TextItem(new TextItemProps {
             name = "vabcode"
-            width = "100%"
         }),
         TextItem(new TextItemProps {
             name = "vabname"
-            width = "100%"
         }),
         DateTimeItem(new DateTimeItemProps {
             name = "tdatein"
-            width = "100%"
         }),
         TextItem(new TextItemProps {
             name = "vemail"
-            width = "100%"
         }),
         TextItem(new TextItemProps {
             name = "vperson"
-            width = "100%"
         }),
         TextItem(new TextItemProps {
             name = "vphone1"
-            width = "100%"
         }),
         TextItem(new TextItemProps {
             name = "vphone2"
-            width = "100%"
         }),
         IntegerItem(new IntegerItemProps {
             name = "idaborg"
-            width = "100%"
             hidden = true.opt
         }),
         orgCodeItem,
         orgNameItem,
         IntegerItem(new IntegerItemProps {
             name = "idabtype"
-            width = "100%"
             hidden = true.opt
         }),
         abonTypeItem,
         TextAreaItem(new TextAreaItemProps {
             name = "vabdesc"
-            width = "100%"
         })
     ).opt
 
