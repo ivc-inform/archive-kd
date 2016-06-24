@@ -53,7 +53,7 @@ isc.defineClass("MenuSS", isc.Menu).addProperties
 				"title": "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043A\u043E\u043D\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u044E '\u043F\u043E-\u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E'"
 				"click": =>
 					if @owner?
-						@owner.restoreViewState? ->
+						@owner.restoreViewState? =>
 							@owner.autoSaveConfig = false if @owner.autoSaveConfig?
 							isc.ok "Восстановление выполнено. Необходима перезагрузка формы."
 							return
