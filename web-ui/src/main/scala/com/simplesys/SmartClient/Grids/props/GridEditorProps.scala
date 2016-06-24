@@ -96,32 +96,6 @@ class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRe
 
     var fields: ScOption[Seq[ListGridFieldProps]] = ScNone
 
-    initWidget = {
-        (thiz: classHandler, args: IscArray[JSAny]) =>
-            thiz.Super("initWidget", args)
-            isc debugTrap this.fields
-
-            if (thiz.fields.isDefined)
-                thiz.replacingfields.foreach {
-                    replacingfields =>
-                        replacingfields.foreach {
-                            replacingfield =>
-                                thiz.fields.foreach {
-                                    fields =>
-                                      isc debugTrap this.fields
-                                        if (!fields.exists(_.name == replacingfield.name))
-                                            isc.error(s"Компонент ${thiz.getIdentifier()} не имеет поля ${replacingfield.name}")
-                                        else {
-                                            import js.JSConverters._
-                                            var field: JSUndefined[ListGridField] = fields.find(_.name == replacingfield.name).orUndefined
-                                            field = replacingfield
-                                        }
-                                }
-                        }
-                }
-
-    }.toThisFunc.opt
-
     var defaultFields: ScOption[Seq[ListGridFieldProps]] = ScNone
     var data: ScOption[Seq[ListGridRecord]] = ScNone
 
