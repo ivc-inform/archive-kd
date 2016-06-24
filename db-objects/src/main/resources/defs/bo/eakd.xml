@@ -169,9 +169,8 @@
 					<attr caption="Код документа входимости" mandatory="true" name="idcrd_fk" type="nInt"></attr>
 					<attr caption="Инвентарный номер" mandatory="false" name="vcrinvent" type="sCaption"></attr>
 					<attr caption="Количество листов" mandatory="false" name="vcrkolpages" type="sCaption"></attr>
-					<attr caption="Код состава" mandatory="false" name="vcrcodeprns" type="sCaption"></attr>
-					<attr caption="Форматы" mandatory="false" name="vformats" type="sCaption"></attr>
 					<attr caption="Применяемость" mandatory="false" name="vcrcodeprn" type="sCaption"></attr>
+					<attr caption="Форматы" mandatory="false" name="vformats" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
