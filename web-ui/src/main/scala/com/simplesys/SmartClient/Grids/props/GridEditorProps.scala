@@ -99,6 +99,7 @@ class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRe
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
             thiz.Super("initWidget", args)
+            isc debugTrap this.fields
 
             if (thiz.fields.isDefined)
                 thiz.replacingfields.foreach {
@@ -107,7 +108,7 @@ class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRe
                             replacingfield =>
                                 thiz.fields.foreach {
                                     fields =>
-                                      isc debugTrap fields
+                                      isc debugTrap this.fields
                                         if (!fields.exists(_.name == replacingfield.name))
                                             isc.error(s"Компонент ${thiz.getIdentifier()} не имеет поля ${replacingfield.name}")
                                         else {
