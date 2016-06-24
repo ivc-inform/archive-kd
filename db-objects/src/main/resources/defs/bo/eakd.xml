@@ -162,17 +162,16 @@
 			<classSimple autoTableMapping="true" caption="Карточка учета" name="card">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код карточка учета" mandatory="true" name="vcrcode" type="sCode"></attr>
-					<attr caption="Наименование карточка учета" mandatory="true" name="vcrname" type="sCaption"></attr>
-					<attr caption="Описание карточка учета" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
+					<attr caption="Обозначение карточки учета" mandatory="true" name="vcrcode" type="sCode"></attr>
+					<attr caption="Наименование карточки учета" mandatory="true" name="vcrname" type="sCaption"></attr>
+					<attr caption="Описание карточки учета" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
 					<attr caption="Дата создания" mandatory="false" name="datecard" type="dDate"></attr>
 					<attr caption="Код документа входимости" mandatory="true" name="idcrd_fk" type="nInt"></attr>
 					<attr caption="Инвентарный номер" mandatory="false" name="vcrinvent" type="sCaption"></attr>
-					<attr caption="Количество листов в карточке" mandatory="false" name="vcrkolpages" type="sCaption"></attr>
+					<attr caption="Количество листов" mandatory="false" name="vcrkolpages" type="sCaption"></attr>
 					<attr caption="Код состава" mandatory="false" name="vcrcodeprns" type="sCaption"></attr>
 					<attr caption="Форматы" mandatory="false" name="vformats" type="sCaption"></attr>
-					<attr caption="Идентификатор файла" mandatory="false" name="vfileident" type="sCaption"></attr>
-					<attr caption="Разработчик" mandatory="false" name="vrazr" type="sCaption"></attr>
+					<attr caption="Применяемость" mandatory="false" name="vcrcodeprn" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -215,6 +214,7 @@
 				<defaults>
 					<showAttrs>
 						<attrName>vctcode</attrName>
+						<attrName>vctname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -245,17 +245,18 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Изделия" name="docitem">
+			<classSimple autoTableMapping="true" caption="Шифр изделия" name="docitem">
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код изделия" mandatory="true" name="vitcode" type="sCode"></attr>
-					<attr caption="Наименование изделия" mandatory="true" name="vitname" type="sCaption"></attr>
+					<attr caption="Код шифра изделия" mandatory="true" name="vitcode" type="sCode"></attr>
+					<attr caption="Наименование шифра изделия" mandatory="true" name="vitname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
-					<attr caption="Описание изделия" mandatory="false" name="vdesc" type="sDescription"></attr>
+					<attr caption="Описание шифра изделия" mandatory="false" name="vdesc" type="sDescription"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
 						<attrName>vitcode</attrName>
+						<attrName>vitname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -430,16 +431,16 @@
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Виды документов" name="doctypes">
+			<classSimple autoTableMapping="true" caption="Типы документов" name="doctypes">
 				<attrs>
-					<attr caption="Код вида документов" mandatory="true" name="vtycode" type="sCode"></attr>
-					<attr caption="Наименование вида документов" mandatory="true" name="vtyname" type="sCaption"></attr>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код типа документов" mandatory="true" name="vtycode" type="sCode"></attr>
+					<attr caption="Наименование типа документов" mandatory="true" name="vtyname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vtyname</attrName>
+						<attrName>vtycode</attrName>
 						<attrName>vtyname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
@@ -492,6 +493,7 @@
 				<defaults>
 					<showAttrs>
 						<attrName>vgicode</attrName>
+						<attrName>vginame</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -608,6 +610,7 @@
 				<defaults>
 					<showAttrs>
 						<attrName>vsecode</attrName>
+						<attrName>vsecaption</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
