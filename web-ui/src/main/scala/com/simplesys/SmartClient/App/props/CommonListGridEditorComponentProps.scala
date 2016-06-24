@@ -62,9 +62,9 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                             }
                     }
 
-                    isc debugTrap(thiz.fields, _fields)
+                    //isc debugTrap(thiz.fields, _fields)
                     thiz.fields = IscArray(_fields:_*)
-                    isc debugTrap(thiz.fields, _fields)
+                    //isc debugTrap(thiz.fields, _fields)
                     thiz.Super("initWidget", arguments)
 
                 }
