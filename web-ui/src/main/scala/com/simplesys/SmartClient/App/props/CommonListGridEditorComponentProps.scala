@@ -84,7 +84,6 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                     }
                 )
 
-
             thiz setFuncMenu funcMenu
             thiz setContextMenu funcMenu
     }.toThisFunc.opt
