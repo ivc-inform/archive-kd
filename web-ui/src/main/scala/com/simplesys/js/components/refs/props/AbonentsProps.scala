@@ -11,7 +11,7 @@ import com.simplesys.app.{AbonentsOrg, AbonentsTypes}
 import com.simplesys.js.components.refs.Abonents
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, ListGridFiledsJS}
 
 class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     override val simpleTable = false
@@ -39,6 +39,8 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     })
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
+    fields = ListGridFiledsJS.eakd_abonents_FLDS.opt
+
     identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
     editingFields = Seq(
         TextItem(new TextItemProps {
@@ -78,30 +80,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         })
     ).opt
 
-    fields = Seq(
-        new ListGridFieldProps {
-            name = "vabcode"
-        },
-        new ListGridFieldProps {
-            name = "vabname"
-        },
-        new ListGridFieldProps {
-            name = "tdatein"
-            `type` = ListGridFieldType.date.opt
-            format = "MMM dd yyyy"
-        },
-        new ListGridFieldProps {
-            name = "vemail"
-        },
-        new ListGridFieldProps {
-            name = "vperson"
-        },
-        new ListGridFieldProps {
-            name = "vphone1"
-        },
-        new ListGridFieldProps {
-            name = "vphone2"
-        },
+    replacingfields = Seq(
         new ListGridFieldProps {
             name = "vabontype"
             editorType = FormItemComponentType.LookupListGridEditorItem
@@ -116,9 +95,6 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "orgname"
             editorType = FormItemComponentType.LookupListGridEditorItem
             editorProperties = orgNameItem.opt
-        },
-        new ListGridFieldProps {
-            name = "vabdesc"
         }
     ).opt
 

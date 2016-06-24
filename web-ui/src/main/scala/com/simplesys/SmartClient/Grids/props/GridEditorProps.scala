@@ -5,15 +5,13 @@ import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.Forms.FormsItems.props.FormItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor}
-import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
+import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
 import com.simplesys.SmartClient.Grids.props.listGrid.{ListGridFieldProps, ListGridRecordProps}
+import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor}
 import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.VLayoutSSProps
-import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.System.{JSObject, JSUndefined}
+import com.simplesys.SmartClient.System.{IscArray, isc}
 import com.simplesys.System.Types.AutoFitWidthApproach.AutoFitWidthApproach
 import com.simplesys.System.Types.DragDataAction._
 import com.simplesys.System.Types.DragTrackerMode.DragTrackerMode
@@ -23,6 +21,9 @@ import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPool
 import com.simplesys.System.Types.SelectionAppearance.SelectionAppearance
 import com.simplesys.System.Types.SelectionStyle._
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
+import com.simplesys.System.{JSAny, JSObject, JSUndefined}
+import com.simplesys.function._
+import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
@@ -86,12 +87,41 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var updateRecordComponent: ScOption[ThisFunction4[classHandler, ListGridRecord, Int, Canvas, Boolean, Canvas]] = ScNone
 
     var selectFirstRecordAfterFetch: ScOption[Boolean] = ScNone
+
+    var replacingfields: ScOption[Seq[ListGridFieldProps]] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {
     type classHandler <: ListGridEditor
 
     var fields: ScOption[Seq[ListGridFieldProps]] = ScNone
+
+    initWidget = {
+        (thiz: classHandler, args: IscArray[JSAny]) =>
+            thiz.Super("initWidget", args)
+
+            if (thiz.fields.isDefined)
+                thiz.replacingfields.foreach {
+                    replacingfields =>
+                        replacingfields.foreach {
+                            replacingfield =>
+                                thiz.fields.foreach {
+                                    fields =>
+                                      isc debugTrap fields
+                                        if (!fields.exists(_.name == replacingfield.name))
+                                            isc.error(s"Компонент ${thiz.getIdentifier()} не имеет поля ${replacingfield.name}")
+                                        else {
+                                            import js.JSConverters._
+                                            var field: JSUndefined[ListGridField] = fields.find(_.name == replacingfield.name).orUndefined
+                                            field = replacingfield
+                                        }
+                                }
+                        }
+                }
+
+    }.toThisFunc.opt
+
     var defaultFields: ScOption[Seq[ListGridFieldProps]] = ScNone
     var data: ScOption[Seq[ListGridRecord]] = ScNone
+
 }

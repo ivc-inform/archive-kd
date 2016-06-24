@@ -127,6 +127,8 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     var editingFields  : JSUndefined[IscArray[FormItem]]
     def getFieldName(colNum: Int | ID): String
     var selectFirstRecordAfterFetch: Boolean
+    val fields: JSUndefined[IscArray[ListGridField]]
+    val replacingfields: JSUndefined[IscArray[ListGridField]]
 }
 
 @js.native
