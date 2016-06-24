@@ -249,13 +249,14 @@
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код шифра изделия" mandatory="true" name="vitcode" type="sCode"></attr>
 					<attr caption="Шифр изделия" mandatory="true" name="vitname" type="sCaption"></attr>
-					<attr caption="Изделие" mandatory="true" name="vitname" type="sCaption"></attr>
+					<attr caption="Изделие" mandatory="true" name="vdesc" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
 						<attrName>vitcode</attrName>
 						<attrName>vitname</attrName>
+						<attrName>vdesc</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
