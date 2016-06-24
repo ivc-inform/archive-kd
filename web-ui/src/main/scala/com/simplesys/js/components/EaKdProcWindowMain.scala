@@ -236,7 +236,10 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(MVid.create(new MVidProps), item)
                                             }.toFunc.opt
-                                        } /*,
+                                        },
+                                        new MenuSSItemProps {
+                                            isSeparator = true.opt
+                                        },
                                         new MenuSSItemProps {
                                             name = "abonents_types".opt
                                             icon = app.abonents.opt
@@ -272,7 +275,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(AuStat.create(new AuStatProps), item)
                                             }.toFunc.opt
-                                        }*/
+                                        }
                                     ).opt
                                 }
                             ).opt
