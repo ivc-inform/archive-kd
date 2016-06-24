@@ -42,6 +42,7 @@ isc.defineClass("MenuSS", isc.Menu).addProperties
 						###console.log "item: #{@title}, owner: #{@owner.getIdentifier()}"###
 						@owner.saveViewState? ->
 							isc.ok "Сохранение выполнено."
+							return
 					else
 						simpleSyS.safeException "Not enabled owner pointer"
 					return
@@ -53,7 +54,9 @@ isc.defineClass("MenuSS", isc.Menu).addProperties
 				"click": =>
 					if @owner?
 						@owner.restoreViewState? ->
+							@owner.autoSaveConfig = false if @owner.autoSaveConfig?
 							isc.ok "Восстановление выполнено. Необходима перезагрузка формы."
+							return
 					else
 						simpleSyS.safeException "Not enabled owner pointer"
 					return
