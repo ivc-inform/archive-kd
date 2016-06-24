@@ -59,9 +59,6 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
             name = "vcrcode"
         }),
         TextItem(new TextItemProps {
-            name = "vcrcodeprns"
-        }),
-        TextItem(new TextItemProps {
             name = "vcrinvent"
         }),
         TextItem(new TextItemProps {
@@ -72,9 +69,6 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
         }),
         TextItem(new TextItemProps {
             name = "vcrsdescr"
-        }),
-        TextItem(new TextItemProps {
-            name = "vfileident"
         }),
         TextItem(new TextItemProps {
             name = "vformats"
@@ -146,9 +140,6 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
         },
         new ListGridFieldProps {
             name = "datecard"
-        },
-        new ListGridFieldProps {
-            name = "vcrcodeprns"
         },
         new ListGridFieldProps {
             name = "idcrd_fk"
