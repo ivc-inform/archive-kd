@@ -46,6 +46,7 @@ class IconMenuButtonSSProps extends IconMenuButtonProps {
                     val menu: MenuSS = thiz.menu.get
 
                     menu.items.foreach(_.owner1 = thiz)
+                    //isc debugTrap menu.items
 
                     menu._showOffscreen()
                     val left = thiz.getPageLeft()
