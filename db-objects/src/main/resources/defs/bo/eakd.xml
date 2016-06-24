@@ -248,9 +248,9 @@
 				<attrs>
 					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код шифра изделия" mandatory="true" name="vitcode" type="sCode"></attr>
-					<attr caption="Наименование шифра изделия" mandatory="true" name="vitname" type="sCaption"></attr>
+					<attr caption="Шифр изделия" mandatory="true" name="vitname" type="sCaption"></attr>
+					<attr caption="Изделие" mandatory="true" name="vitname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
-					<attr caption="Описание шифра изделия" mandatory="false" name="vdesc" type="sDescription"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
