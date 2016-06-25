@@ -22,7 +22,7 @@ import com.simplesys.System.Types.SummaryFunction.SummaryFunction
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types._
-import com.simplesys.System.{JSAny, JSObject}
+import com.simplesys.System.{JSAny, JSObject, JSUndefined, NameStrong}
 
 import scala.scalajs.js
 import scala.scalajs.js.|
@@ -154,7 +154,9 @@ trait ListGridField extends JSObject {
     var linkURLPrefix: String
     var linkURLSuffix: String
     var multiple: Boolean
+    @deprecated(message = "Use nameStrong instead.", since = "")
     var name: String
+    var nameStrong: JSUndefined[NameStrong]
     var optionCriteria: Criteria
     var optionDataSource: String
     var optionFilterContext: DSRequest

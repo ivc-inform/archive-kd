@@ -7,7 +7,7 @@ import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
-import com.simplesys.SmartClient.System.{IscArray, isc}
+import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.SmartClient.System.props.ClassProps
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.AutoComplete.AutoComplete
@@ -15,19 +15,17 @@ import com.simplesys.System.Types.DateDisplayFormat.DateDisplayFormat
 import com.simplesys.System.Types.FormItemComponentType.FormItemComponentType
 import com.simplesys.System.Types.FormItemType.FormItemType
 import com.simplesys.System.Types.OperatorId.OperatorId
-import com.simplesys.System.Types.ReadOnlyDisplayAppearance.{ReadOnlyDisplayAppearance, _}
+import com.simplesys.System.Types.ReadOnlyDisplayAppearance.ReadOnlyDisplayAppearance
 import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types.TitleOrientation.TitleOrientation
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
 import com.simplesys.System.Types.{SCImgURL, _}
 import com.simplesys.System._
-import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNone, ScOption}
 import com.simplesys.option.DoubleType._
-import com.simplesys.option.ScOption._
-import com.simplesys.function._
+import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNone, ScOption}
 
 import scala.scalajs.js
-import scala.scalajs.js.{ThisFunction0, ThisFunction1}
+import scala.scalajs.js.ThisFunction1
 
 class FormItemProps extends ClassProps {
     type classHandler <: FormItem
