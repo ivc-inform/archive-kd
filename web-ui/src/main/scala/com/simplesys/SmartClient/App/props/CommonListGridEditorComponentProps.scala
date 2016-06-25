@@ -29,8 +29,6 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
     selectionType = SelectionStyle.single.opt
     selectFirstRecordAfterFetch = false.opt
 
-
-
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
