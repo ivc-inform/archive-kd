@@ -37,23 +37,46 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
             val _fields = ArrayBuffer.empty[ListGridField]
 
             if (thiz.fields.isDefined && thiz.replacingfields.isDefined && thiz.replacingfields.get.length > 0) {
+                var allFieldsValid = true
 
                 thiz.fields.get.foreach {
                     field =>
-                        thiz.replacingfields.get.find(_.name == field.name) match {
-                            case None =>
-                                _fields += field
-                            case Some(field) =>
-                                _fields += field
-                        }
+                        if (field.nameStrong.isEmpty)
+                            if (allFieldsValid)
+                                allFieldsValid = false
                 }
 
-                //isc debugTrap(thiz.fields, _fields)
-                thiz.fields = IscArray(_fields: _*)
-                //isc debugTrap(thiz.fields, _fields)
-            }
+                if (allFieldsValid)
+                    thiz.replacingfields.get.foreach {
+                        replacingfield =>
+                            if (replacingfield.nameStrong.isEmpty)
+                                if (allFieldsValid)
+                                    allFieldsValid = false
+                    }
 
-            thiz.Super("initWidget", arguments)
+
+                if (allFieldsValid) {
+                    thiz.fields.get.foreach {
+                        field =>
+                            thiz.replacingfields.get.find(_.nameStrong == field.nameStrong) match {
+                                case None =>
+                                    field.asInstanceOf[JSDynamic]("name")(field.nameStrong)
+                                    _fields += field
+                                case Some(field) =>
+                                    field.asInstanceOf[JSDynamic]("name")(field.nameStrong)
+                                    _fields += field
+                            }
+                    }
+
+                    //isc debugTrap(thiz.fields, _fields)
+                    thiz.fields = IscArray(_fields: _*)
+                    //isc debugTrap(thiz.fields, _fields)
+
+                    thiz.Super("initWidget", arguments)
+                }
+
+            } else
+                thiz.Super("initWidget", arguments)
 
             val funcMenu = if (simpleTable)
                 ListGridContextMenu.create(
