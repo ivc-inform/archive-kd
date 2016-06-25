@@ -514,7 +514,7 @@
 					<attr caption="Дата" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Д.номер Обозначение" mandatory="false" name="vcrcode" type="sCaption"></attr>
 					<attr caption="Номер книги" mandatory="false" name="mbook" type="sCaption"></attr>
-					<attr caption="Номер ячейки" mandatory="false" name="mboх" type="sCaption"></attr>
+					<attr caption="Номер ячейки" mandatory="false" name="mbox" type="sCaption"></attr>
 					<attr caption="Номер описи" mandatory="false" name="mlabel" type="sCaption"></attr>
 				</attrs>
 				<defaults>
