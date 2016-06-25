@@ -92,7 +92,7 @@ package object System {
     object ColorItem extends SCApply[ColorItem, ColorItemProps]
     object SkinBoxItem extends SCApply[SkinBoxItem, SkinBoxItemProps]
     object DateItem extends SCApply[DateItem, DateItemProps]
-    //    object DateRangeItem extends SCApply[DateRangeItem, DateRangeItemProps]
+    object DateRangeItem extends SCApply[DateRangeItem, DateRangeItemProps]
     object DateTimeItem extends SCApply[DateTimeItem, DateTimeItemProps]
     object DoubleItem extends SCApply[DoubleItem, DoubleItemProps]
     object IntegerItem extends SCApply[IntegerItem, IntegerItemProps]
