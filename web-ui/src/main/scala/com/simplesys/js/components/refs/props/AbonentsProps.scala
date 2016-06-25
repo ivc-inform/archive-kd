@@ -80,7 +80,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
         })
     ).opt
 
-    replacingfields = Seq(
+    replacingFields = Seq(
         new ListGridFieldProps {
             nameStrong = eakd_abonents_vabontype_NameStrong.opt
             editorType = FormItemComponentType.LookupListGridEditorItem

@@ -34,7 +34,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
 
             val _fields = ArrayBuffer.empty[ListGridField]
 
-            if (thiz.fields.isDefined && thiz.replacingfields.isDefined && thiz.replacingfields.get.length > 0) {
+            if (thiz.fields.isDefined && thiz.replacingFields.isDefined && thiz.replacingFields.get.length > 0) {
                 var allFieldsValid = true
 
                 //isc debugTrap thiz.fields
@@ -47,9 +47,9 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
 
                 //isc debugTrap thiz.replacingfields
                 if (allFieldsValid)
-                    thiz.replacingfields.get.foreach {
-                        replacingfield =>
-                            if (replacingfield.nameStrong.isEmpty)
+                    thiz.replacingFields.get.foreach {
+                        replacingField =>
+                            if (replacingField.nameStrong.isEmpty)
                                 if (allFieldsValid)
                                     allFieldsValid = false
                     }
@@ -59,24 +59,23 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                 if (allFieldsValid) {
                     thiz.fields.get.foreach {
                         field =>
-                            thiz.replacingfields.get.find(_.nameStrong == field.nameStrong) match {
+                            thiz.replacingFields.get.find(_.nameStrong == field.nameStrong) match {
                                 case None =>
                                     //isc debugTrap field
-                                    field.name = field.nameStrong.get.name
+                                    field._name = field.nameStrong.get.name
                                     //isc debugTrap field
                                     _fields += field
                                 case Some(field) =>
                                     //isc debugTrap field
-                                    field.name = field.nameStrong.get.name
+                                    field._name = field.nameStrong.get.name
                                     //isc debugTrap field
                                     _fields += field
                             }
                     }
 
-                    isc debugTrap(thiz.fields, _fields)
+                    //isc debugTrap(thiz.fields, _fields)
                     thiz.fields = IscArray(_fields: _*)
-
-                    isc debugTrap(thiz.fields, _fields)
+                    //isc debugTrap(thiz.fields, _fields)
 
                     thiz.Super("initWidget", arguments)
                 }
