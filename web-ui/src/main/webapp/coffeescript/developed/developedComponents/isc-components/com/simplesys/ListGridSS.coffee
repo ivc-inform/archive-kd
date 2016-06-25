@@ -160,7 +160,7 @@ isc.ListGrid.addProperties
 			isc.addProperties(
 				{},
 				isModal: true
-				###dismissOnEscape: true###
+				dismissOnEscape: true
 				showMaximizeButton: false
 				showMinimizeButton: false
 				identifier: "#{@identifier}_Window_#{requestProperties.operationType}_#{if requestProperties.componentId? then requestProperties.componentId else ""}"

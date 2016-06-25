@@ -26,6 +26,7 @@ import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNo
 
 import scala.scalajs.js
 import scala.scalajs.js.ThisFunction1
+import scala.scalajs.js.annotation.JSName
 
 class FormItemProps extends ClassProps {
     type classHandler <: FormItem
@@ -125,6 +126,8 @@ class FormItemProps extends ClassProps {
     var multipleValueSeparator: ScOption[String] = ScNone
     @deprecated(message = "Use nameStrong instead.", since = "")
     var name: ScOption[String] = ScNone
+    @JSName("name")
+    var _name: ScOption[String] = ScNone
     var nameStrong: ScOption[NameStrong] = ScNone
     var operator: ScOption[OperatorId] = ScNone
     var optionCriteria: ScOption[Criteria] = ScNone

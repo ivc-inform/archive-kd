@@ -106,6 +106,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                             else {
                                 formItem.listGridEditor.foreach {
                                     editor =>
+                                        editor.focus()
                                         //isc debugTrap editor
 
                                         if (!formItem.lookup.getOrElse(false))
@@ -121,6 +122,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                     autoPosition = true.opt
                                                     showMaximizeButton = false.opt
                                                     showMinimizeButton = false.opt
+                                                    dismissOnEscape = true.opt
                                                     identifier = s"${form.identifier}_lookup_${item.name}".opt
                                                     title = s"${formItem.captionClassLookup.getOrElse("Неизвестное поле captionClassLookup.")}".ellipsis.opt
                                                     headerIconPath = Common.iconEdit.opt
