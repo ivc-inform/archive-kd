@@ -33,8 +33,10 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
             val _fields = ArrayBuffer.empty[ListGridField]
+            val enableReplacingField = thiz.fields.isDefined && thiz.replacingFields.isDefined && thiz.replacingFields.get.length > 0
+            val enableReplacingFormItem = thiz.editingFields.isDefined && thiz.replacingEditingFields.isDefined && thiz.replacingEditingFields.get.length > 0
 
-            if (thiz.fields.isDefined && thiz.replacingFields.isDefined && thiz.replacingFields.get.length > 0) {
+            if (enableReplacingField) {
                 var allFieldsValid = true
 
                 //isc debugTrap thiz.fields

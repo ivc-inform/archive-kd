@@ -106,7 +106,6 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                             else {
                                 formItem.listGridEditor.foreach {
                                     editor =>
-                                        editor.focus()
                                         //isc debugTrap editor
 
                                         if (!formItem.lookup.getOrElse(false))
@@ -185,6 +184,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                             )
                                                 }
                                         }
+                                        editor.grid.focus()
                                 }
                             }
 
