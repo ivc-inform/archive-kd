@@ -127,7 +127,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                 }
                                             )
 
-                                            if (form.dataSource.isDefined)
+                                            if (form.dataSource.isEmpty)
                                                 isc.error("Не определено свойство 'form.dataSource' error #132")
                                             else
                                                 form.dataSource.foreach {
