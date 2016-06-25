@@ -28,6 +28,7 @@ import scala.scalajs.js.{Function0, |}
 
 @js.native
 trait FormItem extends Class {
+    val parentItem: JSUndefined[FormItem]
     var _origCanEdit: Boolean
     val lookup: JSUndefined[Boolean]
     val captionClassLookup: JSUndefined[String]
@@ -214,7 +215,7 @@ trait FormItem extends Class {
     var printTextBoxStyle: FormItemBaseStyle
     var printTitleStyle: FormItemBaseStyle
     var prompt: HTMLString
-    var readOnlyDisplay: ReadOnlyDisplayAppearance
+    var readOnlyDisplay: JSUndefined[ReadOnlyDisplayAppearance]
     var readOnlyTextBoxStyle: FormItemBaseStyle
     val record: JSUndefined[ListGridRecord]
     def redraw(reason: String): void

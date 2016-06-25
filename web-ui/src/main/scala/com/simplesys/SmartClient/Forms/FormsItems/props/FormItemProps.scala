@@ -83,6 +83,31 @@ class FormItemProps extends ClassProps {
     var errorMessageWidth: ScOption[Int] = ScNone
     var errorOrientation: ScOption[Alignment] = ScNone
     var exportFormat: ScOption[FormatString] = ScNone
+
+    var getReadOnlyDisplay: ScOption[ThisFunction0[classHandler, JSUndefined[ReadOnlyDisplayAppearance]]] = {
+        (thiz: classHandler) =>
+            var res: JSUndefined[ReadOnlyDisplayAppearance] = jSUndefined
+
+            thiz.readOnlyDisplay.foreach(res = _)
+
+            if (res.isEmpty) {
+                thiz.parentItem.foreach(_.readOnlyDisplay.foreach(res = _))
+                if (res.isEmpty) {
+                    isc debugTrap (thiz.form)
+                    thiz.form.foreach(form => res = form.readOnlyDisplay)
+                    isc debugTrap (res)
+                }
+
+                if (res.isEmpty) {
+                    isc debugTrap (isc.DynamicForm._instancePrototype)
+                    res = isc.DynamicForm._instancePrototype.readOnlyDisplay
+                    isc debugTrap (res)
+                }
+            }
+
+            res
+    }.toThisFunc.opt
+
     init = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
             thiz.nameStrong.foreach(name => thiz.asInstanceOf[JSDynamic].updateDynamic("name")(name.name))
@@ -93,7 +118,6 @@ class FormItemProps extends ClassProps {
             thiz._origCanEdit = thiz.getCanEdit()
 
             isc debugTrap 0
-            isc debugTrap thiz.getReadOnlyDisplay()
             thiz._origReadOnlyDisplay = thiz.getReadOnlyDisplay()
 
             if (thiz.ID.isEmpty || (js.Dynamic.global.window.selectDynamic(thiz.ID.get) != thiz))
@@ -132,7 +156,7 @@ class FormItemProps extends ClassProps {
                 thiz.synchronousValidation = true
             }
 
-            thiz.__sgwtRelink.foreach(_())
+            thiz.__sgwtRelink.foreach(_ ())
             thiz.onInit()
 
     }.toThisFunc.opt

@@ -10,3 +10,6 @@ trait DynamicFormSS extends DynamicForm {
     def addField(field: FormItem, pos: Int): void
 }
 
+@js.native
+abstract class AbstractDynamicFormSSCompanion extends AbstractDynamicFormCompanion
+
