@@ -29,45 +29,57 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
     selectionType = SelectionStyle.single.opt
     selectFirstRecordAfterFetch = false.opt
 
-
-
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
             val _fields = ArrayBuffer.empty[ListGridField]
 
-            if (thiz.fields.isDefined && thiz.replacingfields.isDefined) {
-                var replacingDieldIdValid = true
+            if (thiz.fields.isDefined && thiz.replacingFields.isDefined && thiz.replacingFields.get.length > 0) {
+                var allFieldsValid = true
 
-                thiz.replacingfields.foreach {
-                    replacingfields =>
-                        replacingfields.foreach {
-                            replacingfield =>
-                                if (!thiz.fields.get.exists(_.name == replacingfield.name)) {
-                                    isc.error(s"Компонент ${thiz.getIdentifier()} не имеет поля ${replacingfield.name}")
-                                    if (replacingDieldIdValid)
-                                        replacingDieldIdValid = false
-                                }
-                        }
+                //isc debugTrap thiz.fields
+                thiz.fields.get.foreach {
+                    field =>
+                        if (field.nameStrong.isEmpty)
+                            if (allFieldsValid)
+                                allFieldsValid = false
                 }
 
-                if (replacingDieldIdValid) {
+                //isc debugTrap thiz.replacingfields
+                if (allFieldsValid)
+                    thiz.replacingFields.get.foreach {
+                        replacingField =>
+                            if (replacingField.nameStrong.isEmpty)
+                                if (allFieldsValid)
+                                    allFieldsValid = false
+                    }
+
+
+                //isc debugTrap allFieldsValid
+                if (allFieldsValid) {
                     thiz.fields.get.foreach {
                         field =>
-                            thiz.replacingfields.get.find(_.name == field.name) match {
+                            thiz.replacingFields.get.find(_.nameStrong == field.nameStrong) match {
                                 case None =>
+                                    //isc debugTrap field
+                                    field._name = field.nameStrong.get.name
+                                    //isc debugTrap field
                                     _fields += field
                                 case Some(field) =>
+                                    //isc debugTrap field
+                                    field._name = field.nameStrong.get.name
+                                    //isc debugTrap field
                                     _fields += field
                             }
                     }
 
                     //isc debugTrap(thiz.fields, _fields)
-                    thiz.fields = IscArray(_fields:_*)
+                    thiz.fields = IscArray(_fields: _*)
                     //isc debugTrap(thiz.fields, _fields)
-                    thiz.Super("initWidget", arguments)
 
+                    thiz.Super("initWidget", arguments)
                 }
+
             } else
                 thiz.Super("initWidget", arguments)
 

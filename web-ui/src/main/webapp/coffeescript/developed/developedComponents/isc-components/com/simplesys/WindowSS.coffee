@@ -16,14 +16,13 @@ isc.Window.addProperties
 	"autoPosition"         : false
 	"savePosition"         : true
 	"saveSize"             : true
-	"dismissOnEscape"      : false
-	"dismissOnOutsideClick": false
+	"dismissOnEscape"      : true
 	"vertical"             : true
-	"keyDown" : ->
+	###"keyDown" : ->
 		switch isc.EventHandler.getKey()
 			when "Escape"
 				@markForDestroy() if @dismissOnEscape
-		return true
+		true###
 	"saveParams"           : -> @_save(); return
 	"_save"                : ->
 		if @items?

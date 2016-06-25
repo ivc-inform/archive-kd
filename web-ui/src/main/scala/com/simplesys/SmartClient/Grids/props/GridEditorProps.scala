@@ -78,6 +78,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingFields: ScOption[Seq[FormItem]] = ScNone
+    var replacingEditingFields: ScOption[Seq[FormItem]] = ScNone
     var saveByCell: ScOption[Boolean] = ScNone
     var dataFetchMode: ScOption[FetchMode] = ScNone
     var editWindowProperties: ScOption[WindowSS] = ScNone
@@ -87,8 +88,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var updateRecordComponent: ScOption[ThisFunction4[classHandler, ListGridRecord, Int, Canvas, Boolean, Canvas]] = ScNone
 
     var selectFirstRecordAfterFetch: ScOption[Boolean] = ScNone
-
-    var replacingfields: ScOption[Seq[ListGridFieldProps]] = ScNone
+    var replacingFields: ScOption[Seq[ListGridFieldProps]] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {

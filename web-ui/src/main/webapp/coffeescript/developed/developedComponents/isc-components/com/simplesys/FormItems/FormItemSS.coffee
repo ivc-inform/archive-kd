@@ -1,6 +1,9 @@
 isc.FormItem.addProperties
 	init: `function () {
+        ////  Added A.Yudin
         if (this.nameStrong != null && this.nameStrong.name != null) this.name = nameStrong.name
+        //////////////////
+
         if (isc._traceMarkers) arguments.__this = this;
 
         this._origCanEdit = this.getCanEdit();
