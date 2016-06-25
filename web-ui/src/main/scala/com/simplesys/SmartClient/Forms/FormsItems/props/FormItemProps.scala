@@ -27,8 +27,6 @@ import com.simplesys.option.DoubleType._
 import scala.scalajs.js
 import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 
-abstract trait NameStrong
-
 class FormItemProps extends ClassProps {
     type classHandler <: FormItem
 
@@ -127,7 +125,7 @@ class FormItemProps extends ClassProps {
     var multipleValueSeparator: ScOption[String] = ScNone
     @deprecated(message = "Use nameStrong instead.", since = "")
     var name: ScOption[String] = ScNone
-    var nameStrong: ScOption[NameStrong] = ScNone
+    //var nameStrong: ScOption[NameStrong] = ScNone
     var operator: ScOption[OperatorId] = ScNone
     var optionCriteria: ScOption[Criteria] = ScNone
     var optionDataSource: ScOption[DataSource] = ScNone

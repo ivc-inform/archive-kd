@@ -2,7 +2,6 @@ package com.simplesys.SmartClient.Forms.FormsItems
 
 import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
-import com.simplesys.SmartClient.Forms.FormsItems.props.NameStrong
 import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
@@ -21,7 +20,7 @@ import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types.TitleOrientation.TitleOrientation
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
 import com.simplesys.System.Types._
-import com.simplesys.System.{JSAny, JSDictionary, JSObject, JSUndefined}
+import com.simplesys.System._
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
