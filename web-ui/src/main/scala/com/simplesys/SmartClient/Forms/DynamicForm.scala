@@ -4,9 +4,9 @@ import com.simplesys.SmartClient.DataBinding.Callbacks._
 import com.simplesys.SmartClient.DataBinding._
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Forms.dynamicForm.FormItemEventInfo
-import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
+import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Canvas}
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
+import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
 import com.simplesys.SmartClient.System.{IscArray, KeyIdentifier}
 import com.simplesys.SmartClient.Workdlow.UserTask
 import com.simplesys.System.Types.Alignment.Alignment
@@ -177,7 +177,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def showItem(fieldName: String): void
     var showOldValueInHover: Boolean
     var showTitlesWithErrorMessages: Boolean
-    val stopOnError: Boolean
+    val stopOnError: JSUndefined[Boolean]
     def submit(callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def submitForm(): void
     var submitValues: js.Function2[JSObject, DynamicForm, _]
@@ -204,5 +204,10 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     var valuesChanged: js.ThisFunction0[classHandler, _]
     def valuesHaveChanged(): Boolean
     var wrapItemTitles: Boolean
+}
+
+@js.native
+abstract class AbstractDynamicFormCompanion extends AbstractCanvasCompanion {
+    val _instancePrototype: FormItem = js.native
 }
 

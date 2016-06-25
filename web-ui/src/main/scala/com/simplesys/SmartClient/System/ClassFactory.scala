@@ -13,4 +13,5 @@ trait ClassFactoryTrt extends JSObject {
     def GetClass(): Class
     def newInstance(className: String, props: JSObject | JSDictionaryAny = js.native, props2: JSObject | JSDictionaryAny = js.native, props3: JSObject | JSDictionaryAny = js.native): Class
     def overwriteClass(): void
+    def addGlobalID(id: JSObject): void
 }

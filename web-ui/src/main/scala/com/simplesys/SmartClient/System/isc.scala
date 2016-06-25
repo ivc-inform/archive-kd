@@ -5,6 +5,7 @@ import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.DataBinding.{AbstractDataSourceSSCompanion, AbstractJSONCompanion, AbstractOfflineSSCompanion}
 import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, AbstractDrawPaneCompanion}
 import com.simplesys.SmartClient.Drawing.drawItem.{AbstractDrawLineCompanion, AbstractDrawRectCompanion}
+import com.simplesys.SmartClient.Forms.AbstractDynamicFormCompanion
 import com.simplesys.SmartClient.Forms.FormsItems.{AbstractPickListCompanion, AbstractTimerItemCompanion}
 import com.simplesys.SmartClient.Foundation.AbstractCanvasCompanion
 import com.simplesys.SmartClient.Grids._
@@ -81,7 +82,9 @@ object isc extends JSObject {
     val OfflineSS: AbstractOfflineSSCompanion = js.native
     val RPCManager: AbstractRPCManagerCompanion = js.native
     val DataSourceSS: AbstractDataSourceSSCompanion = js.native
+    val DynamicForm: AbstractDynamicFormCompanion = js.native
     val SettingsEditor: AbstractSettingsEditorCompanion = js.native
+    val _traceMarkers: JSUndefined[Boolean] = js.native
 
     def error(message: String, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     def errorDetail(message: String, detailMessage: String, identifier: ID = js.native, detailIdentifier: ID = js.native): void = js.native

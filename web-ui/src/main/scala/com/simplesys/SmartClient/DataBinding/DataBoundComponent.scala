@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.{Hilite, HiliteEditor, ListGridField}
 import com.simplesys.SmartClient.Layout.Window
 import com.simplesys.SmartClient.System.{Class, IscArray}
-import com.simplesys.System.JSObject
+import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.DragDataAction.DragDataAction
 import com.simplesys.System.Types.FetchMode.FetchMode
@@ -38,7 +38,7 @@ trait DataBoundComponent extends Class {
     val dataFetchMode: FetchMode
     val dataField: String
     var dataPageSize: Int
-    var dataSource: DataSource
+    var dataSource: JSUndefined[DataSource]
     var deepCloneOnEdit: Boolean
     var descriptionField: String
     def deselectAllRecords(): void
