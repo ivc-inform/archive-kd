@@ -37,6 +37,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
             if (thiz.fields.isDefined && thiz.replacingfields.isDefined && thiz.replacingfields.get.length > 0) {
                 var allFieldsValid = true
 
+                //isc debugTrap thiz.fields
                 thiz.fields.get.foreach {
                     field =>
                         if (field.nameStrong.isEmpty)
@@ -44,6 +45,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                                 allFieldsValid = false
                 }
 
+                //isc debugTrap thiz.replacingfields
                 if (allFieldsValid)
                     thiz.replacingfields.get.foreach {
                         replacingfield =>
@@ -53,22 +55,28 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                     }
 
 
+                //isc debugTrap allFieldsValid
                 if (allFieldsValid) {
                     thiz.fields.get.foreach {
                         field =>
                             thiz.replacingfields.get.find(_.nameStrong == field.nameStrong) match {
                                 case None =>
-                                    field.asInstanceOf[JSDynamic]("name")(field.nameStrong)
+                                    //isc debugTrap field
+                                    field.name = field.nameStrong.get.name
+                                    //isc debugTrap field
                                     _fields += field
                                 case Some(field) =>
-                                    field.asInstanceOf[JSDynamic]("name")(field.nameStrong)
+                                    //isc debugTrap field
+                                    field.name = field.nameStrong.get.name
+                                    //isc debugTrap field
                                     _fields += field
                             }
                     }
 
-                    //isc debugTrap(thiz.fields, _fields)
+                    isc debugTrap(thiz.fields, _fields)
                     thiz.fields = IscArray(_fields: _*)
-                    //isc debugTrap(thiz.fields, _fields)
+
+                    isc debugTrap(thiz.fields, _fields)
 
                     thiz.Super("initWidget", arguments)
                 }
