@@ -7,7 +7,7 @@ import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
-import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.SmartClient.System.{IscArray, isc}
 import com.simplesys.SmartClient.System.props.ClassProps
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.AutoComplete.AutoComplete
@@ -23,6 +23,8 @@ import com.simplesys.System.Types.{SCImgURL, _}
 import com.simplesys.System._
 import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNone, ScOption}
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption._
+import com.simplesys.function._
 
 import scala.scalajs.js
 import scala.scalajs.js.{ThisFunction0, ThisFunction1}
@@ -81,6 +83,59 @@ class FormItemProps extends ClassProps {
     var errorMessageWidth: ScOption[Int] = ScNone
     var errorOrientation: ScOption[Alignment] = ScNone
     var exportFormat: ScOption[FormatString] = ScNone
+    init = {
+        (thiz: classHandler, arguments: IscArray[JSAny]) =>
+            thiz.nameStrong.foreach(name => thiz.asInstanceOf[JSDynamic].updateDynamic("name")(name.name))
+
+            if (isc._traceMarkers.getOrElse(false))
+                arguments.asInstanceOf[JSDynamic].updateDynamic("__this")(thiz)
+
+            thiz._origCanEdit = thiz.getCanEdit()
+
+            isc debugTrap 0
+            isc debugTrap thiz.getReadOnlyDisplay()
+            thiz._origReadOnlyDisplay = thiz.getReadOnlyDisplay()
+
+            if (thiz.ID.isEmpty || (js.Dynamic.global.window.selectDynamic(thiz.ID.get) != thiz))
+                isc.ClassFactory.addGlobalID(thiz)
+
+            if (thiz.options.isDefined && thiz.valueMap.isEmpty) {
+                thiz.valueMap = thiz.options
+                isc.deleteProp(thiz.options.get, "options")
+            }
+
+            thiz _convertRawToMeasure thiz._$height
+            thiz _convertRawToMeasure thiz._$width
+            thiz _convertRawToMeasure thiz._$colSpan
+            thiz _convertRawToMeasure thiz._$rowSpan
+
+            thiz._value = thiz.getDefaultValue()
+
+            thiz._setToDefault = true
+
+            thiz._setUpIcons()
+
+            if ((!thiz.validateOnExit || !thiz.synchronousValidation) && thiz.validators.isDefined && thiz.validators.get.length > 0) {
+                var break = false
+                thiz.validators.get.foreach {
+                    validator =>
+                        if (break && validator.stopOnError) {
+                            thiz.validateOnExit = true
+                            thiz.synchronousValidation = true
+                            break = true
+                        }
+                }
+            }
+
+            if ((!thiz.validateOnExit || !thiz.synchronousValidation) && ((thiz.stopOnError == null && thiz.form.isDefined && thiz.form.get.stopOnError) || thiz.stopOnError)) {
+                thiz.validateOnExit = true
+                thiz.synchronousValidation = true
+            }
+
+            thiz.__sgwtRelink.foreach(_())
+            thiz.onInit()
+
+    }.toThisFunc.opt
     var filterLocally: ScOption[Boolean] = ScNone
     var focus: ScOption[js.Function2[DynamicFormSS, FormItem, _]] = ScNone
     var foreignDisplayField: ScOption[String] = ScNone

@@ -12,7 +12,6 @@ trait PresetCriteriaItem extends SelectItem {
     val customOptionTitle: String
     def getCriterion(): Criterion | AdvancedCriteria
     def getCustomCriteria(callback: Callback): void
-    val options: JSObject
     val showCustomOption: Boolean
 }
 

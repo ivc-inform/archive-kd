@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Forms.FormsItems
 
 import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
-import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
+import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
@@ -24,10 +24,11 @@ import com.simplesys.System._
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
-import scala.scalajs.js.|
+import scala.scalajs.js.{Function0, |}
 
 @js.native
 trait FormItem extends Class {
+    var _origCanEdit: Boolean
     val lookup: JSUndefined[Boolean]
     val captionClassLookup: JSUndefined[String]
     val foreignField: JSUndefined[String]
@@ -73,7 +74,7 @@ trait FormItem extends Class {
     var disabled: Boolean
     def disableIcon(icon: String): void
     var disableIconsOnReadOnly: Boolean
-    var displayField:  JSUndefined[String]
+    var displayField: JSUndefined[String]
     var doubleClick: js.Function2[DynamicForm, FormItem, Boolean]
     var editorEnter: js.Function3[DynamicForm, FormItem, JSAny, _]
     var editorExit: js.Function3[DynamicForm, FormItem, JSAny, _]
@@ -95,7 +96,7 @@ trait FormItem extends Class {
     var focus: js.Function2[DynamicForm, FormItem, _]
     def focusInItem(): void
     val foreignDisplayField: String
-    val form: DynamicForm
+    val form: JSUndefined[DynamicFormSS]
     val format: FormatString
     var formatEditorValue: js.Function4[JSAny, ListGridRecord, DynamicForm, FormItem, String]
     var formatValue: js.Function4[JSAny, ListGridRecord, DynamicForm, FormItem, String]
@@ -161,7 +162,10 @@ trait FormItem extends Class {
     var icons: IscArray[FormItemIcon]
     var iconVAlign: VerticalAlignment
     var iconWidth: Int
-    var ID: String
+    var ID: JSUndefined[String]
+    var _origReadOnlyDisplay: Boolean
+    val options: JSUndefined[JSObject]
+    def getReadOnlyDisplay(): Boolean
     var imageURLPrefix: String
     var imageURLSuffix: String
     var implicitSave: Boolean
@@ -185,8 +189,8 @@ trait FormItem extends Class {
     def mapValueToDisplay(value: JSObject): String
     val multipleValueSeparator: String
     @deprecated(message = "Use nameStrong instead.", since = "")
-    val name: String
-    val nameStrong: NameStrong
+    var name: String
+    val nameStrong: JSUndefined[NameStrong]
     val operator: OperatorId
     val optionCriteria: Criteria
     val optionDataSource: String | DataSource
@@ -302,8 +306,8 @@ trait FormItem extends Class {
     def validate(): Boolean
     var validateOnChange: Boolean
     var validateOnExit: Boolean
-    val validators: IscArray[Validator]
-    val validOperators: IscArray[OperatorId]
+    val validators: JSUndefined[IscArray[Validator]]
+    val validOperators: JSUndefined[IscArray[OperatorId]]
     var vAlign: VerticalAlignment
     val value: JSAny
     def valueClipped(): Boolean
@@ -317,11 +321,23 @@ trait FormItem extends Class {
     var valueIconRightPadding: Int
     var valueIconSize: Int
     var valueIconWidth: Int
-    var valueMap: JSDictionary[JSAny]
+    var valueMap: JSUndefined[JSObject]
     var valueIcons: JSDictionary[String]
     var visible: Boolean
     var width: String | Int
     var wrapTitle: Boolean
+
+    val _$height: String
+    val _$width: String
+    val _$colSpan: String
+    val _$rowSpan: String
+    def _convertRawToMeasure(value: String): JSAny
+    def onInit(): void
+    var _value: JSAny
+    def getDefaultValue(): JSAny
+    var _setToDefault: Boolean
+    def _setUpIcons(): void
+    val __sgwtRelink: JSUndefined[Function0[_]]
 }
 
 @js.native

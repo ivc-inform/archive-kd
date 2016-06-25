@@ -82,6 +82,7 @@ object isc extends JSObject {
     val RPCManager: AbstractRPCManagerCompanion = js.native
     val DataSourceSS: AbstractDataSourceSSCompanion = js.native
     val SettingsEditor: AbstractSettingsEditorCompanion = js.native
+    val _traceMarkers: JSUndefined[Boolean] = js.native
 
     def error(message: String, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     def errorDetail(message: String, detailMessage: String, identifier: ID = js.native, detailIdentifier: ID = js.native): void = js.native

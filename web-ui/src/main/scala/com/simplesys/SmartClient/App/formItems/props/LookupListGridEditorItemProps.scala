@@ -38,17 +38,29 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                 editor =>
                     thiz.record.foreach {
                         record =>
-                            val foreignIdField = thiz.form.dataSource.getField(thiz.foreignField.get).get
-                            val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                            val idFieldName1 = foreignIdField.name
+                            if (thiz.form.isEmpty)
+                                isc.error("Не определено свойство 'thiz.form' error #42")
+                            else
+                                thiz.form.foreach {
+                                    form =>
+                                        if (form.dataSource.isEmpty)
+                                            isc.error("Не определено свойство 'form.dataSource' error #47")
+                                        else
+                                            form.dataSource.foreach {
+                                                dataSource =>
+                                                    val foreignIdField = dataSource.getField(thiz.foreignField.get).get
+                                                    val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                                                    val idFieldName1 = foreignIdField.name
 
-                            val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
+                                                    val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
 
-                            val keyValues = js.Object()
-                            keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
-                            //isc debugTrap editor
-                            editor.deselectAllRecords()
-                            editor selectRecordsByKey keyValues
+                                                    val keyValues = js.Object()
+                                                    keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
+                                                    //isc debugTrap editor
+                                                    editor.deselectAllRecords()
+                                                    editor selectRecordsByKey keyValues
+                                            }
+                                }
                     }
             }
 
@@ -115,55 +127,61 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                 }
                                             )
 
-                                            val foreignIdField = form.dataSource.getField(formItem.foreignField.get).get
-                                            val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                                            val idField = form.getItem(formItem.foreignField.get)
-
-                                            if (idField == null && formItem.record.isEmpty)
-                                                isc.error(s"Нет поля ${formItem.foreignField.get}")
+                                            if (form.dataSource.isDefined)
+                                                isc.error("Не определено свойство 'form.dataSource' error #132")
                                             else
-                                                window.addItems(
-                                                    IscArray[Canvas](
-                                                        editor,
-                                                        OkCancelPanel.create(
-                                                            new OkCancelPanelProps {
-                                                                owner = window.opt
-                                                                padding = 5.opt
-                                                                okCaption = "Выбрать".opt
-                                                                ownerDestroy = false.opt
-                                                                ownerHide = true.opt
-                                                                owner = window.opt
-                                                                okFunction = {
-                                                                    (thiz: classHandler) =>
+                                                form.dataSource.foreach {
+                                                    dataSource =>
+                                                        val foreignIdField = dataSource.getField(formItem.foreignField.get).get
+                                                        val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                                                        val idField = form.getItem(formItem.foreignField.get)
 
-                                                                        if (editor.getSelectedRecords().length != 1)
-                                                                            isc.error("Не возможно выделить значение для ввода.")
-                                                                        else {
-                                                                            val valueId = editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idFieldName)
-                                                                            //isc debugTrap(formItem.foreignField.get, item.name, valueId, formItem.record)
+                                                        if (idField == null && formItem.record.isEmpty)
+                                                            isc.error(s"Нет поля ${formItem.foreignField.get}")
+                                                        else
+                                                            window.addItems(
+                                                                IscArray[Canvas](
+                                                                    editor,
+                                                                    OkCancelPanel.create(
+                                                                        new OkCancelPanelProps {
+                                                                            owner = window.opt
+                                                                            padding = 5.opt
+                                                                            okCaption = "Выбрать".opt
+                                                                            ownerDestroy = false.opt
+                                                                            ownerHide = true.opt
+                                                                            owner = window.opt
+                                                                            okFunction = {
+                                                                                (thiz: classHandler) =>
 
-                                                                            if (formItem.record.isEmpty)
-                                                                                idField.setValue(valueId)
-                                                                            else
-                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(valueId))
+                                                                                    if (editor.getSelectedRecords().length != 1)
+                                                                                        isc.error("Не возможно выделить значение для ввода.")
+                                                                                    else {
+                                                                                        val valueId = editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+                                                                                        //isc debugTrap(formItem.foreignField.get, item.name, valueId, formItem.record)
 
-                                                                            val record = editor.getSelectedRecord()
+                                                                                        if (formItem.record.isEmpty)
+                                                                                            idField.setValue(valueId)
+                                                                                        else
+                                                                                            formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(valueId))
 
-                                                                            val recordFields = js.Object.keys(record)
-                                                                            recordFields.foreach {
-                                                                                field =>
-                                                                                    if (editor.dataSource.getField(field).isDefined)
-                                                                                        if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
-                                                                                            //isc debugTrap (field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
-                                                                                            form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                        val record = editor.getSelectedRecord()
+
+                                                                                        val recordFields = js.Object.keys(record)
+                                                                                        recordFields.foreach {
+                                                                                            field =>
+                                                                                                if (editor.dataSource.getField(field).isDefined)
+                                                                                                    if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
+                                                                                                        //isc debugTrap (field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                        form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                    }
                                                                                         }
-                                                                            }
+                                                                                    }
+                                                                            }.toThisFunc.opt
                                                                         }
-                                                                }.toThisFunc.opt
-                                                            }
-                                                        )
-                                                    )
-                                                )
+                                                                    )
+                                                                )
+                                                            )
+                                                }
                                         }
                                 }
                             }
