@@ -132,7 +132,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     var numCols: Int
     var operator: OperatorId
     var originalValueMessage: HTMLString
-    var readOnlyDisplay: JSUndefined[ReadOnlyDisplayAppearance]
+    var readOnlyDisplay: ReadOnlyDisplayAppearance
     var readOnlyTextBoxStyle: FormItemBaseStyle
     var rejectInvalidValueOnChange: Boolean
     def rememberValues(): JSObject
@@ -177,7 +177,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def showItem(fieldName: String): void
     var showOldValueInHover: Boolean
     var showTitlesWithErrorMessages: Boolean
-    val stopOnError: Boolean
+    val stopOnError: JSUndefined[Boolean]
     def submit(callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def submitForm(): void
     var submitValues: js.Function2[JSObject, DynamicForm, _]

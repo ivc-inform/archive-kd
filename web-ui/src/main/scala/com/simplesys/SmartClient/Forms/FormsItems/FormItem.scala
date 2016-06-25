@@ -164,9 +164,9 @@ trait FormItem extends Class {
     var iconVAlign: VerticalAlignment
     var iconWidth: Int
     var ID: JSUndefined[String]
-    var _origReadOnlyDisplay: Boolean
+    var _origReadOnlyDisplay: ReadOnlyDisplayAppearance
     val options: JSUndefined[JSObject]
-    def getReadOnlyDisplay(): Boolean
+    def getReadOnlyDisplay(): JSObject
     var imageURLPrefix: String
     var imageURLSuffix: String
     var implicitSave: Boolean
@@ -280,10 +280,10 @@ trait FormItem extends Class {
     var startRow: Boolean
     var staticHeight: Int
     def stopHover(): void
-    var stopOnError: Boolean
+    var stopOnError: JSUndefined[Boolean]
     def storeValue(value: JSAny, showValue: Boolean = js.native): void
     var suppressValueIcon: Boolean
-    var synchronousValidation: Boolean
+    var synchronousValidation: JSUndefined[Boolean]
     var tabIndex: Int
     var textAlign: Alignment
     var textBoxStyle: FormItemBaseStyle

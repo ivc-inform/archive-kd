@@ -21,6 +21,7 @@ import com.simplesys.System.Types.TitleOrientation.TitleOrientation
 import com.simplesys.System.Types.VisibilityMode.VisibilityMode
 import com.simplesys.System.Types._
 import com.simplesys.option.{IntString, ScNone, ScOption}
+import com.simplesys.option.ScOption._
 
 import scala.scalajs.js._
 

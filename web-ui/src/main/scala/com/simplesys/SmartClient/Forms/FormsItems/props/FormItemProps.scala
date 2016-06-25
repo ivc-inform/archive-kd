@@ -15,7 +15,7 @@ import com.simplesys.System.Types.DateDisplayFormat.DateDisplayFormat
 import com.simplesys.System.Types.FormItemComponentType.FormItemComponentType
 import com.simplesys.System.Types.FormItemType.FormItemType
 import com.simplesys.System.Types.OperatorId.OperatorId
-import com.simplesys.System.Types.ReadOnlyDisplayAppearance.ReadOnlyDisplayAppearance
+import com.simplesys.System.Types.ReadOnlyDisplayAppearance.{ReadOnlyDisplayAppearance, _}
 import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types.TitleOrientation.TitleOrientation
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
@@ -83,83 +83,6 @@ class FormItemProps extends ClassProps {
     var errorMessageWidth: ScOption[Int] = ScNone
     var errorOrientation: ScOption[Alignment] = ScNone
     var exportFormat: ScOption[FormatString] = ScNone
-
-    var getReadOnlyDisplay: ScOption[ThisFunction0[classHandler, JSUndefined[ReadOnlyDisplayAppearance]]] = {
-        (thiz: classHandler) =>
-            var res: JSUndefined[ReadOnlyDisplayAppearance] = jSUndefined
-
-            thiz.readOnlyDisplay.foreach(res = _)
-
-            if (res.isEmpty) {
-                thiz.parentItem.foreach(_.readOnlyDisplay.foreach(res = _))
-                if (res.isEmpty) {
-                    isc debugTrap (thiz.form)
-                    thiz.form.foreach(form => res = form.readOnlyDisplay)
-                    isc debugTrap (res)
-                }
-
-                if (res.isEmpty) {
-                    isc debugTrap (isc.DynamicForm._instancePrototype)
-                    res = isc.DynamicForm._instancePrototype.readOnlyDisplay
-                    isc debugTrap (res)
-                }
-            }
-
-            res
-    }.toThisFunc.opt
-
-    init = {
-        (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            thiz.nameStrong.foreach(name => thiz.asInstanceOf[JSDynamic].updateDynamic("name")(name.name))
-
-            if (isc._traceMarkers.getOrElse(false))
-                arguments.asInstanceOf[JSDynamic].updateDynamic("__this")(thiz)
-
-            thiz._origCanEdit = thiz.getCanEdit()
-
-            isc debugTrap 0
-            thiz._origReadOnlyDisplay = thiz.getReadOnlyDisplay()
-
-            if (thiz.ID.isEmpty || (js.Dynamic.global.window.selectDynamic(thiz.ID.get) != thiz))
-                isc.ClassFactory.addGlobalID(thiz)
-
-            if (thiz.options.isDefined && thiz.valueMap.isEmpty) {
-                thiz.valueMap = thiz.options
-                isc.deleteProp(thiz.options.get, "options")
-            }
-
-            thiz _convertRawToMeasure thiz._$height
-            thiz _convertRawToMeasure thiz._$width
-            thiz _convertRawToMeasure thiz._$colSpan
-            thiz _convertRawToMeasure thiz._$rowSpan
-
-            thiz._value = thiz.getDefaultValue()
-
-            thiz._setToDefault = true
-
-            thiz._setUpIcons()
-
-            if ((!thiz.validateOnExit || !thiz.synchronousValidation) && thiz.validators.isDefined && thiz.validators.get.length > 0) {
-                var break = false
-                thiz.validators.get.foreach {
-                    validator =>
-                        if (break && validator.stopOnError) {
-                            thiz.validateOnExit = true
-                            thiz.synchronousValidation = true
-                            break = true
-                        }
-                }
-            }
-
-            if ((!thiz.validateOnExit || !thiz.synchronousValidation) && ((thiz.stopOnError == null && thiz.form.isDefined && thiz.form.get.stopOnError) || thiz.stopOnError)) {
-                thiz.validateOnExit = true
-                thiz.synchronousValidation = true
-            }
-
-            thiz.__sgwtRelink.foreach(_ ())
-            thiz.onInit()
-
-    }.toThisFunc.opt
     var filterLocally: ScOption[Boolean] = ScNone
     var focus: ScOption[js.Function2[DynamicFormSS, FormItem, _]] = ScNone
     var foreignDisplayField: ScOption[String] = ScNone
