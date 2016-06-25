@@ -2,6 +2,7 @@ package com.simplesys.SmartClient.Forms.FormsItems
 
 import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
+import com.simplesys.SmartClient.Forms.FormsItems.props.NameStrong
 import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
@@ -184,7 +185,9 @@ trait FormItem extends Class {
     def mapDisplayToValue(value: String): JSObject
     def mapValueToDisplay(value: JSObject): String
     val multipleValueSeparator: String
+    @deprecated(message = "Use nameStrong instead.", since = "")
     val name: String
+    val nameStrong: NameStrong
     val operator: OperatorId
     val optionCriteria: Criteria
     val optionDataSource: String | DataSource
