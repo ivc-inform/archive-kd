@@ -22,19 +22,17 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     val abonentType = AbonentsTypes.create(new AbonentsTypesProps)
 
     val orgCodeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
-        name = "orgcode"
+        nameStrong = eakd_abonents_orgcode_NameStrong.opt
         listGridEditor = abonentOrg.opt
-        title = "Код предприятия"
     })
 
     val orgNameItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
-        name = "orgname"
+        nameStrong = eakd_abonents_orgname_NameStrong.opt
         listGridEditor = abonentOrg.opt
-        title = "Наименование предприятия"
     })
 
     val abonTypeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
-        name = "vabontype"
+        nameStrong = eakd_abonents_vabontype_NameStrong.opt
         listGridEditor = abonentType.opt
     })
 
@@ -42,43 +40,13 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     fields = ListGridFiledsJS.eakd_abonents_FLDS.opt
 
     identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
-    editingFields = Seq(
-        TextItem(new TextItemProps {
-            name = "vabcode"
-        }),
-        TextItem(new TextItemProps {
-            name = "vabname"
-        }),
-        DateTimeItem(new DateTimeItemProps {
-            name = "tdatein"
-        }),
-        TextItem(new TextItemProps {
-            name = "vemail"
-        }),
-        TextItem(new TextItemProps {
-            name = "vperson"
-        }),
-        TextItem(new TextItemProps {
-            name = "vphone1"
-        }),
-        TextItem(new TextItemProps {
-            name = "vphone2"
-        }),
-        IntegerItem(new IntegerItemProps {
-            name = "idaborg"
-            hidden = true.opt
-        }),
-        orgCodeItem,
-        orgNameItem,
-        IntegerItem(new IntegerItemProps {
-            name = "idabtype"
-            hidden = true.opt
-        }),
-        abonTypeItem,
-        TextAreaItem(new TextAreaItemProps {
-            name = "vabdesc"
-        })
-    ).opt
+    editingFields = FormItemsJS.eakd_abonents_FRMITM.opt
+
+    replacingEditingFields = Seq(
+            orgCodeItem,
+            orgNameItem,
+            abonTypeItem
+        ).opt
 
     replacingFields = Seq(
         new ListGridFieldProps {
