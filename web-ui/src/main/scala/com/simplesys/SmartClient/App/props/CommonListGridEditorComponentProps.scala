@@ -33,6 +33,8 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
+            thiz.fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name))
+
             val _fieldsListGrid = ArrayBuffer.empty[ListGridField]
             val _fieldsFormItem = ArrayBuffer.empty[FormItem]
 
@@ -92,14 +94,8 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                             field =>
                                 thiz.replacingFields.get.find(_.nameStrong == field.nameStrong) match {
                                     case None =>
-                                        isc debugTrap field
-                                        field._name = field.nameStrong.get.name
-                                        isc debugTrap field
                                         _fieldsListGrid += field
                                     case Some(field) =>
-                                        isc debugTrap field
-                                        field._name = field.nameStrong.get.name
-                                        isc debugTrap field
                                         _fieldsListGrid += field
                                 }
                         }
@@ -114,14 +110,8 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                             field =>
                                 thiz.replacingEditingFields.get.find(_.nameStrong == field.nameStrong) match {
                                     case None =>
-                                        isc debugTrap field
-                                        field._name = field.nameStrong.get.name
-                                        isc debugTrap field
                                         _fieldsFormItem += field
                                     case Some(field) =>
-                                        isc debugTrap field
-                                        field._name = field.nameStrong.get.name
-                                        isc debugTrap field
                                         _fieldsFormItem += field
                                 }
                         }
