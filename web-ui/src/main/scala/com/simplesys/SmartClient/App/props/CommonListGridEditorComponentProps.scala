@@ -40,7 +40,6 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
             thiz.replacingFields.foreach {
                 _.foreach {
                     field =>
-                        //isc.debugTrap(field)
                         if (field.nameStrong.isDefined) {
                             field._name = field.nameStrong.get.name
                             field.editorProperties.foreach {
@@ -50,58 +49,48 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                                         override val name = field._name
                                     }
                                     replacingEditingFields += formItem
-                                    //isc.debugTrap(replacingEditingFields)
                             }
                         }
                         else
-                            thiz.logError("Field not have nameStrong, error #37")
+                            thiz.logError("Field not have nameStrong, error #55")
                 }
             }
 
-            thiz.editingFields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #38")))
-            //isc debugTrap replacingEditingFields
+            thiz.editingFields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #60")))
 
             val _fieldsListGrid = ArrayBuffer.empty[ListGridField]
             val _fieldsFormItem = ArrayBuffer.empty[FormItem]
 
-            //isc debugTrap(thiz, thiz.fields, thiz.replacingFields, thiz.editingFields, replacingEditingFields)
             val enableReplacingField = thiz.fields.isDefined && thiz.replacingFields.isDefined
             val enableReplacingFormItem = thiz.editingFields.isDefined && replacingEditingFields.length > 0
-            //isc debugTrap(enableReplacingField, enableReplacingFormItem)
 
-            if (enableReplacingField || enableReplacingFormItem) {
 
-                if (enableReplacingField) {
-                    thiz.fields.get.foreach {
-                        field =>
-                            thiz.replacingFields.get.find(_._name == field._name) match {
-                                case None =>
-                                    _fieldsListGrid += field
-                                case Some(field) =>
-                                    _fieldsListGrid += field
-                            }
-                    }
-
-                    //isc debugTrap(thiz.fields, _fieldsListGrid)
-                    thiz.fields = IscArray(_fieldsListGrid: _*)
-                    //isc debugTrap(thiz.fields, _fieldsListGrid)
+            if (enableReplacingField) {
+                thiz.fields.get.foreach {
+                    field =>
+                        thiz.replacingFields.get.find(_._name == field._name) match {
+                            case None =>
+                                _fieldsListGrid += field
+                            case Some(field) =>
+                                _fieldsListGrid += field
+                        }
                 }
 
-                if (enableReplacingFormItem) {
-                    thiz.editingFields.get.foreach {
-                        field =>
-                            replacingEditingFields.find(_._name == field._name) match {
-                                case None =>
-                                    _fieldsFormItem += field
-                                case Some(field) =>
-                                    _fieldsFormItem += field
-                            }
-                    }
+                thiz.fields = IscArray(_fieldsListGrid: _*)
+            }
 
-                    isc debugTrap(thiz.editingFields, _fieldsFormItem, replacingEditingFields)
-                    thiz.editingFields = IscArray(_fieldsFormItem: _*)
-                    isc debugTrap(thiz.editingFields, _fieldsFormItem)
+            if (enableReplacingFormItem) {
+                thiz.editingFields.get.foreach {
+                    field =>
+                        replacingEditingFields.find(_._name == field._name) match {
+                            case None =>
+                                _fieldsFormItem += field
+                            case Some(field) =>
+                                _fieldsFormItem += field
+                        }
                 }
+
+                thiz.editingFields = IscArray(_fieldsFormItem: _*)
             }
 
             thiz.Super("initWidget", arguments)
