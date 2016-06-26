@@ -76,7 +76,7 @@ trait ListGridField extends JSObject {
     val editorIconWidth: Int
     var editorImageURLPrefix: String
     var editorImageURLSuffix: String
-    var editorProperties: FormItem
+    var editorProperties: JSUndefined[FormItem]
     var editorType: FormItemClassName
     var editorValueIconHeight: Int
     var editorValueIcons: JSObject

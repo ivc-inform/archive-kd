@@ -18,53 +18,39 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
 
     type classHandler <: Abonents
 
-//    val abonentOrg = AbonentsOrg.create(new AbonentsOrgProps)
-//    val abonentType = AbonentsTypes.create(new AbonentsTypesProps)
-//
-//    val orgCodeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
-//        nameStrong = eakd_abonents_orgcode_NameStrong.opt
-//        listGridEditor = abonentOrg.opt
-//    })
-//
-//    val orgNameItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
-//        nameStrong = eakd_abonents_orgname_NameStrong.opt
-//        listGridEditor = abonentOrg.opt
-//    })
-//
-//    val abonTypeItem = LookupListGridEditorItem(new LookupListGridEditorItemProps {
-//        nameStrong = eakd_abonents_vabontype_NameStrong.opt
-//        listGridEditor = abonentType.opt
-//    })
+    val abonentOrgEditor = AbonentsOrg.create(new AbonentsOrgProps)
+    val abonentTypeEditor = AbonentsTypes.create(new AbonentsTypesProps)
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
-    //fields = ListGridFiledsJS.eakd_abonents_FLDS.opt
+
+    fields = ListGridFiledsJS.eakd_abonents_FLDS.opt
+    editingFields = FormItemsJS.eakd_abonents_FRMITM.opt
+
+    replacingFields = Seq(
+        new ListGridFieldProps {
+            nameStrong = eakd_abonents_vabontype_NameStrong.opt
+            editorType = FormItemComponentType.LookupListGridEditorItem
+            editorProperties = LookupListGridEditorItem(new LookupListGridEditorItemProps {
+                listGridEditor = abonentTypeEditor.opt
+            }).opt
+        },
+        new ListGridFieldProps {
+            nameStrong = eakd_abonents_orgcode_NameStrong.opt
+            editorType = FormItemComponentType.LookupListGridEditorItem
+            editorProperties = LookupListGridEditorItem(new LookupListGridEditorItemProps {
+                listGridEditor = abonentOrgEditor.opt
+            }).opt
+        },
+        new ListGridFieldProps {
+            nameStrong = eakd_abonents_orgname_NameStrong.opt
+            editorType = FormItemComponentType.LookupListGridEditorItem
+            editorProperties = LookupListGridEditorItem(new LookupListGridEditorItemProps {
+                listGridEditor = abonentOrgEditor.opt
+            }).opt
+        }
+    ).opt
 
     identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
-//    editingFields = FormItemsJS.eakd_abonents_FRMITM.opt
-
-//    replacingEditingFields = Seq(
-//            orgCodeItem,
-//            orgNameItem,
-//            abonTypeItem
-//        ).opt
-
-//    replacingFields = Seq(
-//        new ListGridFieldProps {
-//            nameStrong = eakd_abonents_vabontype_NameStrong.opt
-//            editorType = FormItemComponentType.LookupListGridEditorItem
-//            editorProperties = abonTypeItem.opt
-//        },
-//        new ListGridFieldProps {
-//            nameStrong = eakd_abonents_orgcode_NameStrong.opt
-//            editorType = FormItemComponentType.LookupListGridEditorItem
-//            editorProperties = orgCodeItem.opt
-//        },
-//        new ListGridFieldProps {
-//            nameStrong = eakd_abonents_orgname_NameStrong.opt
-//            editorType = FormItemComponentType.LookupListGridEditorItem
-//            editorProperties = orgNameItem.opt
-//        }
-//    ).opt
 
     editWindowProperties = WindowSS(
         new WindowSSProps {

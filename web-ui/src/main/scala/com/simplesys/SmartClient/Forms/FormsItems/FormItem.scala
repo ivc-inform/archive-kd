@@ -193,7 +193,7 @@ trait FormItem extends Class {
     var name: String
     @JSName("name")
     var _name: String
-    val nameStrong: JSUndefined[NameStrong]
+    var nameStrong: JSUndefined[NameStrong]
     val operator: OperatorId
     val optionCriteria: Criteria
     val optionDataSource: String | DataSource
