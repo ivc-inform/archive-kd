@@ -36,12 +36,16 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
             val _fieldsListGrid = ArrayBuffer.empty[ListGridField]
             val _fieldsFormItem = ArrayBuffer.empty[FormItem]
 
+            isc debugTrap(thiz.fields, thiz.replacingFields)
             val enableReplacingField = thiz.fields.isDefined && thiz.replacingFields.isDefined && thiz.replacingFields.get.length > 0
+            isc debugTrap enableReplacingField
             val enableReplacingFormItem = thiz.editingFields.isDefined && thiz.replacingEditingFields.isDefined && thiz.replacingEditingFields.get.length > 0
+            isc debugTrap enableReplacingFormItem
 
             if (enableReplacingField || enableReplacingFormItem) {
                 var allFieldsValid = true
 
+                //<editor-fold desc="Проверка наличия поля NameStrong">
                 if (enableReplacingField) {
                     isc debugTrap thiz.fields
                     thiz.fields.get.foreach {
@@ -79,6 +83,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                                         allFieldsValid = false
                         }
                 }
+                //</editor-fold>
 
                 isc debugTrap allFieldsValid
                 if (allFieldsValid) {

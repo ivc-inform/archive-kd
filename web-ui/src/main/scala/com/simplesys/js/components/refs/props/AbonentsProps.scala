@@ -37,7 +37,7 @@ class AbonentsProps extends CommonListGridEditorComponentProps with Implicits {
     })
 
     dataSource = DataSourcesJS.eakd_abonents_DS.opt
-    fields = ListGridFiledsJS.eakd_abonents_FLDS.opt
+    //fields = ListGridFiledsJS.eakd_abonents_FLDS.opt
 
     identifier = "15EC1A89-2233-358F-1186-372AF0FD1DC2".opt
     editingFields = FormItemsJS.eakd_abonents_FRMITM.opt
