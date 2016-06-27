@@ -3,6 +3,8 @@ package com.simplesys
 import com.simplesys.SmartClient.System.SCApply
 import com.simplesys.js.components.cards.{Cards, DocIzv, Zapros}
 import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
+import com.simplesys.js.components.misc.EmulateOutMessage
+import com.simplesys.js.components.misc.props.EmulateOutMessageProps
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
 
@@ -21,6 +23,7 @@ package object app {
     val admin = "admin.png"
     val attach = "attach.png"
     val guid = "guid.png"
+    val emulateOutMessage = "emulateOutMessage.png"
     val status = "status.png"
     val statusversion = "statusversion.png"
     val mvid = "mvid.png"
@@ -111,4 +114,5 @@ package object app {
     object Cards extends SCApply[Cards, CardsProps]
     object Zapros extends SCApply[Zapros, ZaprosProps]
     object DocIzv extends SCApply[DocIzv, DocIzvProps]
+    object EmulateOutMessage extends SCApply[EmulateOutMessage, EmulateOutMessageProps]
 }

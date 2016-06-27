@@ -17,6 +17,7 @@ import com.simplesys.app
 import com.simplesys.app._
 import com.simplesys.function._
 import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
+import com.simplesys.js.components.misc.props.EmulateOutMessageProps
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
@@ -345,8 +346,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             new RibbonGroupSSProps {
                 title = "Системные".ellipsis.opt
                 controls = Seq(
-                    IconButton.create(
-                        new IconButtonProps {
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
                             title = "Информация".ellipsis.opt
                             icon = app.info.opt
                             click = {
@@ -356,8 +357,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             }.toThisFunc.opt
                         }
                     ),
-                    IconButton.create(
-                        new IconButtonProps {
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
                             title = "Настройки".ellipsis.opt
                             icon = app.settings.opt
                             click = {
@@ -432,8 +433,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             new RibbonGroupSSProps {
                 title = "Misc".ellipsis.opt
                 controls = Seq(
-                    IconButton.create(
-                        new IconButtonProps {
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
                             title = "GUID".opt
                             icon = app.guid.opt
                             orientation = "gorizontal".opt
@@ -444,14 +445,14 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             }.toThisFunc.opt
                         }
                     ),
-                    IconButton.create(
-                        new IconButtonProps {
-                            title = "GUID".opt
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
+                            title = "Настройка тестовых последовательностей".opt
                             icon = app.guid.opt
                             orientation = "gorizontal".opt
                             click = {
                                 (thiz: classHandler) =>
-                                    isc info simpleSyS.guid
+                                    addTab(EmulateOutMessage.create(new EmulateOutMessageProps), thiz)
                                     false
                             }.toThisFunc.opt
                         }
@@ -500,8 +501,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             defaultLayoutAlign = Alignment.center
                                             width = 40
                                             controls = Seq(
-                                                IconButton.create(
-                                                    new IconButtonProps {
+                                                IconButtonSS.create(
+                                                    new IconButtonSSProps {
                                                         click = {
                                                             (thiz: classHandler) =>
                                                                 if (!LoggedGroup.logged) {

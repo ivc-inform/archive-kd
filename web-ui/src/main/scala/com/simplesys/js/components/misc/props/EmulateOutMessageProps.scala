@@ -10,6 +10,6 @@ class EmulateOutMessageProps extends CommonListGridEditorComponentProps {
 
     type classHandler <: Zapros
 
-    dataSource = DataSourcesJS.eakd_zapros_DS.opt
+    dataSource = DataSourcesJS.test_emulate_outmessage_DS.opt
     identifier = "0B8822B1-844D-33E2-57AD-6D763F2AECCF".opt
 }

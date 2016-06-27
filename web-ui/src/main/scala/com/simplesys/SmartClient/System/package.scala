@@ -133,6 +133,7 @@ package object System {
     //<editor-fold desc="Layout">
     object HLayoutSS extends SCApply[HLayoutSS, HLayoutSSProps]
     object IconButton extends SCApply[IconButton, IconButtonProps]
+    object IconButtonSS extends SCApply[IconButtonSS, IconButtonSSProps]
     object IconMenuButton extends SCApply[IconMenuButton, IconMenuButtonProps]
     object IconMenuButtonSS extends SCApply[IconMenuButtonSS, IconMenuButtonSSProps]
     object OkCancelPanel extends SCApply[OkCancelPanel, OkCancelPanelProps]
