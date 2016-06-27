@@ -443,6 +443,18 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                     false
                             }.toThisFunc.opt
                         }
+                    ),
+                    IconButton.create(
+                        new IconButtonProps {
+                            title = "GUID".opt
+                            icon = app.guid.opt
+                            orientation = "gorizontal".opt
+                            click = {
+                                (thiz: classHandler) =>
+                                    isc info simpleSyS.guid
+                                    false
+                            }.toThisFunc.opt
+                        }
                     )
                 ).opt
             }
