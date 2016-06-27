@@ -448,7 +448,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                     IconButtonSS.create(
                         new IconButtonSSProps {
                             title = "Настройка тестовых последовательностей".opt
-                            icon = app.guid.opt
+                            icon = app.emulateOutMessage.opt
                             orientation = "gorizontal".opt
                             click = {
                                 (thiz: classHandler) =>
