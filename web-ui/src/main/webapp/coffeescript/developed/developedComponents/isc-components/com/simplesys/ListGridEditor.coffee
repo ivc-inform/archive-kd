@@ -212,6 +212,10 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@grid.setMasterGrid grid, pkFieldNames
 		return
 	"initWidget"                      : ->
+		@fields?.forEach (field) ->
+			field.name = field.nameStrong.name if field.nameStrong?
+			return
+
 		@Super "initWidget", arguments
 
 		@grid = isc.ListGrid.create
