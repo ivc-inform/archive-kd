@@ -57,7 +57,7 @@ package object System {
     type Point = IscArray[Double]
     type Rectangle = IscArray[Point]
 
-    implicit class StringOpts(x: String) {
+    implicit class String1Opts(x: String) {
         def ellipsis = s"$x..."
         def fromSkinPath = s"[SKIN]$x"
         def dblQuoted: String = "\"" + x + "\""

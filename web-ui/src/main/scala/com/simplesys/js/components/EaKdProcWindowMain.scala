@@ -17,7 +17,6 @@ import com.simplesys.app
 import com.simplesys.app._
 import com.simplesys.function._
 import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
-import com.simplesys.js.components.misc.props.EmulateOutMessageProps
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
@@ -441,18 +440,6 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             click = {
                                 (thiz: classHandler) =>
                                     isc info simpleSyS.guid
-                                    false
-                            }.toThisFunc.opt
-                        }
-                    ),
-                    IconButtonSS.create(
-                        new IconButtonSSProps {
-                            title = "Настройка тестовых последовательностей".opt
-                            icon = app.emulateOutMessage.opt
-                            orientation = "gorizontal".opt
-                            click = {
-                                (thiz: classHandler) =>
-                                    addTab(EmulateOutMessage.create(new EmulateOutMessageProps), thiz)
                                     false
                             }.toThisFunc.opt
                         }

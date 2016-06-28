@@ -49,6 +49,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                                         override val name = field._name
                                     }
                                     replacingEditingFields += formItem
+                                    field.filterEditorType = formItem.`type`.toString
                             }
                         }
                         else
@@ -64,6 +65,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
             val enableReplacingField = thiz.fields.isDefined && thiz.replacingFields.isDefined
             val enableReplacingFormItem = thiz.editingFields.isDefined && replacingEditingFields.length > 0
 
+            isc debugTrap replacingEditingFields
 
             if (enableReplacingField) {
                 thiz.fields.get.foreach {
