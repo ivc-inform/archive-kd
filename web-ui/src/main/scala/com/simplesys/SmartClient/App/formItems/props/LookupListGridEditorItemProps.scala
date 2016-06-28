@@ -34,35 +34,38 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, value: JSAny) =>
             thiz.textItem setValue value
 
-            thiz.listGridEditor.foreach {
-                editor =>
-                    thiz.record.foreach {
-                        record =>
-                            if (thiz.form.isEmpty)
-                                isc.error("Не определено свойство 'thiz.form' error #42")
-                            else
-                                thiz.form.foreach {
-                                    form =>
-                                        if (form.dataSource.isEmpty)
-                                            isc.error("Не определено свойство 'form.dataSource' error #47")
-                                        else
-                                            form.dataSource.foreach {
-                                                dataSource =>
-                                                    val foreignIdField = dataSource.getField(thiz.foreignField.get).get
-                                                    val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                                                    val idFieldName1 = foreignIdField.name
+            if (thiz.listGridEditor.isEmpty)
+                isc.error("Не определено свойство 'thiz.listGridEditor' error #38")
+            else
+                thiz.listGridEditor.foreach {
+                    editor =>
+                        thiz.record.foreach {
+                            record =>
+                                if (thiz.form.isEmpty)
+                                    isc.error("Не определено свойство 'thiz.form' error #45")
+                                else
+                                    thiz.form.foreach {
+                                        form =>
+                                            if (form.dataSource.isEmpty)
+                                                isc.error("Не определено свойство 'form.dataSource' error #50")
+                                            else
+                                                form.dataSource.foreach {
+                                                    dataSource =>
+                                                        val foreignIdField = dataSource.getField(thiz.foreignField.get).get
+                                                        val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                                                        val idFieldName1 = foreignIdField.name
 
-                                                    val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
+                                                        val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
 
-                                                    val keyValues = js.Object()
-                                                    keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
-                                                    //isc debugTrap editor
-                                                    editor.deselectAllRecords()
-                                                    editor selectRecordsByKey keyValues
-                                            }
-                                }
-                    }
-            }
+                                                        val keyValues = js.Object()
+                                                        keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
+                                                        //isc debugTrap editor
+                                                        editor.deselectAllRecords()
+                                                        editor selectRecordsByKey keyValues
+                                                }
+                                    }
+                        }
+                }
 
             thiz.Super("setValue", IscArray(value))
     }.toThisFunc.opt
@@ -82,7 +85,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                         TextItem(
                             new TextItemProps {
                                 colSpan = 2.opt
-                                name = s"${item.name}_inner".opt
+                                _name = s"${item._name}_inner".opt
                                 width = "*"
                                 showTitle = false.opt
                                 value = item.value.opt
@@ -122,7 +125,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                     showMaximizeButton = false.opt
                                                     showMinimizeButton = false.opt
                                                     dismissOnEscape = true.opt
-                                                    identifier = s"${form.identifier}_lookup_${item.name}".opt
+                                                    identifier = s"${form.identifier}_lookup_${item._name}".opt
                                                     title = s"${formItem.captionClassLookup.getOrElse("Неизвестное поле captionClassLookup.")}".ellipsis.opt
                                                     headerIconPath = Common.iconEdit.opt
                                                 }
