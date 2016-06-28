@@ -49,10 +49,12 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTr
                                     }
                                     replacingEditingFields += formItem
                             }
-                            isc debugTrap (field)
+
                             field.filterEditorType = "text"
+                            //todo не работает
                             //field.filterEditorType = field.editorType
                             //field.editorProperties.foreach(field.filterEditorProperties = _)
+                            //isc debugTrap (field)
                         }
                         else
                             thiz.logError("Field not have nameStrong, error #55")
