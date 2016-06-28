@@ -1,7 +1,7 @@
 package com.simplesys.app
 
 import com.simplesys.SmartClient.App.StaticJSCode
-import com.simplesys.SmartClient.System.{CommonListGridEditorComponent, ListGridEditor, isc}
+import com.simplesys.SmartClient.System.{CommonListGridEditorComponent, isc}
 
 import scala.scalajs.js.annotation.JSExport
 

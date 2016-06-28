@@ -6,12 +6,12 @@ import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
+import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.{ListGridFieldProps, ListGridRecordProps}
 import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor}
 import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.VLayoutSSProps
-import com.simplesys.SmartClient.System.{IscArray, isc}
+import com.simplesys.System.JSObject
 import com.simplesys.System.Types.AutoFitWidthApproach.AutoFitWidthApproach
 import com.simplesys.System.Types.DragDataAction._
 import com.simplesys.System.Types.DragTrackerMode.DragTrackerMode
@@ -21,12 +21,8 @@ import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPool
 import com.simplesys.System.Types.SelectionAppearance.SelectionAppearance
 import com.simplesys.System.Types.SelectionStyle._
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
-import com.simplesys.System.{JSAny, JSObject, JSUndefined}
-import com.simplesys.function._
-import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
-import scala.scalajs.js
 import scala.scalajs.js.{ThisFunction0, ThisFunction2, ThisFunction4}
 
 class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends VLayoutSSProps {
@@ -88,14 +84,12 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
 
     var selectFirstRecordAfterFetch: ScOption[Boolean] = ScNone
     var replacingFields: ScOption[Seq[ListGridFieldProps]] = ScNone
+
+    var fields: ScOption[Seq[ListGridFieldProps]] = ScNone
+    var defaultFields: ScOption[Seq[ListGridFieldProps]] = ScNone
 }
 
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {
     type classHandler <: ListGridEditor
-
-    var fields: ScOption[Seq[ListGridFieldProps]] = ScNone
-
-    var defaultFields: ScOption[Seq[ListGridFieldProps]] = ScNone
     var data: ScOption[Seq[ListGridRecord]] = ScNone
-
 }

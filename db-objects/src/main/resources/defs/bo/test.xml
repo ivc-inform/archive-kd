@@ -17,23 +17,6 @@
 					</uc>
 				</constraints>
 			</classSimple>
-			<classSimple name="emulate_outmessage" autoTableMapping="true" caption="Настройка тестовых последовательностей">
-				<attrs>
-					<attr name="id" type="id" mandatory="true" caption="Идентификатор"/>
-					<attr name="timestamp" type="dDate" mandatory="true" caption="Дата время прихода сообщения"/>
-					<attr name="address" type="sPhone" mandatory="true" caption="Телефон"/>
-					<attr name="text" type="sDescription" mandatory="true" caption="Содержание сообщения"/>
-					<attr name="opt" type="sCaption" mandatory="true" caption="Опции выбора"/>
-				</attrs>
-				<defaults>
-					<uiSettings uiFormType="singleListGrid"/>
-				</defaults>
-				<constraints>
-					<uc uniqueType="pk">
-						<attrName>id</attrName>
-					</uc>
-				</constraints>
-			</classSimple>
 		</classes>
 	</group>
 </objectSchema>

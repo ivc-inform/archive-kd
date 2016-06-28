@@ -187,6 +187,7 @@ class ListGridFieldProps extends AbstractClassProps {
     var `type`: ScOption[ListGridFieldType] = ScNone
     var timeFormatter: ScOption[TimeDisplayFormat] = ScNone
     var title: ScOption[String] = ScNone
+    var treeField: ScOption[Boolean] = ScNone
     var userFormula: ScOption[UserFormula] = ScNone
     var userSummary: ScOption[UserSummary] = ScNone
     var validateOnChange: ScOption[Boolean] = ScNone

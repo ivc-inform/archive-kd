@@ -4,7 +4,7 @@
 		<classes>
 			<classSimple autoTableMapping="true" caption="Абоненты" name="abonents">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID абонента" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код абонента" mandatory="true" name="vabcode" type="sCode"></attr>
 					<attr caption="Наименование абонента" mandatory="true" name="vabname" type="sCaption"></attr>
 					<attr caption="Описание абонента" mandatory="false" name="vabdesc" type="sDescription"></attr>
@@ -35,7 +35,7 @@
 
 			<classSimple autoTableMapping="true" caption="Предприятия" name="abonents_org">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID предприятия" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код предприятия" mandatory="true" name="orgcode" type="sCode"></attr>
 					<attr caption="Наименование предприятия" mandatory="true" name="orgname" type="sCaption"></attr>
 				</attrs>
@@ -55,7 +55,7 @@
 
 			<classSimple autoTableMapping="true" caption="Типы абонентов" name="abonents_types">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID типа абонента" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Тип абонента" mandatory="true" name="vabontype" type="sCaption"></attr>
 				</attrs>
 				<defaults>
@@ -73,7 +73,7 @@
 
 			<classSimple autoTableMapping="true" caption="Вложения" name="attach">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID вложения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код вложения" mandatory="false" name="vatcode" type="sCode"></attr>
 					<attr caption="Файл вложения" mandatory="false" name="attfile" type="blob"></attr>
 					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDate"></attr>
@@ -104,7 +104,7 @@
 
 			<classSimple autoTableMapping="true" caption="Тип вложения" name="attachtypes">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID типа вложения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Наименование" mandatory="true" name="vattypename" type="sCaption"></attr>
 				</attrs>
 				<defaults>
@@ -122,8 +122,8 @@
 
 			<classSimple autoTableMapping="true" caption="Статусы версий" name="austat">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="true" name="namest" type="sCaption"></attr>
+					<attr caption="ID статуса версий" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование статуса версий" mandatory="true" name="namest" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -140,7 +140,7 @@
 
 			<classSimple autoTableMapping="true" caption="Таблицы схемы" name="autable">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID таблицы схемы" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код таблицы схемы" mandatory="true" name="vcodetable" type="sCode"></attr>
 					<attr caption="Наименование таблицы схемы" mandatory="true" name="vnametable" type="sCaption"></attr>
 					<attr caption="Описание таблицы схемы" mandatory="false" name="vdesc" type="sDescription"></attr>
@@ -161,7 +161,7 @@
 
 			<classSimple autoTableMapping="true" caption="Карточка учета" name="card">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID карточки учета" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Обозначение карточки учета" mandatory="true" name="vcrcode" type="sCode"></attr>
 					<attr caption="Наименование карточки учета" mandatory="true" name="vcrname" type="sCaption"></attr>
 					<attr caption="Описание карточки учета" mandatory="false" name="vcrsdescr" type="sDescription"></attr>
@@ -205,7 +205,7 @@
 
 			<classSimple autoTableMapping="true" caption="Виды документов" name="doccats">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID вида документов" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код вида документов" mandatory="true" name="vctcode" type="sCode"></attr>
 					<attr caption="Наименование вида документов" mandatory="true" name="vctname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
@@ -226,7 +226,7 @@
 
 			<classSimple autoTableMapping="true" caption="Форматы" name="docformats">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID формата" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код формата" mandatory="true" name="vfmcode" type="sCode"></attr>
 					<attr caption="Наименование формата" mandatory="true" name="vfmname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
@@ -246,7 +246,7 @@
 
 			<classSimple autoTableMapping="true" caption="Шифр изделия" name="docitem">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID шифра изделия" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="Код шифра изделия" mandatory="true" name="vitcode" type="sCode"></attr>
 					<attr caption="Шифр изделия" mandatory="true" name="vitname" type="sCaption"></attr>
@@ -269,10 +269,10 @@
 
 			<classSimple autoTableMapping="true" caption="Извещения" name="docizv">
 				<attrs>
-					<attr caption="Наименование извещения" mandatory="false" name="vizname" type="sCaption"></attr>
+					<attr caption="ID извещения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код извещения" mandatory="false" name="vizcode" type="sCode"></attr>
+					<attr caption="Наименование извещения" mandatory="false" name="vizname" type="sCaption"></attr>
 					<attr caption="Описание извещения" mandatory="false" name="vizdescr" type="sDescription"></attr>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="Дата начала действия" mandatory="false" name="dateon" type="dDate"></attr>
 					<attr caption="Дата конца действия" mandatory="false" name="dateoff" type="dDate"></attr>
@@ -302,7 +302,7 @@
 
 			<classSimple autoTableMapping="true" caption="Описи" name="docizvop">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID описи" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код описи" mandatory="true" name="vopcode" type="sCode"></attr>
 					<attr caption="Наименование описи" mandatory="true" name="vopname" type="sCaption"></attr>
 					<attr caption="Дата" mandatory="false" name="ddate" type="dDate"></attr>
@@ -322,8 +322,8 @@
 
 			<classSimple autoTableMapping="true" caption="Статусы извещений" name="docizvstat">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="true" name="vname" type="sCaption"></attr>
+					<attr caption="ID статуса извещения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование статуса извещения" mandatory="true" name="vname" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -340,7 +340,7 @@
 
 			<classSimple autoTableMapping="true" caption="Типы извещений" name="docizvtype">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID типа извещений" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код типа извещений" mandatory="true" name="vizvcode" type="sCode"></attr>
 					<attr caption="Наименование типа извещений" mandatory="true" name="vizvname" type="sCaption"></attr>
 				</attrs>
@@ -360,9 +360,9 @@
 
 			<classSimple autoTableMapping="true" caption="Литеры" name="docliter">
 				<attrs>
+					<attr caption="ID литеры" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код литеры" mandatory="true" name="vlrcode" type="sCode"></attr>
 					<attr caption="Наименование литеры" mandatory="true" name="vlrname" type="sCaption"></attr>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
@@ -381,10 +381,10 @@
 
 			<classSimple autoTableMapping="true" caption="Листы документа" name="docpages">
 				<attrs>
-					<attr caption="Наименование листа документа" mandatory="true" name="vpgname" type="sCaption"></attr>
+					<attr caption="ID листа документа" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код листа документа" mandatory="true" name="vpgcode" type="sCode"></attr>
+					<attr caption="Наименование листа документа" mandatory="true" name="vpgname" type="sCaption"></attr>
 					<attr caption="Описание листа документа" mandatory="false" name="vpgdescr" type="sDescription"></attr>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
@@ -408,8 +408,8 @@
 
 			<classSimple autoTableMapping="true" caption="Рассылка" name="docrass">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Количество экземпляпро" mandatory="false" name="vrskol" type="dDate"></attr>
+					<attr caption="ID рассылки" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Количество экземпляров" mandatory="false" name="vrskol" type="dDate"></attr>
 					<attr caption="Дата рассылки" mandatory="false" name="tdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
@@ -433,7 +433,7 @@
 
 			<classSimple autoTableMapping="true" caption="Типы документов" name="doctypes">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID типа документов" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код типа документов" mandatory="true" name="vtycode" type="sCode"></attr>
 					<attr caption="Наименование типа документов" mandatory="true" name="vtyname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
@@ -454,10 +454,10 @@
 
 			<classSimple autoTableMapping="true" caption="Версии документов" name="docversion">
 				<attrs>
-					<attr caption="Наименование версии документов" mandatory="false" name="vvrname" type="sCaption"></attr>
+					<attr caption="ID версии документов" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код версии документов" mandatory="false" name="vvrcode" type="sCode"></attr>
+					<attr caption="Наименование версии документов" mandatory="false" name="vvrname" type="sCaption"></attr>
 					<attr caption="Описание версии документов" mandatory="false" name="vvrdescr" type="sDescription"></attr>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="Дата прекращения действия" mandatory="false" name="dateout" type="dDate"></attr>
 					<attr caption="Файл версии" mandatory="false" name="docfile" type="clob"></attr>
@@ -486,7 +486,7 @@
 
 			<classSimple autoTableMapping="true" caption="Группы" name="groupitem">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID группы" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код группы" mandatory="true" name="vgicode" type="sCode"></attr>
 					<attr caption="Наименование группы" mandatory="true" name="vginame" type="sCaption"></attr>
 				</attrs>
@@ -506,16 +506,16 @@
 
 			<classSimple autoTableMapping="true" caption="Вложения магнитотеки" name="matf">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Файл" mandatory="false" name="mfile" type="clob"></attr>
-					<attr caption="Версия" mandatory="false" name="mcodever" type="sCaption"></attr>
-					<attr caption="Инв.номер" mandatory="false" name="minvnumber" type="sCaption"></attr>
-					<attr caption="Количество" mandatory="false" name="mkol" type="sCaption"></attr>
-					<attr caption="Дата" mandatory="false" name="ddatein" type="dDate"></attr>
-					<attr caption="Д.номер Обозначение" mandatory="false" name="vcrcode" type="sCaption"></attr>
-					<attr caption="Номер книги" mandatory="false" name="mbook" type="sCaption"></attr>
-					<attr caption="Номер ячейки" mandatory="false" name="mbox" type="sCaption"></attr>
-					<attr caption="Номер описи" mandatory="false" name="mlabel" type="sCaption"></attr>
+					<attr caption="ID вложения магнитотеки" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Файл вложения магнитотеки" mandatory="false" name="mfile" type="clob"></attr>
+					<attr caption="Версия вложения магнитотеки" mandatory="false" name="mcodever" type="sCaption"></attr>
+					<attr caption="Инв.номер вложения магнитотеки" mandatory="false" name="minvnumber" type="sCaption"></attr>
+					<attr caption="Количество вложения магнитотеки" mandatory="false" name="mkol" type="sCaption"></attr>
+					<attr caption="Дата вложения магнитотеки" mandatory="false" name="ddatein" type="dDate"></attr>
+					<attr caption="Д.номер Обозначение вложения магнитотеки" mandatory="false" name="vcrcode" type="sCaption"></attr>
+					<attr caption="Номер книги вложения магнитотеки" mandatory="false" name="mbook" type="sCaption"></attr>
+					<attr caption="Номер ячейки вложения магнитотеки" mandatory="false" name="mbox" type="sCaption"></attr>
+					<attr caption="Номер описи вложения магнитотеки" mandatory="false" name="mlabel" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -541,7 +541,7 @@
 
 			<classSimple autoTableMapping="true" caption="Магнитотека" name="mcard">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID магнитотеки" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код магнитотеки" mandatory="false" name="mcode" type="sCode"></attr>
 					<attr caption="Наименование магнитотеки" mandatory="false" name="mname" type="sCaption"></attr>
 					<attr caption="Наименование файла магнитотеки" mandatory="false" name="mfilecode" type="sCaption"></attr>
@@ -566,7 +566,7 @@
 
 			<classSimple autoTableMapping="true" caption="Тип носителя" name="mtype">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID типа носителя" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Тип носителя" mandatory="true" name="mtype" type="sCaption"></attr>
 				</attrs>
 				<defaults>
@@ -584,8 +584,8 @@
 
 			<classSimple autoTableMapping="true" caption="Вид носителя" name="mvid">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="true" name="mvidname" type="sCaption"></attr>
+					<attr caption="ID вида носителя" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Вид носителя" mandatory="true" name="mvidname" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -602,7 +602,7 @@
 
 			<classSimple autoTableMapping="true" caption="Состояния" name="state">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID состояния" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код состояния" mandatory="true" name="vsecode" type="sCode"></attr>
 					<attr caption="Наименование состояния" mandatory="true" name="vsecaption" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
@@ -623,10 +623,10 @@
 
 			<classSimple autoTableMapping="true" caption="Статус запроса" name="status">
 				<attrs>
+					<attr caption="ID статуса запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Код статуса запроса" mandatory="true" name="vscode" type="sCaption"></attr>
 					<attr caption="Наименование статуса запроса" mandatory="true" name="vssname" type="sCaption"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Код статуса запроса" mandatory="true" name="vscode" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -644,8 +644,8 @@
 
 			<classSimple autoTableMapping="true" caption="Статус ревизий" name="statversion">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование версии" mandatory="true" name="vsecaption" type="sCaption"></attr>
+					<attr caption="ID статуса ревизии" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование версии статуса ревизии" mandatory="true" name="vsecaption" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -662,15 +662,15 @@
 
 			<classSimple autoTableMapping="true" caption="Запросы" name="zapros">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="ID запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
 					<attr caption="Код запроса" mandatory="false" name="vzpcode" type="sCaption"></attr>
 					<attr caption="Наименование запроса" mandatory="false" name="vzpname" type="sCaption"></attr>
 					<attr caption="Описание запроса" mandatory="false" name="vzpdesc" type="sDescription"></attr>
-					<attr caption="Дата оформления" mandatory="false" name="tdatein" type="dDate"></attr>
-					<attr caption="Дата исполнения" mandatory="false" name="ddatein" type="dDate"></attr>
-					<attr caption="Дата закрытия" mandatory="false" name="ddateout" type="dDate"></attr>
-					<attr caption="Код приоритета" mandatory="false" name="idprior" type="id"></attr>
-					<attr caption="Код выданной версии листа" mandatory="false" name="idvers" type="id"></attr>
+					<attr caption="Дата оформления закрытия" mandatory="false" name="tdatein" type="dDate"></attr>
+					<attr caption="Дата исполнения закрытия" mandatory="false" name="ddatein" type="dDate"></attr>
+					<attr caption="Дата закрытия закрытия" mandatory="false" name="ddateout" type="dDate"></attr>
+					<attr caption="Код приоритета закрытия" mandatory="false" name="idprior" type="id"></attr>
+					<attr caption="Код выданной версии листа закрытия" mandatory="false" name="idvers" type="id"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -693,9 +693,9 @@
 
 			<classSimple autoTableMapping="true" caption="Позиции запроса" name="zaprositems">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Количество" mandatory="false" name="kolpagevers" type="nInt"></attr>
-					<attr caption="Особые указания" mandatory="false" name="vdesc" type="sDescription"></attr>
+					<attr caption="ID позиции запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Количество позиции запроса" mandatory="false" name="kolpagevers" type="nInt"></attr>
+					<attr caption="Особые указания позиции запроса" mandatory="false" name="vdesc" type="sDescription"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -715,10 +715,10 @@
 
 			<classSimple autoTableMapping="true" caption="Рассылка запроса" name="zaprosrass">
 				<attrs>
-					<attr caption="ID" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование" mandatory="false" name="vname" type="sCaption"></attr>
-					<attr caption="VRSKOL" mandatory="false" name="vrskol" type="nInt"></attr>
-					<attr caption="DATEOUT" mandatory="false" name="dateout" type="dDate"></attr>
+					<attr caption="ID рассылки запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
+					<attr caption="Наименование рассылки запроса" mandatory="false" name="vname" type="sCaption"></attr>
+					<attr caption="Количество рассылки запроса" mandatory="false" name="vrskol" type="nInt"></attr>
+					<attr caption="Дата рассылки запроса" mandatory="false" name="dateout" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

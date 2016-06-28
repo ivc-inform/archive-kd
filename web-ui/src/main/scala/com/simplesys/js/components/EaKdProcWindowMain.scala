@@ -345,8 +345,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             new RibbonGroupSSProps {
                 title = "Системные".ellipsis.opt
                 controls = Seq(
-                    IconButton.create(
-                        new IconButtonProps {
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
                             title = "Информация".ellipsis.opt
                             icon = app.info.opt
                             click = {
@@ -356,8 +356,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             }.toThisFunc.opt
                         }
                     ),
-                    IconButton.create(
-                        new IconButtonProps {
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
                             title = "Настройки".ellipsis.opt
                             icon = app.settings.opt
                             click = {
@@ -432,8 +432,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             new RibbonGroupSSProps {
                 title = "Misc".ellipsis.opt
                 controls = Seq(
-                    IconButton.create(
-                        new IconButtonProps {
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
                             title = "GUID".opt
                             icon = app.guid.opt
                             orientation = "gorizontal".opt
@@ -488,8 +488,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             defaultLayoutAlign = Alignment.center
                                             width = 40
                                             controls = Seq(
-                                                IconButton.create(
-                                                    new IconButtonProps {
+                                                IconButtonSS.create(
+                                                    new IconButtonSSProps {
                                                         click = {
                                                             (thiz: classHandler) =>
                                                                 if (!LoggedGroup.logged) {

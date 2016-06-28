@@ -14,7 +14,7 @@ import com.simplesys.option.ScOption._
 
 import scala.collection.mutable.ArrayBuffer
 
-trait CommonListGridEditorComponentProps extends ListGridEditorProps {
+trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTrait {
     val simpleTable: Boolean
 
     type classHandler <: CommonListGridEditorComponent
@@ -32,7 +32,6 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-
             thiz.fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
 
             val replacingEditingFields = ArrayBuffer.empty[FormItem]
@@ -50,6 +49,12 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
                                     }
                                     replacingEditingFields += formItem
                             }
+
+                            field.filterEditorType = "text"
+                            //todo не работает
+                            //field.filterEditorType = field.editorType
+                            //field.editorProperties.foreach(field.filterEditorProperties = _)
+                            //isc debugTrap (field)
                         }
                         else
                             thiz.logError("Field not have nameStrong, error #55")
@@ -63,7 +68,6 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps {
 
             val enableReplacingField = thiz.fields.isDefined && thiz.replacingFields.isDefined
             val enableReplacingFormItem = thiz.editingFields.isDefined && replacingEditingFields.length > 0
-
 
             if (enableReplacingField) {
                 thiz.fields.get.foreach {

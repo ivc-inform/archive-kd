@@ -21,6 +21,7 @@ package object app {
     val admin = "admin.png"
     val attach = "attach.png"
     val guid = "guid.png"
+    val emulateOutMessage = "emulateOutMessage.png"
     val status = "status.png"
     val statusversion = "statusversion.png"
     val mvid = "mvid.png"
