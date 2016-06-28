@@ -122,10 +122,10 @@ trait WebApp {
                     dataSource = aboutDS.opt
                     fields = Seq(
                         new ListGridFieldProps {
-                            nameStrong = "libName".nameStrongOpt
+                            name = "libName".opt
                         },
                         new ListGridFieldProps {
-                            nameStrong = "libVersion".nameStrongOpt
+                            name= "libVersion".opt
                             align = Alignment.center.opt
                         }
                     ).opt
