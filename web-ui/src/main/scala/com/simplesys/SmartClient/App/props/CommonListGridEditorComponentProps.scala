@@ -1,12 +1,13 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonListGridEditorComponent
+import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps}
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.SelectionStyle
+import com.simplesys.System.Types.{FormItemComponentType, SelectionAppearance, SelectionStyle}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -51,13 +52,23 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTr
                             }
 
                             field.filterEditorType = "text"
-                            //todo не работает
-                            //field.filterEditorType = field.editorType
-                            //field.editorProperties.foreach(field.filterEditorProperties = _)
-                            //isc debugTrap (field)
+
+//                            field.filterEditorType = field.editorType
+//                            field.editorProperties.foreach(field.filterEditorProperties = _)
+//
+//
+//                            if (field.filterEditorProperties.`type`.toString == FormItemComponentType.LookupListGridEditorItem.toString) {
+//                                val editor = field.filterEditorProperties.asInstanceOf[LookupListGridEditorItem]
+//
+//                                editor.listGridEditor.foreach {
+//                                    grid =>
+//                                        grid.grid.setSelectionAppearance(SelectionAppearance.checkbox)
+//                                        //grid.grid.setSelectionType(SelectionStyle.multiple)
+//                                }
+//                            }
                         }
                         else
-                            thiz.logError("Field not have nameStrong, error #55")
+                            thiz.logError("Field not have nameStrong, error #77")
                 }
             }
 

@@ -719,7 +719,7 @@ trait Grid[T <: ListGridField, R <: JSObject] extends VLayout with DataBoundComp
     def setRecordComponentHeight(height: Int): void
     def setRowErrors(rowNum: Int, errors: JSAny): void
     def setSelectedState(selectedState: ListGridSelectedState): void
-    def setSelectionAppearance(selectionAppearance: String): void
+    def setSelectionAppearance(selectionAppearance: SelectionAppearance): void
     def setSelectionType(selectionType: SelectionStyle): void
     def setShowCollapsedGroupSummary(showCollapsedGroupSummary: Boolean): void
     def setShowFilterEditor(value: Boolean): void
