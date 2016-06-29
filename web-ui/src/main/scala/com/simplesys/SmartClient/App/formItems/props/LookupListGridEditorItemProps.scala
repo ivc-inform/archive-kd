@@ -3,8 +3,8 @@ package com.simplesys.SmartClient.App.formItems.props
 import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
 import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps, TextItemSSProps}
-import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem, TextItem}
+import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemSSProps}
+import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
@@ -39,6 +39,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
             else
                 thiz.listGridEditor.foreach {
                     editor =>
+                        isc debugTrap(editor, thiz.record)
                         thiz.record.foreach {
                             record =>
                                 if (record != null) {
@@ -91,7 +92,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                 width = "*"
                                 showTitle = false.opt
                                 value = item.value.opt
-                                //readOnlyDisplay = ReadOnlyDisplayAppearance.readOnly.opt
+                                readOnlyDisplay = ReadOnlyDisplayAppearance.readOnly.opt
                             }
                         )
                     ).opt
@@ -161,7 +162,8 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                 (thiz: classHandler) =>
 
                                                                                     if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
-                                                                                        formItem setValueMap editor.getSelectedRecords()
+                                                                                        val record = editor.getSelectedRecords()
+                                                                                        formItem setValueMap record
 
                                                                                         if (formItem.nameStrong.isEmpty)
                                                                                             formItem.nameStrong = new NameStrong {
@@ -169,8 +171,21 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                             }
 
                                                                                         val res = editor.getSelectedRecords().map(item => item.asInstanceOf[JSDynamic].selectDynamic(formItem.nameStrong.get.name).toString).mkString(", ")
-                                                                                        //isc debugTrap res
                                                                                         formItem setValue res
+
+                                                                                        val criteria = js.Object()
+
+                                                                                        val recordFields = js.Object.keys(record)
+                                                                                        recordFields.foreach {
+                                                                                            field =>
+                                                                                                if (editor.dataSource.getField(field).isDefined)
+                                                                                                    form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                        }
+
+                                                                                        formItem.listGridEditor.foreach {
+                                                                                            listGridEditor => listGridEditor.fetchData(criteria = criteria)
+                                                                                        }
+
 
                                                                                     } else {
                                                                                         if (editor.getSelectedRecords().length != 1)

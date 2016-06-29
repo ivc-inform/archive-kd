@@ -35,6 +35,7 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     val showAllRecords: Boolean
     def selectSingleRecordByKey(keyValue: JSAny, newStyle: Boolean): R
     def fetchData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
+    def filterData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def hasChanges(): Boolean
     def getDataLength(): Int
     var showRecordComponentsByCell: Boolean
