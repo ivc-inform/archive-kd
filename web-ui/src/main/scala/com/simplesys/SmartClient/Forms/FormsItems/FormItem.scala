@@ -341,6 +341,7 @@ trait FormItem extends Class {
     var _setToDefault: Boolean
     def _setUpIcons(): void
     val __sgwtRelink: JSUndefined[Function0[_]]
+    var filteredGrid: JSUndefined[ListGridEditor]
 }
 
 @js.native

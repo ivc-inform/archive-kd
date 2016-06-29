@@ -24,6 +24,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
     type classHandler <: LookupListGridEditorItem
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
+
     var listGridEditor: ScOption[ListGridEditor] = ScNone
 
     align = Alignment.center.opt
@@ -39,7 +40,6 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
             else
                 thiz.listGridEditor.foreach {
                     editor =>
-                        isc debugTrap(editor, thiz.record)
                         thiz.record.foreach {
                             record =>
                                 if (record != null) {
@@ -162,8 +162,10 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                 (thiz: classHandler) =>
 
                                                                                     if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
-                                                                                        val record = editor.getSelectedRecords()
-                                                                                        formItem setValueMap record
+
+                                                                                        val records = editor.getSelectedRecords()
+
+                                                                                        formItem setValueMap records
 
                                                                                         if (formItem.nameStrong.isEmpty)
                                                                                             formItem.nameStrong = new NameStrong {
@@ -173,19 +175,36 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                         val res = editor.getSelectedRecords().map(item => item.asInstanceOf[JSDynamic].selectDynamic(formItem.nameStrong.get.name).toString).mkString(", ")
                                                                                         formItem setValue res
 
-                                                                                        val criteria = js.Object()
+                                                                                        val criteria: JSArray[JSObject] = editor.getSelectedRecords().map {
+                                                                                            item =>
+                                                                                                val obj = js.Object()
+                                                                                                val recordFields = js.Object.keys(records(0))
+                                                                                                recordFields.foreach {
+                                                                                                    field =>
+                                                                                                        //isc debugTrap (field, editor.dataSource.getField(field))
+                                                                                                        if (editor.dataSource.getField(field).isDefined) {
+                                                                                                            if (editor.dataSource.getField(field).get.primaryKey.getOrElse(false))
+                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(item.asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                        }
+                                                                                                }
 
-                                                                                        val recordFields = js.Object.keys(record)
-                                                                                        recordFields.foreach {
-                                                                                            field =>
-                                                                                                if (editor.dataSource.getField(field).isDefined)
-                                                                                                    form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                obj
                                                                                         }
 
-                                                                                        formItem.listGridEditor.foreach {
-                                                                                            listGridEditor => listGridEditor.fetchData(criteria = criteria)
-                                                                                        }
+                                                                                        //isc debugTrap criteria
 
+                                                                                        val advancedCriteria = js.Dynamic.literal(
+                                                                                            "_constructor" -> "AdvancedCriteria".dblQuoted,
+                                                                                            "operator" -> "and",
+                                                                                            "criteria" -> criteria
+                                                                                        )
+
+                                                                                        //isc debugTrap(formItem, advancedCriteria, formItem.filteredGrid)
+
+                                                                                        if (formItem.filteredGrid.isEmpty)
+                                                                                            isc.error("Нет поля formItem.filteredGrid.")
+                                                                                        else
+                                                                                            formItem.filteredGrid.foreach(_.fetchData(criteria = advancedCriteria))
 
                                                                                     } else {
                                                                                         if (editor.getSelectedRecords().length != 1)

@@ -5,6 +5,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem}
 import com.simplesys.SmartClient.Forms.{DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
 import com.simplesys.SmartClient.System.IscArray
@@ -231,4 +232,5 @@ class FormItemProps extends ClassProps {
     var width: ScOption[IntString[Int, String]] = "100%"
     var wrapTitle: ScOption[Boolean] = ScNone
     var `type`: ScOption[FormItemType_FormItemComponentType[FormItemType, FormItemComponentType]] = ScNone
+    var filteredGrid: ScOption[ListGridEditor] = ScNone
 }
