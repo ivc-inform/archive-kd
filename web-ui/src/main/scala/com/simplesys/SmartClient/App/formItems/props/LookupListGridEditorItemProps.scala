@@ -189,9 +189,9 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                             recordFields.foreach {
                                                                                                 field =>
                                                                                                     if (editor.dataSource.getField(field).isDefined)
-                                                                                                        if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
+                                                                                                        //if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
                                                                                                             form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
-                                                                                                        }
+                                                                                                        //}
                                                                                             }
                                                                                         }
                                                                                     }
