@@ -2,6 +2,7 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonListGridEditorComponent
 import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
+import com.simplesys.SmartClient.App.formItems.props.LookupListGridEditorItemProps
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps}
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
@@ -51,21 +52,6 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTr
                                     replacingEditingFields += formItem
                             }
 
-                            field.filterEditorType = "text"
-
-//                            field.filterEditorType = field.editorType
-//                            field.editorProperties.foreach(field.filterEditorProperties = _)
-//
-//
-//                            if (field.filterEditorProperties.`type`.toString == FormItemComponentType.LookupListGridEditorItem.toString) {
-//                                val editor = field.filterEditorProperties.asInstanceOf[LookupListGridEditorItem]
-//
-//                                editor.listGridEditor.foreach {
-//                                    grid =>
-//                                        grid.grid.setSelectionAppearance(SelectionAppearance.checkbox)
-//                                        //grid.grid.setSelectionType(SelectionStyle.multiple)
-//                                }
-//                            }
                         }
                         else
                             thiz.logError("Field not have nameStrong, error #77")

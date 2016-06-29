@@ -19,12 +19,12 @@ import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
 
-
 class LookupListGridEditorItemProps extends CanvasItemProps {
     type classHandler <: LookupListGridEditorItem
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
     var listGridEditor: ScOption[ListGridEditor] = ScNone
+    readOnlyDisplay = ReadOnlyDisplayAppearance.static.opt
 
     align = Alignment.center.opt
 
@@ -159,27 +159,38 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                             okFunction = {
                                                                                 (thiz: classHandler) =>
 
-                                                                                    if (editor.getSelectedRecords().length != 1)
-                                                                                        isc.error("Не возможно выделить значение для ввода.")
-                                                                                    else {
-                                                                                        val record = editor.getSelectedRecord()
+                                                                                    if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
+                                                                                        formItem setValueMap editor.getSelectedRecords()
 
-                                                                                        val valueId = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
-                                                                                        //isc debugTrap(formItem.foreignField.get, item.name, valueId, formItem.record)
+                                                                                        if (formItem.nameStrong.isEmpty)
+                                                                                            formItem.nameStrong = new NameStrong {
+                                                                                                override val name = formItem.name
+                                                                                            }
 
-                                                                                        isc debugTrap(idFieldName, formItem, formItem.record, idField)
-                                                                                        if (formItem.record.isEmpty || formItem.record.get == null)
-                                                                                            idField.setValue(valueId)
-                                                                                        else
-                                                                                            formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(valueId))
+                                                                                        val res = editor.getSelectedRecords().map(item => item.asInstanceOf[JSDynamic].selectDynamic(formItem.nameStrong.get.name).toString).mkString(", ")
+                                                                                        //isc debugTrap res
+                                                                                        formItem setValue res
 
-                                                                                        val recordFields = js.Object.keys(record)
-                                                                                        recordFields.foreach {
-                                                                                            field =>
-                                                                                                if (editor.dataSource.getField(field).isDefined)
-                                                                                                    if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
+                                                                                    } else {
+                                                                                        if (editor.getSelectedRecords().length != 1)
+                                                                                            isc.error("Не возможно выделить значение для ввода.")
+                                                                                        else {
+                                                                                            val record = editor.getSelectedRecord()
+
+                                                                                            val valueId = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+                                                                                            //isc debugTrap(formItem.foreignField.get, item.name, valueId, formItem.record)
+
+                                                                                            if (formItem.record.isEmpty || formItem.record.get == null)
+                                                                                                idField.setValue(valueId)
+                                                                                            else
+                                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(valueId))
+
+                                                                                            val recordFields = js.Object.keys(record)
+                                                                                            recordFields.foreach {
+                                                                                                field =>
+                                                                                                    if (editor.dataSource.getField(field).isDefined)
                                                                                                         form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
-                                                                                                    }
+                                                                                            }
                                                                                         }
                                                                                     }
                                                                             }.toThisFunc.opt

@@ -1,9 +1,9 @@
 isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addProperties
-	"hoverWidth" : 300
-	"canDragSelectText" : true
-	"showOpenIcons" : true,
+	"hoverWidth": 300
+	"canDragSelectText": true
+	"showOpenIcons": true,
 	"autoFitFieldWidths": false
-	"canAutoFitWidth"   : false
+	"canAutoFitWidth": false
 	"findByKey": (keyValue) -> @grid.findByKey keyValue
 	"removeData": (removeRecord, callback, requestProperties) ->
 		@grid.removeData removeRecord, callback, requestProperties
@@ -12,17 +12,17 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@grid.saveAllEdits(rows, saveCallback)
 		return
 	"recordComponentPoolingMode": "viewport"
-	"dragTrackerMode" : "icon"
+	"dragTrackerMode": "icon"
 	"showAllRecords": false
 	"canAcceptDroppedRecords": false
-	"selectFirstRecordAfterFetch" : true
+	"selectFirstRecordAfterFetch": true
 	"fetchData": (criteria, callback, requestProperties) ->
 		if @useClientFilteringSorting is false
-			_callback = (dsResponse, data, dsRequest) =>								
+			_callback = (dsResponse, data, dsRequest) =>
 				@grid.selectFirstRecord() if @selectFirstRecordAfterFetch
 				@fireCallback callback
 				return
-				
+
 			@grid.filterData criteria, _callback, requestProperties
 			@filterBuilder?.setCriteria criteria
 		else
@@ -74,7 +74,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			if field.name is name then return field
 		return undefined
 	"showRollOver": true
-	"selectionType" : "single"
+	"selectionType": "single"
 	"autoFetchData": true
 	"showRowNumbers": true
 	"autoSaveConfig": true
@@ -89,12 +89,12 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			@grid.data.getParent record
 
 		@grid.removeSelectedData (dsResponse, data, dsRequest) =>
-									 parents.forEach ((node) =>
-										 node.isFolder = @grid.data.hasChildren node;
-										 return)
-									 @.fireCallback callback;
-									 return
-								 , requestProperties
+			                         parents.forEach ((node) =>
+				                         node.isFolder = @grid.data.hasChildren node;
+				                         return)
+			                         @.fireCallback callback;
+			                         return
+		                         , requestProperties
 		return
 	"showAdvancedFilter": false
 	"showSelectedStyle": true
@@ -157,7 +157,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			try
 				@grid.startEditing record.rowNum + 1, record.colNum
 			catch e
-			##console.error e.stack.toString()
+##console.error e.stack.toString()
 				@grid.startEditing record.rowNum, record.colNum
 		else
 			@grid.startEditing record.rowNum, record.colNum
@@ -170,9 +170,9 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"selectionAppearance": "rowStyle"
 	"openAll": ->
 		@grid.filterData @grid.getCriteria(),
-						->
-							@grid.getData().openAll()
-							return
+		                 ->
+			                 @grid.getData().openAll()
+			                 return
 		return
 	"selectRecords": (records, newState) ->
 		@grid.selectRecords records, newState
@@ -202,7 +202,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		id = @grid.getIdentifier()
 		data = @grid.getViewState()
 		dataStr = isc.JSONSS.encode data,
-									prettyPrint: false
+		                            prettyPrint: false
 		###console.log "Save component id: #{id} data: #{dataStr}"###
 		isc.OfflineSS.put id, dataStr
 		@fireCallback callback if callback?
@@ -226,8 +226,8 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 				owner: @
 			).getMergedContextMenu()
 		return
-	"dropIconSuffix" : "drop"
-	"openIconSuffix" : "open"
+	"dropIconSuffix": "drop"
+	"openIconSuffix": "open"
 	"closedIconSuffix": "closed"
 	"getContextMenu": ->
 		@grid.contextMenu
@@ -241,91 +241,91 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@Super "initWidget", arguments
 
 		@grid = isc.TreeGrid.create
-			"autoFetchData"                   : false,
-			"dataFetchMode"                   : @dataFetchMode
-			"identifier"                      : @identifier
-			"autoFitFieldWidths"              : @autoFitFieldWidths
-			"dropIconSuffix"                  : @dropIconSuffix
-			"recordComponentPoolingMode"      : @recordComponentPoolingMode
-			"showAllRecords"                  : @showAllRecords
-			"rowContextClick"                 : @rowContextClick
-			"dataProperties"                  : @dataProperties
-			"getBaseStyle"                    : @getBaseStyle
-			"clientOnly"                      : @clientOnly
-			"showRecordComponentsByCell"      : @showRecordComponentsByCell
-			"loadDataOnDemand"                : @loadDataOnDemand
-			"showRecordComponents"            : @showRecordComponents
-			"drawAheadRatio"                  : @drawAheadRatio
-			"cellClick"                       : @cellClick
-			"detailField"                     : @detailField
-			"autoSaveEdits"                   : @autoSaveEdits
-			"canAcceptDroppedRecords"      : @canAcceptDroppedRecords
-			"autoDraw"                        : false
-			"initialSort"                     : @initialSort
-			"showOpenIcons"                     : @showOpenIcons
-			"cascadeSelection"                : @cascadeSelection
-			"canEdit"                         : @canEdit
-			"filterOnKeypress"                : @filterOnKeypress
-			"selectionType"                   : @selectionType
-			"showRollOver"                    : @showRollOver
-			"folderIcon"                      : @folderIcon
-			"showRowNumbers"                  : @showRowNumbers
+			"autoFetchData": false,
+			"dataFetchMode": @dataFetchMode
+			"identifier": @identifier
+			"autoFitFieldWidths": @autoFitFieldWidths
+			"dropIconSuffix": @dropIconSuffix
+			"recordComponentPoolingMode": @recordComponentPoolingMode
+			"showAllRecords": @showAllRecords
+			"rowContextClick": @rowContextClick
+			"dataProperties": @dataProperties
+			"getBaseStyle": @getBaseStyle
+			"clientOnly": @clientOnly
+			"showRecordComponentsByCell": @showRecordComponentsByCell
+			"loadDataOnDemand": @loadDataOnDemand
+			"showRecordComponents": @showRecordComponents
+			"drawAheadRatio": @drawAheadRatio
+			"cellClick": @cellClick
+			"detailField": @detailField
+			"autoSaveEdits": @autoSaveEdits
+			"canAcceptDroppedRecords": @canAcceptDroppedRecords
+			"autoDraw": false
+			"initialSort": @initialSort
+			"showOpenIcons": @showOpenIcons
+			"cascadeSelection": @cascadeSelection
+			"canEdit": @canEdit
+			"filterOnKeypress": @filterOnKeypress
+			"selectionType": @selectionType
+			"showRollOver": @showRollOver
+			"folderIcon": @folderIcon
+			"showRowNumbers": @showRowNumbers
 ##"masterGrid"                      : @masterGrid
-			"canExpandRecords"                : @canExpandRecords
-			"showSelectedStyle"               : @showSelectedStyle
-			"data"                            : @data
-			"owner"                           : @
-			"emptyMessage"                    : @emptyMessage
-			"wrapCells"                       : @wrapCells
-			"openIconSuffix"                  : @openIconSuffix
-			"autoFetchTextMatchStyle"         : @autoFetchTextMatchStyle
-			"expansionMode"                   : @expansionMode
-			"fields"                          : @fields
-			"canDragSelectText"               : @canDragSelectText
-			"dataSource"                      : @dataSource
-			"fixedRecordHeights"              : @fixedRecordHeights
-			"autoFitWidthApproach"            : @autoFitWidthApproach
-			"canReparentNodes"                : @canReparentNodes
-			"modalEditing"                    : @modalEditing
-			"selectionAppearance"             : @selectionAppearance
-			"createRecordComponent"           : @createRecordComponent
-			"updateRecordComponent"           : @updateRecordComponent
-			"canSelectText"                   : @canSelectText
-			"expansionDetailFieldProperties"  :
+			"canExpandRecords": @canExpandRecords
+			"showSelectedStyle": @showSelectedStyle
+			"data": @data
+			"owner": @
+			"emptyMessage": @emptyMessage
+			"wrapCells": @wrapCells
+			"openIconSuffix": @openIconSuffix
+			"autoFetchTextMatchStyle": @autoFetchTextMatchStyle
+			"expansionMode": @expansionMode
+			"fields": @fields
+			"canDragSelectText": @canDragSelectText
+			"dataSource": @dataSource
+			"fixedRecordHeights": @fixedRecordHeights
+			"autoFitWidthApproach": @autoFitWidthApproach
+			"canReparentNodes": @canReparentNodes
+			"modalEditing": @modalEditing
+			"selectionAppearance": @selectionAppearance
+			"createRecordComponent": @createRecordComponent
+			"updateRecordComponent": @updateRecordComponent
+			"canSelectText": @canSelectText
+			"expansionDetailFieldProperties":
 				"canSelectText": @canSelectTextExpandedField
-			"canSelectCells"                  : @canSelectCells
+			"canSelectCells": @canSelectCells
 ##"height"                          : "*"
-			"nodeIcon"                        : @nodeIcon
-			"alternateRecordStyles"           : @alternateRecordStyles
-			"closedIconSuffix"                : @closedIconSuffix
+			"nodeIcon": @nodeIcon
+			"alternateRecordStyles": @alternateRecordStyles
+			"closedIconSuffix": @closedIconSuffix
 ##"width"                           : "100%"
 			"cancelEditingConfirmationMessage": @cancelEditingConfirmationMessage
-			"focusChanged"                    : ->
+			"focusChanged": ->
 				simpleSyS.setFuncMenu @funcMenu
 				return
-			"fetchDelay"                      : @fetchDelay
-			"editByCell"                      : @editByCell
-			"editEvent"                       : @editEvent
-			"showDropIcons"                   : @showDropIcons
-			"showPartialSelection"            : @showPartialSelection
-			"showFilterEditor"                : @showFilterEditor
-			"dataPageSize"                    : @dataPageSize
-			"cellChanged"                     : @cellChanged
-			"getExpansionComponent"           : @getExpansionComponent
-			"editComplete"                    : @editComplete
-			"defaultFields"                   : @defaultFields
-			"dragTrackerMode"                 : @dragTrackerMode
-			"canHover"                        : @canHover
-			"hoverWidth"                      : @hoverWidth
-			"dragDataAction"                  : @dragDataAction
-			"canDragRecordsOut"               : @canDragRecordsOut
-			"canReorderRecords"               : @canReorderRecords
-			"trackerImage"                    : @trackerImage
-			"newRequestProperties"            : @newRequestProperties
-			"editRequestProperties"           : @editRequestProperties
-			"editingFields"                   : @editingFields
-			"saveByCell"                      : @saveByCell
-			"editWindowProperties"            : @editWindowProperties
+			"fetchDelay": @fetchDelay
+			"editByCell": @editByCell
+			"editEvent": @editEvent
+			"showDropIcons": @showDropIcons
+			"showPartialSelection": @showPartialSelection
+			"showFilterEditor": @showFilterEditor
+			"dataPageSize": @dataPageSize
+			"cellChanged": @cellChanged
+			"getExpansionComponent": @getExpansionComponent
+			"editComplete": @editComplete
+			"defaultFields": @defaultFields
+			"dragTrackerMode": @dragTrackerMode
+			"canHover": @canHover
+			"hoverWidth": @hoverWidth
+			"dragDataAction": @dragDataAction
+			"canDragRecordsOut": @canDragRecordsOut
+			"canReorderRecords": @canReorderRecords
+			"trackerImage": @trackerImage
+			"newRequestProperties": @newRequestProperties
+			"editRequestProperties": @editRequestProperties
+			"editingFields": @editingFields
+			"saveByCell": @saveByCell
+			"editWindowProperties": @editWindowProperties
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 
@@ -401,15 +401,15 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@dataSource.wildRecordJS = undefined if @grid.getSelectedRecords().length is 0
 
 		@dataSource.addData @dataSource.wildRecordJS,
-							(dsResponse, data, dsRequest) =>
-								id = data[0][_this.grid.data.idField]
-								_node = @grid.data.findById id
-								parent = @grid.data.getParent _node
-								@grid.data.openFolder parent, (node) =>
-									@grid.selectSingleRecord _node
-									@startEditing()
-									return
-								return
+		                    (dsResponse, data, dsRequest) =>
+			                    id = data[0][_this.grid.data.idField]
+			                    _node = @grid.data.findById id
+			                    parent = @grid.data.getParent _node
+			                    @grid.data.openFolder parent, (node) =>
+				                    @grid.selectSingleRecord _node
+				                    @startEditing()
+				                    return
+			                    return
 		return
 
 	"editEvent": "doubleClick"
@@ -434,10 +434,10 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"dataPageSize": 75
 	"getEditorType": (field, values) ->
 		@grid.Super "getEditorType", arguments
-	"deselectRecord" : (record) ->
+	"deselectRecord": (record) ->
 		@grid.deselectRecord record
 		return
-	"deselectRecords" : (records) ->
+	"deselectRecords": (records) ->
 		@grid.deselectRecords records
 		return
 	"deselectAllRecords": ->
@@ -446,3 +446,9 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"getFieldName": (colNum)-> @grid.getFieldName colNum
 	"getRowNum": (record) ->
 		@grid.getRowNum record
+	"setSelectionAppearance": (selectionAppearance) ->
+		@grid.setSelectionAppearance selectionAppearance
+		return
+	"setSelectionType": (selectionType) ->
+		@grid.setSelectionType selectionType
+		return
