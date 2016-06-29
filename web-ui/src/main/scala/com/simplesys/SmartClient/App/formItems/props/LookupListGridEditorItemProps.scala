@@ -24,6 +24,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
     var listGridEditor: ScOption[ListGridEditor] = ScNone
+    readOnlyDisplay = ReadOnlyDisplayAppearance.static.opt
 
     align = Alignment.center.opt
 
