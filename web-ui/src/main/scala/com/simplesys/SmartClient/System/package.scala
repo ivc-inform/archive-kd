@@ -102,6 +102,7 @@ package object System {
     object SpinnerItem extends SCApply[SpinnerItem, SpinnerItemProps]
     object TextAreaItem extends SCApply[TextAreaItem, TextAreaItemProps]
     object TextItem extends SCApply[TextItem, TextItemProps]
+    object TextItemSS extends SCApply[TextItemSS, TextItemSSProps]
     object StaticTextItem extends SCApply[StaticTextItem, StaticTextItemProps]
     object TimeItem extends SCApply[TimeItem, TimeItemProps]
     object TimerItem extends SCApply[TimerItem, TimerItemProps]

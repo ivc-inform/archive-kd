@@ -3,14 +3,14 @@ package com.simplesys.SmartClient.App.formItems.props
 import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
 import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
-import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
+import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps, TextItemSSProps}
+import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
-import com.simplesys.System.Types.ReadOnlyDisplayAppearance.{ReadOnlyDisplayAppearance => _, _}
+import com.simplesys.System.Types.ReadOnlyDisplayAppearance.{ReadOnlyDisplayAppearance => _}
 import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.function._
@@ -83,14 +83,14 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                     minColWidth = 0.opt
                     colWidths = Seq[JSAny](0, "*").opt
                     items = Seq(
-                        TextItem(
-                            new TextItemProps {
+                        TextItemSS(
+                            new TextItemSSProps {
                                 colSpan = 2.opt
                                 nameStrong = s"${item._name}_inner".nameStrongOpt
                                 width = "*"
                                 showTitle = false.opt
                                 value = item.value.opt
-                                readOnlyDisplay = ReadOnlyDisplayAppearance.static.opt
+                                readOnlyDisplay = ReadOnlyDisplayAppearance.readOnly.opt
                             }
                         )
                     ).opt
