@@ -130,6 +130,8 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     var selectFirstRecordAfterFetch: Boolean
     var fields: JSUndefined[IscArray[ListGridField]]
     val replacingFields: JSUndefined[IscArray[ListGridField]]
+    def setSelectionAppearance(selectionAppearance: SelectionAppearance): void
+    def setSelectionType(selectionType: SelectionStyle): void
 }
 
 @js.native
