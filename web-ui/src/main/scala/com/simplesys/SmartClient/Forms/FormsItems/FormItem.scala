@@ -247,7 +247,7 @@ trait FormItem extends Class {
     def setTop(): void
     def setValue(newValue: JSAny): void
     def setValueIcons(map: JSObject): void
-    def setValueMap(valueMap: IscArray[JSAny]): void
+    def setValueMap[T <: JSAny](valueMap: IscArray[T]): void
     @JSName("setValueMap")
     def setValueMapString(valueMap: IscArray[String]): void
     def shouldApplyHeightToTextBox(): Boolean

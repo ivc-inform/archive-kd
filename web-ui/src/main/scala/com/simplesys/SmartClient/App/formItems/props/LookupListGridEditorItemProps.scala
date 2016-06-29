@@ -159,27 +159,33 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                             okFunction = {
                                                                                 (thiz: classHandler) =>
 
-                                                                                    if (editor.getSelectedRecords().length != 1)
-                                                                                        isc.error("Не возможно выделить значение для ввода.")
-                                                                                    else {
-                                                                                        val record = editor.getSelectedRecord()
+                                                                                    isc debugTrap(editor)
+                                                                                    isc debugTrap(editor.selectionType)
 
-                                                                                        val valueId = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
-                                                                                        //isc debugTrap(formItem.foreignField.get, item.name, valueId, formItem.record)
+                                                                                    if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
+                                                                                        idField.setValueMap(editor.getSelectedRecords())
+                                                                                    } else {
+                                                                                        if (editor.getSelectedRecords().length != 1)
+                                                                                            isc.error("Не возможно выделить значение для ввода.")
+                                                                                        else {
+                                                                                            val record = editor.getSelectedRecord()
 
-                                                                                        isc debugTrap(idFieldName, formItem, formItem.record, idField)
-                                                                                        if (formItem.record.isEmpty || formItem.record.get == null)
-                                                                                            idField.setValue(valueId)
-                                                                                        else
-                                                                                            formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(valueId))
+                                                                                            val valueId = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName)
+                                                                                            //isc debugTrap(formItem.foreignField.get, item.name, valueId, formItem.record)
 
-                                                                                        val recordFields = js.Object.keys(record)
-                                                                                        recordFields.foreach {
-                                                                                            field =>
-                                                                                                if (editor.dataSource.getField(field).isDefined)
-                                                                                                    if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
-                                                                                                        form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
-                                                                                                    }
+                                                                                            if (formItem.record.isEmpty || formItem.record.get == null)
+                                                                                                idField.setValue(valueId)
+                                                                                            else
+                                                                                                formItem.record.foreach(_.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(valueId))
+
+                                                                                            val recordFields = js.Object.keys(record)
+                                                                                            recordFields.foreach {
+                                                                                                field =>
+                                                                                                    if (editor.dataSource.getField(field).isDefined)
+                                                                                                        if (!editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
+                                                                                                            form.setValue(field, editor.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                        }
+                                                                                            }
                                                                                         }
                                                                                     }
                                                                             }.toThisFunc.opt
