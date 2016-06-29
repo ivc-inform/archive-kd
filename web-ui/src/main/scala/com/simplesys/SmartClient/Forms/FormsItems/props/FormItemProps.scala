@@ -118,7 +118,7 @@ class FormItemProps extends ClassProps {
     var itemHover: ScOption[js.Function2[FormItem, DynamicFormSS, _]] = ScNone
     var itemHoverHTML: ScOption[js.Function2[FormItem, DynamicFormSS, HTMLString]] = ScNone
     var keyDown: ScOption[js.Function3[FormItem, DynamicFormSS, String, Boolean]] = ScNone
-    var keyPress: ScOption[ThisFunction4[classHandler, FormItem, DynamicFormSS, KeyName, Int, Boolean]] = ScNone
+    var keyPress: ScOption[ThisFunction4[classHandler, FormItem, DynamicFormSS, KeyName, JSUndefined[Int], Boolean]] = ScNone
     var keyUp: ScOption[js.Function3[FormItem, DynamicFormSS, KeyName, Boolean]] = ScNone
     var left: ScOption[Int] = ScNone
     var loadingDisplayValue: ScOption[String] = ScNone

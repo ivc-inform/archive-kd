@@ -87,10 +87,11 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                             new TextItemSSProps {
                                 colSpan = 2.opt
                                 nameStrong = s"${item._name}_inner".nameStrongOpt
+                                _name = s"${item._name}_inner".opt
                                 width = "*"
                                 showTitle = false.opt
                                 value = item.value.opt
-                                readOnlyDisplay = ReadOnlyDisplayAppearance.readOnly.opt
+                                //readOnlyDisplay = ReadOnlyDisplayAppearance.readOnly.opt
                             }
                         )
                     ).opt
