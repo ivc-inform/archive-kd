@@ -19,7 +19,6 @@ import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
 
-
 class LookupListGridEditorItemProps extends CanvasItemProps {
     type classHandler <: LookupListGridEditorItem
 
@@ -159,11 +158,18 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                             okFunction = {
                                                                                 (thiz: classHandler) =>
 
-                                                                                    isc debugTrap(editor)
-                                                                                    isc debugTrap(editor.selectionType)
-
                                                                                     if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
-                                                                                        idField.setValueMap(editor.getSelectedRecords())
+                                                                                        formItem setValueMap editor.getSelectedRecords()
+
+                                                                                        if (formItem.nameStrong.isEmpty)
+                                                                                            formItem.nameStrong = new NameStrong {
+                                                                                                override val name = formItem.name
+                                                                                            }
+
+                                                                                        val res = editor.getSelectedRecords().map(item => item.asInstanceOf[JSDynamic].selectDynamic(formItem.nameStrong.get.name).toString).mkString(", ")
+                                                                                        //isc debugTrap res
+                                                                                        formItem setValue res
+
                                                                                     } else {
                                                                                         if (editor.getSelectedRecords().length != 1)
                                                                                             isc.error("Не возможно выделить значение для ввода.")
