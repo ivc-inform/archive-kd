@@ -10,6 +10,7 @@ import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
+import com.simplesys.System.Types.ReadOnlyDisplayAppearance.{ReadOnlyDisplayAppearance => _, _}
 import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.function._
@@ -24,7 +25,6 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
     var listGridEditor: ScOption[ListGridEditor] = ScNone
-    readOnlyDisplay = ReadOnlyDisplayAppearance.static.opt
 
     align = Alignment.center.opt
 
@@ -76,7 +76,6 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
 
             val formItem = thiz
-
             val df = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     cellPadding = 0.opt
@@ -87,10 +86,11 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                         TextItem(
                             new TextItemProps {
                                 colSpan = 2.opt
-                                _name = s"${item._name}_inner".opt
+                                nameStrong = s"${item._name}_inner".nameStrongOpt
                                 width = "*"
                                 showTitle = false.opt
                                 value = item.value.opt
+                                readOnlyDisplay = ReadOnlyDisplayAppearance.static.opt
                             }
                         )
                     ).opt
@@ -164,7 +164,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
 
                                                                                         if (formItem.nameStrong.isEmpty)
                                                                                             formItem.nameStrong = new NameStrong {
-                                                                                                override val name = formItem.name
+                                                                                                override val name = formItem._name
                                                                                             }
 
                                                                                         val res = editor.getSelectedRecords().map(item => item.asInstanceOf[JSDynamic].selectDynamic(formItem.nameStrong.get.name).toString).mkString(", ")

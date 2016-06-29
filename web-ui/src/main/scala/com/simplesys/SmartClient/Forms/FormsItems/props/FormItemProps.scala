@@ -25,7 +25,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNone, ScOption}
 
 import scala.scalajs.js
-import scala.scalajs.js.ThisFunction1
+import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 import scala.scalajs.js.annotation.JSName
 
 class FormItemProps extends ClassProps {
