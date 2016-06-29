@@ -195,7 +195,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
 
                                                                                         val advancedCriteria = js.Dynamic.literal(
                                                                                             "_constructor" -> "AdvancedCriteria".dblQuoted,
-                                                                                            "operator" -> "and",
+                                                                                            "operator" -> "or",
                                                                                             "criteria" -> criteria
                                                                                         )
 
