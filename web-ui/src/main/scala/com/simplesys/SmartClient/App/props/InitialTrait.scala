@@ -9,9 +9,9 @@ import com.simplesys.System._
 
 import scala.collection.mutable.ArrayBuffer
 
-trait InitListGridTrait {
+trait InitialTrait {
 
-    def initListWidget(thiz: Canvas, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]], arguments: IscArray[JSAny]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
+    def initWidget(thiz: Canvas, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]], arguments: IscArray[JSAny]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
         fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
 
         val replacingEditingFields = ArrayBuffer.empty[FormItem]

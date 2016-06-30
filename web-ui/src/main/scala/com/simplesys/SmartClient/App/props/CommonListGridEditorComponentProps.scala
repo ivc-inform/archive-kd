@@ -11,7 +11,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
-trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitListGridTrait {
+trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitialTrait {
 
     type classHandler <: CommonListGridEditorComponent
 
@@ -29,7 +29,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitLi
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            val res = initListWidget(thiz, thiz.fields, thiz.replacingFields, thiz.editingFields, arguments)
+            val res = initWidget(thiz, thiz.fields, thiz.replacingFields, thiz.editingFields, arguments)
             thiz.fields = res._1
             thiz.editingFields = res._2
 

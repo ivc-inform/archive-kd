@@ -116,10 +116,12 @@ trait TreeListGridEditor extends HLayoutSS {
     var wrapTreeCells: Boolean
     def getListGrid(): ListGridEditor
     def getTreeGrid(): TreeGridEditor
-    var fieldsTree: IscArray[TreeGridField]
-    var defaultFieldsTree: IscArray[TreeGridField]
-    var fieldsList: IscArray[ListGridField]
-    var defaultFieldsList: IscArray[ListGridField]
+    var fieldsTree: JSUndefined[IscArray[ListGridField]]
+    var replacingFieldsTree: JSUndefined[IscArray[ListGridField]]
+    var defaultFieldsTree: JSUndefined[IscArray[TreeGridField]]
+    var fieldsList: JSUndefined[IscArray[ListGridField]]
+    var replacingFieldsList: JSUndefined[IscArray[ListGridField]]
+    var defaultFieldsList: JSUndefined[IscArray[ListGridField]]
     val treeGrid: TreeGridEditor
     val listGrid: ListGridEditor
     val contextMenuListGridEditor: MenuSS
