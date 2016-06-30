@@ -3,8 +3,9 @@ package com.simplesys.SmartClient.Forms.FormsItems.props
 import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, FormItem}
-import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
+import com.simplesys.SmartClient.Forms.{DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
 import com.simplesys.SmartClient.System.IscArray
@@ -25,7 +26,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.{FormItemType_FormItemComponentType, IntString, ScNone, ScOption}
 
 import scala.scalajs.js
-import scala.scalajs.js.ThisFunction1
+import scala.scalajs.js.{ThisFunction1, ThisFunction4}
 import scala.scalajs.js.annotation.JSName
 
 class FormItemProps extends ClassProps {
@@ -40,7 +41,7 @@ class FormItemProps extends ClassProps {
     var ariaRole: ScOption[String] = ScNone
     var ariaState: ScOption[JSObject] = ScNone
     var autoComplete: ScOption[AutoComplete] = ScNone
-    var blur: ScOption[js.Function2[DynamicForm, FormItem, _]] = ScNone
+    var blur: ScOption[js.Function2[DynamicFormSS, FormItem, _]] = ScNone
     var browserSpellCheck: ScOption[Boolean] = ScNone
     var canEdit: ScOption[Boolean] = ScNone
     var canEditOpaqueValues: ScOption[Boolean] = ScNone
@@ -48,10 +49,10 @@ class FormItemProps extends ClassProps {
     var canSelectText: ScOption[Boolean] = ScNone
     var cellHeight: ScOption[Int] = ScNone
     var cellStyle: ScOption[FormItemBaseStyle] = ScNone
-    var change: ScOption[js.Function4[DynamicForm, FormItem, JSAny, JSAny, Boolean]] = ScNone
-    var changed: ScOption[js.Function3[DynamicForm, FormItem, JSAny, _]] = ScNone
+    var change: ScOption[js.Function4[DynamicFormSS, FormItem, JSAny, JSAny, Boolean]] = ScNone
+    var changed: ScOption[js.Function3[DynamicFormSS, FormItem, JSAny, _]] = ScNone
     var changeOnKeypress: ScOption[Boolean] = ScNone
-    var click: ScOption[js.Function2[DynamicForm, FormItem, Boolean]] = ScNone
+    var click: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
     var clipStaticValue: ScOption[Boolean] = ScNone
     var clipTitle: ScOption[Boolean] = ScNone
     var colSpan: ScOption[Int] = ScNone
@@ -62,15 +63,15 @@ class FormItemProps extends ClassProps {
     var dateFormatter: ScOption[DateDisplayFormat] = ScNone
     var decimalPad: ScOption[Int] = ScNone
     var decimalPrecision: ScOption[Int] = ScNone
-    var defaultDynamicValue: ScOption[js.Function3[FormItem, DynamicForm, JSObject, _]] = ScNone
+    var defaultDynamicValue: ScOption[js.Function3[FormItem, DynamicFormSS, JSObject, _]] = ScNone
     var defaultIconSrc: ScOption[SCImgURL] = ScNone
     var defaultValue: ScOption[JSAny] = ScNone
     var disabled: ScOption[Boolean] = ScNone
     var disableIconsOnReadOnly: ScOption[Boolean] = ScNone
     var displayField: ScOption[String] = ScNone
-    var doubleClick: ScOption[js.Function2[DynamicForm, FormItem, Boolean]] = ScNone
-    var editorEnter: ScOption[js.Function3[DynamicForm, FormItem, JSAny, _]] = ScNone
-    var editorExit: ScOption[js.Function3[DynamicForm, FormItem, JSAny, _]] = ScNone
+    var doubleClick: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
+    var editorEnter: ScOption[js.Function3[DynamicFormSS, FormItem, JSAny, _]] = ScNone
+    var editorExit: ScOption[js.Function3[DynamicFormSS, FormItem, JSAny, _]] = ScNone
     var editorType: ScOption[FormItemComponentType] = ScNone
     var editPendingCSSText: ScOption[CSSText] = ScNone
     var emptyDisplayValue: ScOption[String] = ScNone
@@ -85,7 +86,7 @@ class FormItemProps extends ClassProps {
     var filterLocally: ScOption[Boolean] = ScNone
     var focus: ScOption[js.Function2[DynamicFormSS, FormItem, _]] = ScNone
     var foreignDisplayField: ScOption[String] = ScNone
-    var form: ScOption[DynamicForm] = ScNone
+    var form: ScOption[DynamicFormSS] = ScNone
     var format: ScOption[FormatString] = ScNone
     var formatEditorValue: ScOption[js.Function4[JSAny, ListGridRecord, DynamicFormSS, FormItem, String]] = ScNone
     var formatValue: ScOption[js.Function4[JSAny, ListGridRecord, DynamicFormSS, FormItem, String]] = ScNone
@@ -101,10 +102,10 @@ class FormItemProps extends ClassProps {
     var hoverStyle: ScOption[CSSStyleName] = ScNone
     var hoverVAlign: ScOption[VerticalAlignment] = ScNone
     var hoverWidth: ScOption[Int] = ScNone
-    var iconClick: ScOption[js.Function3[DynamicForm, FormItem, FormItemIcon, _]] = ScNone
+    var iconClick: ScOption[js.Function3[DynamicFormSS, FormItem, FormItemIcon, _]] = ScNone
     var iconHeight: ScOption[Int] = ScNone
     var iconHSpace: ScOption[Int] = ScNone
-    var iconKeyPress: ScOption[js.Function5[String, Char, DynamicForm, FormItem, FormItemIcon, _]] = ScNone
+    var iconKeyPress: ScOption[js.Function5[String, Char, DynamicFormSS, FormItem, FormItemIcon, _]] = ScNone
     var iconPrompt: ScOption[HTMLString] = ScNone
     var icons: ScOption[IscArray[FormItemIcon]] = ScNone
     var iconVAlign: ScOption[VerticalAlignment] = ScNone
@@ -115,11 +116,11 @@ class FormItemProps extends ClassProps {
     var implicitSave: ScOption[Boolean] = ScNone
     var implicitSaveOnBlur: ScOption[Boolean] = ScNone
     var inputFormat: ScOption[DateInputFormat] = ScNone
-    var itemHover: ScOption[js.Function2[FormItem, DynamicForm, _]] = ScNone
-    var itemHoverHTML: ScOption[js.Function2[FormItem, DynamicForm, HTMLString]] = ScNone
-    var keyDown: ScOption[js.Function3[FormItem, DynamicForm, String, Boolean]] = ScNone
-    var keyPress: ScOption[js.Function3[FormItem, DynamicForm, Char, Boolean]] = ScNone
-    var keyUp: ScOption[js.Function3[FormItem, DynamicForm, KeyName, Boolean]] = ScNone
+    var itemHover: ScOption[js.Function2[FormItem, DynamicFormSS, _]] = ScNone
+    var itemHoverHTML: ScOption[js.Function2[FormItem, DynamicFormSS, HTMLString]] = ScNone
+    var keyDown: ScOption[js.Function3[FormItem, DynamicFormSS, String, Boolean]] = ScNone
+    var keyPress: ScOption[ThisFunction4[classHandler, FormItem, DynamicFormSS, KeyName, JSUndefined[Int], Boolean]] = ScNone
+    var keyUp: ScOption[js.Function3[FormItem, DynamicFormSS, KeyName, Boolean]] = ScNone
     var left: ScOption[Int] = ScNone
     var loadingDisplayValue: ScOption[String] = ScNone
     var locateItemBy: ScOption[String] = ScNone
@@ -135,11 +136,11 @@ class FormItemProps extends ClassProps {
     var optionFilterContext: ScOption[RPCRequest] = ScNone
     var optionOperationId: ScOption[String] = ScNone
     var originalValueMessage: ScOption[HTMLString] = ScNone
-    var parseEditorValue: ScOption[js.Function3[String, DynamicForm, FormItem, JSAny]] = ScNone
-    var pendingStatusChanged: ScOption[js.Function5[DynamicForm, FormItem, Boolean, JSAny, JSAny, Boolean]] = ScNone
+    var parseEditorValue: ScOption[js.Function3[String, DynamicFormSS, FormItem, JSAny]] = ScNone
+    var pendingStatusChanged: ScOption[js.Function5[DynamicFormSS, FormItem, Boolean, JSAny, JSAny, Boolean]] = ScNone
     var picker: ScOption[Canvas] = ScNone
     var pickerConstructor: ScOption[SCClassName] = ScNone
-    var pickerIconClick: ScOption[js.Function3[DynamicForm, FormItem, FormItemIcon, _]] = ScNone
+    var pickerIconClick: ScOption[js.Function3[DynamicFormSS, FormItem, FormItemIcon, _]] = ScNone
     var pickerIconDefaults: ScOption[FormItemIcon] = ScNone
     var pickerIconHeight: ScOption[Int] = ScNone
     var pickerIconName: ScOption[String] = ScNone
@@ -178,7 +179,7 @@ class FormItemProps extends ClassProps {
     var showFocusedPickerIcon: ScOption[Boolean] = ScNone
     var showHint: ScOption[Boolean] = ScNone
     var showIcons: ScOption[Boolean] = ScNone
-    var showIf: ScOption[js.Function4[FormItem, JSAny, DynamicForm, JSObject, Boolean]] = ScNone
+    var showIf: ScOption[js.Function4[FormItem, JSAny, DynamicFormSS, JSObject, Boolean]] = ScNone
     var showOldValueInHover: ScOption[Boolean] = ScNone
     var showOverIcons: ScOption[Boolean] = ScNone
     var showPending: ScOption[Boolean] = ScNone
@@ -198,16 +199,16 @@ class FormItemProps extends ClassProps {
     var title: ScOption[String] = ScNone
     var titleAlign: ScOption[Alignment] = ScNone
     var titleClassName: ScOption[CSSStyleName] = ScNone
-    var titleClick: ScOption[js.Function2[DynamicForm, FormItem, Boolean]] = ScNone
+    var titleClick: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
     var titleColSpan: ScOption[Int] = ScNone
-    var titleDoubleClick: ScOption[js.Function2[DynamicForm, FormItem, Boolean]] = ScNone
-    var titleHover: ScOption[js.Function2[DynamicForm, FormItem, Boolean]] = ScNone
-    var titleHoverHTML: ScOption[js.Function2[DynamicForm, FormItem, HTMLString]] = ScNone
+    var titleDoubleClick: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
+    var titleHover: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
+    var titleHoverHTML: ScOption[js.Function2[DynamicFormSS, FormItem, HTMLString]] = ScNone
     var titleOrientation: ScOption[TitleOrientation] = ScNone
     var titleStyle: ScOption[FormItemBaseStyle] = ScNone
     var titleVAlign: ScOption[VerticalAlignment] = ScNone
     var top: ScOption[Int] = ScNone
-    var transformInput: ScOption[js.Function4[DynamicForm, FormItem, JSAny, JSAny, JSAny]] = ScNone
+    var transformInput: ScOption[js.Function4[DynamicFormSS, FormItem, JSAny, JSAny, JSAny]] = ScNone
     var useDisabledHintStyleForReadOnly: ScOption[Boolean] = ScNone
     var validateOnChange: ScOption[Boolean] = ScNone
     var validateOnExit: ScOption[Boolean] = ScNone
@@ -217,9 +218,9 @@ class FormItemProps extends ClassProps {
     var value: ScOption[JSAny] = ScNone
     var valueDeselectedCSSText: ScOption[CSSText] = ScNone
     var valueField: ScOption[String] = ScNone
-    var valueHover: ScOption[js.Function2[FormItem, DynamicForm, _]] = ScNone
-    var valueHoverHTML: ScOption[js.Function2[FormItem, DynamicForm, HTMLString]] = ScNone
-    var valueIconClick: ScOption[js.Function3[FormItem, DynamicForm, JSAny, Boolean]] = ScNone
+    var valueHover: ScOption[js.Function2[FormItem, DynamicFormSS, _]] = ScNone
+    var valueHoverHTML: ScOption[js.Function2[FormItem, DynamicFormSS, HTMLString]] = ScNone
+    var valueIconClick: ScOption[js.Function3[FormItem, DynamicFormSS, JSAny, Boolean]] = ScNone
     var valueIconHeight: ScOption[Int] = ScNone
     var valueIconLeftPadding: ScOption[Int] = ScNone
     var valueIconRightPadding: ScOption[Int] = ScNone
@@ -231,4 +232,5 @@ class FormItemProps extends ClassProps {
     var width: ScOption[IntString[Int, String]] = "100%"
     var wrapTitle: ScOption[Boolean] = ScNone
     var `type`: ScOption[FormItemType_FormItemComponentType[FormItemType, FormItemComponentType]] = ScNone
+    var filteredGrid: ScOption[ListGridEditor] = ScNone
 }

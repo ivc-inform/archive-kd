@@ -9,7 +9,7 @@ package object Types {
 
     type Field = JSObject
 
-    type Criteria = JSDictionary[JSObject]
+    type Criteria = JSObject
 
     trait CallbackObject {
         val target: JSObject

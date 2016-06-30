@@ -73,6 +73,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTr
                             case None =>
                                 _fieldsListGrid += field
                             case Some(field) =>
+                                field.filterEditorProperties.filteredGrid = thiz
                                 _fieldsListGrid += field
                         }
                 }

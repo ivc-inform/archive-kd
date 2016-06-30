@@ -3,13 +3,14 @@ package com.simplesys.SmartClient.App.formItems.props
 import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
 import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemProps}
+import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemSSProps}
 import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, OkCancelPanelProps, WindowSSProps}
 import com.simplesys.SmartClient.System.{Common, HLayoutSS, IButtonSS, _}
+import com.simplesys.System.Types.ReadOnlyDisplayAppearance.{ReadOnlyDisplayAppearance => _}
 import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.function._
@@ -23,8 +24,8 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
     type classHandler <: LookupListGridEditorItem
 
     var buttonIcon: ScOption[SCImgURL] = ScNone
+
     var listGridEditor: ScOption[ListGridEditor] = ScNone
-    readOnlyDisplay = ReadOnlyDisplayAppearance.static.opt
 
     align = Alignment.center.opt
 
@@ -76,7 +77,6 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
 
             val formItem = thiz
-
             val df = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     cellPadding = 0.opt
@@ -84,13 +84,15 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                     minColWidth = 0.opt
                     colWidths = Seq[JSAny](0, "*").opt
                     items = Seq(
-                        TextItem(
-                            new TextItemProps {
+                        TextItemSS(
+                            new TextItemSSProps {
                                 colSpan = 2.opt
+                                nameStrong = s"${item._name}_inner".nameStrongOpt
                                 _name = s"${item._name}_inner".opt
                                 width = "*"
                                 showTitle = false.opt
                                 value = item.value.opt
+                                readOnlyDisplay = ReadOnlyDisplayAppearance.readOnly.opt
                             }
                         )
                     ).opt
@@ -160,16 +162,53 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                 (thiz: classHandler) =>
 
                                                                                     if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
-                                                                                        formItem setValueMap editor.getSelectedRecords()
+
+                                                                                        val records = editor.getSelectedRecords()
+
+                                                                                        formItem setValueMap records
 
                                                                                         if (formItem.nameStrong.isEmpty)
                                                                                             formItem.nameStrong = new NameStrong {
-                                                                                                override val name = formItem.name
+                                                                                                override val name = formItem._name
                                                                                             }
 
                                                                                         val res = editor.getSelectedRecords().map(item => item.asInstanceOf[JSDynamic].selectDynamic(formItem.nameStrong.get.name).toString).mkString(", ")
-                                                                                        //isc debugTrap res
                                                                                         formItem setValue res
+
+                                                                                        val criteria: JSArray[JSObject] = editor.getSelectedRecords().map {
+                                                                                            item =>
+                                                                                                val obj = js.Object()
+                                                                                                val objDyn = obj.asInstanceOf[JSDynamic]
+                                                                                                val recordFields = js.Object.keys(records(0))
+                                                                                                recordFields.foreach {
+                                                                                                    field =>
+                                                                                                        //isc debugTrap (field, editor.dataSource.getField(field))
+                                                                                                        if (editor.dataSource.getField(field).isDefined) {
+                                                                                                            if (editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
+                                                                                                                objDyn.updateDynamic("fieldName")(formItem.foreignField.get)
+                                                                                                                objDyn.updateDynamic("operator")("equals")
+                                                                                                                objDyn.updateDynamic("value")(item.asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                            }
+                                                                                                        }
+                                                                                                }
+
+                                                                                                obj
+                                                                                        }
+
+                                                                                        //isc debugTrap criteria
+
+                                                                                        val advancedCriteria = js.Dynamic.literal(
+                                                                                            "_constructor" -> "AdvancedCriteria".dblQuoted,
+                                                                                            "operator" -> "or",
+                                                                                            "criteria" -> criteria
+                                                                                        )
+
+                                                                                        //isc debugTrap (advancedCriteria)
+
+                                                                                        if (formItem.filteredGrid.isEmpty)
+                                                                                            isc.error("Нет поля formItem.filteredGrid.")
+                                                                                        else
+                                                                                            formItem.filteredGrid.foreach(_.fetchData(criteria = advancedCriteria))
 
                                                                                     } else {
                                                                                         if (editor.getSelectedRecords().length != 1)
