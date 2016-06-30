@@ -20,7 +20,7 @@ import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosP
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
 import scala.scalajs.js.annotation.JSExport
 
@@ -398,6 +398,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(EditorUserGroups.create(new EditorUserGroupsProps {
                                                         dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+                                                        fields = ListGridFiledsJS.admin_UserGroup_FLDS.opt
+                                                        editingFields = FormItemsJS.admin_UserGroup_FRMITM.opt
                                                     }), item)
                                             }.toFunc.opt
                                         },

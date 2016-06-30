@@ -32,45 +32,47 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
     shouldSaveValue = true.opt
 
     setValue = {
-        (thiz: classHandler, value: JSAny) =>
+        (thiz: classHandler, value: JSUndefined[JSAny]) =>
+            thiz.Super("setValue", IscArray(value))
             thiz.textItem setValue value
 
-            if (thiz.listGridEditor.isEmpty)
-                isc.error("Не определено свойство 'thiz.listGridEditor' error #38")
-            else
-                thiz.listGridEditor.foreach {
-                    editor =>
-                        thiz.record.foreach {
-                            record =>
-                                if (record != null) {
-                                    if (thiz.form.isEmpty)
-                                        isc.error("Не определено свойство 'thiz.form' error #45")
-                                    else
-                                        thiz.form.foreach {
-                                            form =>
-                                                if (form.dataSource.isEmpty)
-                                                    isc.error("Не определено свойство 'form.dataSource' error #50")
-                                                else
-                                                    form.dataSource.foreach {
-                                                        dataSource =>
-                                                            val foreignIdField = dataSource.getField(thiz.foreignField.get).get
-                                                            val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
-                                                            val idFieldName1 = foreignIdField.name
+            if (value.isDefined) {
 
-                                                            val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
+                if (thiz.listGridEditor.isEmpty)
+                    isc.error("Не определено свойство 'thiz.listGridEditor' error #38")
+                else
+                    thiz.listGridEditor.foreach {
+                        editor =>
+                            thiz.record.foreach {
+                                record =>
+                                    if (record != null) {
+                                        if (thiz.form.isEmpty)
+                                            isc.error("Не определено свойство 'thiz.form' error #45")
+                                        else
+                                            thiz.form.foreach {
+                                                form =>
+                                                    if (form.dataSource.isEmpty)
+                                                        isc.error("Не определено свойство 'form.dataSource' error #50")
+                                                    else
+                                                        form.dataSource.foreach {
+                                                            dataSource =>
+                                                                val foreignIdField = dataSource.getField(thiz.foreignField.get).get
+                                                                val idFieldName = foreignIdField.foreignKey.substring(foreignIdField.foreignKey.lastIndexOf(".") + 1)
+                                                                val idFieldName1 = foreignIdField.name
 
-                                                            val keyValues = js.Object()
-                                                            keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
-                                                            //isc debugTrap editor
-                                                            editor.deselectAllRecords()
-                                                            editor selectRecordsByKey keyValues
-                                                    }
-                                        }
-                                }
-                        }
-                }
+                                                                val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
 
-            thiz.Super("setValue", IscArray(value))
+                                                                val keyValues = js.Object()
+                                                                keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
+                                                                //isc debugTrap editor
+                                                                editor.deselectAllRecords()
+                                                                editor selectRecordsByKey keyValues
+                                                        }
+                                            }
+                                    }
+                            }
+                    }
+            }
     }.toThisFunc.opt
 
     createCanvas = {
@@ -173,7 +175,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                             }
 
                                                                                         val res = editor.getSelectedRecords().map(item => item.asInstanceOf[JSDynamic].selectDynamic(formItem.nameStrong.get.name).toString).mkString(", ")
-                                                                                        formItem setValue res
+                                                                                        //isc debugTrap res
 
                                                                                         val criteria: JSArray[JSObject] = editor.getSelectedRecords().map {
                                                                                             item =>
@@ -205,10 +207,12 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
 
                                                                                         //isc debugTrap (advancedCriteria)
 
-                                                                                        if (formItem.filteredGrid.isEmpty)
+                                                                                        if (formItem.filteredGridList.isEmpty)
                                                                                             isc.error("Нет поля formItem.filteredGrid.")
                                                                                         else
-                                                                                            formItem.filteredGrid.foreach(_.fetchData(criteria = advancedCriteria))
+                                                                                            formItem.filteredGridList.foreach(_.fetchData(criteria = advancedCriteria))
+
+                                                                                        formItem setValue res
 
                                                                                     } else {
                                                                                         if (editor.getSelectedRecords().length != 1)

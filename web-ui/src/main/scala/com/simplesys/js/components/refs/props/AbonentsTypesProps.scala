@@ -7,7 +7,7 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 class AbonentsTypesProps extends CommonListGridEditorComponentProps {
 
-    override val simpleTable = true
+    simpleTable = true.opt
 
     type classHandler <: AbonentsTypes
 

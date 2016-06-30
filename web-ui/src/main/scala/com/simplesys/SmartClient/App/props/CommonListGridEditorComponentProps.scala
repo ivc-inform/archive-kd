@@ -1,26 +1,25 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonListGridEditorComponent
-import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
-import com.simplesys.SmartClient.App.formItems.props.LookupListGridEditorItemProps
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps}
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{FormItemComponentType, SelectionAppearance, SelectionStyle}
+import com.simplesys.System.Types.SelectionStyle
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
 import scala.collection.mutable.ArrayBuffer
 
 trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTrait {
-    val simpleTable: Boolean
 
     type classHandler <: CommonListGridEditorComponent
 
+    var simpleTable: ScOption[Boolean] = ScNone
     height = "100%"
     width = "100%"
     drawAheadRatio = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt
@@ -73,7 +72,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTr
                             case None =>
                                 _fieldsListGrid += field
                             case Some(field) =>
-                                field.filterEditorProperties.filteredGrid = thiz
+                                field.filterEditorProperties.filteredGridList = thiz
                                 _fieldsListGrid += field
                         }
                 }
@@ -97,7 +96,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTr
 
             thiz.Super("initWidget", arguments)
 
-            val funcMenu = if (simpleTable)
+            val funcMenu = if (thiz.simpleTable.getOrElse(false))
                 ListGridContextMenu.create(
                     new ListGridContextMenuProps {
                         owner = thiz.opt
