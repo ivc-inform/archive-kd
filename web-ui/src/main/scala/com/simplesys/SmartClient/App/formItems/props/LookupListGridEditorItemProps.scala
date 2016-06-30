@@ -178,15 +178,17 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                         val criteria: JSArray[JSObject] = editor.getSelectedRecords().map {
                                                                                             item =>
                                                                                                 val obj = js.Object()
+                                                                                                val objDyn = obj.asInstanceOf[JSDynamic]
                                                                                                 val recordFields = js.Object.keys(records(0))
                                                                                                 recordFields.foreach {
                                                                                                     field =>
                                                                                                         //isc debugTrap (field, editor.dataSource.getField(field))
                                                                                                         if (editor.dataSource.getField(field).isDefined) {
-                                                                                                            if (editor.dataSource.getField(field).get.primaryKey.getOrElse(false))
-                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic("fieldName")(item.asInstanceOf[JSDynamic].selectDynamic(formItem.foreignField.get))
-                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic("operator")(item.asInstanceOf[JSDynamic].selectDynamic("equal"))
-                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic("value")(item.asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                            if (editor.dataSource.getField(field).get.primaryKey.getOrElse(false)) {
+                                                                                                                objDyn.updateDynamic("fieldName")(formItem.foreignField.get)
+                                                                                                                objDyn.updateDynamic("operator")("equals")
+                                                                                                                objDyn.updateDynamic("value")(item.asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                            }
                                                                                                         }
                                                                                                 }
 
@@ -201,7 +203,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                             "criteria" -> criteria
                                                                                         )
 
-                                                                                        //isc debugTrap(formItem, advancedCriteria, formItem.filteredGrid)
+                                                                                        //isc debugTrap (advancedCriteria)
 
                                                                                         if (formItem.filteredGrid.isEmpty)
                                                                                             isc.error("Нет поля formItem.filteredGrid.")
