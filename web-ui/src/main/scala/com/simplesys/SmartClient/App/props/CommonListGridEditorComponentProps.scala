@@ -15,7 +15,7 @@ import com.simplesys.option.ScOption._
 
 import scala.collection.mutable.ArrayBuffer
 
-trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTrait {
+trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitListGridTrait {
 
     type classHandler <: CommonListGridEditorComponent
 
@@ -33,66 +33,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitTr
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            thiz.fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
-
-            val replacingEditingFields = ArrayBuffer.empty[FormItem]
-
-            thiz.replacingFields.foreach {
-                _.foreach {
-                    field =>
-                        if (field.nameStrong.isDefined) {
-                            field._name = field.nameStrong.get.name
-                            field.editorProperties.foreach {
-                                formItem =>
-                                    formItem._name = field._name
-                                    formItem.nameStrong = new NameStrong {
-                                        override val name = field._name
-                                    }
-                                    replacingEditingFields += formItem
-                            }
-
-                        }
-                        else
-                            thiz.logError("Field not have nameStrong, error #77")
-                }
-            }
-
-            thiz.editingFields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #60")))
-
-            val _fieldsListGrid = ArrayBuffer.empty[ListGridField]
-            val _fieldsFormItem = ArrayBuffer.empty[FormItem]
-
-            val enableReplacingField = thiz.fields.isDefined && thiz.replacingFields.isDefined
-            val enableReplacingFormItem = thiz.editingFields.isDefined && replacingEditingFields.length > 0
-
-            if (enableReplacingField) {
-                thiz.fields.get.foreach {
-                    field =>
-                        thiz.replacingFields.get.find(_._name == field._name) match {
-                            case None =>
-                                _fieldsListGrid += field
-                            case Some(field) =>
-                                field.filterEditorProperties.filteredGridList = thiz
-                                _fieldsListGrid += field
-                        }
-                }
-
-                thiz.fields = IscArray(_fieldsListGrid: _*)
-            }
-
-            if (enableReplacingFormItem) {
-                thiz.editingFields.get.foreach {
-                    field =>
-                        replacingEditingFields.find(_._name == field._name) match {
-                            case None =>
-                                _fieldsFormItem += field
-                            case Some(field) =>
-                                _fieldsFormItem += field
-                        }
-                }
-
-                thiz.editingFields = IscArray(_fieldsFormItem: _*)
-            }
+            initListWidget(thiz, arguments)
 
             thiz.Super("initWidget", arguments)
 
