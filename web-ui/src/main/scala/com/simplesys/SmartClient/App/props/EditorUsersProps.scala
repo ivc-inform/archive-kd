@@ -61,52 +61,10 @@ class EditorUsersProps extends TreeListGridEditorProps {
 
     }.toThisFunc.opt
 
-    editingTreeFields = Seq(
-        CheckboxItem(new CheckboxItemProps {
-            name = "active".opt
-        }),
-        TextItem(new TextItemProps {
-            name = "codeGroup".opt
-        }),
-        TextItem(new TextItemProps {
-            name = "captionGroup".opt
-        }),
-        TextAreaItem(new TextAreaItemProps {
-            name = "descriptionGroup".opt
-        })
-    ).opt
-
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
             thiz.Super("initWidget", arguments)
-
-            thiz.setTreeFields(
-                IscArray(
-                    TreeGridField(
-                        new TreeGridFieldProps {
-                            name = "codeGroup".opt
-                        }),
-                    TreeGridField(
-                        new TreeGridFieldProps {
-                            name = "captionGroup".opt
-                        }),
-                    TreeGridField(
-                        new TreeGridFieldProps {
-                            name = "descriptionGroup".opt
-                        }),
-                    TreeGridField(
-                        new TreeGridFieldProps {
-                            name = "di".opt
-                            hidden = true.opt
-                        }),
-                    TreeGridField(
-                        new TreeGridFieldProps {
-                            name = "active".opt
-                            `type` = ListGridFieldType.boolean.opt
-                        })
-                )
-            )
 
             thiz.setListFields(
                 IscArray(
@@ -142,6 +100,7 @@ class EditorUsersProps extends TreeListGridEditorProps {
                                     changed = {
                                         (form: DynamicForm, item: FormItem, value: JSAny) =>
                                             val di = thiz.listGrid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic("di")
+                                            isc debugTrap form.grid
                                             thiz.listGrid.saveAllEdits()
                                             thiz.listGrid.cancelEditing()
                                             thiz.treeGrid.deselectAllRecords()

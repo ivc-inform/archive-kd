@@ -412,6 +412,8 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                     addTab(EditorUsers.create(new EditorUsersProps {
                                                         dataSourceList = DataSourcesJS.admin_User_DS.opt
                                                         dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
+                                                        fieldsTree = ListGridFiledsJS.admin_UserGroup_FLDS.opt
+                                                        editingTreeFields = FormItemsJS.admin_UserGroup_FRMITM.opt
                                                     }), item)
                                             }.toFunc.opt
                                         }
