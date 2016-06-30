@@ -132,6 +132,7 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     val replacingFields: JSUndefined[IscArray[ListGridField]]
     def setSelectionAppearance(selectionAppearance: SelectionAppearance): void
     def setSelectionType(selectionType: SelectionStyle): void
+    var simpleTable: JSUndefined[Boolean]
 }
 
 @js.native
