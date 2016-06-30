@@ -184,7 +184,9 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                                                                         //isc debugTrap (field, editor.dataSource.getField(field))
                                                                                                         if (editor.dataSource.getField(field).isDefined) {
                                                                                                             if (editor.dataSource.getField(field).get.primaryKey.getOrElse(false))
-                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic(formItem.foreignField.get)(item.asInstanceOf[JSDynamic].selectDynamic(field))
+                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic("fieldName")(item.asInstanceOf[JSDynamic].selectDynamic(formItem.foreignField.get))
+                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic("operator")(item.asInstanceOf[JSDynamic].selectDynamic("equal"))
+                                                                                                                obj.asInstanceOf[JSDynamic].updateDynamic("value")(item.asInstanceOf[JSDynamic].selectDynamic(field))
                                                                                                         }
                                                                                                 }
 
