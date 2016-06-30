@@ -10,7 +10,7 @@ import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
-trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps  with InitTreeGridTrait{
+trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps with InitListGridTrait {
 
     type classHandler <: CommonTreeGridEditorComponent
 
@@ -32,7 +32,9 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps  with InitT
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            initTreeWidget(thiz, arguments)
+            val res = initListWidget(thiz, thiz.fields, thiz.replacingFields, thiz.editingFields, arguments)
+            thiz.fields = res._1
+            thiz.editingFields = res._2
 
             thiz.Super("initWidget", arguments)
 

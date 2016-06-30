@@ -1,16 +1,17 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.Grids.ListGridEditor
+import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
-import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor}
+import com.simplesys.SmartClient.System.{IscArray, isc}
 import com.simplesys.System._
 
 import scala.collection.mutable.ArrayBuffer
 
 trait InitListGridTrait {
 
-    def initListWidget(thiz: ListGridEditor, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]], arguments: IscArray[JSAny]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
+    def initListWidget(thiz: Canvas, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]], arguments: IscArray[JSAny]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
         fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
 
         val replacingEditingFields = ArrayBuffer.empty[FormItem]
@@ -53,8 +54,13 @@ trait InitListGridTrait {
                         case None =>
                             _fieldsListGrid += field
                         case Some(field) =>
-                            //if (isc.)
-                            field.filterEditorProperties.filteredGridList = thiz
+                            if (isc.isA.ListGridEditor(thiz))
+                                field.filterEditorProperties.filteredGridList = thiz.asInstanceOf[ListGridEditor]
+                            else if (isc.isA.TreeGridEditor(thiz))
+                                field.filterEditorProperties.filteredGridTree = thiz.asInstanceOf[TreeGridEditor]
+                            else
+                                thiz.logError("UnknownEditor, error #62")
+
                             _fieldsListGrid += field
                     }
             }
