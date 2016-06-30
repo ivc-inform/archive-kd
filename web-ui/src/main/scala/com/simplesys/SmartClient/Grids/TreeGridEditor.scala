@@ -8,6 +8,7 @@ import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSName
 
 @js.native
 trait TreeGridEditor extends VLayoutSS with GridEditor[TreeGridField, TreeNode, TreeGridSelectedState] {
@@ -18,7 +19,6 @@ trait TreeGridEditor extends VLayoutSS with GridEditor[TreeGridField, TreeNode, 
     def startEditingNew(): void
     def startEditing(): void
     var showOpenIcons: Boolean
-    var grid: TreeGrid
     def setSelectedRecordsAsFolders(): IscArray[TreeNode]
     def setRecordsAsFolders(records: ListGridRecord): IscArray[TreeNode]
 }
