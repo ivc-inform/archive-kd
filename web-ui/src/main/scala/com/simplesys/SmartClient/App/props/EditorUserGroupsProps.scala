@@ -28,41 +28,6 @@ class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
 
     }.toThisFunc.opt
 
-    editingFields = Seq(
-        CheckboxItem(new CheckboxItemProps {
-            name = "active".opt
-        }),
-        TextItem(new TextItemProps {
-            name = "codeGroup".opt
-        }),
-        TextItem(new TextItemProps {
-            name = "captionGroup".opt
-        }),
-        TextAreaItem(new TextAreaItemProps {
-            name = "descriptionGroup".opt
-        })
-    ).opt
-
-    fields = Seq(
-        new TreeGridFieldProps {
-            name = "codeGroup".opt
-        },
-        new TreeGridFieldProps {
-            name = "captionGroup".opt
-        },
-        new TreeGridFieldProps {
-            name = "descriptionGroup".opt
-        },
-        new TreeGridFieldProps {
-            name = "di".opt
-            hidden = true.opt
-        },
-        new TreeGridFieldProps {
-            name = "active".opt
-            `type` = ListGridFieldType.boolean.opt
-        }
-    ).opt
-
     editWindowProperties = WindowSS(
         new WindowSSProps {
             width = 285

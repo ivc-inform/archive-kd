@@ -36,7 +36,7 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps {
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            thiz.fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
+            thiz.fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #39")))
 
             val replacingEditingFields = ArrayBuffer.empty[FormItem]
 
