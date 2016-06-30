@@ -10,12 +10,15 @@ import scala.collection.mutable.ArrayBuffer
 
 trait InitListGridTrait {
 
-    def initListWidget(thiz: ListGridEditor, arguments: IscArray[JSAny]): Unit = {
-        thiz.fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
+    def initListWidget(thiz: ListGridEditor, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]], arguments: IscArray[JSAny]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
+        fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
 
         val replacingEditingFields = ArrayBuffer.empty[FormItem]
 
-        thiz.replacingFields.foreach {
+        var _fields = fields
+        var _editingFields = editingFields
+
+        replacingFields.foreach {
             _.foreach {
                 field =>
                     if (field.nameStrong.isDefined) {
@@ -35,31 +38,32 @@ trait InitListGridTrait {
             }
         }
 
-        thiz.editingFields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #60")))
+        editingFields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #60")))
 
         val _fieldsListGrid = ArrayBuffer.empty[ListGridField]
         val _fieldsFormItem = ArrayBuffer.empty[FormItem]
 
-        val enableReplacingField = thiz.fields.isDefined && thiz.replacingFields.isDefined
-        val enableReplacingFormItem = thiz.editingFields.isDefined && replacingEditingFields.length > 0
+        val enableReplacingField = fields.isDefined && replacingFields.isDefined
+        val enableReplacingFormItem = editingFields.isDefined && replacingEditingFields.length > 0
 
         if (enableReplacingField) {
-            thiz.fields.get.foreach {
+            fields.get.foreach {
                 field =>
-                    thiz.replacingFields.get.find(_._name == field._name) match {
+                    replacingFields.get.find(_._name == field._name) match {
                         case None =>
                             _fieldsListGrid += field
                         case Some(field) =>
+                            //if (isc.)
                             field.filterEditorProperties.filteredGridList = thiz
                             _fieldsListGrid += field
                     }
             }
 
-            thiz.fields = IscArray(_fieldsListGrid: _*)
+            _fields = IscArray(_fieldsListGrid: _*)
         }
 
         if (enableReplacingFormItem) {
-            thiz.editingFields.get.foreach {
+            editingFields.get.foreach {
                 field =>
                     replacingEditingFields.find(_._name == field._name) match {
                         case None =>
@@ -69,8 +73,10 @@ trait InitListGridTrait {
                     }
             }
 
-            thiz.editingFields = IscArray(_fieldsFormItem: _*)
+            _editingFields = IscArray(_fieldsFormItem: _*)
         }
+
+        (_fields, _editingFields)
     }
 
 }

@@ -2,18 +2,14 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonListGridEditorComponent
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps}
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.SelectionStyle
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
-import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
-
-import scala.collection.mutable.ArrayBuffer
+import com.simplesys.option.{ScNone, ScOption}
 
 trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitListGridTrait {
 
@@ -33,7 +29,9 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with InitLi
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            initListWidget(thiz, arguments)
+            val res = initListWidget(thiz, thiz.fields, thiz.replacingFields, thiz.editingFields, arguments)
+            thiz.fields = res._1
+            thiz.editingFields = res._2
 
             thiz.Super("initWidget", arguments)
 

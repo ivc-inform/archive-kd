@@ -24,7 +24,7 @@ trait NewDSRequestData extends JSObject {
     val active: Boolean
 }
 
-class EditorUsersProps extends TreeListGridEditorProps {
+class EditorUsersProps extends TreeListGridEditorProps /*with InitListGridTrait with InitTreeGridTrait*/{
     type classHandler <: EditorUsers
 
     identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
@@ -63,86 +63,11 @@ class EditorUsersProps extends TreeListGridEditorProps {
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
+            isc debugTrap (thiz.listGrid, thiz.treeGrid)
+//            initListWidget(thiz.listGrid, arguments)
+//            initTreeWidget(thiz.treeGrid, arguments)
 
             thiz.Super("initWidget", arguments)
-
-            thiz.setListFields(
-                IscArray(
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "caption".opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "di".opt
-                            hidden = true.opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "firstName".opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "group".opt
-                            title = "Группа".opt
-                            displayField = "captionGroup".opt
-                            align = Alignment.center.opt
-                            editorProperties = SelectItem(
-                                new SelectItemProps {
-                                    optionDataSource = thiz.treeGrid.dataSource.opt
-                                    displayField = "captionGroup".opt
-                                    valueField = "di".opt
-                                    initialSort = Seq(
-                                        new SortSpecifierProps {
-                                            property = "captionGroup".opt
-                                        }
-                                    ).opt
-                                    changed = {
-                                        (form: DynamicForm, item: FormItem, value: JSAny) =>
-                                            val di = thiz.listGrid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic("di")
-                                            isc debugTrap form.grid
-                                            thiz.listGrid.saveAllEdits()
-                                            thiz.listGrid.cancelEditing()
-                                            thiz.treeGrid.deselectAllRecords()
-                                            thiz.treeGrid selectRecordByKey value
-                                            thiz.listGrid selectRecordByKey di
-                                    }.toFunc.opt
-                                }
-                            ).opt
-                            filterEditorProperties = SelectItem(
-                                new SelectItemProps {
-                                    optionDataSource = thiz.treeGrid.dataSource.opt
-                                    initialSort = Seq(
-                                        new SortSpecifierProps {
-                                            property = "captionGroup".opt
-                                        }
-                                    ).opt
-                                }
-                            ).opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "lastName".opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "login".opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "password".opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "secondName".opt
-                        }),
-                    ListGridField(
-                        new ListGridFieldProps {
-                            name = "active".opt
-                            `type` = ListGridFieldType.boolean.opt
-                        })
-                )
-            )
 
             thiz setFuncMenu UserComponentMenu.create(
                 new UserComponentMenuProps {
