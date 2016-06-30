@@ -1,14 +1,14 @@
 package com.simplesys.SmartClient.App
 
-import com.simplesys.SmartClient.Grids.TreeListGridEditor
-
 import scala.scalajs.js
+import scala.scalajs.js.|
 
 @js.native
-trait EditorUsers extends TreeListGridEditor {
+trait EditorUsers extends CommonTreeListGridEditorComponent {
 }
 
 //@js.native
-//abstract trait AbstractEditoradmin_UserCompanion extends AbstractTreeListGridEditorCompanion {
+//abstract trait AbstractEditorUsersCompanion extends AbstractCommonTreeListGridEditorComponentCompanion {
 //}
+
 

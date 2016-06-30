@@ -1,6 +1,6 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.props.{EditorUserGroupsProps, EditorUsersProps}
+import com.simplesys.SmartClient.App.props.{CommonTreeListGridEditorComponentProps, EditorUserGroupsProps, EditorUsersProps}
 import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
@@ -396,11 +396,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Группы".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(EditorUserGroups.create(new EditorUserGroupsProps {
-                                                        dataSource = DataSourcesJS.admin_UserGroup_DS.opt
-                                                        fields = ListGridFiledsJS.admin_UserGroup_FLDS.opt
-                                                        editingFields = FormItemsJS.admin_UserGroup_FRMITM.opt
-                                                    }), item)
+                                                    addTab(EditorUserGroups.create(new EditorUserGroupsProps), item)
                                             }.toFunc.opt
                                         },
                                         new MenuSSItemProps {
@@ -409,15 +405,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Пользователи".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(EditorUsers.create(new EditorUsersProps {
-                                                        dataSourceList = DataSourcesJS.admin_User_DS.opt
-                                                        dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
-
-                                                        fieldsTree = ListGridFiledsJS.admin_UserGroup_FLDS.opt
-                                                        editingTreeFields = FormItemsJS.admin_UserGroup_FRMITM.opt
-
-                                                        fieldsList = ListGridFiledsJS.admin_User_FLDS.opt
-                                                    }), item)
+                                                    addTab(EditorUsers.create(new EditorUsersProps), item)
                                             }.toFunc.opt
                                         }
                                     ).opt
