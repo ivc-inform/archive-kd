@@ -11,7 +11,7 @@ import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
-    override val simpleTable = false
+    simpleTable = false.opt
 
     type classHandler <: Cards
 

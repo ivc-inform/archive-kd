@@ -163,7 +163,7 @@ class FormItemProps extends ClassProps {
     var saveOnEnter: ScOption[Boolean] = ScNone
     var selectOnClick: ScOption[Boolean] = ScNone
     var selectOnFocus: ScOption[Boolean] = ScNone
-    var setValue: ScOption[ThisFunction1[classHandler, JSAny, _]] = ScNone
+    var setValue: ScOption[ThisFunction1[classHandler, JSUndefined[JSAny], _]] = ScNone
     var shouldSaveValue: ScOption[Boolean] = ScNone
     var shouldStopKeyPressBubbling: ScOption[js.Function2[String, Int, Boolean]] = ScNone
     var showClippedTitleOnHover: ScOption[Boolean] = ScNone

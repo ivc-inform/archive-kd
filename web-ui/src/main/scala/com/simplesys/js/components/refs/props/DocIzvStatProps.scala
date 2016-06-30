@@ -6,7 +6,7 @@ import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 class DocIzvStatProps extends CommonListGridEditorComponentProps {
-    override val simpleTable = true
+    simpleTable = true.opt
 
     type classHandler <: DocItem
 
