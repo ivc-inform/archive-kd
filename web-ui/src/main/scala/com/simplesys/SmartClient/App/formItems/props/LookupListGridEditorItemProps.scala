@@ -243,7 +243,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
                                                             )
                                                 }
                                         }
-                                        editor.grid.focus()
+                                        editor.listGrid.focus()
                                 }
                             }
 

@@ -77,7 +77,7 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var dataSourceList: ScOption[DataSource] = ScNone
     var dataSourceTree: ScOption[DataSource] = ScNone
     var wrapListCells: ScOption[Boolean] = ScNone
-    var fieldsTree: ScOption[Seq[TreeGridFieldProps]] = ScNone
+    var fieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone
     var defaultFieldsTree: ScOption[Seq[TreeGridFieldProps]] = ScNone
     var fieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var defaultFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
