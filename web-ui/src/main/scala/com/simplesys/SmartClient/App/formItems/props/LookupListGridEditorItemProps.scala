@@ -207,10 +207,10 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
 
                                                                                         //isc debugTrap (advancedCriteria)
 
-                                                                                        if (formItem.filteredGrid.isEmpty)
+                                                                                        if (formItem.filteredGridList.isEmpty)
                                                                                             isc.error("Нет поля formItem.filteredGrid.")
                                                                                         else
-                                                                                            formItem.filteredGrid.foreach(_.fetchData(criteria = advancedCriteria))
+                                                                                            formItem.filteredGridList.foreach(_.fetchData(criteria = advancedCriteria))
 
                                                                                         formItem setValue res
 

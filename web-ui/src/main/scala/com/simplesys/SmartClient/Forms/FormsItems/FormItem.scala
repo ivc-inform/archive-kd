@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.ListGridEditor
+import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
 import com.simplesys.SmartClient.System._
@@ -341,7 +341,10 @@ trait FormItem extends Class {
     var _setToDefault: Boolean
     def _setUpIcons(): void
     val __sgwtRelink: JSUndefined[Function0[_]]
-    var filteredGrid: JSUndefined[ListGridEditor]
+    @JSName("filteredGrid")
+    var filteredGridList: JSUndefined[ListGridEditor]
+    @JSName("filteredGrid")
+    var filteredGridTree: JSUndefined[TreeGridEditor]
 }
 
 @js.native
