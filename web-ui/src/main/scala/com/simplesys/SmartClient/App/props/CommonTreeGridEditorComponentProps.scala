@@ -75,7 +75,7 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps {
                             case None =>
                                 _fieldsListGrid += field
                             case Some(field) =>
-                                field.filterEditorProperties.filteredGridList = thiz
+                                field.filterEditorProperties.filteredGridTree = thiz
                                 _fieldsListGrid += field
                         }
                 }
