@@ -389,27 +389,30 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 
 	"localEditingNew": true
 
-	"startEditingNew": ->
-		record = @getSelectedRecord()
+	"startEditingNew": (newValues, suppressFocus)->
+		if newValues?
+			@grid.startEditingNew newValues, suppressFocus
+		else
+			record = @getSelectedRecord()
 
-		if record?
-			@setForignFieldFields @grid
+			if record?
+				@setForignFieldFields @grid
 
-			if @grid.masterGrid?
-				@setForignFieldFields @grid, @grid.masterGrid
+				if @grid.masterGrid?
+					@setForignFieldFields @grid, @grid.masterGrid
 
-		@dataSource.wildRecordJS = undefined if @grid.getSelectedRecords().length is 0
+			@dataSource.wildRecordJS = undefined if @grid.getSelectedRecords().length is 0
 
-		@dataSource.addData @dataSource.wildRecordJS,
-		                    (dsResponse, data, dsRequest) =>
-			                    id = data[0][_this.grid.data.idField]
-			                    _node = @grid.data.findById id
-			                    parent = @grid.data.getParent _node
-			                    @grid.data.openFolder parent, (node) =>
-				                    @grid.selectSingleRecord _node
-				                    @startEditing()
+			@dataSource.addData @dataSource.wildRecordJS,
+			                    (dsResponse, data, dsRequest) =>
+				                    id = data[0][_this.grid.data.idField]
+				                    _node = @grid.data.findById id
+				                    parent = @grid.data.getParent _node
+				                    @grid.data.openFolder parent, (node) =>
+					                    @grid.selectSingleRecord _node
+					                    @startEditing()
+					                    return
 				                    return
-			                    return
 		return
 
 	"editEvent": "doubleClick"

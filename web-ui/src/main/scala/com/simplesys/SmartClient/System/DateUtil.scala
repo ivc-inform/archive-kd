@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.System
 
 import com.simplesys.SmartClient.System.RelativeDate._
+import com.simplesys.SmartClient.System.date.Date
 import com.simplesys.System.Types.RelativeDateRangePosition._
 import com.simplesys.System.Types.RelativeDateShortcut.RelativeDateShortcut
 import com.simplesys.System.Types._
@@ -12,7 +13,7 @@ import scala.scalajs.js.|
 trait DateUtil extends Class
 
 @js.native
-object DateUtil extends AbstractClassCompanion {
+trait  AbstractDateUtilCompanion extends AbstractClassCompanion {
     def createLogicalDate(year: Int, month: Int, date: Int): Date = js.native
     def format(date: Date, format: String): String = js.native
     def getAbsoluteDate(relativeDate: RelativeDate | RelativeDateShortcut | RelativeDateString, baseDate: Date = js.native, rangePosition: RelativeDateRangePosition = js.native, isLogicalDate: Boolean = js.native): Date = js.native

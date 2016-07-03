@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Forms.FormsItems
 
 import com.simplesys.SmartClient.DataBinding.Criterion
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
-import com.simplesys.SmartClient.System.Date
+import com.simplesys.SmartClient.System.date.Date
 import com.simplesys.SmartClient.System.date.FiscalCalendar.FiscalCalendar
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.RelativeDateRangePosition.RelativeDateRangePosition

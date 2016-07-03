@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.DataBinding
 
-import com.simplesys.SmartClient.System.{Date, AbstractClassCompanion, Class}
+import com.simplesys.SmartClient.System.date.Date
+import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class}
 import com.simplesys.System.Types.JSONCircularReferenceMode.JSONCircularReferenceMode
 import com.simplesys.System.Types.JSONDateFormat.JSONDateFormat
 import com.simplesys.System.Types.JSONInstanceSerializationMode.JSONInstanceSerializationMode

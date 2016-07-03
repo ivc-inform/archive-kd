@@ -6,4 +6,10 @@ import scala.scalajs.js
 trait VLayout extends Layout {
 }
 
+@js.native
+abstract trait AbstractVLayoutCompanion extends AbstractLayoutCompanion {
+
+}
+
+
 

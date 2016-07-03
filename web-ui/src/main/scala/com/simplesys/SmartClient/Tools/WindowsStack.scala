@@ -1,13 +1,18 @@
 package com.simplesys.SmartClient.Tools
 
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.System.isc
 
 import scala.collection.mutable
 
 class WindowsStack {
 
     private val elementStack = mutable.Map.empty[String, Canvas]
+
     def addUniqueElement[T <: Canvas](canvas: T): T = {
+        if (canvas.identifier.isEmpty)
+            isc.error(s"Компонент ${canvas.getIdentifier()} не имеет постоянного identifier")
+
         elementStack.get(canvas.getIdentifier()) match {
             case None =>
                 elementStack += (canvas.getIdentifier() -> canvas)
@@ -38,11 +43,11 @@ class WindowsStack {
 
         elementStack.get(name) match {
             case None =>
-                //println(s"Element: $name not found")
+            //println(s"Element: $name not found")
             case Some(canvas) =>
                 elementStack -= name
                 canvas.markForDestroy()
-                //println(s"Element: $name found and destroyed")
+            //println(s"Element: $name found and destroyed")
         }
     }
 

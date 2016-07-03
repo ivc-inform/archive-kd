@@ -38,6 +38,8 @@ import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.toolStrip.{ToolStripButton, ToolStripMenuButton, ToolStripSeparator}
 import com.simplesys.SmartClient.RPC.RPCRequest
 import com.simplesys.SmartClient.RPC.props.RPCRequestProps
+import com.simplesys.SmartClient.System.date.Date
+import com.simplesys.SmartClient.System.date.props.DateProps
 import com.simplesys.SmartClient.System.props.TreeProps
 import com.simplesys.SmartClient.Tools.editProxy.DrawPaneEditProxy
 import com.simplesys.SmartClient.Tools.palette._
@@ -49,8 +51,9 @@ import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
 
 //Должны быть
 //import com.simplesys.macros.PropsToDictionary
-import com.simplesys.macros.PropsToDictionary
 //
+
+import com.simplesys.macros.PropsToDictionary
 
 package object System {
 
@@ -62,6 +65,8 @@ package object System {
         def fromSkinPath = s"[SKIN]$x"
         def dblQuoted: String = "\"" + x + "\""
     }
+
+    object Date extends SCApply4Object[Date, DateProps]
 
     //<editor-fold desc="Control">
     object IButtonSS extends SCApply[IButtonSS, IButtonSSProps]
@@ -94,6 +99,7 @@ package object System {
     object DateItem extends SCApply[DateItem, DateItemProps]
     object DateRangeItem extends SCApply[DateRangeItem, DateRangeItemProps]
     object DateTimeItem extends SCApply[DateTimeItem, DateTimeItemProps]
+    object DateTimeItemSS extends SCApply[DateTimeItemSS, DateTimeItemSSProps]
     object DoubleItem extends SCApply[DoubleItem, DoubleItemProps]
     object IntegerItem extends SCApply[IntegerItem, IntegerItemProps]
     object FloatItem extends SCApply[FloatItem, FloatItemProps]
@@ -107,6 +113,7 @@ package object System {
     object TimeItem extends SCApply[TimeItem, TimeItemProps]
     object TimerItem extends SCApply[TimerItem, TimerItemProps]
     object Tab extends SCApply4Object[Tab, TabProps]
+    object DateChooser extends SCApply4Object[DateChooser, DateChooserProps]
     object FormItemWithButton extends SCApply[FormItemWithButton, FormItemWithButtonProps]
     object ComboboxItemWithButtons extends SCApply[ComboboxItemWithButtons, ComboboxItemWithButtonsProps]
     object ComboboxItemWithClearButton extends SCApply[ComboboxItemWithClearButton, ComboboxItemWithClearButtonProps]
@@ -193,7 +200,7 @@ package object System {
     object ListGridContextMenu extends SCApply[ListGridContextMenu, ListGridContextMenuProps]
     object ListGridContextMenuWithForm extends SCApply[ListGridContextMenu, ListGridContextMenuWithFormProps]
     object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
-    object UserComponentMenu extends SCApply[UserComponentMenu, UserComponentMenuProps]
+    object TreeListGridContextMenu extends SCApply[TreeListGridContextMenu, TreeListGridContextMenuProps]
     object CommonTreeListGridEditorComponent extends SCApply[CommonTreeListGridEditorComponent, CommonTreeListGridEditorComponentProps]
     object EditorUsers extends SCApply[EditorUsers, EditorUsersProps]
     object EditorUserGroups extends SCApply[EditorUserGroups, EditorUserGroupsProps]

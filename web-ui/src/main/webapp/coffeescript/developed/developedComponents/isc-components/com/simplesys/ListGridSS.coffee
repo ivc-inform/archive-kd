@@ -136,7 +136,7 @@ isc.ListGrid.addProperties
 			ownerDestroy      : false
 			ownerHide        : false
 			okFunction: ->
-				if (form.validate true)
+				if (form.validate false)
 					_save = =>
 						@owner.markForDestroy()
 						@okBtn.setDisabled true

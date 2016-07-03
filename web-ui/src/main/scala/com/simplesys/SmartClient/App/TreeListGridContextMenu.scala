@@ -5,7 +5,9 @@ import com.simplesys.SmartClient.Control.MenuSS
 import scala.scalajs.js
 
 @js.native
-trait UserComponentMenu extends MenuSS {
+trait TreeListGridContextMenu extends MenuSS {
+    var simpleTableTree: Boolean
+    var simpleTableList: Boolean
 }
 
 //@js.native

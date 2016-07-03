@@ -6,6 +6,8 @@ import scala.scalajs.js
 
 @js.native
 trait CommonTreeListGridEditorComponent extends TreeListGridEditor {
+    var simpleTableTree: Boolean
+    var simpleTableList: Boolean
 }
 
 //@js.native

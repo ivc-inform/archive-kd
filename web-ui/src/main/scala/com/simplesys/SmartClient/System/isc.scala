@@ -3,13 +3,14 @@ package com.simplesys.SmartClient.System
 import com.simplesys.SmartClient.App.AbstractSettingsEditorCompanion
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.DataBinding.{AbstractDataSourceSSCompanion, AbstractJSONCompanion, AbstractOfflineSSCompanion}
-import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, AbstractDrawPaneCompanion}
 import com.simplesys.SmartClient.Drawing.drawItem.{AbstractDrawLineCompanion, AbstractDrawRectCompanion}
-import com.simplesys.SmartClient.Forms.AbstractDynamicFormCompanion
-import com.simplesys.SmartClient.Forms.FormsItems.{AbstractPickListCompanion, AbstractTimerItemCompanion}
+import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, AbstractDrawPaneCompanion}
+import com.simplesys.SmartClient.Forms.FormsItems.{AbstractDateTimeItemCompanion, AbstractPickListCompanion, AbstractTimerItemCompanion}
+import com.simplesys.SmartClient.Forms.{AbstractDateChooserCompanion, AbstractDynamicFormCompanion}
 import com.simplesys.SmartClient.Foundation.AbstractCanvasCompanion
 import com.simplesys.SmartClient.Grids._
 import com.simplesys.SmartClient.RPC.AbstractRPCManagerCompanion
+import com.simplesys.SmartClient.System.date.{AbstractDateCompanion, AbstractTimeCompanion}
 import com.simplesys.SmartClient.Tools.EditContextCompanion
 import com.simplesys.SmartClient.math.AbstractAffineTransformCompanion
 import com.simplesys.System.Types.{Callback, ID, void}
@@ -23,6 +24,7 @@ import scala.scalajs.js.|
 object isc extends JSObject {
     def addDefaults(destination: JSObject, source: JSObject): JSObject = js.native
     def addProperties[T](destination: JSObject, propsArray: JSAny*): T = js.native
+    def addMethods[T](destination: JSObject, metods: JSObject): T = js.native
     @JSName("addProperties")
     def addPropertiesDyn(destination: JSObject, propsArray: JSAny*): js.Dynamic = js.native
     def ask(message: String, callback: js.Function1[Boolean, _] = js.native, properties: Dialog = js.native): void = js.native
@@ -75,13 +77,18 @@ object isc extends JSObject {
     val ClassFactory: ClassFactoryTrt = js.native
     val DrawItem: AbstractDrawItemCompanion = js.native
     val TimerItem: AbstractTimerItemCompanion = js.native
+    val Time: AbstractTimeCompanion = js.native
     val DrawLine: AbstractDrawLineCompanion = js.native
     val DrawRect: AbstractDrawRectCompanion = js.native
     val DrawPane: AbstractDrawPaneCompanion = js.native
+    val DateChooser: AbstractDateChooserCompanion = js.native
     val AffineTransform: AbstractAffineTransformCompanion = js.native
     val OfflineSS: AbstractOfflineSSCompanion = js.native
     val RPCManager: AbstractRPCManagerCompanion = js.native
     val DataSourceSS: AbstractDataSourceSSCompanion = js.native
+    val DateTimeItem: AbstractDateTimeItemCompanion = js.native
+    val Date: AbstractDateCompanion = js.native
+    val DateUtil: AbstractDateUtilCompanion = js.native
     val DynamicForm: AbstractDynamicFormCompanion = js.native
     val SettingsEditor: AbstractSettingsEditorCompanion = js.native
     val _traceMarkers: JSUndefined[Boolean] = js.native
@@ -94,6 +101,7 @@ object isc extends JSObject {
     def errors(gridproperties: ListGrid | ListGridEditor, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     val JSON: AbstractJSONCompanion = js.native
     def debugTrap[T](obj: T*): T = js.native
+    def deletePrivateProps[T](obj: T*): T = js.native
     def getPropValue[T](obj: JSObject, name: String): JSUndefined[T] = js.native
     def setPropValue[T](obj: JSObject, name: String, value: T): JSUndefined[T] = js.native
     def getWindowObject[T](name: String): JSUndefined[T] = js.native

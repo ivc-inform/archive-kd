@@ -120,7 +120,17 @@ simpleSyS.notImplementation = -> isc.info "Sorry, implementation not found ."; r
 
 isc.debugTrap = (obj...) ->
 	console.log "obj: #{obj}"
-	obj[0]
+	if obj? and obj.length > 0
+		obj[0]
+	else
+		[]
+
+isc.deletePrivateProps = (obj) ->
+	for prop  of obj
+		if prop.charAt(0) is "_"
+			delete obj[prop]
+	obj
+
 
 isc.getPropValue = (object, name) ->
 	try

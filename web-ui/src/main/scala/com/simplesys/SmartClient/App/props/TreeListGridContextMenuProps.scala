@@ -1,19 +1,23 @@
 package com.simplesys.SmartClient.App.props
 
-import com.simplesys.SmartClient.App.UserComponentMenu
+import com.simplesys.SmartClient.App.TreeListGridContextMenu
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
-import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, MenuSSProps, TreeGridContextMenuProps}
+import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps, MenuSSProps, TreeGridContextMenuProps}
 import com.simplesys.SmartClient.Grids.TreeListGridEditor
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.function._
+import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 
-class UserComponentMenuProps extends MenuSSProps {
-    type classHandler <: UserComponentMenu
+class TreeListGridContextMenuProps extends MenuSSProps {
+    type classHandler <: TreeListGridContextMenu
+
+    var simpleTableTree: ScOption[Boolean] = false.opt
+    var simpleTableList: ScOption[Boolean] = true.opt
 
     initWidget = {
-        (thiz: UserComponentMenu, arguments: IscArray[JSAny]) =>
+        (thiz: TreeListGridContextMenu, arguments: IscArray[JSAny]) =>
             thiz.Super("initWidget", arguments)
 
             val topOwner = thiz.owner.asInstanceOf[TreeListGridEditor]
@@ -24,7 +28,14 @@ class UserComponentMenuProps extends MenuSSProps {
                 }
             )
 
+            val listGridEditorMenuWithForm = ListGridContextMenuWithForm.create(
+                new ListGridContextMenuWithFormProps {
+                    owner = topOwner.listGrid.opt
+                }
+            )
+
             topOwner setContextMenuListGridEditor listGridEditorMenu
+            topOwner setContextMenuListGridEditor listGridEditorMenuWithForm
 
             val treeGridEditorMenu = TreeGridContextMenu.create(
                 new TreeGridContextMenuProps {
@@ -38,7 +49,7 @@ class UserComponentMenuProps extends MenuSSProps {
                 IscArray(
                     MenuSSItem(
                         new MenuSSItemProps {
-                            submenu = listGridEditorMenu.opt
+                            submenu = (if (thiz.simpleTableList) listGridEditorMenu else listGridEditorMenuWithForm).opt
                             title = "Пользователи".ellipsis.opt
                             icon = Common.ellipsis.opt
                         }

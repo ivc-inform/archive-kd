@@ -51,8 +51,8 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"getListSelectedRecord"               : -> @listGrid.getSelectedRecord()
 	"enableChangeSelectionTree"           : true
 	"showAllChild"                        : false
-	"selectionTypeTree"                   : "multiple"
-	"selectionTypeList"                   : "multiple"
+	"selectionTypeTree"                   : "single"
+	"selectionTypeList"                   : "single"
 	"getTreeSelection"                    : -> @treeGrid.getSelection()
 	"autoDraw"                            : false
 	"showTreeFilterEditor"                : true

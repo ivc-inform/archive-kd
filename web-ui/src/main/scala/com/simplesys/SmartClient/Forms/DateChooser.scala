@@ -2,14 +2,14 @@ package com.simplesys.SmartClient.Forms
 
 import com.simplesys.SmartClient.Control.IButton
 import com.simplesys.SmartClient.Forms.FormsItems.TimeItem
-import com.simplesys.SmartClient.Layout.{HLayout, VLayout}
-import com.simplesys.SmartClient.System.{Date, IscArray}
+import com.simplesys.SmartClient.Layout.{AbstractVLayoutCompanion, HLayout, VLayout}
+import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.SmartClient.System.date.Date
 import com.simplesys.SmartClient.System.date.FiscalCalendar.FiscalCalendar
 import com.simplesys.System.JSDictionaryAny
 import com.simplesys.System.Types.{void, _}
 
 import scala.scalajs.js
-
 
 @js.native
 trait DateChooser extends VLayout {
@@ -101,6 +101,11 @@ trait DateChooser extends VLayout {
     var weekMenuStyle: CSSStyleName
     val yearChooserButton: IButton with AutoChild
     val yearMenuStyle: CSSStyleName
+}
+
+@js.native
+abstract trait AbstractDateChooserCompanion extends AbstractVLayoutCompanion {
+
 }
 
 

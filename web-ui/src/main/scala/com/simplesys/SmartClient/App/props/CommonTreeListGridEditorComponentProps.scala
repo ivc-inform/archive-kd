@@ -5,10 +5,14 @@ import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.function._
+import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
 class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps with InitialTrait {
     type classHandler <: CommonTreeListGridEditorComponent
+
+    var simpleTableTree: ScOption[Boolean] = false.opt
+    var simpleTableList: ScOption[Boolean] = true.opt
 
     autoFetchData = true.opt
     wrapTreeCells = true.opt
@@ -45,8 +49,10 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
 
             thiz.Super("initWidget", arguments)
 
-            thiz setFuncMenu UserComponentMenu.create(
-                new UserComponentMenuProps {
+            thiz setFuncMenu TreeListGridContextMenu.create(
+                new TreeListGridContextMenuProps {
+                    simpleTableList = thiz.simpleTableList.opt
+                    simpleTableTree = thiz.simpleTableTree.opt
                     owner = thiz.opt
                 }
             )

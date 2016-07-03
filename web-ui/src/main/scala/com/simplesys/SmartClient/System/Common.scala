@@ -53,4 +53,5 @@ object Common {
     val dictionary = "dictionary.png"
     val admin_UserGroup = "admin_UserGroup.png"
     val Actions_document_edit_icon = "Actions-document-edit-icon.png"
+    val copy_icon = "copy.png"
 }

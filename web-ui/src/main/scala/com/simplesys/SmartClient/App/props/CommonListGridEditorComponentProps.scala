@@ -15,7 +15,8 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with Initia
 
     type classHandler <: CommonListGridEditorComponent
 
-    var simpleTable: ScOption[Boolean] = ScNone
+    var simpleTable: ScOption[Boolean] = true.opt
+
     height = "100%"
     width = "100%"
     drawAheadRatio = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt

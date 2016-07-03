@@ -1,7 +1,8 @@
 package com.simplesys.SmartClient.Forms.FormsItems
 
 import com.simplesys.SmartClient.Forms.DateChooser
-import com.simplesys.SmartClient.System.{Date, IscArray}
+import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.SmartClient.System.date.Date
 import com.simplesys.SmartClient.System.date.FiscalCalendar.FiscalCalendar
 import com.simplesys.System.Types.DateDisplayFormat.DateDisplayFormat
 import com.simplesys.System.Types.DateItemSelectorFormat.DateItemSelectorFormat
@@ -54,5 +55,8 @@ trait DateItem extends FormItem {
     var yearSelector: SelectItem with AutoChild
     var yearSelectorProperties: SelectItem
 }
+
+@js.native
+abstract class AbstractDateItemCompanion extends AbstractFormItemCompanion
 
 

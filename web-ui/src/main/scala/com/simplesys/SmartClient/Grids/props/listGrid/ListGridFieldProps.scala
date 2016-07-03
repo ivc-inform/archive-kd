@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.DataBinding.DSRequest
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
-import com.simplesys.SmartClient.Grids.Grid
+import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord, UserFormula, UserSummary}
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.Alignment.Alignment
@@ -30,6 +30,7 @@ import com.simplesys.option.{FormItemType_FormItemComponentType, ScNone, ScOptio
 import com.simplesys.props.AbstractClassProps
 
 import scala.scalajs.js
+import scala.scalajs.js.Function5
 
 class ListGridFieldProps extends AbstractClassProps {
     type classHandler <: ListGridField
@@ -99,6 +100,7 @@ class ListGridFieldProps extends AbstractClassProps {
     var format: ScOption[FormatString] = ScNone
     var formatGridSummary: ScOption[String] = ScNone
     var formatGroupSummary: ScOption[String] = ScNone
+    var formatEditorValue : ScOption[Function5[JSAny, ListGridRecord, Int, Int, ListGrid, JSAny]] = ScNone
     var frozen: ScOption[Boolean] = ScNone
     var groupGranularity: ScOption[Int] = ScNone
     var groupingMode: ScOption[String] = ScNone
