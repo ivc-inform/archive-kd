@@ -24,7 +24,6 @@
 				<defaults>
 					<showAttrs>
 						<attrName>codeGroup</attrName>
-						<attrName>captionGroup</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleTreeGrid"/>
 				</defaults>
