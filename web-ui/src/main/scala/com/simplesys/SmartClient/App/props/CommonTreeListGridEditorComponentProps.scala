@@ -2,6 +2,7 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonTreeListGridEditorComponent
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
+import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.function._
@@ -35,6 +36,9 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
+
+    var replacingFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
+    var replacingFieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>

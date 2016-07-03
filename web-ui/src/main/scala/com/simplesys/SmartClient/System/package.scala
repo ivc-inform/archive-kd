@@ -1,8 +1,8 @@
 package com.simplesys.SmartClient
 
 import com.simplesys.SmartClient.App._
-import com.simplesys.SmartClient.App.formItems.LookupListGridEditorItem
-import com.simplesys.SmartClient.App.formItems.props.LookupListGridEditorItemProps
+import com.simplesys.SmartClient.App.formItems.{LookupListGridEditorItem, LookupTreeGridEditorItem}
+import com.simplesys.SmartClient.App.formItems.props.{LookupListGridEditorItemProps, LookupTreeGridEditorItemProps}
 import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu.{MenuItem, MenuSSItem}
@@ -118,6 +118,7 @@ package object System {
     object ComboboxItemWithButtons extends SCApply[ComboboxItemWithButtons, ComboboxItemWithButtonsProps]
     object ComboboxItemWithClearButton extends SCApply[ComboboxItemWithClearButton, ComboboxItemWithClearButtonProps]
     object LookupListGridEditorItem extends SCApply[LookupListGridEditorItem, LookupListGridEditorItemProps]
+    object LookupTreeGridEditorItem extends SCApply[LookupTreeGridEditorItem, LookupTreeGridEditorItemProps]
     //</editor-fold>
 
     //<editor-fold desc="Foundation">
