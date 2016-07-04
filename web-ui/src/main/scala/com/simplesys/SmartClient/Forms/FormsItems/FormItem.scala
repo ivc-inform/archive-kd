@@ -82,6 +82,7 @@ trait FormItem extends Class {
     var editorType: FormItem
     var editPendingCSSText: CSSText
     var listGridEditor: JSUndefined[ListGridEditor]
+    var treeGridEditor: JSUndefined[TreeGridEditor]
     var emptyDisplayValue: String
     var emptyValueIcon: String
     def enable()

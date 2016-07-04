@@ -38,10 +38,10 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
 
             if (value.isDefined) {
 
-                if (thiz.listGridEditor.isEmpty)
-                    isc.error("Не определено свойство 'thiz.listGridEditor' error #38")
+                if (thiz.treeGridEditor.isEmpty)
+                    isc.error("Не определено свойство 'thiz.treeGridEditor' error #38")
                 else
-                    thiz.listGridEditor.foreach {
+                    thiz.treeGridEditor.foreach {
                         editor =>
                             thiz.record.foreach {
                                 record =>
@@ -110,10 +110,10 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                     width = 22
                     click = {
                         (thiz: classHandler) =>
-                            if (formItem.listGridEditor.isEmpty)
+                            if (formItem.treeGridEditor.isEmpty)
                                 isc.error("Отсутствует редактор.")
                             else {
-                                formItem.listGridEditor.foreach {
+                                formItem.treeGridEditor.foreach {
                                     editor =>
                                         //isc debugTrap editor
 
