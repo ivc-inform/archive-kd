@@ -54,6 +54,7 @@ trait InitialTrait {
                         case None =>
                             _fieldsListGrid += field
                         case Some(field) =>
+                            isc debugTrap field
                             if (isc.isA.ListGridEditor(thiz))
                                 field.filterEditorProperties.filteredGridList = thiz.asInstanceOf[ListGridEditor]
                             else if (isc.isA.TreeGridEditor(thiz))
