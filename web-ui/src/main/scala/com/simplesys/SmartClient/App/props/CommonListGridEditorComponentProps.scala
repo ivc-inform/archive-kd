@@ -17,6 +17,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with Initia
 
     var simpleTable: ScOption[Boolean] = true.opt
 
+    canDragSelectText = false.opt
     height = "100%"
     width = "100%"
     drawAheadRatio = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt

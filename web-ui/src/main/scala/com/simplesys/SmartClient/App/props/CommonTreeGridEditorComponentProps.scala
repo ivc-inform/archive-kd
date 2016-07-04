@@ -14,6 +14,7 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps with Initia
 
     type classHandler <: CommonTreeGridEditorComponent
 
+    canDragSelectText = false.opt
     height = "100%"
     width = "100%"
     drawAheadRatio = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt

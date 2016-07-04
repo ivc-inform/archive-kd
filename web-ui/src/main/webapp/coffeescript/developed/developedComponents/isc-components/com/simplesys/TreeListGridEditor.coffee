@@ -203,6 +203,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"saveByCell"                      : @saveByTreeCell
 			"dataFetchMode"                   : @dataFetchModeTree
 			"editWindowProperties"            : @editWindowPropertiesTree
+			"canDragSelectText"               : @canDragSelectText
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -252,6 +253,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"saveByCell"                      : @saveByListCell
 			"dataFetchMode"                   : @dataFetchModeList
 			"editWindowProperties"            : @editWindowPropertiesList
+			"canDragSelectText"               : @canDragSelectText
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"

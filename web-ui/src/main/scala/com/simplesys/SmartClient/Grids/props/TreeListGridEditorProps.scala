@@ -38,6 +38,7 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var showTreeFilterEditor: ScOption[Boolean] = ScNone
     var canAcceptDroppedRecordsTree: ScOption[Boolean] = ScNone
     var canAcceptDroppedRecordsList: ScOption[Boolean] = ScNone
+    var canDragSelectText: ScOption[Boolean] = ScNone
     var autoFetchData: ScOption[Boolean] = ScNone
     var showTreeAdvancedFilter: ScOption[Boolean] = ScNone
     var cancelEditingConfirmationMessageList: ScOption[String] = ScNone

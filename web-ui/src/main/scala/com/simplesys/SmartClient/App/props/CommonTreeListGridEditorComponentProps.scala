@@ -15,6 +15,7 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     var simpleTableTree: ScOption[Boolean] = false.opt
     var simpleTableList: ScOption[Boolean] = true.opt
 
+    canDragSelectText = false.opt
     autoFetchData = true.opt
     wrapTreeCells = true.opt
     drawAheadRatioList = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt
