@@ -3,6 +3,8 @@ package com.simplesys.SmartClient.App.props
 import com.simplesys.SmartClient.App.EditorUserGroups
 import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
 import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
+import com.simplesys.SmartClient.Forms.DynamicFormSS
+import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
@@ -71,6 +73,21 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
             editorType = FormItemComponentType.LookupTreeGridEditorItem
             editorProperties = LookupTreeGridEditorItem(new LookupTreeGridEditorItemProps {
                 treeGridEditor = userGroupEditor.opt
+                changed = {
+                    (form: DynamicFormSS, item: FormItem, value: JSAny) =>
+                        item.form.foreach {
+                            _.grid.foreach {
+                                grid =>
+                                    val di = grid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic("di")
+                                    grid.saveAllEdits()
+                                    grid.cancelEditing()
+                                    //thiz.treeGrid.deselectAllRecords()
+                                    //thiz.treeGrid selectRecordByKey value
+                                    grid selectRecordByKey di
+                            }
+
+                        }
+                }.toFunc.opt
             }).opt
         }
     ).opt
