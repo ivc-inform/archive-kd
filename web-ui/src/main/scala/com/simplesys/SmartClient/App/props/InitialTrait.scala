@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.App.props
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
-import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor}
+import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor, TreeListGridEditor}
 import com.simplesys.SmartClient.System.{IscArray, isc}
 import com.simplesys.System._
 
@@ -59,6 +59,11 @@ trait InitialTrait {
                                 field.filterEditorProperties.filteredGridList = thiz.asInstanceOf[ListGridEditor]
                             else if (isc.isA.TreeGridEditor(thiz))
                                 field.filterEditorProperties.filteredGridTree = thiz.asInstanceOf[TreeGridEditor]
+                            else if (isc.isA.TreeListGridEditor(thiz)){
+                               val editor = thiz.asInstanceOf[TreeListGridEditor]
+                                field.filterEditorProperties.filteredGridList = editor.listGrid
+                                field.filterEditorProperties.filteredGridTree = editor.treeGrid
+                            }
                             else
                                 thiz.logError("UnknownEditor, error #62")
 
