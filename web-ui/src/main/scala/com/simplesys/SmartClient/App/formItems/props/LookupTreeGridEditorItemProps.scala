@@ -138,7 +138,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                                             )
 
                                             if (form.dataSource.isEmpty)
-                                                isc.error("Не определено свойство 'form.dataSource' error #132")
+                                                isc.error("Не определено свойство 'form.dataSource' error #141")
                                             else
                                                 form.dataSource.foreach {
                                                     dataSource =>
@@ -162,7 +162,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                                                                             owner = window.opt
                                                                             okFunction = {
                                                                                 (thiz: classHandler) =>
-
+                                                                                    isc debugTrap 0
                                                                                     if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
 
                                                                                         val records = editor.getSelectedRecords()

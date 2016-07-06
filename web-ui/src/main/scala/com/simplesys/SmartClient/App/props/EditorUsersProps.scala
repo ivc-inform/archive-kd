@@ -2,8 +2,6 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
 import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
-import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
@@ -65,8 +63,9 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
         new ListGridFieldProps {
             nameStrong = admin_User_codeGroup_NameStrong.opt
             editorType = FormItemComponentType.LookupTreeGridEditorItem
-            editorProperties = LookupTreeGridEditorItem(new LookupTreeGridEditorItemProps {
-                treeGridEditor = userGroupEditor.opt
-            }).opt
+            editorProperties = LookupTreeGridEditorItem(
+                new LookupTreeGridEditorItemProps {
+                    treeGridEditor = userGroupEditor.opt
+                }).opt
         }).opt
 }
