@@ -116,7 +116,7 @@ simpleSyS.getGuid = -> isc.say simpleSyS.guid(); return
 
 simpleSyS.underConstruction = -> isc.info "Sorry, this under consruction."; return
 
-simpleSyS.notImplementation = -> isc.info "Sorry, implementation not found ."; return
+simpleSyS.notImplementation = -> isc.info "Sorry, implementation not found."; return
 
 isc.debugTrap = (obj...) ->
 	if obj? and obj.length > 0
