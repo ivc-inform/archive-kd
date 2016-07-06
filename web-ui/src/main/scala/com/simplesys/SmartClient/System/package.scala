@@ -202,9 +202,6 @@ package object System {
     object ListGridContextMenuWithForm extends SCApply[ListGridContextMenu, ListGridContextMenuWithFormProps]
     object TreeGridContextMenu extends SCApply[TreeGridContextMenu, TreeGridContextMenuProps]
     object TreeListGridContextMenu extends SCApply[TreeListGridContextMenu, TreeListGridContextMenuProps]
-    object CommonTreeListGridEditorComponent extends SCApply[CommonTreeListGridEditorComponent, CommonTreeListGridEditorComponentProps]
-    object EditorUsers extends SCApply[EditorUsers, EditorUsersProps]
-    object EditorUserGroups extends SCApply[EditorUserGroups, EditorUserGroupsProps]
     object TreeListGridEditor extends SCApply[TreeListGridEditor, TreeListGridEditorProps]
 
     object MenuItem extends SCApply4Object[MenuItem, MenuItemProps]
@@ -212,7 +209,10 @@ package object System {
     object ListGridField extends SCApply4Object[ListGridField, ListGridFieldProps]
 
     object CommonListGridEditorComponent extends SCApply[CommonListGridEditorComponent, CommonListGridEditorComponentProps]
+    object CommonTreeListGridEditorComponent extends SCApply[CommonTreeListGridEditorComponent, CommonTreeListGridEditorComponentProps]
     object CommonTreeGridEditorComponent extends SCApply[CommonTreeGridEditorComponent, CommonTreeGridEditorComponentProps]
 
+    object EditorUsers extends SCApply[EditorUsers, EditorUsersProps]
+    object EditorUserGroups extends SCApply[EditorUserGroups, EditorUserGroupsProps]
 }
 

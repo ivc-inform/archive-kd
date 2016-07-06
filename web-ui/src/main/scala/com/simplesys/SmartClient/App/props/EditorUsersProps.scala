@@ -53,19 +53,19 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
 
     fieldsList = ListGridFiledsJS.admin_User_FLDS.opt
 
-    val userGroupFilterEditor = EditorUserGroups.create(
-        new EditorUserGroupsProps {
-            selectionAppearance = SelectionAppearance.checkbox.opt
-            selectionType = SelectionStyle.multiple.opt
-            identifier = "0CC55A45-93E8-E019-5AC7-7C154EB602E2".opt
-        }
-    )
-
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
 
-            val userGroupEditor: EditorUserGroups = EditorUserGroups.create(new EditorUserGroupsProps)
+            val userGroupEditor = EditorUserGroups.create(new EditorUserGroupsProps)
+
+            val userGroupFilterEditor = EditorUserGroups.create(
+                new EditorUserGroupsProps {
+                    selectionAppearance = SelectionAppearance.checkbox.opt
+                    selectionType = SelectionStyle.multiple.opt
+                    identifier = "0CC55A45-93E8-E019-5AC7-7C154EB602E2".opt
+                }
+            )
 
             thiz.replacingFieldsList = IscArray(
                 ListGridField(
@@ -90,7 +90,6 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
                         }).opt
                     }))
 
-            isc debugTrac (-1,thiz.replacingFieldsList)
             thiz.Super("initWidget", args)
 
     }.toThisFunc.opt

@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 trait InitialTrait {
 
     def initWidget(thiz: Canvas, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
-        isc debugTrac 0
+
         println(s"InitialTrait.initWidget: thiz: ${thiz.getClassName()}(${thiz.getIdentifier()}) replacingFields: ${replacingFields.map(fields => fields.map(_.nameStrong.map(_.name)).sortWith(_.get < _.get).mkString("[", ", ", "]"))}, editingFields: ${editingFields.map(fields => fields.map(_.nameStrong.map(_.name)).sortWith(_.get < _.get).mkString("[", ", ", "]"))}")
 
         fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
