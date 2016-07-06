@@ -119,11 +119,14 @@ simpleSyS.underConstruction = -> isc.info "Sorry, this under consruction."; retu
 simpleSyS.notImplementation = -> isc.info "Sorry, implementation not found ."; return
 
 isc.debugTrap = (obj...) ->
-	console.log "obj: #{obj}"
 	if obj? and obj.length > 0
 		obj[0]
 	else
 		[]
+
+isc.debugTrac = (obj...) ->
+	console.log "obj: #{obj}"
+	return
 
 isc.deletePrivateProps = (obj) ->
 	for prop  of obj

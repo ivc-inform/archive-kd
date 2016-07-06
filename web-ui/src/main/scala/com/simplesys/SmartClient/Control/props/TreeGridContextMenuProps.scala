@@ -16,7 +16,7 @@ class TreeGridContextMenuProps extends MenuSSProps {
 
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
             val items = Seq(
                 MenuSSItem(
                     new MenuSSItemProps {

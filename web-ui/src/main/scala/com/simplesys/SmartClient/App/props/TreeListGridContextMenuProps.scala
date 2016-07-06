@@ -18,7 +18,7 @@ class TreeListGridContextMenuProps extends MenuSSProps {
 
     initWidget = {
         (thiz: TreeListGridContextMenu, arguments: IscArray[JSAny]) =>
-            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             thiz.Super("initWidget", arguments)
 

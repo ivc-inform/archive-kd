@@ -100,6 +100,7 @@ object isc extends JSObject {
     def infos(gridProperties : ListGrid | ListGridEditor, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     def errors(gridproperties: ListGrid | ListGridEditor, identifier: ID = js.native, callback: Callback = js.native): void = js.native
     val JSON: AbstractJSONCompanion = js.native
+    def debugTrac[T](obj: T*): T = js.native
     def debugTrap[T](obj: T*): T = js.native
     def deletePrivateProps[T](obj: T*): T = js.native
     def getPropValue[T](obj: JSObject, name: String): JSUndefined[T] = js.native

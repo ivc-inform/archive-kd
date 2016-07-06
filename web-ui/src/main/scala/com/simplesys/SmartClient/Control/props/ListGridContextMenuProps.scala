@@ -166,7 +166,7 @@ class ListGridContextMenuProps extends MenuSSProps {
     type classHandler <: ListGridContextMenu
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             thiz.items = IscArray((ListGridContextMenuProps.newInLine ++ ListGridContextMenuProps.otherItems ++ ListGridContextMenuProps.otherItems1): _*)
             thiz.Super("initWidget", args)
@@ -176,7 +176,7 @@ class ListGridContextMenuProps extends MenuSSProps {
 class ListGridContextMenuWithFormProps extends MenuSSProps {
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             thiz.items = IscArray((ListGridContextMenuProps.newWithForm ++ ListGridContextMenuProps.otherItems ++ ListGridContextMenuProps.otherItems1): _*)
             thiz.Super("initWidget", args)

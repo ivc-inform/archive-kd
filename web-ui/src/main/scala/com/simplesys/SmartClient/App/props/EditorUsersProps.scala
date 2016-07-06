@@ -63,7 +63,7 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
 
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             val userGroupEditor: EditorUserGroups = EditorUserGroups.create(new EditorUserGroupsProps)
 
@@ -90,7 +90,7 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
                         }).opt
                     }))
 
-            isc debugTrap (-1,thiz.replacingFieldsList)
+            isc debugTrac (-1,thiz.replacingFieldsList)
             thiz.Super("initWidget", args)
 
     }.toThisFunc.opt

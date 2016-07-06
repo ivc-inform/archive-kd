@@ -39,7 +39,7 @@ class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             thiz.Super("initWidget", arguments)
     }.toThisFunc.opt

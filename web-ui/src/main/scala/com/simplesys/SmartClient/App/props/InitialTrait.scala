@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 trait InitialTrait {
 
     def initWidget(thiz: Canvas, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
-        isc debugTrap 0
+        isc debugTrac 0
         println(s"InitialTrait.initWidget: thiz: ${thiz.getClassName()}(${thiz.getIdentifier()}) replacingFields: ${replacingFields.map(fields => fields.map(_.nameStrong.map(_.name)).sortWith(_.get < _.get).mkString("[", ", ", "]"))}, editingFields: ${editingFields.map(fields => fields.map(_.nameStrong.map(_.name)).sortWith(_.get < _.get).mkString("[", ", ", "]"))}")
 
         fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
@@ -58,7 +58,7 @@ trait InitialTrait {
                         case None =>
                             _fieldsListGrid += field
                         case Some(field) =>
-                            isc debugTrap field
+                            isc debugTrac field
                             if (isc.isA.ListGridEditor(thiz))
                                 field.filterEditorProperties.filteredGridList = thiz.asInstanceOf[ListGridEditor]
                             else if (isc.isA.TreeGridEditor(thiz))
