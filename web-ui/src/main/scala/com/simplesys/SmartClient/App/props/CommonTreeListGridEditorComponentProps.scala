@@ -45,7 +45,6 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-
             isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             val res = initWidget(thiz, thiz.fieldsList, thiz.replacingFieldsList, thiz.editingListFields)

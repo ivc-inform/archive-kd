@@ -1,6 +1,5 @@
 package com.simplesys.SmartClient.App.props
 
-import com.simplesys.SmartClient.App.EditorUserGroups
 import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
 import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
@@ -21,7 +20,6 @@ import scala.scalajs.js.annotation.ScalaJSDefined
 trait NewDSRequestData extends JSObject {
     val active: Boolean
 }
-
 
 class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
     identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
@@ -53,44 +51,22 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
 
     fieldsList = ListGridFiledsJS.admin_User_FLDS.opt
 
-    initWidget = {
-        (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
+    val userGroupEditor = EditorUserGroups.create(new EditorUserGroupsProps)
 
-            val userGroupEditor = EditorUserGroups.create(new EditorUserGroupsProps)
+    val userGroupFilterEditor = EditorUserGroups.create(
+        new EditorUserGroupsProps {
+            selectionAppearance = SelectionAppearance.checkbox.opt
+            selectionType = SelectionStyle.multiple.opt
+            identifier = "0CC55A45-93E8-E019-5AC7-7C154EB602E2".opt
+        }
+    )
 
-            val userGroupFilterEditor = EditorUserGroups.create(
-                new EditorUserGroupsProps {
-                    selectionAppearance = SelectionAppearance.checkbox.opt
-                    selectionType = SelectionStyle.multiple.opt
-                    identifier = "0CC55A45-93E8-E019-5AC7-7C154EB602E2".opt
-                }
-            )
-
-            thiz.replacingFieldsList = IscArray(
-                ListGridField(
-                    new ListGridFieldProps {
-                        nameStrong = admin_User_codeGroup_NameStrong.opt
-                        filterEditorType = FormItemComponentType.LookupTreeGridEditorItem
-                        filterEditorProperties = LookupTreeGridEditorItem(new LookupTreeGridEditorItemProps {
-                            treeGridEditor = userGroupFilterEditor.opt
-                        }).opt
-                        editorType = FormItemComponentType.LookupTreeGridEditorItem
-                        editorProperties = LookupTreeGridEditorItem(new LookupTreeGridEditorItemProps {
-                            treeGridEditor = userGroupEditor.opt
-                            changed = {
-                                (form: DynamicFormSS, item: FormItem, value: JSAny) =>
-                                    val di = thiz.listGrid.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic("di")
-                                    thiz.listGrid.saveAllEdits()
-                                    thiz.listGrid.cancelEditing()
-                                    thiz.treeGrid.deselectAllRecords()
-                                    thiz.treeGrid selectRecordByKey value
-                                    thiz.listGrid selectRecordByKey di
-                            }.toFunc.opt
-                        }).opt
-                    }))
-
-            thiz.Super("initWidget", args)
-
-    }.toThisFunc.opt
+    replacingFieldsList = Seq(
+        new ListGridFieldProps {
+            nameStrong = admin_User_codeGroup_NameStrong.opt
+            editorType = FormItemComponentType.LookupTreeGridEditorItem
+            editorProperties = LookupTreeGridEditorItem(new LookupTreeGridEditorItemProps {
+                treeGridEditor = userGroupEditor.opt
+            }).opt
+        }).opt
 }

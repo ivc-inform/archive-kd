@@ -158,6 +158,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"dataFetchModeTree" : "basic"
 
 	"initWidget"                          : ->
+		isc.debugTrac @getClassName(), @getIdentifier()
 		@Super "initWidget", arguments
 
 		@treeGrid = isc.TreeGridEditor.create

@@ -234,6 +234,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"getExpansionComponent": -> null
 	"getFieldName": (colNum)-> @grid.getFieldName colNum
 	"initWidget": ->
+		isc.debugTrac @getClassName(), @getIdentifier()
 		@fields?.forEach (field) ->
 			field.name = field.nameStrong.name if field.nameStrong?
 			return
