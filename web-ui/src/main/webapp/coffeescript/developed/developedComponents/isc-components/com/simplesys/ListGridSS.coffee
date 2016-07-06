@@ -66,6 +66,7 @@ isc.ListGrid.addProperties
 
 			@masterGrid.setSelectionChanged? (record, state) =>
 				masterSelectedRecords = @masterGrid.getSelectedRecords()
+				@discardAllEdits()
 
 				criteria = {}
 				if pkFieldNames? and isc.isA.Object(pkFieldNames) and pkFieldNames.masterGridField? and pkFieldNames.detailGridField
@@ -73,7 +74,7 @@ isc.ListGrid.addProperties
 
 				if isc.isA.Array(pkFieldNames) and pkFieldNames.length > 0
 					pkFieldNames. forEach (item) ->
-						arrayRes = masterSelectedRecords.filter((rec) -> rec[item.masterGridField] isnt undefined).map (rec) -> rec[item.masterGridField]
+						arrayRes = masterSelectedRecords.filter((rec) -> rec[item.masterGridField]?).map (rec) -> rec[item.masterGridField]
 
 						if isc.isA.Array(arrayRes) and arrayRes.length > 0
 							if arrayRes.length is 1
@@ -92,7 +93,7 @@ isc.ListGrid.addProperties
 						else
 							masterGridField = forignKeyFields[field]
 
-						arrayRes = masterSelectedRecords.filter((rec) -> rec[masterGridField] isnt undefined ).map (rec) -> rec[masterGridField]
+						arrayRes = masterSelectedRecords.filter((rec) -> rec[masterGridField]?).map (rec) -> rec[masterGridField]
 						if isc.isA.Array(arrayRes) and arrayRes.length > 0
 							if arrayRes.length is 1
 								criteria[field] = arrayRes[0]

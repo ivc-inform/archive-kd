@@ -28,6 +28,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with Initia
     //selectionType = SelectionStyle.multiple.opt
     selectionType = SelectionStyle.single.opt
     selectFirstRecordAfterFetch = false.opt
+    saveByCell = true.opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>

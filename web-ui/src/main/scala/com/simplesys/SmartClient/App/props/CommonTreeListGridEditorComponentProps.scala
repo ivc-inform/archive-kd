@@ -18,6 +18,8 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     canDragSelectText = false.opt
     autoFetchData = true.opt
     wrapTreeCells = true.opt
+    saveByListCell = true.opt
+    saveByTreeCell = true.opt
     drawAheadRatioList = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt
     drawAheadRatioTree = simpleSyS.config.drawAheadRatio.getOrElse(2.0).opt
     canSelectCellsList = false.opt
