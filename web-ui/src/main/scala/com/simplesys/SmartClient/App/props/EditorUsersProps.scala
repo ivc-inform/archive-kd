@@ -88,6 +88,7 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
                         }).opt
                     }))
 
+            isc debugTrap (-1,thiz.replacingFieldsList)
             thiz.Super("initWidget", args)
 
     }.toThisFunc.opt
