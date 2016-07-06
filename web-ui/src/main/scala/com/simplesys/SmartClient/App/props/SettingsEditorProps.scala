@@ -30,6 +30,8 @@ class SettingsEditorProps extends WindowSSProps {
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
+            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+
             thiz.Super("initWidget", arguments)
 
             val identifierApp = thiz.identifier

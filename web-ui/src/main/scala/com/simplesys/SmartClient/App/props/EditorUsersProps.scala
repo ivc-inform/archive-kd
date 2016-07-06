@@ -63,6 +63,8 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
 
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
+            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+
             val userGroupEditor: EditorUserGroups = EditorUserGroups.create(new EditorUserGroupsProps)
 
             thiz.replacingFieldsList = IscArray(

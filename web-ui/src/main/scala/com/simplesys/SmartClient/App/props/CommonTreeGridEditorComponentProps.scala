@@ -34,6 +34,8 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps with Initia
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
+            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+
             val res = initWidget(thiz, thiz.fields, thiz.replacingFields, thiz.editingFields)
             thiz.fields = res._1
             thiz.editingFields = res._2

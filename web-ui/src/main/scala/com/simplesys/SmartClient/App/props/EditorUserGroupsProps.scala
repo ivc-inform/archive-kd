@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.App.EditorUserGroups
 import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
+import com.simplesys.System.JSAny
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
@@ -35,4 +36,11 @@ class EditorUserGroupsProps extends CommonTreeGridEditorComponentProps {
             height = 285
         }
     ).opt
+
+    initWidget = {
+        (thiz: classHandler, arguments: IscArray[JSAny]) =>
+            isc debugTrap (thiz.getClassName(), thiz.getIdentifier())
+
+            thiz.Super("initWidget", arguments)
+    }.toThisFunc.opt
 }
