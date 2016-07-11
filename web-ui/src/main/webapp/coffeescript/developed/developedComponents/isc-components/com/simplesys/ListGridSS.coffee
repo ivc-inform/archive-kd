@@ -152,6 +152,7 @@ isc.ListGrid.addProperties
 				return
 
 		okCancelPanel.okBtn.showDisabledIcon = false
+		setedFields = []
 
 		if not updatedOperation
 			forignKeyFields = @dataSource.getForignKeyFields()
@@ -169,14 +170,22 @@ isc.ListGrid.addProperties
 				else
 					masterGridField = forignKeyFields[field]
 
-				if (masterSelectedRecords.length is 1)
-					form.setValue field, masterSelectedRecords[0][masterGridField] if form.getField field
+				if (masterSelectedRecords.length is 1) and form.getField field
+					form.setValue field, masterSelectedRecords[0][masterGridField]
+					setedFields.push field
 
 				masterFields.forEach (field) ->
 					value = masterSelectedRecords[0][field]
-					fieldItem = form.getField(field)
-					fieldItem.setValue(value) if fieldItem? and not masterPKFields.contains(field)
+					if not masterPKFields.contains(field) and form.getField(field)
+						form.setValue(field, value)
+						setedFields.push field
 					return
+
+				form.getItems().forEach (formItem) ->
+					if not setedFields.contains(formItem.name)
+						formItem.clearValue()
+						return
+
 
 		canvas = isc.ChainMasterDetail.create
 			vertical: true
@@ -199,7 +208,7 @@ isc.ListGrid.addProperties
 				, @editWindowProperties))
 
 		okCancelPanel.owner = window
-		form.clearValues() if requestProperties.operationType is "add"
+		#form.clearValues() if requestProperties.operationType is "add"
 		return
 
 	"startEditingNewInForm": (obj, fields, callback, requestProperties)->
