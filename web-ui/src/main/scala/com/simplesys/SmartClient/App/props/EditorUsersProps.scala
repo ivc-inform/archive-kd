@@ -2,11 +2,12 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
 import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
-import com.simplesys.SmartClient.Forms.FormsItems.props.FormItemProps
+import com.simplesys.SmartClient.Forms.DynamicFormSS
+import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{FormItemComponentType, FormItemType, SelectionAppearance, SelectionStyle}
+import com.simplesys.System.Types.{FormItemComponentType, SelectionAppearance, SelectionStyle}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -69,6 +70,10 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
             editorProperties = LookupTreeGridEditorItem(
                 new LookupTreeGridEditorItemProps {
                     treeGridEditor = userGroupEditor.opt
+                    changed = {
+                        (form: DynamicFormSS, item: FormItem, value: JSAny) =>
+                            isc debugTrap s" Value changed: $value"
+                    }.toFunc.opt
                 }).opt
         }
     ).opt

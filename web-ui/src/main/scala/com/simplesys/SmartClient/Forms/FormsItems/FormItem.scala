@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
 import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor}
+import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
 import com.simplesys.SmartClient.System._
@@ -346,6 +346,7 @@ trait FormItem extends Class {
     var filteredGridList: JSUndefined[ListGridEditor]
     @JSName("filteredGrid")
     var filteredGridTree: JSUndefined[TreeGridEditor]
+    val grid: ListGrid
 }
 
 @js.native
