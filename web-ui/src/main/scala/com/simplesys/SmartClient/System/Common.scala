@@ -9,7 +9,7 @@ object Common {
     val iconFolder = "folder.png"
     val iconFile = "file.png"
     val iconRefresh = "Refresh.png"
-    val iconTreeNode = "tree_node.png"
+    val iconTreeNode = "document_plain_new.png"
     val iconEllipsis = "ellipsis.png"
     val iconFunctions = "function-selection.png"
     val iconStatistiq = "global_manager.png"

@@ -40,6 +40,13 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
+    trackerImageTree = ImgProperties(
+        new ImgPropertiesProps{
+          imgDir = Common.iconTreeNode.opt
+          height = 24.opt
+          width = 24.opt
+        }
+    ).opt
 
     var replacingFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var replacingFieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone
