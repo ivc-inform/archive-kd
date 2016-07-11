@@ -208,6 +208,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"editWindowProperties"            : @editWindowPropertiesTree
 			"canDragSelectText"               : @canDragSelectText
 			"canDragRecordsOut"               : @canDragRecordsOutTree
+			"trackerImage"                    : @trackerImageTree
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -259,6 +260,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"editWindowProperties"            : @editWindowPropertiesList
 			"canDragSelectText"               : @canDragSelectText
 			"canDragRecordsOut"               : @canDragRecordsOutList
+			"trackerImage"                    : @trackerImageList
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"
