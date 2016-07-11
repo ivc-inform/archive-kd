@@ -21,7 +21,9 @@ import com.simplesys.SmartClient.Forms.FormsItems.props._
 import com.simplesys.SmartClient.Forms._
 import com.simplesys.SmartClient.Forms.props._
 import com.simplesys.SmartClient.Foundation._
+import com.simplesys.SmartClient.Foundation.canvas.ImgProperties
 import com.simplesys.SmartClient.Foundation.props._
+import com.simplesys.SmartClient.Foundation.props.canvas.ImgPropertiesProps
 import com.simplesys.SmartClient.Grids._
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Grids.props._
@@ -125,6 +127,7 @@ package object System {
     object Canvas extends SCApply[Canvas, CanvasProps]
     object Label extends SCApply[Label, LabelProps]
     object HTMLFlow extends SCApply[HTMLFlow, HTMLFlowProps]
+    object ImgProperties extends SCApply4Object[ImgProperties, ImgPropertiesProps]
     //</editor-fold>
 
     //<editor-fold desc="RPC">

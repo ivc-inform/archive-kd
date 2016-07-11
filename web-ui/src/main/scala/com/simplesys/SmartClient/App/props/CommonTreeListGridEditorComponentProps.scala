@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonTreeListGridEditorComponent
+import com.simplesys.SmartClient.Foundation.props.canvas.ImgPropertiesProps
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
@@ -40,6 +41,14 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
     canDragRecordsOutList = true.opt
+    trackerImageList = ImgProperties(
+        new ImgPropertiesProps{
+          imgDir = Common.piz_lico.opt
+          height = 24.opt
+          width = 24.opt
+        }
+    ).opt
+    canAcceptDroppedRecordsTree = true.opt
 
     var replacingFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var replacingFieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone
