@@ -95,4 +95,6 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var dataTree: ScOption[Tree] = ScNone
     var editWindowPropertiesTree: ScOption[WindowSS] = ScNone
     var editWindowPropertiesList: ScOption[WindowSS] = ScNone
+    var canDragRecordsOutList: ScOption[Boolean] = ScNone
+    var canDragRecordsOutTree: ScOption[Boolean] = ScNone
 }

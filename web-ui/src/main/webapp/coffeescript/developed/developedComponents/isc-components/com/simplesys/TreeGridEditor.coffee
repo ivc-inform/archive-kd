@@ -327,6 +327,7 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"editingFields": @editingFields
 			"saveByCell": @saveByCell
 			"editWindowProperties": @editWindowProperties
+			"canDragRecordsOut" : @canDragRecordsOut
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 

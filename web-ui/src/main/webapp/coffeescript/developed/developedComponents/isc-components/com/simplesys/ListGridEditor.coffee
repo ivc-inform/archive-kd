@@ -295,6 +295,7 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"saveByCell"                      : @saveByCell
 			"editingFields"                   : @editingFields
 			"editWindowProperties"            : @editWindowProperties
+			"canDragRecordsOut"               : @canDragRecordsOut
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 

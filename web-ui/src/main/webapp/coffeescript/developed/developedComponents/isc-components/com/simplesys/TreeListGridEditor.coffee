@@ -156,6 +156,8 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"closedIconSuffix" : ""
 	"dataFetchModeList" : "paged"
 	"dataFetchModeTree" : "basic"
+	"canDragRecordsOutList" : false
+	"canDragRecordsOutTree" : false
 
 	"initWidget"                          : ->
 		isc.debugTrac @getClassName(), @getIdentifier()
@@ -205,6 +207,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"dataFetchMode"                   : @dataFetchModeTree
 			"editWindowProperties"            : @editWindowPropertiesTree
 			"canDragSelectText"               : @canDragSelectText
+			"canDragRecordsOut"               : @canDragRecordsOutTree
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -255,6 +258,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"dataFetchMode"                   : @dataFetchModeList
 			"editWindowProperties"            : @editWindowPropertiesList
 			"canDragSelectText"               : @canDragSelectText
+			"canDragRecordsOut"               : @canDragRecordsOutList
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"

@@ -39,6 +39,7 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
+    canDragRecordsOutList = true.opt
 
     var replacingFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var replacingFieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone

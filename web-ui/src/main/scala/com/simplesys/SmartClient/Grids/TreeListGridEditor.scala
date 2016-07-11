@@ -131,7 +131,9 @@ trait TreeListGridEditor extends HLayoutSS {
     var editTreeRequestProperties: JSUndefined[DSRequest]
     var newListRequestProperties: JSUndefined[DSRequest]
     var editListRequestProperties: JSUndefined[DSRequest]
-    var editingTreeFields  : JSUndefined[IscArray[FormItem]]
-    var editingListFields  : JSUndefined[IscArray[FormItem]]
+    var editingTreeFields: JSUndefined[IscArray[FormItem]]
+    var editingListFields: JSUndefined[IscArray[FormItem]]
+    var canDragRecordsOutList: JSUndefined[Boolean]
+    var canDragRecordsOutTree: JSUndefined[Boolean]
 }
 
