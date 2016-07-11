@@ -40,15 +40,6 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
-    canDragRecordsOutList = true.opt
-    trackerImageList = ImgProperties(
-        new ImgPropertiesProps{
-          imgDir = Common.piz_lico.opt
-          height = 24.opt
-          width = 24.opt
-        }
-    ).opt
-    canAcceptDroppedRecordsTree = true.opt
 
     var replacingFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var replacingFieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone
