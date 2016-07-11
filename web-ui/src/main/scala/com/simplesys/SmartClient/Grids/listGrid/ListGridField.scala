@@ -89,7 +89,7 @@ trait ListGridField extends JSObject {
     var exportFieldWidth: Boolean
     var exportFormat: FormatString
     val exportRawValues: Boolean
-    var filterEditorProperties: FormItem
+    var filterEditorProperties: JSUndefined[FormItem]
     var filterEditorType: FormItemClassName
     var filterEditorValueMap: JSObject
     var filterOnKeypress: Boolean

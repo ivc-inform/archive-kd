@@ -1,11 +1,12 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.props.{CommonTreeListGridEditorComponentProps, EditorUserGroupsProps, EditorUsersProps}
-import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
+import com.simplesys.SmartClient.App.props._
+import com.simplesys.SmartClient.App.{CommonTreeGridEditorComponent, LoggedGroup, TabSetStack, WebApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
+import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
 import com.simplesys.SmartClient.Layout.props._

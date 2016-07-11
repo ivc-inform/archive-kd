@@ -209,8 +209,8 @@ package object System {
     object ListGridField extends SCApply4Object[ListGridField, ListGridFieldProps]
 
     object CommonListGridEditorComponent extends SCApply[CommonListGridEditorComponent, CommonListGridEditorComponentProps]
-    object CommonTreeListGridEditorComponent extends SCApply[CommonTreeListGridEditorComponent, CommonTreeListGridEditorComponentProps]
     object CommonTreeGridEditorComponent extends SCApply[CommonTreeGridEditorComponent, CommonTreeGridEditorComponentProps]
+    object CommonTreeListGridEditorComponent extends SCApply[CommonTreeListGridEditorComponent, CommonTreeListGridEditorComponentProps]
 
     object EditorUsers extends SCApply[EditorUsers, EditorUsersProps]
     object EditorUserGroups extends SCApply[EditorUserGroups, EditorUserGroupsProps]

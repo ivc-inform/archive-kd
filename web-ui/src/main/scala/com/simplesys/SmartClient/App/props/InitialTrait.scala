@@ -13,7 +13,7 @@ trait InitialTrait {
 
     def initWidget(thiz: Canvas, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
 
-        println(s"InitialTrait.initWidget: thiz: ${thiz.getClassName()}(${thiz.getIdentifier()}) replacingFields: ${replacingFields.map(fields => fields.map(_.nameStrong.map(_.name)).sortWith(_.get < _.get).mkString("[", ", ", "]"))}, editingFields: ${editingFields.map(fields => fields.map(_.nameStrong.map(_.name)).sortWith(_.get < _.get).mkString("[", ", ", "]"))}")
+        println(s"InitialTrait.initWidget: thiz: ${thiz.getClassName()}(${thiz.getIdentifier()}) replacingFields: ${replacingFields.map(fields => fields.map(_.nameStrong.map(_.name)).mkString("[", ", ", "]"))}, editingFields: ${editingFields.map(fields => fields.map(_.nameStrong.map(_.name)).mkString("[", ", ", "]"))}")
 
         fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
 
@@ -60,13 +60,13 @@ trait InitialTrait {
                         case Some(field) =>
                             isc debugTrac field
                             if (isc.isA.ListGridEditor(thiz))
-                                field.filterEditorProperties.filteredGridList = thiz.asInstanceOf[ListGridEditor]
+                                field.filterEditorProperties.foreach(_.filteredGridList = thiz.asInstanceOf[ListGridEditor])
                             else if (isc.isA.TreeGridEditor(thiz))
-                                field.filterEditorProperties.filteredGridTree = thiz.asInstanceOf[TreeGridEditor]
+                                field.filterEditorProperties.foreach(_.filteredGridTree = thiz.asInstanceOf[TreeGridEditor])
                             else if (isc.isA.TreeListGridEditor(thiz)) {
                                 val editor = thiz.asInstanceOf[TreeListGridEditor]
-                                field.filterEditorProperties.filteredGridList = editor.listGrid
-                                field.filterEditorProperties.filteredGridTree = editor.treeGrid
+                                field.filterEditorProperties.foreach(_.filteredGridList = editor.listGrid)
+                                field.filterEditorProperties.foreach(_.filteredGridTree = editor.treeGrid)
                             }
                             else
                                 thiz.logError("UnknownEditor, error #62")

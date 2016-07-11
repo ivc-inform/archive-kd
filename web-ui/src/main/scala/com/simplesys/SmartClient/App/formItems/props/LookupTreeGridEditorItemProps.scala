@@ -79,6 +79,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, form: DynamicFormSS, item: CanvasItem) =>
 
             val formItem = thiz
+
             val df = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     cellPadding = 0.opt
@@ -205,7 +206,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                                                                                             "criteria" -> criteria
                                                                                         )
 
-                                                                                        //isc debugTrap (advancedCriteria)
+                                                                                        isc debugTrap formItem.filteredGridList
 
                                                                                         if (formItem.filteredGridList.isEmpty)
                                                                                             isc.error("Нет поля formItem.filteredGrid.")

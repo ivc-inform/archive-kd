@@ -2,10 +2,11 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
 import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
+import com.simplesys.SmartClient.Forms.FormsItems.props.FormItemProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{FormItemComponentType, SelectionAppearance, SelectionStyle}
+import com.simplesys.System.Types.{FormItemComponentType, FormItemType, SelectionAppearance, SelectionStyle}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -48,6 +49,8 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
     editingTreeFields = FormItemsJS.admin_UserGroup_FRMITM.opt
 
     fieldsList = ListGridFiledsJS.admin_User_FLDS.opt
+    //editingListFields = FormItemsJS.admin_User_FRMITM.filter(item => item.nameStrong.isDefined && item.nameStrong.get.name != admin_User_codeGroup_NameStrong.name).opt
+    editingListFields = FormItemsJS.admin_User_FRMITM.opt
 
     val userGroupEditor = EditorUserGroups.create(new EditorUserGroupsProps)
 
@@ -67,5 +70,6 @@ class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
                 new LookupTreeGridEditorItemProps {
                     treeGridEditor = userGroupEditor.opt
                 }).opt
-        }).opt
+        }
+    ).opt
 }
