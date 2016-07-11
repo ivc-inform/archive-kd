@@ -35,6 +35,7 @@ class LookupListGridEditorItemProps extends CanvasItemProps {
     setValue = {
         (thiz: classHandler, value: JSUndefined[JSAny]) =>
             thiz.Super("setValue", IscArray(value))
+            isc debugTrap (value, thiz.listGridEditor)
             thiz.textItem setValue value
 
             if (value.isDefined) {

@@ -34,6 +34,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
     setValue = {
         (thiz: classHandler, value: JSUndefined[JSAny]) =>
             thiz.Super("setValue", IscArray(value))
+            isc debugTrap (value, thiz.listGridEditor)
             thiz.textItem setValue value
 
             if (value.isDefined) {
@@ -163,7 +164,6 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                                                                             owner = window.opt
                                                                             okFunction = {
                                                                                 (thiz: classHandler) =>
-                                                                                    isc debugTrap 0
                                                                                     if (editor.selectionType.toString == SelectionStyle.multiple.toString) {
 
                                                                                         val records = editor.getSelectedRecords()

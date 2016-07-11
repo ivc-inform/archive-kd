@@ -132,11 +132,11 @@ isc.ListGrid.addProperties
 				fields: fields
 
 		okCancelPanel = isc.OkCancelPanel.create
-			padding: 5
-			okCaption: "Сохранить"
-			ownerDestroy      : false
-			ownerHide        : false
-			okFunction: ->
+			padding     : 5
+			okCaption   : "Сохранить"
+			ownerDestroy: false
+			ownerHide   : false
+			okFunction  : ->
 				if (form.validate false)
 					_save = =>
 						@owner.markForDestroy()
@@ -149,9 +149,34 @@ isc.ListGrid.addProperties
 			cancelFunction: ->
 				form.clearErrors true
 				form.cancelEditing()
+				return
 
-#		okCancelPanel.okBtn.setDisabled true
 		okCancelPanel.okBtn.showDisabledIcon = false
+
+		if not updatedOperation
+			forignKeyFields = @dataSource.getForignKeyFields()
+			masterFields = @masterGrid.dataSource.getFieldNames(false)
+			masterPKFields = @masterGrid.dataSource.getPrimaryKeyFieldNames()
+
+			masterSelectedRecords = @masterGrid.getSelectedRecords()
+
+			if (masterSelectedRecords.length isnt 1)
+				okCancelPanel.okBtn.setDisabled true
+
+			for field, value of forignKeyFields
+				if forignKeyFields[field].foreignKey.indexOf('.') isnt -1
+					masterGridField = forignKeyFields[field].foreignKey.substring(forignKeyFields[field].foreignKey.lastIndexOf('.') + 1)
+				else
+					masterGridField = forignKeyFields[field]
+
+				if (masterSelectedRecords.length is 1)
+					form.setValue field, masterSelectedRecords[0][masterGridField] if form.getField field
+
+				masterFields.forEach (field) ->
+					value = masterSelectedRecords[0][field]
+					fieldItem = form.getField(field)
+					fieldItem.setValue(value) if fieldItem? and not masterPKFields.contains(field)
+					return
 
 		canvas = isc.ChainMasterDetail.create
 			vertical: true
