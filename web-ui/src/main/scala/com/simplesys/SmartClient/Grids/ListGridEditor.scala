@@ -102,7 +102,7 @@ trait GridEditor[T <: ListGridField, R <: JSObject, S <: JSObject] extends VLayo
     def deselectRecord(record: R | Int): void
     def deselectRecords(records: IscArray[R]): void
     def deselectAllRecords(): void
-    def selectRecordsByKey(keyValues: JSObject, newState: Boolean = js.native): R
+    def selectRecordsByKey(keyValues: JSAny, newState: Boolean = js.native): R
     def getRowNum(record: R): Int
     var dataSource: DataSource
     def setContextMenu(menu: MenuSS): void

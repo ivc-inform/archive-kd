@@ -63,11 +63,12 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
 
                                                                 val id = record.asInstanceOf[JSDynamic].selectDynamic(idFieldName1)
 
-                                                                val keyValues = js.Object()
-                                                                keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
+                                                                //val keyValues = js.Object()
+                                                                //keyValues.asInstanceOf[JSDynamic].updateDynamic(idFieldName)(id)
                                                                 //isc debugTrap editor
                                                                 editor.deselectAllRecords()
-                                                                editor selectRecordsByKey keyValues
+                                                                //isc debugTrap (foreignIdField, idFieldName, idFieldName1, id, keyValues)
+                                                                editor selectRecordsByKey id
                                                         }
                                             }
                                     }
