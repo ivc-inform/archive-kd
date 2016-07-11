@@ -163,14 +163,16 @@ isc.ListGrid.addProperties
 
 			if (masterSelectedRecords.length isnt 1)
 				okCancelPanel.okBtn.setDisabled true
+			else
+				okCancelPanel.okBtn.setDisabled false
 
-			for field, value of forignKeyFields
-				if forignKeyFields[field].foreignKey.indexOf('.') isnt -1
-					masterGridField = forignKeyFields[field].foreignKey.substring(forignKeyFields[field].foreignKey.lastIndexOf('.') + 1)
-				else
-					masterGridField = forignKeyFields[field]
+				for field, value of forignKeyFields
+					if forignKeyFields[field].foreignKey.indexOf('.') isnt -1
+						masterGridField = forignKeyFields[field].foreignKey.substring(forignKeyFields[field].foreignKey.lastIndexOf('.') + 1)
+					else
+						masterGridField = forignKeyFields[field]
 
-				if (masterSelectedRecords.length is 1) and form.getField field
+				if form.getField field
 					form.setValue field, masterSelectedRecords[0][masterGridField]
 					setedFields.push field
 
@@ -185,7 +187,6 @@ isc.ListGrid.addProperties
 					if not setedFields.contains(formItem.name)
 						formItem.clearValue()
 						return
-
 
 		canvas = isc.ChainMasterDetail.create
 			vertical: true
