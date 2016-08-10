@@ -80,7 +80,7 @@ object EaKdProcWindowMain extends WebApp {
         ),
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Пользователь".ellipsis.opt
+                title = "Пользователи".ellipsis.opt
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
@@ -265,7 +265,7 @@ object EaKdProcWindowMain extends WebApp {
         ),
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Пользователь".ellipsis.opt
+                title = "Пользователи".ellipsis.opt
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
@@ -284,7 +284,7 @@ object EaKdProcWindowMain extends WebApp {
         ),
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Пользователь".ellipsis.opt
+                title = "Пользователи".ellipsis.opt
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
@@ -303,7 +303,7 @@ object EaKdProcWindowMain extends WebApp {
         ),
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Пользователь".ellipsis.opt
+                title = "Пользователи".ellipsis.opt
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
