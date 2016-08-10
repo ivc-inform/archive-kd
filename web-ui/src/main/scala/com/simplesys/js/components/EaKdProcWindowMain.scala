@@ -1,19 +1,14 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
-import com.simplesys.SmartClient.App.props._
-import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
+import com.simplesys.SmartClient.App.WebApp
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Foundation.props.LabelProps
-import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.RibbonGroupSS
 import com.simplesys.SmartClient.Layout.props._
-import com.simplesys.SmartClient.RPC.RPCManagerSS
-import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
+import com.simplesys.SmartClient.System.{RibbonGroupSS, _}
 import com.simplesys.System.Types.{State => _, _}
 import com.simplesys.System._
 import com.simplesys.app
@@ -21,14 +16,12 @@ import com.simplesys.app._
 import com.simplesys.function._
 import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
 import com.simplesys.js.components.refs.props._
-import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS, admin_User_codeGroup_NameStrong}
 
 import scala.scalajs.js.annotation.JSExport
 
 @JSExport
-object EaKdProcWindowMain extends WebApp with TabSetStack {
+object EaKdProcWindowMain extends WebApp {
 
     override val loadSchemas = com.simplesys.app.loadSchemas
 
@@ -36,7 +29,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
 
     override val appImageDir: String = "images/"
 
-    private val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
+    protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
@@ -362,213 +355,4 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             item.hide()
             item
     }
-
-    private val managedAdminsGroups: Seq[RibbonGroupSS] = Seq(
-        RibbonGroupSS.create(
-            new RibbonGroupSSProps {
-                title = "Администраторы".ellipsis.opt
-                controls = Seq(
-                    IconMenuButtonSS.create(
-                        new IconMenuButtonSSProps {
-                            title = "Администрирование".ellipsis.opt
-                            icon = app.ref.opt
-                            identifier = "33EE1839-8D4D-FFA0-E491-22B54F2C772A".opt
-                            menu = MenuSS.create(
-                                new MenuSSProps {
-                                    items = Seq(
-                                        new MenuSSItemProps {
-                                            name = "groups".opt
-                                            icon = app.admin_UserGroup.opt
-                                            title = "Группы".ellipsis.opt
-                                            click = {
-                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(EditorUserGroups.create(new EditorUserGroupsProps), item)
-                                            }.toFunc.opt
-                                        },
-                                        new MenuSSItemProps {
-                                            name = "users".opt
-                                            icon = app.admin_User.opt
-                                            title = "Пользователи".ellipsis.opt
-                                            click = {
-                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(EditorUsers.create(
-                                                        new EditorUsersProps {
-                                                            dataSourceList = DataSourcesJS.admin_User_DS.opt
-                                                            dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
-
-                                                            fieldsTree = ListGridFiledsJS.admin_UserGroup_FLDS.opt
-                                                            editingTreeFields = FormItemsJS.admin_UserGroup_FRMITM.opt
-
-                                                            fieldsList = ListGridFiledsJS.admin_User_FLDS.opt
-                                                            editingListFields = FormItemsJS.admin_User_FRMITM.opt
-
-                                                            val userGroupEditor = EditorUserGroups.create(new EditorUserGroupsProps {
-                                                                dataSource = DataSourcesJS.admin_UserGroup_DS.opt
-                                                                fields = ListGridFiledsJS.admin_UserGroup_FLDS.opt
-                                                                editingFields = FormItemsJS.admin_UserGroup_FRMITM.opt
-                                                            })
-
-                                                            replacingFieldsList = Seq(
-                                                                new ListGridFieldProps {
-                                                                    nameStrong = admin_User_codeGroup_NameStrong.opt
-                                                                    editorType = FormItemComponentType.LookupTreeGridEditorItem
-                                                                    editorProperties = LookupTreeGridEditorItem(
-                                                                        new LookupTreeGridEditorItemProps {
-                                                                            treeGridEditor = userGroupEditor.opt
-                                                                        }).opt
-                                                                }
-                                                            ).opt
-                                                        }
-                                                    ), item)
-                                            }.toFunc.opt
-                                        }
-                                    ).opt
-                                }
-                            ).opt
-                        }
-                    )
-                ).opt
-            }
-        )
-    ).map {
-        item =>
-            item.hide()
-            item
-    }
-
-    private val managedDevsGroups = Seq(
-        RibbonGroupSS.create(
-            new RibbonGroupSSProps {
-                title = "Разработчики".ellipsis.opt
-                controls = Seq(
-                    IconButtonSS.create(
-                        new IconButtonSSProps {
-                            title = "GUID".opt
-                            icon = app.guid.opt
-                            orientation = "gorizontal".opt
-                            click = {
-                                (thiz: classHandler) =>
-                                    isc info simpleSyS.guid
-                                    false
-                            }.toThisFunc.opt
-                        }
-                    )
-                ).opt
-            }
-        )
-    ).map {
-        item =>
-            item.hide()
-            item
-    }
-
-    private val captionUserLabel = Label.create(
-        new LabelProps {
-            showEdges = true.opt
-            contents = "Иванов Иван Иванович".opt
-            icon = app.approved.opt
-            wrap = true.opt
-            visibility = Visibility.hidden.opt
-        }
-    )
-
-    override protected def mainCanvas: Canvas =
-        VLayoutSS.create(
-            new VLayoutSSProps {
-                members = Seq(
-                    RibbonBar.create(
-                        new RibbonBarProps {
-                            width = "100%"
-                            showResizeBar = true.opt
-                            members = (
-                              managedUsersGroups ++
-                                managedAdminsGroups ++
-                                Seq(functionGroup) ++
-                                managedDevsGroups ++
-                                Seq(
-                                    LayoutSpacer.create(
-                                        new LayoutSpacerProps {
-                                            width = "*"
-                                        }
-                                    ),
-                                    RibbonGroupSS.create(
-                                        new RibbonGroupSSProps {
-                                            title = "Аутентификация".ellipsis.opt
-                                            defaultLayoutAlign = Alignment.center
-                                            width = 40
-                                            controls = Seq(
-                                                IconButtonSS.create(
-                                                    new IconButtonSSProps {
-                                                        click = {
-                                                            (thiz: classHandler) =>
-                                                                if (!LoggedGroup.logged) {
-                                                                    RPCManagerSS.loginRequired({
-                                                                        (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
-                                                                            if (res) {
-
-                                                                                captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
-                                                                                captionUserLabel.show()
-                                                                                managedUsersGroups.foreach(_.show())
-                                                                                LoggedGroup.codeGroup = codeGroup.toOption
-
-                                                                                if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
-                                                                                    managedAdminsGroups.foreach(_.show())
-
-                                                                                if (LoggedGroup.isRoot()) {
-                                                                                    managedAdminsGroups.foreach(_.show())
-                                                                                }
-
-                                                                                if (LoggedGroup.isDevsGroup())
-                                                                                    managedDevsGroups.foreach(_.show())
-
-                                                                                LoggedGroup.logged = true
-
-                                                                                thiz setTitle "Выход"
-                                                                                thiz setIcon app.closeProgram
-                                                                            } else {
-                                                                                managedUsersGroups.foreach(_.hide())
-                                                                                managedAdminsGroups.foreach(_.hide())
-                                                                                managedDevsGroups.foreach(_.hide())
-                                                                                captionUserLabel.hide()
-                                                                                tabGroupSet.removeAllTabs()
-
-                                                                                LoggedGroup.logged = false
-                                                                                thiz setTitle "Вход".ellipsis
-                                                                                thiz setIcon app.login
-                                                                            }
-                                                                    }.toFunc)
-
-                                                                } else {
-                                                                    RPCManagerSS.logoutRequired()
-                                                                    thiz setTitle "Вход".ellipsis
-                                                                    thiz setIcon app.login
-                                                                    LoggedGroup.logged = false
-                                                                    managedUsersGroups.foreach(_.hide())
-                                                                    managedAdminsGroups.foreach(_.hide())
-                                                                    managedDevsGroups.foreach(_.hide())
-                                                                    captionUserLabel.hide()
-                                                                    functionGroup.hide()
-                                                                    windowsStack.destroyAll()
-                                                                    tabGroupSet.removeAllTabs()
-                                                                }
-                                                                false
-                                                        }.toThisFunc.opt
-                                                        title = "Войти".ellipsis.opt
-                                                        iconOrientation = IconOrientation.center.opt
-                                                        icon = app.login.opt
-                                                    }
-                                                ),
-                                                captionUserLabel
-                                            ).opt
-                                            numRows = 3.opt
-                                            titleHeight = 18.opt
-                                        }
-                                    )
-                                )).opt
-                        }
-                    ),
-                    tabGroupSet
-                ).opt
-            }
-        )
 }

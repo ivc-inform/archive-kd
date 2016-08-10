@@ -6,7 +6,7 @@ container.deploy("/archive-kd" -> webUI)
 
 port in container.Configuration := 8083
 
-addCommandAlias("debug-restart", "; packageWar ; container:restart; fastOptJS")
+addCommandAlias("debug-restart", "; fastOptJS ; packageWar ; container:restart")
 
 val HostingDeploy = config("hostingDeploy") extend (Compile)
 
