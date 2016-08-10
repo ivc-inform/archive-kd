@@ -17,7 +17,7 @@ isc.ClassFactory.defineClass("ComboboxItemWithButtons", isc.CanvasItem).addPrope
 		return
 
 	_visiblityButton: (identifier, action) ->
-		button = (@buttons.filter (button) -> button.identifier is identifier)
+		button = (@buttons.filter (button) -> button.identifier is identifier).map (button) -> (button.setCanFocus false; button)
 		if button.length > 0
 			switch action
 				when "show"

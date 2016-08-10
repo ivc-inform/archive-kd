@@ -2,13 +2,13 @@ simpleSyS = @simpleSyS
 
 isc.Class.addProperties
 	getIdentifier: -> @identifier or @getID()
-
+	
 	getComment: ->
 		title = @title;
-
+		
 		if title?.toLowerCase().indexOf("untitled") is - 1
 			title = undefined
-
+		
 		@comment or title or @getClassName()
 
 ###isc.Class.addMethods
@@ -20,11 +20,11 @@ isc.Class.addClassProperties
 	addGlobalSS: (propName, propValue) ->
 		if propName? and propValue? then simpleSyS.objects[propName] = propValue
 		return
-
+	
 	getObjectSS: (identifier) -> simpleSyS.objects[identifier]
-
+	
 	isNullOrUndefigned: (obj) -> not obj?
-
+	
 	fireCallback: `function (callback, argNames, args, target, catchErrors) {
         arguments.__this = this;
         if (callback == null) return;
@@ -113,7 +113,9 @@ isc.Class.addClassProperties
                 else
                     isc.Log._onRethrowError(e);
 
+                //<editor-fold desc="Fixed by Y.Andrew">
                 isc.Log.logError(e.stack)
+                //</editor-fold>
                 throw e;
             }
         }

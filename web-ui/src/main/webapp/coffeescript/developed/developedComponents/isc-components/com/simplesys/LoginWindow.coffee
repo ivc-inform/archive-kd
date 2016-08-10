@@ -8,11 +8,13 @@ isc.defineClass("LoginWindow", isc.WindowSS).addProperties
 			login = form.getItem("login").getValue()
 
 			isc.RPCManagerSS.sendRequest
+				"timeout" : 10000
+				"sendNoQueue" : true
 				"callback"     : (rpcResponse) =>
 					data = rpcResponse.data
 					if not data?
-						@logWarn("Повтор запроса doLogin !!!!!!!!!!!")
-						@doLogin form
+						@logWarn("rpcResponse: #{isc.JSON.encode(rpcResponse, prettyPrint: true)}")
+						##@doLogin form
 					else
 						failure = () ->
 							form.setValue "loginFailure", errorMessage
@@ -51,6 +53,7 @@ isc.defineClass("LoginWindow", isc.WindowSS).addProperties
 								simpleSyS.app.codeGroup = data.codeGroup
 								simpleSyS.app.captionUser = data.captionUser
 								@simpleSysContextPath = data.simpleSysContextPath
+								simpleSyS.simpleSysContextPath = data.simpleSysContextPath
 
 								isc.OfflineSS.put "#{@getIdentifier()}codeGroup", simpleSyS.app.codeGroup
 

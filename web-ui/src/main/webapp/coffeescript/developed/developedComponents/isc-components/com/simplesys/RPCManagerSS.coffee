@@ -1,27 +1,31 @@
 simpleSyS = @simpleSyS
 
 simpleSyS.config ?= {
-	defaultTimeout       : 240000
+	defaultTimeout: 240000
 	maxErrorMessageLength: 10000
-	timeoutErrorMessage  : "Время операции истекло (("
+	timeoutErrorMessage: "Время операции истекло (("
 }
 
 simpleSyS.app ?= {
 	ViewLoaderC: -> undefined
-	logining   : {
-		URILOGIN : "logic/login"
+	logining: {
+		URILOGIN: "logic/login"
 		URILOGOUT: "logic/logout"
 	}
 }
 
 isc.RPCManager.addClassProperties
+		
 	"handleError": (response, request) ->
 		if response.status is isc.RPCResponse.STATUS_LOGIN_REQUIRED
 			isc.error "Потеря данных сессии, требуется аутентификация.",
 			          "958c9eec-000a-92a1-b3a7-2877a657ec99",
 			          -> isc.RPCManager.loginRequired(response, request); return
-
+		
 		else
+			if response.data?.data?
+				response.data = response.data.data
+			
 			if response.data? and isc.isA.String(response.data) is true
 				message = response.data
 				if isc.isA.String(message) is true
@@ -29,9 +33,9 @@ isc.RPCManager.addClassProperties
 					if messageToShow.length > @maxErrorMessageLength
 						delta = messageToShow.length - @maxErrorMessageLength
 						messageToShow =
-								messageToShow.substring(0, @maxErrorMessageLength) +
-										"<br><br>...(#{delta} bytes truncated - set isc.RPCManager.maxErrorMessageLength > #{@maxErrorMessageLength} to see more or check the Developer Console for full error)..."
-
+							messageToShow.substring(0, @maxErrorMessageLength) +
+								"<br><br>...(#{delta} bytes truncated - set isc.RPCManager.maxErrorMessageLength > #{@maxErrorMessageLength} to see more or check the Developer Console for full error)..."
+				
 				###isc.error messageToShow, "958c9eec-999a-92a1-b3a7-2877a657ec55"###
 			else
 				if response.data?.error?
@@ -45,53 +49,53 @@ isc.RPCManager.addClassProperties
 						if codeName.startsWith("STATUS_") is true then codeName = codeName.substring(7)
 					else
 						codeName = if response.status? then "error code: #{response.status}" else "unknown error code"
-
+					
 					opName = response.operationId or response.operationType
 					extraText = strEmpty
-
+					
 					switch codeName
 						when "MAX_FILE_SIZE_EXCEEDED"
 							message = isc.DataSource.maxFileSizeExceededMessage.evalDynamicString(
-									@,
-									maxFileSize: response.maxFileSize
-										uploadedFileName: response.uploadedFileName
-										uploadedFileSize: response.uploadedFileSize
+								@,
+								maxFileSize: response.maxFileSize
+									uploadedFileName: response.uploadedFileName
+									uploadedFileSize: response.uploadedFileSize
 							                                                                     )
-
+							
 							extraText = "#{newLine}Set rpcRequest.willHandleError:true on your request to handle this error yourself, or add a custom handleError to RPCManager to change system-wide default error reporting"
-
+						
 						when "VALIDATION_ERROR"
 							message = "Server returned validation errors: " + isc.echoFull(response.errors)
-
+							
 							extraText = "#{newLine}Set rpcRequest.willHandleError:true on your request to handle this error yourself, or add a custom handleError to RPCManager to change system-wide default error reporting"
-
+						
 						else
 							message = "Server returned #{codeName} with no error message" + if opName? then " performing operation '#{opName}'." else "."
-
+					
 					@reportError message
-
+		
 		@logWarn(message + extraText + " - response: #{@echo response}")
-
+		
 		return false
-
+	
 	"evalResult": (request, response, results) ->
 		if isc.isA.Function results.match
 			evalVars = request.evalVars
 			@logDebug ("evaling result" + if evalVars? then " with evalVars: #{isc.Log.echo(evalVars)}" else strEmpty)
-
+			
 			origAutoDraw = isc.Canvas.getInstanceProperty "autoDraw"
 			if request.suppressAutoDraw
 				isc.Canvas.setInstanceProperty "autoDraw", false
-
+			
 			if results.match(new RegExp("^\\s*\\{"))
 				results = "var evalText=#{results};evalText;"
-
+			
 			evalResult = isc.Class.evalWithVars results, evalVars
 			if request.suppressAutoDraw
 				isc.Canvas.setInstanceProperty "autoDraw", origAutoDraw
-
+			
 			evalResult
-
+	
 	"sendRequest": `function (request) {
         // for Developer Consoel RPC->Call Stack view
         if ((this._trackRPC || !this._initializedTrackRPC) && !request.doNotTrackRPC) {
@@ -161,9 +165,9 @@ isc.RPCManager.addClassProperties
         isc.addDefaults(
             request, {
                 showPrompt              : this.showPrompt,
-                promptStyle: this.promptStyle,
-                promptCursor: this.promptCursor,
-                useCursorTracker: this.useCursorTracker,
+                promptStyle             : this.promptStyle,
+                promptCursor            : this.promptCursor,
+                useCursorTracker        : this.useCursorTracker,
                 cursorTrackerConstructor: this.cursorTrackerConstructor
             }
         );
@@ -217,31 +221,31 @@ isc.RPCManager.addClassProperties
     }`
 
 isc.defineClass("RPCManagerSS", isc.RPCManager).addClassProperties
-	"defaultTimeout"       : simpleSyS.config.defaultTimeout
+	"defaultTimeout": simpleSyS.config.defaultTimeout
 	"maxErrorMessageLength": simpleSyS.config.maxErrorMessageLength
-	"timeoutErrorMessage"  : simpleSyS.config.timeoutErrorMessage
-
+	"timeoutErrorMessage": simpleSyS.config.timeoutErrorMessage
+	
 	"mainPageNotLogged": simpleSyS.config.mainPageNotLogged
-	"mainPageLogged"   : simpleSyS.config.mainPageLogged
-
-	"sendRequest": (request) ->
+	"mainPageLogged": simpleSyS.config.mainPageLogged
+	
+	"sendRequest": (request, evalResult) ->
 		if request? and isc.isA.Object(request) is true
 			request.useSimpleHttp = true
 			request.httpMethod = "POST"
 			##request.willHandleError = true
-			request.evalResult = true
+			request.evalResult = if not evalResult? then true else evalResult
 			request.params =
 				isc_dataFormat: "JSON"
 			if isc.isA.Object(request.data) is true
 				request.data = isc.JSONSS.encode request.data, "prettyPrint": false
 			else if isc.isA.String(request.data) is false
-				request.data = "Data in Request must be a serrialized String."
-
+				request.data = {}
+			
 			@Super "sendRequest", [request]
 		else
 			@Super "sendRequest", arguments
 		return
-
+	
 	"loginRequired": (reload, loginSuccessProcedure) ->
 		if isc.isA.Function(reload)
 			loginSuccessProcedure = reload
@@ -250,23 +254,24 @@ isc.defineClass("RPCManagerSS", isc.RPCManager).addClassProperties
 			if not reload? then reload = true
 		else
 			reload = true
-
+		
 		if isc.isA.LoginWindow isc.RPCManagerSS.loginWindow
 			isc.RPCManagerSS.loginWindow.markForDestroy()
 			isc.RPCManagerSS.loginWindow = null
-
+		
 		isc.RPCManagerSS.loginWindow = isc.LoginWindow.create
 			"loginSuccessProcedure": loginSuccessProcedure
 			"mainPageLogged": @mainPageLogged
-			"reload"        : reload
-
+			"reload": reload
+		
 		return
 	"logoutRequired": () ->
 		delete simpleSyS.app.login
 		delete simpleSyS.app.userId
 		delete simpleSyS.app.codeGroup
 		delete simpleSyS.app.userId
-
+		delete simpleSyS.simpleSysContextPath
+		
 		simpleSyS.app.ViewLoaderC?.setViewURL? @mainPageNotLogged
 		return
 

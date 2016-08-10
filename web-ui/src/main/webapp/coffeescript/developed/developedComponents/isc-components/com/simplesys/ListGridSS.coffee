@@ -154,7 +154,7 @@ isc.ListGrid.addProperties
 		okCancelPanel.okBtn.showDisabledIcon = false
 		setedFields = []
 
-		if not updatedOperation
+		if not updatedOperation and @masterGrid?
 			forignKeyFields = @dataSource.getForignKeyFields()
 			masterFields = @masterGrid.dataSource.getFieldNames(false)
 			masterPKFields = @masterGrid.dataSource.getPrimaryKeyFieldNames()
