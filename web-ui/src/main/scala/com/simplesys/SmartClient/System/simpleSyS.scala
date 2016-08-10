@@ -3,8 +3,7 @@ package com.simplesys.SmartClient.System
 import com.simplesys.SmartClient.Control._
 import com.simplesys.SmartClient.Control.menu._
 import com.simplesys.SmartClient.Foundation._
-import com.simplesys.System.Types.Skin.Skin
-import com.simplesys.System.Types.{Record, void}
+import com.simplesys.System.Types.{Record, URL, void}
 import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
@@ -26,4 +25,5 @@ object simpleSyS extends JSObject {
     val aboutData: IscArray[Record] = js.native
     var skin: JSUndefined[String] = js.native
     var expertMode: JSUndefined[Boolean] = js.native
+    val simpleSysContextPath: URL = js.native
 }

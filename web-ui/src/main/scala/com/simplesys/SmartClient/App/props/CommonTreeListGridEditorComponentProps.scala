@@ -40,7 +40,7 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     wrapListCells = true.opt
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
-    trackerImageTree = ImgProperties(
+    trackerImageList = ImgProperties(
         new ImgPropertiesProps{
           imgDir = Common.iconTreeNode.opt
           height = 24.opt

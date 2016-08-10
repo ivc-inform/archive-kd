@@ -25,7 +25,6 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with Initia
     canEdit = true.opt
     filterOnKeypress = true.opt
     autoFetchData = true.opt
-    //selectionType = SelectionStyle.multiple.opt
     selectionType = SelectionStyle.single.opt
     selectFirstRecordAfterFetch = false.opt
     saveByCell = true.opt

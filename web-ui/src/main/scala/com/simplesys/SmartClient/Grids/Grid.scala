@@ -12,7 +12,6 @@ import com.simplesys.SmartClient.Foundation.{Canvas, GridRenderer, HTMLFlow, Sta
 import com.simplesys.SmartClient.Grids.listGrid._
 import com.simplesys.SmartClient.Grids.treeGrid.Tree
 import com.simplesys.SmartClient.Layout.{HLayout, Layout, VLayout}
-import com.simplesys.SmartClient.System.SortSpecifier.SortSpecifier
 import com.simplesys.SmartClient.System.selection.CellSelection
 import com.simplesys.SmartClient.System.{Class, IscArray, Selection}
 import com.simplesys.System.Types.Alignment.Alignment

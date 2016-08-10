@@ -26,6 +26,7 @@ trait HTMLFlow extends Canvas with DataBoundComponent {
     def fetchRelatedData(record: ListGridRecord, schema: Canvas | DataSource | ID, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     var handleError: js.Function2[RPCRequest, RPCResponse, Boolean]
     var httpMethod: SendMethod
+    def clean():void
     def loadingContent(): Boolean
     val loadingMessage: HTMLString
     var selectContentOnSelectAll: Boolean

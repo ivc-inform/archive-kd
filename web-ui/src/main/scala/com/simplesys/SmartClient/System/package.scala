@@ -38,8 +38,8 @@ import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
 import com.simplesys.SmartClient.Layout.props.toolStrip.{ToolStripButtonProps, ToolStripMenuButtonProps, ToolStripSeparatorProps}
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.toolStrip.{ToolStripButton, ToolStripMenuButton, ToolStripSeparator}
-import com.simplesys.SmartClient.RPC.RPCRequest
-import com.simplesys.SmartClient.RPC.props.RPCRequestProps
+import com.simplesys.SmartClient.RPC.{RPCRequest, RequestParams}
+import com.simplesys.SmartClient.RPC.props.{RPCRequestProps, RequestParamsProps}
 import com.simplesys.SmartClient.System.date.Date
 import com.simplesys.SmartClient.System.date.props.DateProps
 import com.simplesys.SmartClient.System.props.TreeProps
@@ -53,9 +53,8 @@ import com.simplesys.SmartClient.Tools.{EditContext, EditProxy, PaletteNode}
 
 //Должны быть
 //import com.simplesys.macros.PropsToDictionary
-//
-
 import com.simplesys.macros.PropsToDictionary
+//
 
 package object System {
 
@@ -127,6 +126,7 @@ package object System {
     object Canvas extends SCApply[Canvas, CanvasProps]
     object Label extends SCApply[Label, LabelProps]
     object HTMLFlow extends SCApply[HTMLFlow, HTMLFlowProps]
+    object HTMLPane extends SCApply[HTMLPane, HTMLPaneProps]
     object ImgProperties extends SCApply4Object[ImgProperties, ImgPropertiesProps]
     //</editor-fold>
 
@@ -156,6 +156,7 @@ package object System {
     object TabSetSS extends SCApply[TabSetSS, TabSetSSProps]
     object WindowSS extends SCApply[WindowSS, WindowSSProps]
     object ToolStrip extends SCApply[ToolStrip, ToolStripProps]
+    object WindowListGridEditorToolStrip extends SCApply[WindowListGridEditorToolStrip, WindowListGridEditorToolStripProps]
     object ToolStripMenuButton extends SCApply[ToolStripMenuButton, ToolStripMenuButtonProps]
     object ToolStripSeparator extends SCApply[ToolStripSeparator, ToolStripSeparatorProps]
     object ToolStripButton extends SCApply[ToolStripButton, ToolStripButtonProps]
@@ -192,6 +193,8 @@ package object System {
     object DrawLinePathSS extends SCApply[DrawLinePathSS, DrawLinePathSSProps]
     object DrawKnob extends SCApply[DrawKnob, DrawKnobProps]
     object Shadow extends SCApply4Object[Shadow, ShadowProps]
+    object SortSpecifier extends SCApply4Object[SortSpecifier, SortSpecifierProps]
+    object RequestParams extends SCApply4Object[RequestParams, RequestParamsProps]
 
     object RibbonBar extends SCApply[RibbonBar, RibbonBarProps]
     object RibbonGroup extends SCApply[RibbonGroup, RibbonGroupProps]

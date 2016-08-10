@@ -121,7 +121,7 @@ class CanvasProps extends ClassProps {
     var dragStop: ScOption[ThisFunction0[classHandler, Boolean]] = ScNone
     var dragTarget: ScOption[Canvas] = ScNone
     var dragType: ScOption[String] = ScNone
-    var draw: ScOption[ThisFunction1[classHandler, IscArray[JSAny], Canvas]] = ScNone
+    var draw: ScOption[ThisFunction1[classHandler, JSUndefined[IscArray[JSAny]], Canvas]] = ScNone
     var drop: ScOption[ThisFunction0[classHandler, Boolean]] = ScNone
     var dropMove: ScOption[ThisFunction0[classHandler, Boolean]] = ScNone
     var dropOut: ScOption[ThisFunction0[classHandler, Boolean]] = ScNone

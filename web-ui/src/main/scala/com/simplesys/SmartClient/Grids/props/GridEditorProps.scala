@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.Grids.props
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
-import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
+import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource, SortSpecifier}
 import com.simplesys.SmartClient.Forms.FormsItems.FormItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
@@ -78,6 +78,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var dataFetchMode: ScOption[FetchMode] = ScNone
     var editWindowProperties: ScOption[WindowSS] = ScNone
     var recordComponentPoolingMode: ScOption[RecordComponentPoolingMode] = ScNone
+    var initialSort: ScOption[Seq[SortSpecifier]] = ScNone
 
     var createRecordComponent: ScOption[ThisFunction2[classHandler, ListGridRecord, Int, Canvas]] = ScNone
     var updateRecordComponent: ScOption[ThisFunction4[classHandler, ListGridRecord, Int, Canvas, Boolean, Canvas]] = ScNone

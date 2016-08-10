@@ -16,6 +16,7 @@ object Common {
     val iconEdit = "edit.png"
     val delete_Column = "Delete_Column.png"
     val delete_icon = "Delete-icon.png"
+    val cancel = "cancel.png"
     val iconSave = "Save-icon.png"
     val iconDiscard = "cancel-icon.png"
     val iconOpenFolder = "openFolder.png"

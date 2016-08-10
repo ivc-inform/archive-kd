@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Control
 
-import com.simplesys.SmartClient.Foundation.StatefulCanvas
+import com.simplesys.SmartClient.Foundation.{StatefulCanvas, AbstractStatefulCanvasCompanion}
 import com.simplesys.System.Types.Cursor.Cursor
 import com.simplesys.System.Types.{HTMLString, void}
 
@@ -25,6 +25,9 @@ trait Button extends StatefulCanvas {
     def titleHoverHTML(defaultHTML: HTMLString): HTMLString
     var wrap: Boolean
 }
+
+@js.native
+abstract class AbstractButtonCompanion extends AbstractStatefulCanvasCompanion
 
 
 

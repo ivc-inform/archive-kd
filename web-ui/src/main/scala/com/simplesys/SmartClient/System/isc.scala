@@ -9,6 +9,7 @@ import com.simplesys.SmartClient.Forms.FormsItems.{AbstractDateTimeItemCompanion
 import com.simplesys.SmartClient.Forms.{AbstractDateChooserCompanion, AbstractDynamicFormCompanion}
 import com.simplesys.SmartClient.Foundation.AbstractCanvasCompanion
 import com.simplesys.SmartClient.Grids._
+import com.simplesys.SmartClient.Layout.toolStrip.AbstractToolStripButtonCompanion
 import com.simplesys.SmartClient.RPC.AbstractRPCManagerCompanion
 import com.simplesys.SmartClient.System.date.{AbstractDateCompanion, AbstractTimeCompanion}
 import com.simplesys.SmartClient.Tools.EditContextCompanion

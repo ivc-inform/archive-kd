@@ -9,8 +9,6 @@ import scala.scalajs.js
 trait SortSpecifier extends JSObject {
     val context: DataBoundComponent
     val direction: SortDirection
-    var normalizer: js.Function
+    val normalizer: js.Function
     val property: String
 }
-
-

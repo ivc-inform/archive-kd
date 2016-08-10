@@ -1,12 +1,13 @@
 package com.simplesys.SmartClient.RPC.props
 
 import com.simplesys.SmartClient.DataBinding.Callbacks.RPCCallback
+import com.simplesys.SmartClient.RPC.RequestParams
 import com.simplesys.SmartClient.System.props.ClassProps
 import com.simplesys.System.Types.PromptStyle.PromptStyle
 import com.simplesys.System.Types.RPCTransport.RPCTransport
 import com.simplesys.System.Types._
 import com.simplesys.System._
-import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.option.{ScNone, ScOption, ScSome}
 
 import scala.scalajs.js
 
@@ -29,7 +30,7 @@ class RequestCommon[C <: js.Function] extends ClassProps {
     var httpProxyURL: ScOption[String] = ScNone
     var ignoreTimeout: ScOption[Boolean] = ScNone
     var omitNullMapValuesInResponse: ScOption[Boolean] = ScNone
-    var params: ScOption[JSObject] = ScNone
+    var params: ScOption[RequestParams] = ScNone
     var prompt: ScOption[String] = ScNone
     var promptCursor: ScOption[String] = ScNone
     var promptDelay: ScOption[Int] = ScNone

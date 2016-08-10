@@ -57,7 +57,7 @@ abstract trait AbstractRPCManagerCompanion extends AbstractClassCompanion {
     def send(data: JSAny, callback: Callback, requestParams: RPCRequest): void = js.native
     def sendProxied(request: RPCRequest): void = js.native
     def sendQueue(callback: Callback): void = js.native
-    def sendRequest(rpcRequest: RPCRequest): void = js.native
+    def sendRequest(rpcRequest: RPCRequest, evalResult: Boolean = js.native): void = js.native
     var showPrompt: Boolean = js.native
     def startQueue(shouldQueue: Boolean): Boolean = js.native
     def suspendTransaction(transaction: Int): void = js.native

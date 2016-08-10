@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Layout
 
 import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Canvas}
-import com.simplesys.SmartClient.System.{AbstractClassCompanion, IscArray}
+import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.LayoutPolicy.LayoutPolicy
 import com.simplesys.System.Types.LayoutResizeBarPolicy.LayoutResizeBarPolicy
@@ -49,7 +49,7 @@ trait Layout extends Canvas {
     var locateMembersType: LocatorTypeStrategy
     val managePercentBreadth: Boolean
     val memberOverlap: Int
-    val members: IscArray[Canvas | String]
+    var members: IscArray[_ <: Canvas]
     var membersChanged: js.ThisFunction0[classHandler, void]
     var membersMargin: Int
     var minMemberSize: Int

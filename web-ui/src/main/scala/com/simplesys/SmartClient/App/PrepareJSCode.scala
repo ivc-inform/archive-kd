@@ -28,6 +28,7 @@ class PrepareJSCode extends StaticJSCode {
         isc.defineClass(DateTimeItemSS.getClass.getSimpleName, DateTimeItem.getClass.getSimpleName)
         isc.defineClass(EditorUsers.getClass.getSimpleName, CommonTreeListGridEditorComponent.getClass.getSimpleName)
         isc.defineClass(EditorUserGroups.getClass.getSimpleName, CommonTreeGridEditorComponent.getClass.getSimpleName)
+        isc.defineClass(WindowListGridEditorToolStrip.getClass.getSimpleName, ToolStrip.getClass.getSimpleName)
         isc.addMethods(
             isc.Date.prototype,
             Date(new DateProps)
