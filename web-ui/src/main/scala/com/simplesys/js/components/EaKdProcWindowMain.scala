@@ -1,18 +1,19 @@
 package com.simplesys.js.components
 
+import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
 import com.simplesys.SmartClient.App.props._
-import com.simplesys.SmartClient.App.{CommonTreeGridEditorComponent, LoggedGroup, TabSetStack, WebApp}
+import com.simplesys.SmartClient.App.{LoggedGroup, TabSetStack, WebApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
-import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
+import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props._
 import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
-import com.simplesys.System.Types.{Alignment, ID, IconOrientation, Visibility}
+import com.simplesys.System.Types.{State => _, _}
 import com.simplesys.System._
 import com.simplesys.app
 import com.simplesys.app._
@@ -21,7 +22,7 @@ import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosP
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS, admin_User_codeGroup_NameStrong}
 
 import scala.scalajs.js.annotation.JSExport
 
@@ -406,7 +407,35 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                             title = "Пользователи".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(EditorUsers.create(new EditorUsersProps), item)
+                                                    addTab(EditorUsers.create(
+                                                        new EditorUsersProps {
+                                                            dataSourceList = DataSourcesJS.admin_User_DS.opt
+                                                            dataSourceTree = DataSourcesJS.admin_UserGroup_DS.opt
+
+                                                            fieldsTree = ListGridFiledsJS.admin_UserGroup_FLDS.opt
+                                                            editingTreeFields = FormItemsJS.admin_UserGroup_FRMITM.opt
+
+                                                            fieldsList = ListGridFiledsJS.admin_User_FLDS.opt
+                                                            editingListFields = FormItemsJS.admin_User_FRMITM.opt
+
+                                                            val userGroupEditor = EditorUserGroups.create(new EditorUserGroupsProps {
+                                                                dataSource = DataSourcesJS.admin_UserGroup_DS.opt
+                                                                fields = ListGridFiledsJS.admin_UserGroup_FLDS.opt
+                                                                editingFields = FormItemsJS.admin_UserGroup_FRMITM.opt
+                                                            })
+
+                                                            replacingFieldsList = Seq(
+                                                                new ListGridFieldProps {
+                                                                    nameStrong = admin_User_codeGroup_NameStrong.opt
+                                                                    editorType = FormItemComponentType.LookupTreeGridEditorItem
+                                                                    editorProperties = LookupTreeGridEditorItem(
+                                                                        new LookupTreeGridEditorItemProps {
+                                                                            treeGridEditor = userGroupEditor.opt
+                                                                        }).opt
+                                                                }
+                                                            ).opt
+                                                        }
+                                                    ), item)
                                             }.toFunc.opt
                                         }
                                     ).opt
