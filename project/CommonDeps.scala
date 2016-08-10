@@ -14,7 +14,7 @@ object PluginDeps {
         val xsbtWebVersion = "0.9.1"
         val sbtPackVersion = "0.7.7"
 
-        val scalaJSPluginVersion = "0.6.10"
+        val scalaJSPluginVersion = "0.6.11"
 
         val macroParadiseVersion = "2.0.1"
     }
@@ -40,7 +40,7 @@ object CommonDeps {
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
 
-        val jettyVersion = "9.3.10.v20160621"
+        val jettyVersion = "9.3.11.v20160721"
 
         val kamonVersion = "0.5.2"
 
@@ -53,17 +53,17 @@ object CommonDeps {
         val dictionaryMitEduInterfaceVersion = "2.3.3"
 
         //val smartclientVersion = "10.1.1"
-        val smartclientVersion = "11.0-v20160530"
+        val smartclientVersion = "11.0-v20160805.8"
         //val smartclientVersion = "10.1-v20160316"
 
-        val akkaVersion = "2.4.7"
+        val akkaVersion = "2.4.8"
 
         val servletAPIVersion = "3.1.0"
 
-        val scalaTestVersion = "2.2.4"
+        val scalaTestVersion = "3.0.0-M15"
         val scalaJSVersion = "1.0-SNAPSHOT"
 
-        val scalajsDOMVersion = "0.9.0"
+        val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
     }
 

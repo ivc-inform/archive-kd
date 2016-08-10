@@ -10,6 +10,7 @@ import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
+import com.simplesys.SmartClient.Layout.RibbonGroupSS
 import com.simplesys.SmartClient.Layout.props._
 import com.simplesys.SmartClient.RPC.RPCManagerSS
 import com.simplesys.SmartClient.System.{RibbonBar, RibbonGroupSS, _}
@@ -35,27 +36,10 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
 
     override val appImageDir: String = "images/"
 
-    val functionButton = IconMenuButtonSS.create(
-        new IconMenuButtonSSProps {
-            title = "Операции".ellipsis.opt
-            icon = app.iconConstructor.opt
-            identifier = "33EE1839-8D4D-FFA0-E491-22B54F212772A".opt
-        }
-    )
-
-    val functionGroup = RibbonGroupSS.create(
-        new RibbonGroupSSProps {
-            title = "Управление".ellipsis.opt
-            visibility = Visibility.hidden.opt
-            controls = Seq(
-                functionButton
-            ).opt
-        })
-
-    private val managedSystemGroups = Seq(
+    private val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Пользователь".ellipsis.opt
+                title = "Пользователи".ellipsis.opt
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
@@ -379,10 +363,10 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
             item
     }
 
-    private val managedAdminsGroups = Seq(
+    private val managedAdminsGroups: Seq[RibbonGroupSS] = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Администратор".ellipsis.opt
+                title = "Администраторы".ellipsis.opt
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
@@ -455,7 +439,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
     private val managedDevsGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Misc".ellipsis.opt
+                title = "Разработчики".ellipsis.opt
                 controls = Seq(
                     IconButtonSS.create(
                         new IconButtonSSProps {
@@ -497,7 +481,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                             width = "100%"
                             showResizeBar = true.opt
                             members = (
-                              managedSystemGroups ++
+                              managedUsersGroups ++
                                 managedAdminsGroups ++
                                 Seq(functionGroup) ++
                                 managedDevsGroups ++
@@ -524,7 +508,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
 
                                                                                 captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
                                                                                 captionUserLabel.show()
-                                                                                managedSystemGroups.foreach(_.show())
+                                                                                managedUsersGroups.foreach(_.show())
                                                                                 LoggedGroup.codeGroup = codeGroup.toOption
 
                                                                                 if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
@@ -542,7 +526,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                                 thiz setTitle "Выход"
                                                                                 thiz setIcon app.closeProgram
                                                                             } else {
-                                                                                managedSystemGroups.foreach(_.hide())
+                                                                                managedUsersGroups.foreach(_.hide())
                                                                                 managedAdminsGroups.foreach(_.hide())
                                                                                 managedDevsGroups.foreach(_.hide())
                                                                                 captionUserLabel.hide()
@@ -559,7 +543,7 @@ object EaKdProcWindowMain extends WebApp with TabSetStack {
                                                                     thiz setTitle "Вход".ellipsis
                                                                     thiz setIcon app.login
                                                                     LoggedGroup.logged = false
-                                                                    managedSystemGroups.foreach(_.hide())
+                                                                    managedUsersGroups.foreach(_.hide())
                                                                     managedAdminsGroups.foreach(_.hide())
                                                                     managedDevsGroups.foreach(_.hide())
                                                                     captionUserLabel.hide()

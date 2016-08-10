@@ -7,10 +7,13 @@ import com.simplesys.SmartClient.DataBinding.{DataSource, DataSourceSSstatic}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
+import com.simplesys.SmartClient.Layout.RibbonGroupSS
+import com.simplesys.SmartClient.Layout.props.{IconMenuButtonSSProps, RibbonGroupSSProps}
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.Tools.WindowsStack
 import com.simplesys.System.Types._
 import com.simplesys.System._
+import com.simplesys.app
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
@@ -22,9 +25,30 @@ trait WebApp {
 
     protected val windowsStack = new WindowsStack
 
-    val loadSchemas: Boolean
+    protected val loadSchemas: Boolean
     val identifier: ID
     val appImageDir: String
+
+    protected val functionButton = IconMenuButtonSS.create(
+        new IconMenuButtonSSProps {
+            title = "Операции".ellipsis.opt
+            icon = app.iconConstructor.opt
+            identifier = "33EE1839-8D4D-FFA0-E491-22B54F212772A".opt
+        }
+    )
+
+    protected val functionGroup = RibbonGroupSS.create(
+        new RibbonGroupSSProps {
+            title = "Управление".ellipsis.opt
+            visibility = Visibility.hidden.opt
+            controls = Seq(
+                functionButton
+            ).opt
+        })
+
+    protected val managedUsersGroups: Seq[RibbonGroupSS]
+    protected val managedAdminsGroups: Seq[RibbonGroupSS]
+    protected val managedDevsGroups: Seq[RibbonGroupSS]
 
     //Можно при наследование объявлять как lazy val
     protected def mainCanvas: Canvas
