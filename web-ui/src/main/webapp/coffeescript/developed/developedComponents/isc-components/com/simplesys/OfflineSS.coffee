@@ -22,7 +22,7 @@ isc.defineClass("OfflineSS", isc.Offline).addClassMethods
 				guid: key
 				ts  : ts
 			callback : (rpcResponse, data, rpcRequest) ->
-				if _callback?
+				if isc.isA.Function(_callback) and data?.response?.data?.properties4Storage and isc.isA.String(data.response.data.properties4Storage)
 					@.fireCallback _callback, "result", [if data.response.data.properties4Storage is strEmpty then [] else isc.JSON.decode(data.response.data.properties4Storage)]
 					return
 		return

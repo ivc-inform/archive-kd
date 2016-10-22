@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.Drawing.props
 
 import com.simplesys.SmartClient.Control.MenuSS
+import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Drawing._
 import com.simplesys.SmartClient.Drawing.drawItem._
 import com.simplesys.SmartClient.Drawing.gradient.Gradient
@@ -41,6 +42,8 @@ class DrawItemProps extends ClassProps {
             //isc debugTrap title
 
             var titleLabel = thiz.titleLabel
+            //thiz.updateFont()
+
             val showTitleLabelBackground: Boolean = thiz.showTitleLabelBackground
             var titleLabelBackground = thiz.titleLabelBackground
             val drawPane = thiz.drawPane
@@ -379,6 +382,7 @@ class DrawItemProps extends ClassProps {
     var destroyed: ScOption[Boolean] = ScNone
     var destroying: ScOption[Boolean] = ScNone
     var dragMove: ScOption[js.Function0[Boolean]] = ScNone
+
     def move(parentDrawItem: DrawItem, drawItems: IscArray[DrawItem], kindOfRefs: KindOfRefs): Unit = {
 
         val center = parentDrawItem.getCenter()
@@ -498,6 +502,7 @@ class DrawItemProps extends ClassProps {
     var editProxyProperties: ScOption[EditProxy] = ScNone
     var endArrow: ScOption[ArrowStyle] = ScNone
     var endKnob: ScOption[DrawKnob] = ScNone
+    var fieldDataSource: ScOption[DataSource] = ScNone
     var fillColor: ScOption[CSSColor] = ScNone
     var fillGradient: ScOption[Gradient] = ScNone
     var fillOpacity: ScOption[Double] = ScNone
@@ -517,14 +522,30 @@ class DrawItemProps extends ClassProps {
         (thiz: classHandler, dx: Double, dy: Double) =>
 
             //isc debugTrap thiz
+
             thiz.outConnectedItems foreach (move(thiz, _, OutcomingRefs))
 
             thiz.inConnectedItems foreach (move(thiz, _, IncomingRefs))
 
             thiz.targetGlue.foreach(_.setGluedDrawItem())
 
+            def moveGluedItems(targetGlueDrawItem: JSUndefined[DrawItem]): Unit = {
+                targetGlueDrawItem.foreach {
+                    drawItem ⇒
+                        drawItem.targetGlue.foreach {
+                            drawItem ⇒
+                                drawItem.outConnectedItems foreach (move(drawItem, _, OutcomingRefs))
+                                drawItem.inConnectedItems foreach (move(drawItem, _, IncomingRefs))
+                        }
+                        moveGluedItems(drawItem.targetGlue)
+                }
+            }
+
+            moveGluedItems(thiz)
+
             true
     }.toThisFunc.opt
+
     def intercect2Rectangle(rect1: IscArray[Double], rect2: IscArray[Double]): Boolean = {
 
         val __rect1 = Rectangle(rect1)
@@ -599,12 +620,9 @@ class DrawItemProps extends ClassProps {
     var _moved4Glue: ScOption[ThisFunction4[classHandler, Double, Double, Double, Double, _]] = {
         (thiz: classHandler, newLeft: Double, newTop: Double, newRight: Double, newBottom: Double) =>
             if (thiz.enable2Glue.getOrElse(false)) {
-                //                if (isc.isA.DrawRect(thiz)) {
-                //                    println(s"box: (${thiz.getClassName()}) ${thiz.getBoundingBox().toString}")
-                //                    println(s"box1: (${thiz.getClassName()}) $newLeft, $newTop, $newRight, $newBottom")
-                //                }
 
                 val connectItems = thiz.drawPane.map(_.drawItems.filter(item => item.enable4Glue.getOrElse(false) && item.getID() != thiz.getID() && (item.sourceGlue.isEmpty || item.sourceGlue.get.getID() != thiz.getID())))
+
                 connectItems.foreach {
                     _.foreach {
                         item =>
@@ -646,6 +664,7 @@ class DrawItemProps extends ClassProps {
     var proportionalResizeModifiers: ScOption[Seq[KeyName]] = ScNone
     var proportionalResizing: ScOption[ProportionalResizeMode] = ScNone
     var resized: ScOption[js.Function0[_]] = ScNone
+
     var resized1: ScOption[ThisFunction4[classHandler, Double, Double, Double, Double, _]] = {
         (thiz: classHandler, newLeft: Double, newTop: Double, newRight: Double, newBottom: Double) =>
 
@@ -656,6 +675,7 @@ class DrawItemProps extends ClassProps {
             thiz.setGluedDrawItem()
             thiz.targetGlue.foreach(_.setGluedDrawItem())
     }.toThisFunc.opt
+
     var _resized1: ScOption[ThisFunction4[classHandler, Double, Double, Double, Double, _]] = {
         (thiz: classHandler, newLeft: Double, newTop: Double, newRight: Double, newBottom: Double) =>
             thiz._transform = jSUndefined
@@ -665,6 +685,7 @@ class DrawItemProps extends ClassProps {
             thiz.saveCoordinates()
             thiz.resized1(newLeft, newTop, newRight, newBottom)
     }.toThisFunc.opt
+
     var resizeKnobPoints: ScOption[Seq[ResizeKnobPoint]] = ScNone
     var resizeOutline: ScOption[DrawRect] = ScNone
     var resizeViaLocalTransformOnly: ScOption[Boolean] = ScNone
@@ -811,14 +832,11 @@ class DrawItemProps extends ClassProps {
                     (isc.DrawItem._makeCoordinate(oldLeft) != isc.DrawItem._makeCoordinate(_newLeft) && isc.DrawItem._makeCoordinate(oldRight - oldLeft) == isc.DrawItem._makeCoordinate(_newRight - _newLeft)) ||
                       (isc.DrawItem._makeCoordinate(oldTop) != isc.DrawItem._makeCoordinate(_newTop) && isc.DrawItem._makeCoordinate(oldBottom - oldTop) == isc.DrawItem._makeCoordinate(_newBottom - _newTop))
                 ) {
-                    //thiz._moved(isc.DrawItem._makeCoordinate(_newLeft - oldLeft), isc.DrawItem._makeCoordinate(_newTop - oldTop))
                     thiz._moved(isc.DrawItem._makeCoordinate(_newLeft - oldLeft), isc.DrawItem._makeCoordinate(_newTop - oldTop))
                     thiz._moved4Glue(isc.DrawItem._makeCoordinate(_newLeft), isc.DrawItem._makeCoordinate(_newTop), isc.DrawItem._makeCoordinate(_newRight), isc.DrawItem._makeCoordinate(_newBottom))
                 }
 
                 if (isc.DrawItem._makeCoordinate(oldRight - oldLeft) != isc.DrawItem._makeCoordinate(_newRight - _newLeft) || isc.DrawItem._makeCoordinate(oldBottom - oldTop) != isc.DrawItem._makeCoordinate(_newBottom - _newTop)) {
-                    //isc debugTrap (isc.DrawItem._makeCoordinate(oldRight - oldLeft), isc.DrawItem._makeCoordinate(_newRight - _newLeft))
-                    //isc debugTrap (isc.DrawItem._makeCoordinate(oldBottom - oldTop), isc.DrawItem._makeCoordinate(_newBottom - _newTop))
                     thiz._resized()
                     thiz._resized1(isc.DrawItem._makeCoordinate(_newLeft), isc.DrawItem._makeCoordinate(_newTop), isc.DrawItem._makeCoordinate(_newRight), isc.DrawItem._makeCoordinate(_newBottom))
                 }

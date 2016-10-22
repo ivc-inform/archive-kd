@@ -1,10 +1,13 @@
 package com.simplesys.SmartClient.Drawing.gradient
 
 import scala.scalajs.js
-import scala.scalajs.js.|
+import scala.scalajs.js.annotation.ScalaJSDefined
 
-@js.native
+@ScalaJSDefined
 trait SimpleGradient extends Gradient {
-    var direction:Double
+
+    import com.simplesys.System.JSUndefined
+
+    var direction: JSUndefined[Double]
 }
 

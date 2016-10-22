@@ -8,9 +8,11 @@ import scala.scalajs.js.annotation.ScalaJSDefined
 
 @ScalaJSDefined
 trait Gradient extends JSObject {
-    var colorStops: IscArray[ColorStop]
-    var endColor: CSSColor
-    var id: ID
-    var startColor: CSSColor
+
+    import com.simplesys.System.JSUndefined
+
+    var colorStops: JSUndefined[IscArray[ColorStop]]
+    var endColor: JSUndefined[CSSColor]
+    var startColor: JSUndefined[CSSColor]
 }
 

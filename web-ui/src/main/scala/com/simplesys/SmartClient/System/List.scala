@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.System
 
-import com.simplesys.SmartClient.DataBinding.AdvancedCriteria
+import com.simplesys.SmartClient.DataBinding._
 import com.simplesys.System.Types.void
 import com.simplesys.System.{JSAny, JSObject}
 

@@ -1,14 +1,15 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonTreeListGridEditorComponent
+import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Foundation.props.canvas.ImgPropertiesProps
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.function._
-import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
+import com.simplesys.option.{ScNone, ScOption}
 
 class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps with InitialTrait {
     type classHandler <: CommonTreeListGridEditorComponent
@@ -41,19 +42,25 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     wrapTreeCells = true.opt
     showOpenIconsTree = false.opt
     trackerImageList = ImgProperties(
-        new ImgPropertiesProps{
-          imgDir = Common.iconTreeNode.opt
-          height = 24.opt
-          width = 24.opt
+        new ImgPropertiesProps {
+            imgDir = Common.iconTreeNode.opt
+            height = 24.opt
+            width = 24.opt
         }
     ).opt
 
     var replacingFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var replacingFieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone
 
+    var captionMenuTree: ScOption[String] = "Группы пользователей".opt
+    var captionMenuList: ScOption[String] = "Пользователи".opt
+
+    var customMenuTree: ScOption[Seq[MenuSSItem]] = ScNone
+    var customMenuList: ScOption[Seq[MenuSSItem]] = ScNone
+
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
+            //isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             val res = initWidget(thiz, thiz.fieldsList, thiz.replacingFieldsList, thiz.editingListFields)
             thiz.fieldsList = res._1
@@ -65,10 +72,19 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
 
             thiz.Super("initWidget", arguments)
 
+            val cml = if (thiz.customMenuList.isEmpty) ScNone else thiz.customMenuList.get.toSeq.opt
+            val cmt = if (thiz.customMenuTree.isEmpty) ScNone else thiz.customMenuTree.get.toSeq.opt
+
+            //isc debugTrap (cml, cmt)
+
             thiz setFuncMenu TreeListGridContextMenu.create(
                 new TreeListGridContextMenuProps {
+                    captionMenuTree = thiz.captionMenuTree.opt
+                    captionMenuList = thiz.captionMenuList.opt
                     simpleTableList = thiz.simpleTableList.opt
                     simpleTableTree = thiz.simpleTableTree.opt
+                    customMenuList = cml
+                    customMenuTree = cmt
                     owner = thiz.opt
                 }
             )

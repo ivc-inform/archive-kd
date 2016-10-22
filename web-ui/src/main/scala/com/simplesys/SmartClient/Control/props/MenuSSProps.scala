@@ -21,7 +21,6 @@ import scala.scalajs.js.ThisFunction1
 class MenuSSProps extends GridProps[ListGridField, MenuSSItem] {
     type classHandler <: MenuSS
 
-    var owner: ScOption[Canvas] = ScNone
     var autoDismiss: ScOption[Boolean] = ScNone
     var autoDismissOnBlur: ScOption[Boolean] = ScNone
     var cancelButtonTitle: ScOption[HTMLString] = ScNone
@@ -47,13 +46,16 @@ class MenuSSProps extends GridProps[ListGridField, MenuSSItem] {
 
             if (menu.isDefined) {
 
-                val items = menu.get.items.duplicate()
+                if (menu.get.items.isEmpty)
+                    menu.get.items = menu.get.data
+
+                val items = menu.get.items.get.duplicate()
                 items add MenuSSItem(
                     new MenuSSItemProps {
                         isSeparator = true.opt
                     }
                 )
-                items addArray thiz.items.duplicate()
+                items addArray thiz.items.get.duplicate()
                 val res = MenuSS.create()
                 res.setData(items)
                 res

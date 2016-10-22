@@ -52,6 +52,6 @@ class SliderProps extends CanvasProps {
     var vertical: ScOption[Boolean] = ScNone
     var vThumbStyle: ScOption[CSSStyleName] = ScNone
     var vTrackStyle: ScOption[CSSStyleName] = ScNone
-    var drawPane : ScOption[JSUndefined[DrawPane]] = ScNone
+    var drawPane : ScOption[DrawPane] = ScNone
 
 }

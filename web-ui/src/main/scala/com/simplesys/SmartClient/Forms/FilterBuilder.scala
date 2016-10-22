@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.Forms
 import com.simplesys.SmartClient.Control.{IButton, ImgButton}
 import com.simplesys.SmartClient.DataBinding.dataSource.DataSourceField
 import com.simplesys.SmartClient.DataBinding.{AdvancedCriteria, Criterion, DataSource}
-import com.simplesys.SmartClient.Forms.FormsItems.{FormItem, PickList, SelectItem}
+import com.simplesys.SmartClient.Forms.formsItems.{FormItem, PickList, SelectItem}
 import com.simplesys.SmartClient.Foundation.{Canvas, Label}
 import com.simplesys.SmartClient.Layout.{AbstractLayoutCompanion, HLayout, Layout, VStack}
 import com.simplesys.SmartClient.System.IscArray

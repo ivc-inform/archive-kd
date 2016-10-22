@@ -7,6 +7,11 @@ import com.simplesys.System.Types.{CSSStyleName, SCImgURL}
 import com.simplesys.option.{ScNone, ScOption}
 
 class StretchImgProps extends StatefulCanvasProps {
+
+    import com.simplesys.SmartClient.Foundation.StretchImg
+
+    type classHandler <: StretchImg
+
     var gripImgSuffix: ScOption[String] = ScNone
     var hSrc: ScOption[SCImgURL] = ScNone
     var imageType: ScOption[ImageStyle] = ScNone

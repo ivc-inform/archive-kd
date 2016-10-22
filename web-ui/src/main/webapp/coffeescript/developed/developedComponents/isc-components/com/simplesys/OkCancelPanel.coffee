@@ -3,14 +3,16 @@ simpleSyS = @simpleSyS
 isc.defineClass("OkCancelPanel", isc.HPanelSS).addProperties
 	"defaultLayoutAlign": "center"
 	"autoDraw"          : false
-	"okBtn"             : null
+	"height"            : 28
+	"okIcon"            : "ok.png"
+	"cancelIcon"        : "cancel.png"
 	"ownerDestroy"      : true
 	"ownerHide"         : true
 	"cancelCaption"     : "Отменить"
 	"okCaption"         : "Выполнить"
 	"timeoutClose"      : 1000
-	setDisabledOk       : (value) -> @okBtn.setDisabled(value); @
-	setOwner            : (owner) -> @owner = owner; @
+	"setDisabledOk"       : (value) -> @okBtn.setDisabled(value); @
+	"setOwner"            : (owner) -> @owner = owner; @
 	"initWidget"        : ->
 		@Super "initWidget", arguments
 
@@ -19,19 +21,22 @@ isc.defineClass("OkCancelPanel", isc.HPanelSS).addProperties
 							"width": "*"
 
 						@okBtn = isc.IButtonSS.create
+							"autoFit": true
 							"click": =>
-								@okFunction? @
-								if @owner?
-									simpleSyS?.checkOwner? @owner
-									@owner?.okFunction? @
-									if @ownerDestroy is true
-										@owner?.markForDestroy?()
-									else if @ownerHide is true
-										@owner?.hide?()
+								if isc.isA.Function @okFunction
+									@okFunction @
+								else
+									if @owner?
+										simpleSyS?.checkOwner? @owner
+										@owner.okFunction? @
+										if @ownerDestroy is true
+											@owner?.markForDestroy?()
+										else if @ownerHide is true
+											@owner?.hide?()
 								return
 
 							"title"           : @okCaption
-							"icon"            : "ok.png"
+							"icon"            : @okIcon
 							"width"           : 100
 							"showDisabledIcon": true
 
@@ -39,19 +44,22 @@ isc.defineClass("OkCancelPanel", isc.HPanelSS).addProperties
 							"width": "*"
 
 						@cancelButton = isc.IButtonSS.create
+							"autoFit": true
 							"click": =>
-								@cancelFunction? @
-								if @owner?
-									simpleSyS?.checkOwner? @owner
-									@owner?.cancelFunction? @
-									if @ownerDestroy is true
-										@owner?.markForDestroy?()
-									else
-										@owner?.hide?()
+								if isc.isA.Function @cancelFunction
+									@cancelFunction @
+								else
+									if @owner?
+										simpleSyS?.checkOwner? @owner
+										@owner?.cancelFunction? @
+										if @ownerDestroy is true
+											@owner?.markForDestroy?()
+										else if @ownerHide is true
+											@owner?.hide?()
 								return
 
 							"title": @cancelCaption
-							"icon" : "cancel.png"
+							"icon" : @cancelIcon
 							"width": 100
 
 						isc.LayoutSpacerSS.create
@@ -62,10 +70,10 @@ isc.defineClass("OkCancelPanel", isc.HPanelSS).addProperties
 isc.defineClass("OkPanel", isc.HPanelSS).addProperties
 	"defaultLayoutAlign": "center"
 	"autoDraw": false
-	"okBtn": null
 	"ownerDestroy": true
 	"ownerHide": true
 	"okCaption": "Выполнить"
+	"okIcon"   : "ok.png"
 	"timeoutClose": 1000
 	setDisabledOk: (value) -> @okBtn.setDisabled(value); @
 	setOwner: (owner) -> @owner = owner; @
@@ -77,6 +85,7 @@ isc.defineClass("OkPanel", isc.HPanelSS).addProperties
 				"width": "*"
 
 			@okBtn = isc.IButtonSS.create
+				"autoFit": true
 				"click": =>
 					@okFunction? @
 					if @owner?
@@ -89,7 +98,7 @@ isc.defineClass("OkPanel", isc.HPanelSS).addProperties
 					return
 
 				"title": @okCaption
-				"icon": "ok.png"
+				"icon":  @okIcon
 				"width": 100
 				"showDisabledIcon": true
 

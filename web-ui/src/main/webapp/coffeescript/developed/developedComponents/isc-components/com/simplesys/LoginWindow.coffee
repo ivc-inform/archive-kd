@@ -8,7 +8,7 @@ isc.defineClass("LoginWindow", isc.WindowSS).addProperties
 			login = form.getItem("login").getValue()
 
 			isc.RPCManagerSS.sendRequest
-				"timeout" : 10000
+				"timeout" : 60000
 				"sendNoQueue" : true
 				"callback"     : (rpcResponse) =>
 					data = rpcResponse.data
@@ -85,7 +85,7 @@ isc.defineClass("LoginWindow", isc.WindowSS).addProperties
 	"showCloseButton" : false
 	"autoSize"          : true
 	"headerIconPath"    : "key-login-icon.png"
-	"title"             : "Аутентификация..."
+	"title"             : "Идентификация..."
 	"initWidget"        : ->
 		@Super "initWidget", arguments
 		if not simpleSyS?

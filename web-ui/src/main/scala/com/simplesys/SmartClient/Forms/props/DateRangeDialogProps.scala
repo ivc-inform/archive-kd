@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Forms.props
 
 import com.simplesys.SmartClient.Control.IButton
-import com.simplesys.SmartClient.Forms.FormsItems.DateRangeItem
+import com.simplesys.SmartClient.Forms.formsItems.DateRangeItem
 import com.simplesys.SmartClient.Layout.props.WindowProps
 import com.simplesys.option.{ScNone, ScOption}
 

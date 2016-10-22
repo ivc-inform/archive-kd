@@ -5,8 +5,8 @@ import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Drawing.drawItem.DrawLinePathSS
-import com.simplesys.SmartClient.Drawing.props.{DrawKnobProps, DrawLineCommons}
-import com.simplesys.SmartClient.Drawing.{DrawKnob, Point}
+import com.simplesys.SmartClient.Drawing.props.DrawKnobProps
+import com.simplesys.SmartClient.Drawing.{DrawKnob, DrawLineCommons, Point}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.math.AffineTransform
@@ -18,6 +18,7 @@ import com.simplesys.function._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScOption, ScSome}
 
+import scala.scalajs.js
 import scala.scalajs.js._
 
 class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons {
@@ -71,14 +72,17 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons {
             thiz.endLeft = thiz.endPoint.getX().get
             thiz.endTop = thiz.endPoint.getY().get
 
-            thiz.titleRotationMode = TitleRotationMode.withLineAlwaysUp
+            //isc debugTrap thiz.titleRotationMode
+            //thiz.titleRotationMode = TitleRotationMode.withLineAlwaysUp
 
             thiz.cKnobs = IscArray()
-            thiz.controlPoints = IscArray(thiz.points.slice(1, thiz.points.length - 1).map(item => UndefOr.any2undefOrA(item)): _*)
+            thiz.controlPoints = IscArray(thiz.points.slice(1, thiz.points.length - 1).map(item => js.UndefOr.any2undefOrA(item)): _*)
             //isc debugTrap thiz.controlPoints
             thiz.points = thiz._getSegmentPoints()
 
             thiz.Super("init", arguments)
+
+            //isc debugTrap(thiz)
 
     }.toThisFunc.opt
 
@@ -252,12 +256,11 @@ class DrawLinePathSSProps extends DrawPathProps with DrawLineCommons {
                                         thiz.cKnobs(index) = thiz.createAutoChild(
                                             s"c${index}Knob", DrawKnob(
                                                 new DrawKnobProps {
-                                                    _constructor = "DrawKnob".opt
                                                     x = v.getX().get.opt
                                                     y = v.getY().get.opt
                                                     click = {
                                                         (thiz: DrawKnob) =>
-                                                            if (isc.EventHandler.ctrlKeyDown())
+                                                            if (isc.EventHandler.shiftKeyDown())
                                                                 topThiz removeControlPointKnob thiz
                                                             false
                                                     }.toThisFunc.opt

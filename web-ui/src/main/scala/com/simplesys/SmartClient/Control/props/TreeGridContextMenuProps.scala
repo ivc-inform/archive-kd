@@ -10,9 +10,12 @@ import com.simplesys.System.Types.Visibility
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
+import com.simplesys.option.{ScNone, ScOption}
 
 class TreeGridContextMenuProps extends MenuSSProps {
     type classHandler <: TreeGridContextMenu
+
+    var customMenu: ScOption[Seq[MenuSSItem]] = ScNone
 
     def newRootMenuItem = MenuSSItem(
         new MenuSSItemProps {
@@ -25,16 +28,13 @@ class TreeGridContextMenuProps extends MenuSSProps {
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     simpleSyS checkOwner owner
                     owner.deselectAllRecords()
-                    if (owner.treeGrid.newRequestProperties.isEmpty)
-                        isc error "Нет функции newRequestProperties."
-                    else {
-                        if (owner.treeGrid.newRequestProperties.isDefined)
-                            owner.startEditingNewInForm(
-                                requestProperties = (owner.treeGrid.newRequestProperties.get) ()
-                            )
-                        else
-                            owner.startEditingNewInForm()
-                    }
+
+                    if (owner.treeGrid.newRequestProperties.isDefined)
+                        owner.startEditingNewInForm(
+                            requestProperties = (owner.treeGrid.newRequestProperties.get) ()
+                        )
+                    else
+                        owner.startEditingNewInForm()
 
             }.toFunc.opt
         })
@@ -48,24 +48,22 @@ class TreeGridContextMenuProps extends MenuSSProps {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     //simpleSyS checkOwner owner
-                    if (owner.treeGrid.newRequestProperties.isEmpty)
-                        isc error "Нет функции newRequestProperties."
-                    else {
-                        val parentIdField = owner.treeGrid.data.parentIdField
-                        val idField = owner.treeGrid.data.idField
 
-                        if (owner.treeGrid.newRequestProperties.isDefined) {
-                            val request = (owner.treeGrid.newRequestProperties.get) ()
-                            val idValue = owner.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idField)
+                    val parentIdField = owner.treeGrid.data.parentIdField
+                    val idField = owner.treeGrid.data.idField
 
-                            request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField)(idValue)
+                    if (owner.treeGrid.newRequestProperties.isDefined) {
+                        val request = (owner.treeGrid.newRequestProperties.get) ()
+                        val idValue = owner.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idField)
 
-                            owner.startEditingNewInForm(
-                                requestProperties = request
-                            )
-                        } else
-                            owner.startEditingNewInForm()
-                    }
+                        request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField)(idValue)
+
+                        owner.startEditingNewInForm(
+                            requestProperties = request
+                        )
+                    } else
+                        owner.startEditingNewInForm()
+
             }.toFunc.opt
             enableIf = {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
@@ -84,7 +82,7 @@ class TreeGridContextMenuProps extends MenuSSProps {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     simpleSyS checkOwner owner
-                    owner.getSelectedRecords().foreach(record => owner.dataSource.addData(isc.deletePrivateProps(record)))
+                    owner.getSelectedRecords().foreach(record => owner.dataSource.addData(ListGridContextMenuProps.deletePKField(owner.dataSource, isc.deletePrivateProps(record))))
                     false
             }.toFunc.opt
             enableIf = {
@@ -237,7 +235,7 @@ class TreeGridContextMenuProps extends MenuSSProps {
 
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
+            //isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
             val items = Seq(
                 newRootMenuItem,
                 newMenuItem,
@@ -246,11 +244,12 @@ class TreeGridContextMenuProps extends MenuSSProps {
                 enableReparentMenuItem,
                 deleteMenuItem,
                 refreshMenuItem,
-                openFolderMenuItem,
-                separatorMenuItem,
-                saveMenuItem,
-                cancelMenuItem
-            )
+                openFolderMenuItem) ++
+              ListGridContextMenuProps.getCustomMenuItems(thiz.customMenu) ++
+              Seq(separatorMenuItem,
+                  saveMenuItem,
+                  cancelMenuItem
+              )
 
             thiz.items = IscArray(items: _*)
             thiz.Super("initWidget", args)

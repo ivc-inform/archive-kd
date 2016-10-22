@@ -3,16 +3,25 @@ package com.simplesys.SmartClient.Control.props
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Control.{ListGridContextMenu, MenuSS}
+import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.System.{Common, simpleSyS, _}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
+import com.simplesys.option.{ScNone, ScOption}
 
 trait IDMenu
 
 object ListGridContextMenuProps {
+    def deletePKField(dataSource: DataSource, record: JSObject): JSObject = {
+        dataSource.getPrimaryKeyFieldNames().foreach {
+            name =>
+                isc.deleteProp(record, name)
+        }
+        record
+    }
     def newMenuItemWithForm = MenuSSItem(
         new MenuSSItemProps {
             title = "Новый".ellipsis.opt
@@ -21,8 +30,12 @@ object ListGridContextMenuProps {
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
-                    simpleSyS checkOwner owner
                     owner.startEditingNewInForm()
+            }.toFunc.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    true
+
             }.toFunc.opt
         })
 
@@ -37,6 +50,10 @@ object ListGridContextMenuProps {
                     simpleSyS checkOwner owner
                     owner.startEditingNew()
             }.toFunc.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    true
+            }.toFunc.opt
         })
 
     def copyMenuItem = MenuSSItem(
@@ -48,7 +65,7 @@ object ListGridContextMenuProps {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
-                    owner.getSelectedRecords().foreach(owner.dataSource.addData(_))
+                    owner.getSelectedRecords().foreach(record => owner.dataSource.addData(deletePKField(owner.dataSource, record)))
                     false
             }.toFunc.opt
             enableIf = {
@@ -114,6 +131,10 @@ object ListGridContextMenuProps {
                     simpleSyS checkOwner owner
                     owner.fullRefresh()
             }.toFunc.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    true
+            }.toFunc.opt
         })
 
     def separetorMenuItem = MenuSSItem(
@@ -175,26 +196,57 @@ object ListGridContextMenuProps {
         saveMenuItem,
         cancelMenuItem
     )
+
+    def getCustomMenuItems(customMenu: JSUndefined[IscArray[MenuSSItem]]): Seq[MenuSSItem] = {
+        if (customMenu.isEmpty)
+            Seq.empty[MenuSSItem]
+        else {
+            Seq(
+                MenuSSItem(
+                    new MenuSSItemProps {
+                        isSeparator = true.opt
+                    })
+            ) ++ customMenu.get
+        }
+    }
 }
 
 class ListGridContextMenuProps extends MenuSSProps {
     type classHandler <: ListGridContextMenu
+
+    var customMenu: ScOption[Seq[MenuSSItem]] = ScNone
+
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
+            //isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
 
-            val items = Seq(ListGridContextMenuProps.newMenuItem) ++ ListGridContextMenuProps.otherItems ++ ListGridContextMenuProps.otherItems1
+            //isc debugTrap thiz.customMenu
+
+            val items = Seq(ListGridContextMenuProps.newMenuItem) ++
+              ListGridContextMenuProps.otherItems ++
+              ListGridContextMenuProps.getCustomMenuItems(thiz.customMenu) ++
+              ListGridContextMenuProps.otherItems1
+
             thiz.items = IscArray(items: _*)
             thiz.Super("initWidget", args)
     }.toThisFunc.opt
 }
 
 class ListGridContextMenuWithFormProps extends MenuSSProps {
+    type classHandler <: ListGridContextMenu
+
+    var customMenu: ScOption[Seq[MenuSSItem]] = ScNone
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
+            //isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
 
-            val items = Seq(ListGridContextMenuProps.newMenuItemWithForm) ++ ListGridContextMenuProps.otherItems ++ ListGridContextMenuProps.otherItems1
+            isc debugTrap thiz.customMenu
+
+            val items = Seq(ListGridContextMenuProps.newMenuItemWithForm) ++
+              ListGridContextMenuProps.otherItems ++
+              ListGridContextMenuProps.getCustomMenuItems(thiz.customMenu) ++
+              ListGridContextMenuProps.otherItems1
+
             thiz.items = IscArray(items: _*)
             thiz.Super("initWidget", args)
     }.toThisFunc.opt

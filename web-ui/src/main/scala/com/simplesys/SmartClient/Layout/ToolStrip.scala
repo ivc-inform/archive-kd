@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Layout
 
 import com.simplesys.SmartClient.Forms.DynamicForm
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment

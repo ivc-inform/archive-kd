@@ -23,11 +23,11 @@ if not isc.module_RealtimeMessaging?
 				executed = false
 
 				channels.forEach (channel) =>
-					##if not @_channels[channel]?
 					@_channels[channel] =
 							isChannel: true
 							target   : target
 							callback : callback
+							event : event
 
 					executed = true
 					return
@@ -97,8 +97,19 @@ if not isc.module_RealtimeMessaging?
 					                    )
 			return
 
-		messagingSubscribeURL: => "#{@simpleSysContextPath}Message/Subscribe"
-		messagingSendURL : => "#{@simpleSysContextPath}Message/Send"
+			
+		checkSimpleSysContextPath: () ->
+			if not @simpleSysContextPath? and not simpleSyS.simpleSysContextPath?
+				Log.logError "simpleSysContextPath undefined"
+				return
+				
+		messagingSubscribeURL: ->
+			@checkSimpleSysContextPath()
+			"#{if @simpleSysContextPath? then @simpleSysContextPath else simpleSyS.simpleSysContextPath}Message/Subscribe"
+			
+		messagingSendURL : ->
+			@checkSimpleSysContextPath()
+			"#{if @simpleSysContextPath? then @simpleSysContextPath else simpleSyS.simpleSysContextPath}Message/Send"
 
 		_connect: (callback, event) ->
 			if not event?
@@ -112,12 +123,13 @@ if not isc.module_RealtimeMessaging?
 			if @getSubscribedChannels().length is 0
 				if callback?
 					isc.MessagingSS.fireCallback callback
-					return undefined
+					return
 
 			_url = @messagingSubscribeURL()
+			
 			uriBuilder = isc.URIBuilder.create isc.Page.getURL _url
-			data =
-				subscribedChannels: isc.JSONSS.encode @_channels
+			
+			data = subscribedChannels: isc.JSONSS.encode @_channels
 
 			for own fieldName, value of data
 				uriBuilder.setQueryParam fieldName, String data[fieldName]
@@ -125,7 +137,8 @@ if not isc.module_RealtimeMessaging?
 			uriBuilder.setQueryParam "eventStream", "true"
 
 			if uriBuilder.uri.length > 2000
-				Log.logError "uriBuilder.uri > 2000 символов"
+				Log.logError "Слишком много каналов, uriBuilder.uri > 2000 символов"
+				return
 
 			##todo В случае необходимости подключения большого кол-ва каналов, необходимо разбиение их на несколько EventSource
 

@@ -1,13 +1,15 @@
 isc.defineClass("ComboboxItemWithClearButton", isc.ComboboxItemWithButtons).addProperties
 
+	constructor: "ComboBoxItem"
+	
 	buttonsProperties: [
 		(
 			width: 20
 			icon: "cancel.png"
 			identifier: "ButtonClear"
 			click: ->
-				that = if isc.isA.IButtonSS @ then @ else if isc.isA.ComboboxItemWithClearButton @ then @buttons[0] else null
-
+				that = if isc.isA.IButtonSS @ then @ else if isc.isA.ComboboxItemWithClearButton @ then @buttons[0] else undefined
+			
 				that?.combobox?.onButtonClearClick?(that.combobox.getValue())
 				that?.combobox?.clearValue?()
 				that?.hide?()
@@ -31,11 +33,12 @@ isc.defineClass("ComboboxItemWithClearButton", isc.ComboboxItemWithButtons).addP
 				return
 
 		return
-
+		
 	setValue: (value) ->
-		if value?
-			@showButton "ButtonClear"
-		else
-			@hideButton "ButtonClear"
-		@Super "setValue", [value]
+		if value isnt undefined
+			if value?
+				@showButton "ButtonClear"
+			else
+				@hideButton "ButtonClear"
+			@Super "setValue", [value]
 		return

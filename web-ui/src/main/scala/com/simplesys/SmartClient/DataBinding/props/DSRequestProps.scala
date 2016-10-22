@@ -5,7 +5,6 @@ import com.simplesys.SmartClient.DataBinding._
 import com.simplesys.SmartClient.Grids.treeGrid.TreeNode
 import com.simplesys.SmartClient.RPC.props.RequestCommon
 import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.System.JSObject
 import com.simplesys.System.Types.DSOperationType.DSOperationType
 import com.simplesys.System.Types.DSProtocol.DSProtocol
 import com.simplesys.System.Types.ExportDisplay.ExportDisplay
@@ -15,11 +14,16 @@ import com.simplesys.System.Types.PropertyIdentifier.PropertyIdentifier
 import com.simplesys.System.Types.Record
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types.ValidationMode.ValidationMode
+import com.simplesys.System._
 import com.simplesys.option.{ScNone, ScOption}
 
 class DSRequestProps extends RequestCommon[DSCallback] {
     var additionalOutputs: ScOption[String] = ScNone
     var componentId: ScOption[String] = ScNone
+    var channelMessage4AddOperation: ScOption[String] = ScNone
+    var channelMessage4EndAddOperation: ScOption[String] = ScNone
+    var channelMessage4DeleteOperation: ScOption[String] = ScNone
+    var channelMessage4EndDeleteOperation: ScOption[String] = ScNone
     var dataProtocol: ScOption[DSProtocol] = ScNone
     var dataSource: ScOption[String] = ScNone
     var data: ScOption[JSObject] = ScNone

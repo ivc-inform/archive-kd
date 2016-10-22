@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Forms.props.validator
 
 import com.simplesys.SmartClient.DataBinding.DataBoundComponent
 import com.simplesys.SmartClient.DataBinding.dataSource.DataSourceField
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.Forms.Validator
 import com.simplesys.System.Types.Record
 import com.simplesys.System.{JSObject, JSAny}

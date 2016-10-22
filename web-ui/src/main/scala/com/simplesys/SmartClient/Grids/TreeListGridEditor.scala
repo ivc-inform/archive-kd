@@ -3,13 +3,15 @@ package com.simplesys.SmartClient.Grids
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.Foundation.Img
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.canvas.ImgProperties
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
 import com.simplesys.SmartClient.Grids.treeGrid.TreeGridField
-import com.simplesys.SmartClient.Layout.HLayoutSS
+import com.simplesys.SmartClient.Layout.{AbstractHLayoutSSCompanion, HLayoutSS, TabSetSS}
 import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.System.Types.RecordComponentPoolingMode._
+import com.simplesys.System.Types.SelectionAppearance.SelectionAppearance
 import com.simplesys.System.Types.SelectionStyle.SelectionStyle
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types._
@@ -20,6 +22,7 @@ import scala.scalajs.js.|
 
 @js.native
 trait TreeListGridEditor extends HLayoutSS {
+
     def getTreeSelectedRecord(): ListGridRecord
     def getListSelectedRecord(): ListGridRecord
     def findByKeyList(keyValue: JSAny): ListGridRecord
@@ -32,14 +35,14 @@ trait TreeListGridEditor extends HLayoutSS {
     def removeTreeSelectedData(): void
     var widthTree: Int | String
     var widthList: Int | String
-    def fetchTreeData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
-    def fetchListData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
+    def fetchTreeData(criteria: Criteria | js.Dictionary[_] = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
+    def fetchListData(criteria: Criteria | js.Dictionary[_] = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     var fetchTreeDelay: Int
     var fetchListDelay: Int
     var showTreeRecordComponents: Boolean
     var showListRecordComponents: Boolean
-    def selectListSingleRecordByKey(keyValue: JSAny, newStyle: Boolean): ListGridRecord
-    def selectTreeSingleRecordByKey(keyValue: JSAny, newStyle: Boolean): ListGridRecord
+    def selectListSingleRecordByKey(keyValue: JSAny, newStyle: Boolean = js.native, callback: Callback = js.native): ListGridRecord
+    def selectTreeSingleRecordByKey(keyValue: JSAny, newStyle: Boolean = js.native, callback: Callback = js.native): ListGridRecord
     var editByCellTree: Boolean
     var editByCellList: Boolean
     var enableChangeSelectionTree: Boolean
@@ -129,6 +132,7 @@ trait TreeListGridEditor extends HLayoutSS {
     val contextMenuListGridEditor: MenuSS
     val contextMenuTreeGridEditor: MenuSS
     def getViewState(): void
+    def setTabSet(tabSet: TabSetSS): TabSetSS
     var newTreeRequestProperties: JSUndefined[DSRequest]
     var editTreeRequestProperties: JSUndefined[DSRequest]
     var newListRequestProperties: JSUndefined[DSRequest]
@@ -137,7 +141,26 @@ trait TreeListGridEditor extends HLayoutSS {
     var editingListFields: JSUndefined[IscArray[FormItem]]
     var canDragRecordsOutList: JSUndefined[Boolean]
     var canDragRecordsOutTree: JSUndefined[Boolean]
-    var trackerImageList : JSUndefined[ImgProperties]
-    var trackerImageTree : JSUndefined[ImgProperties]
+    var trackerImageList: JSUndefined[ImgProperties]
+    var trackerImageTree: JSUndefined[ImgProperties]
+    var selectionAppearanceList: JSUndefined[SelectionAppearance]
+    var selectionAppearanceTree: JSUndefined[SelectionAppearance]
+    var selectFirstRecordAfterFetchList: JSUndefined[Boolean]
+    var selectFirstRecordAfterFetchTree: JSUndefined[Boolean]
+
+    def createListRecordComponent(record: ListGridRecord, colNum: Int): JSUndefined[Canvas]
+    def createTreeRecordComponent(record: ListGridRecord, colNum: Int): JSUndefined[Canvas]
+
+    def updateListRecordComponent(record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean): JSUndefined[Canvas]
+    def updateTreeRecordComponent(record: ListGridRecord, colNum: Int, component: Canvas, recordChanged: Boolean): JSUndefined[Canvas]
+
+    val recordListComponentPoolingMode: RecordComponentPoolingMode
+    val recordTreeComponentPoolingMode: RecordComponentPoolingMode
+
+    def refreshDataList(callBack: DSCallback = js.native): void
+    def refreshDataTree(callBack: DSCallback = js.native): void
 }
 
+@js.native
+abstract trait AbstractTreeListGridEditorCompanion extends AbstractHLayoutSSCompanion {
+}

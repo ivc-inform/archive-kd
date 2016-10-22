@@ -38,11 +38,11 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"fetchListDelay"                      : 500
 	"showTreeRecordComponents"            : false
 	"showListRecordComponents"            : false
-	"selectListSingleRecordByKey"         : (keyValue) ->
-		@listGrid.selectSingleRecordByKey keyValue
+	"selectListSingleRecordByKey"         : (keyValue, newStyle, callback) ->
+		@listGrid.selectSingleRecordByKey keyValue, newStyle, callback
 		return
-	"selectTreeSingleRecordByKey"         : (keyValue) ->
-		@treeGrid.selectSingleRecordByKey keyValue
+	"selectTreeSingleRecordByKey"         : (keyValue, newStyle, callback) ->
+		@treeGrid.selectSingleRecordByKey keyValue, newStyle, callback
 		return
 	"editByCellTree"                      : false
 	"autoSaveListEdits"                   : true
@@ -158,9 +158,15 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"dataFetchModeTree" : "basic"
 	"canDragRecordsOutList" : false
 	"canDragRecordsOutTree" : false
+	"refreshDataList": (callback) ->
+		@listGrid.refreshData callback
+		return
+	"refreshDataTree": (callback) ->
+		@treeGrid.refreshData callback
+		return
 
 	"initWidget"                          : ->
-		isc.debugTrac @getClassName(), @getIdentifier()
+		#isc.debugTrac @getClassName(), @getIdentifier()
 		@Super "initWidget", arguments
 
 		@treeGrid = isc.TreeGridEditor.create
@@ -174,7 +180,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"initialSort"                     : @initialSortTree
 			"canEdit"                         : @canEditTree
 			"selectionType"                   : @selectionTypeTree
-			"autoFetchData"                   : false
+			"autoFetchData"                   : @autoFetchData
 			"folderIcon"                      : @folderIconTree
 			"showAdvancedFilter"              : @showTreeAdvancedFilter
 			"contextMenu"                     : @contextMenuTreeGridEditor
@@ -209,6 +215,11 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"canDragSelectText"               : @canDragSelectText
 			"canDragRecordsOut"               : @canDragRecordsOutTree
 			"trackerImage"                    : @trackerImageTree
+			"selectionAppearance"             : @selectionAppearanceTree
+			"selectFirstRecordAfterFetch"     : @selectFirstRecordAfterFetchTree
+			"createRecordComponent"           : @createTreeRecordComponent
+			"updateRecordComponent"           : @updateTreeRecordComponent
+			"recordComponentPoolingMode"      : @recordTreeComponentPoolingMode
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -228,7 +239,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"canEdit"                         : @canEditList
 			"filterOnKeypress"                : @filterListOnKeypress
 			"selectionType"                   : @selectionTypeList
-			"autoFetchData"                   : false
+			"autoFetchData"                   : @autoFetchData
 			"masterGrid"                      : @treeGrid
 			"showAdvancedFilter"              : @showListAdvancedFilter
 			"contextMenu"                     : @contextMenuListGridEditor
@@ -243,6 +254,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 		##"targetResizeBar"                   : "next"
 			"dataSource"                      : @dataSourceList
 			"createRecordComponent"           : @createListRecordComponent
+			"updateRecordComponent"           : @updateListRecordComponent
 			"canSelectCells"                  : @canSelectCellsList
 			"height"                          : @heightList
 			"cancelEditingConfirmationMessage": @cancelEditingConfirmationMessageList
@@ -261,6 +273,9 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"canDragSelectText"               : @canDragSelectText
 			"canDragRecordsOut"               : @canDragRecordsOutList
 			"trackerImage"                    : @trackerImageList
+			"selectionAppearance"             : @selectionAppearanceList
+			"selectFirstRecordAfterFetch"     : @selectFirstRecordAfterFetchList
+			"recordComponentPoolingMode"      : @recordListComponentPoolingMode
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"

@@ -3,8 +3,8 @@ package com.simplesys.SmartClient.App.formItems.props
 import com.simplesys.SmartClient.App.formItems.LookupTreeGridEditorItem
 import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.props.{CanvasItemProps, TextItemSSProps}
-import com.simplesys.SmartClient.Forms.FormsItems.{CanvasItem, TextItem}
+import com.simplesys.SmartClient.Forms.formsItems.props.{CanvasItemProps, TextItemSSProps}
+import com.simplesys.SmartClient.Forms.formsItems.{CanvasItem, TextItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
@@ -37,7 +37,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
         (thiz: classHandler, value: JSUndefined[JSAny]) =>
             thiz.Super("setValue", IscArray(value))
 
-            thiz.textItem setValue value
+            thiz.textItem setValue (value)
 
             if (value.isDefined) {
 
@@ -209,7 +209,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                                                                                         else
                                                                                             formItem.filteredGridList.foreach(_.fetchData(criteria = advancedCriteria))
 
-                                                                                        formItem setValue res
+                                                                                        formItem setValue (res)
 
                                                                                     } else {
                                                                                         if (editor.getSelectedRecords().length != 1)

@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Forms.props
 
 import com.simplesys.SmartClient.Control.IButton
-import com.simplesys.SmartClient.Forms.FormsItems.TimeItem
+import com.simplesys.SmartClient.Forms.formsItems.TimeItem
 import com.simplesys.SmartClient.Forms.{DateChooser, DateGrid}
 import com.simplesys.SmartClient.Layout.HLayout
 import com.simplesys.SmartClient.Layout.props.VLayoutProps

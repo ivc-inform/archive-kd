@@ -13,4 +13,5 @@ class ToolStripButtonProps extends ButtonProps {
     showDisabledIcon = false.opt
 
     var  enableIf: ScOption[ThisFunction0[classHandler, Boolean]] = ScNone
+    autoDraw = false.opt
 }

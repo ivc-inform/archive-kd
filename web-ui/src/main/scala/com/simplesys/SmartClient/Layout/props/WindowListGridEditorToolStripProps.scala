@@ -25,7 +25,6 @@ trait VisibleButtons extends JSObject {
 class WindowListGridEditorToolStripProps extends ToolStripProps {
     type classHandler <: WindowListGridEditorToolStrip
 
-    var owner: ScOption[Canvas] = ScNone
     var visibleButtons: ScOption[VisibleButtons] = ScNone
 
     members = Seq(

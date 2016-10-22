@@ -12,10 +12,10 @@ trait Progressbar extends StretchImg {
     def getLength(): Int
     val length: Int
     var percentChanged: js.Function1[void, _]
-    var percentDone: Int
+    var percentDone: Double
     def setBreadth(newBreadth: Int): void
     def setLength(newLength: Int): void
-    def setPercentDone(newPercent: Int): void
+    def setPercentDone(newPercent: Double): void
 }
 
 

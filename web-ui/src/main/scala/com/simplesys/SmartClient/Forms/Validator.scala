@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.Forms
 
 import com.simplesys.SmartClient.DataBinding.AdvancedCriteria
 import com.simplesys.SmartClient.DataBinding.dataSource.DataSourceField
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.RPC.ServerObject
 import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class, IscArray}
 import com.simplesys.System.Types.ValidatorType.ValidatorType
@@ -57,6 +57,4 @@ abstract trait AbstractValidatorCompanion extends AbstractClassCompanion {
     val requiredField: String = js.native
 }
 
-@js.native
-   object Validator extends AbstractValidatorCompanion
 

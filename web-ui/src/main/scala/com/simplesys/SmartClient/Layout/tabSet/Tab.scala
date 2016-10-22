@@ -24,7 +24,7 @@ trait Tab extends JSObject {
     var iconWidth: Int
     var ID: String
     var name: JSUndefined[String]
-    var pane: String | Canvas
+    var pane: JSUndefined[Canvas]
     var paneMargin: Int
     var pickerTitle: HTMLString
     var prompt: HTMLString

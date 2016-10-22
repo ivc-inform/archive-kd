@@ -7,6 +7,11 @@ import com.simplesys.option.{ScNone, ScOption}
 import scala.scalajs.js
 
 class ProgressbarProps extends StretchImgProps {
+
+    import com.simplesys.SmartClient.Control.Progressbar
+
+    type classHandler <:  Progressbar
+
     var breadth: ScOption[Int] = ScNone
     var length: ScOption[Int] = ScNone
     var percentChanged: ScOption[js.Function1[void, _]] = ScNone

@@ -69,40 +69,38 @@ isc.defineClass("DataSourceSS", isc.DataSource).addClassProperties
 	
 	loadComponentSchemas: (callback)->
 		isc.RPCManagerSS.sendRequest
+			"timeout" : 10000
+			"sendNoQueue" : true
 			callback: (response, data, request) =>
 				if response.httpResponseCode is 404
 					isc.error("The DataSourceLoader servlet is not installed.")
 				else
-					if not data?
-						@logWarn("Повтор запроса loadComponentSchemas !!!")
-						isc.DataSourceSS.loadComponentSchemas callback
-					else
-						componentName = ""
-						try
-							dataArray = data.response.data
-							if isc.isA.Array dataArray
-								
-								logPrty = @getDefaultLogPriority()
-								@setLogPriority @getClassName(), isc.Log.DEBUG
-								
-								dataArray.forEach (item) =>
-									if not isc.DataSource.get(item.component)?
-										componentName = item.component
-										obj = isc.Class.evaluate item.jsonStr
-										
-										if obj?
-											@logDebug "Component schema: #{item.component} loaded."
-										else
-											@logDebug "Component schema: #{item.component} not loaded."
-										return
-								
-								@setLogPriority @getClassName(), logPrty
-							@getLogDataSources()
-							if (callback)
-								@fireCallback callback
-						
-						catch e
-							isc.logWarn "Component: #{componentName} Encountered problems trying to loadComponentSchemas DataSources: #{isc.echoAll(e)}"
+					componentName = ""
+					try
+						dataArray = data.response.data
+						if isc.isA.Array dataArray
+							
+							logPrty = @getDefaultLogPriority()
+							@setLogPriority @getClassName(), isc.Log.DEBUG
+							
+							dataArray.forEach (item) =>
+								if not isc.DataSource.get(item.component)?
+									componentName = item.component
+									obj = isc.Class.evaluate item.jsonStr
+									
+									if obj?
+										@logDebug "Component schema: #{item.component} loaded."
+									else
+										@logDebug "Component schema: #{item.component} not loaded."
+									return
+							
+							@setLogPriority @getClassName(), logPrty
+						@getLogDataSources()
+						if (callback)
+							@fireCallback callback
+					
+					catch e
+						isc.logWarn "Component: #{componentName} Encountered problems trying to loadComponentSchemas DataSources: #{isc.echoAll(e)}"
 				return
 			
 			actionURL: isc.DataSourceSS.loaderSchemasURL
@@ -1790,16 +1788,16 @@ isc._initBuiltInOperatorsSS = ->
 	                                  ]
 	
 	isc.DataSourceSS.setTypeOperators "integer",
-	                                  ["equals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 	
 	isc.DataSourceSS.setTypeOperators "float",
-	                                  ["equals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 	
 	isc.DataSourceSS.setTypeOperators "time",
-	                                  ["equals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 	
 	isc.DataSourceSS.setTypeOperators "date",
-	                                  ["equals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 
 isc._initBuiltInOperatorsSS()
 

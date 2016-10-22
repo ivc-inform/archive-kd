@@ -7,8 +7,8 @@ import scala.scalajs.js.|
 trait EditorUsers extends CommonTreeListGridEditorComponent {
 }
 
-//@js.native
-//abstract trait AbstractEditorUsersCompanion extends AbstractCommonTreeListGridEditorComponentCompanion {
-//}
+@js.native
+abstract trait AbstractEditorUsersCompanion extends AbstractCommonTreeListGridEditorComponentCompanion {
+}
 
 

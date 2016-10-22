@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.{Hilite, HiliteEditor, ListGridField}
 import com.simplesys.SmartClient.Layout.Window
-import com.simplesys.SmartClient.System.{Class, IscArray}
+import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class, IscArray}
 import com.simplesys.System.{JSAny, JSObject, JSUndefined}
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.DragDataAction.DragDataAction
@@ -139,5 +139,8 @@ trait DataBoundComponent extends Class {
     def userAddedField(field: ListGridField): Boolean
     def willFetchData(newCriteria: Criteria, textMatchStyle: TextMatchStyle = js.native): Boolean
 }
+
+@js.native
+abstract trait AbstractDataBoundComponentCompanion extends AbstractClassCompanion
 
 

@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Forms
 
 import com.simplesys.SmartClient.Control.IButton
-import com.simplesys.SmartClient.Forms.FormsItems.TimeItem
+import com.simplesys.SmartClient.Forms.formsItems.TimeItem
 import com.simplesys.SmartClient.Layout.{AbstractVLayoutCompanion, HLayout, VLayout}
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.SmartClient.System.date.Date

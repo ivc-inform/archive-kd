@@ -11,7 +11,10 @@ trait JSON extends Class {
 
 @js.native
 abstract trait AbstractJSONCompanion extends AbstractClassCompanion {
-    def decode(jsonString: String): JSObject = js.native
+
+    import scala.scalajs.js.|
+
+    def decode[T <: JSObject](jsonString: String): T = js.native
     def encode(obj: JSObject, settings: JSONEncoder = js.native): String = js.native
     def printObject(obj: JSObject): String = js.native
 }

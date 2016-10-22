@@ -16,6 +16,7 @@ import scala.scalajs.js.UndefOr._
 class TabSetSSProps extends TabSetProps {
     type classHandler <: TabSetSS
 
+    var tabSet: ScOption[TabSetSS] = ScNone
     var tabsReordered: ScOption[js.ThisFunction0[classHandler, _]] = ScNone
     var afterRemoveTabs : ScOption[ThisFunction0[classHandler, _]] = ScNone
     var beforeRemoveTabs : ScOption[ThisFunction1[classHandler, Tab, _]] = ScNone

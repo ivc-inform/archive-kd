@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Tools
 
 import com.simplesys.SmartClient.Forms.DynamicForm
 import com.simplesys.SmartClient.Foundation.{Canvas, Label}
-import com.simplesys.SmartClient.System.Class
+import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class}
 import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types.InlineEditEvent.InlineEditEvent
 import com.simplesys.System.Types.SelectedAppearance.SelectedAppearance
@@ -41,3 +41,6 @@ trait EditProxy extends Class {
     //def startInlineEditing(appendChar: String = js.native): void
     val supportsInlineEdit: Boolean
 }
+
+@js.native
+abstract class AbstractEditProxyCompanion extends AbstractClassCompanion

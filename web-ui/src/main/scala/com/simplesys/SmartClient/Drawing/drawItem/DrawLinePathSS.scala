@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Drawing.drawItem
 
-import com.simplesys.SmartClient.Drawing.DrawKnob
+import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, DrawKnob}
 import com.simplesys.SmartClient.System.{IscArray, Point}
 import com.simplesys.System.Types.ConnectorOrientation.ConnectorOrientation
 import com.simplesys.System.Types.ConnectorStyle._
@@ -44,3 +44,6 @@ trait DrawLinePathSS extends DrawPath {
     def setEndPoint(left: Double, top: Double): void
     def setStartPoint(left: Double, top: Double): void
 }
+
+@js.native
+abstract trait AbstractDrawLinePathSSCompanion extends AbstractDrawPathCompanion

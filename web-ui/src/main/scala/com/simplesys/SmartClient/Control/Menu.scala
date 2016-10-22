@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Control
 
 import com.simplesys.SmartClient.Control.menu.MenuItem
 import com.simplesys.SmartClient.Foundation.{Canvas, Img}
-import com.simplesys.SmartClient.Grids.Grid
+import com.simplesys.SmartClient.Grids.{AbstractListGridCompanion, Grid}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Layout.NavigationBar
 import com.simplesys.SmartClient.System.IscArray
@@ -68,5 +68,7 @@ trait Menu extends Grid[ListGridField, MenuItem] {
     var useKeys: Boolean
 }
 
-
+@js.native
+abstract trait AbstractMenuCompanion extends AbstractListGridCompanion {
+}
 

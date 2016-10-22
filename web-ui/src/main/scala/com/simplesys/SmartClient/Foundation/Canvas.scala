@@ -2,9 +2,9 @@ package com.simplesys.SmartClient.Foundation
 
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.DataBinding.Callbacks._
-import com.simplesys.SmartClient.Forms.FormsItems.CanvasItem
+import com.simplesys.SmartClient.Forms.formsItems.CanvasItem
 import com.simplesys.SmartClient.Forms.ValuesManager
-import com.simplesys.SmartClient.Layout.PrintWindow
+import com.simplesys.SmartClient.Layout.{PrintWindow, TabSetSS, WindowSS}
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.Tools.{EditContext, EditNode}
 import com.simplesys.SmartClient.math.AffineTransform
@@ -236,7 +236,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     def handleHover(): void
     val height: String | Int
     def hide(): void
-    def hide1(): Canvas
+    def hide1[T](): T
     def hideClickMask(ID: String = js.native): void
     def hideComponentMask(): void
     def hideContextMenu(): void
@@ -276,7 +276,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     var layoutAlign: Alignment | VerticalAlignment
     def layoutChildren(reason: String): void
     val leavePageSpace: Int
-    val left: String | Int
+    var left:  Int
     def linkHTML(href: String, text: HTMLString = js.native, target: String = js.native, ID: String = js.native, tabIndex: Int = js.native, accessKey: String = js.native): HTMLString
     var locateChildrenBy: LocatorStrategy
     var locateChildrenType: LocatorTypeStrategy
@@ -311,6 +311,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     var noDoubleClicks: Boolean
     val opacity: Int
     val overflow: Overflow
+    var owner: JSUndefined[Canvas]
     val padding: Int
     def pageScrollDown(): void
     def pageScrollUp(): void
@@ -441,8 +442,9 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     var snapVDirection: String
     var snapVGap: Int
     var styleName: CSSStyleName
+    var tabSet: JSUndefined[TabSetSS]
     var tabIndex: Int
-    val top: Int | String
+    val top: Int
     val topElement: Canvas
     val unserialize: JSUndefined[Boolean]
     val updateEditNode: JSUndefined[js.Function2[EditContext, EditNode, _]]
@@ -456,7 +458,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     var visibility: Visibility
     var visibilityChanged: js.ThisFunction1[classHandler, Boolean, void]
     def visibleAtPoint(x: Int, y: Int, withinViewport: Boolean = js.native, ignoreWidgets: Canvas = js.native, upToParent: Canvas = js.native): Boolean
-    val width: Int | String
+    var width: Int | String
     var willAcceptDrop: js.ThisFunction0[classHandler, Boolean]
 }
 

@@ -6,3 +6,6 @@ import scala.scalajs.js
 trait IButtonSS extends IButton {
 }
 
+@js.native
+abstract class AbstractIButtonSSCompanion extends AbstractIButtonCompanion
+

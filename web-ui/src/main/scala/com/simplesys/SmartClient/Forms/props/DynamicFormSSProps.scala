@@ -1,18 +1,19 @@
 package com.simplesys.SmartClient.Forms.props
 
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.System.{IscArray, isc}
-import com.simplesys.System.JSAny
-import com.simplesys.System.Types.FormItemType
-import com.simplesys.System.Types.FormItemType.FormItemType
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.function._
 import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.{ThisFunction2, ThisFunction3}
+import scala.scalajs.js.ThisFunction2
 
 class DynamicFormSSProps extends DynamicFormProps {
+
+    import com.simplesys.System._
+    import com.simplesys.option.ScNone
+
     type classHandler <: DynamicFormSS
 
     var createItem: ScOption[ThisFunction2[classHandler, FormItem, String, _]] = {
@@ -22,4 +23,6 @@ class DynamicFormSSProps extends DynamicFormProps {
             //isc debugTrap item
             thiz.Super("createItem", IscArray[JSAny](item, tp))
     }.toThisFunc.opt
+
+    var setPropertyOnSelection: ScOption[ThisFunction2[classHandler, String, JSUndefined[JSAny], _]] = ScNone
 }

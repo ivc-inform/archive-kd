@@ -16,7 +16,10 @@ trait TabSetSS extends TabSet {
     var beforeRemoveTabs : js.Function1[Tab, _]
     var afterRemoveTabs : js.Function1[Tab, _]
     def filter4Visiblity(tabs: IscArray[Tab]): IscArray[Tab]
-    def addTabs(tabs: IscArray[Tab], position: Int = js.native): void
+    def addTabs(tabs: IscArray[Tab], position: Int): void
+    def addTabs(tabs: IscArray[Tab]): void
+    def addTabs(tab: Tab, position: Int): void
+    def addTabs(tab: Tab): void
     def addTab(tab: Tab, position: Int = js.native): void
     def removeTab(tab: Tab | Int | ID, position: Int = js.native): void
     def removeAllTabs(): void

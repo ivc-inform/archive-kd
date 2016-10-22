@@ -92,6 +92,9 @@ isc.defineClass("WindowSS", isc.Window).addProperties
 
 		if @autoPosition is true
 			@calcXY_Window?()
+			
+		@observe(@, "resized", @_save)
+		@observe(@, "moved", @_save)
 		return
 	show        : ->
 		@Super "show", arguments

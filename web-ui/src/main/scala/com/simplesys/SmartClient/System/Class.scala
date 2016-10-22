@@ -12,13 +12,14 @@ import scala.scalajs.js.|
 trait Class extends JSObject {
     type classHandler <: this.type
 
-    def addAutoChild(childName: String, defaults: JSDictionary[JSObject]): Class
+    def addAutoChild(childName: String, defaults: JSObject): Class
     def addProperties(arguments: JSDictionaryAny | JSObject): this.type
     var addPropertiesOnCreate: Boolean
     def addPropertyList(list: IscArray[JSDictionary[JSObject]]): JSObject
     def clearLogPriority(category: String): void
     def createAutoChild[T <: Class](childName: String, passedDynamicDefaults: JSObject, defaultConstructor: String = js.native, assignToSlot: Boolean = js.native): T
     var creator : classHandler
+
     @JSName("destroy")
     var destroy1: js.ThisFunction0[classHandler, _]
     def destroy(): void
@@ -61,6 +62,8 @@ trait Class extends JSObject {
     def setProperties(arguments: JSDictionary[JSObject]): void
     def setProperty(propertyName: String, newValue: JSAny): void
     def Super(methodName: String, args: IscArray[JSAny] = js.native, nativeArgs: IscArray[JSAny] = js.native): JSAny
+    @JSName("Super")
+    def Super1(methodName: String, args: JSUndefined[IscArray[JSAny]] = js.native, nativeArgs: IscArray[JSAny] = js.native): JSAny
 }
 
 @js.native
@@ -77,7 +80,7 @@ abstract trait AbstractClassCompanion extends JSObject {
     def echo(obj: JSAny): String = js.native
     def echoAll(obj: JSAny): String = js.native
     def echoLeaf(obj: JSAny): String = js.native
-    def evaluate(expression: String, evalArgs: JSDictionary[JSObject]): JSObject = js.native
+    def evaluate(expression: String, evalArgs: JSDictionary[JSObject] = js.native): JSObject = js.native
     def fireCallback(callback: Callback, argNames: String = js.native, args: IscArray[JSObject] = js.native, target: JSObject = js.native): JSAny = js.native
     def getCallTrace(args: JSObject = js.native): void = js.native
     def getClassName(): String = js.native

@@ -6,7 +6,8 @@ isc.ClassFactory.defineClass("ComboboxItemWithButtons", isc.CanvasItem).addPrope
 		@comboboxItem.getValue()
 
 	setValue: (value) ->
-		@comboboxItem.setValue value
+		if value isnt undefined
+			@comboboxItem.setValue value
 		return
 
 	getClientPickListData: ->
@@ -37,7 +38,7 @@ isc.ClassFactory.defineClass("ComboboxItemWithButtons", isc.CanvasItem).addPrope
 	setValueMap: (valueMap) ->
 		@comboboxItem.setValueMap valueMap
 		return
-
+		
 	createCanvas: ->
 		res = isc.HLayoutSS.create
 			height : 20,
@@ -59,7 +60,7 @@ isc.ClassFactory.defineClass("ComboboxItemWithButtons", isc.CanvasItem).addPrope
 							onButtonClearClick: @onButtonClearClick
 							addUnknownValues: @addUnknownValues
 							optionDataSource: @optionDataSource
-							type: "ComboBoxItem"
+							_constructor: @constructor
 							valueMap: @valueMap
 							value: @value
 							defaultValue: @defaultValue

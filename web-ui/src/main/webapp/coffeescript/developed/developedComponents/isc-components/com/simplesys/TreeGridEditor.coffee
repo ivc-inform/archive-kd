@@ -107,12 +107,16 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"setValueMap": (fieldID, map)->
 		@grid.setValueMap fieldID, map
 		return
-	"selectSingleRecordByKey": (keyValue, newState) ->
+	"selectSingleRecordByKey": (keyValue, newState, callback) ->
 		node = @grid.data.findById keyValue
-		parents = @grid.data.getParents node
-		parents.forEach (parent) => @grid.data.openFolder parent; return
-		@grid.selectRecord node, newState
-		return
+		if node?
+			parents = @grid.data.getParents node
+			parents.forEach (parent) => @grid.data.openFolder parent; return
+			@grid.selectRecord node, newState
+			isc.Class.fireCallback callback
+		else
+			null
+		
 	"setDataSource": (dataSource) ->
 		@grid.setDataSource dataSource
 		return
@@ -233,101 +237,107 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@grid.contextMenu
 	"getExpansionComponent": -> null
 	"getFieldName": (colNum)-> @grid.getFieldName colNum
+	"refreshData": (callback) ->
+		@grid.refreshData callback
+		return
 	"initWidget": ->
-		isc.debugTrac @getClassName(), @getIdentifier()
+		#isc.debugTrac @getClassName(), @getIdentifier()
 		@fields?.forEach (field) ->
 			field.name = field.nameStrong.name if field.nameStrong?
 			return
 
 		@Super "initWidget", arguments
-
+		
 		@grid = isc.TreeGrid.create
-			"autoFetchData": false,
-			"dataFetchMode": @dataFetchMode
-			"identifier": @identifier
-			"autoFitFieldWidths": @autoFitFieldWidths
-			"dropIconSuffix": @dropIconSuffix
-			"recordComponentPoolingMode": @recordComponentPoolingMode
-			"showAllRecords": @showAllRecords
-			"rowContextClick": @rowContextClick
-			"dataProperties": @dataProperties
-			"getBaseStyle": @getBaseStyle
-			"clientOnly": @clientOnly
-			"showRecordComponentsByCell": @showRecordComponentsByCell
-			"loadDataOnDemand": @loadDataOnDemand
-			"showRecordComponents": @showRecordComponents
-			"drawAheadRatio": @drawAheadRatio
-			"cellClick": @cellClick
-			"detailField": @detailField
-			"autoSaveEdits": @autoSaveEdits
-			"canAcceptDroppedRecords": @canAcceptDroppedRecords
-			"autoDraw": false
-			"initialSort": @initialSort
-			"showOpenIcons": @showOpenIcons
-			"cascadeSelection": @cascadeSelection
-			"canEdit": @canEdit
-			"filterOnKeypress": @filterOnKeypress
-			"selectionType": @selectionType
-			"showRollOver": @showRollOver
-			"folderIcon": @folderIcon
-			"showRowNumbers": @showRowNumbers
+			"autoFetchData"                   : false,
+			"dataFetchMode"                   : @dataFetchMode
+			"identifier"                      : @identifier
+			"autoFitFieldWidths"              : @autoFitFieldWidths
+			"dropIconSuffix"                  : @dropIconSuffix
+			"recordComponentPoolingMode"      : @recordComponentPoolingMode
+			"showAllRecords"                  : @showAllRecords
+			"rowContextClick"                 : @rowContextClick
+			"dataProperties"                  : @dataProperties
+			"getBaseStyle"                    : @getBaseStyle
+			"clientOnly"                      : @clientOnly
+			"showRecordComponentsByCell"      : @showRecordComponentsByCell
+			"loadDataOnDemand"                : @loadDataOnDemand
+			"showRecordComponents"            : @showRecordComponents
+			"drawAheadRatio"                  : @drawAheadRatio
+			"cellClick"                       : @cellClick
+			"detailField"                     : @detailField
+			"autoSaveEdits"                   : @autoSaveEdits
+			"canAcceptDroppedRecords"         : @canAcceptDroppedRecords
+			"autoDraw"                        : false
+			"initialSort"                     : @initialSort
+			"showOpenIcons"                   : @showOpenIcons
+			"cascadeSelection"                : @cascadeSelection
+			"canEdit"                         : @canEdit
+			"filterOnKeypress"                : @filterOnKeypress
+			"selectionType"                   : @selectionType
+			"showRollOver"                    : @showRollOver
+			"folderIcon"                      : @folderIcon
+			"showRowNumbers"                  : @showRowNumbers
 ##"masterGrid"                      : @masterGrid
-			"canExpandRecords": @canExpandRecords
-			"showSelectedStyle": @showSelectedStyle
-			"data": @data
-			"owner": @
-			"emptyMessage": @emptyMessage
-			"wrapCells": @wrapCells
-			"openIconSuffix": @openIconSuffix
-			"autoFetchTextMatchStyle": @autoFetchTextMatchStyle
-			"expansionMode": @expansionMode
-			"fields": @fields
-			"canDragSelectText": @canDragSelectText
-			"dataSource": @dataSource
-			"fixedRecordHeights": @fixedRecordHeights
-			"autoFitWidthApproach": @autoFitWidthApproach
-			"canReparentNodes": @canReparentNodes
-			"modalEditing": @modalEditing
-			"selectionAppearance": @selectionAppearance
-			"createRecordComponent": @createRecordComponent
-			"updateRecordComponent": @updateRecordComponent
-			"canSelectText": @canSelectText
-			"expansionDetailFieldProperties":
+			"canExpandRecords"                : @canExpandRecords
+			"showSelectedStyle"               : @showSelectedStyle
+			"data"                            : @data
+			"owner"                           : @
+			"emptyMessage"                    : @emptyMessage
+			"wrapCells"                       : @wrapCells
+			"openIconSuffix"                  : @openIconSuffix
+			"autoFetchTextMatchStyle"         : @autoFetchTextMatchStyle
+			"expansionMode"                   : @expansionMode
+			"fields"                          : @fields
+			"canDragSelectText"               : @canDragSelectText
+			"dataSource"                      : @dataSource
+			"fixedRecordHeights"              : @fixedRecordHeights
+			"autoFitWidthApproach"            : @autoFitWidthApproach
+			"canReparentNodes"                : @canReparentNodes
+			"modalEditing"                    : @modalEditing
+			"selectionAppearance"             : @selectionAppearance
+			"createRecordComponent"           : @createRecordComponent
+			"updateRecordComponent"           : @updateRecordComponent
+			"canSelectText"                   : @canSelectText
+			"expansionDetailFieldProperties"  :
 				"canSelectText": @canSelectTextExpandedField
-			"canSelectCells": @canSelectCells
+			"canSelectCells"                  : @canSelectCells
 ##"height"                          : "*"
-			"nodeIcon": @nodeIcon
-			"alternateRecordStyles": @alternateRecordStyles
-			"closedIconSuffix": @closedIconSuffix
+			"nodeIcon"                        : @nodeIcon
+			"alternateRecordStyles"           : @alternateRecordStyles
+			"closedIconSuffix"                : @closedIconSuffix
 ##"width"                           : "100%"
 			"cancelEditingConfirmationMessage": @cancelEditingConfirmationMessage
-			"focusChanged": ->
+			"focusChanged"                    : ->
 				simpleSyS.setFuncMenu @funcMenu
 				return
-			"fetchDelay": @fetchDelay
-			"editByCell": @editByCell
-			"editEvent": @editEvent
-			"showDropIcons": @showDropIcons
-			"showPartialSelection": @showPartialSelection
-			"showFilterEditor": @showFilterEditor
-			"dataPageSize": @dataPageSize
-			"cellChanged": @cellChanged
-			"getExpansionComponent": @getExpansionComponent
-			"editComplete": @editComplete
-			"defaultFields": @defaultFields
-			"dragTrackerMode": @dragTrackerMode
-			"canHover": @canHover
-			"hoverWidth": @hoverWidth
-			"dragDataAction": @dragDataAction
-			"canDragRecordsOut": @canDragRecordsOut
-			"canReorderRecords": @canReorderRecords
-			"trackerImage": @trackerImage
-			"newRequestProperties": @newRequestProperties
-			"editRequestProperties": @editRequestProperties
-			"editingFields": @editingFields
-			"saveByCell": @saveByCell
-			"editWindowProperties": @editWindowProperties
-			"canDragRecordsOut" : @canDragRecordsOut
+			"fetchDelay"                      : @fetchDelay
+			"editByCell"                      : @editByCell
+			"editEvent"                       : @editEvent
+			"showDropIcons"                   : @showDropIcons
+			"showPartialSelection"            : @showPartialSelection
+			"showFilterEditor"                : @showFilterEditor
+			"dataPageSize"                    : @dataPageSize
+			"cellChanged"                     : @cellChanged
+			"getExpansionComponent"           : @getExpansionComponent
+			"editComplete"                    : @editComplete
+			"defaultFields"                   : @defaultFields
+			"dragTrackerMode"                 : @dragTrackerMode
+			"canHover"                        : @canHover
+			"hoverWidth"                      : @hoverWidth
+			"dragDataAction"                  : @dragDataAction
+			"canDragRecordsOut"               : @canDragRecordsOut
+			"canReorderRecords"               : @canReorderRecords
+			"trackerImage"                    : @trackerImage
+			"newRequestProperties"            : @newRequestProperties
+			"editRequestProperties"           : @editRequestProperties
+			"editingFields"                   : @editingFields
+			"saveByCell"                      : @saveByCell
+			"editWindowProperties"            : @editWindowProperties
+			"canDragRecordsOut"               : @canDragRecordsOut
+			"dateFormatter"                   : @dateFormatter
+			"datetimeFormatter"               : @datetimeFormatter
+			"selectFirstRecordAfterFetch"     : @selectFirstRecordAfterFetch
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 

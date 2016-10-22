@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.App.props
 
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridField
 import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor, TreeListGridEditor}
@@ -13,7 +13,7 @@ trait InitialTrait {
 
     def initWidget(thiz: Canvas, fields: JSUndefined[IscArray[ListGridField]], replacingFields: JSUndefined[IscArray[ListGridField]], editingFields: JSUndefined[IscArray[FormItem]]): (JSUndefined[IscArray[ListGridField]], JSUndefined[IscArray[FormItem]]) = {
 
-        println(s"InitialTrait.initWidget: thiz: ${thiz.getClassName()}(${thiz.getIdentifier()}) replacingFields: ${replacingFields.map(fields => fields.map(_.nameStrong.map(_.name)).mkString("[", ", ", "]"))}, editingFields: ${editingFields.map(fields => fields.map(_.nameStrong.map(_.name)).mkString("[", ", ", "]"))}")
+//        println(s"InitialTrait.initWidget: thiz: ${thiz.getClassName()}(${thiz.getIdentifier()}) replacingFields: ${replacingFields.map(fields => fields.map(_.nameStrong.map(_.name)).mkString("[", ", ", "]"))}, editingFields: ${editingFields.map(fields => fields.map(_.nameStrong.map(_.name)).mkString("[", ", ", "]"))}")
 
         fields.foreach(_.foreach(field => if (field.nameStrong.isDefined) field._name = field.nameStrong.get.name else thiz.logError("Field not have nameStrong, error #36")))
 
@@ -39,7 +39,7 @@ trait InitialTrait {
 
                     }
                     else
-                        thiz.logError("Field not have nameStrong, error #77")
+                        thiz.logError("Field not have nameStrong, error #42")
             }
         }
 
@@ -58,7 +58,7 @@ trait InitialTrait {
                         case None =>
                             _fieldsListGrid += field
                         case Some(field) =>
-                            isc debugTrac field
+                            //isc debugTrac field
                             if (isc.isA.ListGridEditor(thiz))
                                 field.filterEditorProperties.foreach(_.filteredGridList = thiz.asInstanceOf[ListGridEditor])
                             else if (isc.isA.TreeGridEditor(thiz))

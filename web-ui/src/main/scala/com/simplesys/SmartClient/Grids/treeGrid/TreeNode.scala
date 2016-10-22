@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.Grids.treeGrid
 
+import com.simplesys.SmartClient.Drawing.DrawItem
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.{HTMLString, SCImgURL}
 import com.simplesys.System.{JSObject, JSUndefined}
@@ -22,4 +23,5 @@ trait TreeNode extends JSObject{
     var showDropIcon:  JSUndefined[Boolean]
     var showOpenIcon:  JSUndefined[Boolean]
     var title:  JSUndefined[HTMLString]
+    var liveObject:  JSUndefined[DrawItem]
 }

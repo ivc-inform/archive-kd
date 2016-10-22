@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Forms.props
 
 import com.simplesys.SmartClient.Control.ImgButton
-import com.simplesys.SmartClient.Forms.FormsItems.{FormItem, PickList, SelectItem}
+import com.simplesys.SmartClient.Forms.formsItems.{FormItem, PickList, SelectItem}
 import com.simplesys.SmartClient.Forms.SearchForm
 import com.simplesys.SmartClient.Layout.props.LayoutProps
 import com.simplesys.System.Types.{Criteria, void}

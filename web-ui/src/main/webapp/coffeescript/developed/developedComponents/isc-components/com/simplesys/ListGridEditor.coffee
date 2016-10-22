@@ -18,9 +18,14 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@grid.selectAllRecords visibleNodesOnly
 		return
 	"showAllRecords"             : false
-	"selectSingleRecordByKey"    : (keyValue, newStyle) ->
-		@selectRecord @findByKey keyValue, newStyle
-		return
+	"selectSingleRecordByKey"    : (keyValue, newStyle, callback) ->
+		record = @findByKey keyValue, newStyle
+		if record?
+			@selectRecord record
+			isc.Class.fireCallback callback
+		else
+			@deselectAllRecords()
+		record
 	"selectFirstRecordAfterFetch": true
 	"fetchData"                  : (criteria, callback, requestProperties) ->
 		if @useClientFilteringSorting is false
@@ -211,8 +216,11 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"setMasterGrid"                   : (grid, pkFieldNames) ->
 		@grid.setMasterGrid grid, pkFieldNames
 		return
+	"refreshData"                     : (callback) ->
+		@grid.refreshData callback
+		return
 	"initWidget"                      : ->
-		isc.debugTrac @getClassName(), @getIdentifier()
+		#isc.debugTrac @getClassName(), @getIdentifier()
 		@fields?.forEach (field) ->
 			field.name = field.nameStrong.name if field.nameStrong?
 			return
@@ -296,6 +304,9 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"editingFields"                   : @editingFields
 			"editWindowProperties"            : @editWindowProperties
 			"canDragRecordsOut"               : @canDragRecordsOut
+			"dateFormatter"                   : @dateFormatter
+			"datetimeFormatter"               : @datetimeFormatter
+			"selectFirstRecordAfterFetch"     : @selectFirstRecordAfterFetch
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 

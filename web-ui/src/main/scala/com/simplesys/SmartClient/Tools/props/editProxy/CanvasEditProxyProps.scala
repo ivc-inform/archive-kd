@@ -6,7 +6,6 @@ import com.simplesys.SmartClient.Tools.props.EditProxyProps
 import com.simplesys.System._
 import com.simplesys.option.{ScNone, ScOption}
 
-import scala.scalajs.js
 import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 
 class CanvasEditProxyProps extends EditProxyProps {

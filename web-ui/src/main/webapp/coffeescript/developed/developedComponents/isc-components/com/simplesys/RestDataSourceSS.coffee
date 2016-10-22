@@ -31,6 +31,6 @@ isc.defineClass("RestDataSourceSS", isc.RestDataSource).addProperties
 
 		#call the parent method with the updated dsRequest
 		@Super "transformRequest", dsRequest
-
+	
 	getLookupFileds : isc.getLookupFileds
 	getForeignFields: isc.getForeignFields

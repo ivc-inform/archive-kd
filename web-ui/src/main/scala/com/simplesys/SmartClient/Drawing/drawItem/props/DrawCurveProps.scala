@@ -1,12 +1,15 @@
 package com.simplesys.SmartClient.Drawing.drawItem.props
 
 import com.simplesys.SmartClient.Drawing.props.DrawItemProps
-import com.simplesys.SmartClient.Drawing.{DrawCurveDefaults, DrawKnob}
+import com.simplesys.SmartClient.Drawing.DrawKnob
 import com.simplesys.SmartClient.System.Point
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
 class DrawCurveProps extends DrawItemProps {
+
+    import com.simplesys.SmartClient.Drawing.DrawCurveDefaults
+
     var c1Knob: ScOption[DrawKnob] = ScNone
     var c2Knob: ScOption[DrawKnob] = ScNone
     var controlPoint1: ScOption[Point] = ScNone

@@ -18,10 +18,10 @@ isc.RPCManager.addClassProperties
 		
 	"handleError": (response, request) ->
 		if response.status is isc.RPCResponse.STATUS_LOGIN_REQUIRED
-			isc.error "Потеря данных сессии, требуется аутентификация.",
-			          "958c9eec-000a-92a1-b3a7-2877a657ec99",
-			          -> isc.RPCManager.loginRequired(response, request); return
-		
+			if isc.RPCManager.loginRequired?
+				isc.RPCManager.loginRequired(response, request)
+			else if isc.RPCManagerSS.loginRequired?
+							isc.RPCManagerSS.loginRequired(response, request)
 		else
 			if response.data?.data?
 				response.data = response.data.data
@@ -38,6 +38,9 @@ isc.RPCManager.addClassProperties
 				
 				###isc.error messageToShow, "958c9eec-999a-92a1-b3a7-2877a657ec55"###
 			else
+				if response.errorStruct?.error?
+					response.data.error = response.errorStruct.error
+					
 				if response.data?.error?
 					if isc.isA.Array(response.data.error) is true
 						isc.error "Ошибка: #{response.data.error.length} элемента."
@@ -68,16 +71,22 @@ isc.RPCManager.addClassProperties
 							message = "Server returned validation errors: " + isc.echoFull(response.errors)
 							
 							extraText = "#{newLine}Set rpcRequest.willHandleError:true on your request to handle this error yourself, or add a custom handleError to RPCManager to change system-wide default error reporting"
-						
+							
+						when "FAILURE"
+							if response.httpResponseText?
+								data = isc.Class.evaluate(response.httpResponseText)
+								if isc.isA.Array(data)
+									data.forEach (data) ->
+										err = data.data.error
+										#isc.ErrorDetail err.message, err.stackTrace, "958c9eec-999a-92a1-b3a7-2877a657ec33", "a338970d-416a-96e5-0842-685fd76052d8"
 						else
 							message = "Server returned #{codeName} with no error message" + if opName? then " performing operation '#{opName}'." else "."
 					
-					@reportError message
+					#@reportError message
 		
 		@logWarn(message + extraText + " - response: #{@echo response}")
-		
-		return false
-	
+		return
+					
 	"evalResult": (request, response, results) ->
 		if isc.isA.Function results.match
 			evalVars = request.evalVars
@@ -260,7 +269,7 @@ isc.defineClass("RPCManagerSS", isc.RPCManager).addClassProperties
 			isc.RPCManagerSS.loginWindow = null
 		
 		isc.RPCManagerSS.loginWindow = isc.LoginWindow.create
-			"loginSuccessProcedure": loginSuccessProcedure
+			"loginSuccessProcedure": if isc.isA.Function(loginSuccessProcedure) then loginSuccessProcedure else undefined
 			"mainPageLogged": @mainPageLogged
 			"reload": reload
 		

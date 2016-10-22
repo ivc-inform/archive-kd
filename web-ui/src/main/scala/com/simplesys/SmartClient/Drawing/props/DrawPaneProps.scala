@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Drawing.props
 
 import com.simplesys.SmartClient.Drawing.gradient.Gradient
-import com.simplesys.SmartClient.Drawing.{DrawItem, DrawPane, DrawPaneDefaults}
+import com.simplesys.SmartClient.Drawing.{DrawItem, DrawPane}
 import com.simplesys.SmartClient.Foundation.props.CanvasProps
 import com.simplesys.SmartClient.System.isc
 import com.simplesys.System.{JSUndefined, jSUndefined}
@@ -15,6 +15,9 @@ import com.simplesys.function._
 import scala.scalajs.js.ThisFunction1
 
 class DrawPaneProps extends CanvasProps {
+
+    import com.simplesys.SmartClient.Drawing.DrawPaneDefaults
+
     type classHandler <: DrawPane
 
     var drawingHeight: ScOption[Double] = ScNone

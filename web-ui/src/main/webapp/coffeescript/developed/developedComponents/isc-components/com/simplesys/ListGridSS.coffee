@@ -1,4 +1,7 @@
 isc.ListGrid.addProperties
+#	"datetimeFormatter"        : ()->
+#		"#{@getDate()}.#{@getMonth()}.#{@getShortYear()}"
+		
 	"canDragSelectText"        : true
 	"getRowNumSelectedGridRecord": ->
 		grid = @
@@ -62,49 +65,55 @@ isc.ListGrid.addProperties
 
 		if isc.isA.ListGrid(grid)
 			@masterGrid = grid
-			forignKeyFields = @dataSource.getForignKeyFields()
-
-			@masterGrid.setSelectionChanged? (record, state) =>
-				masterSelectedRecords = @masterGrid.getSelectedRecords()
-				@discardAllEdits()
-
-				criteria = {}
-				if pkFieldNames? and isc.isA.Object(pkFieldNames) and pkFieldNames.masterGridField? and pkFieldNames.detailGridField
-					pkFieldNames = [pkFieldNames]
-
-				if isc.isA.Array(pkFieldNames) and pkFieldNames.length > 0
-					pkFieldNames. forEach (item) ->
-						arrayRes = masterSelectedRecords.filter((rec) -> rec[item.masterGridField]?).map (rec) -> rec[item.masterGridField]
-
-						if isc.isA.Array(arrayRes) and arrayRes.length > 0
-							if arrayRes.length is 1
-								criteria[item.detailGridField] = arrayRes[0]
+			if isc.isA.DataSource(@dataSource)
+				forignKeyFields = @dataSource.getForignKeyFields()
+	
+				@masterGrid.setSelectionChanged? (record, state) =>
+					masterSelectedRecords = @masterGrid.getSelectedRecords()
+					
+					@discardAllEdits()
+	
+					criteria = {}
+					if pkFieldNames? and isc.isA.Object(pkFieldNames) and pkFieldNames.masterGridField? and pkFieldNames.detailGridField
+						pkFieldNames = [pkFieldNames]
+	
+					if isc.isA.Array(pkFieldNames) and pkFieldNames.length > 0
+						pkFieldNames. forEach (item) ->
+							arrayRes = masterSelectedRecords.filter((rec) -> rec[item.masterGridField]?).map (rec) -> rec[item.masterGridField]
+	
+							if isc.isA.Array(arrayRes) and arrayRes.length > 0
+								if arrayRes.length is 1
+									criteria[item.detailGridField] = arrayRes[0]
+								else
+									criteria[item.detailGridField] = arrayRes
+	
+						if not isc.isA.emptyObject criteria
+							@fetchData(
+								criteria,
+								if @selectFirstRecordAfterFetch is true then () => @selectFirstRecord() ; return)
+						else if masterSelectedRecords.length > 0
+							@logWarn1 "Criteria for MaterGrid not found", @getClassName()
+					else
+						for field, value of forignKeyFields
+							if forignKeyFields[field].foreignKey.indexOf('.') isnt -1
+								masterGridField = forignKeyFields[field].foreignKey.substring(forignKeyFields[field].foreignKey.lastIndexOf('.') + 1)
 							else
-								criteria[item.detailGridField] = arrayRes
-
-					if not isc.isA.emptyObject criteria
-						@fetchData(criteria, () => @selectFirstRecord(); return)
-					else if masterSelectedRecords.length > 0
-						@logWarn1 "Criteria for MaterGrid not found", @getClassName()
-				else
-					for field, value of forignKeyFields
-						if forignKeyFields[field].foreignKey.indexOf('.') isnt -1
-							masterGridField = forignKeyFields[field].foreignKey.substring(forignKeyFields[field].foreignKey.lastIndexOf('.') + 1)
-						else
-							masterGridField = forignKeyFields[field]
-
-						arrayRes = masterSelectedRecords.filter((rec) -> rec[masterGridField]?).map (rec) -> rec[masterGridField]
-						if isc.isA.Array(arrayRes) and arrayRes.length > 0
-							if arrayRes.length is 1
-								criteria[field] = arrayRes[0]
-							else
-								criteria[field] = arrayRes
-
-					if not isc.isA.emptyObject criteria
-						@fetchData(criteria, () => @selectFirstRecord(); return)
-					else if masterSelectedRecords.length > 0
-						@logWarn1 "Criteria for MaterGrid not found", @getClassName()
-				return
+								masterGridField = forignKeyFields[field]
+	
+							arrayRes = masterSelectedRecords.filter((rec) -> rec[masterGridField]?).map (rec) -> rec[masterGridField]
+							if isc.isA.Array(arrayRes) and arrayRes.length > 0
+								if arrayRes.length is 1
+									criteria[field] = arrayRes[0]
+								else
+									criteria[field] = arrayRes
+	
+						if not isc.isA.emptyObject criteria
+							@fetchData(
+								criteria,
+								if @selectFirstRecordAfterFetch is true then () => @selectFirstRecord(); return)
+						else if masterSelectedRecords.length > 0
+							@logWarn1 "Criteria for MaterGrid not found", @getClassName()
+					return
 			return
 
 	"_getEditorWindow": (obj, fields, callback, requestProperties)->
@@ -266,13 +275,12 @@ isc.ClassFactory.defineInterface("GridEditorInterface").addInterfaceProperties
 				for lk of lks
 					grid.dataSource.wildRecordJS[lk] = _masterGrid.getSelectedRecord()[lk]
 		return
-
-	"selectRecordsByKey": (keyValues, newState) ->
+	
+	"selectRecordsByKey": (keyValues, newState, callback) ->
 		if not isc.isA.Array(keyValues)
 			keyValues = [keyValues]
 		for keyValue in keyValues
-			@selectSingleRecordByKey? keyValue, newState
-		return
+			@selectSingleRecordByKey? keyValue, newState, callback
 
 	"setSelectionChanged": (func) ->
 		@grid.setSelectionChanged func

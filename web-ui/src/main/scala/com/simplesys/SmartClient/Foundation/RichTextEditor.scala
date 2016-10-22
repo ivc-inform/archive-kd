@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Foundation
 
-import com.simplesys.SmartClient.Forms.FormsItems.SelectItem
+import com.simplesys.SmartClient.Forms.formsItems.SelectItem
 import com.simplesys.SmartClient.Foundation.richTextEditor.ListPropertiesDialog
 import com.simplesys.SmartClient.Layout.{Layout, VLayout}
 import com.simplesys.SmartClient.System.IscArray

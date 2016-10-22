@@ -18,7 +18,6 @@ trait OkCancelPanel extends HPanelSS {
     var ownerDestroy: Boolean
     var ownerHide: Boolean
     var timeoutClose: Int
-    var owner: Canvas
 }
 
 

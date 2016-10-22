@@ -9,8 +9,7 @@ import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.ArrowStyle._
 import com.simplesys.System.Types.ConnectorStyle._
 import com.simplesys.System.Types.LinePattern._
-import com.simplesys.System.Types.TitleRotationMode._
-import com.simplesys.System.Types.{ArrowStyle => _, LinePattern => _, _}
+import com.simplesys.System.Types.{ArrowStyle ⇒ _, LinePattern ⇒ _, _}
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{IntString, ScNone, ScOption}
 import com.simplesys.props.AbstractClassProps

@@ -12,6 +12,8 @@ import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js.ThisFunction7
 
+
+
 class DrawRectProps extends DrawItemProps {
     type classHandler <: DrawRect
 

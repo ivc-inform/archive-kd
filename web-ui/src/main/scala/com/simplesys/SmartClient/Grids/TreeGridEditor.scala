@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Grids
 
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.treeGrid.{Tree, TreeGridField, TreeNode}
-import com.simplesys.SmartClient.Layout.VLayoutSS
+import com.simplesys.SmartClient.Layout.{AbstractVLayoutSSCompanion, VLayoutSS}
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types._
@@ -21,6 +21,10 @@ trait TreeGridEditor extends VLayoutSS with GridEditor[TreeGridField, TreeNode, 
     var showOpenIcons: Boolean
     def setSelectedRecordsAsFolders(): IscArray[TreeNode]
     def setRecordsAsFolders(records: ListGridRecord): IscArray[TreeNode]
+}
+
+@js.native
+abstract trait AbstractTreeGridEditorCompanion extends AbstractVLayoutSSCompanion {
 }
 
 

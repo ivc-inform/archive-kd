@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Control.props
 
 import com.simplesys.SmartClient.Control.IButton
 import com.simplesys.SmartClient.Forms.DynamicForm
-import com.simplesys.SmartClient.Forms.FormsItems._
+import com.simplesys.SmartClient.Forms.formsItems._
 import com.simplesys.SmartClient.Layout.props.WindowProps
 import com.simplesys.System.JSObject
 import com.simplesys.option.{ScNone, ScOption}

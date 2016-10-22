@@ -28,6 +28,10 @@ trait DSRequest extends RPCRequest {
     val additionalOutputs: String
     val internalClientContext: InternalClientContext
     val componentId: String
+    val channelMessage4AddOperation: JSUndefined[String]
+    val channelMessage4EndAddOperation: JSUndefined[String]
+    val channelMessage4DeleteOperation: JSUndefined[String]
+    val channelMessage4EndDeleteOperation: JSUndefined[String]
     val dataProtocol: DSProtocol
     val dataSource: String
     val endRow: Int
@@ -61,9 +65,9 @@ trait DSRequest extends RPCRequest {
     val headerData: JSObject
     val keepParentsOnFilter: Boolean
     val lineBreakStyle: String
-    val oldValues: Record
+    var oldValues: JSUndefined[Record]
     val operationId: String
-    val operationType: DSOperationType
+    val operationType: JSUndefined[DSOperationType]
     val outputs: String
     val parentNode: TreeNode
     val pendingAdd: Boolean

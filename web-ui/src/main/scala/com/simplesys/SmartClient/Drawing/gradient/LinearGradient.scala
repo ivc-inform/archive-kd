@@ -4,9 +4,12 @@ import scala.scalajs.js
 
 @js.native
 trait LinearGradient extends Gradient {
-    var x1: String
-    var x2: String
-    var y1: String
-    var y2: String
+
+    import com.simplesys.System.JSUndefined
+
+    var x1: JSUndefined[String]
+    var x2: JSUndefined[String]
+    var y1: JSUndefined[String]
+    var y2: JSUndefined[String]
 }
 

@@ -1,21 +1,32 @@
 package com.simplesys.SmartClient.RPC
 
+import com.simplesys.SmartClient.DataBinding.ErrorStruct
 import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class}
-import com.simplesys.System.JSObject
 import com.simplesys.System.Types.void
+import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
+
+@ScalaJSDefined
+trait Response extends JSObject{
+  val response: JSUndefined[RPCResponse]
+}
 
 @js.native
 trait RPCResponse extends Class {
+
+    import com.simplesys.System.JSAny
+
     val clientContext: JSObject
-    val data: JSObject
+    val data: JSUndefined[JSAny]
     val httpHeaders: JSObject
     val httpResponseCode: Int
     val httpResponseText: String
-    val status: Int
+    var status: Int
     val transactionNum: Int
+    var errorStruct: JSUndefined[ErrorStruct]
+    val results: JSUndefined[Response]  //Не менять !!!
 }
 
 @js.native

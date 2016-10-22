@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Foundation.props.richTextEditor
 
 import com.simplesys.SmartClient.Forms.DynamicForm
-import com.simplesys.SmartClient.Forms.FormsItems.SpinnerItem
+import com.simplesys.SmartClient.Forms.formsItems.SpinnerItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.richTextEditor.ListProperties
 import com.simplesys.SmartClient.Grids.TileLayout

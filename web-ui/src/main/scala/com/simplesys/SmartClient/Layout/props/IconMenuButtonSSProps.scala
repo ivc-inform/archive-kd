@@ -6,12 +6,16 @@ import com.simplesys.SmartClient.System.{IscArray, isc}
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.IconOrientation
 import com.simplesys.function._
+import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 
 import scala.scalajs.js
 
 class IconMenuButtonSSProps extends IconMenuButtonProps {
     type classHandler <: IconMenuButtonSS
+
+    var addOwner1: ScOption[Boolean] = true.opt
+
     click = {
         (thiz: classHandler) =>
             thiz.showMenu()
@@ -20,7 +24,7 @@ class IconMenuButtonSSProps extends IconMenuButtonProps {
 
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
-            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
+            //isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             thiz.iconSmall = thiz.icon
             thiz.title1 = thiz.title
@@ -44,10 +48,19 @@ class IconMenuButtonSSProps extends IconMenuButtonProps {
                 } else
                     true
 
+                //isc debugTrap res
                 if (res) {
+                    //isc debugTrap(thiz.menu, thiz.menu.get)
+
                     val menu: MenuSS = thiz.menu.get
 
-                    menu.items.foreach(_.owner1 = thiz)
+                    //isc debugTrap (menu.items, menu.data)
+                    if (menu.items.isEmpty)
+                        menu.items = menu.data
+
+                    if (thiz.addOwner1)
+                        menu.items.foreach(_ foreach (_.owner1 = thiz))
+
                     //isc debugTrap menu.items
 
                     menu._showOffscreen()

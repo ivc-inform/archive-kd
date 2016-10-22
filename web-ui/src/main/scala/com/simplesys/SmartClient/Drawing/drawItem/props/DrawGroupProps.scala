@@ -1,11 +1,14 @@
 package com.simplesys.SmartClient.Drawing.drawItem.props
 
 import com.simplesys.SmartClient.Drawing.props.DrawItemProps
-import com.simplesys.SmartClient.Drawing.{DrawGroupDefaults, DrawItem}
+import com.simplesys.SmartClient.Drawing.DrawItem
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
 class DrawGroupProps extends DrawItemProps {
+
+    import com.simplesys.SmartClient.Drawing.DrawGroupDefaults
+
     var drawItems: ScOption[Seq[DrawItem]] = ScNone
     var height: ScOption[Int] = ScNone
     var left: ScOption[Int] = ScNone

@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Layout.props
 
 import com.simplesys.SmartClient.Control.{ImgButton, StretchImgButton}
-import com.simplesys.SmartClient.Forms.FormsItems.TextItem
+import com.simplesys.SmartClient.Forms.formsItems.TextItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.CanvasProps
 import com.simplesys.SmartClient.Grids.TableView
@@ -18,8 +18,11 @@ import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
+import scala.scalajs.js.ThisFunction5
 
 class TabSetProps extends CanvasProps {
+    type classHandler <: TabSet
+
     var addTabButton: ScOption[ImgButton] = ScNone
     var animateTabScrolling: ScOption[Boolean] = ScNone
     var addTabButtonIcon: ScOption[SCImgURL] = ScNone
@@ -89,7 +92,7 @@ class TabSetProps extends CanvasProps {
     var tabBarProperties: ScOption[TabBar] = ScNone
     var tabBarThickness: ScOption[Int] = ScNone
     var tabDeselected: ScOption[js.Function5[Int, Canvas, ID, Tab, Tab, Boolean]] = ScNone
-    var tabSelected: ScOption[js.Function5[Int, Canvas, JSUndefined[ID], Tab, JSUndefined[String], Boolean]] = ScNone
+    var tabSelected: ScOption[ThisFunction5[classHandler, Int, Canvas, JSUndefined[ID], Tab, JSUndefined[String], Boolean]] = ScNone
     var tabIconClick: ScOption[js.Function1[Tab, _]] = ScNone
     var tabPicker: ScOption[ImgButton] = ScNone
     var tabProperties: ScOption[Tab] = ScNone

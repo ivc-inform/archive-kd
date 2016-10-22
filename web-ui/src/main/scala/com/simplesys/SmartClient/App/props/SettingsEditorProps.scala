@@ -2,8 +2,8 @@ package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.SettingsEditor
 import com.simplesys.SmartClient.Forms.DynamicForm
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.Forms.FormsItems.props.{CheckboxItemProps, SkinBoxItemProps}
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.props.{CheckboxItemProps, SkinBoxItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
 import com.simplesys.SmartClient.Layout.props.{OkCancelPanelProps, TabSetSSProps, WindowSSProps}
@@ -13,6 +13,7 @@ import com.simplesys.System.{JSAny, JSUndefined, jSUndefined}
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+import com.simplesys.SmartClient.Forms.formsItems.props.SpinnerItemProps
 
 import scala.scalajs.js
 
@@ -28,9 +29,10 @@ class SettingsEditorProps extends WindowSSProps {
     headerIconPath = Common.settings.opt
     autoPosition = false.opt
 
+
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
+            isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
 
             thiz.Super("initWidget", arguments)
 
@@ -40,6 +42,7 @@ class SettingsEditorProps extends WindowSSProps {
 
             val commons = DynamicFormSS.create(
                 new DynamicFormSSProps {
+
                     fields = Seq(
                         CheckboxItem(
                             new CheckboxItemProps {
@@ -48,8 +51,20 @@ class SettingsEditorProps extends WindowSSProps {
                                 value = simpleSyS.expertMode.getOrElse(false).asInstanceOf[JSAny].opt
                                 disabled = true.opt
                                 changed = {
-                                    (form: DynamicForm, item: FormItem, value: JSAny) =>
-                                        simpleSyS.expertMode = value.asInstanceOf[Boolean]
+                                    (form: DynamicForm, item: FormItem, value: JSUndefined[Boolean]) =>
+                                        simpleSyS.expertMode = value
+
+                                }.toFunc.opt
+                            }
+                        ),
+                        CheckboxItem(
+                            new CheckboxItemProps {
+                                title = "Тестовый режим генерации сценариев".opt
+                                height = 25
+                                value = simpleSyS.scenarioTestMode.getOrElse(false).asInstanceOf[JSAny].opt
+                                changed = {
+                                    (form: DynamicForm, item: FormItem, value: JSUndefined[Boolean]) =>
+                                        simpleSyS.scenarioTestMode = value
 
                                 }.toFunc.opt
                             }
@@ -59,8 +74,22 @@ class SettingsEditorProps extends WindowSSProps {
                                 title = "Темы оформления (Skins)".opt
                                 value = simpleSyS.skin.getOrElse(Skin.Enterprise.toString).asInstanceOf[JSAny].opt
                                 changed = {
-                                    (form: DynamicForm, item: FormItem, value: JSAny) =>
-                                        skin = value.toString
+                                    (form: DynamicForm, item: FormItem, value: JSUndefined[String]) =>
+                                        skin = value
+                                }.toFunc.opt
+                            }
+                        ),
+                        SpinnerItem(
+                            new SpinnerItemProps {
+                                disabled = true.opt
+                                title = "Количество копий графа состояний".opt
+                                defaultValue = (if (simpleSyS.qtyGraphCopies.isEmpty) 100 else simpleSyS.qtyGraphCopies get).asInstanceOf[JSAny].opt
+                                min = 0.0.opt
+                                step = 1.0.opt
+                                changed = {
+                                    import com.simplesys.SmartClient.Forms.DynamicFormSS
+                                    (form: DynamicFormSS, formItem: FormItem, value: JSUndefined[Int]) ⇒
+                                        simpleSyS.qtyGraphCopies = value
                                 }.toFunc.opt
                             }
                         )
@@ -90,7 +119,9 @@ class SettingsEditorProps extends WindowSSProps {
                         (thiz: classHandler) =>
                             if (oldSkin != skin) {
                                 simpleSyS.skin = skin
+
                                 isc.OfflineSS.put(s"Skin$identifierApp", skin)
+                                isc.OfflineSS.putBoolean(s"ScenarioTestMode$identifierApp", simpleSyS.scenarioTestMode.getOrElse(false))
                                 js.Dynamic.global.window.location.reload(false)
                             }
 

@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Forms.props
 
 import com.simplesys.SmartClient.Control.{IButton, ImgButton}
 import com.simplesys.SmartClient.DataBinding.{AdvancedCriteria, DataSource}
-import com.simplesys.SmartClient.Forms.FormsItems.{FormItem, PickList, SelectItem}
+import com.simplesys.SmartClient.Forms.formsItems.{FormItem, PickList, SelectItem}
 import com.simplesys.SmartClient.Forms.{DynamicForm, FilterBuilder}
 import com.simplesys.SmartClient.Foundation.{Canvas, Label}
 import com.simplesys.SmartClient.Layout.props.LayoutProps

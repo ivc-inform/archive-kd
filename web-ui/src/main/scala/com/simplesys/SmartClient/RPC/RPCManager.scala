@@ -2,10 +2,10 @@ package com.simplesys.SmartClient.RPC
 
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class, IscArray}
-import com.simplesys.System.JSAny
 import com.simplesys.System.Types.PromptStyle.PromptStyle
 import com.simplesys.System.Types.RPCTransport.RPCTransport
 import com.simplesys.System.Types.{Callback, HTMLString, URL, void}
+import com.simplesys.System.{JSAny, JSUndefined}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSName
@@ -17,6 +17,9 @@ trait RPCManager extends Class {
 
 @js.native
 abstract trait AbstractRPCManagerCompanion extends AbstractClassCompanion {
+
+    import com.simplesys.SmartClient.DataBinding.Callbacks.RPCQueueCallback
+
     var actionURL: URL = js.native
     val ALL_GLOBALS: String = js.native
     var allowCrossDomainCalls: Boolean = js.native
@@ -32,14 +35,14 @@ abstract trait AbstractRPCManagerCompanion extends AbstractClassCompanion {
     def exportContent(canvas: Canvas | IscArray[Canvas] | String, requestProperties: RPCRequest = js.native): void = js.native
     def exportImage(svgString: String, requestProperties: RPCRequest = js.native, callback: Callback = js.native): void = js.native
     var fetchDataPrompt: String = js.native
-    def getCurrentTransactionId(): Int = js.native
-    def getQueueTransactionId(): Int = js.native
+    def getCurrentTransactionId(): JSUndefined[Int] = js.native
+    def getQueueTransactionId(): JSUndefined[Int] = js.native
     def handleError(response: RPCResponse, request: RPCRequest): void = js.native
     def handleTransportError(transactionNum: Int, status: Int, httpResponseCode: Int, httpResponseText: String): void = js.native
     def hasCurrentTransactionQueued(): Boolean = js.native
     val httpProxyURL: String = js.native
     def loadScreen(screenName: String, callback: Callback, globals: IscArray[String] = js.native, locale: String = js.native, requestProperties: RPCRequest = js.native): void = js.native
-    var loginRequired: js.Function3[Int, RPCRequest, RPCResponse, _]  = js.native
+    var loginRequired: js.Function3[Int, RPCRequest, RPCResponse, _] = js.native
     @JSName("loginRequired")
     var loginRequiredMarker: String = js.native
     var loginStatusCodeMarker: String = js.native
@@ -56,10 +59,10 @@ abstract trait AbstractRPCManagerCompanion extends AbstractClassCompanion {
     var screenLoaderURL: URL = js.native
     def send(data: JSAny, callback: Callback, requestParams: RPCRequest): void = js.native
     def sendProxied(request: RPCRequest): void = js.native
-    def sendQueue(callback: Callback): void = js.native
+    def sendQueue(callback: RPCQueueCallback = js.native, prompt: String = js.native, URL: URL = js.native, delay: Int = js.native): void = js.native
     def sendRequest(rpcRequest: RPCRequest, evalResult: Boolean = js.native): void = js.native
     var showPrompt: Boolean = js.native
-    def startQueue(shouldQueue: Boolean): Boolean = js.native
+    def startQueue(shouldQueue: Boolean = js.native): Boolean = js.native
     def suspendTransaction(transaction: Int): void = js.native
     var timeoutErrorMessage: String = js.native
     var useCursorTracker: Boolean = js.native

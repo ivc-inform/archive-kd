@@ -10,7 +10,6 @@ import scala.scalajs.js.{ThisFunction0, |}
 @js.native
 trait ToolStripButton extends Button {
     val enableIf : JSUndefined[js.ThisFunction0[Canvas, Boolean]]
-    var owner : JSUndefined[Canvas]
 }
 
 @js.native

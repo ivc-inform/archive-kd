@@ -1,11 +1,11 @@
 package com.simplesys.SmartClient.Grids.props.listGrid
 
 import com.simplesys.SmartClient.DataBinding.DSRequest
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.Forms.FormsItems.formItem.FormItemIcon
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicForm, Validator}
-import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord, UserFormula, UserSummary}
+import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.AutoComplete.AutoComplete
@@ -98,9 +98,10 @@ class ListGridFieldProps extends AbstractClassProps {
     var filterOnKeypress: ScOption[Boolean] = ScNone
     var filterOperator: ScOption[OperatorId] = ScNone
     var format: ScOption[FormatString] = ScNone
+    var formatCellValue: ScOption[Function5[JSAny, ListGridRecord, Int, Int, ListGrid, HTMLString]] = ScNone
     var formatGridSummary: ScOption[String] = ScNone
     var formatGroupSummary: ScOption[String] = ScNone
-    var formatEditorValue : ScOption[Function5[JSAny, ListGridRecord, Int, Int, ListGrid, JSAny]] = ScNone
+    var formatEditorValue: ScOption[Function5[JSAny, ListGridRecord, Int, Int, ListGrid, JSAny]] = ScNone
     var frozen: ScOption[Boolean] = ScNone
     var groupGranularity: ScOption[Int] = ScNone
     var groupingMode: ScOption[String] = ScNone

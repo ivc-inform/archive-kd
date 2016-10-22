@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.Drawing.drawItem
 
 import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, DrawItem}
+import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
@@ -9,10 +10,10 @@ import scala.scalajs.js
 trait DrawLabel extends DrawItem {
     val alignment: String
     var contents: String
-    val fontFamily: String
-    var fontSize: Int
-    val fontStyle: String
-    val fontWeight: String
+    val fontFamily: JSUndefined[String]
+    var fontSize: JSUndefined[Int]
+    val fontStyle: JSUndefined[String]
+    val fontWeight: JSUndefined[String]
     val left: Int
     def setContents(contents: String, fromUpdateTitleLabelAndBackground: Boolean = js.native): void
     def setFontSize(size: Int): void

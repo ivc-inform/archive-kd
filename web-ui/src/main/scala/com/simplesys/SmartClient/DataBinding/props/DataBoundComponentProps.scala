@@ -1,21 +1,38 @@
 package com.simplesys.SmartClient.DataBinding.props
 
-import com.simplesys.SmartClient.DataBinding.DataSource
+import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
 import com.simplesys.SmartClient.Grids.listGrid.{Hilite, HiliteEditor}
-import com.simplesys.SmartClient.Layout.Window
+import com.simplesys.SmartClient.Layout.props.WindowProgressDialogProps
+import com.simplesys.SmartClient.Layout.{Window, WindowProgressDialog}
+import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System.props.ClassProps
-import com.simplesys.System.JSObject
+import com.simplesys.SmartClient.System.{Common, IscArray, WindowProgressDialog, isc, _}
 import com.simplesys.System.Types.DragDataAction.DragDataAction
 import com.simplesys.System.Types.FetchMode.FetchMode
 import com.simplesys.System.Types.FieldNamingStrategy.FieldNamingStrategy
 import com.simplesys.System.Types.HiliteIconPosition.HiliteIconPosition
 import com.simplesys.System.Types.RecategorizeMode.RecategorizeMode
-import com.simplesys.System.Types.{CSSStyleName, Criteria, HTMLString}
+import com.simplesys.System.Types._
+import com.simplesys.System._
+import com.simplesys.function._
+import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js
+import scala.scalajs.js.{ThisFunction4, |}
+
+@js.native
+trait Operation extends JSObject {
+    val ID: ID
+    val dataSource: DataSource | String
+    val filterType: String
+    val loadDataOnDemand: Boolean
+    val source: String
+    val `type`: String
+}
 
 trait DataBoundComponentProps extends ClassProps {
+
     var addDropValues: ScOption[Boolean] = ScNone
     var addFormulaFieldText: ScOption[String] = ScNone
     var addOperation: ScOption[String] = ScNone
@@ -33,6 +50,70 @@ trait DataBoundComponentProps extends ClassProps {
     var dataSource: ScOption[DataSource] = ScNone
     var deepCloneOnEdit: ScOption[Boolean] = ScNone
     var descriptionField: ScOption[String] = ScNone
+    var deleteRecords: ScOption[ThisFunction4[classHandler, IscArray[Record], Operation, DSRequest, DataSource, _]] = {
+        (thiz: classHandler, records: IscArray[Record], deleteOperation: Operation, context: DSRequest, dataSource: DataSource) ⇒
+
+            //isc debugTrap(records, deleteOperation, context, dataSource)
+            isc.addProperties(context, js.Dictionary("prompt" → context.prompt.getOrElse(isc.RPCManager.removeDataPrompt)))
+
+            val keyFieldNames: IscArray[String] = dataSource.getPrimaryKeyFieldNames()
+            val fieldNames: IscArray[String] = dataSource.getFieldNames()
+
+            var progressBar: JSUndefined[WindowProgressDialog] = jSUndefined
+
+            if (records.length > 1)
+                progressBar = WindowProgressDialog.create(
+                    new WindowProgressDialogProps {
+                        maxValue = records.length.toDouble.opt
+                        title = "Удаление данных".ellipsis.opt
+                        headerIconPath = Common.insert.opt
+                    }
+                )
+
+
+            val wasAlreadyQueuing = isc.RPCManager.startQueue()
+
+            //isc debugTrap(keyFieldNames, fieldNames, wasAlreadyQueuing)
+            records.foreach {
+                record ⇒
+
+                    if (record.asInstanceOf[js.Dynamic]._isGroup.undef.isEmpty) {
+
+                        val recordKeys = isc.applyMask[JSObject](record, keyFieldNames)
+                        context.oldValues = isc.applyMask[JSObject](record, fieldNames)
+                        dataSource.performDSOperation(deleteOperation.`type`, recordKeys, jSUndefined, context)
+                    }
+            }
+
+            val transactionID = isc.RPCManager.getQueueTransactionId()
+            val _channelMessage4RemoveOperation = s"ListElements_Remove_$transactionID"
+            val _channelMessage4RemoveAddOperation = s"ListElements_EndRemove_$transactionID"
+
+            transactionID.foreach {
+                transactionID ⇒
+
+                    isc.MessagingSS.subscribe(_channelMessage4RemoveOperation, {
+                        (e: MessageJS) ⇒
+                            //println(s"remove data: ${e.data.toString}")
+                            progressBar.foreach(_.nextStep())
+                    }
+                    )
+
+                    isc.MessagingSS.subscribe(
+                        _channelMessage4RemoveAddOperation, {
+                            (e: MessageJS) ⇒
+                                isc.MessagingSS unsubscribe _channelMessage4RemoveOperation
+                                isc.MessagingSS unsubscribe _channelMessage4RemoveAddOperation
+
+                                progressBar.foreach(_.markForDestroy())
+                        }
+                    )
+
+                    if (!wasAlreadyQueuing)
+                        isc.RPCManager.sendQueue(delay = 100)
+            }
+
+    }.toThisFunc.opt
     var dragDataAction: ScOption[DragDataAction] = ScNone
     var dragRecategorize: ScOption[RecategorizeMode] = ScNone
     var dragTrackerStyle: ScOption[CSSStyleName] = ScNone

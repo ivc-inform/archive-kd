@@ -1,5 +1,8 @@
 isc.defineClass("ChainMasterDetail", isc.LayoutSS).addProperties
 	vertical: false
+	"setFuncMenu": (funcMenu) ->
+		@funcMenu = funcMenu
+		return
 	destroy : ->
 		###@setViewState()###
 		@Super "destroy", arguments

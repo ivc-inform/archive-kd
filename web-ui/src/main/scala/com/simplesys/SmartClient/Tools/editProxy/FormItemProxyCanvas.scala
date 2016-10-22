@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Tools.editProxy
 
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Canvas}
 
 import scala.scalajs.js

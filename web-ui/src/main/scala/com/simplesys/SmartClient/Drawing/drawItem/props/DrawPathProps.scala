@@ -1,14 +1,13 @@
 package com.simplesys.SmartClient.Drawing.drawItem.props
 
+import com.simplesys.SmartClient.Drawing.DrawPathDefaults
 import com.simplesys.SmartClient.Drawing.drawItem.DrawPath
-import com.simplesys.SmartClient.Drawing.{DrawItem, DrawPathDefaults}
 import com.simplesys.SmartClient.Drawing.props.DrawItemProps
-import com.simplesys.SmartClient.System.{IscArray, Point}
-import com.simplesys.System._
-import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.SmartClient.System.{IscArray, Point, isc}
+import com.simplesys.System.JSAny
 import com.simplesys.option.ScOption._
-
-import scala.scalajs.js.ThisFunction2
+import com.simplesys.function._
+import com.simplesys.option.{ScNone, ScOption}
 
 class DrawPathProps extends DrawItemProps {
     type classHandler <: DrawPath

@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Drawing.drawItem
 
-import com.simplesys.SmartClient.Drawing.DrawItem
+import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, DrawItem}
 import com.simplesys.SmartClient.System.Point
 import com.simplesys.System.Types.void
 
@@ -25,4 +25,7 @@ trait DrawOval extends DrawItem {
     var top: Int
     var width: Int
 }
+
+@js.native
+abstract trait AbstractDrawOvalCompanion extends AbstractDrawItemCompanion
 

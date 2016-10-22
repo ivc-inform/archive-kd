@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonTreeGridEditorComponent
+import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.TreeGridContextMenuProps
 import com.simplesys.SmartClient.Grids.props.TreeGridEditorProps
 import com.simplesys.SmartClient.System._
@@ -8,6 +9,7 @@ import com.simplesys.System.Types.SelectionStyle
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
 trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps with InitialTrait {
@@ -32,9 +34,11 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps with Initia
     selectFirstRecordAfterFetch = false.opt
     saveByCell = true.opt
 
+    var customMenu: ScOption[Seq[MenuSSItem]] = ScNone
+
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
-            isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
+            //isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
             val res = initWidget(thiz, thiz.fields, thiz.replacingFields, thiz.editingFields)
             thiz.fields = res._1
@@ -45,6 +49,7 @@ trait CommonTreeGridEditorComponentProps extends TreeGridEditorProps with Initia
             val funcMenu = TreeGridContextMenu.create(
                 new TreeGridContextMenuProps {
                     owner = thiz.opt
+                    customMenu = if (thiz.customMenu.isEmpty) ScNone else thiz.customMenu.get.toSeq.opt
                 }
             )
 

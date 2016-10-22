@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.Drawing
 
 import com.simplesys.SmartClient.Control.MenuSS
+import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Drawing.drawItem.{DrawGroup, DrawLabel, DrawRect}
 import com.simplesys.SmartClient.Drawing.gradient.Gradient
 import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class, IscArray, Point, Rect1}
@@ -42,6 +43,7 @@ trait CalculateTitleLabelPositionInfo extends JSObject {
 @ScalaJSDefined
 trait LiveObject extends JSObject {
     var canDrag: Boolean
+    val fieldDataSource: JSUndefined[DataSource]
 }
 
 @js.native
@@ -63,6 +65,7 @@ trait DrawItem extends Class {
     var editNode: JSUndefined[EditNode]
     var canDrag: JSUndefined[Boolean]
     var ID: ID
+    val titleLabelProperties: JSUndefined[DrawLabel]
     var _segmentPoints: IscArray[Point]
     var canHover: Boolean
     var click: js.ThisFunction0[classHandler, Boolean]
@@ -112,7 +115,7 @@ trait DrawItem extends Class {
     var keepInParentRect: Boolean
     val knobs: IscArray[KnobType]
     var lineCap: LineCap
-    var lineColor: CSSColor
+    var lineColor: JSUndefined[CSSColor]
     var lineOpacity: Double
     //var linePattern: LinePattern //!!!!! Не убирать
     var lineWidth: Double
@@ -169,7 +172,7 @@ trait DrawItem extends Class {
     def setShadow(shadow: Shadow): void
     def setStartArrow(arrowStyle: ArrowStyle): void
     def setTitle(newTitle: String = js.native): void
-    var shadow: Shadow
+    var shadow: JSUndefined[Shadow]
     val shapeData: JSObject
     def show(): void
     def showAllKnobs(): void
@@ -196,9 +199,8 @@ trait DrawItem extends Class {
     //Возможность приклеивания другого
     var enable4Glue: JSUndefined[Boolean]
     var title: JSUndefined[String]
-    val titleLabel: JSUndefined[DrawLabel]
+    var titleLabel: JSUndefined[DrawLabel]
     val titleLabelDefaults: DrawLabel
-    val titleLabelProperties: DrawLabel
     val titleLabelBackground: JSUndefined[DrawRect]
     val titleLabelPadding: Double
     var titleRotationMode: JSUndefined[TitleRotationMode]
@@ -221,6 +223,13 @@ trait DrawItem extends Class {
 
     var startLeft2CentrLeft: JSUndefined[Double]
     var startTop2CentrTop: JSUndefined[Double]
+
+    val fieldDataSource: JSUndefined[DataSource]
+    val variableProps: JSUndefined[JSObject]
+    val subProgramProps: JSUndefined[JSObject]
+    val listRefs: JSUndefined[JSObject]
+    val timerProps: JSUndefined[JSObject]
+    val groupProps: JSUndefined[JSObject]
 }
 
 @js.native

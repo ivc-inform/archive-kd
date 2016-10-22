@@ -1,6 +1,8 @@
 package com.simplesys.SmartClient.Tools.props
 
-import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.treeGrid.TreeNode
+import com.simplesys.SmartClient.System.{IscArray, isc}
 import com.simplesys.SmartClient.System.props.ClassProps
 import com.simplesys.SmartClient.Tools._
 import com.simplesys.SmartClient.Tools.props.EditContextProps.SelectedUpdated
@@ -10,6 +12,8 @@ import com.simplesys.System.Types.SelectedAppearance.SelectedAppearance
 import com.simplesys.System.Types.SelectionStyle.SelectionStyle
 import com.simplesys.System._
 import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.function._
+import com.simplesys.option.ScOption._
 
 import scala.scalajs.js
 import scala.scalajs.js._
@@ -47,5 +51,5 @@ trait EditContextProps extends ClassProps {
     var showSelectedLabel: ScOption[Boolean] = ScNone
     var showSelectedLabelOnSelect: ScOption[Boolean] = ScNone
     var selectedEditNodesUpdated: ScOption[SelectedUpdated] = ScNone
-    var selectionType : ScOption[SelectionStyle] = ScNone
+    var selectionType: ScOption[SelectionStyle] = ScNone
 }

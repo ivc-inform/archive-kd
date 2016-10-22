@@ -28,6 +28,4 @@ trait JSONEncoder extends Class {
 abstract trait AbstractJSONEncoderCompanion extends AbstractClassCompanion {
 }
 
-@js.native
-object JSONEncoder extends AbstractJSONEncoderCompanion
 

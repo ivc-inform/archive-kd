@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Forms
 
 import com.simplesys.SmartClient.DataBinding.Callbacks._
 import com.simplesys.SmartClient.DataBinding._
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.Forms.dynamicForm.FormItemEventInfo
 import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Canvas}
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
@@ -26,6 +26,7 @@ import com.simplesys.System.{JSAny, JSObject, JSUndefined}
 
 import scala.scalajs.js
 import scala.scalajs.js._
+import scala.scalajs.js.annotation.JSName
 
 @js.native
 trait DynamicForm extends Canvas with DataBoundComponent {
@@ -82,7 +83,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def getErrorsHTML(errors: JSObject): HTMLString
     def getEventItem(): FormItem
     def getEventItemInfo(): FormItemEventInfo
-    def getField(itemName: String): FormItem
+    def getField(itemName: String): JSUndefined[FormItem]
     def getFieldErrors(fieldName: String): IscArray[String]
     def getFields(): IscArray[FormItem]
     def getFocusItem(): FormItem
@@ -163,6 +164,8 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def setTarget(target: String): void
     def setTitleOrientation(titleOrientation: TitleOrientation): void
     def setValue(fieldName: String, value: JSAny): void
+    @JSName("setValue")
+    def setValueString(fieldName: String, value: String): void
     def setValueMap(itemName: String, valueMap: ValueMap): void
     def setValues(newData: JSObject = js.native): void
     def setValuesAsCriteria(criteria: Criterion): void

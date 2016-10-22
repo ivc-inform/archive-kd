@@ -31,6 +31,8 @@ object Callbacks {
 
     type DSCallback = js.Function3[DSResponse, JSObject, DSRequest, _]
 
+    type RPCQueueCallback = js.Function1[IscArray[RPCResponse], _]
+
     type RPCCallback = js.Function3[RPCResponse, JSObject, RPCRequest, _]
 
     type DataURLCallback = js.Function1[String, _]

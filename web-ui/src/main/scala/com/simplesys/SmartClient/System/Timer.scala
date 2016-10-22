@@ -13,7 +13,7 @@ trait Timer extends Class {
 @js.native
 abstract trait AbstractTimerCompanion extends AbstractClassCompanion {
     def clear(timerEvent: JSObject): void = js.native
-    def setTimeout(action: js.Function0[_] | String, delay: Int): JSObject = js.native
+    def setTimeout(action: js.Function, delay: Int = js.native): JSObject = js.native
 }
 
 @js.native

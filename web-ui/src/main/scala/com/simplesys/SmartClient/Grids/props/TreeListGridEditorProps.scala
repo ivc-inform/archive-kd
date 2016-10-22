@@ -1,11 +1,10 @@
 package com.simplesys.SmartClient.Grids.props
 
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
-import com.simplesys.SmartClient.Forms.FormsItems.props.FormItemProps
-import com.simplesys.SmartClient.Foundation.Img
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.canvas.ImgProperties
-import com.simplesys.SmartClient.Grids.TreeListGridEditor
+import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor, TreeListGridEditor}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Grids.props.treeGrid.TreeGridFieldProps
@@ -13,13 +12,16 @@ import com.simplesys.SmartClient.Grids.treeGrid.Tree
 import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types.FetchMode.FetchMode
+import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPoolingMode
+import com.simplesys.System.Types.SelectionAppearance._
 import com.simplesys.System.Types.SelectionStyle.SelectionStyle
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types._
 import com.simplesys.option.{IntString, ScNone, ScOption}
 
-import scala.scalajs.js.ThisFunction0
+import scala.scalajs.js.{ThisFunction0, ThisFunction2, ThisFunction4}
 
 class TreeListGridEditorProps extends HLayoutSSProps {
     type classHandler <: TreeListGridEditor
@@ -90,8 +92,8 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var editListRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingListFields: ScOption[Seq[FormItem]] = ScNone
     var editingTreeFields: ScOption[Seq[FormItem]] = ScNone
-    var saveByTreeCell : ScOption[Boolean] = ScNone
-    var saveByListCell : ScOption[Boolean] = ScNone
+    var saveByTreeCell: ScOption[Boolean] = ScNone
+    var saveByListCell: ScOption[Boolean] = ScNone
     var dataFetchModeList: ScOption[FetchMode] = ScNone
     var dataFetchModeTree: ScOption[FetchMode] = ScNone
     var dataTree: ScOption[Tree] = ScNone
@@ -99,6 +101,19 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var editWindowPropertiesList: ScOption[WindowSS] = ScNone
     var canDragRecordsOutList: ScOption[Boolean] = ScNone
     var canDragRecordsOutTree: ScOption[Boolean] = ScNone
-    var trackerImageList : ScOption[ImgProperties] = ScNone
-    var trackerImageTree : ScOption[ImgProperties] = ScNone
+    var trackerImageList: ScOption[ImgProperties] = ScNone
+    var trackerImageTree: ScOption[ImgProperties] = ScNone
+    var selectionAppearanceList: ScOption[SelectionAppearance] = ScNone
+    var selectionAppearanceTree: ScOption[SelectionAppearance] = ScNone
+    var selectFirstRecordAfterFetchList: ScOption[Boolean] = ScNone
+    var selectFirstRecordAfterFetchTree: ScOption[Boolean] = ScNone
+
+    var createListRecordComponent: ScOption[ThisFunction2[ListGridEditor, ListGridRecord, Int, JSUndefined[Canvas]]] = ScNone
+    var updateListRecordComponent: ScOption[ThisFunction4[ListGridEditor, ListGridRecord, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
+
+    var createTreeRecordComponent: ScOption[ThisFunction2[TreeGridEditor, ListGridRecord, Int, JSUndefined[Canvas]]] = ScNone
+    var updateTreeRecordComponent: ScOption[ThisFunction4[TreeGridEditor, ListGridRecord, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
+
+    var recordListComponentPoolingMode: ScOption[RecordComponentPoolingMode] = ScNone
+    var recordTreeComponentPoolingMode: ScOption[RecordComponentPoolingMode] = ScNone
 }

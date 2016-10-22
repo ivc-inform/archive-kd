@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.Forms.props.dynamicForm
 
-import com.simplesys.SmartClient.Forms.FormsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.props.AbstractClassProps
 

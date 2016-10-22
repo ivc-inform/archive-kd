@@ -11,7 +11,6 @@ import scala.scalajs.js
 
 @js.native
 trait WindowListGridEditorToolStrip extends ToolStrip {
-    var owner: JSUndefined[Canvas]
     val members: IscArray[_ <: ToolStripButton]
     var visibleButtons: JSUndefined[VisibleButtons]
     def redrawButtons(): void

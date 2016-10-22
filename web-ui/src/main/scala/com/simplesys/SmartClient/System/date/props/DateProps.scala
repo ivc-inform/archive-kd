@@ -15,7 +15,7 @@ class DateProps extends AbstractClassProps {
 
     var toEuropeanDatetime: ScOption[ThisFunction1[classHandler, JSUndefined[Boolean], String]] = {
         (thiz: Date, useCustomTimezone: JSUndefined[Boolean]) =>
-            s"${thiz.toEuropeanShortDate()} ${isc.Time.format(thiz, "toPadded24HourTime", true)}"
+            s"${thiz.toEuropeanShortDate()} ${isc.Time.format(thiz, "toPadded24HourTime", true, useCustomTimezone.getOrElse(false))}"
     }.toThisFunc.opt
 
 }

@@ -68,14 +68,12 @@ class EditContextSSProps extends EditContextProps {
 
     }.toThisFunc.opt
 
-    var addPaletteNodesFromJSON1: ScOption[ThisFunction5[classHandler, JSAny, JSUndefined[EditNode], JSUndefined[IscArray[String]], JSUndefined[JSFunction], JSUndefined[JSObject], _]] = {
-        (thiz: classHandler, jsonString: JSAny, parentNode: JSUndefined[EditNode], globals: JSUndefined[IscArray[String]], callback: JSUndefined[JSFunction], addedProps: JSUndefined[JSObject]) =>
+    var addPaletteNodesFromJSON1: ScOption[ThisFunction6[classHandler, Map[String, DrawItem], JSAny, JSUndefined[EditNode], JSUndefined[IscArray[String]], JSUndefined[JSFunction], JSUndefined[JSObject], _]] = {
+        (thiz: classHandler, components: Map[String, DrawItem], jsonString: JSAny, parentNode: JSUndefined[EditNode], globals: JSUndefined[IscArray[String]], callback: JSUndefined[JSFunction], addedProps: JSUndefined[JSObject]) =>
 
             isc.captureDefaults = true.asInstanceOf[JSAny]
 
-            val _json = jsonString.toString.replace("\n", "\\n")
-            //println(isc.js_beautify(_json))
-            val jsClassDefs = isc.JSON.decode(_json).asInstanceOf[IscArray[JSUndefined[DrawItem]]]
+            val jsClassDefs = isc.JSON.decode(jsonString.asInstanceOf[String].replaceAll("<div.*</div>", "")/*.replace("\n", "\\n")*/).asInstanceOf[IscArray[JSUndefined[DrawItem]]]
             val _globals = globals.getOrElse(IscArray(RPCManager.ALL_GLOBALS))
 
             def newInstance(item: DrawItem): Unit = {
@@ -94,6 +92,14 @@ class EditContextSSProps extends EditContextProps {
                                     js.Dictionary[JSAny]())
 
                             case _ =>
+                                val props = components.get(className) match {
+                                    case None ⇒
+                                        js.Dictionary()
+                                    case Some(component) ⇒
+                                        js.Dictionary("fieldDataSource" → component.asInstanceOf[JSDynamic].selectDynamic("fieldDataSource").undef)
+                                }
+
+                                //isc debugTrap item
                                 isc.ClassFactory.newInstance(className, item, if (addedProps.isDefined)
                                     js.Dictionary[JSAny](
                                         "contextMenu" -> addedProps.asInstanceOf[AddedProps].contextMenu,
@@ -106,10 +112,10 @@ class EditContextSSProps extends EditContextProps {
                                         "outConnectedItems" -> item.outConnectedItems,
                                         "sourceGlue" -> item.sourceGlue,
                                         "targetGlue" -> item.targetGlue,
-                                        "canDrag" -> item.canDrag
+                                        "canDrag" → item.canDrag
                                     )
                                 else
-                                    js.Dictionary[JSAny]())
+                                    js.Dictionary.empty[JSAny], props)
                         }
                 }
             }
@@ -140,10 +146,7 @@ class EditContextSSProps extends EditContextProps {
                                     if (drawItem.sourceGlue.isEmpty && drawItem.targetGlue.isDefined)
                                         drawItem.targetGlue.get.setGluedDrawItem()
                             }
-
-                            //drawPane.canDragScroll = false
                         }
-                        //isc debugTrap drawPane
                     }
             }
 
@@ -221,21 +224,37 @@ class EditContextSSProps extends EditContextProps {
             if (isc.isA.DrawItem(_node.liveObject)) {
                 val drawItem = _node.liveObject.asInstanceOf[DrawItem]
 
+                isc.deleteProp(defaults,"sourceConnect")
                 drawItem.sourceConnect.foreach(item => defaults.sourceConnect = s"ref:${item.ID}")
+
+                isc.deleteProp(defaults,"targetConnect")
                 drawItem.targetConnect.foreach(item => defaults.targetConnect = s"ref:${item.ID}")
 
+                isc.deleteProp(defaults,"inConnectedItems")
                 drawItem.inConnectedItems.foreach(item => defaults.inConnectedItems = item.map(item => s"ref:${item.ID}"))
+
+                isc.deleteProp(defaults,"outConnectedItems")
                 drawItem.outConnectedItems.foreach(item => defaults.outConnectedItems = item.map(item => s"ref:${item.ID}"))
 
+                isc.deleteProp(defaults,"sourceGlue")
                 drawItem.sourceGlue.foreach(item => defaults.sourceGlue = s"ref:${item.ID}")
+
+                isc.deleteProp(defaults,"targetGlue")
                 drawItem.targetGlue.foreach(item => defaults.targetGlue = s"ref:${item.ID}")
 
+                isc.deleteProp(defaults,"startLeft2CentrLeft")
                 drawItem.startLeft2CentrLeft.foreach(defaults.startLeft2CentrLeft = _)
+
+                isc.deleteProp(defaults,"startTop2CentrTop")
                 drawItem.startTop2CentrTop.foreach(defaults.startTop2CentrTop = _)
 
+                isc.deleteProp(defaults,"endLeft2CentrLeft")
                 drawItem.endLeft2CentrLeft.foreach(defaults.endLeft2CentrLeft = _)
+
+                isc.deleteProp(defaults,"endTop2CentrTop")
                 drawItem.endTop2CentrTop.foreach(defaults.endTop2CentrTop = _)
 
+                isc.deleteProp(defaults,"canDrag")
                 drawItem.canDrag.foreach(defaults.canDrag = _)
             }
 
@@ -270,7 +289,7 @@ class EditContextSSProps extends EditContextProps {
             val editTree = thiz.getEditNodeTree()
             val rootNode = thiz.getRootEditNode()
             val childNodes = editTree.getChildren(rootNode)
-            if (childNodes.isDefined && childNodes.get.length > 0) js.UndefOr.any2undefOrA(childNodes.get(0).asInstanceOf[EditNode]) else jSUndefined
+            if (childNodes.isDefined && childNodes.get.length > 0) childNodes.get(0).asInstanceOf[EditNode].undef else jSUndefined
     }.toThisFunc.opt
 
     var fireSelectedEditNodesUpdated: ScOption[ThisFunction0[classHandler, _]] = {
@@ -307,9 +326,7 @@ class EditContextSSProps extends EditContextProps {
                                     }
                             }
                     }
-
             }
 
     }.toThisFunc.opt
-
 }

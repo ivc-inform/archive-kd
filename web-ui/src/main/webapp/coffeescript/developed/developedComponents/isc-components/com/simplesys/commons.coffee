@@ -161,10 +161,14 @@ isc.getWindowObject = (name) ->
 	catch
 		undefined
 
-isc.js_beautify = js_beautify
+isc.js_beautify = if js_beautify? then js_beautify else (str) -> str
 
 isc.setArrayItem = (array, index, value) ->
 	if isc.isA.Array(array)
 		array[index] = value
 		return
+		
+isc.createClass = (className, args) ->
+	creater = isc[className].create
+	creater(args)
 
