@@ -1,8 +1,6 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
-import com.simplesys.SmartClient.Forms.FormsItems.props.TextItemProps
-import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.js.components.cards.Cards

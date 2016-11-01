@@ -1,15 +1,18 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.WebApp
+import com.simplesys.SmartClient.App.WebTabSetApp
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
+import com.simplesys.SmartClient.DataBinding.RestDataSourceSS
+import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.RibbonGroupSS
 import com.simplesys.SmartClient.Layout.props._
 import com.simplesys.SmartClient.System.{RibbonGroupSS, _}
-import com.simplesys.System.Types.{State => _, _}
+import com.simplesys.System.Types.{State ⇒ _, _}
 import com.simplesys.System._
 import com.simplesys.app
 import com.simplesys.app._
@@ -17,17 +20,29 @@ import com.simplesys.function._
 import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.ScOption._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
 import scala.scalajs.js.annotation.JSExport
 
 @JSExport
-object EaKdProcWindowMain extends WebApp {
+object EaKdProcWindowMain extends WebTabSetApp {
 
-    override val loadSchemas = com.simplesys.app.loadSchemas
+    override protected val loadSchemas = com.simplesys.app.loadSchemas
+    override protected val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
+    override protected val appImageDir: String = "images/"
 
-    override val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
 
-    override val appImageDir: String = "images/"
+    override protected val dataSourcesJS_admin_UserGroup_DS: RestDataSourceSS = DataSourcesJS.admin_UserGroup_DS
+    override protected val dataSourcesJS_admin_User_DS: RestDataSourceSS = DataSourcesJS.admin_User_DS
+
+    override protected val listGridFiledsJS_admin_UserGroup_FLDS: Seq[ListGridFieldProps] = ListGridFiledsJS.admin_UserGroup_FLDS
+    override protected val listGridFiledsJS_admin_User_FLDS: Seq[ListGridFieldProps] = ListGridFiledsJS.admin_User_FLDS
+
+    override protected val formItemsJS_admin_UserGroup_FRMITM: Seq[FormItem] = FormItemsJS.admin_UserGroup_FRMITM
+    override protected val formItemsJS_admin_User_FRMITM: Seq[FormItem] = FormItemsJS.admin_User_FRMITM
+
+    override protected val admin_User_codeGroup_NameStrong: NameStrong = ScalaJSGen.admin_User_codeGroup_NameStrong
 
     protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
         RibbonGroupSS.create(
