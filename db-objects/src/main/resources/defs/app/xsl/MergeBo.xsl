@@ -8,7 +8,7 @@
 
     <xsl:output indent="yes" method="xml" encoding="UTF-8" byte-order-mark="no" name="format"/>
 
-    <xsl:param name="resFile" as="xs:string" select="'F:\target\scala-2.10\src_managed\main\defs\app\tmp\allBo.xml'"/>
+    <xsl:param name="resFile" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp/allBo.xml'"/>
     <xsl:param as="xs:string*" name="files"
                select="(
                '../../bo/ui.xml',
