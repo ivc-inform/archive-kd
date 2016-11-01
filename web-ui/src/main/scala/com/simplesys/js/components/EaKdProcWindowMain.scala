@@ -1,6 +1,7 @@
 package com.simplesys.js.components
 
-import com.simplesys.SmartClient.App.WebTabSetApp
+import com.simplesys.SmartClient.App.props.SettingsEditorProps
+import com.simplesys.SmartClient.App.{SettingsEditor, WebTabSetApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
@@ -27,6 +28,7 @@ import scala.scalajs.js.annotation.JSExport
 
 @JSExport
 object EaKdProcWindowMain extends WebTabSetApp {
+    self ⇒
 
     override protected val loadSchemas = com.simplesys.app.loadSchemas
     override protected val identifier: ID = "5814FE1C-252A-01C4-11A1-557FA3222D3F"
@@ -43,6 +45,13 @@ object EaKdProcWindowMain extends WebTabSetApp {
     override protected val formItemsJS_admin_User_FRMITM: Seq[FormItem] = FormItemsJS.admin_User_FRMITM
 
     override protected val admin_User_codeGroup_NameStrong: NameStrong = ScalaJSGen.admin_User_codeGroup_NameStrong
+
+
+    override protected def getSettingsEditor(): SettingsEditor = SettingsEditor.create(
+        new SettingsEditorProps {
+            identifier = self.identifier.opt
+        }
+    )
 
     protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
         RibbonGroupSS.create(
@@ -330,35 +339,6 @@ object EaKdProcWindowMain extends WebTabSetApp {
                                     items = Seq().opt
                                 }
                             ).opt
-                        }
-                    )
-                ).opt
-            }
-        ),
-        RibbonGroupSS.create(
-            new RibbonGroupSSProps {
-                title = "Системные".ellipsis.opt
-                controls = Seq(
-                    IconButtonSS.create(
-                        new IconButtonSSProps {
-                            title = "Информация".ellipsis.opt
-                            icon = app.info.opt
-                            click = {
-                                (thiz: classHandler) =>
-                                    getAbout()
-                                    false
-                            }.toThisFunc.opt
-                        }
-                    ),
-                    IconButtonSS.create(
-                        new IconButtonSSProps {
-                            title = "Настройки".ellipsis.opt
-                            icon = app.settings.opt
-                            click = {
-                                (thiz: classHandler) =>
-                                    getSetting()
-                                    false
-                            }.toThisFunc.opt
                         }
                     )
                 ).opt
