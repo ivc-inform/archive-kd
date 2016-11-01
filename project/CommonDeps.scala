@@ -8,14 +8,13 @@ object PluginDeps {
         val devPluginVersion = "1.0.11-SNAPSHOT"
         val sourceGenJSVersion = "1.0.3"
         val transpileCoffeScriptVersion = "1.0.10"
-        val mergeJSVersion = "1.0.11.1"
+        val mergeJSVersion = "1.0.4-SNAPSHOT"
 
         val sbtAspectJVersion = "0.10.2"
         val xsbtWebVersion = "0.9.1"
         val sbtPackVersion = "0.7.7"
 
         val scalaJSPluginVersion = "0.6.13"
-
         val macroParadiseVersion = "2.0.1"
     }
 
@@ -56,7 +55,7 @@ object CommonDeps {
         val smartclientVersion = "11.0-v20160805.10"
         //val smartclientVersion = "10.1-v20160316"
 
-        val akkaVersion = "2.4.11"
+        val akkaVersion = "2.4.12"
 
         val servletAPIVersion = "3.1.0"
 
