@@ -65,7 +65,8 @@ object ListGridContextMenuProps {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
-                    owner.getSelectedRecords().foreach(record => owner.dataSource.addData(deletePKField(owner.dataSource, record)))
+                    owner.getSelectedRecords().foreach (record => owner.dataSource.addData(deletePKField(owner.dataSource, record)))
+                    owner.fullRefresh()
                     false
             }.toFunc.opt
             enableIf = {

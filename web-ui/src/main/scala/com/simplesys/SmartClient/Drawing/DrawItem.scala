@@ -18,6 +18,7 @@ import com.simplesys.System.Types.ResizeKnobPoint.ResizeKnobPoint
 import com.simplesys.System.Types.TitleRotationMode.TitleRotationMode
 import com.simplesys.System.Types._
 import com.simplesys.System._
+import com.simplesys.js.components.props.ConstructorPaletteItem
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
@@ -140,6 +141,7 @@ trait DrawItem extends Class {
     def _moveTo(left: Double, top: Double): void
     def _normalize(x: Double, y: Double, inputCoordinateSystem: String = js.native, outputCoordinateSystem: String = js.native): Point
     def _getNormalizeTransform(inputCoordinateSystem: String = js.native, outputCoordinateSystem: String = js.native): AffineTransform
+    var palette: JSUndefined[_ <: JSObject]
     var prompt: HTMLString
     val proportionalResizeModifiers: IscArray[KeyName]
     val proportionalResizing: ProportionalResizeMode
@@ -225,8 +227,9 @@ trait DrawItem extends Class {
     var startTop2CentrTop: JSUndefined[Double]
 
     val fieldDataSource: JSUndefined[DataSource]
-    val variableProps: JSUndefined[JSObject]
-    val subProgramProps: JSUndefined[JSObject]
+    var variableProps: JSUndefined[JSObject]
+    var subProgramProps: JSUndefined[JSObject]
+    var multiElementsProps: JSUndefined[JSObject]
     val listRefs: JSUndefined[JSObject]
     val timerProps: JSUndefined[JSObject]
     val groupProps: JSUndefined[JSObject]

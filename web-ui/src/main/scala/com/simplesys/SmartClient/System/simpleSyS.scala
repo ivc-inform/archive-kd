@@ -28,6 +28,7 @@ object simpleSyS extends JSObject {
     val aboutData: IscArray[Record] = js.native
     var skin: JSUndefined[String] = js.native
     var expertMode: JSUndefined[Boolean] = js.native
+    var scenarioTestMode: JSUndefined[Boolean] = js.native
     val simpleSysContextPath: URL = js.native
     var qtyGraphCopies: JSUndefined[Int] = js.native
 }

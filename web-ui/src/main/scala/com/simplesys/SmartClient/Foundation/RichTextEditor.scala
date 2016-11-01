@@ -2,7 +2,7 @@ package com.simplesys.SmartClient.Foundation
 
 import com.simplesys.SmartClient.Forms.formsItems.SelectItem
 import com.simplesys.SmartClient.Foundation.richTextEditor.ListPropertiesDialog
-import com.simplesys.SmartClient.Layout.{Layout, VLayout}
+import com.simplesys.SmartClient.Layout.{AbstractLayoutCompanion, AbstractVLayoutCompanion, Layout, VLayout}
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.ControlName.ControlName
 import com.simplesys.System.Types.{AutoChild, MultiAutoChild, void}
@@ -10,9 +10,10 @@ import com.simplesys.System.{JSAny, JSObject}
 
 import scala.scalajs.js
 
-
 @js.native
 trait RichTextEditor extends VLayout {
+    //def addContents(content: String): void
+    def clear(): void
     var alignCenterPrompt: String
     var alignLeftPrompt: String
     var alignRightPrompt: String
@@ -59,6 +60,10 @@ trait RichTextEditor extends VLayout {
     val underlineSelectionPrompt: String
     val unorderedListPrompt: String
     val value: String
+}
+
+@js.native
+abstract trait AbstractRichTextEditorCompanion extends AbstractVLayoutCompanion {
 }
 
 

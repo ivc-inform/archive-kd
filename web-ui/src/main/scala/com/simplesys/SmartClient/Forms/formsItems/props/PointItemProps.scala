@@ -109,7 +109,7 @@ class PointItemProps extends CanvasItemProps {
     }.toThisFunc.opt
 
     setValue = {
-        (thiz: classHandler, value: JSUndefined[JSAny]) ⇒
+        (thiz: classHandler, value: JSUndefined[Point]) ⇒
             value.foreach {
                 value ⇒
                     //isc debugTrap value
@@ -118,14 +118,12 @@ class PointItemProps extends CanvasItemProps {
                     else {
                         thiz.innerForm.foreach {
                             innerForm ⇒
-                                val _value = value.asInstanceOf[Point]
+                                innerForm.setValue("x", value.getX())
+                                innerForm.setValue("y", value.getY())
 
-                                innerForm.setValue("x", _value.getX())
-                                innerForm.setValue("y", _value.getY())
-
-                                thiz.x = _value.getX()
-                                thiz.y = _value.getY()
-                                thiz.point = _value
+                                thiz.x = value.getX()
+                                thiz.y = value.getY()
+                                thiz.point = value
                         }
                     }
             }

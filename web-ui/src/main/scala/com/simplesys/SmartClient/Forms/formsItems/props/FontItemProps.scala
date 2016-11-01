@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.Forms.formsItems.props
 
+import com.simplesys.SmartClient.Drawing.drawItem.DrawLabel
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.{FontItem, FormItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
@@ -44,7 +45,7 @@ class FontItemProps extends FormItemWithButtonsProps {
     }.toThisFunc.opt
 
     setValue = {
-        (thiz: classHandler, value: JSUndefined[JSAny]) ⇒
+        (thiz: classHandler, value: JSUndefined[DrawLabel]) ⇒
             //isc debugTrap value
             value.foreach {
                 value ⇒
@@ -53,23 +54,19 @@ class FontItemProps extends FormItemWithButtonsProps {
                     else {
                         thiz.innerForm.foreach {
                             innerForm ⇒
+                                innerForm.setValue("fontFamily", value.fontFamily)
+                                innerForm.setValue("fontSize", value.fontSize)
+                                innerForm.setValue("fontStyle", value.fontStyle)
+                                innerForm.setValue("fontWeight", value.fontWeight)
+                                innerForm.setValue("lineColor", value.lineColor)
+                                innerForm.setValue("rotation", value.rotation)
 
-                                import com.simplesys.SmartClient.Drawing.drawItem.DrawLabel
-                                val _value = value.asInstanceOf[DrawLabel]
-
-                                innerForm.setValue("fontFamily", _value.fontFamily)
-                                innerForm.setValue("fontSize", _value.fontSize)
-                                innerForm.setValue("fontStyle", _value.fontStyle)
-                                innerForm.setValue("fontWeight", _value.fontWeight)
-                                innerForm.setValue("lineColor", _value.lineColor)
-                                innerForm.setValue("rotation", _value.rotation)
-
-                                thiz.fontFamily = _value.fontFamily
-                                thiz.fontSize = _value.fontSize
-                                thiz.fontStyle = _value.fontStyle
-                                thiz.fontWeight = _value.fontWeight
-                                thiz.lineColor = _value.lineColor
-                                thiz.rotation = _value.rotation
+                                thiz.fontFamily = value.fontFamily
+                                thiz.fontSize = value.fontSize
+                                thiz.fontStyle = value.fontStyle
+                                thiz.fontWeight = value.fontWeight
+                                thiz.lineColor = value.lineColor
+                                thiz.rotation = value.rotation
                         }
                     }
             }

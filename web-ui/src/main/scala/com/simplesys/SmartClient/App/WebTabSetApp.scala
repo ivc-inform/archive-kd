@@ -9,7 +9,9 @@ import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldProps
 import com.simplesys.SmartClient.DataBinding.props.{DataSourceProps, DataViewProps}
 import com.simplesys.SmartClient.DataBinding.{DataSource, DataSourceSSstatic, RestDataSourceSS}
+import com.simplesys.SmartClient.Forms.DynamicForm
 import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.props.{CheckboxItemProps, SpinnerItemProps}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.LabelProps
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
@@ -47,6 +49,7 @@ trait WebTabSetApp extends TabSetStack {
     protected val formItemsJS_admin_User_FRMITM: Seq[FormItem]
 
     protected val admin_User_codeGroup_NameStrong: NameStrong
+    protected def getSettingsEditor(): SettingsEditor
 
     protected val functionButton = IconMenuButtonSS.create(
         new IconMenuButtonSSProps {
@@ -174,14 +177,6 @@ trait WebTabSetApp extends TabSetStack {
         )
     }
 
-    protected def getSetting(): Unit = {
-        SettingsEditor.create(
-            new SettingsEditorProps {
-                identifier = self.identifier.opt
-            }
-        )
-    }
-
     protected val managedAdminsGroups: Seq[RibbonGroupSS] = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
@@ -283,7 +278,7 @@ trait WebTabSetApp extends TabSetStack {
                         icon = Common.settings.opt
                         click = {
                             (thiz: classHandler) =>
-                                getSetting()
+                                getSettingsEditor()
                                 false
                         }.toThisFunc.opt
                     }
@@ -308,7 +303,7 @@ trait WebTabSetApp extends TabSetStack {
                             orientation = "gorizontal".opt
                             click = {
                                 (thiz: classHandler) =>
-                                    isc info simpleSyS.guid
+                                    isc info(simpleSyS.guid, "163B7F9E-576B-7EFA-8F3C-E536055508B4")
                                     false
                             }.toThisFunc.opt
                         }

@@ -12,6 +12,7 @@ import scala.scalajs.js.|
 trait Class extends JSObject {
     type classHandler <: this.type
 
+    var identifier1: JSUndefined[String]
     def addAutoChild(childName: String, defaults: JSObject): Class
     def addProperties(arguments: JSDictionaryAny | JSObject): this.type
     var addPropertiesOnCreate: Boolean
