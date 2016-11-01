@@ -9,9 +9,11 @@ import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.function._
+import com.simplesys.js.components.PropertyEditorDynamicForm
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.SmartClient.Drawing.gradient.SimpleGradient
 
 class GradientItemProps extends FormItemWithButtonsProps {
     type classHandler <: GradientItem
@@ -40,7 +42,7 @@ class GradientItemProps extends FormItemWithButtonsProps {
     }.toThisFunc.opt
 
     setValue = {
-        (thiz: classHandler, value: JSUndefined[JSAny]) ⇒
+        (thiz: classHandler, value: JSUndefined[SimpleGradient]) ⇒
             //isc debugTrap value
             value.foreach {
                 value ⇒
@@ -49,17 +51,13 @@ class GradientItemProps extends FormItemWithButtonsProps {
                     else {
                         thiz.innerForm.foreach {
                             innerForm ⇒
+                                innerForm.setValue("startColor", value.startColor)
+                                innerForm.setValue("endColor", value.endColor)
+                                innerForm.setValue("direction", value.direction)
 
-                                import com.simplesys.SmartClient.Drawing.gradient.SimpleGradient
-                                val _value = value.asInstanceOf[SimpleGradient]
-
-                                innerForm.setValue("startColor", _value.startColor)
-                                innerForm.setValue("endColor", _value.endColor)
-                                innerForm.setValue("direction", _value.direction)
-
-                                thiz.startColor = _value.startColor
-                                thiz.endColor = _value.endColor
-                                thiz.direction = _value.direction
+                                thiz.startColor = value.startColor
+                                thiz.endColor = value.endColor
+                                thiz.direction = value.direction
                         }
                     }
                     thiz.Super("setValue", IscArray(value))
@@ -89,6 +87,13 @@ class GradientItemProps extends FormItemWithButtonsProps {
     var endColor: ScOption[CSSColor] = ScNone
     var direction: ScOption[Double] = ScNone
 
+    changed = {
+        (form: DynamicFormSS, formItem: GradientItem, value: SimpleGradient) ⇒
+            isc debugTrap(form, value)
+            form.setPropertyOnSelection("fillGradient", value)
+
+    }.toFunc.opt
+
     init = {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
             //isc debugTrap thisTop.drawItem
@@ -107,7 +112,7 @@ class GradientItemProps extends FormItemWithButtonsProps {
                                 changed = {
                                     (form: DynamicFormSS, formItem: FormItem, value: JSUndefined[CSSColor]) ⇒
                                         thisTop.startColor = value
-                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, formItem, thisTop.getValue())))
+                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, thisTop, thisTop.getValue())))
                                 }.toFunc.opt
                             }
                         ),
@@ -119,7 +124,7 @@ class GradientItemProps extends FormItemWithButtonsProps {
                                 changed = {
                                     (form: DynamicFormSS, formItem: FormItem, value: JSUndefined[CSSColor]) ⇒
                                         thisTop.endColor = value
-                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, formItem, thisTop.getValue())))
+                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, thisTop, thisTop.getValue())))
                                 }.toFunc.opt
                             }
                         ),
@@ -134,7 +139,7 @@ class GradientItemProps extends FormItemWithButtonsProps {
                                 changed = {
                                     (form: DynamicFormSS, formItem: FormItem, value: JSUndefined[Double]) ⇒
                                         thisTop.direction = value
-                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, formItem, thisTop.getValue())))
+                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, thisTop, thisTop.getValue())))
                                 }.toFunc.opt
                             }
                         )

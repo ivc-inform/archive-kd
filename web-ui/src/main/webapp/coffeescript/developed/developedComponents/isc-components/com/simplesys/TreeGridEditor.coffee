@@ -16,6 +16,12 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"showAllRecords": false
 	"canAcceptDroppedRecords": false
 	"selectFirstRecordAfterFetch": true
+	"applyRecordData" : (recordDate) ->
+		@grid.applyRecordData recordDate
+		return
+	"invalidateRecordComponents" : () ->
+		@grid.invalidateRecordComponents()
+		return
 	"fetchData": (criteria, callback, requestProperties) ->
 		if @useClientFilteringSorting is false
 			_callback = (dsResponse, data, dsRequest) =>

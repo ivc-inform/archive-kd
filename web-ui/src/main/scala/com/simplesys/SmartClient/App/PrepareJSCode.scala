@@ -8,6 +8,7 @@ import com.simplesys.SmartClient.Drawing.props.{DrawItemProps, DrawPaneProps}
 import com.simplesys.SmartClient.Forms.formsItems.PickList
 import com.simplesys.SmartClient.Forms.formsItems.props.{DateTimeItemProps, FormItemProps, FormItemWithButtonsProps, PickListProps}
 import com.simplesys.SmartClient.Forms.props.DateChooserProps
+import com.simplesys.SmartClient.Foundation.props.RichTextEditorProps
 import com.simplesys.SmartClient.Grids.props.ListGridProps
 import com.simplesys.SmartClient.Layout.WindowSSDialog
 import com.simplesys.SmartClient.Layout.props.{WindowSSDialogProps, WindowSSProps}
@@ -76,7 +77,7 @@ class PrepareJSCode extends StaticJSCode {
         isc.DrawItem.addProperties(DrawItem(new DrawItemProps))
         isc.DrawLine.addProperties(DrawLine(new DrawLineProps))
         isc.DrawRect.addProperties(DrawRect(new DrawRectProps))
-        isc.DrawPane.addProperties(DrawPane(new DrawPaneProps))
+        isc.RichTextEditor.addProperties(RichTextEditor(new RichTextEditorProps))
 
         isc.PickList.addInterfaceMethods(PickList(new PickListProps {
             override type classHandler = PickList

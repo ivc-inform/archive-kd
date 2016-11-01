@@ -45,7 +45,7 @@ class ShadowItemProps extends FormItemWithButtonsProps {
     }.toThisFunc.opt
 
     setValue = {
-        (thiz: classHandler, value: JSUndefined[JSAny]) ⇒
+        (thiz: classHandler, value: JSUndefined[Shadow]) ⇒
             value.foreach {
                 value ⇒
                     //isc debugTrap value
@@ -55,21 +55,18 @@ class ShadowItemProps extends FormItemWithButtonsProps {
                     else {
                         thiz.innerForm.foreach {
                             innerForm ⇒
-
-                                val _value = value.asInstanceOf[Shadow]
-
-                                innerForm.setValue("color", _value.color)
-                                innerForm.setValue("blur", _value.blur)
-                                innerForm.setValue("offset", _value.offset)
+                                innerForm.setValue("color", value.color)
+                                innerForm.setValue("blur", value.blur)
+                                innerForm.setValue("offset", value.offset)
 
                                 thiz.checkShadowUndefined()
 
-                                //isc debugTrap(thiz.shadow, _value)
+                                //isc debugTrap(thiz.shadow, value)
                                 thiz.shadow.foreach {
                                     shadow ⇒
-                                        shadow.color = _value.color
-                                        shadow.blur = _value.blur
-                                        shadow.offset = _value.offset
+                                        shadow.color = value.color
+                                        shadow.blur = value.blur
+                                        shadow.offset = value.offset
                                 }
                         }
                     }
@@ -131,7 +128,7 @@ class ShadowItemProps extends FormItemWithButtonsProps {
                                     (form: DynamicFormSS, formItem: FormItem, value: JSUndefined[CSSColor]) ⇒
                                         thisTop.checkShadowUndefined()
                                         thisTop.shadow.foreach(_.color = value)
-                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, formItem, thisTop.getValue())))
+                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, thisTop, thisTop.getValue())))
                                 }.toFunc.opt
                             }
                         ),
@@ -147,7 +144,7 @@ class ShadowItemProps extends FormItemWithButtonsProps {
                                     (form: DynamicFormSS, formItem: FormItem, value: JSUndefined[Int]) ⇒
                                         thisTop.checkShadowUndefined()
                                         thisTop.shadow.foreach(_.blur = value)
-                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, formItem, thisTop.getValue())))
+                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, thisTop, thisTop.getValue())))
 
                                 }.toFunc.opt
                             }
@@ -165,7 +162,7 @@ class ShadowItemProps extends FormItemWithButtonsProps {
                                         //isc debugTrap value
                                         thisTop.checkShadowUndefined()
                                         thisTop.shadow.foreach(_.offset = value)
-                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, formItem, thisTop.getValue())))
+                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, thisTop, thisTop.getValue())))
 
                                 }.toFunc.opt
                             }

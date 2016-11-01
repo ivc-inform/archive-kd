@@ -18,6 +18,12 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@grid.selectAllRecords visibleNodesOnly
 		return
 	"showAllRecords"             : false
+	"applyRecordData": (recordDate) ->
+		@grid.applyRecordData recordDate
+		return
+	"invalidateRecordComponents": () ->
+		@grid.invalidateRecordComponents()
+		return
 	"selectSingleRecordByKey"    : (keyValue, newStyle, callback) ->
 		record = @findByKey keyValue, newStyle
 		if record?

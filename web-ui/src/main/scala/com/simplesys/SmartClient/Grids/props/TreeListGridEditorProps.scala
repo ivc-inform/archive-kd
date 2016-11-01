@@ -12,7 +12,7 @@ import com.simplesys.SmartClient.Grids.treeGrid.Tree
 import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.System.JSUndefined
+import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.System.Types.FetchMode.FetchMode
 import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPoolingMode
 import com.simplesys.System.Types.SelectionAppearance._
@@ -108,11 +108,11 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var selectFirstRecordAfterFetchList: ScOption[Boolean] = ScNone
     var selectFirstRecordAfterFetchTree: ScOption[Boolean] = ScNone
 
-    var createListRecordComponent: ScOption[ThisFunction2[ListGridEditor, ListGridRecord, Int, JSUndefined[Canvas]]] = ScNone
-    var updateListRecordComponent: ScOption[ThisFunction4[ListGridEditor, ListGridRecord, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
+    var createListRecordComponent: ScOption[ThisFunction2[ListGridEditor, _ <: JSObject, Int, JSUndefined[Canvas]]] = ScNone
+    var updateListRecordComponent: ScOption[ThisFunction4[ListGridEditor, _ <: JSObject, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
 
-    var createTreeRecordComponent: ScOption[ThisFunction2[TreeGridEditor, ListGridRecord, Int, JSUndefined[Canvas]]] = ScNone
-    var updateTreeRecordComponent: ScOption[ThisFunction4[TreeGridEditor, ListGridRecord, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
+    var createTreeRecordComponent: ScOption[ThisFunction2[TreeGridEditor, _ <: JSObject, Int, JSUndefined[Canvas]]] = ScNone
+    var updateTreeRecordComponent: ScOption[ThisFunction4[TreeGridEditor, _ <: JSObject, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
 
     var recordListComponentPoolingMode: ScOption[RecordComponentPoolingMode] = ScNone
     var recordTreeComponentPoolingMode: ScOption[RecordComponentPoolingMode] = ScNone

@@ -125,7 +125,8 @@ isc.debugTrap = (obj...) ->
 		[]
 
 isc.debugTrac = (obj...) ->
-	console.log "obj: #{obj}"
+	json = isc.JSON.encode(obj, prettyPrint: true)
+	console.log "obj: #{json}"
 	return
 
 isc.deletePrivateProps = (obj) ->

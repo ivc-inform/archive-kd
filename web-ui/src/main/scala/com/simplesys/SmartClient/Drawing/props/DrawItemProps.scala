@@ -21,6 +21,7 @@ import com.simplesys.System.Types.TitleRotationMode.TitleRotationMode
 import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.function._
+import com.simplesys.js.components.props.ConstructorPaletteItem
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
@@ -507,6 +508,7 @@ class DrawItemProps extends ClassProps {
     var fillGradient: ScOption[Gradient] = ScNone
     var fillOpacity: ScOption[Double] = ScNone
     var keepInParentRect: ScOption[Boolean] = ScNone
+    var palette: ScOption[ConstructorPaletteItem] = ScNone
     var knobs: ScOption[Seq[KnobType]] = ScNone
     var lineCap: ScOption[LineCap] = ScNone
     var lineColor: ScOption[CSSColor] = ScNone

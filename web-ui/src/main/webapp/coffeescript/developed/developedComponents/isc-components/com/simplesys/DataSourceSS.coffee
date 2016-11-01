@@ -1787,17 +1787,18 @@ isc._initBuiltInOperatorsSS = ->
 		                                  "iNotContains", "iNotStartsWith", "iNotEndsWith"
 	                                  ]
 	
+	###"iBetweenInclusive",###
 	isc.DataSourceSS.setTypeOperators "integer",
-	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 	
 	isc.DataSourceSS.setTypeOperators "float",
-	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 	
 	isc.DataSourceSS.setTypeOperators "time",
-	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 	
 	isc.DataSourceSS.setTypeOperators "date",
-	                                  ["iEquals", "iBetweenInclusive", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
+	                                  ["iEquals", "greaterThan", "lessThan", "greaterOrEqual", "lessOrEqual"]
 
 isc._initBuiltInOperatorsSS()
 
