@@ -57,18 +57,6 @@ class SettingsEditorProps extends WindowSSProps {
                                 }.toFunc.opt
                             }
                         ),
-                        CheckboxItem(
-                            new CheckboxItemProps {
-                                title = "Тестовый режим генерации сценариев".opt
-                                height = 25
-                                value = simpleSyS.scenarioTestMode.getOrElse(false).asInstanceOf[JSAny].opt
-                                changed = {
-                                    (form: DynamicForm, item: FormItem, value: JSUndefined[Boolean]) =>
-                                        simpleSyS.scenarioTestMode = value
-
-                                }.toFunc.opt
-                            }
-                        ),
                         SkinBoxItem(
                             new SkinBoxItemProps {
                                 title = "Темы оформления (Skins)".opt
