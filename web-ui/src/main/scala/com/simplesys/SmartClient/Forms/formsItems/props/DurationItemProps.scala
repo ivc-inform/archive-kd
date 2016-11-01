@@ -44,7 +44,7 @@ class DurationItemProps extends CanvasItemProps {
     }.toThisFunc.opt
 
     setValue = {
-        (thiz: classHandler, value: JSUndefined[DurationItem]) ⇒
+        (thiz: classHandler, value: JSUndefined[JSAny]) ⇒
             value.foreach {
                 value ⇒
                     //isc debugTrap value
@@ -53,15 +53,17 @@ class DurationItemProps extends CanvasItemProps {
                     else {
                         thiz.innerForm.foreach {
                             innerDynamicForm ⇒
-                                innerDynamicForm.setValue("days", value.days)
-                                innerDynamicForm.setValue("hours", value.hours)
-                                innerDynamicForm.setValue("mins", value.mins)
-                                innerDynamicForm.setValue("secs", value.secs)
+                                val _value = value.asInstanceOf[DurationItem]
 
-                                thiz.days = value.days
-                                thiz.hours = value.hours
-                                thiz.mins = value.mins
-                                thiz.secs = value.secs
+                                innerDynamicForm.setValue("days", _value.days)
+                                innerDynamicForm.setValue("hours", _value.hours)
+                                innerDynamicForm.setValue("mins", _value.mins)
+                                innerDynamicForm.setValue("secs", _value.secs)
+
+                                thiz.days = _value.days
+                                thiz.hours = _value.hours
+                                thiz.mins = _value.mins
+                                thiz.secs = _value.secs
                         }
                     }
             }

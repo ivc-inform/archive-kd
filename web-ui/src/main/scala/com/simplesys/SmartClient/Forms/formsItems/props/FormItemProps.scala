@@ -1,7 +1,6 @@
 package com.simplesys.SmartClient.Forms.formsItems.props
 
 import com.simplesys.SmartClient.DataBinding.DataSource
-import com.simplesys.SmartClient.Drawing.DrawItem
 import com.simplesys.SmartClient.Forms.formsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.formsItems.{CanvasItem, FormItem}
 import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
@@ -9,7 +8,6 @@ import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.ListGridEditor
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.RPCRequest
-import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.SmartClient.System.props.ClassProps
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.AutoComplete.AutoComplete
@@ -52,7 +50,7 @@ class FormItemProps extends ClassProps {
     var cellHeight: ScOption[Int] = ScNone
     var cellStyle: ScOption[FormItemBaseStyle] = ScNone
     var change: ScOption[js.Function4[_ <: DynamicFormSS, FormItem, _ <:  JSUndefined[JSAny], _ <: JSUndefined[JSAny], Boolean]] = ScNone
-    var changed: ScOption[js.Function3[_ <: DynamicFormSS, _ <: FormItem, _ <: JSUndefined[JSAny], _]] = ScNone
+    var changed: ScOption[js.Function3[_ <: DynamicForm, _ <: FormItem, _ <: JSUndefined[JSAny], _]] = ScNone
     var changeOnKeypress: ScOption[Boolean] = ScNone
     var clearValue: ScOption[ThisFunction0[classHandler, _]] = ScNone
     var click: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
@@ -73,7 +71,6 @@ class FormItemProps extends ClassProps {
     var disableIconsOnReadOnly: ScOption[Boolean] = ScNone
     var displayField: ScOption[String] = ScNone
     var doubleClick: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
-    var drawItems: ScOption[IscArray[DrawItem]] = ScNone
     var editorEnter: ScOption[js.Function3[DynamicFormSS, FormItem, JSAny, _]] = ScNone
     var editorExit: ScOption[js.Function3[DynamicFormSS, FormItem, JSAny, _]] = ScNone
     var editorType: ScOption[FormItemComponentType] = ScNone
@@ -168,7 +165,7 @@ class FormItemProps extends ClassProps {
     var saveOnEnter: ScOption[Boolean] = ScNone
     var selectOnClick: ScOption[Boolean] = ScNone
     var selectOnFocus: ScOption[Boolean] = ScNone
-    var setValue: ScOption[ThisFunction1[classHandler, _ <: JSUndefined[JSAny], _]] = ScNone
+    var setValue: ScOption[ThisFunction1[classHandler, JSUndefined[JSAny], _]] = ScNone
     var shouldSaveValue: ScOption[Boolean] = ScNone
     var shouldStopKeyPressBubbling: ScOption[js.Function2[String, Int, Boolean]] = ScNone
     var showClippedTitleOnHover: ScOption[Boolean] = ScNone

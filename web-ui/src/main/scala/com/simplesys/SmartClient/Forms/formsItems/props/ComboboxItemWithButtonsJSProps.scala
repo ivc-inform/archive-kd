@@ -81,7 +81,7 @@ class ComboboxItemWithButtonsJSProps extends FormItemWithButtonsProps {
                                     (form: DynamicFormSS, formItem: FormItem, value: JSUndefined[JSAny]) ⇒
                                         //isc debugTrap value
                                         thisTop.comboBoxValue = value
-                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, thisTop, thisTop.getValue())))
+                                        thisTop.form.foreach(form ⇒ thisTop.changed.foreach(_ (form, formItem, thisTop.getValue())))
                                 }.toFunc.opt
                             }
                         )

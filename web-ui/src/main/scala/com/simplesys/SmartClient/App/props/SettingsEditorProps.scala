@@ -13,7 +13,6 @@ import com.simplesys.System.{JSAny, JSUndefined, jSUndefined}
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import com.simplesys.SmartClient.Forms.formsItems.props.SpinnerItemProps
 
 import scala.scalajs.js
 
@@ -42,6 +41,8 @@ class SettingsEditorProps extends WindowSSProps {
 
             val commons = DynamicFormSS.create(
                 new DynamicFormSSProps {
+
+                    import com.simplesys.SmartClient.Forms.formsItems.props.SpinnerItemProps
 
                     fields = Seq(
                         CheckboxItem(
@@ -107,9 +108,7 @@ class SettingsEditorProps extends WindowSSProps {
                         (thiz: classHandler) =>
                             if (oldSkin != skin) {
                                 simpleSyS.skin = skin
-
                                 isc.OfflineSS.put(s"Skin$identifierApp", skin)
-                                isc.OfflineSS.putBoolean(s"ScenarioTestMode$identifierApp", simpleSyS.scenarioTestMode.getOrElse(false))
                                 js.Dynamic.global.window.location.reload(false)
                             }
 

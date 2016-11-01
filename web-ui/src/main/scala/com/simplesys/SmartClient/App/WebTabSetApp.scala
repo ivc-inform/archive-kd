@@ -308,7 +308,7 @@ trait WebTabSetApp extends TabSetStack {
                             orientation = "gorizontal".opt
                             click = {
                                 (thiz: classHandler) =>
-                                    isc info (simpleSyS.guid, "163B7F9E-576B-7EFA-8F3C-E536055508B4")
+                                    isc info simpleSyS.guid
                                     false
                             }.toThisFunc.opt
                         }

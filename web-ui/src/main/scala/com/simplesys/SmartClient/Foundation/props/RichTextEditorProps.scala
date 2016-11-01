@@ -1,38 +1,17 @@
 package com.simplesys.SmartClient.Foundation.props
 
 import com.simplesys.SmartClient.Forms.formsItems.SelectItem
+import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.richTextEditor.ListPropertiesDialog
-import com.simplesys.SmartClient.Foundation.{Canvas, RichTextEditor}
 import com.simplesys.SmartClient.Layout.Layout
 import com.simplesys.SmartClient.Layout.props.VLayoutProps
-import com.simplesys.SmartClient.System.{IscArray, isc}
+import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.ControlName.ControlName
 import com.simplesys.System.Types.MultiAutoChild
-import com.simplesys.function._
-import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
-import scala.scalajs.js.{ThisFunction0, ThisFunction1}
-
 class RichTextEditorProps extends VLayoutProps {
-    type classHandler <: RichTextEditor
-
-    /*var addContents: ScOption[ThisFunction1[classHandler, String, _]] = {
-        (thiz: classHandler, content: String) ⇒
-            isc debugTrap content
-            if (content == """&nbsp;""")
-                thiz setContents content
-            else {
-                thiz setContents s"${thiz.getContents()}<p>$content"
-            }
-
-    }.toThisFunc.opt*/
-    var clear: ScOption[ThisFunction0[classHandler, _]] = {
-        (thiz: classHandler) ⇒
-            thiz setContents """&nbsp;"""
-
-    }.toThisFunc.opt
     var alignCenterPrompt: ScOption[String] = ScNone
     var alignLeftPrompt: ScOption[String] = ScNone
     var alignRightPrompt: ScOption[String] = ScNone

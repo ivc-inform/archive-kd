@@ -6,12 +6,7 @@ import com.simplesys.System.Types.void
 import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
-
-@ScalaJSDefined
-trait Response extends JSObject{
-  val response: JSUndefined[RPCResponse]
-}
+import scala.scalajs.js.annotation.JSName
 
 @js.native
 trait RPCResponse extends Class {
@@ -26,7 +21,6 @@ trait RPCResponse extends Class {
     var status: Int
     val transactionNum: Int
     var errorStruct: JSUndefined[ErrorStruct]
-    val results: JSUndefined[Response]  //Не менять !!!
 }
 
 @js.native

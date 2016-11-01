@@ -47,7 +47,7 @@ trait SectionStack extends VLayout {
     def setSectionTitle(section: String | Int, newTitle: String): void
     def setVisibilityMode(newVisibilityMode: VisibilityMode): void
     var showExpandControls: Boolean
-    def showSection(sections: String | Int | IscArray[Int] | IscArray[String], callback: ShowSectionCallback = js.native): void
+    def showSection(sections: String | IscArray[Int] | IscArray[String], callback: ShowSectionCallback = js.native): void
     val useGlobalSectionIDs: Boolean
     var visibilityMode: VisibilityMode
 }

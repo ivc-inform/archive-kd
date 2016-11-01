@@ -124,7 +124,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     def deparent(): void
     def depeer(): void
     val destroyed: JSUndefined[Boolean]
-    val destroying: JSUndefined[Boolean]
+    val destroying: Boolean
     def disable(): void
     val disabled: Boolean
     var disabledCursor: Cursor

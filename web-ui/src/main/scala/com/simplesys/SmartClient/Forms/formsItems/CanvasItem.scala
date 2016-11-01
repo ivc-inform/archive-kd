@@ -1,9 +1,8 @@
 package com.simplesys.SmartClient.Forms.formsItems
 
 import com.simplesys.SmartClient.DataBinding.Criterion
-import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS}
+import com.simplesys.SmartClient.Forms.DynamicForm
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.FormItemComponentType._
 import com.simplesys.System.Types.FormItemType._
 import com.simplesys.System.Types.Overflow.Overflow
@@ -17,7 +16,7 @@ import scala.scalajs.js.|
 @js.native
 trait CanvasItem extends FormItem {
     var _constructor: JSUndefined[FormItemType | FormItemComponentType]
-    var innerForm: JSUndefined[DynamicFormSS]
+    var innerForm: JSUndefined[DynamicForm]
     var applyPromptToCanvas: Boolean
     var autoDestroy: Boolean
     var canEditChanged: js.Function1[Boolean, Boolean]

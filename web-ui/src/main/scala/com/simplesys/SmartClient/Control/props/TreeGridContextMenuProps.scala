@@ -83,7 +83,6 @@ class TreeGridContextMenuProps extends MenuSSProps {
                     val owner = item.owner.asInstanceOf[TreeGridEditor]
                     simpleSyS checkOwner owner
                     owner.getSelectedRecords().foreach(record => owner.dataSource.addData(ListGridContextMenuProps.deletePKField(owner.dataSource, isc.deletePrivateProps(record))))
-                    owner.fullRefresh()
                     false
             }.toFunc.opt
             enableIf = {

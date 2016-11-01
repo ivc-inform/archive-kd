@@ -1,7 +1,6 @@
 package com.simplesys.SmartClient.Forms.formsItems
 
 import com.simplesys.SmartClient.DataBinding.{Criterion, DataSource}
-import com.simplesys.SmartClient.Drawing.DrawItem
 import com.simplesys.SmartClient.Forms.formsItems.formItem.FormItemIcon
 import com.simplesys.SmartClient.Forms.{DynamicFormSS, Validator}
 import com.simplesys.SmartClient.Foundation.Canvas
@@ -30,7 +29,6 @@ import scala.scalajs.js.{Function0, Function3, Function4, |}
 
 @js.native
 trait FormItem extends Class {
-    val drawItems : JSUndefined[IscArray[DrawItem]]
     val parentItem: JSUndefined[FormItem]
     var _origCanEdit: Boolean
     val lookup: JSUndefined[Boolean]
@@ -55,8 +53,8 @@ trait FormItem extends Class {
     var canSelectText: Boolean
     var cellHeight: Int
     var cellStyle: FormItemBaseStyle
-    var change: JSUndefined[js.Function4[DynamicFormSS, FormItem, JSAny, JSAny, Boolean]]
-    var changed: JSUndefined[js.Function3[DynamicFormSS, FormItem, JSAny, _]]
+    var change: JSUndefined[Function4[DynamicFormSS, FormItem, JSAny, JSAny, Boolean]]
+    var changed: JSUndefined[Function3[DynamicFormSS, FormItem, JSAny, _]]
     var changeOnKeypress: Boolean
     def clearErrors(): void
     def clearValue(): void

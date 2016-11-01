@@ -36,10 +36,8 @@ import com.simplesys.SmartClient.Grids.tileGrid.{DrawItemTile, SimpleTile}
 import com.simplesys.SmartClient.Grids.treeGrid.{Tree, TreeGridField}
 import com.simplesys.SmartClient.Layout._
 import com.simplesys.SmartClient.Layout.props._
-import com.simplesys.SmartClient.Layout.props.sectionStack.SectionStackSectionProps
 import com.simplesys.SmartClient.Layout.props.tabSet.TabProps
 import com.simplesys.SmartClient.Layout.props.toolStrip.{ToolStripButtonProps, ToolStripMenuButtonProps, ToolStripSeparatorProps}
-import com.simplesys.SmartClient.Layout.sectionStack.SectionStackSection
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.toolStrip.{ToolStripButton, ToolStripMenuButton, ToolStripSeparator}
 import com.simplesys.SmartClient.RPC.props.{RPCRequestProps, RequestParamsProps}
@@ -70,7 +68,7 @@ package object System {
     implicit class String1Opts(x: String) {
         def ellipsis = s"$x..."
         def fromSkinPath = s"[SKIN]$x"
-        def dblQuoted: String = "\"" + x.replace("\"", "\\\"") + "\""
+        def dblQuoted: String = "\"" + x + "\""
     }
 
     object Date extends SCApply4Object[Date, DateProps]
@@ -155,7 +153,6 @@ package object System {
     object Label extends SCApply[Label, LabelProps]
     object HTMLFlow extends SCApply[HTMLFlow, HTMLFlowProps]
     object HTMLPane extends SCApply[HTMLPane, HTMLPaneProps]
-    object HTMLPaneSS extends SCApply[HTMLPaneSS, HTMLPaneSSProps]
     object Progressbar extends SCApply[Progressbar, ProgressbarProps]
     object ImgProperties extends SCApply4Object[ImgProperties, ImgPropertiesProps]
     //</editor-fold>
@@ -195,7 +192,6 @@ package object System {
     object ToolStripButton extends SCApply[ToolStripButton, ToolStripButtonProps]
     object SectionStack extends SCApply[SectionStack, SectionStackProps]
     object SectionStackSS extends SCApply[SectionStackSS, SectionStackSSProps]
-    object SectionStackSection  extends SCApply4Object[SectionStackSection , SectionStackSectionProps]
     object LayoutSpacer extends SCApply[LayoutSpacer, LayoutSpacerProps]
     object RichTextEditor extends SCApply[RichTextEditor, RichTextEditorProps]
     //</editor-fold>
@@ -266,7 +262,5 @@ package object System {
 
     object EditorUsers extends SCApply[EditorUsers, EditorUsersProps]
     object EditorUserGroups extends SCApply[EditorUserGroups, EditorUserGroupsProps]
-
-    val nbsp = """&nbsp;"""
 }
 

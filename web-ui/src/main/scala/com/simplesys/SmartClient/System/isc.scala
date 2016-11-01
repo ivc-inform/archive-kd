@@ -7,7 +7,7 @@ import com.simplesys.SmartClient.Drawing.drawItem.{AbstractDrawLineCompanion, Ab
 import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, AbstractDrawPaneCompanion}
 import com.simplesys.SmartClient.Forms.formsItems._
 import com.simplesys.SmartClient.Forms.{AbstractDateChooserCompanion, AbstractDynamicFormCompanion}
-import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, AbstractRichTextEditorCompanion}
+import com.simplesys.SmartClient.Foundation.AbstractCanvasCompanion
 import com.simplesys.SmartClient.Grids._
 import com.simplesys.SmartClient.Layout.AbstractWindowSSCompanion
 import com.simplesys.SmartClient.Messaging.AbstractMessagingSSCompanion
@@ -93,7 +93,6 @@ object isc extends JSObject {
     val DrawLine: AbstractDrawLineCompanion = js.native
     val DrawRect: AbstractDrawRectCompanion = js.native
     val DrawPane: AbstractDrawPaneCompanion = js.native
-    val RichTextEditor: AbstractRichTextEditorCompanion = js.native
     val DateChooser: AbstractDateChooserCompanion = js.native
     val AffineTransform: AbstractAffineTransformCompanion = js.native
     val OfflineSS: AbstractOfflineSSCompanion = js.native

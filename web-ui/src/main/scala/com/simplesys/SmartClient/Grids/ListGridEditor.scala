@@ -38,8 +38,6 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     def fetchData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def hasChanges(): Boolean
     def getDataLength(): Int
-    def applyRecordData(recordData: IscArray[Record]): void
-    def invalidateRecordComponents(): void
     var showRecordComponentsByCell: Boolean
     var showRecordComponents: Boolean
     var filterOnKeypress: Boolean

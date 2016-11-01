@@ -23,7 +23,7 @@ class CanvasItemProps extends FormItemProps {
     var canvasConstructor: ScOption[String] = ScNone
     var canvasDefaults: ScOption[JSObject] = ScNone
     var canvasProperties: ScOption[JSObject] = ScNone
-    var innerForm: ScOption[DynamicFormSS] = ScNone
+    var innerForm: ScOption[DynamicForm] = ScNone
     var createCanvas: ScOption[ThisFunction2[classHandler, _ <: DynamicForm, _ <: CanvasItem, Canvas]] = ScNone
     var _constructor: ScOption[FormItemType_FormItemComponentType[FormItemType, FormItemComponentType]] = ScNone
     var editCriteriaInInnerForm: ScOption[Boolean] = ScNone

@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Foundation
 
 import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
-import com.simplesys.SmartClient.DataBinding.{AbstractDataBoundComponentCompanion, DSRequest, DataBoundComponent, DataSource}
+import com.simplesys.SmartClient.DataBinding.{DSRequest, DataBoundComponent, DataSource}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.RPC.{RPCRequest, RPCResponse}
 import com.simplesys.System.JSObject
@@ -33,8 +33,5 @@ trait HTMLFlow extends Canvas with DataBoundComponent {
     def setContentsURL(url: URL = js.native, params: JSObject = js.native): void
     var transformHTML: js.Function1[HTMLElement, _]
 }
-
-@js.native
-abstract trait AbstractHTMLFlowCompanion extends AbstractDataBoundComponentCompanion
 
 
