@@ -7,11 +7,12 @@
 	<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd"/>
 	<xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
+	<xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
 	<xsl:param name="inputBoFile" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp/allBo.xml'"/>
 	<xsl:variable name="FileSource" select="doc($inputBoFile)"/>
 
 	<xsl:param name="macroDir" as="xs:string" select="'file:///f:/src/main/resources/defs/app/macroBo'"/>
-	<xsl:variable name="_macroDir" as="xs:string" select="common:check-last-slash($macroDir)"/>
+	<xsl:variable name="_macroDir" as="xs:string" select="common:check-last-slash($macroDir, $pathSeparator)"/>
 
 	<xsl:template name="ProcessingAll">
 		<xsl:apply-templates select="$FileSource/bo:allClasses"/>

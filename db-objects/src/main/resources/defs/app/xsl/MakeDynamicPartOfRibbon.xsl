@@ -8,12 +8,13 @@
 	<xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
 	<xsl:param name="files" as="xs:string*" select="('file:///f:/target/scala-2.11/src_managed/main/defs/app/generated/xml/admin_User.xml')"/>
+	<xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
 
 	<xsl:param name="tmpDir" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
-	<xsl:variable name="_tmpDir" as="xs:string" select="common:check-last-slash($tmpDir)"/>
+	<xsl:variable name="_tmpDir" as="xs:string" select="common:check-last-slash($tmpDir, $pathSeparator)"/>
 
 	<xsl:param name="jsDir" as="xs:string" select="'file:///f:/src/main/resources/defs/app/js'"/>
-	<xsl:variable name="_jsDir" as="xs:string" select="common:check-last-slash($jsDir)"/>
+	<xsl:variable name="_jsDir" as="xs:string" select="common:check-last-slash($jsDir, $pathSeparator)"/>
 
 	<xsl:variable select="'http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd'" name="schemaAppPath" as="xs:string"/>
 

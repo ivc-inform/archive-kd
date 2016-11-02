@@ -6,8 +6,9 @@
     <!--<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schemaISC.xsd"/>-->
     <xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/domains.xsd"/>
 
+    <xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
     <xsl:param name="tmpDir" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
-    <xsl:variable name="dataTypes" select="doc(concat(common:check-last-slash($tmpDir), 'domains.xml'))"/>
+    <xsl:variable name="dataTypes" select="doc(concat(common:check-last-slash($tmpDir, $pathSeparator), 'domains.xml'))"/>
 
     <xsl:function name="app:getOperationURL" as="xs:string">
         <xsl:param name="bo" as="node()*"/>

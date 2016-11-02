@@ -16,6 +16,7 @@
 	<xsl:param name="domainsFile" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp/domains.xml'"/>
 	<xsl:param name="maxArity" as="xs:integer" select="254"/>
 	<xsl:param name="ContextPath" as="xs:string" select="'mfms'"/>
+	<xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
 
 	<xsl:variable name="FileSource" select="doc($inputBoFile)"/>
 	<xsl:variable name="FileDomains" select="doc($domainsFile)"/>

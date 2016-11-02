@@ -5,11 +5,12 @@
     <xsl:import href="common.xsl"/>
     <xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
+    <xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
     <xsl:param name="tmpDir" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
-    <xsl:variable name="_tmpDir" as="xs:string" select="common:check-last-slash($tmpDir)"/>
+    <xsl:variable name="_tmpDir" as="xs:string" select="common:check-last-slash($tmpDir, $pathSeparator)"/>
     
     <xsl:param name="jsDir" as="xs:string" select="'file:///f:/src/main/resources/defs/app/js'"/>
-    <xsl:variable name="_jsDir" as="xs:string" select="common:check-last-slash($jsDir)"/>
+    <xsl:variable name="_jsDir" as="xs:string" select="common:check-last-slash($jsDi, $pathSeparatorr)"/>
 
     <xsl:template name="Embedding">
         <xsl:message select="'Embedding begin.'"/>
