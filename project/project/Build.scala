@@ -13,7 +13,7 @@ object PluginsBuild extends Build
 
   //lazy val devPlugin = uri("../../build-plugins/dev-plugin")
 
-  lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning)/*.dependsOn(devPlugin)*/.settings(
+  lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning)./*dependsOn(devPlugin).*/settings(
     PluginDeps.devPlugin,
     PluginDeps.sourceGenJS,
     PluginDeps.transpileCoffeeScript,
@@ -23,4 +23,6 @@ object PluginsBuild extends Build
     PluginDeps.sbtPack,
     PluginDeps.scalaJSPlugin
   )
+
+  (baseDirectory in root)
 }
