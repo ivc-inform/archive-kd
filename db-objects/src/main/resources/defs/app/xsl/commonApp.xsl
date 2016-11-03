@@ -8,7 +8,7 @@
 	<xsl:param name="tmpDir" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
 	<xsl:param name="pathSeparator" as="xs:string"/>
 
-	<xsl:variable name="dataTypes" select="doc(concat(concat($tmpDir, $pathSeparator), 'domains.xml'))"/>
+	<xsl:variable name="dataTypes" select="doc(concat(common:check-last-slash($tmpDir, $pathSeparator), 'domains.xml'))"/>
 
 	<xsl:function name="app:getOperationURL" as="xs:string">
 		<xsl:param name="bo" as="node()*"/>
