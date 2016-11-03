@@ -20,6 +20,7 @@
 	<!--<xsl:param name="FilesName" as="xs:string*" select="'file:///f:/src/main/resources/defs/app/macroBo/userOld.xml'"/>-->
 	<!--<xsl:param name="FilesName" as="xs:string*" select="('file:///f:/src/main/resources/defs/app/macroBo/contractors.xml','file:///f:/src/main/resources/defs/app/macroBo/user.xml')"/>-->
 	<!--<xsl:param name="FilesName" as="xs:string*"/>-->
+	<xsl:param name="tmpDir" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
 	<xsl:param name="ContextPath" as="xs:string" select="'mfms'"/>
 
 	<xsl:param name="macroDir" as="xs:string" select="'file:///f:/src/main/resources/defs/app/macroBo'"/>
