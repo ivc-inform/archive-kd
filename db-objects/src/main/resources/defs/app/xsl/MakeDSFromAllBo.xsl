@@ -11,12 +11,9 @@
 
 	<xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
-	<xsl:param name="resFile" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp/dataSources.xml'"/>
-	<xsl:param name="inputBoFile" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp/allBo.xml'"/>
-	<xsl:param name="domainsFile" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp/domains.xml'"/>
-	<xsl:param name="tmpDir" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
-
-	<xsl:param name="pathSeparator" as="xs:string" select="'\'"/>
+	<xsl:param name="resFile" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp/dataSources.xml'"/>
+	<xsl:param name="inputBoFile" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp/allBo.xml'"/>
+	<xsl:param name="domainsFile" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp/domains.xml'"/>
 	<xsl:param name="maxArity" as="xs:integer" select="254"/>
 	<xsl:param name="ContextPath" as="xs:string" select="'mfms'"/>
 
@@ -334,40 +331,3 @@
 		</isc:DataSourceFieldDyn>
 	</xsl:template>
 </xsl:stylesheet>
-<!-- Stylus Studio meta-information - (c) 2004-2009. Progress Software Corporation. All rights reserved.
-
-<metaInformation>
-	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="no" url="file:///c:/Job/archive-kd/db-objects/src/main/resources/defs/app/xml/Empty.xml" htmlbaseurl="" outputurl="" processortype="saxon8" useresolver="yes"
-		          profilemode="6" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""
-		          validateoutput="no" validator="internal" customvalidator="">
-			<advancedProp name="bSchemaAware" value="true"/>
-			<advancedProp name="xsltVersion" value="3.0"/>
-			<advancedProp name="schemaCache" value="||"/>
-			<advancedProp name="xsdVersion" value="1.1"/>
-			<advancedProp name="iWhitespace" value="0"/>
-			<advancedProp name="bWarnings" value="true"/>
-			<advancedProp name="bXml11" value="true"/>
-			<advancedProp name="bUseDTD" value="false"/>
-			<advancedProp name="bXsltOneIsOkay" value="true"/>
-			<advancedProp name="bTinyTree" value="true"/>
-			<advancedProp name="bGenerateByteCode" value="true"/>
-			<advancedProp name="bExtensions" value="true"/>
-			<advancedProp name="iValidation" value="1"/>
-			<advancedProp name="iErrorHandling" value="0"/>
-			<advancedProp name="sInitialTemplate" value="ProcessingAll"/>
-			<advancedProp name="sInitialMode" value=""/>
-		</scenario>
-	</scenarios>
-	<MapperMetaTag>
-		<MapperInfo srcSchemaPathIsRelative="yes" srcSchemaInterpretAsXML="no" destSchemaPath="" destSchemaRoot="" destSchemaPathIsRelative="yes" destSchemaInterpretAsXML="no">
-			<SourceSchema srcSchemaPath="..\xml\Empty.xml" srcSchemaRoot="objectSchema" AssociatedInstance="" loaderFunction="document" loaderFunctionUsesURI="no"/>
-		</MapperInfo>
-		<MapperBlockPosition>
-			<template name="ProcessingAll"></template>
-		</MapperBlockPosition>
-		<TemplateContext></TemplateContext>
-		<MapperFilter side="source"></MapperFilter>
-	</MapperMetaTag>
-</metaInformation>
--->
