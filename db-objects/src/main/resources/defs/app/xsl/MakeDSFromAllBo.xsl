@@ -16,7 +16,7 @@
 	<xsl:param name="domainsFile" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp/domains.xml'"/>
 	<xsl:param name="tmpDir" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
 
-	<xsl:param name="pathSeparator" as="xs:string" select="'\'"/>
+	<xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
 	<xsl:param name="maxArity" as="xs:integer" select="254"/>
 	<xsl:param name="ContextPath" as="xs:string" select="'mfms'"/>
 
