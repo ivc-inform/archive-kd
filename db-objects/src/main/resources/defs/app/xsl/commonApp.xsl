@@ -1,6 +1,6 @@
 <?xml version="1.1"?>
 
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://simpleSys.ru/xml/library/common"
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://simpleSys.ru/xml/library/common"
                 xmlns:app="http://simpleSys.ru/xml/library/app" xmlns:isc="http://simpleSys.ru/xml/library/ISC" xmlns:bo="http://simpleSys.ru/xml/library/bo"
                 xmlns:domains="http://simpleSys.ru/xml/library/domains" exclude-result-prefixes="common xs isc bo app domains">
 

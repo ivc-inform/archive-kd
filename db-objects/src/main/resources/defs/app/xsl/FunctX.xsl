@@ -32,7 +32,7 @@
                 xmlns:fn="http://www.w3.org/2005/xpath-functions"
                 xmlns:local="http://www.datypic.com/local"
                 xmlns:functx="http://www.functx.com"  
-                exclude-result-prefixes="dxmlf xs" version="2.0">
+                exclude-result-prefixes="dxmlf xs" version="3.0">
  
 <!--
   Adds attributes to XML elements 

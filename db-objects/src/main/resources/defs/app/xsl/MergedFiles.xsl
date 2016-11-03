@@ -1,5 +1,5 @@
 <?xml version="1.1"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:merge="http://simpleSys.ru/xml/library/merge" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:merge="http://simpleSys.ru/xml/library/merge" xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:common="http://simpleSys.ru/xml/library/common" exclude-result-prefixes="xs common">
 
     <!--<xsl:import href="common.xsl"/>-->

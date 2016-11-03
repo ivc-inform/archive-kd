@@ -1,5 +1,5 @@
 <?xml version="1.1"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://simpleSys.ru/xml/library/common" xmlns:isc="http://simpleSys.ru/xml/library/ISC"
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://simpleSys.ru/xml/library/common" xmlns:isc="http://simpleSys.ru/xml/library/ISC"
                 xmlns:bo="http://simpleSys.ru/xml/library/bo" exclude-result-prefixes="common xs isc bo">
 
 	<!--<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd"/>-->
