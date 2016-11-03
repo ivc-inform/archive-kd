@@ -6,7 +6,8 @@
 
     <!--<xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/schemaISC.xsd"/>-->
     <xsl:import-schema schema-location="http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/domains.xsd"/>
-    
+
+    <xsl:param name="tmpDir" as="xs:string" select="'file:///e:/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
     <xsl:param name="pathSeparator" as="xs:string"/>
 
     <xsl:variable name="dataTypes" select="doc(concat(common:check-last-slash($tmpDir, $pathSeparator), 'domains.xml'))"/>
@@ -125,15 +126,3 @@
         </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>
-<!-- Stylus Studio meta-information - (c) 2004-2009. Progress Software Corporation. All rights reserved.
-
-<metaInformation>
-	<scenarios/>
-	<MapperMetaTag>
-		<MapperInfo srcSchemaPathIsRelative="yes" srcSchemaInterpretAsXML="no" destSchemaPath="" destSchemaRoot="" destSchemaPathIsRelative="yes" destSchemaInterpretAsXML="no"/>
-		<MapperBlockPosition></MapperBlockPosition>
-		<TemplateContext></TemplateContext>
-		<MapperFilter side="source"></MapperFilter>
-	</MapperMetaTag>
-</metaInformation>
--->
