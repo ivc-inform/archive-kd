@@ -16,7 +16,7 @@
 	<xsl:param name="domainsFile" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp/domains.xml'"/>
 	<xsl:param name="tmpDir" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
 
-	<xsl:param name="pathSeparator" as="xs:string" select="'\'"/>
+	<xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
 	<xsl:param name="maxArity" as="xs:integer" select="254"/>
 	<xsl:param name="ContextPath" as="xs:string" select="'mfms'"/>
 
@@ -334,6 +334,7 @@
 		</isc:DataSourceFieldDyn>
 	</xsl:template>
 </xsl:stylesheet>
+
 <!-- Stylus Studio meta-information - (c) 2004-2009. Progress Software Corporation. All rights reserved.
 
 <metaInformation>
@@ -343,8 +344,8 @@
 		          validateoutput="no" validator="internal" customvalidator="">
 			<advancedProp name="bSchemaAware" value="true"/>
 			<advancedProp name="xsltVersion" value="3.0"/>
-			<advancedProp name="schemaCache" value="||"/>
 			<advancedProp name="xsdVersion" value="1.1"/>
+			<advancedProp name="schemaCache" value="||"/>
 			<advancedProp name="iWhitespace" value="0"/>
 			<advancedProp name="bWarnings" value="true"/>
 			<advancedProp name="bXml11" value="true"/>
