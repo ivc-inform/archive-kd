@@ -12,6 +12,7 @@
 
 	<xsl:param name="resFile" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp/SimpleTypes.xml'"/>
 	<xsl:param name="inputBoFile" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp/domains.xml'"/>
+	<xsl:param name="tmpDir" as="xs:string" select="'file:///c:/Job/archive-kd/web-ui/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
 
 	<xsl:variable name="FileSource" select="doc($inputBoFile)"/>
 
