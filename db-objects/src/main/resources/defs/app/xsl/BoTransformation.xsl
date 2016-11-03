@@ -21,19 +21,18 @@
 	<!--<xsl:param name="FilesName" as="xs:string*" select="('file:///f:/src/main/resources/defs/app/macroBo/contractors.xml','file:///f:/src/main/resources/defs/app/macroBo/user.xml')"/>-->
 	<!--<xsl:param name="FilesName" as="xs:string*"/>-->
 	<xsl:param name="ContextPath" as="xs:string" select="'mfms'"/>
-	<xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
 
 	<xsl:param name="macroDir" as="xs:string" select="'file:///f:/src/main/resources/defs/app/macroBo'"/>
-	<xsl:variable name="_macroDir" as="xs:string" select="common:check-last-slash($macroDir, $pathSeparator)"/>
+	<xsl:variable name="_macroDir" as="xs:string" select="common:check-last-slash($macroDir)"/>
 
 	<xsl:param name="tmpDir" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp'"/>
-	<xsl:variable name="_tmpDir" as="xs:string" select="common:check-last-slash($tmpDir, $pathSeparator)"/>
+	<xsl:variable name="_tmpDir" as="xs:string" select="common:check-last-slash($tmpDir)"/>
 
 	<xsl:param name="jsDir" as="xs:string" select="'file:///f:/src/main/resources/defs/app/js'"/>
-	<xsl:variable name="_jsDir" as="xs:string" select="common:check-last-slash($jsDir, $pathSeparator)"/>
+	<xsl:variable name="_jsDir" as="xs:string" select="common:check-last-slash($jsDir)"/>
 
 	<xsl:param name="generatedDir" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/generated/xml'"/>
-	<xsl:variable name="_generatedDir" as="xs:string" select="common:check-last-slash($generatedDir, $pathSeparator)"/>
+	<xsl:variable name="_generatedDir" as="xs:string" select="common:check-last-slash($generatedDir)"/>
 
 	<xsl:variable select="'http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schemaISC.xsd'" name="schemaAppPath" as="xs:string"/>
 
@@ -379,7 +378,7 @@
 			<isc:ShadowDepth>10</isc:ShadowDepth>
 			<isc:ShowShadow>true</isc:ShowShadow>
 			<xsl:apply-templates select="app:MenuItems">
-				<xsl:with-param as="xs:string" name="functionsFile" select="common:check-last-slash(concat($_jsDir, app:JSFile), $pathSeparator)" tunnel="yes"/>
+				<xsl:with-param as="xs:string" name="functionsFile" select="common:check-last-slash(concat($_jsDir, app:JSFile))" tunnel="yes"/>
 			</xsl:apply-templates>
 		</isc:MenuDyn>
 		<!--</xsl:variable>-->

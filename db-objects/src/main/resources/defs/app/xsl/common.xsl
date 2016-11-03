@@ -66,8 +66,8 @@
 
 	<xsl:function name="common:check-last-slash" as="xs:string">
 		<xsl:param name="input" as="xs:string"/>
-		<xsl:param name="pathSeparator" as="xs:string" select="'/'"/>
-		<xsl:value-of select="if (contains($input, $pathSeparator)) then (if (common:substring-after-last($input, $pathSeparator)='') then $input else concat($input, $pathSeparator)) else concat($input, $pathSeparator)"/>
+		<xsl:param name="pathSeparator" as="xs:string"/>
+		<xsl:value-of select="if (contains($input, $pathSeparator)) then (if (common:substring-after-last($input, $pathSeparator)='') then $input else concat($input,$pathSeparator)) else concat($input, $pathSeparator)"/>
 	</xsl:function>
 
 	<xsl:function name="common:getFirstPartOfPath" as="xs:string">
