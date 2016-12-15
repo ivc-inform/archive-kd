@@ -30,7 +30,9 @@ trait MenuSSItem extends ListGridRecord {
     val iconWidth: Int
     val keys: IscArray[KeyIdentifier]
     val keyTitle: String
-    val submenu: MenuSS
+    val submenu: JSUndefined[MenuSS]
     val title: HTMLString
+    def setOwner(owner: Canvas): void
+    def setOwner1(owner: Canvas): void
 }
 

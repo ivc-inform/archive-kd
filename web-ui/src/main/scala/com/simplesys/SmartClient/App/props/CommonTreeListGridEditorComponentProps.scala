@@ -6,6 +6,7 @@ import com.simplesys.SmartClient.Foundation.props.canvas.ImgPropertiesProps
 import com.simplesys.SmartClient.Grids.props.TreeListGridEditorProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.System._
+import com.simplesys.System.Types.FetchMode
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
@@ -15,7 +16,7 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     type classHandler <: CommonTreeListGridEditorComponent
 
     var simpleTableTree: ScOption[Boolean] = false.opt
-    var simpleTableList: ScOption[Boolean] = true.opt
+    var simpleTableList: ScOption[Boolean] = false.opt
 
     canDragSelectText = false.opt
     autoFetchData = true.opt
@@ -28,10 +29,10 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     showListRecordComponents = false.opt
     folderIconTree = Common.iconFolder.opt
 
-    //dataFetchModeTree = FetchMode.basic.opt
+    //dataFetchModeTree = FetchMode.paged.opt
     dataPageSizeTree = simpleSyS.config.dataPageSize.getOrElse(75).opt
 
-    //dataFetchModeList = FetchMode.basic.opt
+    //dataFetchModeList = FetchMode.paged.opt
     dataPageSizeList = simpleSyS.config.dataPageSize.getOrElse(75).opt
 
     nodeIconTree = Common.iconTreeNode.opt
@@ -52,8 +53,8 @@ class CommonTreeListGridEditorComponentProps extends TreeListGridEditorProps wit
     var replacingFieldsList: ScOption[Seq[ListGridFieldProps]] = ScNone
     var replacingFieldsTree: ScOption[Seq[ListGridFieldProps]] = ScNone
 
-    var captionMenuTree: ScOption[String] = "Группы пользователей".opt
-    var captionMenuList: ScOption[String] = "Пользователи".opt
+    var captionMenuTree: ScOption[String] = ScNone
+    var captionMenuList: ScOption[String] = ScNone
 
     var customMenuTree: ScOption[Seq[MenuSSItem]] = ScNone
     var customMenuList: ScOption[Seq[MenuSSItem]] = ScNone

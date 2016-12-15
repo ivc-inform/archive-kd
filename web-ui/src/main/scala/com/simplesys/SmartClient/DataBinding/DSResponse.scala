@@ -2,9 +2,9 @@ package com.simplesys.SmartClient.DataBinding
 
 import com.simplesys.SmartClient.RPC.{AbstractRPCResponseCompanion, RPCResponse}
 import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.System.Types.DSOperationType.DSOperationType
-import com.simplesys.System.Types.Record
+import com.simplesys.System.Types.{Record, URL}
+import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.ScalaJSDefined
@@ -21,13 +21,13 @@ trait DSResponse extends RPCResponse {
     val endRow: Int
     val errors: JSObject
     val data: JSUndefined[IscArray[Record]]
-    val error: JSUndefined[Error]
     val fromOfflineCache: Boolean
     val offlineTimestamp: Int
     val operationType: DSOperationType
     val queueStatus: Int
     val startRow: Int
     val totalRows: Int
+    val urlExportFile: JSUndefined[URL]
 }
 
 @js.native

@@ -76,7 +76,7 @@ trait DSRequest extends RPCRequest {
     val resultSet: ResultSet
     val resultTree: ResultTree
     val shouldUseCache: Boolean
-    val sortBy: String | IscArray[String] | IscArray[SortSpecifier]
+    var sortBy: String | IscArray[String] | IscArray[SortSpecifier]
     val startRow: Int
     val streamResults: Boolean
     val summaryFunctions: JSObject

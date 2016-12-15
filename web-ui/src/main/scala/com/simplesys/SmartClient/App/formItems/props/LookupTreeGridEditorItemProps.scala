@@ -91,7 +91,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                                 _name = s"${item._name}_inner".opt
                                 width = "*"
                                 showTitle = false.opt
-                                value = item.value.opt
+                                value = item.getValue().opt
                                 readOnlyDisplay = ReadOnlyDisplayAppearance.readOnly.opt
                             }
                         )

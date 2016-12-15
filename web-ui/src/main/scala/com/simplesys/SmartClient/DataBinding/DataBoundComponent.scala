@@ -35,7 +35,7 @@ trait DataBoundComponent extends Class {
     val canEditFieldAttribute: String
     var canEditHilites: Boolean
     var dataArity: String
-    val dataFetchMode: FetchMode
+    var dataFetchMode: JSUndefined[FetchMode]
     val dataField: String
     var dataPageSize: Int
     var dataSource: JSUndefined[DataSource]

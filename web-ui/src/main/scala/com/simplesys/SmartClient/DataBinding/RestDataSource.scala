@@ -14,6 +14,11 @@ trait ErrorStruct extends JSObject {
 }
 
 @ScalaJSDefined
+trait ErrorStructOld extends JSObject {
+    val error: JSUndefined[Error]
+}
+
+@ScalaJSDefined
 trait ResponseData extends JSObject {
     val data: JSUndefined[ErrorStruct]
     val status: JSUndefined[Int]

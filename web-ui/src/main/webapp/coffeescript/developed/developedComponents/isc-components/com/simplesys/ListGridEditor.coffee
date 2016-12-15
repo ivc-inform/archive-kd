@@ -37,7 +37,7 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		if @useClientFilteringSorting is false
 			_callback = (dsResponse, data, dsRequest) =>
 				@grid.selectFirstRecord() if @selectFirstRecordAfterFetch
-				@fireCallback callback
+				@fireCallback(callback, "dsResponse, data, dsRequest", [dsResponse, data, dsRequest])
 				return
 			
 			@grid.filterData criteria, _callback, requestProperties
@@ -49,7 +49,7 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 					allRows   : data
 				
 				@grid.setData resultSet
-				@fireCallback callback
+				@fireCallback(callback, "dsResponse, data, dsRequest", [dsResponse, data, dsRequest])
 				return
 			
 			@dataSource.filterData criteria, _callback, requestProperties
@@ -300,7 +300,6 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"hoverWidth"                      : @hoverWidth
 			"canResizeFields"                 : @canResizeFields
 			"dragDataAction"                  : @dragDataAction
-			"canDragRecordsOut"               : @canDragRecordsOut
 			"canReorderRecords"               : @canReorderRecords
 			"canAcceptDroppedRecords"         : @canAcceptDroppedRecords
 			"trackerImage"                    : @trackerImage

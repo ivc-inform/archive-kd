@@ -96,7 +96,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def getTitleOrientation(item: FormItem = js.native): TitleOrientation
     def getValidatedValues(): JSObject
     def getValue(fieldName: String): JSAny
-    def getValues(): JSObject
+    def getValues[T <: JSObject]():T
     def getValuesAsAdvancedCriteria(textMatchStyle: TextMatchStyle = js.native): AdvancedCriteria
     val grid: JSUndefined[ListGrid]
     def getValuesAsCriteria(advanced: Boolean, textMatchStyle: TextMatchStyle = js.native): Criteria | AdvancedCriteria

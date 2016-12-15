@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Drawing
 
 import com.simplesys.SmartClient.Control.MenuSS
-import com.simplesys.SmartClient.DataBinding.DataSource
+import com.simplesys.SmartClient.DataBinding.{AdvancedCriteria, DataSource}
 import com.simplesys.SmartClient.Drawing.drawItem.{DrawGroup, DrawLabel, DrawRect}
 import com.simplesys.SmartClient.Drawing.gradient.Gradient
 import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class, IscArray, Point, Rect1}
@@ -74,6 +74,7 @@ trait DrawItem extends Class {
     var _constructor: JSUndefined[String]
     var contextMenu: JSUndefined[MenuSS]
     var cornerResizeKnob: DrawKnob with MultiAutoChild
+    val criteria: JSUndefined[AdvancedCriteria]
     var cursor: Cursor
     val defaults: DrawItemDefaults
     def deleteGlueItems(): void

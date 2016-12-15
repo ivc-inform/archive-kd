@@ -16,10 +16,10 @@ class TreeListGridContextMenuProps extends MenuSSProps {
     type classHandler <: TreeListGridContextMenu
 
     var simpleTableTree: ScOption[Boolean] = false.opt
-    var simpleTableList: ScOption[Boolean] = true.opt
+    var simpleTableList: ScOption[Boolean] = false.opt
 
-    var captionMenuTree: ScOption[String] = "Группы пользователей".opt
-    var captionMenuList: ScOption[String] = "Пользователи".opt
+    var captionMenuTree: ScOption[String] = ScNone
+    var captionMenuList: ScOption[String] = ScNone
 
     var customMenuTree: ScOption[Seq[MenuSSItem]] = ScNone
     var customMenuList: ScOption[Seq[MenuSSItem]] = ScNone

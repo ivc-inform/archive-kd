@@ -26,6 +26,7 @@ isc.defineClass("OkCancelFunctionPanel", isc.HPanelSS).addProperties
 						            @owner?.hide?()###
 					            return
 				            "title"           : @okButtonTitle
+				            "prompt"          : @okButtonTitle
 				            "icon"            : "ok.png"
 				            "width"           : 100
 				            "showDisabledIcon": true
@@ -40,6 +41,7 @@ isc.defineClass("OkCancelFunctionPanel", isc.HPanelSS).addProperties
 					            @owner?.functionFunction? @filterBuilder
 					            return
 				            "title"           : @functionButtonTitle
+				            "prompt"          : @functionButtonTitle
 				            "icon"            : "function-selection.png"
 				            "width"           : 100
 				            "showDisabledIcon": true
@@ -55,6 +57,7 @@ isc.defineClass("OkCancelFunctionPanel", isc.HPanelSS).addProperties
 					            @owner?.markForDestroy?()
 					            return
 				            "title"           : @cancelButtonTitle
+				            "prompt"          : @cancelButtonTitle
 				            "icon"            : "cancel.png"
 				            "width"           : 100
 				            "showDisabledIcon": true

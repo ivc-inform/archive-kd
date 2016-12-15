@@ -39,7 +39,7 @@ object CommonDeps {
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
 
-        val jettyVersion = "9.3.13.v20161014"
+        val jettyVersion = "9.4.0.v20161208"
 
         val kamonVersion = "0.5.2"
 
@@ -55,11 +55,11 @@ object CommonDeps {
         val smartclientVersion = "11.0-v20160805.10"
         //val smartclientVersion = "10.1-v20160316"
 
-        val akkaVersion = "2.4.12"
+        val akkaVersion = "2.4.14"
 
         val servletAPIVersion = "3.1.0"
 
-        val scalaTestVersion = "3.0.0"
+        val scalaTestVersion = "3.0.1"
         val scalaJSVersion = "1.0-SNAPSHOT"
 
         val scalajsDOMVersion = "0.9.1"

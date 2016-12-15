@@ -23,7 +23,8 @@ import scala.scalajs.js.annotation.JSExport
 @JSExport
 class PrepareJSCode extends StaticJSCode {
 
-    @JSExport override def createJS(): Unit = {
+    @JSExport
+    override def createJS(): Unit = {
 
         isc.WindowSS.addProperties(WindowSS(new WindowSSProps))
 

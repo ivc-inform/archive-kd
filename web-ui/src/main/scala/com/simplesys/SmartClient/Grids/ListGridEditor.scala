@@ -36,6 +36,7 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     val showAllRecords: Boolean
     def selectSingleRecordByKey(keyValue: JSAny, newStyle: Boolean = js.native, callback: Callback = js.native): R
     def fetchData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
+    def exportData(criteria: Criteria = js.native, requestProperties: DSRequest = js.native, callback: DSCallback = js.native): void
     def hasChanges(): Boolean
     def getDataLength(): Int
     def applyRecordData(recordData: IscArray[Record]): void

@@ -247,7 +247,7 @@ isc.addGlobal "error", (message, identifier, callback) ->
 		"message"   : message
 		"width"     : simpleSyS.getWidthMessageWindow message
 	messageWindow.show()
-	return
+	messageWindow
 
 isc.addGlobal "info", (message, identifier, callback) ->
 	messageWindow = isc.MessageWindow1.create
@@ -258,7 +258,7 @@ isc.addGlobal "info", (message, identifier, callback) ->
 		"title"     : "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F..."
 		"width"     : simpleSyS.getWidthMessageWindow message
 	messageWindow.show()
-	return
+	messageWindow
 
 isc.addGlobal "infos", (gridProperties, identifier, callback) ->
 	messageWindow = isc.MessageWindow3.create
@@ -268,7 +268,7 @@ isc.addGlobal "infos", (gridProperties, identifier, callback) ->
 		"gridProperties": gridProperties
 		"title"     : "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F..."
 	messageWindow.show()
-	return
+	messageWindow
 
 isc.addGlobal "ok", (message, identifier, callback) ->
 	messageWindow = isc.MessageWindow1.create
@@ -279,7 +279,7 @@ isc.addGlobal "ok", (message, identifier, callback) ->
 		"title"     : "\u0412\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E ..."
 		"width"     : simpleSyS.getWidthMessageWindow message
 	messageWindow.show()
-	return
+	messageWindow
 
 isc.addGlobal "errors", (errors, identifier, callback) ->
 	messageWindow = isc.MessageWindow2.create
@@ -287,4 +287,4 @@ isc.addGlobal "errors", (errors, identifier, callback) ->
 		"identifier": identifier
 		"errors"    : errors
 	messageWindow.show()
-	return
+	messageWindow

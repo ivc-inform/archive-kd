@@ -140,7 +140,7 @@ isc.ListGrid.addProperties
 				colWidths: [100, "*"]
 				fields: fields
 
-		okCancelPanel = isc.OkCancelPanel.create
+		okCancelPanel = isc.OkCancelFunctionPanel.create
 			padding     : 5
 			okCaption   : "Сохранить"
 			ownerDestroy: false
@@ -154,9 +154,11 @@ isc.ListGrid.addProperties
 
 					form.saveData _save, requestProperties
 				return
-
-			cancelFunction: ->
+				
+			functionButtonTitle: "Очистить все поля"
+			functionFunction: ->
 				form.clearErrors true
+				form.clearValues()
 				form.cancelEditing()
 				return
 

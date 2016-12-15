@@ -3,6 +3,8 @@ package com.simplesys.SmartClient.Control.props
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Control.{MenuSS, TreeGridContextMenu}
+import com.simplesys.SmartClient.DataBinding.DSRequest
+import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.{ListGridEditor, TreeGridEditor}
 import com.simplesys.SmartClient.System.{Common, simpleSyS, _}
@@ -11,6 +13,8 @@ import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
+
+import scala.scalajs.js
 
 class TreeGridContextMenuProps extends MenuSSProps {
     type classHandler <: TreeGridContextMenu
@@ -52,17 +56,20 @@ class TreeGridContextMenuProps extends MenuSSProps {
                     val parentIdField = owner.treeGrid.data.parentIdField
                     val idField = owner.treeGrid.data.idField
 
-                    if (owner.treeGrid.newRequestProperties.isDefined) {
-                        val request = (owner.treeGrid.newRequestProperties.get) ()
-                        val idValue = owner.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idField)
+                    //isc debugTrap(parentIdField, idField)
 
-                        request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField)(idValue)
+                    val request: DSRequest = if (owner.treeGrid.newRequestProperties.isDefined) (owner.treeGrid.newRequestProperties.get) () else DSRequest(
+                        new DSRequestProps{
+                            data = js.Object().opt
+                        }
+                    )
+                    val idValue = owner.getSelectedRecord().asInstanceOf[JSDynamic].selectDynamic(idField)
 
-                        owner.startEditingNewInForm(
-                            requestProperties = request
-                        )
-                    } else
-                        owner.startEditingNewInForm()
+                    request.data.asInstanceOf[JSDynamic].updateDynamic(parentIdField)(idValue)
+
+                    owner.startEditingNewInForm(
+                        requestProperties = request
+                    )
 
             }.toFunc.opt
             enableIf = {

@@ -85,7 +85,7 @@ isc.defineClass("LoginWindow", isc.WindowSS).addProperties
 	"showCloseButton" : false
 	"autoSize"          : true
 	"headerIconPath"    : "key-login-icon.png"
-	"title"             : "Идентификация..."
+	"title"             : "Аутентификация..."
 	"initWidget"        : ->
 		@Super "initWidget", arguments
 		if not simpleSyS?

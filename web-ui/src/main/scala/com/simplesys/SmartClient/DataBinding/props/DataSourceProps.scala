@@ -1,8 +1,9 @@
 package com.simplesys.SmartClient.DataBinding.props
 
+import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
 import com.simplesys.SmartClient.DataBinding.dataSource.Operator
 import com.simplesys.SmartClient.DataBinding.props.dataSource.{DataSourceFieldProps, OperationBindingProps, WildRecordColumnProps}
-import com.simplesys.SmartClient.DataBinding.{DSRequest, DSResponse, DataSource}
+import com.simplesys.SmartClient.DataBinding.{AdvancedCriteria, DSRequest, DSResponse, DataSource}
 import com.simplesys.SmartClient.Layout.WindowProgressDialog
 import com.simplesys.SmartClient.Layout.props.WindowProgressDialogProps
 import com.simplesys.SmartClient.Messaging.MessageJS
@@ -14,6 +15,7 @@ import com.simplesys.System.Types.DSInheritanceMode.DSInheritanceMode
 import com.simplesys.System.Types.DSProtocol.DSProtocol
 import com.simplesys.System.Types.DSServerType.DSServerType
 import com.simplesys.System.Types.EnumTranslateStrategy.EnumTranslateStrategy
+import com.simplesys.System.Types.ExportFormat.{ExportFormat ⇒ _}
 import com.simplesys.System.Types.MultiUpdatePolicy.MultiUpdatePolicy
 import com.simplesys.System.Types.RPCTransport.RPCTransport
 import com.simplesys.System.Types.SQLPagingStrategy.SQLPagingStrategy

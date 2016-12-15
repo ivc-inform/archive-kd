@@ -93,6 +93,7 @@ package object System {
     object DataSourceSS extends SCApply[DataSourceSS, DataSourceSSProps]
     object DataBoundComponent extends SCApply4Object[DataBoundComponent, DataBoundComponentProps]
     object RestDataSourceSS extends SCApply[RestDataSourceSS, RestDataSourceSSProps]
+    object RestDataSource extends SCApply[RestDataSource, RestDataSourceProps]
     object SimpleType extends SCApply[SimpleType, SimpleTypeProps]
     object SimpleTile extends SCApply[SimpleTile, SimpleTileProps]
     object AdvancedCriteria extends SCApply4Object[AdvancedCriteria, AdvancedCriteriaProps]
@@ -134,6 +135,9 @@ package object System {
     object Tab extends SCApply4Object[Tab, TabProps]
     object DateChooser extends SCApply4Object[DateChooser, DateChooserProps]
     object BooleanItem extends SCApply4Object[BooleanItem, BooleanItemProps]
+    object PasswordItem extends SCApply4Object[PasswordItem, PasswordItemProps]
+    object SubmitItem extends SCApply4Object[SubmitItem, SubmitItemProps]
+    object ButtonItem extends SCApply4Object[ButtonItem, ButtonItemProps]
 
     object FormItemWithButtons extends SCApply4Object[FormItemWithButtons, FormItemWithButtonsProps]
     object ComboboxItemWithButtonsJS extends SCApply4Object[ComboboxItemWithButtonsJS, ComboboxItemWithButtonsJSProps]

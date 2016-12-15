@@ -2,7 +2,8 @@ package com.simplesys.SmartClient.Grids.props
 
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.DataBinding.Callbacks.DSCallback
-import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource, SortSpecifier}
+import com.simplesys.SmartClient.DataBinding._
+import com.simplesys.SmartClient.DataBinding.props.DSRequestProps
 import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
@@ -10,22 +11,26 @@ import com.simplesys.SmartClient.Grids.props.listGrid.{ListGridFieldProps, ListG
 import com.simplesys.SmartClient.Grids.{ListGrid, ListGridEditor}
 import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.VLayoutSSProps
-import com.simplesys.System.{JSObject, JSUndefined}
+import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.AutoFitWidthApproach.AutoFitWidthApproach
-import com.simplesys.System.Types.{Criteria, DateDisplayFormat}
 import com.simplesys.System.Types.DateDisplayFormat._
 import com.simplesys.System.Types.DragDataAction._
 import com.simplesys.System.Types.DragTrackerMode.DragTrackerMode
-import com.simplesys.System.Types.FetchMode.FetchMode
+import com.simplesys.System.Types.ExportFormat.{apply ⇒ _}
+import com.simplesys.System.Types.FetchMode.{apply ⇒ _, _}
 import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
 import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPoolingMode
 import com.simplesys.System.Types.SelectionAppearance.SelectionAppearance
 import com.simplesys.System.Types.SelectionStyle._
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
+import com.simplesys.System.Types.{Criteria, DateDisplayFormat, ExportFormat}
+import com.simplesys.System.{JSObject, JSUndefined}
+import com.simplesys.function._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js._
+import scala.scalajs.js.annotation.ScalaJSDefined
 
 class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends VLayoutSSProps {
 
@@ -97,7 +102,47 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
 
 }
 
+@ScalaJSDefined
+trait EmptyCriteria extends JSObject {
+    val ts: Double
+}
+
 class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRecordProps] {
     type classHandler <: ListGridEditor
     var data: ScOption[Seq[ListGridRecord]] = ScNone
+
+    var exportData: ScOption[ThisFunction3[classHandler, JSUndefined[AdvancedCriteria], JSUndefined[DSRequest], JSUndefined[DSCallback], _]] = {
+        (thiz: classHandler, criteria: JSUndefined[AdvancedCriteria], requestProperties: JSUndefined[DSRequest], callback: JSUndefined[DSCallback]) ⇒
+
+            val timestamProp = new EmptyCriteria {
+                override val ts: Double = isc.timeStamp()
+            }
+
+            def getGriteria(): Criteria = if (criteria.isEmpty) thiz.getCriteria() else criteria.get
+
+            thiz.fetchData(
+                isc.addProperties(getGriteria(), timestamProp), {
+                    (resp: DSResponse, data: IscArray[JSObject], req: DSRequest) ⇒
+                        callback.foreach(thiz.fireCallback(_, "resp, data, req", IscArray(resp, data, req)))
+
+                        //isc debugTrap(resp, data, req)
+
+                        if (data.length > 0 && data(0).asInstanceOf[ErrorStructOld].error.isDefined)
+                            isc.errorDetail(
+                                data(0).asInstanceOf[ErrorStructOld].error.get.message.getOrElse("Unknown message"),
+                                data(0).asInstanceOf[ErrorStructOld].error.get.stackTrace.getOrElse("Unknown message"),
+                                "BE1379E4-354C-FFD1-C791-A417430252B7",
+                                "1DB22FC7-9191-FB5E-AED7-83D3B40A8575"
+                            )
+                        else
+                            resp.urlExportFile.foreach(window.location assign _)
+                },
+                DSRequest(
+                    new DSRequestProps {
+                        exportAs = ExportFormat.ooxml.opt
+                        exportToFilesystem = true.opt
+                    }
+                )
+            )
+    }.toThisFunc.opt
 }

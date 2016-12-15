@@ -18,6 +18,9 @@ trait NewDSRequestData extends JSObject {
 class EditorUsersProps extends CommonTreeListGridEditorComponentProps {
     identifier = "58125E1C-252A-01C4-11A1-557FA3222D3F".opt
 
+    captionMenuTree = "Группы пользователей".opt
+    captionMenuList = "Пользователи".opt
+
     newTreeRequestProperties = {
         (thiz: classHandler) =>
             DSRequest(

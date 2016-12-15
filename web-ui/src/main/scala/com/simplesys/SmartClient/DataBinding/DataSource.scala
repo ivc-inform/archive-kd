@@ -103,7 +103,7 @@ trait DataSource extends Class {
     def evaluateCriterion(record: Record, criterion: Criterion): Boolean
     def execute(dsRequest: DSRequest): void
     def exportClientData(data: IscArray[Record], requestProperties: DSRequest, callback: DSCallback): void
-    def exportData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
+    def exportData(criteria: Criteria = js.native, requestProperties: DSRequest = js.native, callback: DSCallback = js.native): void
     def fetchData(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def fetchRecord(pkValue: JSAny, requestProperties: DSRequest = js.native, callback: DSCallback = js.native): void
     def fieldMatchesFilter(fieldValue: JSAny, filterValue: JSAny, requestProperties: DSRequest = js.native): Boolean

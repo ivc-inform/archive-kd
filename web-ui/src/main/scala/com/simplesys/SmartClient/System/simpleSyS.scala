@@ -16,6 +16,15 @@ trait Config extends JSObject {
 }
 
 @js.native
+trait appStruct extends JSObject {
+    val login: String
+    val password: String
+    val userId: Double
+    val codeGroup: Double
+    val captionUser: String
+}
+
+@js.native
 object simpleSyS extends JSObject {
 
     import com.simplesys.System._
@@ -31,4 +40,5 @@ object simpleSyS extends JSObject {
     var scenarioTestMode: JSUndefined[Boolean] = js.native
     val simpleSysContextPath: URL = js.native
     var qtyGraphCopies: JSUndefined[Int] = js.native
+    val app: appStruct = js.native
 }

@@ -6,7 +6,7 @@ if not isc.module_RealtimeMessaging?
 		_subscribeReconnectDelay: 100
 		eventStream             : ->
 			res = not not window.EventSource
-			if not res? then @logError "Browser do not support SSE."
+			if not res? then isc.error "Ваш браузер не поддерживает технологию SSE, что делает невозможным автоматическое получение сообщений от сервера. (Данная задача находится в доработке.)"
 			res
 		_channels               : {}
 		_recentIDList           : []

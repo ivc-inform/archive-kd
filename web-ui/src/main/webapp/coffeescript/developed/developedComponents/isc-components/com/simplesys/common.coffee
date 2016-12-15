@@ -7,5 +7,3 @@ Object.defineProperty String.prototype,
                       "isEmpty",
                       get: ->
 	                      not @.isNotEmpty
-	                    
-

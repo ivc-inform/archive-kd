@@ -59,6 +59,7 @@ object Common {
     val abonents = "abonents.png"
     val admin = "admin.png"
     val attach = "attach.png"
+    val password = "password.png"
     val guid = "guid.png"
     val emulateOutMessage = "emulateOutMessage.png"
     val status = "status.png"
@@ -89,4 +90,5 @@ object Common {
     val softStop = "softStop.png"
     val load = "load.png"
     val jsonGear = "json-gear.png"
+    val save = "save.png"
 }
