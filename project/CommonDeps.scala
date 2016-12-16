@@ -14,7 +14,7 @@ object PluginDeps {
         val xsbtWebVersion = "0.9.1"
         val sbtPackVersion = "0.7.7"
 
-        val scalaJSPluginVersion = "0.6.13"
+        val scalaJSPluginVersion = "0.6.14"
         val macroParadiseVersion = "2.0.1"
     }
 
@@ -46,7 +46,7 @@ object CommonDeps {
         val doobieVersion = "0.2.3"
 
         val ssysCoreVersion = "1.2-SNAPSHOT"
-        //val ssysCoreVersion = "1.2.84"
+        //val ssysCoreVersion = "1.2.98"
 
         val ssysDictionariesDataVersion = "1.1.2"
         val dictionaryMitEduInterfaceVersion = "2.3.3"
