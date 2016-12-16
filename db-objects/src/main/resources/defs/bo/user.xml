@@ -5,18 +5,18 @@
 			<classSimple name="UserGroup" caption="Группы пользователей" autoTableMapping="true">
 				<attrs>
 					<attr name="di" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true"/>
-					<attr name="codeGroup" type="sCaption" mandatory="true" caption="Код группы"/>
+					<attr name="codeGroup" type="sCaption" mandatory="true" caption="Код группы" genBySeq="true"/>
 					<attr name="captionGroup" type="sCode" mandatory="false" caption="Наименование группы"/>
 					<attr name="descriptionGroup" type="sDescription" mandatory="false" caption="Описание группы"/>
-					<attr name="active" type="bBoolean" caption="Активность" mandatory="false"/>
+					<attr name="active" type="bBoolean" caption="Активность" mandatory="true"/>
 				</attrs>
 				<constraints>
 					<uc uniqueType="pk">
 						<attrName>di</attrName>
 					</uc>
-					<uc uniqueType="uq">
-						<attrName>codeGroup</attrName>
-					</uc>
+						<uc uniqueType="uq">
+							<attrName>codeGroup</attrName>
+						</uc>
 					<fk parent="UserGroup" linkType="refIsOwner" mandatory="false">
 						<mapping attrNameLocal="parent" attrNameRemote="di"/>
 					</fk>
@@ -24,6 +24,7 @@
 				<defaults>
 					<showAttrs>
 						<attrName>codeGroup</attrName>
+						<attrName>captionGroup</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleTreeGrid"/>
 				</defaults>
@@ -32,7 +33,7 @@
 			<classSimple name="User" autoTableMapping="true" caption="Пользователи">
 				<attrs>
 					<attr name="di" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true"/>
-					<attr name="login" type="sCode" caption="Логин" mandatory="true"/>
+					<attr name="login" type="sCode" caption="Логин" mandatory="true" />
 					<attr name="firstName" caption="Имя" type="sCaption" mandatory="false"/>
 					<attr name="secondName" caption="Отчество" type="sCaption" mandatory="false"/>
 					<attr name="lastName" caption="Фамилия" type="sCaption" mandatory="true"/>
@@ -49,12 +50,13 @@
 					</classifier>
 					<uiSettings uiFormType="masterTreeDetailedListGrid"/>
 					<!--<uiSettings uiFormType="singleListGrid"/>-->
+
 				</defaults>
 				<constraints>
 					<uc uniqueType="pk">
 						<attrName>di</attrName>
 					</uc>
-					<fk parent="UserGroup" linkType="refIsOwner" mandatory="false">
+					<fk parent="UserGroup" linkType="refIsOwner" mandatory="true">
 						<mapping attrNameLocal="group" attrNameRemote="di"/>
 					</fk>
 					<uc uniqueType="uq">
