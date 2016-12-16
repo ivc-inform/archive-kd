@@ -14,7 +14,7 @@ object PluginDeps {
         val xsbtWebVersion = "0.9.1"
         val sbtPackVersion = "0.7.7"
 
-        val scalaJSPluginVersion = "0.6.14"
+        val scalaJSPluginVersion = "0.6.13"
         val macroParadiseVersion = "2.0.1"
     }
 
@@ -34,7 +34,7 @@ object PluginDeps {
 
 object CommonDeps {
     object versions {
-        val scalaModulesVersion = "1.0.4"
+        val scalaModulesVersion = "1.0.6"
 
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
@@ -60,7 +60,8 @@ object CommonDeps {
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
-        val scalaJSVersion = "1.0-SNAPSHOT"
+        //val scalaJSVersion = "1.0-SNAPSHOT"
+        val scalaJSVersion = "1.0.15"
 
         val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
