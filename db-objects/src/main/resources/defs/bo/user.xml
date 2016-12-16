@@ -32,7 +32,6 @@
 			<classSimple name="User" autoTableMapping="true" caption="Пользователи">
 				<attrs>
 					<attr name="di" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true"/>
-					<!--<attr name="di1" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true"/>-->
 					<attr name="login" type="sCode" caption="Логин" mandatory="true"/>
 					<attr name="firstName" caption="Имя" type="sCaption" mandatory="false"/>
 					<attr name="secondName" caption="Отчество" type="sCaption" mandatory="false"/>
