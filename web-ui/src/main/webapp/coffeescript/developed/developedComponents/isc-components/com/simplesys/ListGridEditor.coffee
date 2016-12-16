@@ -18,6 +18,9 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 		@grid.selectAllRecords visibleNodesOnly
 		return
 	"showAllRecords"             : false
+	"refreshRecordComponent"     : (rowNum, colNum) ->
+		@grid.refreshRecordComponent recordDate, colNum
+		return
 	"applyRecordData": (recordDate) ->
 		@grid.applyRecordData recordDate
 		return

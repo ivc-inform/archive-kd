@@ -34,7 +34,6 @@ trait RestDataSource extends DataSource {
     val prettyPrintJSON: Boolean
     val removeDataURL: String
     val sendMetaData: Boolean
-    var transformRequest: js.Function1[void, _]
     var updateDataURL: String
     val xmlRecordXPath: String
 }

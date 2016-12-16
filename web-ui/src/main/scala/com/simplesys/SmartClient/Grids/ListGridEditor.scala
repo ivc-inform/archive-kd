@@ -41,6 +41,7 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     def getDataLength(): Int
     def applyRecordData(recordData: IscArray[Record]): void
     def invalidateRecordComponents(): void
+    def refreshRecordComponent(rowNum:Int, colNum:Int = js.native): void
     var showRecordComponentsByCell: Boolean
     var showRecordComponents: Boolean
     var filterOnKeypress: Boolean
@@ -137,6 +138,7 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     def setSelectionAppearance(selectionAppearance: SelectionAppearance): void
     def setSelectionType(selectionType: SelectionStyle): void
     var simpleTable: JSUndefined[Boolean]
+    def getEditFormItem(field: String | Int): FormItem
     @JSName("grid")
     var listGrid: ListGrid
     @JSName("grid")

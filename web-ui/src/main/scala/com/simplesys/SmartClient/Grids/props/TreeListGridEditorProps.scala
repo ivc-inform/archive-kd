@@ -21,6 +21,7 @@ import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types._
 import com.simplesys.option.{IntString, ScNone, ScOption}
 
+import scala.scalajs.js
 import scala.scalajs.js.{ThisFunction0, ThisFunction2, ThisFunction4}
 
 class TreeListGridEditorProps extends HLayoutSSProps {
@@ -107,6 +108,8 @@ class TreeListGridEditorProps extends HLayoutSSProps {
     var selectionAppearanceTree: ScOption[SelectionAppearance] = ScNone
     var selectFirstRecordAfterFetchList: ScOption[Boolean] = ScNone
     var selectFirstRecordAfterFetchTree: ScOption[Boolean] = ScNone
+    var dataArrivedList: ScOption[js.ThisFunction2[classHandler, Int, Int, _]] = ScNone
+    var dataArrivedTree: ScOption[js.ThisFunction2[classHandler, Int, Int, _]] = ScNone
 
     var createListRecordComponent: ScOption[ThisFunction2[ListGridEditor, _ <: JSObject, Int, JSUndefined[Canvas]]] = ScNone
     var updateListRecordComponent: ScOption[ThisFunction4[ListGridEditor, _ <: JSObject, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone

@@ -147,6 +147,8 @@ trait TreeListGridEditor extends HLayoutSS {
     var selectionAppearanceTree: JSUndefined[SelectionAppearance]
     var selectFirstRecordAfterFetchList: JSUndefined[Boolean]
     var selectFirstRecordAfterFetchTree: JSUndefined[Boolean]
+    var dataArrivedList: js.ThisFunction2[classHandler, Int, Int, void]
+    var dataArrivedTree: js.ThisFunction2[classHandler, Int, Int, void]
 
     def createListRecordComponent(record: ListGridRecord, colNum: Int): JSUndefined[Canvas]
     def createTreeRecordComponent(record: ListGridRecord, colNum: Int): JSUndefined[Canvas]
@@ -159,6 +161,9 @@ trait TreeListGridEditor extends HLayoutSS {
 
     def refreshDataList(callBack: DSCallback = js.native): void
     def refreshDataTree(callBack: DSCallback = js.native): void
+
+    def refreshRecordComponentList(rowNum:Int, colNum:Int = js.native): void
+    def refreshRecordComponentTree(rowNum:Int, colNum:Int = js.native): void
 }
 
 @js.native

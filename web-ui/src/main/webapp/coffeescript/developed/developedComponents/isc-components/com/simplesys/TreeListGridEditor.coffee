@@ -23,6 +23,8 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"removeTreeSelectedData"              : ->
 		@treeGrid.removeSelectedData()
 		return
+	"dataArrivedTree"                     : (startRecord, endRecord) -> undefined; return
+	"dataArrivedList"                     : (startRecord, endRecord) -> undefined; return
 	"widthTree"                           : "300"
 	"widthList"                           : "*"
 	"fetchData"                           : (criteria, callback, requestProperties) ->
@@ -164,6 +166,12 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 	"refreshDataTree": (callback) ->
 		@treeGrid.refreshData callback
 		return
+	"refreshRecordComponentTree":  (rowNum, colNum) ->
+		@treeGrid.refreshRecordComponent recordDate, colNum
+		return
+	"refreshRecordComponentList":  (rowNum, colNum) ->
+		@listGrid.refreshRecordComponent recordDate, colNum
+		return
 
 	"initWidget"                          : ->
 		#isc.debugTrac @getClassName(), @getIdentifier()
@@ -220,6 +228,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"createRecordComponent"           : @createTreeRecordComponent
 			"updateRecordComponent"           : @updateTreeRecordComponent
 			"recordComponentPoolingMode"      : @recordTreeComponentPoolingMode
+			"dataArrived"                     : @dataArrivedTree
 			"resized"                         : ->
 				isc.OfflineSS.putNumber "#{@getIdentifier()}.width", @getWidth() if @isDrawn() is true
 				return
@@ -276,6 +285,7 @@ isc.defineClass("TreeListGridEditor", isc.HLayoutSS).addProperties
 			"selectionAppearance"             : @selectionAppearanceList
 			"selectFirstRecordAfterFetch"     : @selectFirstRecordAfterFetchList
 			"recordComponentPoolingMode"      : @recordListComponentPoolingMode
+			"dataArrived"                     : @dataArrivedList
 
 		###simpleSyS._initMenus @listGrid
 		simpleSyS._RecordComponent @listGrid, "create"

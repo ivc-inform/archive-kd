@@ -22,6 +22,14 @@ isc.defineClass("TreeGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"invalidateRecordComponents" : () ->
 		@grid.invalidateRecordComponents()
 		return
+	"refreshRecordComponent"     : (rowNum, colNum) ->
+		@grid.refreshRecordComponent recordDate, colNum
+		return
+	"setEditValue": (rowNum, colNum, value) ->
+		@grid.refreshRecordComponent rowNum, colNum, value
+		return
+	"getEditFormItem" : (field) ->
+		@grid.getEditFormItem field
 	"fetchData": (criteria, callback, requestProperties) ->
 		if @useClientFilteringSorting is false
 			_callback = (dsResponse, data, dsRequest) =>

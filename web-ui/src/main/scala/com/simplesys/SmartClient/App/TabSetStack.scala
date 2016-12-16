@@ -149,6 +149,8 @@ trait TabSetStack extends TabSetsStack {
     )
 
     def addTab(canvas: Canvas, menuItem: MenuSSItem, funcOnTabDeselect: JSUndefined[Function0[Boolean]] = jSUndefined): Unit = {
+        //isc debugTrap funcOnTabDeselect
+
         if (canvas.funcMenu.isEmpty)
             isc warn s"Отсутствует FuncMenu у компонента: ${canvas.getClassName()} c ID: ${canvas.getID()}, поэтому не будет работать кнопка 'Операции' для этого компонента."
 
@@ -180,6 +182,10 @@ trait TabSetStack extends TabSetsStack {
                             pane = checkInnerTabSet(groupButton.getIdentifier(), canvas, menuItem, funcOnTabDeselect).opt
                             name = groupButton.getIdentifier().opt
                             title = _title.opt
+                            tabDeselected = {
+                                (tabSet: TabSet, tabNum: Int, tabPane: Canvas, ID: JSUndefined[ID], tab: Tab, tabOld: Tab, name: JSUndefined[String]) =>
+                                    funcOnTabDeselect.map(_ ()).getOrElse(true)
+                            }.toFunc.opt
                             tabSelected = {
                                 (tabSet: TabSet, tabNum: Int, tabPane: Canvas, ID: JSUndefined[ID], tab: Tab, name: JSUndefined[String]) =>
                                     if (tabPane.asInstanceOf[TabSetSS].getSelectedTab().isEmpty)

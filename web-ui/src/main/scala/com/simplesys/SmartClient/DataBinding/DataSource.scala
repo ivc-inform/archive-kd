@@ -235,7 +235,7 @@ trait DataSource extends Class {
     val title: String
     val titleField: String
     val transformMultipleFields: Boolean
-    var transformReques: js.Function1[DSRequest, JSAny]
+    var transformRequest: js.Function1[DSRequest, _]
     var transformResponse: js.Function3[DSResponse, DSRequest, JSON, DSResponse]
     val translatePatternOperators: Boolean
     val trimMilliseconds: Boolean
