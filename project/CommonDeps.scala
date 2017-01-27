@@ -39,8 +39,6 @@ object CommonDeps {
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
 
-        val jettyVersion = "9.4.0.v20161208"
-
         val kamonVersion = "0.5.2"
 
         val doobieVersion = "0.2.3"
@@ -88,10 +86,6 @@ object CommonDeps {
     val akkaHttpXml = Def.setting("com.typesafe.akka" %% "akka-http-xml" % versions.akkaHttpVersion)
     val akkaHttpSprayJson = Def.setting("com.typesafe.akka" %% "akka-http-spray-json" % versions.akkaHttpVersion)
     val akkaQuery = Def.setting("com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion)
-
-    val jettyWebapp = Def.setting("org.eclipse.jetty" % "jetty-webapp" % versions.jettyVersion)
-    val jettyAnnotations = Def.setting("org.eclipse.jetty" % "jetty-annotations" % versions.jettyVersion)
-    val jettyPlus = Def.setting("org.eclipse.jetty" % "jetty-plus" % versions.jettyVersion)
 
     val smartclient = Def.setting("com.simplesys" % "smartclient-js" % versions.smartclientVersion)
 
