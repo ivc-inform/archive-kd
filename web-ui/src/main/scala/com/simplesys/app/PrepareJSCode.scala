@@ -3,12 +3,10 @@ package com.simplesys.app
 import com.simplesys.SmartClient.App.StaticJSCode
 import com.simplesys.SmartClient.System.{CommonListGridEditorComponent, isc}
 
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.JSExportTopLevel
 
-@JSExport
-class PrepareJSCode extends StaticJSCode{
-
-    @JSExport
+object PrepareJSCode extends StaticJSCode{
+    @JSExportTopLevel("CreateAppJS")
     override def createJS(): Unit = {
         isc.defineClass(AbonentsOrg.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)
         isc.defineClass(AbonentsTypes.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)

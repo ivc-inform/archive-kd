@@ -18,12 +18,12 @@ import com.simplesys.SmartClient.Tools.editProxy.props.DrawItemEditProxyProps
 import com.simplesys.System.Types.DateDisplayFormat
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 
-@JSExport
-class PrepareJSCode extends StaticJSCode {
 
-    @JSExport
+object PrepareJSCode extends StaticJSCode {
+
+    @JSExportTopLevel("CreateSmartClientJS")
     override def createJS(): Unit = {
 
         isc.WindowSS.addProperties(WindowSS(new WindowSSProps))
