@@ -56,7 +56,7 @@ object CommonDeps {
         //val smartclientVersion = "10.1-v20160316"
 
         val akkaVersion = "2.4.16"
-        val akkaHttpVersion = "10.0.2"
+        val akkaHttpVersion = "10.0.3"
 
         val servletAPIVersion = "3.1.0"
 
