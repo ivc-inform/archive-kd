@@ -93,9 +93,9 @@ object HttpServerApp extends App{
       }
       // format: ON
 
-      val bindingFuture = Http().bindAndHandle(routes, interface = "0.0.0.0", port = 8080)
+      val bindingFuture = Http().bindAndHandle(routes, interface = "localhost", port = 8080)
 
-      println(s"Server online at http://0.0.0.0:8080/\nPress RETURN to stop...")
+      println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
       StdIn.readLine()
 
       bindingFuture.flatMap(_.unbind()).onComplete(_ ⇒ system.terminate())
