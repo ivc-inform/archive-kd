@@ -45,7 +45,7 @@ object CommonDeps {
 
         val doobieVersion = "0.2.3"
 
-        val ssysCoreVersion = "1.2-SNAPSHOT"
+        val ssysCoreVersion = "1.3-SNAPSHOT"
         //val ssysCoreVersion = "1.2.98"
 
         val ssysDictionariesDataVersion = "1.1.2"
@@ -55,7 +55,8 @@ object CommonDeps {
         val smartclientVersion = "11.0-v20160805.10"
         //val smartclientVersion = "10.1-v20160316"
 
-        val akkaVersion = "2.4.14"
+        val akkaVersion = "2.4.16"
+        val akkaHttpVersion = "10.0.2"
 
         val servletAPIVersion = "3.1.0"
 
@@ -82,6 +83,9 @@ object CommonDeps {
     val akkaPersistence = Def.setting("com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion)
     //exclude("org.iq80.leveldb","leveldb"))
     val akkaTestKit = Def.setting("com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion)
+    val akkaHTTPCore = Def.setting("com.typesafe.akka" %% "akka-http-core" % versions.akkaHttpVersion)
+    val akkaHttp = Def.setting("com.typesafe.akka" %% "akka-http" % versions.akkaHttpVersion)
+    val akkaQuery = Def.setting("com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion)
 
     val jettyWebapp = Def.setting("org.eclipse.jetty" % "jetty-webapp" % versions.jettyVersion)
     val jettyAnnotations = Def.setting("org.eclipse.jetty" % "jetty-annotations" % versions.jettyVersion)

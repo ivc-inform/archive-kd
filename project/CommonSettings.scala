@@ -6,7 +6,7 @@ object CommonSettings {
   object settingValues {
     val baseVersion = "1.0"
 
-    val scalaVersion = "2.11.8"
+    val scalaVersion = "2.12.1"
     val organization = "com.simplesys.dmprocessing"
     val scalacOptions = Seq(
       "-feature",
