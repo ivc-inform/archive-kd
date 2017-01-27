@@ -36,6 +36,11 @@ trait WebUI {
             CommonDeps.jettyAnnotations.value % "container",
             CommonDeps.jettyPlus.value % "container",
 
+            CommonDeps.akkaActor.value ,
+            CommonDeps.akkaHttp.value ,
+            CommonDeps.akkaHttpXml.value ,
+            CommonDeps.akkaHttpSprayJson.value ,
+
             CommonDeps.scalaTest.value % "test",
             //CommonDeps.play.value % "test",
 

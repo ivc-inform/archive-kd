@@ -83,8 +83,10 @@ object CommonDeps {
     val akkaPersistence = Def.setting("com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion)
     //exclude("org.iq80.leveldb","leveldb"))
     val akkaTestKit = Def.setting("com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion)
-    val akkaHTTPCore = Def.setting("com.typesafe.akka" %% "akka-http-core" % versions.akkaHttpVersion)
+    val akkaHttpCore = Def.setting("com.typesafe.akka" %% "akka-http-core" % versions.akkaHttpVersion)
     val akkaHttp = Def.setting("com.typesafe.akka" %% "akka-http" % versions.akkaHttpVersion)
+    val akkaHttpXml = Def.setting("com.typesafe.akka" %% "akka-http-xml" % versions.akkaHttpVersion)
+    val akkaHttpSprayJson = Def.setting("com.typesafe.akka" %% "akka-http-spray-json" % versions.akkaHttpVersion)
     val akkaQuery = Def.setting("com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion)
 
     val jettyWebapp = Def.setting("org.eclipse.jetty" % "jetty-webapp" % versions.jettyVersion)
