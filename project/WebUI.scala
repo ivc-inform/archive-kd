@@ -38,6 +38,7 @@ trait WebUI {
 
             CommonDeps.akkaActor.value ,
             CommonDeps.akkaHttp.value ,
+            CommonDeps.akkaHttpCore.value ,
             CommonDeps.akkaHttpXml.value ,
             CommonDeps.akkaHttpSprayJson.value ,
 
