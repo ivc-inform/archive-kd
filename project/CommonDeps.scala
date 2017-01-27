@@ -61,8 +61,8 @@ object CommonDeps {
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
-        //val scalaJSVersion = "1.0-SNAPSHOT"
-        val scalaJSVersion = "1.0.15"
+        val scalaJSVersion = "1.1-SNAPSHOT"
+        //val scalaJSVersion = "1.0.15"
 
         val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
