@@ -10,6 +10,7 @@ import com.typesafe.config.{Config, ConfigFactory}
 import akka.actor.ActorSystem
 import akka.stream._
 import akka.stream.scaladsl._
+import akka.http.scaladsl.server._
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.common.EntityStreamingSupport
 
