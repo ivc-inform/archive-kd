@@ -21,7 +21,8 @@ object PluginsBuild extends Build
     PluginDeps.sbtAspectJ,
     PluginDeps.xsbtWeb,
     PluginDeps.sbtPack,
-    PluginDeps.scalaJSPlugin
+    PluginDeps.scalaJSPlugin,
+    PluginDeps.scalafmt
   )
 
   (baseDirectory in root)

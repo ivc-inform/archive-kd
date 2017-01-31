@@ -16,6 +16,7 @@ object PluginDeps {
 
         val scalaJSPluginVersion = "0.6.14"
         val macroParadiseVersion = "2.0.1"
+        val scalaFmtVersion = "0.5.4"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
@@ -28,6 +29,7 @@ object PluginDeps {
     val sbtPack = addSbtPlugin("org.xerial.sbt" % "sbt-pack" % versions.sbtPackVersion)
 
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
+    val scalafmt = addSbtPlugin("com.geirsson" % "sbt-scalafmt" % versions.scalaFmtVersion)
 
     val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
 }
