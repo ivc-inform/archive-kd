@@ -5,6 +5,12 @@ import ru.simplesys.plugins.sourcegen.DevPlugin._
 
 name := "acrchive-kd"
 
+lazy val server = Project(id = "server", base = file("server")).dependsOn(webUI).settings(
+    libraryDependencies ++= Seq(
+        CommonDeps.scalaTest.value % Test
+    )
+).settings(CommonSettings.defaultProjectSettings)
+
 lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).enablePlugins(DevPlugin).settings(
     libraryDependencies ++= Seq(
         CommonDeps.ssysCoreLibrary.value,
@@ -22,9 +28,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).enabl
         contextPath in DevConfig := "acrchive-kd",
         maxArity := 254,
         sourceGenerators in Compile <+= (generateBoScalaCode in DevConfig)
-    )
-}
-).settings(CommonSettings.defaultProjectSettings)
+    )}).settings(CommonSettings.defaultProjectSettings)
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
     DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin
@@ -176,7 +180,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
 
 lazy val root = (project in file(".")).
   enablePlugins(GitVersioning).
-  aggregate(dbObjects, webUI).
+  aggregate(dbObjects, webUI, server).
   settings(
       inThisBuild(Seq(
           git.baseVersion := CommonSettings.settingValues.baseVersion,
