@@ -12,7 +12,7 @@ object PluginDeps {
 
         val sbtAspectJVersion = "0.10.2"
         val xsbtWebVersion = "0.9.1"
-        val sbtPackVersion = "0.7.7"
+        val sbtPackVersion = "1.2.0-M8"
 
         val scalaJSPluginVersion = "0.6.14"
         val macroParadiseVersion = "2.0.1"
@@ -26,7 +26,7 @@ object PluginDeps {
 
     val xsbtWeb = addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % versions.xsbtWebVersion)
     val sbtAspectJ = addSbtPlugin("com.typesafe.sbt" % "sbt-aspectj" % versions.sbtAspectJVersion)
-    val sbtPack = addSbtPlugin("org.xerial.sbt" % "sbt-pack" % versions.sbtPackVersion)
+    val sbtPack = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtPackVersion)
 
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
     val scalafmt = addSbtPlugin("com.geirsson" % "sbt-scalafmt" % versions.scalaFmtVersion)
@@ -61,7 +61,7 @@ object CommonDeps {
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
-        val scalaTagsVersion = "0.6.1"
+        val scalaTagsVersion = "0.6.2"
         val scalaJSVersion = "1.1-SNAPSHOT"
         //val scalaJSVersion = "1.0.15"
 
