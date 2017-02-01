@@ -13,5 +13,5 @@ object CommonDepsScalaJS {
     val underscoreJS = Def.setting("com.simplesys" %%% "underscore-js" % CommonDeps.versions.scalaJSVersion)
     val scalajsDOM = Def.setting("org.scala-js" %%% "scalajs-dom" % CommonDeps.versions.scalajsDOMVersion)
     val scalajsJQuey = Def.setting("be.doeraene" %%% "scalajs-jquery" % CommonDeps.versions.scalajsJQueryVersion)
-
+    val scalaTags = Def.setting("com.lihaoyi" %%% "scalatags" % CommonDeps.versions.scalaTagsVersion)
 }

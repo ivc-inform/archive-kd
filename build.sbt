@@ -53,7 +53,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
         //CommonDeps.play.value % "test",
 
         CommonDeps.scalaJSWrapper.value,
+        CommonDeps.scalaTags.value,
         CommonDepsScalaJS.scalaJSWrapper.value,
+        CommonDepsScalaJS.scalaTags.value,
 
         CommonDepsScalaJS.jointJS.value,
         CommonDepsScalaJS.backboneJS.value,

@@ -61,6 +61,7 @@ object CommonDeps {
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
+        val scalaTagsVersion = "0.6.1"
         val scalaJSVersion = "1.1-SNAPSHOT"
         //val scalaJSVersion = "1.0.15"
 
@@ -108,6 +109,7 @@ object CommonDeps {
     val ssysBoneCPWrapper = Def.setting("com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion)
     val ssysLogBackWrapper = Def.setting("com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion)
     val scalaJSWrapper = Def.setting("com.simplesys" %% "common-types" % versions.scalaJSVersion)
+    val scalaTags = Def.setting("com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion)
 
     val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
 }
