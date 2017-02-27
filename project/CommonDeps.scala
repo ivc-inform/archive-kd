@@ -16,7 +16,7 @@ object PluginDeps {
 
         val scalaJSPluginVersion = "0.6.14"
         val macroParadiseVersion = "2.0.1"
-        val scalaFmtVersion = "0.5.4"
+        val scalaFmtVersion = "0.5.6"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
