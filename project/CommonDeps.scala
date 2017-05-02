@@ -14,7 +14,7 @@ object PluginDeps {
         val xsbtWebVersion = "0.9.1"
         val sbtPackVersion = "1.2.0-M8"
 
-        val scalaJSPluginVersion = "0.6.14"
+        val scalaJSPluginVersion = "0.6.15"
         val macroParadiseVersion = "2.0.1"
         val scalaFmtVersion = "0.5.4"
     }
@@ -55,8 +55,8 @@ object CommonDeps {
         val smartclientVersion = "11.0-v20160805.10"
         //val smartclientVersion = "10.1-v20160316"
 
-        val akkaVersion = "2.4.16"
-        val akkaHttpVersion = "10.0.3"
+        val akkaVersion = "2.4.17"
+        val akkaHttpVersion = "10.0.5"
 
         val servletAPIVersion = "3.1.0"
 
