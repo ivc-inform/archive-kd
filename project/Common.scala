@@ -63,13 +63,8 @@ object Common extends Build {
 
             CommonDeps.scalaJSWrapper.value,
             CommonDeps.scalaTags.value,
-            CommonDepsScalaJS.scalaJSWrapper.value,
-            CommonDepsScalaJS.scalaTags.value,
-
-            CommonDepsScalaJS.jointJS.value,
-            CommonDepsScalaJS.backboneJS.value,
-            CommonDepsScalaJS.underscoreJS.value,
-            CommonDepsScalaJS.scalajsJQuey.value
+            CommonDepsScalaJS.smartClientWrapper.value,
+            CommonDepsScalaJS.scalaTags.value
 
         )
     ).settings(DevPlugin.devPluginGeneratorSettings).settings({
