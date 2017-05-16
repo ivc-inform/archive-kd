@@ -14,9 +14,9 @@ object PluginDeps {
         val xsbtWebVersion = "0.9.1"
         val sbtPackVersion = "1.2.0-M8"
 
-        val scalaJSPluginVersion = "0.6.15"
-        val macroParadiseVersion = "2.0.1"
-        val scalaFmtVersion = "0.5.4"
+        val scalaJSPluginVersion = "0.6.16"
+        val macroParadiseVersion = "2.1.0"
+        val scalaFmtVersion = "0.7.0-RC1"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
@@ -48,21 +48,17 @@ object CommonDeps {
         val ssysCoreVersion = "1.3-SNAPSHOT"
         //val ssysCoreVersion = "1.2.98"
 
-        val ssysDictionariesDataVersion = "1.1.2"
-        val dictionaryMitEduInterfaceVersion = "2.3.3"
-
         //val smartclientVersion = "10.1.1"
-        val smartclientVersion = "11.0-v20160805.10"
-        //val smartclientVersion = "10.1-v20160316"
+        val smartclientVersion = "11.0-v20160805.11"
 
-        val akkaVersion = "2.4.17"
-        val akkaHttpVersion = "10.0.5"
+        val akkaVersion = "2.4.18"
+        val akkaHttpVersion = "10.0.6"
 
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
         val scalaTagsVersion = "0.6.2"
-        val scalaJSVersion = "1.1-SNAPSHOT"
+        val scalaJSVersion = "1.3-SNAPSHOT"
         //val scalaJSVersion = "1.0.15"
 
         val scalajsDOMVersion = "0.9.1"
