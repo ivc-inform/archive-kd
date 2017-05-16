@@ -14,11 +14,9 @@ lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(Git
   ))).
   settings(
       PluginDeps.devPlugin,
-      PluginDeps.sourceGenJS,
       PluginDeps.transpileCoffeeScript,
       PluginDeps.mergeJS,
-      PluginDeps.sbtAspectJ,
       PluginDeps.xsbtWeb,
-      PluginDeps.sbtPack,
+      PluginDeps.sbtNativePackager,
       PluginDeps.scalaJSPlugin
   )

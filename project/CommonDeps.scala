@@ -5,14 +5,13 @@ import sbt._
 
 object PluginDeps {
     object versions {
-        val devPluginVersion = "1.0.11-SNAPSHOT"
-        val sourceGenJSVersion = "1.0.3"
+        val devPluginVersion = "1.3.11-SNAPSHOT"
         val transpileCoffeScriptVersion = "1.0.10"
-        val mergeJSVersion = "1.0.4-SNAPSHOT"
+        val mergeJSVersion = "1.0.9"
 
         val sbtAspectJVersion = "0.10.2"
         val xsbtWebVersion = "0.9.1"
-        val sbtPackVersion = "1.2.0-M8"
+        val sbtNativePackagerVersion = "1.2.0-M8"
 
         val scalaJSPluginVersion = "0.6.16"
         val macroParadiseVersion = "2.1.0"
@@ -20,15 +19,12 @@ object PluginDeps {
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
     val mergeJS = addSbtPlugin("ru.simplesys" % "merge-js" % versions.mergeJSVersion)
-    val sourceGenJS = addSbtPlugin("com.simplesys" % "source-gen-js" % versions.sourceGenJSVersion)
     val transpileCoffeeScript = addSbtPlugin("ru.simplesys" % "transpile-coffeescript" % versions.transpileCoffeScriptVersion)
 
     val xsbtWeb = addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % versions.xsbtWebVersion)
-    val sbtAspectJ = addSbtPlugin("com.typesafe.sbt" % "sbt-aspectj" % versions.sbtAspectJVersion)
-    val sbtPack = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtPackVersion)
+    val sbtNativePackager = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtNativePackagerVersion)
 
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
-
     val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
 }
 
