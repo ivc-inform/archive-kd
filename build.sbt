@@ -1,4 +1,3 @@
-import com.simplesys.json.{JsonList, JsonObject}
 import com.typesafe.sbt.SbtGit.git
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
@@ -28,7 +27,8 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).enabl
         contextPath in DevConfig := "acrchive-kd",
         maxArity := 254,
         sourceGenerators in Compile <+= (generateBoScalaCode in DevConfig)
-    )}).settings(CommonSettings.defaultProjectSettings)
+    )
+}).settings(CommonSettings.defaultProjectSettings)
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
     DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin
@@ -185,9 +185,9 @@ lazy val root = (project in file(".")).
       inThisBuild(Seq(
           git.baseVersion := CommonSettings.settingValues.baseVersion,
           scalaVersion := CommonSettings.settingValues.scalaVersion,
-          publishTo <<= version { (v: String) =>
+          publishTo := {
               val corporateRepo = "http://toucan.simplesys.lan/"
-              if (v.trim.endsWith("SNAPSHOT"))
+              if (isSnapshot.value)
                   Some("snapshots" at corporateRepo + "artifactory/libs-snapshot-local")
               else
                   Some("releases" at corporateRepo + "artifactory/libs-release-local")
