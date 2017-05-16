@@ -67,6 +67,7 @@ object Common extends Build {
             CommonDeps.scalaJSWrapper.value,
             CommonDeps.scalaTags.value,
             CommonDepsScalaJS.smartClientWrapper.value,
+            CommonDepsScalaJS.macroJS.value,
             CommonDepsScalaJS.scalaTags.value
 
         )
