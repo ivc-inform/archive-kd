@@ -1,8 +1,9 @@
+import com.simplesys.json.{JsonList, JsonObject}
 import com.simplesys.mergewebapp.MergeWebappPlugin
 import com.typesafe.sbt.coffeescript.TranspileCoffeeScript
 import org.scalajs.sbtplugin.ScalaJSPlugin
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
-import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings}
+import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin
 import sbt.Keys._
 import sbt.{Build, Compile, Project, file, _}
@@ -125,50 +126,50 @@ object Common extends Build {
             currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
             currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
             currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
-            merge in MergeWebappConfig <<= (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets) //,
+            merge in MergeWebappConfig <<= (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),
 
-            /*(resourceGenerators in Compile) += task[Seq[File]] {
+            (resourceGenerators in Compile) += task[Seq[File]] {
 
-            val aboutFile: File = (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "MakeAboutData.js"
+                val aboutFile: File = (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "MakeAboutData.js"
 
-            val list = JsonList()
+                val list = JsonList()
 
-            import scala.reflect.ClassTag
-            import scala.reflect.runtime.universe._
-            import scala.reflect.runtime.{universe ⇒ ru}
+                import scala.reflect.ClassTag
+                import scala.reflect.runtime.universe._
+                import scala.reflect.runtime.{universe ⇒ ru}
 
-            def makeVersionList[T: TypeTag : ClassTag](e: T): Unit = {
+                def makeVersionList[T: TypeTag : ClassTag](e: T): Unit = {
 
-                val classLoaderMirror = ru.runtimeMirror(this.getClass.getClassLoader)
-                val `type`: ru.Type = ru.typeOf[T]
+                    val classLoaderMirror = ru.runtimeMirror(this.getClass.getClassLoader)
+                    val `type`: ru.Type = ru.typeOf[T]
 
-                val classSymbol = `type`.typeSymbol.asClass
+                    val classSymbol = `type`.typeSymbol.asClass
 
-                val decls = `type`.declarations.sorted.filter(_.isMethod).filter(!_.name.toString.contains("<init>"))
-                val im = classLoaderMirror reflect e
+                    val decls = `type`.declarations.sorted.filter(_.isMethod).filter(!_.name.toString.contains("<init>"))
+                    val im = classLoaderMirror reflect e
 
-                decls.foreach {
-                    item =>
+                    decls.foreach {
+                        item =>
 
-                        val shippingTermSymb = `type`.declaration(ru.newTermName(item.name.toString)).asTerm
-                        val shippingFieldMirror = im reflectField shippingTermSymb
-                        val res = shippingFieldMirror.get.toString()
+                            val shippingTermSymb = `type`.declaration(ru.newTermName(item.name.toString)).asTerm
+                            val shippingFieldMirror = im reflectField shippingTermSymb
+                            val res = shippingFieldMirror.get.toString()
 
-                        list += JsonObject("libName" -> item.name.toString, "libVersion" -> res)
+                            list += JsonObject("libName" -> item.name.toString, "libVersion" -> res)
+                    }
                 }
+
+                list ++= Seq(
+                    JsonObject("libName" -> "Исполнители :", "libVersion" -> "Юдин Андрей"),
+                    JsonObject("libName" -> "Версия :", "libVersion" -> version.value)
+                )
+
+                makeVersionList(CommonDeps.versions)
+                makeVersionList(PluginDeps.versions)
+
+                IO.write(aboutFile, s"simpleSyS.aboutData = ${list.toPrettyString}")
+                Seq()
             }
-
-            list ++= Seq(
-                JsonObject("libName" -> "Исполнители :", "libVersion" -> "Юдин Андрей"),
-                JsonObject("libName" -> "Версия :", "libVersion" -> version.value)
-            )
-
-            makeVersionList(CommonDeps.versions)
-            makeVersionList(PluginDeps.versions)
-
-            IO.write(aboutFile, s"simpleSyS.aboutData = ${list.toPrettyString}")
-            Seq()
-        }*/
         )
     }).settings(CommonSettings.defaultProjectSettings)
 }
