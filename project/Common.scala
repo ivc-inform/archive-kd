@@ -58,8 +58,8 @@ object Common extends Build {
             CommonDeps.akkaHttpXml.value,
             CommonDeps.akkaHttpSprayJson.value,
 
-            CommonDeps.scalaTest.value % "test",
-            //CommonDeps.play.value % "test",
+            CommonDeps.scalaTest.value % Test,
+            //CommonDeps.play.value % Test,
 
             CommonDeps.scalaJSWrapper.value,
             CommonDeps.scalaTags.value,
