@@ -120,6 +120,8 @@ class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRe
 
             def getGriteria(): Criteria = if (criteria.isEmpty) thiz.getCriteria() else criteria.get
 
+            //isc debugTrap 0
+
             thiz.fetchData(
                 isc.addProperties(getGriteria(), timestamProp), {
                     (resp: DSResponse, data: IscArray[JSObject], req: DSRequest) ⇒

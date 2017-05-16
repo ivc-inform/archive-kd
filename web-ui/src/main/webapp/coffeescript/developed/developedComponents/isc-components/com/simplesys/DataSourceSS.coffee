@@ -86,10 +86,7 @@ isc.defineClass("DataSourceSS", isc.DataSource).addClassProperties
 							dataArray.forEach (item) =>
 								if not isc.DataSource.get(item.component)?
 									componentName = item.component
-									
-									#@logDebug "JSON for evalute: #{item.jsonStr}"
 									obj = isc.Class.evaluate item.jsonStr
-									#@logDebug "JSON evaluted: #{isc.JSON.encode(obj, prettyPrint: true)}"
 									
 									if obj?
 										@logDebug "Component schema: #{item.component} loaded."
@@ -103,7 +100,7 @@ isc.defineClass("DataSourceSS", isc.DataSource).addClassProperties
 							@fireCallback callback
 					
 					catch e
-						@logError "Component: #{componentName} Encountered problems trying to loadComponentSchemas DataSources: #{e.toString()}"
+						isc.logWarn "Component: #{componentName} Encountered problems trying to loadComponentSchemas DataSources: #{isc.echoAll(e)}"
 				return
 			
 			actionURL: isc.DataSourceSS.loaderSchemasURL

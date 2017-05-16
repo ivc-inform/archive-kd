@@ -1,19 +1,39 @@
-package ru.simplesys.eakd.sbtbuild
-
 import com.simplesys.json.{JsonList, JsonObject}
+import com.simplesys.mergewebapp.MergeWebappPlugin
+import com.typesafe.sbt.coffeescript.TranspileCoffeeScript
 import org.scalajs.sbtplugin.ScalaJSPlugin
-import ru.simplesys.eakd.sbtbuild._
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
+import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
+import ru.simplesys.plugins.sourcegen.DevPlugin
 import sbt.Keys._
-import sbt._
+import sbt.{Build, Compile, Project, file, _}
 
-trait WebUI {
-    self: Build
-      with DbObjects =>
+object Common extends Build {
+    lazy val server = Project(id = "server", base = file("server")).dependsOn(webUI).settings(
+        libraryDependencies ++= Seq(
+            CommonDeps.scalaTest.value % Test
+        )
+    ).settings(CommonSettings.defaultProjectSettings)
 
-    import com.simplesys.mergewebapp.MergeWebappPlugin
-    import com.typesafe.sbt.coffeescript.TranspileCoffeeScript
-    import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
-    import ru.simplesys.plugins.sourcegen.DevPlugin
+    lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).enablePlugins(DevPlugin).settings(
+        libraryDependencies ++= Seq(
+            CommonDeps.ssysCoreLibrary.value,
+            CommonDeps.ssysJsonExtender.value,
+            CommonDeps.ssysJDBCWrapper.value,
+            CommonDeps.jodaTime.value,
+            CommonDeps.jodaConvert.value,
+            CommonDeps.scalaTest.value % Test
+        )
+    ).settings(DevPlugin.devPluginGeneratorSettings).settings({
+        import ru.simplesys.plugins.sourcegen.DevPlugin._
+        Seq(
+            sourceSchemaDir in DevConfig := (resourceDirectory in Compile).value / "defs",
+            startPackageName in DevConfig := "ru.simplesys.defs",
+            contextPath in DevConfig := "acrchive-kd",
+            maxArity := 254,
+            sourceGenerators in Compile <+= (generateBoScalaCode in DevConfig)
+        )
+    }).settings(CommonSettings.defaultProjectSettings)
 
     lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
         DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin
@@ -22,7 +42,7 @@ trait WebUI {
     ).aggregate(dbObjects).settings(
 
         libraryDependencies ++= Seq(
-            CommonDeps.servletAPI.value % "provided",
+            CommonDeps.servletAPI.value % Provided,
             CommonDeps.ssysCommonWebapp.value,
             CommonDeps.ssysIscComponents.value,
             CommonDeps.ssysXMLExtender.value,
@@ -32,20 +52,24 @@ trait WebUI {
 
             CommonDeps.smartclient.value,
 
+            CommonDeps.akkaActor.value,
+            CommonDeps.akkaHttp.value,
+            CommonDeps.akkaHttpCore.value,
+            CommonDeps.akkaHttpXml.value,
+            CommonDeps.akkaHttpSprayJson.value,
+
             CommonDeps.jettyWebapp.value % "container",
             CommonDeps.jettyAnnotations.value % "container",
             CommonDeps.jettyPlus.value % "container",
 
-            CommonDeps.scalaTest.value % "test",
-            //CommonDeps.play.value % "test",
+            CommonDeps.scalaTest.value % Test,
+            //CommonDeps.play.value % Test,
 
             CommonDeps.scalaJSWrapper.value,
-            CommonDepsScalaJS.scalaJSWrapper.value,
-
-            CommonDepsScalaJS.jointJS.value,
-            CommonDepsScalaJS.backboneJS.value,
-            CommonDepsScalaJS.underscoreJS.value,
-            CommonDepsScalaJS.scalajsJQuey.value
+            CommonDeps.scalaTags.value,
+            CommonDepsScalaJS.smartClientWrapper.value,
+            CommonDepsScalaJS.macroJS.value,
+            CommonDepsScalaJS.scalaTags.value
 
         )
     ).settings(DevPlugin.devPluginGeneratorSettings).settings({
@@ -97,16 +121,6 @@ trait WebUI {
                 ),
                 ("com.simplesys", "smartclient-js") -> Seq(
                     Seq("isomorphic") -> Some(Seq("webapp", "isomorphic"))
-                ),
-                ("com.simplesys", "joint-js") -> Seq(
-                    Seq("css") -> Some(Seq("webapp", "managed", "css", "joint-js")),
-                    Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "joint-js"))
-                ),
-                ("com.simplesys", "backbone-js") -> Seq(
-                    Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "backbone-js"))
-                ),
-                ("com.simplesys", "underscore-js") -> Seq(
-                    Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "underscore-js"))
                 )
             ),
             currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
@@ -122,7 +136,7 @@ trait WebUI {
 
                 import scala.reflect.ClassTag
                 import scala.reflect.runtime.universe._
-                import scala.reflect.runtime.{universe => ru}
+                import scala.reflect.runtime.{universe ⇒ ru}
 
                 def makeVersionList[T: TypeTag : ClassTag](e: T): Unit = {
 

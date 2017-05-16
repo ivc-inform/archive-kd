@@ -4,7 +4,7 @@ import com.simplesys.SmartClient.App.props.{CommonListGridEditorComponentProps, 
 import com.simplesys.SmartClient.DataBinding.props.DataSourceProps
 import com.simplesys.SmartClient.Drawing.drawItem.DrawLinePathSS
 import com.simplesys.SmartClient.Drawing.drawItem.props.{DrawLinePathSSProps, DrawLineProps, DrawRectProps}
-import com.simplesys.SmartClient.Drawing.props.{DrawItemProps, DrawPaneProps}
+import com.simplesys.SmartClient.Drawing.props.DrawItemProps
 import com.simplesys.SmartClient.Forms.formsItems.PickList
 import com.simplesys.SmartClient.Forms.formsItems.props.{DateTimeItemProps, FormItemProps, FormItemWithButtonsProps, PickListProps}
 import com.simplesys.SmartClient.Forms.props.DateChooserProps
@@ -18,8 +18,7 @@ import com.simplesys.SmartClient.Tools.editProxy.props.DrawItemEditProxyProps
 import com.simplesys.System.Types.DateDisplayFormat
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
-
+import scala.scalajs.js.annotation.JSExportTopLevel
 
 object PrepareJSCode extends StaticJSCode {
 

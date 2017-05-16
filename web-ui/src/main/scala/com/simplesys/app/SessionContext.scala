@@ -54,7 +54,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
     def getBirtEngine = birtEngine*/
 
     private[this] var servletContext: ServletContext = null
-    def getServletContext = servletContext
+    //def getServletContext = servletContext
 
     for (_session <- session) {
         _session.LogSession
@@ -80,7 +80,6 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
             case _ => strEmpty
         }
 
-        servletContext = _session.ServletContext
         ds = servletContext.Attribute(s"ds") match {
             case Some(value: BoneCPDataSource) => value
             case _ => throw new RuntimeException(s"Нет DS")
