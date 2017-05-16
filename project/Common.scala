@@ -1,12 +1,11 @@
 import com.simplesys.mergewebapp.MergeWebappPlugin
 import com.typesafe.sbt.coffeescript.TranspileCoffeeScript
 import org.scalajs.sbtplugin.ScalaJSPlugin
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings}
 import ru.simplesys.plugins.sourcegen.DevPlugin
-import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt.Keys._
-import sbt._
-import sbt.{Build, Compile, Project, file}
+import sbt.{Build, Compile, Project, file, _}
 
 object Common extends Build {
     lazy val server = Project(id = "server", base = file("server")).dependsOn(webUI).settings(
@@ -57,6 +56,10 @@ object Common extends Build {
             CommonDeps.akkaHttpCore.value,
             CommonDeps.akkaHttpXml.value,
             CommonDeps.akkaHttpSprayJson.value,
+
+            CommonDeps.jettyWebapp.value % "container",
+            CommonDeps.jettyAnnotations.value % "container",
+            CommonDeps.jettyPlus.value % "container",
 
             CommonDeps.scalaTest.value % Test,
             //CommonDeps.play.value % Test,

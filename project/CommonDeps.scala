@@ -63,6 +63,8 @@ object CommonDeps {
 
         val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
+
+        val jettyVersion = "9.4.5.v20170502"
     }
 
     val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
@@ -107,6 +109,10 @@ object CommonDeps {
     val scalaJSWrapper = Def.setting("com.simplesys" %% "common-types" % versions.scalaJSVersion)
     val scalaTags = Def.setting("com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion)
     val uPickle = Def.setting("com.lihaoyi" %% "upickle" % versions.uPickleVersion)
+
+    val jettyWebapp = Def.setting("org.eclipse.jetty" % "jetty-webapp" % versions.jettyVersion)
+    val jettyAnnotations = Def.setting("org.eclipse.jetty" % "jetty-annotations" % versions.jettyVersion)
+    val jettyPlus = Def.setting("org.eclipse.jetty" % "jetty-plus" % versions.jettyVersion)
 
     val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
 }
