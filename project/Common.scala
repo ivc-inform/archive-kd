@@ -120,16 +120,6 @@ object Common extends Build {
                 ),
                 ("com.simplesys", "smartclient-js") -> Seq(
                     Seq("isomorphic") -> Some(Seq("webapp", "isomorphic"))
-                ),
-                ("com.simplesys", "joint-js") -> Seq(
-                    Seq("css") -> Some(Seq("webapp", "managed", "css", "joint-js")),
-                    Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "joint-js"))
-                ),
-                ("com.simplesys", "backbone-js") -> Seq(
-                    Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "backbone-js"))
-                ),
-                ("com.simplesys", "underscore-js") -> Seq(
-                    Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "underscore-js"))
                 )
             ),
             currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
