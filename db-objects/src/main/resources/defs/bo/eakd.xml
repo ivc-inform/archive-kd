@@ -510,7 +510,7 @@
 					<attr caption="Файл вложения магнитотеки" mandatory="false" name="mfile" type="clob"></attr>
 					<attr caption="Версия вложения магнитотеки" mandatory="false" name="mcodever" type="sCaption"></attr>
 					<attr caption="Инв.номер вложения магнитотеки" mandatory="false" name="minvnumber" type="sCaption"></attr>
-					<attr caption="Количество вложения магнитотеки" mandatory="false" name="mkol" type="sCaption"></attr>
+					<attr caption="Количество вложения магнитотеки" mandatory="true" name="mkol" type="nInt"></attr>
 					<attr caption="Дата вложения магнитотеки" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Д.номер Обозначение вложения магнитотеки" mandatory="false" name="vcrcode" type="sCaption"></attr>
 					<attr caption="Номер книги вложения магнитотеки" mandatory="false" name="mbook" type="sCaption"></attr>
@@ -546,7 +546,6 @@
 					<attr caption="Наименование магнитотеки" mandatory="false" name="mname" type="sCaption"></attr>
 					<attr caption="Наименование файла магнитотеки" mandatory="false" name="mfilecode" type="sCaption"></attr>
 					<attr caption="Дата заптси" mandatory="false" name="mdatein" type="dDate"></attr>
-					<attr caption="IDITEM" genBySeq="true" hidden="true" mandatory="true" name="iditem" type="id"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -670,7 +669,6 @@
 					<attr caption="Дата исполнения закрытия" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Дата закрытия закрытия" mandatory="false" name="ddateout" type="dDate"></attr>
 					<attr caption="Код приоритета закрытия" mandatory="false" name="idprior" type="id"></attr>
-					<attr caption="Код выданной версии листа закрытия" mandatory="false" name="idvers" type="id"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -687,6 +685,9 @@
 					</fk>
 					<fk linkType="refIsOwner" mandatory="true" parent="card">
 						<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="true" parent="statversion">
+						<mapping attrNameLocal="idvers" attrNameRemote="id"></mapping>
 					</fk>
 				</constraints>
 			</classSimple>
