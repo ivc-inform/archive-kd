@@ -58,3 +58,5 @@ src/main/resources/migration/
 src/main/webapp/javascript/IncludeModules
 src/main/webapp/isomorphic/
 web-ui/src/main/webapp/javascript/IncludeModules
+
+*.mkv
