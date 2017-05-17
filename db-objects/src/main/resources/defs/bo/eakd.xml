@@ -695,7 +695,7 @@
 			<classSimple autoTableMapping="true" caption="Позиции запроса" name="zaprositems">
 				<attrs>
 					<attr caption="ID позиции запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Количество позиции запроса" mandatory="false" name="kolpagevers" type="nInt"></attr>
+					<attr caption="Количество позиции запроса" mandatory="true" name="kolpagevers" type="nInt"></attr>
 					<attr caption="Особые указания позиции запроса" mandatory="false" name="vdesc" type="sDescription"></attr>
 				</attrs>
 				<defaults>
@@ -717,9 +717,9 @@
 			<classSimple autoTableMapping="true" caption="Рассылка запроса" name="zaprosrass">
 				<attrs>
 					<attr caption="ID рассылки запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование рассылки запроса" mandatory="false" name="vname" type="sCaption"></attr>
-					<attr caption="Количество рассылки запроса" mandatory="false" name="vrskol" type="nInt"></attr>
-					<attr caption="Дата рассылки запроса" mandatory="false" name="dateout" type="dDate"></attr>
+					<attr caption="Наименование рассылки запроса" mandatory="true" name="vname" type="sCaption"></attr>
+					<attr caption="Количество рассылки запроса" mandatory="true" name="vrskol" type="nInt"></attr>
+					<attr caption="Дата рассылки запроса" mandatory="true" name="dateout" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
