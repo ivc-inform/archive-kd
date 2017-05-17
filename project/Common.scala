@@ -9,22 +9,32 @@ import sbt.Keys._
 import sbt.{Build, Compile, Project, file, _}
 
 object Common extends Build {
-    lazy val server = Project(id = "server", base = file("server")).dependsOn(webUI).settings(
+    lazy val common = Project(id = "common", base = file("common")).settings(
         libraryDependencies ++= Seq(
             CommonDeps.scalaTest.value % Test
         )
     ).settings(CommonSettings.defaultProjectSettings)
 
-    lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).enablePlugins(DevPlugin).settings(
+    lazy val testModule = Project(id = "test", base = file("test")).dependsOn(common).settings(
         libraryDependencies ++= Seq(
-            CommonDeps.ssysCoreLibrary.value,
-            CommonDeps.ssysJsonExtender.value,
-            CommonDeps.ssysJDBCWrapper.value,
-            CommonDeps.jodaTime.value,
-            CommonDeps.jodaConvert.value,
             CommonDeps.scalaTest.value % Test
         )
-    ).settings(DevPlugin.devPluginGeneratorSettings).settings({
+    ).settings(CommonSettings.defaultProjectSettings)
+
+    lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
+      dependsOn(common).
+      enablePlugins(DevPlugin).
+      settings(
+          libraryDependencies ++= Seq(
+              CommonDeps.ssysCoreLibrary.value,
+              CommonDeps.ssysJsonExtender.value,
+              CommonDeps.ssysJDBCWrapper.value,
+              CommonDeps.jodaTime.value,
+              CommonDeps.jodaConvert.value,
+              CommonDeps.scalaTest.value % Test
+          )
+      ).settings(DevPlugin.devPluginGeneratorSettings).
+      settings({
         import ru.simplesys.plugins.sourcegen.DevPlugin._
         Seq(
             sourceSchemaDir in DevConfig := (resourceDirectory in Compile).value / "defs",
@@ -35,7 +45,8 @@ object Common extends Build {
         )
     }).settings(CommonSettings.defaultProjectSettings)
 
-    lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
+    lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
+      enablePlugins(
         DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin
     ).dependsOn(
         dbObjects
