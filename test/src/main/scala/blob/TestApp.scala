@@ -11,5 +11,7 @@ object TestApp extends App with BoneCPStack {
 
 
     upload_filesBo.insertP(Upload_files(1L, "Red_Hot.mkv"))
+    println("Test executed")
+
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
 }
