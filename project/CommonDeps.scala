@@ -37,7 +37,7 @@ object CommonDeps {
 
         val kamonVersion = "0.5.2"
 
-        val doobieVersion = "0.2.3"
+        val doobieVersion = "0.4.1"
 
         val ssysCoreVersion = "1.3-SNAPSHOT"
         //val ssysCoreVersion = "1.2.98"
@@ -77,7 +77,7 @@ object CommonDeps {
     val akkaActor = Def.setting("com.typesafe.akka" %% "akka-actor" % versions.akkaVersion)
     val akkaSLF4J = Def.setting("com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion)
     val akkaPersistence = Def.setting("com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion)
-    //exclude("org.iq80.leveldb","leveldb"))
+
     val akkaTestKit = Def.setting("com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion)
     val akkaHttpCore = Def.setting("com.typesafe.akka" %% "akka-http-core" % versions.akkaHttpVersion)
     val akkaHttp = Def.setting("com.typesafe.akka" %% "akka-http" % versions.akkaHttpVersion)
@@ -113,6 +113,9 @@ object CommonDeps {
 
     val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
     val jdbcOracle11Driver = Def.setting("com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion)
+
+    val doobieCore = Def.setting("org.tpolecat" %% "doobie-core" % versions.doobieVersion)
+    val doobieCoreCats = Def.setting("org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion)
 }
 
 object DepsHelper {
