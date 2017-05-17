@@ -61,6 +61,7 @@ object CommonDeps {
         val scalajsJQueryVersion = "0.9.0"
 
         val jettyVersion = "9.4.5.v20170502"
+        val jdbcOracle11DriverVersion = "11.2.0.4"
     }
 
     val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
@@ -111,6 +112,7 @@ object CommonDeps {
     val jettyPlus = Def.setting("org.eclipse.jetty" % "jetty-plus" % versions.jettyVersion)
 
     val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
+    val jdbcOracle11Driver = Def.setting("com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion)
 }
 
 object DepsHelper {

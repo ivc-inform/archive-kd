@@ -17,6 +17,7 @@ object Common extends Build {
 
     lazy val testModule = Project(id = "test", base = file("test")).dependsOn(dbObjects).settings(
         libraryDependencies ++= Seq(
+            CommonDeps.jdbcOracle11Driver.value,
             CommonDeps.ssysBoneCPWrapper.value,
             CommonDeps.scalaTest.value % Test
         )

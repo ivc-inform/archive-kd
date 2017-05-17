@@ -5,7 +5,7 @@ import org.scalatest.FunSuite
 
 class TestSuit extends FunSuite with BoneCPStack {
   test("load to blob") {
-      val ds = OracleDataSource("oracleMFMS")
+      val ds = OracleDataSource("oracleEAKD")
       val connection = ds.Connection
       connection.close()
   }
