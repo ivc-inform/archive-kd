@@ -15,8 +15,9 @@ object Common extends Build {
         )
     ).settings(CommonSettings.defaultProjectSettings)
 
-    lazy val testModule = Project(id = "test", base = file("test")).dependsOn(common).settings(
+    lazy val testModule = Project(id = "test", base = file("test")).dependsOn(dbObjects).settings(
         libraryDependencies ++= Seq(
+            CommonDeps.ssysBoneCPWrapper.value,
             CommonDeps.scalaTest.value % Test
         )
     ).settings(CommonSettings.defaultProjectSettings)
