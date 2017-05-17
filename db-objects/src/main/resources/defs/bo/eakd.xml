@@ -460,7 +460,7 @@
 					<attr caption="Описание версии документов" mandatory="false" name="vvrdescr" type="sDescription"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="Дата прекращения действия" mandatory="false" name="dateout" type="dDate"></attr>
-					<attr caption="Файл версии" mandatory="false" name="docfile" type="clob"></attr>
+					<attr caption="Файл версии" mandatory="false" name="docfile" type="blob"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
