@@ -1,8 +1,6 @@
 package blob
 
-import java.io.{File, FileInputStream}
-import java.nio.channels.Channels
-import java.nio.file.{Files, Paths}
+import java.io.{BufferedOutputStream, File, FileInputStream}
 
 import com.simplesys.connectionStack.BoneCPStack
 
@@ -36,11 +34,7 @@ case class DT(days: Long, hours: Long, minits: Long, seconds: Long) {
     override def toString: String = s"Days: $days, Hours: $hours, Mins: $minits, Secs: $seconds"
 }
 
-/*
-*
-* */
-
-object TestApp extends App with BoneCPStack {
+/*object TestApp extends App with BoneCPStack {
     val ds = OracleDataSource("oracleEAKD")
 
     //val upload_filesTbl = Upload_filesTbl(ds)
@@ -93,7 +87,7 @@ object TestApp extends App with BoneCPStack {
     println("Test executed")
 
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
-}
+}*/
 
 /*object TestApp extends App with BoneCPStack {
     val ds = OracleDataSource("oracleEAKD")
@@ -141,3 +135,60 @@ object TestApp extends App with BoneCPStack {
 
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
 }*/
+
+object TestApp extends App with BoneCPStack {
+    val ds = OracleDataSource("oracleEAKD")
+
+    //val upload_filesTbl = Upload_filesTbl(ds)
+    //val upload_filesBo1 = Upload_filesTblFile_content(ds)
+
+
+    //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
+    //val fileName = "Red_Hot.mkv"
+    val fileName = "SoapUI-x64-5.3.0.sh"
+    //val fileName = "Chelovek_bez_pasporta.avi"
+    //val fileName = "build.sbt"
+
+    val file = new File(fileName)
+    val fin = new FileInputStream(file)
+    val fileContent = new Array[Byte](file.length.asInstanceOf[Int])
+
+    val con = ds.Connection
+    con setAutoCommit false
+
+    val sqlInsert = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, EMPTY_BLOB())"
+
+    val startTime = System.currentTimeMillis()
+
+    val pstmt = con prepareStatement sqlInsert
+    pstmt.setLong(1, 1)
+    pstmt.setString(2, fileName)
+    pstmt.executeUpdate()
+
+    {
+        val sqlSelect = "SELECT BLOB_VALUE FROM TEST_UPLOAD_FILES WHERE ID = ? FOR UPDATE"
+        val pstmt = con prepareStatement sqlSelect
+        pstmt.setLong(1, 1)
+
+        val rset = pstmt.executeQuery
+
+        while (rset.next) {
+            val blob = rset.getBlob(1)
+
+            val out = new BufferedOutputStream(blob.setBinaryStream(1L))
+            out.write(fileContent)
+            out.close()
+        }
+
+        rset.close()
+    }
+
+    val elapsedTime = System.currentTimeMillis() - startTime
+
+    println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
+    println("Test executed")
+
+    //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
+}
+
+
