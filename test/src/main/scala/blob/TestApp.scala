@@ -1,6 +1,8 @@
 package blob
 
 import java.io.{File, FileInputStream}
+import java.nio.channels.Channels
+import java.nio.file.{Files, Paths}
 
 import com.simplesys.connectionStack.BoneCPStack
 
@@ -35,7 +37,11 @@ case class DT(days: Long, hours: Long, minits: Long, seconds: Long) {
 }
 
 /*
-* val ds = OracleDataSource("oracleEAKD")
+*
+* */
+
+object TestApp extends App with BoneCPStack {
+    val ds = OracleDataSource("oracleEAKD")
 
     //val upload_filesTbl = Upload_filesTbl(ds)
     //val upload_filesBo1 = Upload_filesTblFile_content(ds)
@@ -87,9 +93,9 @@ case class DT(days: Long, hours: Long, minits: Long, seconds: Long) {
     println("Test executed")
 
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
-* */
+}
 
-object TestApp extends App with BoneCPStack {
+/*object TestApp extends App with BoneCPStack {
     val ds = OracleDataSource("oracleEAKD")
 
     //val upload_filesTbl = Upload_filesTbl(ds)
@@ -134,4 +140,4 @@ object TestApp extends App with BoneCPStack {
     println("Test executed")
 
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
-}
+}*/
