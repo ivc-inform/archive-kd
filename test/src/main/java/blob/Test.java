@@ -20,7 +20,6 @@ public class Test {
           final Blob blob = rset.getBlob(1);
           try (final OutputStream out = new BufferedOutputStream(blob.setBinaryStream(1L))) {
             out.write(value);
-            out.write(value);
           }
         }
       }
