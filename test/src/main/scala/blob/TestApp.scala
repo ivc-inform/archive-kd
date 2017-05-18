@@ -180,6 +180,7 @@ object TestApp extends App with BoneCPStack {
             out.close()
         }
 
+        con.commit()
         rset.close()
     }
 
