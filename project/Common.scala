@@ -20,7 +20,7 @@ object Common extends Build {
 //            CommonDeps.doobieCore.value,
 //            CommonDeps.doobieCoreCats.value,
             CommonDeps.ssysJDBCWrapper.value,
-            CommonDeps.jdbcOracle11Driver.value,
+//            CommonDeps.jdbcOracle11Driver.value,
             CommonDeps.ssysBoneCPWrapper.value,
             CommonDeps.scalaTest.value % Test
         )

@@ -4,6 +4,9 @@ import java.io.{File, FileInputStream}
 
 import com.simplesys.connectionStack.BoneCPStack
 import com.simplesys.tuple.TupleSS2
+import oracle.jdbc.OraclePreparedStatement
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import ru.simplesys.defs.bo.test.table.{Upload_filesTbl, Upload_filesTblFile_content}
 
 object TestApp extends App with BoneCPStack {
@@ -14,7 +17,9 @@ object TestApp extends App with BoneCPStack {
 
 
     //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
-    val fileName = "Red_Hot.mkv"
+    //val fileName = "Red_Hot.mkv"
+    //val fileName = "SoapUI-x64-5.3.0.sh"
+    val fileName = "Chelovek_bez_pasporta.avi"
     //val fileName = "build.sbt"
 
     val file = new File(fileName)
@@ -27,11 +32,18 @@ object TestApp extends App with BoneCPStack {
     val pstmt = con prepareStatement sql
     pstmt.setLong(1, 1L)
     pstmt.setString(2, fileName)
-    println(s"seting BinaryStream for file: $fileName ${System.currentTimeMillis()}")
-    pstmt.setBinaryStream(3, out)
+
+    val startTime = System.currentTimeMillis()
+
+    println(s"seting BinaryStream for file: $fileName")
+    
+    pstmt.setBlob(3, out)
     pstmt.executeUpdate()
     con.commit()
-    println(s"${System.currentTimeMillis()}")
+
+    val elapsedTime = System.currentTimeMillis() - startTime
+    
+    println(s"elapsedTime : $elapsedTime ms")
 
     println("Test executed")
 
