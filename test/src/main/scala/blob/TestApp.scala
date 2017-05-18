@@ -34,6 +34,61 @@ case class DT(days: Long, hours: Long, minits: Long, seconds: Long) {
     override def toString: String = s"Days: $days, Hours: $hours, Mins: $minits, Secs: $seconds"
 }
 
+/*
+* val ds = OracleDataSource("oracleEAKD")
+
+    //val upload_filesTbl = Upload_filesTbl(ds)
+    //val upload_filesBo1 = Upload_filesTblFile_content(ds)
+
+
+    //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
+    //val fileName = "Red_Hot.mkv"
+    //val fileName = "Кейт и Лео.avi"
+    val fileName = "SoapUI-x64-5.3.0.sh"
+    //val fileName = "Chelovek_bez_pasporta.avi"
+    //val fileName = "build.sbt"
+
+    /*val file = new File(fileName)
+    val fin = new FileInputStream(file)
+    val l = file.length
+    val fileContent = new Array[Byte](file.length.asInstanceOf[Int])*/
+
+    val con = ds.Connection
+    con setAutoCommit false
+
+    val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
+    val pstmt = con prepareStatement sql
+    pstmt.setLong(1, 1L)
+    pstmt.setString(2, fileName)
+
+    val startTime = System.currentTimeMillis()
+
+    val path = Paths.get(fileName)
+    println(s"Paths.get")
+
+    val sbc = Files.newByteChannel(path)
+    println(s"Files.newByteChannel")
+
+    val in = Channels.newInputStream(sbc)
+    println(s"Channels.newInputStream")
+
+    pstmt.setBlob(3, in)
+    println(s"pstmt.setBinaryStream")
+
+    pstmt.executeUpdate()
+    println(s"pstmt.executeUpdate")
+
+    con.commit()
+    println(s"con.commit")
+
+    val elapsedTime = System.currentTimeMillis() - startTime
+
+    println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
+    println("Test executed")
+
+    //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
+* */
+
 object TestApp extends App with BoneCPStack {
     val ds = OracleDataSource("oracleEAKD")
 
@@ -42,8 +97,8 @@ object TestApp extends App with BoneCPStack {
 
 
     //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
-    val fileName = "Red_Hot.mkv"
-    //val fileName = "SoapUI-x64-5.3.0.sh"
+    //val fileName = "Red_Hot.mkv"
+    val fileName = "SoapUI-x64-5.3.0.sh"
     //val fileName = "Chelovek_bez_pasporta.avi"
     //val fileName = "build.sbt"
 
