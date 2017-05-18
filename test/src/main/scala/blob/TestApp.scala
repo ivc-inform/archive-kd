@@ -145,8 +145,8 @@ object TestApp extends App with BoneCPStack {
 
     //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
     //val fileName = "Red_Hot.mkv"
-    val fileName = "SoapUI-x64-5.3.0.sh"
-    //val fileName = "Chelovek_bez_pasporta.avi"
+    //val fileName = "SoapUI-x64-5.3.0.sh"
+    val fileName = "Chelovek_bez_pasporta.avi"
     //val fileName = "build.sbt"
 
     val file = new File(fileName)
