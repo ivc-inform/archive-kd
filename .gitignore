@@ -48,6 +48,13 @@ web-ui/src/main/webapp/javascript/IncludeModules
 *.war
 *.ear
 
+# Media Files #
+*.mkv
+*.avi
+
+# Bash Files #
+*.sh
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
@@ -59,8 +66,5 @@ src/main/webapp/javascript/IncludeModules
 src/main/webapp/isomorphic/
 web-ui/src/main/webapp/javascript/IncludeModules
 
-*.mkv
-*.sh
-*.avi
 !common/lib/*.jar
 
