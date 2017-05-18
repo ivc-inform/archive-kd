@@ -42,9 +42,9 @@ object TestApp extends App with BoneCPStack {
 
 
     //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
-    //val fileName = "Red_Hot.mkv"
+    val fileName = "Red_Hot.mkv"
     //val fileName = "SoapUI-x64-5.3.0.sh"
-    val fileName = "Chelovek_bez_pasporta.avi"
+    //val fileName = "Chelovek_bez_pasporta.avi"
     //val fileName = "build.sbt"
 
     val file = new File(fileName)
@@ -75,7 +75,7 @@ object TestApp extends App with BoneCPStack {
 
     val elapsedTime = System.currentTimeMillis() - startTime
 
-    println(s"elapsedTime : ${DT(elapsedTime).toString}")
+    println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
     println("Test executed")
 
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
