@@ -3,7 +3,8 @@ package blob
 import java.io._
 
 import com.simplesys.connectionStack.BoneCPStack
-import oracle.jdbc.pool.OracleConnectionPoolDataSource
+import oracle.jdbc.pool.OracleDataSource
+import org.apache.commons.io._
 
 object DT {
     def apply(d: Long): DT = {
@@ -156,9 +157,9 @@ object TestApp1 extends App with BoneCPStack {
     val file = new File(fileName)
     val fileSize = file.length()
     val inputStream = new FileInputStream(file)
-    val blockSize = 1024 * 1024 * 10
-    
-    val buffer = new Array[Byte](blockSize)
+    val bufferSize = 1024 * 1024 * 100
+
+    val buffer = new Array[Byte](bufferSize)
 
     val con = ds.Connection
     con setAutoCommit false
@@ -185,21 +186,10 @@ object TestApp1 extends App with BoneCPStack {
         //val outputStream = new BufferedOutputStream(blob.setBinaryStream(1L))
         val outputStream = blob.setBinaryStream(1L)
 
-        var length = inputStream.read(buffer)
-        var bytes: Long = length
-
-        while (length != -1) {
-            println(s"readed bytes: $bytes is ${(bytes * 100) / fileSize}%")
-            outputStream.write(buffer, 0, length)
-            //println(s"outputStream.write")
-
-            length = inputStream.read(buffer)
-            //println(s"inputStream.read")
-            bytes += length
-        }
+        IOUtils.copy(inputStream, outputStream, bufferSize)
 
         outputStream.close()
-
+        inputStream.close()
 
         con.commit()
         rset.close()
@@ -214,4 +204,30 @@ object TestApp1 extends App with BoneCPStack {
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
 }
 
+object TestApp2 {
+    def main(args: Array[String]): Unit = {
+        val ods = new OracleDataSource
 
+        ods.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
+        ods.setUser("eakd")
+        ods.setPassword("eakd")
+
+        val conn = ods.getConnection
+
+        // Create Oracle DatabaseMetaData object
+        val meta = conn.getMetaData
+
+        // gets driver info:
+        println("JDBC driver version is " + meta.getDriverVersion)
+
+        //val fileName = "Red_Hot.mkv"
+        //val fileName = "Кейт и Лео.avi"
+        val fileName = "SoapUI-x64-5.3.0.sh"
+        //val fileName = "Chelovek_bez_pasporta.avi"
+        //val fileName = "build.sbt"
+
+        val file = new File(fileName)
+        val inputStream = new FileInputStream(file)
+
+    }
+}
