@@ -3,6 +3,7 @@ package blob
 import java.io._
 
 import oracle.jdbc.OraclePreparedStatement
+import oracle.jdbc.driver.OracleConnection
 import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.io._
 
@@ -40,13 +41,13 @@ object TestApp2 {
     def main(args: Array[String]): Unit = {
         val ds = new OracleDataSource
 
-        val bufferSize = 1024 * 1024 * 100
+//        val bufferSize = 1024 * 1024 * 100
 
         ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
         ds.setUser("eakd")
         ds.setPassword("eakd")
 
-        val conn = ds.getConnection
+        val conn = ds.getConnection.asInstanceOf[OracleConnection]
         conn setAutoCommit false
 
         // Create Oracle DatabaseMetaData object
@@ -59,8 +60,8 @@ object TestApp2 {
 
         //val fileName = "Red_Hot.mkv"
         //val fileName = "Кейт и Лео.avi"
-        val fileName = "SoapUI-x64-5.3.0.sh"
-        //val fileName = "Chelovek_bez_pasporta.avi"
+        //val fileName = "SoapUI-x64-5.3.0.sh"
+        val fileName = "Chelovek_bez_pasporta.avi"
         //val fileName = "build.sbt"
 
         val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
@@ -78,9 +79,10 @@ object TestApp2 {
 //        val outputStream = blob.setBinaryStream(1)
 //
 //        IOUtils.copy(inputStream, outputStream, bufferSize)
+
         pstmt.setBinaryStream(3, inputStream, file.length())
 
-        pstmt.executeUpdate()
+        pstmt.executeLargeUpdate()
         println(s"pstmt.executeUpdate")
 
         conn.commit()
