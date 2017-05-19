@@ -60,8 +60,8 @@ object TestApp2 {
         val startTime = System.currentTimeMillis()
 
         //val fileName = "Red_Hot.mkv"
-        val fileName = "Кейт и Лео.avi"
-        //val fileName = "SoapUI-x64-5.3.0.sh"
+        //val fileName = "Кейт и Лео.avi"
+        val fileName = "SoapUI-x64-5.3.0.sh"
         //val fileName = "Chelovek_bez_pasporta.avi"
         //val fileName = "build.sbt"
 
@@ -77,17 +77,9 @@ object TestApp2 {
         val file = new File(fileName)
         val inputStream = new FileInputStream(file)
 
-        val blob = conn.createBlob()
-        val outputStream = blob.setBinaryStream(1)
+        pstmt.setBlob(3, inputStream, file.length())
 
-        IOUtils.copy(inputStream, outputStream, bufferSize)
-
-        //pstmt.setBinaryStream(3, inputStream, file.length())
-        //pstmt.setBlob(3, inputStream, file.length())
-
-        pstmt.setBlob(3, blob)
-
-        pstmt.executeLargeUpdate()
+        pstmt.execute()
         println(s"pstmt.executeUpdate")
 
         conn.commit()
