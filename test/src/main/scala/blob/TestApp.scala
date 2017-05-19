@@ -6,6 +6,7 @@ import oracle.jdbc.OraclePreparedStatement
 import oracle.jdbc.driver.OracleConnection
 import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.io._
+import org.joda.time.DateTime
 
 object DT {
     def apply(d: Long): DT = {
@@ -41,7 +42,7 @@ object TestApp2 {
     def main(args: Array[String]): Unit = {
         val ds = new OracleDataSource
 
-//        val bufferSize = 1024 * 1024 * 100
+        val bufferSize = 1024 * 1024 * 100
 
         ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
         ds.setUser("eakd")
@@ -59,10 +60,12 @@ object TestApp2 {
         val startTime = System.currentTimeMillis()
 
         //val fileName = "Red_Hot.mkv"
-        //val fileName = "Кейт и Лео.avi"
+        val fileName = "Кейт и Лео.avi"
         //val fileName = "SoapUI-x64-5.3.0.sh"
-        val fileName = "Chelovek_bez_pasporta.avi"
+        //val fileName = "Chelovek_bez_pasporta.avi"
         //val fileName = "build.sbt"
+
+        println(s"Start at ${DateTime.now()} file: $fileName")
 
         val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
         //val pstmt = conn prepareStatement sql
@@ -74,13 +77,15 @@ object TestApp2 {
         val file = new File(fileName)
         val inputStream = new FileInputStream(file)
 
-//        val blob = conn.createBlob()
-//
-//        val outputStream = blob.setBinaryStream(1)
-//
-//        IOUtils.copy(inputStream, outputStream, bufferSize)
+        val blob = conn.createBlob()
+        val outputStream = blob.setBinaryStream(1)
 
-        pstmt.setBinaryStream(3, inputStream, file.length())
+        IOUtils.copy(inputStream, outputStream, bufferSize)
+
+        //pstmt.setBinaryStream(3, inputStream, file.length())
+        //pstmt.setBlob(3, inputStream, file.length())
+
+        pstmt.setBlob(3, blob)
 
         pstmt.executeLargeUpdate()
         println(s"pstmt.executeUpdate")
@@ -92,6 +97,6 @@ object TestApp2 {
 
         println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
         println("Test executed")
-
+        println(s"Stop at ${DateTime.now()}")
     }
 }
