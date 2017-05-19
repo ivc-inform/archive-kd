@@ -2,8 +2,7 @@ package blob
 
 import java.io._
 
-import blob.TestApp1.bufferSize
-import com.simplesys.connectionStack.BoneCPStack
+import oracle.jdbc.OraclePreparedStatement
 import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.io._
 
@@ -37,188 +36,26 @@ case class DT(days: Long, hours: Long, minits: Long, seconds: Long) {
     override def toString: String = s"Days: $days, Hours: $hours, Mins: $minits, Secs: $seconds"
 }
 
-/*object TestApp extends App with BoneCPStack {
-    val ds = OracleDataSource("oracleEAKD")
-
-    //val upload_filesTbl = Upload_filesTbl(ds)
-    //val upload_filesBo1 = Upload_filesTblFile_content(ds)
-
-
-    //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
-    //val fileName = "Red_Hot.mkv"
-    //val fileName = "Кейт и Лео.avi"
-    val fileName = "SoapUI-x64-5.3.0.sh"
-    //val fileName = "Chelovek_bez_pasporta.avi"
-    //val fileName = "build.sbt"
-
-    /*val file = new File(fileName)
-    val fin = new FileInputStream(file)
-    val l = file.length
-    val fileContent = new Array[Byte](file.length.asInstanceOf[Int])*/
-
-    val con = ds.Connection
-    con setAutoCommit false
-
-    val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
-    val pstmt = con prepareStatement sql
-    pstmt.setLong(1, 1L)
-    pstmt.setString(2, fileName)
-
-    val startTime = System.currentTimeMillis()
-
-    val path = Paths.get(fileName)
-    println(s"Paths.get")
-
-    val sbc = Files.newByteChannel(path)
-    println(s"Files.newByteChannel")
-
-    val in = Channels.newInputStream(sbc)
-    println(s"Channels.newInputStream")
-
-    pstmt.setBlob(3, in)
-    println(s"pstmt.setBinaryStream")
-
-    pstmt.executeUpdate()
-    println(s"pstmt.executeUpdate")
-
-    con.commit()
-    println(s"con.commit")
-
-    val elapsedTime = System.currentTimeMillis() - startTime
-
-    println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
-    println("Test executed")
-
-    //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
-}*/
-
-/*object TestApp extends App with BoneCPStack {
-    val ds = OracleDataSource("oracleEAKD")
-
-    //val upload_filesTbl = Upload_filesTbl(ds)
-    //val upload_filesBo1 = Upload_filesTblFile_content(ds)
-
-
-    //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
-    //val fileName = "Red_Hot.mkv"
-    val fileName = "SoapUI-x64-5.3.0.sh"
-    //val fileName = "Chelovek_bez_pasporta.avi"
-    //val fileName = "build.sbt"
-
-    val file = new File(fileName)
-    val fin = new FileInputStream(file)
-    val fileContent = new Array[Byte](file.length.asInstanceOf[Int])
-
-    val con = ds.Connection
-    con setAutoCommit false
-
-    val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
-    val pstmt = con prepareStatement sql
-    pstmt.setLong(1, 1L)
-    pstmt.setString(2, fileName)
-
-    val startTime = System.currentTimeMillis()
-
-    fin.read(fileContent)
-    println(s"fin.read")
-
-    pstmt.setBytes(3, fileContent)
-    println(s"pstmt.setBytes")
-
-    pstmt.executeUpdate()
-    println(s"pstmt.executeUpdate")
-
-    con.commit()
-    println(s"con.commit")
-
-    val elapsedTime = System.currentTimeMillis() - startTime
-
-    println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
-    println("Test executed")
-
-    //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
-}*/
-
-
-object TestApp1 extends App with BoneCPStack {
-    //val oracleDS = OracleConnectionPoolDataSource
-
-    val ds = new OracleDataSource
-
-    ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
-    ds.setUser("eakd")
-    ds.setPassword("eakd")
-
-    val fileName = "Red_Hot.mkv"
-    //val fileName = "SoapUI-x64-5.3.0.sh"
-    //val fileName = "Chelovek_bez_pasporta.avi"
-    //val fileName = "build.sbt"
-
-    val file = new File(fileName)
-    val fileSize = file.length()
-    val inputStream = new FileInputStream(file)
-    val bufferSize = 1024 * 1024 * 100
-
-    val buffer = new Array[Byte](bufferSize)
-
-    val con = ds.getConnection
-    con setAutoCommit false
-
-    val sqlInsert = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, EMPTY_BLOB())"
-
-    val startTime = System.currentTimeMillis()
-
-    val pstmt = con prepareStatement sqlInsert
-    pstmt.setLong(1, 1)
-    pstmt.setString(2, fileName)
-    pstmt.executeUpdate()
-
-    {
-        val sqlSelect = "SELECT BLOB_VALUE FROM TEST_UPLOAD_FILES WHERE ID = ? FOR UPDATE"
-        val pstmt = con prepareStatement sqlSelect
-        pstmt.setLong(1, 1)
-
-        val rset = pstmt.executeQuery
-
-        rset.next()
-        val blob = rset.getBlob("BLOB_VALUE")
-
-        //val outputStream = new BufferedOutputStream(blob.setBinaryStream(1L))
-        val outputStream = blob.setBinaryStream(1L)
-
-        IOUtils.copy(inputStream, outputStream, bufferSize)
-
-        outputStream.close()
-        inputStream.close()
-
-        con.commit()
-        rset.close()
-        ds.close()
-    }
-
-    val elapsedTime = System.currentTimeMillis() - startTime
-
-    println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
-    println("Test executed")
-
-    //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
-}
-
 object TestApp2 {
     def main(args: Array[String]): Unit = {
         val ds = new OracleDataSource
+
+        val bufferSize = 1024 * 1024 * 100
 
         ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
         ds.setUser("eakd")
         ds.setPassword("eakd")
 
         val conn = ds.getConnection
+        conn setAutoCommit false
 
         // Create Oracle DatabaseMetaData object
         val meta = conn.getMetaData
 
         // gets driver info:
-        println("JDBC driver version is " + meta.getDriverVersion)
+        println(s"JDBC driver version is ${meta.getDriverVersion}")
+
+        val startTime = System.currentTimeMillis()
 
         //val fileName = "Red_Hot.mkv"
         //val fileName = "Кейт и Лео.avi"
@@ -226,22 +63,22 @@ object TestApp2 {
         //val fileName = "Chelovek_bez_pasporta.avi"
         //val fileName = "build.sbt"
 
-        val file = new File(fileName)
-        val inputStream = new FileInputStream(file)
-
-        val blob = conn.createBlob()
-
-        val outputStream = blob.setBinaryStream(1)
-        IOUtils.copy(inputStream, outputStream, bufferSize)
-
         val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
-        val pstmt = conn prepareStatement sql
+        //val pstmt = conn prepareStatement sql
+        val pstmt = (conn prepareStatement sql).asInstanceOf[OraclePreparedStatement]
 
         pstmt.setLong(1, 1L)
         pstmt.setString(2, fileName)
-        pstmt.setBlob(3, blob)
 
-        val startTime = System.currentTimeMillis()
+        val file = new File(fileName)
+        val inputStream = new FileInputStream(file)
+
+//        val blob = conn.createBlob()
+//
+//        val outputStream = blob.setBinaryStream(1)
+//
+//        IOUtils.copy(inputStream, outputStream, bufferSize)
+        pstmt.setBinaryStream(3, inputStream, file.length())
 
         pstmt.executeUpdate()
         println(s"pstmt.executeUpdate")
