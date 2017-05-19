@@ -3,6 +3,7 @@ package blob
 import java.io._
 
 import com.simplesys.connectionStack.BoneCPStack
+import oracle.jdbc.pool.OracleConnectionPoolDataSource
 
 object DT {
     def apply(d: Long): DT = {
@@ -137,11 +138,8 @@ case class DT(days: Long, hours: Long, minits: Long, seconds: Long) {
 }*/
 
 
-object TestApp extends App with BoneCPStack {
-
-    import java.io.IOException
-
-    private val BUFFER_SIZE = 8192
+object TestApp1 extends App with BoneCPStack {
+    //val oracleDS = OracleConnectionPoolDataSource
 
     val ds = OracleDataSource("oracleEAKD")
 
@@ -158,7 +156,9 @@ object TestApp extends App with BoneCPStack {
     val file = new File(fileName)
     val fileSize = file.length()
     val inputStream = new FileInputStream(file)
-    val buffer = new Array[Byte](1024*1024*10)
+    val blockSize = 1024 * 1024 * 10
+    
+    val buffer = new Array[Byte](blockSize)
 
     val con = ds.Connection
     con setAutoCommit false
@@ -178,29 +178,32 @@ object TestApp extends App with BoneCPStack {
         pstmt.setLong(1, 1)
 
         val rset = pstmt.executeQuery
-        var bytes = 0L
 
-        while (rset.next) {
-            val blob = rset.getBlob(1)
+        rset.next()
+        val blob = rset.getBlob("BLOB_VALUE")
 
-            val outputStream = new BufferedOutputStream(blob.setBinaryStream(1L))
+        //val outputStream = new BufferedOutputStream(blob.setBinaryStream(1L))
+        val outputStream = blob.setBinaryStream(1L)
 
-            var length = inputStream.read(buffer)
+        var length = inputStream.read(buffer)
+        var bytes: Long = length
 
-            while (length != -1) {
-                println(s"bytes: $bytes is ${((bytes * 100) / fileSize).toString.toInt}%")
-                outputStream.write(buffer, 0, length)
-                //println(s"outputStream.write")
-                length = inputStream.read(buffer)
-                //println(s"inputStream.read")
-                bytes += length
-            }
+        while (length != -1) {
+            println(s"readed bytes: $bytes is ${(bytes * 100) / fileSize}%")
+            outputStream.write(buffer, 0, length)
+            //println(s"outputStream.write")
 
-            outputStream.close()
+            length = inputStream.read(buffer)
+            //println(s"inputStream.read")
+            bytes += length
         }
+
+        outputStream.close()
+
 
         con.commit()
         rset.close()
+        ds.close()
     }
 
     val elapsedTime = System.currentTimeMillis() - startTime
