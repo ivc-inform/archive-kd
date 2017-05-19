@@ -1,6 +1,6 @@
 package blob
 
-import java.io.{BufferedOutputStream, File, FileInputStream}
+import java.io._
 
 import com.simplesys.connectionStack.BoneCPStack
 
@@ -136,7 +136,13 @@ case class DT(days: Long, hours: Long, minits: Long, seconds: Long) {
     //upload_filesBo1.updateP(Upload_filesFile_content(1L, "Red_Hot.mkv"))
 }*/
 
+
 object TestApp extends App with BoneCPStack {
+
+    import java.io.IOException
+
+    private val BUFFER_SIZE = 8192
+
     val ds = OracleDataSource("oracleEAKD")
 
     //val upload_filesTbl = Upload_filesTbl(ds)
@@ -144,14 +150,15 @@ object TestApp extends App with BoneCPStack {
 
 
     //upload_filesTbl.insert(TupleSS2("Red_Hot.mkv", 1))
-    //val fileName = "Red_Hot.mkv"
+    val fileName = "Red_Hot.mkv"
     //val fileName = "SoapUI-x64-5.3.0.sh"
-    val fileName = "Chelovek_bez_pasporta.avi"
+    //val fileName = "Chelovek_bez_pasporta.avi"
     //val fileName = "build.sbt"
 
     val file = new File(fileName)
-    val fin = new FileInputStream(file)
-    val fileContent = new Array[Byte](file.length.asInstanceOf[Int])
+    val fileSize = file.length()
+    val inputStream = new FileInputStream(file)
+    val buffer = new Array[Byte](1024*1024*10)
 
     val con = ds.Connection
     con setAutoCommit false
@@ -171,13 +178,25 @@ object TestApp extends App with BoneCPStack {
         pstmt.setLong(1, 1)
 
         val rset = pstmt.executeQuery
+        var bytes = 0L
 
         while (rset.next) {
             val blob = rset.getBlob(1)
 
-            val out = new BufferedOutputStream(blob.setBinaryStream(1L))
-            out.write(fileContent)
-            out.close()
+            val outputStream = new BufferedOutputStream(blob.setBinaryStream(1L))
+
+            var length = inputStream.read(buffer)
+
+            while (length != -1) {
+                println(s"bytes: $bytes is ${((bytes * 100) / fileSize).toString.toInt}%")
+                outputStream.write(buffer, 0, length)
+                //println(s"outputStream.write")
+                length = inputStream.read(buffer)
+                //println(s"inputStream.read")
+                bytes += length
+            }
+
+            outputStream.close()
         }
 
         con.commit()
