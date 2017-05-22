@@ -44,7 +44,8 @@ object TestApp2 {
 
         val bufferSize = 1024 * 1024 * 100
 
-        ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
+        //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
+        ds.setURL("jdbc:oracle:thin:@//localhost:1521/orcl")
         ds.setUser("eakd")
         ds.setPassword("eakd")
 
