@@ -1,4 +1,5 @@
-create or replace procedure Load_BLOB_From_File_Image(file_name_ varchar2) is
+create or replace procedure Load_BLOB_From_File_Image is
+  file_name_ varchar2(255) := 'file.txt';
   dest_loc blob;
   src_loc  bfile := BFILENAME('EXAMPLE_LOB_DIR', file_name_);
   fid integer;
