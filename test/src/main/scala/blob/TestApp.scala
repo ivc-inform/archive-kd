@@ -63,7 +63,7 @@ object TestApp2 {
         //val fileName = "Red_Hot.mkv"
         //val fileName = "Кейт и Лео.avi"
         //val fileName = "SoapUI-x64-5.3.0.sh"
-        val fileName = "Вий.avi"
+        val fileName = "files/Вий.avi"
         //val fileName = "Chelovek_bez_pasporta.avi"
         //val fileName = "build.sbt"
 
