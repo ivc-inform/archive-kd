@@ -15,7 +15,10 @@ object Common extends Build {
         )
     ).settings(CommonSettings.defaultProjectSettings)
 
-    lazy val testModule = Project(id = "test", base = file("test")).dependsOn(dbObjects).settings(
+    lazy val testModule = Project(id = "test", base = file("test")).
+      enablePlugins(ScalaJSPlugin).
+      dependsOn(dbObjects).
+      settings(
         libraryDependencies ++= Seq(
 //            CommonDeps.doobieCore.value,
 //            CommonDeps.doobieCoreCats.value,
