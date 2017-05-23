@@ -68,3 +68,4 @@ web-ui/src/main/webapp/javascript/IncludeModules
 
 !common/lib/*.jar
 files/
+*.~*

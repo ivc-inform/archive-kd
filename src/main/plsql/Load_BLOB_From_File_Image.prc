@@ -2,6 +2,7 @@ create or replace procedure Load_BLOB_From_File_Image(file_name_ varchar2) is
   dest_loc blob;
   src_loc  bfile := BFILENAME('EXAMPLE_LOB_DIR', file_name_);
   fid integer;
+  flength integer := DBMS_LOB.getLength(src_loc);
 begin
   -- +-------------------------------------------------------------+
   -- | INSERT INITIAL BLOB VALUE (an image file) INTO THE TABLE    |
@@ -11,11 +12,13 @@ begin
   insert into test_upload_files
     (id,
      sfile_name,
-		 blob_value)
+		 blob_value,
+     sz)
   values
     (fid,
      file_name_,
-     empty_blob())
+     empty_blob(),
+     flength)
   returning blob_value into dest_loc;
 
   -- +-------------------------------------------------------------+
@@ -31,7 +34,7 @@ begin
   -- +-------------------------------------------------------------+
   -- | SIMPLY CALL "loadfromfile" TO LOAD FILES INTO A LOB COLUMN  |
   -- +-------------------------------------------------------------+
-  DBMS_LOB.LOADFROMFILE(dest_lob => dest_loc, src_lob => src_loc, amount => DBMS_LOB.getLength(src_loc));
+  DBMS_LOB.LOADFROMFILE(dest_lob => dest_loc, src_lob => src_loc, amount => flength);
 
   -- +-------------------------------------------------------------+
   -- | CLOSING ANY LOB IS MANDATORY IF YOU HAVE OPENED IT          |
