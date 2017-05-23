@@ -51,7 +51,7 @@ object CommonDeps {
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
-        val scalaTagsVersion = "0.6.2"
+        val scalaTagsVersion = "0.6.5"
         val uPickleVersion = "0.4.4"
 
         val scalaJSVersion = "1.3-SNAPSHOT"
