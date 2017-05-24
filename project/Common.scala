@@ -9,22 +9,40 @@ import sbt.Keys._
 import sbt.{Build, Compile, Project, file, _}
 
 object Common extends Build {
-    lazy val server = Project(id = "server", base = file("server")).dependsOn(webUI).settings(
+    lazy val common = Project(id = "common", base = file("common")).settings(
         libraryDependencies ++= Seq(
             CommonDeps.scalaTest.value % Test
         )
     ).settings(CommonSettings.defaultProjectSettings)
 
-    lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).enablePlugins(DevPlugin).settings(
+    lazy val testModule = Project(id = "test", base = file("test")).
+      enablePlugins(ScalaJSPlugin).
+      dependsOn(dbObjects).
+      settings(
         libraryDependencies ++= Seq(
-            CommonDeps.ssysCoreLibrary.value,
-            CommonDeps.ssysJsonExtender.value,
+//            CommonDeps.doobieCore.value,
+//            CommonDeps.doobieCoreCats.value,
             CommonDeps.ssysJDBCWrapper.value,
-            CommonDeps.jodaTime.value,
-            CommonDeps.jodaConvert.value,
+//            CommonDeps.jdbcOracle11Driver.value,
+            CommonDeps.ssysBoneCPWrapper.value,
             CommonDeps.scalaTest.value % Test
         )
-    ).settings(DevPlugin.devPluginGeneratorSettings).settings({
+    ).settings(CommonSettings.defaultProjectSettings)
+
+    lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
+      dependsOn(common).
+      enablePlugins(DevPlugin).
+      settings(
+          libraryDependencies ++= Seq(
+              CommonDeps.ssysCoreLibrary.value,
+              CommonDeps.ssysJsonExtender.value,
+              CommonDeps.ssysJDBCWrapper.value,
+              CommonDeps.jodaTime.value,
+              CommonDeps.jodaConvert.value,
+              CommonDeps.scalaTest.value % Test
+          )
+      ).settings(DevPlugin.devPluginGeneratorSettings).
+      settings({
         import ru.simplesys.plugins.sourcegen.DevPlugin._
         Seq(
             sourceSchemaDir in DevConfig := (resourceDirectory in Compile).value / "defs",
@@ -35,7 +53,8 @@ object Common extends Build {
         )
     }).settings(CommonSettings.defaultProjectSettings)
 
-    lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
+    lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
+      enablePlugins(
         DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin
     ).dependsOn(
         dbObjects
@@ -81,9 +100,9 @@ object Common extends Build {
 
         Seq(
             //scala.js
-            crossTarget in fastOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
-            crossTarget in fullOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
-            crossTarget in packageJSDependencies := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
+            crossTarget in fastOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
+            crossTarget in fullOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
+            crossTarget in packageJSDependencies := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
 
             //coffeeScript
             CoffeeScriptKeys.sourceMap := false,

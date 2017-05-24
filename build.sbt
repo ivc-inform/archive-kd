@@ -6,7 +6,7 @@ name := "acrchive-kd"
 
 lazy val root = (project in file(".")).
   enablePlugins(GitVersioning).
-  aggregate(dbObjects, webUI, server).
+  aggregate(dbObjects, webUI, common, testModule).
   settings(
       inThisBuild(Seq(
           git.baseVersion := CommonSettings.settingValues.baseVersion,
