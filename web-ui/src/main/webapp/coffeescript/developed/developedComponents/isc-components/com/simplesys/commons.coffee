@@ -1,6 +1,6 @@
 top = @
-simpleSyS = @simpleSyS
-isc = @isc
+simpleSyS = if ! top.simpleSyS? then {} else top.simpleSyS
+isc = if ! top.isc? then {} else top.isc
 
 simpleSyS._getGrid = (that) ->
 	if isc.isA.ListGrid(that.grid) is true then that.grid
@@ -26,7 +26,7 @@ simpleSyS._createRecordComponent = (that) =>
 						result = isc.LookupEditor.create
 							editorIdentifier: that.getIdentifier() + fieldName
 							record          : record
-							owner           : @
+							owner           : top
 							foreignField    : foreignField
 							lookupFields    : lookupFields
 

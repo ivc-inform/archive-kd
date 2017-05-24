@@ -1,7 +1,6 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.TreeListGridContextMenu
-import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps, MenuSSProps, TreeGridContextMenuProps}
@@ -9,8 +8,8 @@ import com.simplesys.SmartClient.Grids.TreeListGridEditor
 import com.simplesys.SmartClient.System._
 import com.simplesys.System._
 import com.simplesys.function._
-import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
+import com.simplesys.option.{ScNone, ScOption}
 
 class TreeListGridContextMenuProps extends MenuSSProps {
     type classHandler <: TreeListGridContextMenu
@@ -29,7 +28,7 @@ class TreeListGridContextMenuProps extends MenuSSProps {
     initWidget = {
         (thiz: TreeListGridContextMenu, arguments: IscArray[JSAny]) =>
             //isc debugTrac(thiz.getClassName(), thiz.getIdentifier())
-
+           
             thiz.Super("initWidget", arguments)
 
             val topOwner = thiz.owner.asInstanceOf[TreeListGridEditor]
