@@ -1,4 +1,4 @@
-package com.simplesys.js.components
+package com.simplesys.app.http
 
 import com.simplesys.SmartClient.App.props.SettingsEditorProps
 import com.simplesys.SmartClient.App.{SettingsEditor, WebTabSetApp}
