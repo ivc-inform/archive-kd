@@ -1,11 +1,14 @@
 package example
 
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 import org.scalajs.dom
-class Example[Builder, Output <: FragT, FragT]
-             (val bundle: scalatags.generic.Bundle[Builder, Output, FragT]){
+
+import scalatags.generic._
+
+class Example[Builder, Output <: FragT, FragT] (val bundle: Bundle[Builder, Output, FragT]){
   val htmlFrag = {
     import bundle.all._
+
     div(
       h1("Header 1"),
       h2("Header 2"),
@@ -102,10 +105,12 @@ class Example[Builder, Output <: FragT, FragT]
       textarea
     )
   }
+
   val svgFrag = {
     import bundle.implicits._
     import bundle.svgTags._
     import bundle.svgAttrs._
+
     svg(height := "800", width := "500")(
       polyline(
         points := "20,20 40,25 60,40 80,120 120,140 200,180",
@@ -189,14 +194,17 @@ class Example[Builder, Output <: FragT, FragT]
     )
   }
 }
-@JSExport
+
 object ScalaJSExample {
-  @JSExport
+  @JSExportTopLevel("ScalaJSExample1")
   def main(t1: String, t2: String, t3: String, t4: String): Unit = {
+    
     val textExample = new Example(scalatags.Text)
     val jsDomExample = new Example(scalatags.JsDom)
+
     dom.document.getElementById(t1).innerHTML = textExample.htmlFrag.render
     dom.document.getElementById(t2).innerHTML = textExample.svgFrag.render
+
     dom.document.getElementById(t3).appendChild(jsDomExample.htmlFrag.render)
     dom.document.getElementById(t4).appendChild(jsDomExample.svgFrag.render)
   }
