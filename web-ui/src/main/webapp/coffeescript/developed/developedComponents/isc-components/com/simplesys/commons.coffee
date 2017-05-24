@@ -1,6 +1,10 @@
 top = @
-simpleSyS = if ! top.simpleSyS? then {} else top.simpleSyS
-isc = if ! top.isc? then {} else top.isc
+
+if ! top.simpleSyS? then top.simpleSyS = {}
+if ! top.isc? then top.isc = {}
+
+simpleSyS = top.simpleSyS
+isc = top.isc
 
 simpleSyS._getGrid = (that) ->
 	if isc.isA.ListGrid(that.grid) is true then that.grid
