@@ -203,9 +203,9 @@ object ScalaJSExample {
     val jsDomExample = new Example(scalatags.JsDom)
 
     dom.document.getElementById(t1).innerHTML = textExample.htmlFrag.render
-    dom.document.getElementById(t2).innerHTML = textExample.svgFrag.render
+    //dom.document.getElementById(t2).innerHTML = textExample.svgFrag.render
 
-    dom.document.getElementById(t3).appendChild(jsDomExample.htmlFrag.render)
-    dom.document.getElementById(t4).appendChild(jsDomExample.svgFrag.render)
+    //dom.document.getElementById(t4).appendChild(jsDomExample.htmlFrag.render)
+    //dom.document.getElementById(t3).appendChild(jsDomExample.svgFrag.render)
   }
 }
