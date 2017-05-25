@@ -358,8 +358,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
     @JSExportTopLevel("StartUI")
     def StarUI(): Unit = {
         getUIContent()
-        /*val jsDomExample = new StartPage(scalatags.JsDom)
+        val textHTML = new StartPage(scalatags.Text)
 
-        dom.document.getElementById("body").appendChild(jsDomExample.bodyHTML.render)*/
+        /*dom.document.getElementById("body").appendChild(jsDomExample.bodyHTML.render)*/
     }
 }

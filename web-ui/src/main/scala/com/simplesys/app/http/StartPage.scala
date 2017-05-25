@@ -7,7 +7,7 @@ class StartPage [Builder, Output <: FragT, FragT] (val bundle: Bundle[Builder, O
         import bundle.all._
         val subPath = "javascript/generated/generatedComponents"
 
-        div(
+        a(
 //            script("var isomorphicDir = \"isomorphic/\""),
 //            script(src := "isomorphic/client/modules/ISC_Core.js"),
 //            script(src := "isomorphic/client/modules/ISC_Foundation.js"),
