@@ -1,5 +1,8 @@
 package example
 
+
+import com.simplesys.SmartClient.System.isc
+
 import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 import org.scalajs.dom
 
@@ -200,7 +203,10 @@ object ScalaJSExample {
   def main(t1: String, t2: String, t3: String, t4: String): Unit = {
     
     val textExample = new Example(scalatags.Text)
-    val jsDomExample = new Example(scalatags.JsDom)
+
+    isc.debugTrap(textExample.htmlFrag.render)
+
+    //val jsDomExample = new Example(scalatags.JsDom)
 
     dom.document.getElementById(t1).innerHTML = textExample.htmlFrag.render
     //dom.document.getElementById(t2).innerHTML = textExample.svgFrag.render
