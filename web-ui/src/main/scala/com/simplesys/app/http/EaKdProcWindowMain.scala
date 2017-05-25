@@ -21,12 +21,13 @@ import com.simplesys.function._
 import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.ScOption._
+import org.scalajs.dom
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 
-@JSExport
+//@JSExport
 object EaKdProcWindowMain extends WebTabSetApp {
 
     self ⇒
@@ -352,5 +353,13 @@ object EaKdProcWindowMain extends WebTabSetApp {
         item =>
             item.hide()
             item
+    }
+
+    @JSExportTopLevel("startUI")
+    def starUI(): Unit = {
+        getUIContent()
+        /*val jsDomExample = new StartPage(scalatags.JsDom)
+
+        dom.document.getElementById("body").appendChild(jsDomExample.bodyHTML.render)*/
     }
 }

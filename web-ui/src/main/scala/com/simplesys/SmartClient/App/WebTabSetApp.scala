@@ -69,7 +69,7 @@ trait WebTabSetApp extends TabSetStack {
     protected def managedUsersGroups: Seq[RibbonGroupSS]
     protected def progectManagedDevsGroups: Seq[RibbonGroupSS]
 
-    @JSExport
+    //@JSExport
     def getUIContent() {
         Page.setEvent(
             PageEvent.load, {
