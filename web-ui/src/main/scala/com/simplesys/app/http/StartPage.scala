@@ -14,6 +14,7 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
             ),
             body(
                 style := "margin: 0px",
+
                 script("var isomorphicDir = \"isomorphic/\""),
                 script(src := "isomorphic/client/modules/ISC_Core.js"),
                 script(src := "isomorphic/client/modules/ISC_Foundation.js"),
@@ -29,7 +30,6 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
                 script(src := "isomorphic/client/modules/ISC_Drawing.js"),
                 script(src := "isomorphic/client/modules/ISC_Charts.js"),
                 script(src := "isomorphic/client/modules/ISC_FileLoader.js"),
-
 
                 script(src := "managed/javascript/isc-misc/beautify.js"),
                 script(src := "managed/javascript/common-webapp/generated/generatedComponents/coffeescript/common.js"),
@@ -91,10 +91,11 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
 
                 script(src := s"javascript/generated/generatedComponentsJS/web-ui-fastopt.js"),
                 link(href := "managed/css/common-webapp/logging_styles.css", rel := "stylesheet", `type` := "text/css"),
-                script("CreateSimpleTypes();" +
-                  "CreateSmartClientJS();" +
-                  "CreateAppJS();" +
-                  "GetUIContent();"
+                script(
+                    "CreateSimpleTypes();" +
+                      "CreateSmartClientJS();" +
+                      "CreateAppJS();" +
+                      "GetUIContent();"
                 )
             )
         )
