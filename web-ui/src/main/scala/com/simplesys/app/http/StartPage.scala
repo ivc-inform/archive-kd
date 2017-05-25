@@ -7,9 +7,9 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
         import bundle.all._
 
         val subPath = "javascript/generated/generatedComponents"
-        html(
+        html(lang := "en",
+            title := "Архив электронных документов",
             head(
-                title := "Архив электронных документов",
                 meta(httpEquiv := "Content-Type", content := "text/html; charset=utf-8")
             ),
             body(
