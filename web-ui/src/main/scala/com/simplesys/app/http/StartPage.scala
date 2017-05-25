@@ -3,7 +3,7 @@ package com.simplesys.app.http
 import scalatags.generic.Bundle
 
 class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT]) {
-    val bodyHTML = {
+    def bodyHTML(lastScript: String) = {
         import bundle.all._
 
         val subPath = "javascript/generated/generatedComponents"
@@ -91,12 +91,7 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
 
                 script(src := s"javascript/generated/generatedComponentsJS/web-ui-fastopt.js"),
                 link(href := "managed/css/common-webapp/logging_styles.css", rel := "stylesheet", `type` := "text/css"),
-                script(
-                    "CreateSimpleTypes();" +
-                      "CreateSmartClientJS();" +
-                      "CreateAppJS();" +
-                      "GetUIContent();"
-                )
+                script(lastScript)
             )
         )
     }
