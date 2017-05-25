@@ -13,6 +13,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
             val textHTML = new StartPage(scalatags.Text)
 
             val html: String = textHTML.bodyHTML.render
+            println(html)
+
             Out("""<!DOCTYPE html>
                   |<html lang="en">
                   |    <head>
