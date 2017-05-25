@@ -359,8 +359,10 @@ object EaKdProcWindowMain extends WebTabSetApp {
         //        val textHTML = new StartPage(scalatags.Text)
         //        dom.document.getElementById("scripts").innerHTML = textHTML.bodyHTML.render
 
-//        ru.simplesys.defs.app.scala.jsGen.SimpleTypes.createJS()
+
 //        com.simplesys.SmartClient.App.PrepareJSCode.createJS()
+        
+        ru.simplesys.defs.app.scala.jsGen.SimpleTypes.createJS()
         com.simplesys.app.PrepareJSCode.createJS()
         getUIContent()
     }
