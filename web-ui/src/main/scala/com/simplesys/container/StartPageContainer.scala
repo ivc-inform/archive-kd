@@ -13,7 +13,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
         case GetData => {
             val textHTML = new StartPage(scalatags.Text)
 
-            val html: String = textHTML.bodyHTML.render.unEscape
+            val html = "<!DOCTYPE html>" + textHTML.bodyHTML.render.unEscape
             //println(html)
 
             Out(html)

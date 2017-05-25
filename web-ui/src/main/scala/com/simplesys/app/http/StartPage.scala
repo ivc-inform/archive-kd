@@ -8,8 +8,8 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
 
         val subPath = "javascript/generated/generatedComponents"
         html(lang := "en",
-            title := "Архив электронных документов",
             head(
+                bundle.tags2.title("Архив электронных документов"),
                 meta(httpEquiv := "Content-Type", content := "text/html; charset=utf-8")
             ),
             body(
