@@ -18,7 +18,7 @@ import com.simplesys.SmartClient.Tools.editProxy.props.DrawItemEditProxyProps
 import com.simplesys.System.Types.DateDisplayFormat
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.annotation.JSExportTopLevel
+import scala.scalajs.js.annotation.{JSExport, JSExportTopLevel}
 
 object PrepareJSCode extends StaticJSCode {
 

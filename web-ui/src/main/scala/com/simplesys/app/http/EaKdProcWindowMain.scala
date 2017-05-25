@@ -354,16 +354,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
             item
     }
 
-    @JSExportTopLevel("StartUI")
-    def StarUI(): Unit = {
-        //        val textHTML = new StartPage(scalatags.Text)
-        //        dom.document.getElementById("scripts").innerHTML = textHTML.bodyHTML.render
-
-
-//        com.simplesys.SmartClient.App.PrepareJSCode.createJS()
-        
-        ru.simplesys.defs.app.scala.jsGen.SimpleTypes.createJS()
-        com.simplesys.app.PrepareJSCode.createJS()
+    @JSExportTopLevel("GetUIContent")
+    def GetUIContent(): Unit = {
         getUIContent()
     }
 }
