@@ -11,6 +11,7 @@ import com.simplesys.System.Types.PageOrientation.PageOrientation
 import com.simplesys.System.Types.{AutoChild, HTMLString, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait SplitPanel extends Layout {
@@ -76,5 +77,6 @@ abstract trait AbstractSplitPaneCompanion extends AbstractLayoutCompanion {
 }
 
 @js.native
+@JSGlobal
 object SplitPane extends AbstractSplitPaneCompanion
 
