@@ -9,7 +9,7 @@ import com.simplesys.System.Types.{Callback, HTMLString, URL, void}
 import com.simplesys.System.{JSAny, JSUndefined}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 import scala.scalajs.js.|
 
 @js.native
@@ -74,5 +74,6 @@ abstract trait AbstractRPCManagerCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object RPCManager extends AbstractRPCManagerCompanion
 

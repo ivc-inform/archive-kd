@@ -6,7 +6,7 @@ import com.simplesys.System.Types.void
 import com.simplesys.System.{JSDictionary, JSObject, JSUndefined}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
+import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 
 @ScalaJSDefined
 trait Response extends JSObject {
@@ -82,6 +82,6 @@ abstract trait AbstractRPCResponseCompanion extends AbstractClassCompanion {
 }
 
 @js.native
-@JSName("RPCResponse")
+@JSGlobal("RPCResponse")
 object RPCResponseStatic extends AbstractRPCResponseCompanion
 

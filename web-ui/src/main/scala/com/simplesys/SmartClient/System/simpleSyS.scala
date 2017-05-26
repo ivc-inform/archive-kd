@@ -7,6 +7,7 @@ import com.simplesys.System.Types.{Record, URL, void}
 import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait Config extends JSObject {
@@ -25,6 +26,7 @@ trait appStruct extends JSObject {
 }
 
 @js.native
+@JSGlobal
 object simpleSyS extends JSObject {
 
     import com.simplesys.System._

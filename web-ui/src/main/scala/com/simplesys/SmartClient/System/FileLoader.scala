@@ -4,9 +4,11 @@ import com.simplesys.System.JSObject
 import com.simplesys.System.Types.{Callback, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
+@JSGlobal
 object FileLoader extends JSObject {
     type OnLoad = js.Function0[_]
     var addVersionToLoadTags: Boolean = js.native

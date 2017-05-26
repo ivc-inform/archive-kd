@@ -1,13 +1,11 @@
 package com.simplesys.SmartClient.DataBinding
 
 import com.simplesys.SmartClient.DataBinding.Callbacks.RPCCallback
-import com.simplesys.SmartClient.System.{AbstractClassCompanion, IscArray}
+import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types._
 import com.simplesys.System._
 
 import scala.scalajs.js
-import scala.scalajs.js.|
-
 
 @js.native
 abstract trait AbstractOfflineSSCompanion extends AbstractOfflineCompanion {

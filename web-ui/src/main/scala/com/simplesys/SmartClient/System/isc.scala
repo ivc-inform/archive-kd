@@ -21,10 +21,11 @@ import com.simplesys.System.Types.{Callback, ID, void}
 import com.simplesys.System._
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSBracketAccess, JSName}
+import scala.scalajs.js.annotation.{JSBracketAccess, JSGlobal, JSName}
 import scala.scalajs.js.|
 
 @js.native
+@JSGlobal
 object isc extends JSObject {
 
     import com.simplesys.SmartClient.App.AbstractCommonListGridEditorComponentCompanion

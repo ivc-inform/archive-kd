@@ -14,6 +14,7 @@ import com.simplesys.System.Types.{Criteria, Record, void}
 import com.simplesys.System.{JSAny, JSObject}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -90,5 +91,6 @@ abstract trait AbstractValuesManagerCompanion extends AbstractClassCompanion {
 }
 
 @js.native
-   object ValuesManager extends AbstractValuesManagerCompanion
+@JSGlobal
+object ValuesManager extends AbstractValuesManagerCompanion
 

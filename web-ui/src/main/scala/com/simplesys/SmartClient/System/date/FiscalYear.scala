@@ -3,8 +3,10 @@ package com.simplesys.SmartClient.System.date
 import com.simplesys.System.JSObject
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
+@JSGlobal
 object FiscalYear extends JSObject{
   type FiscalYear = FiscalYear.type
 

@@ -7,6 +7,7 @@ import com.simplesys.System.Types.PageOrientation._
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait Page extends Class
@@ -60,4 +61,5 @@ abstract trait AbstractPageCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object Page extends AbstractPageCompanion

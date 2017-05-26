@@ -6,6 +6,7 @@ import com.simplesys.System.Types.void
 import com.simplesys.System.{JSAny, JSUndefined}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -24,5 +25,6 @@ abstract trait AbstractOfflineCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object Offline extends AbstractOfflineCompanion
 

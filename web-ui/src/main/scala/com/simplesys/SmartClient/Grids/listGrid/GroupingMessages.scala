@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.System.AbstractClassCompanion
 import com.simplesys.SmartClient.System.Class
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -42,5 +43,6 @@ abstract trait AbstractGroupingMessagesCompanion extends AbstractClassCompanion 
 }
 
 @js.native
+@JSGlobal
 object GroupingMessages extends AbstractGroupingMessagesCompanion
 

@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Workdlow
 
 import scala.scalajs.js
-import scala.scalajs.js.|
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait UserTask extends Task {
@@ -12,5 +12,6 @@ abstract trait AbstractUserTaskCompanion extends AbstractTaskCompanion {
 }
 
 @js.native
-   object UserTask extends AbstractUserTaskCompanion
+@JSGlobal
+object UserTask extends AbstractUserTaskCompanion
 

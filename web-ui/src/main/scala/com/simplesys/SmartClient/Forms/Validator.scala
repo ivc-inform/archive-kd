@@ -11,6 +11,7 @@ import com.simplesys.System.Types.void
 import com.simplesys.System.{JSAny, JSObject}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -34,6 +35,7 @@ trait Validator extends Class {
 }
 
 @js.native
+@JSGlobal
 abstract trait AbstractValidatorCompanion extends AbstractClassCompanion {
     def addValidator(`type`: String, condition: js.Function): void = js.native
     def addValidatorDefinition(`type`: String, definition: JSObject): void = js.native

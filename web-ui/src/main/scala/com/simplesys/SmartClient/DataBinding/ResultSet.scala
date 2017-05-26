@@ -8,6 +8,7 @@ import com.simplesys.System.Types.{Criteria, Record, void}
 import com.simplesys.System.{JSAny, JSObject}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait ResultSet extends Class {
@@ -59,5 +60,6 @@ abstract trait AbstractResultSetCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object ResultSet extends AbstractResultSetCompanion
 

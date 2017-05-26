@@ -8,6 +8,7 @@ import com.simplesys.System.Types.JSONInstanceSerializationMode.JSONInstanceSeri
 import com.simplesys.System.JSAny
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -25,6 +26,7 @@ trait JSONEncoder extends Class {
 }
 
 @js.native
+@JSGlobal
 abstract trait AbstractJSONEncoderCompanion extends AbstractClassCompanion {
 }
 
