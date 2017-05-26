@@ -6,7 +6,6 @@ import com.simplesys.SmartClient.Tools.Palette
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
-import scala.scalajs.js.|
 
 @js.native
 trait MenuPalette extends Menu with Palette{
