@@ -20,4 +20,12 @@ class TestSuit extends FunSuite with BoneCPStack {
         // gets driver info:
         println("JDBC driver version is " + meta.getDriverVersion)
     }
+
+    test("Eqv array") {
+        var a = Array("1", "2")
+        println(Array("1", "2").zipWithIndex.foreach{
+            case (item, index) ⇒
+              println(a(index) == item)
+        })
+    }
 }
