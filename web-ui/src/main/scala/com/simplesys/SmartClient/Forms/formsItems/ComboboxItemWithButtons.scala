@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.Control.IButtonSS
 import com.simplesys.SmartClient.System.IscArray
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait ComboboxItemWithButtons extends CanvasItem {
@@ -11,5 +12,6 @@ trait ComboboxItemWithButtons extends CanvasItem {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractComboboxItemWithButtonsCompanion extends AbstractCanvasItemCompanion
 

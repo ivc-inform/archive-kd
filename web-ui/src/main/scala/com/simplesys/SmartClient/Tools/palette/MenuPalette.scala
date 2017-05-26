@@ -6,6 +6,7 @@ import com.simplesys.SmartClient.Tools.Palette
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait MenuPalette extends Menu with Palette{
@@ -17,4 +18,5 @@ abstract trait AbstractMenuPaletteCompanion extends AbstractLayoutCompanion {
 }
 
 @js.native
+@JSGlobal
 object MenuPaletteStatic extends AbstractMenuPaletteCompanion

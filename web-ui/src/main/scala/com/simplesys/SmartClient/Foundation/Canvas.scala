@@ -463,6 +463,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractCanvasCompanion extends AbstractClassCompanion {
     var allowExternalFilters: Boolean = js.native
     var defaultPageSpace: Int = js.native

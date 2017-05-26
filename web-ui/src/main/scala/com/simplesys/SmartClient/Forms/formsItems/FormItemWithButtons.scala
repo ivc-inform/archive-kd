@@ -7,6 +7,7 @@ import com.simplesys.System.Types.void
 import com.simplesys.System._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait FormItemWithButtons extends CanvasItem {
@@ -21,5 +22,6 @@ trait FormItemWithButtons extends CanvasItem {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractFormItemWithButtonsCompanion extends AbstractCanvasItemCompanion
 

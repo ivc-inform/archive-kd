@@ -9,6 +9,7 @@ import com.simplesys.System.Types.DateItemSelectorFormat.DateItemSelectorFormat
 import com.simplesys.System.Types.{AutoChild, DateInputFormat, SCClassName, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -57,6 +58,7 @@ trait DateItem extends FormItem {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractDateItemCompanion extends AbstractFormItemCompanion
 
 

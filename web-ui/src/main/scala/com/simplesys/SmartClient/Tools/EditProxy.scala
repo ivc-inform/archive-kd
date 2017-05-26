@@ -9,6 +9,7 @@ import com.simplesys.System.Types.SelectedAppearance.SelectedAppearance
 import com.simplesys.System.Types.{AutoChild, CSSColor, MultiAutoChild, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait EditProxy extends Class {
@@ -43,4 +44,5 @@ trait EditProxy extends Class {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractEditProxyCompanion extends AbstractClassCompanion
