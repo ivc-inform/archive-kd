@@ -1,10 +1,11 @@
 package com.simplesys.SmartClient.Control
 
-import com.simplesys.SmartClient.Foundation.{StatefulCanvas, AbstractStatefulCanvasCompanion}
+import com.simplesys.SmartClient.Foundation.{AbstractStatefulCanvasCompanion, StatefulCanvas}
 import com.simplesys.System.Types.Cursor.Cursor
 import com.simplesys.System.Types.{HTMLString, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait Button extends StatefulCanvas {
@@ -27,6 +28,7 @@ trait Button extends StatefulCanvas {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractButtonCompanion extends AbstractStatefulCanvasCompanion
 
 

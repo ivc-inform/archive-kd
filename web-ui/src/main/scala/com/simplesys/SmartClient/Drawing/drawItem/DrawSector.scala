@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.Drawing.{AbstractDrawItemCompanion, DrawItem}
 import com.simplesys.SmartClient.System.Point
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait DrawSector extends DrawItem {
@@ -20,4 +21,5 @@ abstract trait AbstractDrawSectorCompanion extends AbstractDrawItemCompanion {
 }
 
 @js.native
+@JSGlobal
 object DrawSector extends AbstractDrawSectorCompanion

@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.DataBinding
 import com.simplesys.System.Types.{URL, void}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait DataSourceSS extends DataSource {
@@ -17,5 +17,5 @@ abstract trait AbstractDataSourceSSCompanion extends AbstractDataSourceCompanion
 }
 
 @js.native
-@JSName("DataSourceSS")
+@JSGlobal("DataSourceSS")
 object DataSourceSSstatic extends AbstractDataSourceSSCompanion

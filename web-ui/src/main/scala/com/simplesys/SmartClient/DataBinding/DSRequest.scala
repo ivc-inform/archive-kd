@@ -15,7 +15,7 @@ import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types.ValidationMode.ValidationMode
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
+import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
 @ScalaJSDefined
@@ -92,6 +92,6 @@ abstract trait AbstractDSRequestCompanion extends AbstractRPCRequestCompanion {
 }
 
 @js.native
-@JSName("isc.DSRequest")
+@JSGlobal("isc.DSRequest")
 object DSRequestStatic extends AbstractDSRequestCompanion
 
