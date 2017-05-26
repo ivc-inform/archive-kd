@@ -35,7 +35,6 @@ trait Validator extends Class {
 }
 
 @js.native
-@JSGlobal
 abstract trait AbstractValidatorCompanion extends AbstractClassCompanion {
     def addValidator(`type`: String, condition: js.Function): void = js.native
     def addValidatorDefinition(`type`: String, definition: JSObject): void = js.native

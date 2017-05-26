@@ -69,7 +69,6 @@ trait PickList extends Class {
 }
 
 @js.native
-@JSGlobal
 abstract trait AbstractPickListCompanion extends AbstractClassCompanion
 
 
