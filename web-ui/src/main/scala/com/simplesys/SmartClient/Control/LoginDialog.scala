@@ -8,7 +8,7 @@ import com.simplesys.System.JSObject
 import com.simplesys.System.Types.AutoChild
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 
 @js.native
 trait LoginDialog extends Window {
@@ -49,6 +49,6 @@ abstract trait AbstractLoginDialogCompanion extends AbstractCanvasCompanion {
 }
 
 @js.native
-@JSName("LoginDialog")
+@JSGlobal("LoginDialog")
 object LoginDialogStatic extends AbstractLoginDialogCompanion
 
