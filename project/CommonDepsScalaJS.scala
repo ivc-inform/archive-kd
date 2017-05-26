@@ -11,6 +11,7 @@ object CommonDepsScalaJS {
     val smartClientWrapper = if (useFullSmartClientWrapper) Def.setting("com.simplesys" %%% "smartclient-wrapper" % CommonDeps.versions.scalaJSVersion) else Def.setting("com.simplesys" %%% "common-types" % CommonDeps.versions.scalaJSVersion)
 
     val uPickleJS = Def.setting("com.lihaoyi" %%% "upickle" % CommonDeps.versions.uPickleVersion)
-
     val scalaTags = Def.setting("com.lihaoyi" %%% "scalatags" % CommonDeps.versions.scalaTagsVersion)
+    val scalaDom = Def.setting("org.scala-js" %%% "scalajs-dom" % CommonDeps.versions.scalaDomVersion)
+    val jQuery = Def.setting("be.doeraene" %%% "scalajs-jquery" % CommonDeps.versions.jQueryVersion)
 }

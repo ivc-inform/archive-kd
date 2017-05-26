@@ -88,7 +88,9 @@ object Common extends Build {
             CommonDeps.scalaTags.value,
             CommonDepsScalaJS.smartClientWrapper.value,
             CommonDepsScalaJS.macroJS.value,
-            CommonDepsScalaJS.scalaTags.value
+            CommonDepsScalaJS.scalaTags.value,
+            CommonDepsScalaJS.jQuery.value,
+            CommonDepsScalaJS.scalaDom.value
 
         )
     ).settings(DevPlugin.devPluginGeneratorSettings).settings({

@@ -100,6 +100,5 @@ $hash = md5("test");
             }
 
         </script>
-
     </body>
 </html>

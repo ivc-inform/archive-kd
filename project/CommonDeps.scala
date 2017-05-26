@@ -45,13 +45,15 @@ object CommonDeps {
         //val smartclientVersion = "10.1.1"
         val smartclientVersion = "11.0-v20160805.11"
 
-        val akkaVersion = "2.4.18"
-        val akkaHttpVersion = "10.0.6"
+        val akkaVersion = "2.5.2"
+        val akkaHttpVersion = "10.0.7"
 
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
         val scalaTagsVersion = "0.6.5"
+        val scalaDomVersion = "0.9.1"
+        val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
         val scalaJSVersion = "1.3-SNAPSHOT"
