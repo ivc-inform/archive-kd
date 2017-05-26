@@ -22,7 +22,7 @@ trait TabSetsStack {
 
     def checkInnerTabSet(groupIdentifier: ID, canvas: Canvas, menuItem: MenuSSItem, funcOnTabDeselect: JSUndefined[Function0[Boolean]] = jSUndefined): TabSetSS = {
 
-        val tabSet = tabGroupSet.tabs.map(_.pane.asInstanceOf[TabSetSS]).find(_.identifier == groupIdentifier) match {
+        val tabSet = tabGroupSet.tabs.map(_.pane.asInstanceOf[TabSetSS]).find(_.identifier.getOrElse("") == groupIdentifier) match {
             case None =>
                 TabSetSS.create(
                     new TabSetSSProps {
@@ -79,7 +79,7 @@ trait TabSetsStack {
 
     def checkInnerTabSet(groupIdentifier: ID, canvas: Canvas, button: IconButtonSS): TabSetSS = {
 
-        val tabSet = tabGroupSet.tabs.map(_.pane.asInstanceOf[TabSetSS]).find(_.identifier == groupIdentifier) match {
+        val tabSet = tabGroupSet.tabs.map(_.pane.asInstanceOf[TabSetSS]).find(_.identifier.getOrElse("") == groupIdentifier) match {
             case None =>
                 TabSetSS.create(
                     new TabSetSSProps {

@@ -9,7 +9,6 @@ import scala.scalajs.js.annotation.JSName
 import scala.scalajs.js.|
 
 @js.native
-@JSName("List")
 trait IscList[A] extends js.Array[A] with Class {
     def add(`object`: JSAny): this.type = js.native
     def addPos(`object`: JSAny, pos: Int): this.type = js.native
