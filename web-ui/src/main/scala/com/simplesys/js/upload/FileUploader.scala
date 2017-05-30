@@ -9,5 +9,5 @@ import scala.scalajs.js.annotation.JSGlobal
 @js.native
 @JSGlobal
 object FileUploader extends JSObject{
-  if (XMLHttpRequest)
+  //if (XMLHttpRequest)
 }

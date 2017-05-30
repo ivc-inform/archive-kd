@@ -18,7 +18,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                   "CreateSimpleTypes();" +
                     "CreateSmartClientJS();" +
                     "CreateAppJS();" +
-                    "GetUIContent();"
+                    "GetUIContent();",
+                  true
               ).render.unEscape
 
             Out(html)
