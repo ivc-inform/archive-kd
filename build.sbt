@@ -39,8 +39,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
         CommonDeps.ssysXMLExtender.value,
         CommonDeps.ssysJsonExtender.value,
         CommonDeps.ssysIscMisc.value,
-        //CommonDeps.play.value,
-
         CommonDeps.smartclient.value,
 
         CommonDeps.akkaActor.value,
@@ -49,8 +47,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
         CommonDeps.akkaHttpXml.value,
         CommonDeps.akkaHttpSprayJson.value,
 
-        CommonDeps.scalaTest.value % "test",
-        //CommonDeps.play.value % "test",
+        CommonDeps.scalaTest.value % Test,
 
         CommonDeps.scalaJSWrapper.value,
         CommonDepsScalaJS.scalaJSWrapper.value,
@@ -86,7 +83,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).enablePlugins(
         startPackageName in DevConfig := "ru.simplesys.defs",
         contextPath in DevConfig := "archive-kd",
         maxArity in DevConfig := 254,
-
         sourceGenerators in Compile <+= generateScalaCode in DevConfig,
 
         //merger
