@@ -6,6 +6,7 @@ import com.simplesys.common._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, ServletActor, ServletContext}
 
+//http://localhost:8083/archive-kd/StartPage
 @RSTransfer(urlPattern = "/StartPage")
 class StartPageContainer(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends ServletActor {
 
