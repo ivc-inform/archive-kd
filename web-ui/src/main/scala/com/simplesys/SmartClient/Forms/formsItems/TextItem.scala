@@ -6,6 +6,7 @@ import com.simplesys.System.Types.CharacterCasing.CharacterCasing
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait TextItem extends FormItem {
@@ -39,6 +40,7 @@ trait TextItem extends FormItem {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractTextItemCompanion extends AbstractFormItemCompanion
 
 

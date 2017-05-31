@@ -5,9 +5,11 @@ import com.simplesys.SmartClient.System.date._
 import com.simplesys.System.JSObject
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
+@JSGlobal
 object DateRange extends JSObject {
   type DateRange = DateRange.type
   var end: RelativeDate | Date = js.native

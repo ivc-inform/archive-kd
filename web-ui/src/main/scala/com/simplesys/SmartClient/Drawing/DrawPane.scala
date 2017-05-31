@@ -11,7 +11,7 @@ import com.simplesys.System.{JSDictionaryAny, JSUndefined}
 import org.scalajs.dom.svg.RadialGradient
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 
 @js.native
 trait DrawPane extends Canvas {
@@ -63,5 +63,5 @@ abstract trait AbstractDrawPaneCompanion extends AbstractCanvasCompanion {
 }
 
 @js.native
-@JSName("DrawPane")
+@JSGlobal("DrawPane")
 object DrawPaneSatic extends AbstractDrawPaneCompanion

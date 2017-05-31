@@ -5,6 +5,7 @@ import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait DynamicFormSS extends DynamicForm {
@@ -13,5 +14,6 @@ trait DynamicFormSS extends DynamicForm {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractDynamicFormSSCompanion extends AbstractDynamicFormCompanion
 

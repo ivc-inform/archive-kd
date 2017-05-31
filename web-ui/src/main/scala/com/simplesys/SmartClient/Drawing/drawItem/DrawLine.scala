@@ -6,7 +6,7 @@ import com.simplesys.System.JSUndefined
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 
 @js.native
 trait DrawLine extends DrawItem {
@@ -30,6 +30,6 @@ abstract trait AbstractDrawLineCompanion extends AbstractDrawItemCompanion {
 }
 
 @js.native
-@JSName("DrawLine")
+@JSGlobal("DrawLine")
 object DrawLineStatic extends AbstractDrawLineCompanion
 

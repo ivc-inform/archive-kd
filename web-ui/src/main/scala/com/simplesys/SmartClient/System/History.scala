@@ -1,11 +1,13 @@
 package com.simplesys.SmartClient.System
 
 import com.simplesys.System.Types.{Callback, void}
-import com.simplesys.System.{JSObject, JSAny}
+import com.simplesys.System.{JSAny, JSObject}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
+@JSGlobal
 object History extends JSObject {
     type History = History.type
 

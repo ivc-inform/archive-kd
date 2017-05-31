@@ -25,7 +25,7 @@ import com.simplesys.System.Types._
 import com.simplesys.System._
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 import scala.scalajs.js.{Function0, Function3, Function4, |}
 
 @js.native
@@ -361,6 +361,7 @@ trait FormItem extends Class {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractFormItemCompanion extends AbstractClassCompanion
 
 

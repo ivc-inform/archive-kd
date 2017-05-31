@@ -4,6 +4,7 @@ import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class}
 import com.simplesys.System.JSObject
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait JSON extends Class {
@@ -20,5 +21,6 @@ abstract trait AbstractJSONCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object JSON extends AbstractJSONCompanion
 

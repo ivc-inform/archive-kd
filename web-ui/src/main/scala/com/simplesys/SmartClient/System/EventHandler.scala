@@ -6,6 +6,7 @@ import com.simplesys.System.Types.{KeyName, SCImgURL, void}
 import org.scalajs.dom.raw.HTMLElement
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -43,5 +44,6 @@ abstract trait AbstractEventHandlerCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object EventHandler extends AbstractEventHandlerCompanion
 

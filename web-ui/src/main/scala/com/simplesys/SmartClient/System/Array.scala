@@ -5,7 +5,7 @@ import com.simplesys.System.Types.void
 import com.simplesys.System._
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
+import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
 @ScalaJSDefined
@@ -22,7 +22,6 @@ trait Rect1 extends Rect {
 }
 
 @js.native
-@JSName("Array")
 trait IscArray[A] extends IscList[A] {
     def addAt(`object`: JSAny, pos: Int = js.native): this.type
     def and(start: Int, end: Int): Boolean
@@ -61,7 +60,7 @@ abstract trait AbstractArrayCompanion extends JSObject {
 }
 
 @js.native
-@JSName("Array")
+@JSGlobal("Array")
 object IscArray extends AbstractArrayCompanion {
     def apply[A](items: A*): IscArray[A] = js.native
     def empty[A]: IscArray[A] = js.native

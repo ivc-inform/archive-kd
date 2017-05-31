@@ -11,6 +11,7 @@ import com.simplesys.System.Types._
 import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -68,8 +69,6 @@ trait PickList extends Class {
 }
 
 @js.native
-abstract trait AbstractPickListCompanion extends AbstractClassCompanion {
-
-}
+abstract trait AbstractPickListCompanion extends AbstractClassCompanion
 
 

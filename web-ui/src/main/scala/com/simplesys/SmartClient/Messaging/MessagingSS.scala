@@ -5,6 +5,7 @@ import com.simplesys.System.Types.void
 import com.simplesys.System._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -18,4 +19,5 @@ abstract trait AbstractMessagingSSCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object MessagingSS extends AbstractMessagingSSCompanion

@@ -5,7 +5,7 @@ import com.simplesys.System.Types.{Callback, ID, void}
 import com.simplesys.System._
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 import scala.scalajs.js.|
 
 @js.native
@@ -117,7 +117,7 @@ abstract trait AbstractClassCompanion extends JSObject {
 }
 
 @js.native
-@JSName("Class")
+@JSGlobal("Class")
 object ClassStatic extends AbstractClassCompanion
 
 

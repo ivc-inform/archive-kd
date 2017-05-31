@@ -8,6 +8,7 @@ import com.simplesys.System.Types.VerticalAlignment._
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait StatefulCanvas extends Canvas {
@@ -68,5 +69,6 @@ trait StatefulCanvas extends Canvas {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractStatefulCanvasCompanion extends AbstractCanvasCompanion
 

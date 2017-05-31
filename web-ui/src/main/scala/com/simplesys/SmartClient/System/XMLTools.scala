@@ -5,6 +5,7 @@ import com.simplesys.System.JSObject
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -28,6 +29,7 @@ abstract trait AbstractXMLToolsCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object XMLTools extends AbstractXMLToolsCompanion {
     type XMLTools = XMLTools.type
 

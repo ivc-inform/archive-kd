@@ -114,7 +114,10 @@ isc.Class.addClassProperties
                     isc.Log._onRethrowError(e);
 
                 //<editor-fold desc="Fixed by Y.Andrew">
-                isc.Log.logError(e.stack)
+                /*if (e.stack)
+                 isc.Log.logError(e.stack)
+                else if (e)
+                    isc.Log.logError(e)*/
                 //</editor-fold>
                 throw e;
             }

@@ -38,7 +38,7 @@ class DrawItemProps extends ClassProps {
     var _updateTitleLabelAndBackground: ScOption[ThisFunction0[classHandler, _]] = {
         (thiz: classHandler) =>
 
-            var title = thiz.title
+            val title = thiz.title
             //isc debugTrap title
 
             var titleLabel = thiz.titleLabel

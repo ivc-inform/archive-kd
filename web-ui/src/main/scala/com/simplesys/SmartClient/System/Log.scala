@@ -5,6 +5,7 @@ import com.simplesys.System.Types.LogPriority.LogPriority
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -33,4 +34,5 @@ abstract trait AbstractLogCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object Log extends AbstractLogCompanion

@@ -1,7 +1,6 @@
 package com.simplesys.SmartClient.Tools
 
 import com.simplesys.SmartClient.Control.MenuSS
-import com.simplesys.SmartClient.DataBinding.DataSource
 import com.simplesys.SmartClient.Drawing.DrawItem
 import com.simplesys.SmartClient.Tools.editProxy.DrawPaneEditProxy
 import com.simplesys.System._

@@ -5,6 +5,7 @@ import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -20,5 +21,6 @@ abstract trait AbstractDeckCompanion extends AbstractLayoutCompanion {
 }
 
 @js.native
-   object Deck extends AbstractDeckCompanion
+@JSGlobal
+object Deck extends AbstractDeckCompanion
 

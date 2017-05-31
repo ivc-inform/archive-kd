@@ -7,7 +7,7 @@ import com.simplesys.System.Types.{ID, URL, void}
 import com.simplesys.System._
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.{JSName, ScalaJSDefined}
+import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
 @ScalaJSDefined
@@ -60,7 +60,7 @@ abstract trait AbstractRPCRequestCompanion extends AbstractClassCompanion {
 }
 
 @js.native
-@JSName("RPCRequest")
+@JSGlobal("RPCRequest")
 object RPCRequestStatic extends AbstractRPCRequestCompanion
 
 

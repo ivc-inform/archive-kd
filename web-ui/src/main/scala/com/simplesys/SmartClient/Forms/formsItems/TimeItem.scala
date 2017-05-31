@@ -6,6 +6,7 @@ import com.simplesys.System.Types.TimeUnit.TimeUnit
 import com.simplesys.System.Types.{AutoChild, HTMLString, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait TimeItem extends FormItem {
@@ -80,5 +81,6 @@ trait TimeItem extends FormItem {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractTimeItemCompanion extends AbstractFormItemCompanion
 

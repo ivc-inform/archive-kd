@@ -7,6 +7,7 @@ import com.simplesys.System.Types.CellRecord
 import com.simplesys.System.Types.ChartType.ChartType
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -23,4 +24,5 @@ abstract trait AbstractChartCompanion extends JSObject {
 }
 
 @js.native
+@JSGlobal
 object Chart extends AbstractChartCompanion

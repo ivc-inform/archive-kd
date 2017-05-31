@@ -11,7 +11,7 @@ import com.simplesys.System.Types._
 
 import scala.scalajs.js
 import scala.scalajs.js._
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 
 @js.native
 trait MultiSortDialog extends Window {
@@ -53,6 +53,6 @@ abstract trait AbstractMultiSortDialogCompanion extends AbstractCanvasCompanion 
 }
 
 @js.native
-@JSName("MultiSortDialog")
+@JSGlobal("MultiSortDialog")
 object MultiSortDialogStatic extends AbstractMultiSortDialogCompanion
 

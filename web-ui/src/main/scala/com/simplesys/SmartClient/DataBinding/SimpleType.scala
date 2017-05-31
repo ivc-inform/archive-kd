@@ -14,7 +14,7 @@ import com.simplesys.System.Types._
 import com.simplesys.System.{JSAny, JSObject}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 import scala.scalajs.js.|
 
 @js.native
@@ -54,5 +54,5 @@ abstract trait AbstractSimpleTypeCompanion extends AbstractClassCompanion {
 }
 
 @js.native
-@JSName("SimpleType")
+@JSGlobal("SimpleType")
 object SimpleTypeStatic extends AbstractSimpleTypeCompanion

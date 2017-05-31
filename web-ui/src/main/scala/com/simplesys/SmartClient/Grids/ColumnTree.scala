@@ -13,6 +13,7 @@ import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
 import com.simplesys.System.Types._
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -50,11 +51,11 @@ trait ColumnTree extends Layout with DataBoundComponent {
     def selectRecords(records: IscArray[ListGridRecord] | IscArray[Int], newState: Boolean = js.native, colNum: Int = js.native): void
     def setData(newData: Tree): void
     def shouldShowHeader(node: TreeNode, colNum: Int): void
-    var showCustomIconOpen:Boolean
-    var showHeaders:Boolean
-    var showMultipleColumns:Boolean
-    var showNodeCount:Boolean
-    var showOpenIcons:Boolean
+    var showCustomIconOpen: Boolean
+    var showHeaders: Boolean
+    var showMultipleColumns: Boolean
+    var showNodeCount: Boolean
+    var showOpenIcons: Boolean
 }
 
 @js.native
@@ -62,6 +63,7 @@ abstract trait AbstractColumnTreeCompanion extends AbstractLayoutCompanion {
 }
 
 @js.native
-   object ColumnTree extends AbstractColumnTreeCompanion
+@JSGlobal
+object ColumnTree extends AbstractColumnTreeCompanion
 
 

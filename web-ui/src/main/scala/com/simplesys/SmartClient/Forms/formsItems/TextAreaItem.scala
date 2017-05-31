@@ -5,6 +5,7 @@ import com.simplesys.System.Types.TEXTAREA_WRAP.TEXTAREA_WRAP
 import com.simplesys.System.Types.{SCClassName, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait TextAreaItem extends FormItem {
@@ -31,6 +32,7 @@ trait TextAreaItem extends FormItem {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractTextAreaItemCompanion extends AbstractFormItemCompanion
 
 

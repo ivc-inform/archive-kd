@@ -7,7 +7,7 @@ import com.simplesys.System.Types.{Record, URL}
 import com.simplesys.System.{JSObject, JSUndefined}
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.ScalaJSDefined
+import scala.scalajs.js.annotation.{JSGlobal, ScalaJSDefined}
 
 @ScalaJSDefined
 trait Error extends JSObject {
@@ -35,5 +35,8 @@ abstract trait AbstractDSResponseCompanion extends AbstractRPCResponseCompanion 
 }
 
 @js.native
+@JSGlobal
 object DSResponse extends AbstractDSResponseCompanion
+
+
 

@@ -1,4 +1,4 @@
-package com.simplesys.js.components
+package com.simplesys.app.http
 
 import com.simplesys.SmartClient.App.props.SettingsEditorProps
 import com.simplesys.SmartClient.App.{SettingsEditor, WebTabSetApp}
@@ -24,9 +24,9 @@ import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.JSExportTopLevel
 
-@JSExport
+//@JSExport
 object EaKdProcWindowMain extends WebTabSetApp {
 
     self ⇒
@@ -352,5 +352,10 @@ object EaKdProcWindowMain extends WebTabSetApp {
         item =>
             item.hide()
             item
+    }
+
+    @JSExportTopLevel("GetUIContent")
+    def GetUIContent(): Unit = {
+        getUIContent()
     }
 }

@@ -26,7 +26,7 @@ import com.simplesys.System.{JSAny, JSObject, JSUndefined}
 
 import scala.scalajs.js
 import scala.scalajs.js._
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 
 @js.native
 trait DynamicForm extends Canvas with DataBoundComponent {
@@ -210,6 +210,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractDynamicFormCompanion extends AbstractCanvasCompanion {
     val _instancePrototype: FormItem = js.native
 }

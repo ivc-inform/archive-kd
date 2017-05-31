@@ -11,7 +11,7 @@ import com.simplesys.System.Types.{CSSColor, HTMLString, void}
 import com.simplesys.System._
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 import scala.scalajs.js.|
 
 @js.native
@@ -96,5 +96,5 @@ abstract trait EditContextCompanion extends AbstractClassCompanion {
 }
 
 @js.native
-@JSName("EditContext")
+@JSGlobal("EditContext")
 object EditContextStatic extends EditContextCompanion

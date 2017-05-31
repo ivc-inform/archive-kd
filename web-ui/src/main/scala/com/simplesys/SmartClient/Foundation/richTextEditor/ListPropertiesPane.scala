@@ -5,9 +5,10 @@ import com.simplesys.SmartClient.Forms.formsItems.SpinnerItem
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.TileLayout
 import com.simplesys.SmartClient.Layout.{AbstractLayoutCompanion, Layout}
-import com.simplesys.System.Types.{MultiAutoChild, AutoChild}
+import com.simplesys.System.Types.{AutoChild, MultiAutoChild}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -25,4 +26,5 @@ abstract trait AbstractListPropertiesPaneCompanion extends AbstractLayoutCompani
 }
 
 @js.native
+@JSGlobal
 object ListPropertiesPane extends AbstractListPropertiesPaneCompanion        

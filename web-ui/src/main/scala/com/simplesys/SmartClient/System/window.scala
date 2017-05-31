@@ -4,8 +4,10 @@ import com.simplesys.System.Types.{URL, void}
 import com.simplesys.System.{JSAny, JSObject}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
+@JSGlobal
 object window extends JSObject {
     def setTimeout(function: js.Function, delay: Long, args: JSAny*): Int = js.native
     def clearTimeout(timerId: Int): void = js.native

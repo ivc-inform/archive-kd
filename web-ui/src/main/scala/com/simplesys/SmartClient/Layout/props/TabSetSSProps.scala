@@ -32,7 +32,7 @@ class TabSetSSProps extends TabSetProps {
                 tabName = tab.toString
 
             if (tabName != "")
-                res = thiz.tabs.find(tab => tab.name == tabName) match {
+                res = thiz.tabs.find(tab => tab.name.getOrElse("") == tabName) match {
                     case None => jSUndefined
                     case Some(x) => x
                 }

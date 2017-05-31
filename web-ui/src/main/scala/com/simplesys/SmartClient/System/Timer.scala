@@ -4,6 +4,7 @@ import com.simplesys.System.JSObject
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.|
 
 @js.native
@@ -17,6 +18,7 @@ abstract trait AbstractTimerCompanion extends AbstractClassCompanion {
 }
 
 @js.native
+@JSGlobal
 object Timer extends AbstractTimerCompanion
 
 

@@ -6,8 +6,10 @@ import com.simplesys.System.JSObject
 import com.simplesys.System.Types.FiscalYearMode.FiscalYearMode
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
+@JSGlobal
 object FiscalCalendar extends JSObject {
     type FiscalCalendar = FiscalCalendar.type
 

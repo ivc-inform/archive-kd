@@ -10,6 +10,7 @@ import com.simplesys.System.Types.ValueItemType.ValueItemType
 import com.simplesys.System.Types.{AutoChild, Criteria, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait FilterClause extends Layout {
@@ -40,5 +41,7 @@ abstract trait AbstractFilterClauseCompanion extends AbstractLayoutCompanion {
 }
 
 @js.native
+@JSGlobal
 object FilterClause extends AbstractFilterClauseCompanion
+
 

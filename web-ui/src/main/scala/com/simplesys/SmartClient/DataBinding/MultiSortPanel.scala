@@ -9,6 +9,7 @@ import com.simplesys.System.JSObject
 import com.simplesys.System.Types.{AutoChild, HTMLString}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait MultiSortPanel extends Layout {
@@ -45,5 +46,6 @@ abstract trait AbstractMultiSortPanelCompanion extends AbstractLayoutCompanion {
 }
 
 @js.native
+@JSGlobal
 object MultiSortPanel extends AbstractMultiSortPanelCompanion
 

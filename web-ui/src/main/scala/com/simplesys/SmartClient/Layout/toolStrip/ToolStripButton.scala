@@ -5,6 +5,7 @@ import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Canvas}
 import com.simplesys.System.JSUndefined
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 import scala.scalajs.js.{ThisFunction0, |}
 
 @js.native
@@ -13,6 +14,7 @@ trait ToolStripButton extends Button {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractToolStripButtonCompanion extends  AbstractButtonCompanion
 
 

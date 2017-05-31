@@ -34,7 +34,7 @@ import org.scalajs.dom.raw.HTMLElement
 
 import scala.scalajs.js
 import scala.scalajs.js._
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 
 @js.native
 trait Canvas extends com.simplesys.SmartClient.System.Class {
@@ -463,6 +463,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
 }
 
 @js.native
+@JSGlobal
 abstract class AbstractCanvasCompanion extends AbstractClassCompanion {
     var allowExternalFilters: Boolean = js.native
     var defaultPageSpace: Int = js.native
@@ -499,6 +500,6 @@ abstract class AbstractCanvasCompanion extends AbstractClassCompanion {
 }
 
 @js.native
-@JSName("Canvas")
+@JSGlobal("Canvas")
 object CanvasStatic extends AbstractCanvasCompanion
 

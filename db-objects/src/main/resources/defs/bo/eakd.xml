@@ -460,7 +460,7 @@
 					<attr caption="Описание версии документов" mandatory="false" name="vvrdescr" type="sDescription"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"></attr>
 					<attr caption="Дата прекращения действия" mandatory="false" name="dateout" type="dDate"></attr>
-					<attr caption="Файл версии" mandatory="false" name="docfile" type="clob"></attr>
+					<attr caption="Файл версии" mandatory="false" name="docfile" type="blob"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -510,7 +510,7 @@
 					<attr caption="Файл вложения магнитотеки" mandatory="false" name="mfile" type="clob"></attr>
 					<attr caption="Версия вложения магнитотеки" mandatory="false" name="mcodever" type="sCaption"></attr>
 					<attr caption="Инв.номер вложения магнитотеки" mandatory="false" name="minvnumber" type="sCaption"></attr>
-					<attr caption="Количество вложения магнитотеки" mandatory="false" name="mkol" type="sCaption"></attr>
+					<attr caption="Количество вложения магнитотеки" mandatory="true" name="mkol" type="nInt"></attr>
 					<attr caption="Дата вложения магнитотеки" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Д.номер Обозначение вложения магнитотеки" mandatory="false" name="vcrcode" type="sCaption"></attr>
 					<attr caption="Номер книги вложения магнитотеки" mandatory="false" name="mbook" type="sCaption"></attr>
@@ -546,7 +546,6 @@
 					<attr caption="Наименование магнитотеки" mandatory="false" name="mname" type="sCaption"></attr>
 					<attr caption="Наименование файла магнитотеки" mandatory="false" name="mfilecode" type="sCaption"></attr>
 					<attr caption="Дата заптси" mandatory="false" name="mdatein" type="dDate"></attr>
-					<attr caption="IDITEM" genBySeq="true" hidden="true" mandatory="true" name="iditem" type="id"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -670,7 +669,6 @@
 					<attr caption="Дата исполнения закрытия" mandatory="false" name="ddatein" type="dDate"></attr>
 					<attr caption="Дата закрытия закрытия" mandatory="false" name="ddateout" type="dDate"></attr>
 					<attr caption="Код приоритета закрытия" mandatory="false" name="idprior" type="id"></attr>
-					<attr caption="Код выданной версии листа закрытия" mandatory="false" name="idvers" type="id"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -688,13 +686,16 @@
 					<fk linkType="refIsOwner" mandatory="true" parent="card">
 						<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
 					</fk>
+					<fk linkType="refIsOwner" mandatory="true" parent="statversion">
+						<mapping attrNameLocal="idvers" attrNameRemote="id"></mapping>
+					</fk>
 				</constraints>
 			</classSimple>
 
 			<classSimple autoTableMapping="true" caption="Позиции запроса" name="zaprositems">
 				<attrs>
 					<attr caption="ID позиции запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Количество позиции запроса" mandatory="false" name="kolpagevers" type="nInt"></attr>
+					<attr caption="Количество позиции запроса" mandatory="true" name="kolpagevers" type="nInt"></attr>
 					<attr caption="Особые указания позиции запроса" mandatory="false" name="vdesc" type="sDescription"></attr>
 				</attrs>
 				<defaults>
@@ -716,9 +717,9 @@
 			<classSimple autoTableMapping="true" caption="Рассылка запроса" name="zaprosrass">
 				<attrs>
 					<attr caption="ID рассылки запроса" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Наименование рассылки запроса" mandatory="false" name="vname" type="sCaption"></attr>
-					<attr caption="Количество рассылки запроса" mandatory="false" name="vrskol" type="nInt"></attr>
-					<attr caption="Дата рассылки запроса" mandatory="false" name="dateout" type="dDate"></attr>
+					<attr caption="Наименование рассылки запроса" mandatory="true" name="vname" type="sCaption"></attr>
+					<attr caption="Количество рассылки запроса" mandatory="true" name="vrskol" type="nInt"></attr>
+					<attr caption="Дата рассылки запроса" mandatory="true" name="dateout" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

@@ -6,6 +6,7 @@ import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types.{AutoChild, CSSStyleName, void}
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait NavPanel extends SplitPanel {
@@ -25,5 +26,6 @@ abstract trait AbstractNavPanelCompanion extends AbstractSplitPaneCompanion {
 }
 
 @js.native
+@JSGlobal
 object NavPanel extends AbstractNavPanelCompanion
 

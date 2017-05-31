@@ -6,7 +6,7 @@ import com.simplesys.System.JSObject
 import com.simplesys.System.Types.void
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.annotation.{JSGlobal, JSName}
 
 @js.native
 trait CellSelection extends Class {
@@ -27,6 +27,6 @@ abstract trait AbstractCellSelectionCompanion extends AbstractClassCompanion {
 }
 
 @js.native
-@JSName("CellSelection")
+@JSGlobal("CellSelection")
 object CellSelectionStatic extends AbstractCellSelectionCompanion
 
