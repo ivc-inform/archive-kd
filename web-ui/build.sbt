@@ -9,5 +9,5 @@
 
 //webInfIncludeJarPattern in Compile := Some( """.*com\.simplesys.*/*\.jar$|.*ru\.simplesys.*/*\.jar$|.*/classes/.*""")
 
-addCommandAlias("debug-restart", "; fastOptJS ; packageWar ; container:restart")
+//addCommandAlias("debug-restart", "; fastOptJS ; packageWar ; container:restart")
 
