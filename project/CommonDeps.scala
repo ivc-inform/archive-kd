@@ -10,8 +10,8 @@ object PluginDeps {
         val mergeJSVersion = "1.0.9"
 
         val sbtAspectJVersion = "0.10.2"
-        //val xsbtWebVersion = "3.0.1"
-        val xsbtWebVersion = "0.9.1"
+        val xsbtWebVersion = "3.0.1"
+        //val xsbtWebVersion = "0.9.1"
         val sbtNativePackagerVersion = "1.2.0-M8"
 
         val scalaJSPluginVersion = "0.6.16"
