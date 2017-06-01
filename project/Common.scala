@@ -1,5 +1,6 @@
 import com.simplesys.json.{JsonList, JsonObject}
 import com.simplesys.mergewebapp.MergeWebappPlugin
+import com.simplesys.xwp.JettyPlugin
 import com.typesafe.sbt.coffeescript.TranspileCoffeeScript
 import org.scalajs.sbtplugin.ScalaJSPlugin
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
@@ -7,6 +8,7 @@ import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings
 import ru.simplesys.plugins.sourcegen.DevPlugin
 import sbt.Keys._
 import sbt.{Build, Compile, Project, addCommandAlias, file, _}
+import com.simplesys.xwp.ContainerPlugin.autoImport._
 
 object Common extends Build {
     lazy val common = Project(id = "common", base = file("common")).settings(
@@ -55,7 +57,7 @@ object Common extends Build {
 
     lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
       enablePlugins(
-          DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin
+          DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin
       ).dependsOn(
         dbObjects
     ).aggregate(dbObjects).settings(
@@ -150,6 +152,9 @@ object Common extends Build {
               currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
               currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
               merge in MergeWebappConfig <<= (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),
+
+              containerPort := 8083,
+              containerArgs := Seq("--path", "/archive-kd"),
 
               (resourceGenerators in Compile) += task[Seq[File]] {
 
