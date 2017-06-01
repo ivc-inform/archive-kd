@@ -10,6 +10,7 @@ import sbt.Keys._
 import sbt.{Build, Compile, Project, addCommandAlias, file, _}
 import com.simplesys.xwp.ContainerPlugin.autoImport._
 import com.simplesys.xwp.JettyPlugin.autoImport._
+import com.simplesys.xwp.WebappPlugin.autoImport._
 
 object Common extends Build {
     lazy val common = Project(id = "common", base = file("common")).settings(
@@ -160,6 +161,7 @@ object Common extends Build {
               artifactName := { (v: ScalaVersion, m: ModuleID, a: Artifact) =>
                 a.name + "." + a.extension
               },
+              //webappWebInfClasses := true,
 
               (resourceGenerators in Compile) += task[Seq[File]] {
 
