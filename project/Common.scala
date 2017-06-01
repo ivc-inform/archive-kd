@@ -161,7 +161,7 @@ object Common extends Build {
               artifactName := { (v: ScalaVersion, m: ModuleID, a: Artifact) =>
                 a.name + "." + a.extension
               },
-              //webappWebInfClasses := true,
+              webappWebInfClasses := true,
 
               (resourceGenerators in Compile) += task[Seq[File]] {
 
