@@ -78,9 +78,9 @@ object Common extends Build {
             CommonDeps.akkaHttpXml.value,
             CommonDeps.akkaHttpSprayJson.value,
 
-            CommonDeps.jettyWebapp.value % "container",
-            CommonDeps.jettyAnnotations.value % "container",
-            CommonDeps.jettyPlus.value % "container",
+//            CommonDeps.jettyWebapp.value % "container",
+//            CommonDeps.jettyAnnotations.value % "container",
+//            CommonDeps.jettyPlus.value % "container",
 
             CommonDeps.scalaTest.value % Test,
             //CommonDeps.play.value % Test,
