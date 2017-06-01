@@ -10,7 +10,7 @@ object PluginDeps {
         val mergeJSVersion = "1.0.9"
 
         val sbtAspectJVersion = "0.10.2"
-        val xsbtWebVersion = "0.9.1"
+        val xsbtWebVersion = "0.9.1.1"
         val sbtNativePackagerVersion = "1.2.0-M8"
 
         val scalaJSPluginVersion = "0.6.16"
@@ -21,7 +21,7 @@ object PluginDeps {
     val mergeJS = addSbtPlugin("ru.simplesys" % "merge-js" % versions.mergeJSVersion)
     val transpileCoffeeScript = addSbtPlugin("ru.simplesys" % "transpile-coffeescript" % versions.transpileCoffeScriptVersion)
 
-    val xsbtWeb = addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % versions.xsbtWebVersion)
+    val xsbtWeb = addSbtPlugin("com.simplesys" % "xsbt-web-plugin" % versions.xsbtWebVersion)
     val sbtNativePackager = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtNativePackagerVersion)
 
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)

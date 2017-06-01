@@ -7,6 +7,7 @@ import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings
 import ru.simplesys.plugins.sourcegen.DevPlugin
 import sbt.Keys._
 import sbt.{Build, Compile, Project, file, _}
+import com.earldouglas.xsbtwebplugin.PluginKeys._
 
 object Common extends Build {
     lazy val common = Project(id = "common", base = file("common")).settings(
@@ -149,6 +150,8 @@ object Common extends Build {
               currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
               currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
               merge in MergeWebappConfig <<= (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),
+
+              classesAsJar := true,
 
               (resourceGenerators in Compile) += task[Seq[File]] {
 
