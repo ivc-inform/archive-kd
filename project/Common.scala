@@ -1,6 +1,6 @@
 import com.simplesys.json.{JsonList, JsonObject}
 import com.simplesys.mergewebapp.MergeWebappPlugin
-import com.simplesys.xwp.JettyPlugin
+import com.simplesys.xwp.{JettyPlugin, WarPlugin, WebappPlugin}
 import com.typesafe.sbt.coffeescript.TranspileCoffeeScript
 import org.scalajs.sbtplugin.ScalaJSPlugin
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
@@ -9,6 +9,7 @@ import ru.simplesys.plugins.sourcegen.DevPlugin
 import sbt.Keys._
 import sbt.{Build, Compile, Project, addCommandAlias, file, _}
 import com.simplesys.xwp.ContainerPlugin.autoImport._
+import com.simplesys.xwp.JettyPlugin.autoImport._
 
 object Common extends Build {
     lazy val common = Project(id = "common", base = file("common")).settings(
@@ -57,7 +58,7 @@ object Common extends Build {
 
     lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
       enablePlugins(
-          DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin
+          DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin
       ).dependsOn(
         dbObjects
     ).aggregate(dbObjects).settings(
@@ -155,6 +156,10 @@ object Common extends Build {
 
               containerPort := 8083,
               containerArgs := Seq("--path", "/archive-kd"),
+              containerLibs in Jetty := Seq(CommonDeps.jettyRuner.value intransitive()),
+              artifactName := { (v: ScalaVersion, m: ModuleID, a: Artifact) =>
+                a.name + "." + a.extension
+              },
 
               (resourceGenerators in Compile) += task[Seq[File]] {
 
