@@ -6,7 +6,7 @@ import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin
 import sbt.Keys._
-import sbt.{Build, Compile, Project, file, _}
+import sbt.{Build, Compile, Project, addCommandAlias, file, _}
 
 object Common extends Build {
     lazy val common = Project(id = "common", base = file("common")).settings(
@@ -60,6 +60,7 @@ object Common extends Build {
         dbObjects
     ).aggregate(dbObjects).settings(
 
+        addCommandAlias("debug-restart", "; fastOptJS ; packageWar ; container:restart"),
         libraryDependencies ++= Seq(
             CommonDeps.servletAPI.value % Provided,
             CommonDeps.ssysCommonWebapp.value,
@@ -192,6 +193,7 @@ object Common extends Build {
                   IO.write(aboutFile, s"simpleSyS.aboutData = ${list.toPrettyString}")
                   Seq()
               }
+
           )
       },
           skip in packageJSDependencies := false,
