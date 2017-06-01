@@ -63,7 +63,7 @@ object Common extends Build {
         dbObjects
     ).aggregate(dbObjects).settings(
 
-        addCommandAlias("debug-restart", "; fastOptJS ; packageWar ; container:restart"),
+//        addCommandAlias("debug-restart", "; fastOptJS ; packageWar ; container:restart"),
         libraryDependencies ++= Seq(
             CommonDeps.servletAPI.value % Provided,
             CommonDeps.ssysCommonWebapp.value,
