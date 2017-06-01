@@ -20,7 +20,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                     "CreateSmartClientJS();" +
                     "CreateAppJS();" +
                     "GetUIContent();",
-                  true
+                  false
               ).render.unEscape
 
             Out(html)

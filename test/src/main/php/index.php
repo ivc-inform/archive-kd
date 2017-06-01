@@ -41,7 +41,6 @@ $hash = md5("test");
         </style>
 
         <script type="text/javascript" src="./fileuploader.js?nc=<?php print time(); ?>"></script>
-
     </head>
     <body onload="ShowForm();">
         <div class="content">
