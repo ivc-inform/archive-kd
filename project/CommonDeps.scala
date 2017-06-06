@@ -14,7 +14,7 @@ object PluginDeps {
         //val xsbtWebVersion = "0.9.1"
         val sbtNativePackagerVersion = "1.2.0-M8"
 
-        val scalaJSPluginVersion = "0.6.16"
+        val scalaJSPluginVersion = "0.6.17"
         val macroParadiseVersion = "2.1.0"
     }
 
