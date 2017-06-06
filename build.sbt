@@ -84,7 +84,10 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     dbObjects
 ).aggregate(dbObjects).settings(
 
-    //        addCommandAlias("debug-restart", "; fastOptJS ; packageWar ; container:restart"),
+    addCommandAlias("debug-restart", "; jetty:stop ; fastOptJS ; package ; jetty:start"),
+
+    scalacOptions += "-P:scalajs:sjsDefinedByDefault",
+
     libraryDependencies ++= Seq(
         CommonDeps.servletAPI.value % Provided,
         CommonDeps.ssysCommonWebapp.value,
