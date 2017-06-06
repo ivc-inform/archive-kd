@@ -1,5 +1,7 @@
 import com.simplesys.json.{JsonList, JsonObject}
 import com.typesafe.sbt.SbtGit.git
+import fi.gekkio.sbtplugins.jrebel.JRebelPlugin
+import fi.gekkio.sbtplugins.jrebel.JRebelPlugin._
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
 
@@ -87,6 +89,16 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     addCommandAlias("debug-restart", "; jetty:stop ; fastOptJS ; package ; jetty:start"),
 
     scalacOptions += "-P:scalajs:sjsDefinedByDefault",
+    JRebelPlugin.jrebelSettings,
+    jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
+    jrebel.enabled := true,
+
+    javaOptions in Jetty ++= Seq(
+        "-javaagent:~/jrebel/jrebel.jar",
+        "-noverify",
+        "-XX:+UseConcMarkSweepGC",
+        "-XX:+CMSClassUnloadingEnabled"
+    ),
 
     libraryDependencies ++= Seq(
         CommonDeps.servletAPI.value % Provided,
