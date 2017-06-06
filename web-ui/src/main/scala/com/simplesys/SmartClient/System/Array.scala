@@ -8,7 +8,7 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
-@ScalaJSDefined
+
 trait Rect extends JSObject {
     val left: Double
     val top: Double
@@ -16,7 +16,7 @@ trait Rect extends JSObject {
     val height: Double
 }
 
-@ScalaJSDefined
+
 trait Rect1 extends Rect {
     val success: Boolean
 }

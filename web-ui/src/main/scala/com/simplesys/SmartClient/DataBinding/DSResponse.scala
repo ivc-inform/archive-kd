@@ -9,7 +9,7 @@ import com.simplesys.System.{JSObject, JSUndefined}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSGlobal, ScalaJSDefined}
 
-@ScalaJSDefined
+
 trait Error extends JSObject {
     val message: JSUndefined[String]
     val stackTrace: JSUndefined[String]

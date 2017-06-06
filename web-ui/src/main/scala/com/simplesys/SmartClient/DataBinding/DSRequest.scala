@@ -18,7 +18,7 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
-@ScalaJSDefined
+
 trait InternalClientContext extends JSObject {
   var _callback: JSUndefined[Callback]
 }

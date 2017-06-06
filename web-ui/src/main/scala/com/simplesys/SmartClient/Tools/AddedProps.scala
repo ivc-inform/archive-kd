@@ -8,7 +8,7 @@ import com.simplesys.System._
 import scala.scalajs.js.annotation.ScalaJSDefined
 import scala.scalajs.js.{ThisFunction0, ThisFunction2}
 
-@ScalaJSDefined
+
 trait AddedProps extends JSObject {
     val contextMenu: MenuSS
     val drawPaneEditProxyProperties: DrawPaneEditProxy

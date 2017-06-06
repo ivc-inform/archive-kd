@@ -6,7 +6,7 @@ import com.simplesys.System.Types.{CSSColor, ID}
 
 import scala.scalajs.js.annotation.ScalaJSDefined
 
-@ScalaJSDefined
+
 trait Gradient extends JSObject {
 
     import com.simplesys.System.JSUndefined

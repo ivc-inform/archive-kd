@@ -5,7 +5,7 @@ import com.simplesys.System._
 import scala.scalajs.js
 import scala.scalajs.js.annotation.ScalaJSDefined
 
-@ScalaJSDefined
+
 trait DurationValue extends JSObject {
     val days: JSUndefined[Int]
     val hours: JSUndefined[Int]
