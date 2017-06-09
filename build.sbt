@@ -194,7 +194,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
           containerPort := 8083,
           containerArgs := Seq("--path", "/archive-kd"),
-          containerLibs in Jetty := Seq(CommonDeps.jettyRuner.value intransitive()),
+          containerLibs in Jetty := Seq(
+              CommonDeps.jettyRuner.value intransitive()
+          ),
           artifactName := { (v: ScalaVersion, m: ModuleID, a: Artifact) =>
               a.name + "." + a.extension
           },

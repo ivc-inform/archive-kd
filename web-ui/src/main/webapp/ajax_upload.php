@@ -5,9 +5,9 @@
         <title>HTML5 Ajax upload очень больших файлов</title>
     </head>
     <body style="margin: 0px">
-        <h1>"Hello World"</h1>
+        <!--<h1>"Hello World"</h1>-->
         <?php
-          echo "Hello World"
+        echo "Hello World1"
         ?>
     </body>
 </html>
