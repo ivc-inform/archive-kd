@@ -1,8 +1,8 @@
 import com.simplesys.json.{JsonList, JsonObject}
 import com.typesafe.sbt.SbtGit.git
 
-import fi.gekkio.sbtplugins.jrebel.JRebelPlugin
-import fi.gekkio.sbtplugins.jrebel.JRebelPlugin._
+import com.simplesys.jrebel.JRebelPlugin
+import com.simplesys.jrebel.JRebelPlugin._
 
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
@@ -70,7 +70,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           CommonDeps.scalaTest.value % Test
       )
   ).settings(DevPlugin.devPluginGeneratorSettings).
-  settings({
+  settings({                                                                   
       import ru.simplesys.plugins.sourcegen.DevPlugin._
       Seq(
           sourceSchemaDir in DevConfig := (resourceDirectory in Compile).value / "defs",
@@ -83,7 +83,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
-      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin
+      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin
   ).dependsOn(
     dbObjects
 ).aggregate(dbObjects).settings(
