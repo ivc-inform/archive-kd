@@ -8,6 +8,6 @@ class UploadServlet extends HttpServlet{
 
 
     override protected def DoPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
-      val  isMultipart = ServletFileUpload.isMultipartContent(request.proxy)
+      val  isMultipart = ServletFileUpload.isMultipartContent(request)
     }
 }
