@@ -118,13 +118,10 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.akkaHttpCore.value,
         CommonDeps.akkaHttpXml.value,
         CommonDeps.akkaHttpSprayJson.value,
-
-        //            CommonDeps.jettyWebapp.value % "container",
-        //            CommonDeps.jettyAnnotations.value % "container",
-        //            CommonDeps.jettyPlus.value % "container",
+        CommonDeps.commonsFileupload.value,
+        CommonDeps.commonsIO.value,
 
         CommonDeps.scalaTest.value % Test,
-        //CommonDeps.play.value % Test,
 
         CommonDeps.scalaJSWrapper.value,
         CommonDeps.scalaTags.value,

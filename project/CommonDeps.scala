@@ -65,8 +65,11 @@ object CommonDeps {
         val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
 
-        val jettyVersion = "9.4.5.v20170502"
+        val jettyVersion = "9.4.6.v20170531"
         val jdbcOracle11DriverVersion = "11.2.0.4"
+
+        val commonsFileuploadVersion = "1.3.2"
+        val commonsIOVersion = "2.5"
     }
 
     val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
@@ -119,6 +122,10 @@ object CommonDeps {
 
     val doobieCore = Def.setting("org.tpolecat" %% "doobie-core" % versions.doobieVersion)
     val doobieCoreCats = Def.setting("org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion)
+
+    val commonsFileupload = Def.setting("commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion)
+    val commonsIO = Def.setting("commons-io" % "commons-io" % versions.commonsIOVersion)
+
 }
 
 object DepsHelper {
