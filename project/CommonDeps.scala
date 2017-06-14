@@ -68,7 +68,7 @@ object CommonDeps {
         val jettyVersion = "9.4.6.v20170531"
         val jdbcOracle11DriverVersion = "11.2.0.4"
 
-        val commonsFileuploadVersion = "1.3.2"
+        val commonsFileuploadVersion = "1.4-SNAPHOT"
         val commonsIOVersion = "2.5"
     }
 
@@ -124,7 +124,7 @@ object CommonDeps {
     val doobieCoreCats = Def.setting("org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion)
 
     val commonsFileupload = Def.setting("commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion)
-    val commonsIO = Def.setting("commons-io" % "commons-io" % versions.commonsIOVersion)
+    //val commonsIO = Def.setting("commons-io" % "commons-io" % versions.commonsIOVersion)
 
 }
 

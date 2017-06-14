@@ -119,7 +119,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.akkaHttpXml.value,
         CommonDeps.akkaHttpSprayJson.value,
         CommonDeps.commonsFileupload.value,
-        CommonDeps.commonsIO.value,
+        //CommonDeps.commonsIO.value,
 
         CommonDeps.scalaTest.value % Test,
 
