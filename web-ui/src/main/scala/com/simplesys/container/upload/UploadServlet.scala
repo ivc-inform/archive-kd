@@ -95,17 +95,12 @@ class UploadServlet extends HttpServlet {
                             println(s"write file: ${file.getAbsolutePath}")
 
                             //@formatter:off
-                            body = body addChild <br>{s"Uploaded File: ${file.getAbsolutePath}"}</br>
+                            body = body addChild <h2>{s"Uploaded File: ${file.getAbsolutePath}"}</h2>
                             //@formatter:on
                         }
                 }
-//                println("out")
-//                println(out)
-//                println("body")
-//                println(body)
+
                 out = out addChild body
-//                println("out")
-//                println(out)
                 out
             } match {
                 case Success(out) ⇒
