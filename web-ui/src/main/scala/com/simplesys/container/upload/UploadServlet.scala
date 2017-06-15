@@ -3,6 +3,7 @@ package com.simplesys.container.upload
 import java.io.File
 import javax.servlet.annotation.WebServlet
 
+import blob.DT
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.HTMLContent
 import com.simplesys.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
@@ -45,6 +46,8 @@ class UploadServlet extends HttpServlet {
     private val filePath: String = "web-ui/target/upload"
 
     override protected def DoPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
+        val startTime = System.currentTimeMillis()
+
         val isMultipart = ServletFileUpload.isMultipartContent(request)
         response.ContentType = HTMLContent
 
@@ -144,6 +147,8 @@ class UploadServlet extends HttpServlet {
                             println(s"pstmt.executeUpdate")
 
                             conn.commit()
+                            val elapsedTime = System.currentTimeMillis() - startTime
+                            println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
 
                             //@formatter:off
                             body = body addChild <h2>{s"Uploaded File: $fileName"}</h2>
