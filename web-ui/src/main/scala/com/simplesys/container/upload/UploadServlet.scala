@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.HTMLContent
 import com.simplesys.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
+import oracle.jdbc.driver.OracleConnection
+import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
@@ -74,7 +76,7 @@ class UploadServlet extends HttpServlet {
 
                         if (megaBytes != mBytes) {
                             megaBytes = mBytes
-                              //println(s"We are currently reading item $pItems")
+                            //println(s"We are currently reading item $pItems")
 
                             if (pContentLength == -1L)
                                 println(s"So far, $pBytesRead bytes have been read.")
@@ -84,7 +86,7 @@ class UploadServlet extends HttpServlet {
                     }
                 }
 
-                upload setProgressListener progressListener
+                //upload setProgressListener progressListener
 
                 var body = <body></body>
                 upload.parseRequest(request).asScala.foreach {
@@ -105,13 +107,45 @@ class UploadServlet extends HttpServlet {
                             val sizeInBytes = fi.getSize
                             println(s"sizeInBytes: $sizeInBytes")
 
-                            val file = new File(filePath + "//" + fileName)
-                            fi write file
+                            //                            val file = new File(filePath + "//" + fileName)
+                            //                            fi write file
+                            println(s"before inputStream")
+                            val inputStream = fi.getInputStream()
+                            println(s"after inputStream")
 
-                            println(s"write file: ${file.getAbsolutePath}")
+                            val ds = new OracleDataSource
+
+                            ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
+                            ds.setUser("eakd")
+                            ds.setPassword("eakd")
+
+                            val conn = ds.getConnection.asInstanceOf[OracleConnection]
+                            conn setAutoCommit false
+
+                            val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
+
+                            val pstmt = conn prepareStatement sql
+                            println(s"before pstmt.setLong(1, 1L)")
+                            pstmt.setLong(1, 1L)
+                            println(s"after pstmt.setLong(1, 1L)")
+
+                            println(s"before pstmt.setString(2, $fileName)")
+                            pstmt.setString(2, fileName)
+                            println(s"after pstmt.setString(2, $fileName)")
+
+                            println(s"before setBinaryStream")
+                            //pstmt.setBinaryStream(3, inputStream)
+                            pstmt.setBlob(3, inputStream)
+                            println(s"after setBinaryStream")
+
+                            println(s"before pstmt.executeUpdate")
+                            pstmt.execute()
+                            println(s"pstmt.executeUpdate")
+
+                            conn.commit()
 
                             //@formatter:off
-                            body = body addChild <h2>{s"Uploaded File: ${file.getAbsolutePath}"}</h2>
+                            body = body addChild <h2>{s"Uploaded File: $fileName"}</h2>
                             //@formatter:on
                         }
                 }

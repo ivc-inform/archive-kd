@@ -80,6 +80,7 @@ object TestApp2 {
         val inputStream = new FileInputStream(file)
 
         pstmt.setBlob(3, inputStream, file.length())
+        //pstmt.setBinaryStream(3, )
 
         pstmt.execute()
         println(s"pstmt.executeUpdate")
