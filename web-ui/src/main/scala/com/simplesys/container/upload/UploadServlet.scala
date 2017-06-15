@@ -115,7 +115,8 @@ class UploadServlet extends HttpServlet {
 
                             val ds = new OracleDataSource
 
-                            ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
+                            //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
+                            ds.setURL("jdbc:oracle:thin:@//localhost:1521/orcl")
                             ds.setUser("eakd")
                             ds.setPassword("eakd")
 
