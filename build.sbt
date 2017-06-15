@@ -70,7 +70,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           CommonDeps.scalaTest.value % Test
       )
   ).settings(DevPlugin.devPluginGeneratorSettings).
-  settings({                                                                   
+  settings({
       import ru.simplesys.plugins.sourcegen.DevPlugin._
       Seq(
           sourceSchemaDir in DevConfig := (resourceDirectory in Compile).value / "defs",
@@ -95,8 +95,15 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
     jrebel.enabled := true,
 
+//    javaOptions in Jetty ++= Seq(
+//        "-javaagent:/home/uandrew/jrebel/legacy/jrebel.jar",
+//        "-noverify",
+//        "-XX:+UseConcMarkSweepGC",
+//        "-XX:+CMSClassUnloadingEnabled"
+//    ),
+
     javaOptions in Jetty ++= Seq(
-        "-javaagent:/home/uandrew/jrebel/legacy/jrebel.jar",
+        "-javaagent:e:/job/jrebel/legacy/jrebel.jar",
         "-noverify",
         "-XX:+UseConcMarkSweepGC",
         "-XX:+CMSClassUnloadingEnabled"
