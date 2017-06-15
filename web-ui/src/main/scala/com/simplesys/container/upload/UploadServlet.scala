@@ -133,10 +133,10 @@ class UploadServlet extends HttpServlet {
                             pstmt.setString(2, fileName)
                             println(s"after pstmt.setString(2, $fileName)")
 
-                            println(s"before setBinaryStream")
+                            println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
                             //pstmt.setBinaryStream(3, inputStream)
-                            pstmt.setBlob(3, inputStream)
-                            println(s"after setBinaryStream")
+                            pstmt.setBlob(3, inputStream, fi.getSize)
+                            println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize})")
 
                             println(s"before pstmt.executeUpdate")
                             pstmt.execute()
