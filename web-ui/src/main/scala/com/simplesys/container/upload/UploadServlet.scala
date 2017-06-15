@@ -70,10 +70,11 @@ class UploadServlet extends HttpServlet {
 
                     override def update(pBytesRead: Long, pContentLength: Long, pItems: Int): Unit = {
 
-                        val mBytes = pBytesRead / 1000000
+                        val mBytes = pBytesRead / 1024 * 1024 * 100
+
                         if (megaBytes != mBytes) {
                             megaBytes = mBytes
-                            println(s"We are currently reading item $pItems")
+                              //println(s"We are currently reading item $pItems")
 
                             if (pContentLength == -1L)
                                 println(s"So far, $pBytesRead bytes have been read.")
