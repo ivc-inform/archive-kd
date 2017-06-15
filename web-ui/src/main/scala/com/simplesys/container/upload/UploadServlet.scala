@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.HTMLContent
 import com.simplesys.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
+import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
 
@@ -40,9 +41,6 @@ object UploadServlet {
 @WebServlet(urlPatterns = Array("/UploadServlet"))
 class UploadServlet extends HttpServlet {
     private val filePath: String = "web-ui/target/upload"
-    //    private val maxMemSize = 4 * 1024
-    //    private val maxFileSize = 50 * 1024
-
 
     override protected def DoPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
         val isMultipart = ServletFileUpload.isMultipartContent(request)
@@ -56,11 +54,8 @@ class UploadServlet extends HttpServlet {
 
             val factory = new DiskFileItemFactory()
 
-            //factory setSizeThreshold maxMemSize
             factory setRepository new File("./temp")
-
             val upload = new ServletFileUpload(factory)
-            //  upload setSizeMax maxFileSize
 
             Try {
 
@@ -70,7 +65,27 @@ class UploadServlet extends HttpServlet {
 
                 import UploadServlet._
 
-                var body: Node = <body></body>
+                val progressListener = new ProgressListener() {
+                    private var megaBytes = -1L
+
+                    override def update(pBytesRead: Long, pContentLength: Long, pItems: Int): Unit = {
+
+                        val mBytes = pBytesRead / 1000000
+                        if (megaBytes != mBytes) {
+                            megaBytes = mBytes
+                            println(s"We are currently reading item $pItems")
+
+                            if (pContentLength == -1L)
+                                println(s"So far, $pBytesRead bytes have been read.")
+                            else
+                                println(s"So far, $pBytesRead of $pContentLength bytes have been read.")
+                        }
+                    }
+                }
+
+                upload setProgressListener progressListener
+
+                var body = <body></body>
                 upload.parseRequest(request).asScala.foreach {
                     fi ⇒
                         if (!fi.isFormField) {
