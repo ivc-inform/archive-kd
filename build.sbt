@@ -39,6 +39,7 @@ lazy val root = (project in file(".")).
 
 lazy val common = Project(id = "common", base = file("common")).settings(
     libraryDependencies ++= Seq(
+        CommonDeps.commonsIO.value,
         CommonDeps.scalaTest.value % Test
     )
 ).settings(CommonSettings.defaultProjectSettings)
