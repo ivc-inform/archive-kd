@@ -23,6 +23,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                   false
               ).render.unEscape
 
+
+            logger debug html
             Out(html)
 
             selfStop()

@@ -1,6 +1,7 @@
 package com.simplesys.container.upload
 
 import java.io.File
+import javax.servlet.annotation.WebServlet
 
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.HTMLContent
@@ -10,85 +11,108 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload
 
 import scala.collection.JavaConverters._
 import scala.util.{Failure, Success, Try}
-import scala.xml.{Elem, Node}
+import scala.xml.{Elem, Node, Null}
 
 object UploadServlet {
+    implicit def node2Elem(node: Node): Elem = Elem(node.prefix, node.label, Null, node.scope, true, node.child: _*)
+
     implicit class NodeOpt(node: Node) {
-        def addChild(newChild: Node) = node match {
-            case Elem(prefix, label, attribs, scope, child@_*) =>
-                Elem(prefix, label, attribs, scope, false, child ++ newChild: _*)
-            case _ =>
-                new RuntimeException("Can only add children to elements!")
+        def addChild(newChild: Elem): Elem = {
+            val elem: Elem = node
+            elem.copy(child = elem.child ++ newChild.child)
+        }
+    }
+
+    implicit class ResponceOpt(response: HttpServletResponse) {
+        def makePageMessage(msg: String) = {
+            response.Print(
+                //@formatter:off
+                <html>
+                    <head><title>Servlet upload</title></head>
+                    <body><p>{msg}</p></body>
+                </html>
+                //@formatter:on
+            )
         }
     }
 }
 
+@WebServlet(urlPatterns = Array("/UploadServlet"))
 class UploadServlet extends HttpServlet {
     private val filePath: String = "web-ui/target/upload"
-    private val maxMemSize = 4 * 1024
-    private val maxFileSize = 50 * 1024
+    //    private val maxMemSize = 4 * 1024
+    //    private val maxFileSize = 50 * 1024
 
 
     override protected def DoPost(request: HttpServletRequest, response: HttpServletResponse): Unit = {
         val isMultipart = ServletFileUpload.isMultipartContent(request)
         response.ContentType = HTMLContent
 
+        import UploadServlet._
+
         if (!isMultipart) {
-            response.Print(
-                <html>
-                    <head>
-                        <title>Servlet upload</title>
-                    </head>
-                    <body>
-                        <p>No file uploaded</p>
-                    </body>
-                </html>
-            )
+            response.makePageMessage("No file uploaded")
         } else {
 
             val factory = new DiskFileItemFactory()
 
-            factory.setSizeThreshold(maxMemSize)
-            factory.setRepository(new File("./temp"))
+            //factory setSizeThreshold maxMemSize
+            factory setRepository new File("./temp")
 
             val upload = new ServletFileUpload(factory)
-            upload setSizeMax maxFileSize
+            //  upload setSizeMax maxFileSize
 
             Try {
-                val out: Node =
-                    <html>
-                        <head>
-                            <title>Servlet upload</title>
-                        </head>
-                    </html>
+
+                //@formatter:off
+                var out: Node = <html><head><title>Servlet upload</title></head></html>
+                //@formatter:on
 
                 import UploadServlet._
 
-                val body: Node = <body></body>
+                var body: Node = <body></body>
                 upload.parseRequest(request).asScala.foreach {
                     fi ⇒
                         if (!fi.isFormField) {
                             val fieldName = fi.getFieldName
-                            val fileName = fi.getName
-                            val contentType = fi.getContentType
-                            val isInMemory = fi.isInMemory
-                            val sizeInBytes = fi.getSize
+                            println(s"fieldName: $fieldName")
 
-                            fi write (if (fileName.lastIndexOf("\\") >= 0)
-                                new File(filePath + fileName.substring(fileName.lastIndexOf("\\")))
-                            else
-                                new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1))
-                              )
+                            val fileName = fi.getName
+                            println(s"fileName: $fileName")
+
+                            val contentType = fi.getContentType
+                            println(s"contentType: $contentType")
+
+                            val isInMemory = fi.isInMemory
+                            println(s"isInMemory: $isInMemory")
+
+                            val sizeInBytes = fi.getSize
+                            println(s"sizeInBytes: $sizeInBytes")
+
+                            val file = new File(filePath + "//" + fileName)
+                            fi write file
+
+                            println(s"write file: ${file.getAbsolutePath}")
 
                             //@formatter:off
-                            body addChild <br>{s"Uploaded File: $fileName"}</br>
+                            body = body addChild <br>{s"Uploaded File: ${file.getAbsolutePath}"}</br>
                             //@formatter:on
                         }
                 }
-                out addChild body
+//                println("out")
+//                println(out)
+//                println("body")
+//                println(body)
+                out = out addChild body
+//                println("out")
+//                println(out)
+                out
             } match {
-                case Success(_) ⇒
+                case Success(out) ⇒
+                    response Print out
+
                 case Failure(e) ⇒
+                    response.makePageMessage(e.getMessage)
             }
         }
     }
