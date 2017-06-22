@@ -1,8 +1,15 @@
-docker run --name oracle_122 -p 1521:1521 -p 5500:5500 oracle/database:12.2.0.1-ee
+docker run --name oracle_122 -p 1521:1521 oracle/database:12.2.0.1-ee
 
-docker exec gvenzl ./setPassword.sh dfqc2 &&  sqlplus system/dfqc2@//localhost:1521/ORCLPDB1
+docker exec oracle_122 ./setPassword.sh dfqc2 && docker exec -it oracle_122 /bin/bash
+
+sqlplus system/dfqc2@//localhost:1521/ORCLPDB1
+
+//sqlplus sys/dfqc2@//localhost:1521/ORCLCDB as sysdba
 
 grant connect, resource to oracle_122 identified by oracle_122_pass;
+grant connect, resource to eakd identified by eakd;
 
 conn oracle_122/oracle_122_pass@//localhost:1521/ORCLPDB1
+
+sqlplus oracle_122/oracle_122_pass//localhost:1521/ORCLPDB1
 

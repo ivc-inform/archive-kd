@@ -95,16 +95,10 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     JRebelPlugin.jrebelSettings,
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
     jrebel.enabled := true,
-
-//    javaOptions in Jetty ++= Seq(
-//        "-javaagent:/home/uandrew/jrebel/legacy/jrebel.jar",
-//        "-noverify",
-//        "-XX:+UseConcMarkSweepGC",
-//        "-XX:+CMSClassUnloadingEnabled"
-//    ),
-
+    
     javaOptions in Jetty ++= Seq(
-        "-javaagent:e:/job/jrebel/legacy/jrebel.jar",
+        //"-javaagent:e:/job/jrebel/legacy/jrebel.jar",
+        "-javaagent:/home/uandrew/jrebel/legacy/jrebel.jar",
         "-noverify",
         "-XX:+UseConcMarkSweepGC",
         "-XX:+CMSClassUnloadingEnabled"
