@@ -1,0 +1,6 @@
+docker run --name ora_container \
+-p 1521:1521 -p 5500:5500 \
+-e ORACLE_SID=test \
+-e ORACLE_PDB=test_pdb \
+-e ORACLE_PWD=Uandrew1965 \
+oracle/database:12.2.0.1-ee
