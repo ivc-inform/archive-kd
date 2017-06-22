@@ -120,7 +120,7 @@ class UploadServlet extends HttpServlet {
 
                             //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
 
-                            ds.setURL("jdbc:oracle:thin:@//localhost:1521/ORCLPDB1")
+                            ds.setURL("jdbc:oracle:thin:@//localhost:1521/test")
                             ds.setUser("eakd")
                             ds.setPassword("eakd")
 
