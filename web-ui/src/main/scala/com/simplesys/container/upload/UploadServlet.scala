@@ -119,7 +119,8 @@ class UploadServlet extends HttpServlet {
                             val ds = new OracleDataSource
 
                             //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
-                            ds.setURL("jdbc:oracle:thin:@//localhost:1521/orcl")
+
+                            ds.setURL("jdbc:oracle:thin:@//localhost:1521/ORCLPDB1")
                             ds.setUser("eakd")
                             ds.setPassword("eakd")
 
@@ -151,7 +152,7 @@ class UploadServlet extends HttpServlet {
                             println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
 
                             //@formatter:off
-                            body = body addChild <h2>{s"Uploaded File: $fileName"}</h2>
+                            body = body addChild <h2>{s"Uploaded File: $fileName" + s"elapsedTime for $fileName : ${DT(elapsedTime).toString}"}</h2>
                             //@formatter:on
                         }
                 }

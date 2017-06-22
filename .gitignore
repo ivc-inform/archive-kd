@@ -71,3 +71,4 @@ files/
 *.~*
 
 upgrade/
+*.tmp
