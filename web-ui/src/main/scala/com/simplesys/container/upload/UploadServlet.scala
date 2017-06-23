@@ -110,8 +110,9 @@ class UploadServlet extends HttpServlet {
                             val sizeInBytes = fi.getSize
                             println(s"sizeInBytes: $sizeInBytes")
 
-                            //                            val file = new File(filePath + "//" + fileName)
-                            //                            fi write file
+                            //val file = new File(filePath + "//" + fileName)
+                            //fi write file
+                            
                             println(s"before inputStream")
                             val inputStream = fi.getInputStream()
                             println(s"after inputStream")
