@@ -1,7 +1,7 @@
 package com.simplesys.container.upload
 
-import java.io.File
-import java.util.Properties
+import java.io.{File, InputStream}
+import java.util.{Properties, UUID}
 import javax.servlet.annotation.WebServlet
 
 import com.simplesys.servlet.ContentType._
@@ -120,7 +120,7 @@ class UploadServlet extends HttpServlet {
                 }
 
 
-                //upload setProgressListener progressListener
+                upload setProgressListener progressListener
                 var body = <body></body>
                 upload.parseRequest(request).asScala.foreach {
                     fi ⇒
@@ -144,7 +144,7 @@ class UploadServlet extends HttpServlet {
                             //fi write file
 
                             println(s"before inputStream")
-                            val inputStream = fi.getInputStream()
+                            val inputStream  = fi.getInputStream()
                             println(s"after inputStream")
 
                             val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
@@ -163,6 +163,7 @@ class UploadServlet extends HttpServlet {
 
                                     println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
                                     //pstmt.setBinaryStream(3, inputStream)
+                                    
                                     pstmt.setBlob(3, inputStream, fi.getSize)
                                     println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
@@ -171,12 +172,13 @@ class UploadServlet extends HttpServlet {
                                     println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                     conn.commit()
+                                    fi.delete()
 
                                     val elapsedTime = System.currentTimeMillis() - startTime
                                     println(s"after conn.commit() elapsedTime for $fileName : ${DT(elapsedTime).toString}")
 
                                     //@formatter:off
-                                    body = body addChild <h2>{s"Uploaded File : $fileName" + s"; elapsedTime for $fileName : ${DT(elapsedTime).toString}"}</h2>
+                                    body = body addChild <h2>{s"Uploaded File : $fileName" + s"; elapsedTime : ${DT(elapsedTime).toString}"}</h2>
                                     //@formatter:on
                             }
                         }
@@ -186,7 +188,6 @@ class UploadServlet extends HttpServlet {
                 out
             } match {
                 case Success(out) ⇒
-                    file.delete()
                     conn.foreach {
                         conn ⇒
                             dcr.foreach(conn unregisterDatabaseChangeNotification _)
@@ -195,7 +196,6 @@ class UploadServlet extends HttpServlet {
                     response Print out
 
                 case Failure(e) ⇒
-                    file.delete()
                     conn.foreach(_.close())
                     response.makePageMessage(e.getMessage)
             }
