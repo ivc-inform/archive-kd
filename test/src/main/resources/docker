@@ -14,3 +14,6 @@ sqlplus eakd/eakd@//localhost:1521/test
 
 ALTER USER eakd quota unlimited on users;
 
+alter database datafile '/opt/oracle/oradata/ORCLCDB/test/users01.dbf' resize 20G;
+
+
