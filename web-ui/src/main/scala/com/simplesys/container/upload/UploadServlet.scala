@@ -61,8 +61,9 @@ class UploadServlet extends HttpServlet {
 
             val factory = new DiskFileItemFactory()
 
-            factory setRepository new File("./temp")
-            val upload = new ServletFileUpload(factory)
+            val file = new File("./temp")
+            factory setRepository file
+            val upload: ServletFileUpload = new ServletFileUpload(factory)
 
             val ds = new OracleDataSource
 
@@ -185,6 +186,7 @@ class UploadServlet extends HttpServlet {
                 out
             } match {
                 case Success(out) ⇒
+                    file.delete()
                     conn.foreach {
                         conn ⇒
                             dcr.foreach(conn unregisterDatabaseChangeNotification _)
@@ -193,6 +195,7 @@ class UploadServlet extends HttpServlet {
                     response Print out
 
                 case Failure(e) ⇒
+                    file.delete()
                     conn.foreach(_.close())
                     response.makePageMessage(e.getMessage)
             }
