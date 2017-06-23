@@ -1,13 +1,15 @@
 package com.simplesys.container.upload
 
 import java.io.File
+import java.util.Properties
 import javax.servlet.annotation.WebServlet
 
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.HTMLContent
 import com.simplesys.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
 import com.simplesys.util.DT
-import oracle.jdbc.driver.OracleConnection
+import oracle.jdbc.OracleConnection
+import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener}
 import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
@@ -62,6 +64,33 @@ class UploadServlet extends HttpServlet {
             factory setRepository new File("./temp")
             val upload = new ServletFileUpload(factory)
 
+            val ds = new OracleDataSource
+
+            //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
+            ds.setURL("jdbc:oracle:thin:@//localhost:1521/test")
+
+            ds.setUser("eakd")
+            ds.setPassword("eakd")
+
+            val conn = Option(ds.getConnection.asInstanceOf[OracleConnection])
+
+            val dcr = conn.map {
+                conn ⇒
+                    conn setAutoCommit false
+
+                    val prop = new Properties()
+                    prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
+                    val dcr = conn.registerDatabaseChangeNotification(prop)
+
+                    dcr.addListener(new DatabaseChangeListener {
+                        def onDatabaseChangeNotification(dce: DatabaseChangeEvent): Unit = {
+                            println(dce.toString)
+                        }
+                    })
+                    dcr
+            }
+
+
             Try {
 
                 //@formatter:off
@@ -89,8 +118,8 @@ class UploadServlet extends HttpServlet {
                     }
                 }
 
-                //upload setProgressListener progressListener
 
+                //upload setProgressListener progressListener
                 var body = <body></body>
                 upload.parseRequest(request).asScala.foreach {
                     fi ⇒
@@ -112,49 +141,43 @@ class UploadServlet extends HttpServlet {
 
                             //val file = new File(filePath + "//" + fileName)
                             //fi write file
-                            
+
                             println(s"before inputStream")
                             val inputStream = fi.getInputStream()
                             println(s"after inputStream")
 
-                            val ds = new OracleDataSource
-
-                            //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
-
-                            ds.setURL("jdbc:oracle:thin:@//localhost:1521/test")
-                            ds.setUser("eakd")
-                            ds.setPassword("eakd")
-
-                            val conn = ds.getConnection.asInstanceOf[OracleConnection]
-                            conn setAutoCommit false
-
                             val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
 
-                            val pstmt = conn prepareStatement sql
-                            println(s"before pstmt.setLong(1, 1L); elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
-                            pstmt.setLong(1, 1L)
-                            println(s"after pstmt.setLong(1, 1L); elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
+                            conn.foreach {
+                                conn ⇒
+                                    val pstmt = conn prepareStatement sql
 
-                            println(s"before pstmt.setString(2, $fileName)")
-                            pstmt.setString(2, fileName)
-                            println(s"after pstmt.setString(2, $fileName) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
+                                    println(s"before pstmt.setLong(1, 1L); elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
+                                    pstmt.setLong(1, 1L)
+                                    println(s"after pstmt.setLong(1, 1L); elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
-                            println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
-                            //pstmt.setBinaryStream(3, inputStream)
-                            pstmt.setBlob(3, inputStream, fi.getSize)
-                            println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
+                                    println(s"before pstmt.setString(2, $fileName)")
+                                    pstmt.setString(2, fileName)
+                                    println(s"after pstmt.setString(2, $fileName) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
-                            println(s"before pstmt.executeUpdate")
-                            pstmt.execute()
-                            println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
+                                    println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
+                                    //pstmt.setBinaryStream(3, inputStream)
+                                    pstmt.setBlob(3, inputStream, fi.getSize)
+                                    println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
-                            conn.commit()
-                            val elapsedTime = System.currentTimeMillis() - startTime
-                            println(s"after conn.commit() elapsedTime for $fileName : ${DT(elapsedTime).toString}")
+                                    println(s"before pstmt.executeUpdate")
+                                    pstmt.execute()
+                                    println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
-                            //@formatter:off
-                            body = body addChild <h2>{s"Uploaded File : $fileName" + s"elapsedTime for $fileName : ${DT(elapsedTime).toString}"}</h2>
-                            //@formatter:on
+                                    conn.commit()
+
+                                    val elapsedTime = System.currentTimeMillis() - startTime
+                                    println(s"after conn.commit() elapsedTime for $fileName : ${DT(elapsedTime).toString}")
+
+                                    //@formatter:off
+                                    body = body addChild <h2>{s"Uploaded File : $fileName" + s"elapsedTime for $fileName : ${DT(elapsedTime).toString}"}</h2>
+                                    //@formatter:on
+                            }
                         }
                 }
 
@@ -162,9 +185,15 @@ class UploadServlet extends HttpServlet {
                 out
             } match {
                 case Success(out) ⇒
+                    conn.foreach {
+                        conn ⇒
+                            dcr.foreach(conn unregisterDatabaseChangeNotification _)
+                            conn.close()
+                    }
                     response Print out
 
                 case Failure(e) ⇒
+                    conn.foreach(_.close())
                     response.makePageMessage(e.getMessage)
             }
         }
