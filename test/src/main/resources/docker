@@ -18,4 +18,4 @@ alter database datafile '/opt/oracle/oradata/ORCLCDB/test/users01.dbf' resize 20
 
 grant execute on DBMS_CRYPTO to eakd;
 
-
+SELECT GET_MD5SUM_BLOB_FN(BLOB_VALUE) md5 FROM TEST_UPLOAD_FILES;
