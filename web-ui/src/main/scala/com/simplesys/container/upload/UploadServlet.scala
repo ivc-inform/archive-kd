@@ -120,7 +120,7 @@ class UploadServlet extends HttpServlet {
                 }
 
 
-                upload setProgressListener progressListener
+                //upload setProgressListener progressListener
                 var body = <body></body>
                 upload.parseRequest(request).asScala.foreach {
                     fi ⇒
@@ -162,9 +162,9 @@ class UploadServlet extends HttpServlet {
                                     println(s"after pstmt.setString(2, $fileName) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                     println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
-                                    //pstmt.setBinaryStream(3, inputStream)
+                                    pstmt.setBinaryStream(3, inputStream)
                                     
-                                    pstmt.setBlob(3, inputStream, fi.getSize)
+                                    //pstmt.setBlob(3, inputStream, fi.getSize)
                                     println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                     println(s"before pstmt.executeUpdate")
