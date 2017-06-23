@@ -176,7 +176,7 @@ class UploadServlet extends HttpServlet {
                                     println(s"after conn.commit() elapsedTime for $fileName : ${DT(elapsedTime).toString}")
 
                                     //@formatter:off
-                                    body = body addChild <h2>{s"Uploaded File : $fileName" + s"elapsedTime for $fileName : ${DT(elapsedTime).toString}"}</h2>
+                                    body = body addChild <h2>{s"Uploaded File : $fileName" + s"; elapsedTime for $fileName : ${DT(elapsedTime).toString}"}</h2>
                                     //@formatter:on
                             }
                         }
