@@ -16,4 +16,6 @@ ALTER USER eakd quota unlimited on users;
 
 alter database datafile '/opt/oracle/oradata/ORCLCDB/test/users01.dbf' resize 20G;
 
+grant execute on DBMS_CRYPTO to eakd;
+
 
