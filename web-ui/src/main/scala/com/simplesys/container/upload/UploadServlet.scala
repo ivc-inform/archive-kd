@@ -130,26 +130,26 @@ class UploadServlet extends HttpServlet {
                             val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
 
                             val pstmt = conn prepareStatement sql
-                            println(s"before pstmt.setLong(1, 1L)")
+                            println(s"before pstmt.setLong(1, 1L); elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
                             pstmt.setLong(1, 1L)
-                            println(s"after pstmt.setLong(1, 1L)")
+                            println(s"after pstmt.setLong(1, 1L); elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                             println(s"before pstmt.setString(2, $fileName)")
                             pstmt.setString(2, fileName)
-                            println(s"after pstmt.setString(2, $fileName)")
+                            println(s"after pstmt.setString(2, $fileName) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                             println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
                             //pstmt.setBinaryStream(3, inputStream)
                             pstmt.setBlob(3, inputStream, fi.getSize)
-                            println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize})")
+                            println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                             println(s"before pstmt.executeUpdate")
                             pstmt.execute()
-                            println(s"pstmt.executeUpdate")
+                            println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                             conn.commit()
                             val elapsedTime = System.currentTimeMillis() - startTime
-                            println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
+                            println(s"after conn.commit() elapsedTime for $fileName : ${DT(elapsedTime).toString}")
 
                             //@formatter:off
                             body = body addChild <h2>{s"Uploaded File : $fileName" + s"elapsedTime for $fileName : ${DT(elapsedTime).toString}"}</h2>
