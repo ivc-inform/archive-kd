@@ -5,6 +5,7 @@ import com.simplesys.app.http.StartPage
 import com.simplesys.common._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, ServletActor, ServletContext}
+import com.simplesys.SmartClient.System._
 
 //http://localhost:8083/archive-kd/StartPage
 @RSTransfer(urlPattern = "/StartPage")
@@ -12,7 +13,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
     def receive = {
         case GetData => {
-            val textHTML = new StartPage("Архив электронных документов", scalatags.Text)
+            val textHTML = new StartPage("Архив электронных документов".ellipsis, scalatags.Text)
 
             val html = "<!DOCTYPE html>" +
               textHTML.bodyHTML(
@@ -24,7 +25,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
               ).render.unEscape
 
 
-            logger debug html
+            //logger debug html
             Out(html)
 
             selfStop()
@@ -40,7 +41,7 @@ class StartUploadPageContainer(val request: HttpServletRequest, val response: Ht
 
     def receive = {
         case GetData => {
-            val textHTML = new StartPage("Загрузчик файлов", scalatags.Text)
+            val textHTML = new StartPage("Загрузчик файлов".ellipsis, scalatags.Text)
 
             val html = "<!DOCTYPE html>" +
               textHTML.bodyHTML(

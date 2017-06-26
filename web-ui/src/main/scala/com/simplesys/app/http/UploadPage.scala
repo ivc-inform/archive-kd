@@ -19,7 +19,7 @@ object UploadPage extends WebTabSetApp {
     self ⇒
 
     override protected val loadSchemas = com.simplesys.app.loadSchemas
-    override protected val identifier: ID = "1EEA9903-B7D5-17CD-2889-01B774FB8FD1"
+    override protected val identifier: ID = "24115187-2DC0-8A44-C723-C1A79C9050D9"
     override protected val appImageDir: String = "images/"
 
 
