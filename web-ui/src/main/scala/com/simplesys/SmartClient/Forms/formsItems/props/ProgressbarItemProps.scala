@@ -16,7 +16,7 @@ import scala.scalajs.js._
 class ProgressbarItemProps extends CanvasItemProps {
     type classHandler <: ProgressbarItem
 
-    height = "*"
+    height = 25
     width = "*"
     rowSpan = "*"
     endRow = true.opt

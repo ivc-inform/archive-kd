@@ -3,7 +3,7 @@ package com.simplesys.container.upload.props
 import com.simplesys.SmartClient.Control.props.ProgressbarProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.{FormItem, SubmitItem}
-import com.simplesys.SmartClient.Forms.formsItems.props.{SubmitItemProps, UploadItemProps}
+import com.simplesys.SmartClient.Forms.formsItems.props.{ProgressbarItemProps, SubmitItemProps, UploadItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
@@ -36,7 +36,7 @@ class UploadTestTabProps extends HLayoutProps {
                                 title = "Choose file".opt
                                 changed = {
                                     (form: DynamicFormSS, item: FormItem, value: JSUndefined[JSAny]) ⇒
-                                        val submit = form getItem  1
+                                        val submit = form getItem 1
                                         //isc debugTrap submit
                                         if (value.isDefined) submit.enable() else submit.disable()
 
@@ -52,12 +52,12 @@ class UploadTestTabProps extends HLayoutProps {
                                         false
                                 }.toFunc.opt
                             }
-                        )/*,
-                        Progressbar(
-                            new ProgressbarProps {
-                                
+                        ),
+                        ProgressbarItem(
+                            new ProgressbarItemProps {
+                                title = "Процесс выгрузки".ellipsis.opt
                             }
-                        )*/
+                        )
                     ).opt
                 }
             )
