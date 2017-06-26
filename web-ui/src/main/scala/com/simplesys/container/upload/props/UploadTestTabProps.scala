@@ -38,15 +38,11 @@ class UploadTestTabProps extends HLayoutProps {
                                 //showTitle = false.opt
                                 title = "Choose file".opt
                                 //showFileInline = true.opt
+                                ID = "69EC6EB4-E51F-B7A9-C1E0-CF216085122F".opt
                                 changed = {
                                     (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                         val submit = form getItem 1
-                                        //isc debugTrap value
-                                        //isc debugTrap item.getID()
-                                        val uploadItem = document.getElementById(item.getID()).asInstanceOf[HTMLInputElement]
-                                        //uploadItem.files
-                                        isc debugTrap uploadItem
-                                        value.map(_.toString).foreach(isc.ok(_))
+                                        value.map(_.toString.replace("C:\\fakepath\\", "")).foreach(isc.ok(_))
                                         if (value.isDefined) submit.enable() else submit.disable()
 
                                 }.toFunc.opt
