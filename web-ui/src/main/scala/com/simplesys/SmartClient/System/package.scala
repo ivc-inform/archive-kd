@@ -139,6 +139,7 @@ package object System {
     object SubmitItem extends SCApply4Object[SubmitItem, SubmitItemProps]
     object ButtonItem extends SCApply4Object[ButtonItem, ButtonItemProps]
     object UploadItem extends SCApply4Object[UploadItem, UploadItemProps]
+    object FileItem extends SCApply4Object[FileItem, FileItemProps]
     object ProgressbarItem extends SCApply4Object[ProgressbarItem, ProgressbarItemProps]
 
     object FormItemWithButtons extends SCApply4Object[FormItemWithButtons, FormItemWithButtonsProps]

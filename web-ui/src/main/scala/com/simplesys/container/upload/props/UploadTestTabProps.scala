@@ -2,8 +2,8 @@ package com.simplesys.container.upload.props
 
 import com.simplesys.SmartClient.Control.props.ProgressbarProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.formsItems.{FormItem, SubmitItem}
-import com.simplesys.SmartClient.Forms.formsItems.props.{ProgressbarItemProps, SubmitItemProps, UploadItemProps}
+import com.simplesys.SmartClient.Forms.formsItems.{FileItem, FormItem, SubmitItem, UploadItem}
+import com.simplesys.SmartClient.Forms.formsItems.props.{FileItemProps, ProgressbarItemProps, SubmitItemProps, UploadItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
@@ -12,6 +12,9 @@ import com.simplesys.System._
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
+import org.scalajs.dom
+import dom.document
+import org.scalajs.dom.raw.{Element, HTMLInputElement, NodeList}
 
 import scala.scalajs.js._
 
@@ -34,10 +37,16 @@ class UploadTestTabProps extends HLayoutProps {
                             new UploadItemProps {
                                 //showTitle = false.opt
                                 title = "Choose file".opt
+                                //showFileInline = true.opt
                                 changed = {
-                                    (form: DynamicFormSS, item: FormItem, value: JSUndefined[JSAny]) ⇒
+                                    (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                         val submit = form getItem 1
-                                        //isc debugTrap submit
+                                        //isc debugTrap value
+                                        //isc debugTrap item.getID()
+                                        val uploadItem = document.getElementById(item.getID()).asInstanceOf[HTMLInputElement]
+                                        //uploadItem.files
+                                        isc debugTrap uploadItem
+                                        value.map(_.toString).foreach(isc.ok(_))
                                         if (value.isDefined) submit.enable() else submit.disable()
 
                                 }.toFunc.opt
