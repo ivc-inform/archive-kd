@@ -305,24 +305,6 @@ trait WebTabSetApp extends TabSetStack {
                     )
                 ).opt
             }
-        ),
-        RibbonGroupSS.create(
-            new RibbonGroupSSProps {
-                title = "Разработчики".ellipsis.opt
-                controls = Seq(
-                    IconButtonSS.create(
-                        new IconButtonSSProps {
-                            title = "Upload Test".opt
-                            icon = Common.upload.opt
-                            orientation = "gorizontal".opt
-                            click = {
-                                (thiz: classHandler) =>                                   
-                                    false
-                            }.toThisFunc.opt
-                        }
-                    )
-                ).opt
-            }
         )
     ).map {
         item =>

@@ -6,9 +6,13 @@ import com.simplesys.SmartClient.DataBinding.RestDataSourceSS
 import com.simplesys.SmartClient.Forms.formsItems.FormItem
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.RibbonGroupSS
-import com.simplesys.SmartClient.System.SettingsEditor
+import com.simplesys.SmartClient.Layout.props.{IconButtonSSProps, RibbonGroupSSProps}
+import com.simplesys.SmartClient.System.{Common, IconButtonSS, RibbonGroupSS, SettingsEditor, _}
 import com.simplesys.System.NameStrong
 import com.simplesys.System.Types.ID
+import com.simplesys.app.UploadTestTab
+import com.simplesys.container.upload.props.UploadTestTabProps
+import com.simplesys.function._
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
@@ -40,7 +44,28 @@ object UploadPage extends WebTabSetApp {
         }
     )
 
-    override protected def managedUsersGroups = Seq.empty[RibbonGroupSS]
+    override protected def managedUsersGroups = Seq(
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Разработчики".ellipsis.opt
+                controls = Seq(
+                    IconButtonSS.create(
+                        new IconButtonSSProps {
+                            identifier = "6DC5A7AE-20CF-D2C5-364C-EAE4B53CDDDC".opt
+                            title = "Upload Test".opt
+                            icon = Common.upload.opt
+                            orientation = "gorizontal".opt
+                            click = {
+                                (thiz: classHandler) =>
+                                    addTab(UploadTestTab.create(new UploadTestTabProps), thiz)
+                                    false
+                            }.toThisFunc.opt
+                        }
+                    )
+                ).opt
+            }
+        )
+    )
     override protected def progectManagedDevsGroups = Seq.empty[RibbonGroupSS]
 
     @JSExportTopLevel("GetUploadExampleUIContent")
