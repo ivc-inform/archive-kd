@@ -138,6 +138,7 @@ package object System {
     object PasswordItem extends SCApply4Object[PasswordItem, PasswordItemProps]
     object SubmitItem extends SCApply4Object[SubmitItem, SubmitItemProps]
     object ButtonItem extends SCApply4Object[ButtonItem, ButtonItemProps]
+    object UploadItem extends SCApply4Object[UploadItem, UploadItemProps]
 
     object FormItemWithButtons extends SCApply4Object[FormItemWithButtons, FormItemWithButtonsProps]
     object ComboboxItemWithButtonsJS extends SCApply4Object[ComboboxItemWithButtonsJS, ComboboxItemWithButtonsJSProps]

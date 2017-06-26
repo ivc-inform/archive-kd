@@ -188,9 +188,11 @@ trait TabSetStack extends TabSetsStack {
                             }.toFunc.opt
                             tabSelected = {
                                 (tabSet: TabSet, tabNum: Int, tabPane: Canvas, ID: JSUndefined[ID], tab: Tab, name: JSUndefined[String]) =>
-                                    if (tabPane.asInstanceOf[TabSetSS].getSelectedTab().isEmpty)
-                                        functionButton.menu = jSUndefined
+//                                    if (tabPane.asInstanceOf[TabSetSS].getSelectedTab().isEmpty)
+//                                        functionButton.menu = jSUndefined
 
+                                    functionButton.menu = jSUndefined
+                                    
                                     tabPane.asInstanceOf[TabSetSS].getSelectedTab().foreach {
                                         tab ⇒
                                             if (tab.pane.isEmpty)

@@ -25,8 +25,6 @@ import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.annotation.JSExport
-
 trait WebTabSetApp extends TabSetStack {
 
     self =>
