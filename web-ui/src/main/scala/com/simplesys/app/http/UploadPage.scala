@@ -9,7 +9,7 @@ import com.simplesys.SmartClient.Layout.RibbonGroupSS
 import com.simplesys.SmartClient.Layout.props.{IconButtonSSProps, RibbonGroupSSProps}
 import com.simplesys.SmartClient.System.{Common, IconButtonSS, RibbonGroupSS, SettingsEditor, _}
 import com.simplesys.System.NameStrong
-import com.simplesys.System.Types.ID
+import com.simplesys.System.Types.{ID, Visibility}
 import com.simplesys.app.UploadTestTab
 import com.simplesys.container.upload.props.UploadTestTabProps
 import com.simplesys.function._
@@ -48,6 +48,7 @@ object UploadPage extends WebTabSetApp {
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Разработчики".ellipsis.opt
+                visibility = Visibility.hidden.opt
                 controls = Seq(
                     IconButtonSS.create(
                         new IconButtonSSProps {
