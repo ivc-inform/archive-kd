@@ -164,7 +164,7 @@ class FormItemProps extends ClassProps {
     var rejectInvalidValueOnChange: ScOption[Boolean] = ScNone
     var required: ScOption[Boolean] = ScNone
     var requiredMessage: ScOption[String] = ScNone
-    var rowSpan: ScOption[Int] = ScNone
+    var rowSpan: ScOption[IntString[Int, String]] = ScNone
     var saveOnEnter: ScOption[Boolean] = ScNone
     var selectOnClick: ScOption[Boolean] = ScNone
     var selectOnFocus: ScOption[Boolean] = ScNone

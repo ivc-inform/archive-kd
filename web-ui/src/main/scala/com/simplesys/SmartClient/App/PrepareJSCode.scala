@@ -45,6 +45,7 @@ object PrepareJSCode extends StaticJSCode {
         isc.defineClass(LookupTreeGridEditorItem.getClass.getSimpleName, CanvasItem.getClass.getSimpleName)
         isc.defineClass(TextItemSS.getClass.getSimpleName, TextItem.getClass.getSimpleName)
         isc.defineClass(TextAreaItemSS.getClass.getSimpleName, TextAreaItem.getClass.getSimpleName)
+        isc.defineClass(ProgressbarItem.getClass.getSimpleName, CanvasItem.getClass.getSimpleName)
         isc.defineClass(DateTimeItemSS.getClass.getSimpleName, DateTimeItem.getClass.getSimpleName)
         isc.defineClass(EditorUsers.getClass.getSimpleName, CommonTreeListGridEditorComponent.getClass.getSimpleName)
         isc.defineClass(EditorUserGroups.getClass.getSimpleName, CommonTreeGridEditorComponent.getClass.getSimpleName)

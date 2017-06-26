@@ -16,8 +16,7 @@ import com.simplesys.System.Types.AutoFitWidthApproach.AutoFitWidthApproach
 import com.simplesys.System.Types.DateDisplayFormat._
 import com.simplesys.System.Types.DragDataAction._
 import com.simplesys.System.Types.DragTrackerMode.DragTrackerMode
-import com.simplesys.System.Types.ExportFormat.{apply ⇒ _}
-import com.simplesys.System.Types.FetchMode.{apply ⇒ _, _}
+import com.simplesys.System.Types.FetchMode.FetchMode
 import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
 import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPoolingMode
 import com.simplesys.System.Types.SelectionAppearance.SelectionAppearance
@@ -30,7 +29,6 @@ import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js._
-import scala.scalajs.js.annotation.ScalaJSDefined
 
 class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends VLayoutSSProps {
 

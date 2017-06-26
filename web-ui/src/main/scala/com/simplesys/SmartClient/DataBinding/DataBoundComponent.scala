@@ -81,7 +81,7 @@ trait DataBoundComponent extends Class {
     def getDataPathField(dataPath: DataPath): Field
     def getDragData(source: DataBoundComponent): IscArray[Record]
     def getDropValues(record: Record, sourceDS: DataSource, targetRecord: Record, index: Int, sourceWidget: Canvas): JSObject
-    def getField(fieldID: String | Int): Field
+    def getField(fieldID: String | Int): JSUndefined[Field]
     def getFieldAlignments(): IscArray[Alignment]
     def getFieldNum(fieldID: String | Int): Int
     def getFormulaFieldValue(field: Field, record: Record): Double | String

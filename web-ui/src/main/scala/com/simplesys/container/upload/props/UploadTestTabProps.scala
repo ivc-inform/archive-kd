@@ -1,6 +1,8 @@
 package com.simplesys.container.upload.props
 
+import com.simplesys.SmartClient.Control.props.ProgressbarProps
 import com.simplesys.SmartClient.Forms.DynamicFormSS
+import com.simplesys.SmartClient.Forms.formsItems.{FormItem, SubmitItem}
 import com.simplesys.SmartClient.Forms.formsItems.props.{SubmitItemProps, UploadItemProps}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
@@ -23,24 +25,44 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
-            thiz addMember DynamicForm.create(
+            val form = DynamicForm.create(
                 new DynamicFormSSProps {
                     action = "UploadServlet".opt
                     encoding = Encoding.multipart.opt
-                    fields = Seq(
+                    items = Seq(
                         UploadItem(
                             new UploadItemProps {
+                                //showTitle = false.opt
+                                title = "Choose file".opt
+                                changed = {
+                                    (form: DynamicFormSS, item: FormItem, value: JSUndefined[JSAny]) ⇒
+                                        val submit = form getItem  1
+                                        //isc debugTrap submit
+                                        if (value.isDefined) submit.enable() else submit.disable()
 
+                                }.toFunc.opt
                             }
-                        ),
-                        SubmitItem(
+                        ), SubmitItem(
                             new SubmitItemProps {
+                                disabled = true.opt
                                 title = "Upload".opt
+                                click = {
+                                    (form: DynamicFormSS, item: FormItem) ⇒
+                                        form.submitForm()
+                                        false
+                                }.toFunc.opt
                             }
-                        )
+                        )/*,
+                        Progressbar(
+                            new ProgressbarProps {
+                                
+                            }
+                        )*/
                     ).opt
                 }
             )
+
+            thiz addMember form
 
         //isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
