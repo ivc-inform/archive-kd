@@ -2,14 +2,14 @@ package com.simplesys.app.http
 
 import scalatags.generic.Bundle
 
-class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT]) {
+class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: Bundle[Builder, Output, FragT]) {
     def bodyHTML(lastScript: String, fullOpt: Boolean = false) = {
         import bundle.all._
 
         val subPath = "javascript/generated/generatedComponents"
         html(lang := "en",
             head(
-                bundle.tags2.title("Архив электронных документов"),
+                bundle.tags2.title(_title),
                 meta(httpEquiv := "Content-Type", content := "text/html; charset=utf-8")
             ),
             body(

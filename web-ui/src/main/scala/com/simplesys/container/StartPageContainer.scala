@@ -12,7 +12,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
     def receive = {
         case GetData => {
-            val textHTML = new StartPage(scalatags.Text)
+            val textHTML = new StartPage("Архив электронных документов", scalatags.Text)
 
             val html = "<!DOCTYPE html>" +
               textHTML.bodyHTML(
@@ -40,7 +40,7 @@ class StartUploadPageContainer(val request: HttpServletRequest, val response: Ht
 
     def receive = {
         case GetData => {
-            val textHTML = new StartPage(scalatags.Text)
+            val textHTML = new StartPage("Загрузчик файлов", scalatags.Text)
 
             val html = "<!DOCTYPE html>" +
               textHTML.bodyHTML(
@@ -52,7 +52,7 @@ class StartUploadPageContainer(val request: HttpServletRequest, val response: Ht
               ).render.unEscape
 
 
-            logger debug html
+            //logger debug html
             Out(html)
 
             selfStop()
