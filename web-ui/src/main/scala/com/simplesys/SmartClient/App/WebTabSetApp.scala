@@ -64,8 +64,8 @@ trait WebTabSetApp extends TabSetStack {
             ).opt
         })
 
-    protected def managedUsersGroups: Seq[RibbonGroupSS]
-    protected def progectManagedDevsGroups: Seq[RibbonGroupSS]
+    protected val managedUsersGroups: Seq[RibbonGroupSS]
+    protected val progectManagedDevsGroups: Seq[RibbonGroupSS]
 
     //@JSExport
     def getUIContent() {

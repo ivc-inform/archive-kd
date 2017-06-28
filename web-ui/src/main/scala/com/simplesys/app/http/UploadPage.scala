@@ -44,7 +44,7 @@ object UploadPage extends WebTabSetApp {
         }
     )
 
-    override protected def managedUsersGroups = Seq(
+    override protected val managedUsersGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Разработчики".ellipsis.opt
@@ -52,7 +52,7 @@ object UploadPage extends WebTabSetApp {
                 controls = Seq(
                     IconButtonSS.create(
                         new IconButtonSSProps {
-                            identifier = "6DC5A7AE-20CF-D2C5-364C-EAE4B53CDDDC".opt
+                            identifier = "BA4E6DF4-FE83-FE30-0F22-6E1BA40CA422".opt
                             title = "Upload Test".opt
                             icon = Common.upload.opt
                             orientation = "gorizontal".opt
@@ -67,7 +67,8 @@ object UploadPage extends WebTabSetApp {
             }
         )
     )
-    override protected def progectManagedDevsGroups = Seq.empty[RibbonGroupSS]
+
+    override protected val progectManagedDevsGroups = Seq.empty[RibbonGroupSS]
 
     @JSExportTopLevel("GetUploadExampleUIContent")
     def GetUIContent(): Unit = {
