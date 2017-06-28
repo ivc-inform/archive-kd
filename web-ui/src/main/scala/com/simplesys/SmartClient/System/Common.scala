@@ -91,4 +91,5 @@ object Common {
     val load = "load.png"
     val jsonGear = "json-gear.png"
     val save = "save.png"
+    val upload = "upload.png"
 }

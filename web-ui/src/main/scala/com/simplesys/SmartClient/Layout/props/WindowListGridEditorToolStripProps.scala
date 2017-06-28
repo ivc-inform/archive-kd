@@ -14,7 +14,7 @@ import com.simplesys.option.{ScNone, ScOption}
 import scala.scalajs.js.ThisFunction0
 import scala.scalajs.js.annotation.ScalaJSDefined
 
-@ScalaJSDefined
+
 trait VisibleButtons extends JSObject {
     val newButton: Visibility
     val editButton: Visibility

@@ -87,7 +87,7 @@ trait DataBoundComponentProps extends ClassProps {
 
             val transactionID = isc.RPCManager.getQueueTransactionId()
             val _channelMessage4RemoveOperation = s"ListElements_Remove_$transactionID"
-            val _channelMessage4RemoveAddOperation = s"ListElements_EndRemove_$transactionID"
+            val _channelMessage4EndRemoveOperation = s"ListElements_EndRemove_$transactionID"
 
             transactionID.foreach {
                 transactionID ⇒
@@ -100,10 +100,10 @@ trait DataBoundComponentProps extends ClassProps {
                     )
 
                     isc.MessagingSS.subscribe(
-                        _channelMessage4RemoveAddOperation, {
+                        _channelMessage4EndRemoveOperation, {
                             (e: MessageJS) ⇒
                                 isc.MessagingSS unsubscribe _channelMessage4RemoveOperation
-                                isc.MessagingSS unsubscribe _channelMessage4RemoveAddOperation
+                                isc.MessagingSS unsubscribe _channelMessage4EndRemoveOperation
 
                                 progressBar.foreach(_.markForDestroy())
                         }

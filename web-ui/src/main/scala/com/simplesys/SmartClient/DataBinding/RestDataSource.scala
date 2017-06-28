@@ -6,19 +6,19 @@ import com.simplesys.System._
 import scala.scalajs.js
 import scala.scalajs.js.annotation.ScalaJSDefined
 
-@ScalaJSDefined
+
 trait ErrorStruct extends JSObject {
     val errorMessage: JSUndefined[String]
     val stackTrace: JSUndefined[String]
     val status: JSUndefined[Int]
 }
 
-@ScalaJSDefined
+
 trait ErrorStructOld extends JSObject {
     val error: JSUndefined[Error]
 }
 
-@ScalaJSDefined
+
 trait ResponseData extends JSObject {
     val data: JSUndefined[ErrorStruct]
     val status: JSUndefined[Int]

@@ -76,6 +76,8 @@ package object System {
     object Date extends SCApply4Object[Date, DateProps]
 
     //<editor-fold desc="Control">
+    object Dialog extends SCApply[Dialog, DialogProps]
+    object DialogSS extends SCApply[DialogSS, DialogSSProps]
     object IButtonSS extends SCApply[IButtonSS, IButtonSSProps]
     object CancelButton extends SCApply[CancelButton, CancelButtonProps]
     object IMenuButton extends SCApply[IMenuButton, IMenuButtonProps]
@@ -138,6 +140,9 @@ package object System {
     object PasswordItem extends SCApply4Object[PasswordItem, PasswordItemProps]
     object SubmitItem extends SCApply4Object[SubmitItem, SubmitItemProps]
     object ButtonItem extends SCApply4Object[ButtonItem, ButtonItemProps]
+    object UploadItem extends SCApply4Object[UploadItem, UploadItemProps]
+    object FileItem extends SCApply4Object[FileItem, FileItemProps]
+    object ProgressbarItem extends SCApply4Object[ProgressbarItem, ProgressbarItemProps]
 
     object FormItemWithButtons extends SCApply4Object[FormItemWithButtons, FormItemWithButtonsProps]
     object ComboboxItemWithButtonsJS extends SCApply4Object[ComboboxItemWithButtonsJS, ComboboxItemWithButtonsJSProps]

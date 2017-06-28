@@ -10,7 +10,7 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
-@ScalaJSDefined
+
 trait ClientContext extends JSObject {
     val fetchID: ID
 }

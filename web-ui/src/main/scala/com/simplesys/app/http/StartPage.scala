@@ -2,14 +2,14 @@ package com.simplesys.app.http
 
 import scalatags.generic.Bundle
 
-class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Output, FragT]) {
-    def bodyHTML(lastScript: String) = {
+class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: Bundle[Builder, Output, FragT]) {
+    def bodyHTML(lastScript: String, fullOpt: Boolean = false) = {
         import bundle.all._
 
         val subPath = "javascript/generated/generatedComponents"
         html(lang := "en",
             head(
-                bundle.tags2.title("Архив электронных документов"),
+                bundle.tags2.title(_title),
                 meta(httpEquiv := "Content-Type", content := "text/html; charset=utf-8")
             ),
             body(
@@ -56,7 +56,6 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/TabSetSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/SkinBoxItem.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DataViewSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DialogSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VStackSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/HStackSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VLayoutSS.js"),
@@ -89,7 +88,7 @@ class StartPage[Builder, Output <: FragT, FragT](val bundle: Bundle[Builder, Out
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/WindowWrapper.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/LookupEditor.js"),
 
-                script(src := s"javascript/generated/generatedComponentsJS/web-ui-fastopt.js"),
+                script(src := s"javascript/generated/generatedComponentsJS/${if (fullOpt) "web-ui-opt.js" else "web-ui-fastopt.js"}"),
                 link(href := "managed/css/common-webapp/logging_styles.css", rel := "stylesheet", `type` := "text/css"),
                 script(lastScript)
             )

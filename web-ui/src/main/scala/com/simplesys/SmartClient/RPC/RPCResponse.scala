@@ -8,7 +8,7 @@ import com.simplesys.System.{JSDictionary, JSObject, JSUndefined}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 
-@ScalaJSDefined
+
 trait Response extends JSObject {
     val response: JSUndefined[RPCResponse]
 }

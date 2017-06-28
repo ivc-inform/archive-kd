@@ -2,7 +2,7 @@
 $hash = htmlspecialchars(stripslashes($_GET["hash"]));
 $hash = md5("test");
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
     <head>
         <title>video.novgorod.ru</title>
@@ -41,7 +41,6 @@ $hash = md5("test");
         </style>
 
         <script type="text/javascript" src="./fileuploader.js?nc=<?php print time(); ?>"></script>
-
     </head>
     <body onload="ShowForm();">
         <div class="content">

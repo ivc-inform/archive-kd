@@ -23,13 +23,13 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSGlobal, JSName, ScalaJSDefined}
 import scala.scalajs.js.|
 
-@ScalaJSDefined
+
 trait RotationCenter extends JSObject {
     val cx: Double
     val cy: Double
 }
 
-@ScalaJSDefined
+
 trait CalculateTitleLabelPositionInfo extends JSObject {
     // in drawing coordinates
     val topLeftPoint: Point
@@ -40,7 +40,7 @@ trait CalculateTitleLabelPositionInfo extends JSObject {
     val dims: DrawLabel
 }
 
-@ScalaJSDefined
+
 trait LiveObject extends JSObject {
     var canDrag: Boolean
     val fieldDataSource: JSUndefined[DataSource]

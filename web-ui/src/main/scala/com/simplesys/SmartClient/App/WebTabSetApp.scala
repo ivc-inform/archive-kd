@@ -25,8 +25,6 @@ import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.annotation.JSExport
-
 trait WebTabSetApp extends TabSetStack {
 
     self =>
@@ -66,8 +64,8 @@ trait WebTabSetApp extends TabSetStack {
             ).opt
         })
 
-    protected def managedUsersGroups: Seq[RibbonGroupSS]
-    protected def progectManagedDevsGroups: Seq[RibbonGroupSS]
+    protected val managedUsersGroups: Seq[RibbonGroupSS]
+    protected val progectManagedDevsGroups: Seq[RibbonGroupSS]
 
     //@JSExport
     def getUIContent() {
@@ -103,9 +101,7 @@ trait WebTabSetApp extends TabSetStack {
                                                         new DataViewProps {
                                                             height = "100%"
                                                             width = "100%"
-                                                            members = Seq(
-                                                                mainCanvas
-                                                            ).opt
+                                                            members = Seq(mainCanvas).opt
                                                         }
                                                     )
                                             )
@@ -114,9 +110,7 @@ trait WebTabSetApp extends TabSetStack {
                                                 new DataViewProps {
                                                     height = "100%"
                                                     width = "100%"
-                                                    members = Seq(
-                                                        mainCanvas
-                                                    ).opt
+                                                    members = Seq(mainCanvas).opt
                                                 }
                                             )
                                 })

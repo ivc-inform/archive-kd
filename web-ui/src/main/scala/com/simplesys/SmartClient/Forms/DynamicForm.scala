@@ -83,7 +83,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def getErrorsHTML(errors: JSObject): HTMLString
     def getEventItem(): FormItem
     def getEventItemInfo(): FormItemEventInfo
-    def getField(itemName: String): JSUndefined[FormItem]
+    def getField(itemName: String | Int): JSUndefined[FormItem]
     def getFieldErrors(fieldName: String): IscArray[String]
     def getFields(): IscArray[FormItem]
     def getFocusItem(): FormItem
@@ -96,7 +96,7 @@ trait DynamicForm extends Canvas with DataBoundComponent {
     def getTitleOrientation(item: FormItem = js.native): TitleOrientation
     def getValidatedValues(): JSObject
     def getValue(fieldName: String): JSAny
-    def getValues[T <: JSObject]():T
+    def getValues[T <: JSObject](): T
     def getValuesAsAdvancedCriteria(textMatchStyle: TextMatchStyle = js.native): AdvancedCriteria
     val grid: JSUndefined[ListGrid]
     def getValuesAsCriteria(advanced: Boolean, textMatchStyle: TextMatchStyle = js.native): Criteria | AdvancedCriteria

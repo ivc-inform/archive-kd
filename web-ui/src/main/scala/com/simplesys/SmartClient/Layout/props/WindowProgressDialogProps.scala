@@ -7,13 +7,15 @@ import com.simplesys.System.JSUndefined
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.System.JSAny
+import com.simplesys.SmartClient.Layout.WindowProgressDialog
+import com.simplesys.option.{ScNone, ScOption}
+import scala.scalajs.js.{ThisFunction0, ThisFunction1}
+import com.simplesys.SmartClient.Control.props.ProgressbarProps
+import com.simplesys.SmartClient.System.Progressbar
 
 class WindowProgressDialogProps extends WindowSSProps {
-
-    import com.simplesys.SmartClient.Layout.WindowProgressDialog
-    import com.simplesys.option.{ScNone, ScOption}
-
-    import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 
     type classHandler <: WindowProgressDialog
 
@@ -42,6 +44,7 @@ class WindowProgressDialogProps extends WindowSSProps {
     }.toThisFunc.opt
 
     var cancelFunction: ScOption[ThisFunction0[classHandler, _]] = ScNone
+
     var setPercentDone: ScOption[ThisFunction1[classHandler, Double, _]] = {
         (thiz: classHandler, newPercent: Double) ⇒
             thiz.progressBar setPercentDone newPercent
@@ -65,12 +68,8 @@ class WindowProgressDialogProps extends WindowSSProps {
     }.toThisFunc.opt
 
     initWidget = {
-        import com.simplesys.SmartClient.System.IscArray
-        import com.simplesys.System.JSAny
-        (thizTop: classHandler, args: IscArray[JSAny]) ⇒
 
-            import com.simplesys.SmartClient.Control.props.ProgressbarProps
-            import com.simplesys.SmartClient.System.Progressbar
+        (thizTop: classHandler, args: IscArray[JSAny]) ⇒
 
             thizTop.Super("initWidget", args)
 
@@ -82,11 +81,11 @@ class WindowProgressDialogProps extends WindowSSProps {
 
             thizTop.oneStep = 1 / ((thizTop.maxValue - thizTop.minValue) / 100)
 
-            /*println(s"thizTop.maxValue: ${thizTop.maxValue}")
-            println(s"thizTop.minValue: ${thizTop.minValue}")
-            println(s"thizTop.oneStep: ${thizTop.oneStep}")*/
+//            println(s"thizTop.maxValue: ${thizTop.maxValue}")
+//            println(s"thizTop.minValue: ${thizTop.minValue}")
+//            println(s"thizTop.oneStep: ${thizTop.oneStep}")
 
-            //isc debugTrap (thizTop.maxValue, thizTop.minValue, thizTop.oneStep)
+//            isc debugTrap (thizTop.maxValue, thizTop.minValue, thizTop.oneStep)
 
             thizTop addItem thizTop.progressBar
 

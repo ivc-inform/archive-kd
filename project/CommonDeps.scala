@@ -10,10 +10,12 @@ object PluginDeps {
         val mergeJSVersion = "1.0.9"
 
         val sbtAspectJVersion = "0.10.2"
-        val xsbtWebVersion = "0.9.1.1"
+        val xsbtWebVersion = "3.0.1.1"
+        //val xsbtWebVersion = "0.9.1"
         val sbtNativePackagerVersion = "1.2.0-M8"
 
-        val scalaJSPluginVersion = "0.6.16"
+        val scalaJSPluginVersion = "0.6.17"
+        val jrabelPluginVersion = "0.10.0-SNAPSHOT"
         val macroParadiseVersion = "2.1.0"
     }
 
@@ -26,6 +28,7 @@ object PluginDeps {
 
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
     val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
+    val jrebelPlugin = addSbtPlugin("com.simplesys" % "jrebel-plugin" % versions.jrabelPluginVersion)
 }
 
 object CommonDeps {
@@ -45,25 +48,28 @@ object CommonDeps {
         //val smartclientVersion = "10.1.1"
         val smartclientVersion = "11.0-v20160805.11"
 
-        val akkaVersion = "2.5.2"
-        val akkaHttpVersion = "10.0.7"
+        val akkaVersion = "2.5.3"
+        val akkaHttpVersion = "10.0.8"
 
         val servletAPIVersion = "3.1.0"
 
         val scalaTestVersion = "3.0.1"
         val scalaTagsVersion = "0.6.5"
-        val scalaDomVersion = "0.9.1"
+        val scalaDomVersion = "0.9.2"
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
         val scalaJSVersion = "1.3-SNAPSHOT"
-        //val scalaJSVersion = "1.0.15"
+        //val scalaJSVersion = "1.3.2"
 
         val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
 
-        val jettyVersion = "9.4.5.v20170502"
+        val jettyVersion = "9.4.6.v20170531"
         val jdbcOracle11DriverVersion = "11.2.0.4"
+
+        val commonsFileuploadVersion = "1.3.2"
+        val commonsIOVersion = "2.5"
     }
 
     val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
@@ -108,16 +114,18 @@ object CommonDeps {
     val scalaJSWrapper = Def.setting("com.simplesys" %% "common-types" % versions.scalaJSVersion)
     val scalaTags = Def.setting("com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion)
     val uPickle = Def.setting("com.lihaoyi" %% "upickle" % versions.uPickleVersion)
-
-    val jettyWebapp = Def.setting("org.eclipse.jetty" % "jetty-webapp" % versions.jettyVersion)
-    val jettyAnnotations = Def.setting("org.eclipse.jetty" % "jetty-annotations" % versions.jettyVersion)
-    val jettyPlus = Def.setting("org.eclipse.jetty" % "jetty-plus" % versions.jettyVersion)
+    
+    val jettyRuner = Def.setting("org.eclipse.jetty" % "jetty-runner" % versions.jettyVersion)
 
     val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
     val jdbcOracle11Driver = Def.setting("com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion)
 
     val doobieCore = Def.setting("org.tpolecat" %% "doobie-core" % versions.doobieVersion)
     val doobieCoreCats = Def.setting("org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion)
+
+    val commonsFileupload = Def.setting("commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion)
+    val commonsIO = Def.setting("commons-io" % "commons-io" % versions.commonsIOVersion)
+
 }
 
 object DepsHelper {
