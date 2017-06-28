@@ -183,6 +183,7 @@ package object System {
     //</editor-fold>
 
     //<editor-fold desc="Layout">
+    object Layout extends SCApply[Layout, LayoutProps]
     object LayoutSS extends SCApply[LayoutSS, LayoutSSProps]
     object HLayoutSS extends SCApply[HLayoutSS, HLayoutSSProps]
     object VLayoutSS extends SCApply[VLayoutSS, VLayoutSSProps]

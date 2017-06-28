@@ -27,6 +27,7 @@ object PrepareJSCode extends StaticJSCode {
 
         isc.WindowSS.addProperties(WindowSS(new WindowSSProps))
 
+        //isc.defineClass(LayoutSS.getClass.getSimpleName, Layout.getClass.getSimpleName)
         isc.defineClass(DialogSS.getClass.getSimpleName, Dialog.getClass.getSimpleName)
         isc.defineClass(RibbonGroupSS.getClass.getSimpleName, RibbonGroup.getClass.getSimpleName)
         isc.defineClass(SettingsEditor.getClass.getSimpleName, WindowSS.getClass.getSimpleName)
