@@ -1,7 +1,7 @@
 package com.simplesys.SmartClient.Control
 
 import com.simplesys.SmartClient.Foundation.{Img, Label}
-import com.simplesys.SmartClient.Layout.{Layout, Toolbar, Window}
+import com.simplesys.SmartClient.Layout._
 import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.System.Types._
 
@@ -35,6 +35,10 @@ trait Dialog extends Window {
     val toolbarButtons: IscArray[Button]
     val warnIcon:SCImgURL
     var yesClick: js.Function1[void, _]
+}
+
+@js.native
+abstract trait AbstractDialogCompanion extends AbstractWindowCompanion {
 }
 
 

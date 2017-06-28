@@ -76,6 +76,8 @@ package object System {
     object Date extends SCApply4Object[Date, DateProps]
 
     //<editor-fold desc="Control">
+    object Dialog extends SCApply[Dialog, DialogProps]
+    object DialogSS extends SCApply[DialogSS, DialogSSProps]
     object IButtonSS extends SCApply[IButtonSS, IButtonSSProps]
     object CancelButton extends SCApply[CancelButton, CancelButtonProps]
     object IMenuButton extends SCApply[IMenuButton, IMenuButtonProps]

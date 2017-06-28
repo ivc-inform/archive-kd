@@ -56,7 +56,6 @@ class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: 
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/TabSetSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/SkinBoxItem.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DataViewSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DialogSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VStackSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/HStackSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VLayoutSS.js"),
