@@ -47,7 +47,7 @@ object UploadPage extends WebTabSetApp {
     override protected val managedUsersGroups = Seq(
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
-                title = "Разработчики".ellipsis.opt
+                title = "Experiment".ellipsis.opt
                 visibility = Visibility.hidden.opt
                 controls = Seq(
                     IconButtonSS.create(
