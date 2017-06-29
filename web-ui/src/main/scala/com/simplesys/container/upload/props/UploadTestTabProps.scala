@@ -4,9 +4,9 @@ import com.simplesys.SmartClient.DataBinding.props.DataSourceSSProps
 import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldProps
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DSResponse}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.formsItems.props.{ProgressbarItemProps, SubmitItemProps, UploadItemProps}
+import com.simplesys.SmartClient.Forms.formsItems.props.{ButtonItemProps, ProgressbarItemProps, SubmitItemProps, UploadItemProps}
 import com.simplesys.SmartClient.Forms.formsItems.{FormItem, UploadItem}
-import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
+import com.simplesys.SmartClient.Forms.props.{DynamicFormProps, DynamicFormSSProps}
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.FormItemComponentType
@@ -26,9 +26,9 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
-            thiz addMember DynamicForm.create(
-                new DynamicFormSSProps {
-                    width = "100%"
+            val member = DynamicForm.create(
+                new DynamicFormProps {
+                    //width = "100%"
                     //action = "UploadServlet".opt
                     //encoding = Encoding.multipart.opt
                     dataSource = DataSourceSS.create(
@@ -57,8 +57,8 @@ class UploadTestTabProps extends HLayoutProps {
 
                                 }.toFunc.opt
                             }
-                        ), SubmitItem(
-                            new SubmitItemProps {
+                        ), ButtonItem(
+                            new ButtonItemProps {
                                 disabled = true.opt
                                 title = "Upload".opt
                                 nameStrong = "upload".nameStrongOpt
@@ -78,6 +78,7 @@ class UploadTestTabProps extends HLayoutProps {
                         ProgressbarItem(
                             new ProgressbarItemProps {
                                 colSpan = "*"
+                                width = "100%"
                                 showTitle = false.opt
                                 title = "Процесс выгрузки".ellipsis.opt
                             }
@@ -85,6 +86,8 @@ class UploadTestTabProps extends HLayoutProps {
                     ).opt
                 }
             )
+
+            thiz addMember member
 
         //isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
