@@ -22,7 +22,7 @@ class GradientItemProps extends FormItemWithButtonsProps {
     title = "Градиентная заливка".opt
     typeEditorField = FormItemComponentType.TextAreaItem
     showTitle = false.opt
-    colSpan = 2.opt
+    colSpan = 2
 
     clearValue = {
         (thiz: classHandler) ⇒

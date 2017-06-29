@@ -252,7 +252,7 @@ class SettingsEditorProps extends WindowSSProps {
                                                   icon = Common.save.opt
                                                   nameStrong = "save".nameStrongOpt
                                                   height = 25
-                                                  colSpan = 2.opt
+                                                  colSpan = 2
                                                   disabled = true.opt
                                                   init = {
                                                       (thizButton: classHandler,

@@ -58,7 +58,7 @@ class FormItemProps extends ClassProps {
     var click: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
     var clipStaticValue: ScOption[Boolean] = ScNone
     var clipTitle: ScOption[Boolean] = ScNone
-    var colSpan: ScOption[Int] = ScNone
+    var colSpan: ScOption[IntString[Int, String]] = ScNone
     var containerWidget: ScOption[CanvasItem] = ScNone
     var controlStyle: ScOption[FormItemBaseStyle] = ScNone
     var criteriaField: ScOption[String] = ScNone

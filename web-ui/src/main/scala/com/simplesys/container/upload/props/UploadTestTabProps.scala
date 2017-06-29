@@ -26,7 +26,7 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
-            thiz addMember DynamicFormSS.create(
+            thiz addMember DynamicForm.create(
                 new DynamicFormSSProps {
                     width = "100%"
                     //action = "UploadServlet".opt
@@ -77,6 +77,8 @@ class UploadTestTabProps extends HLayoutProps {
                         ),
                         ProgressbarItem(
                             new ProgressbarItemProps {
+                                colSpan = "*"
+                                showTitle = false.opt
                                 title = "Процесс выгрузки".ellipsis.opt
                             }
                         )

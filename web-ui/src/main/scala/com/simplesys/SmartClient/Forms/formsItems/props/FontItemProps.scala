@@ -20,7 +20,7 @@ class FontItemProps extends FormItemWithButtonsProps {
     title = "Шрифт".opt
     typeEditorField = FormItemComponentType.TextAreaItem
     showTitle = false.opt
-    colSpan = 2.opt
+    colSpan = 2
 
     clearValue = {
         (thiz: classHandler) ⇒
