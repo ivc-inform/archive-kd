@@ -129,14 +129,14 @@ trait WebTabSetApp extends TabSetStack {
                 fields = Seq(
                     new DataSourceFieldProps {
                         required = true.opt
-                        `type` = FieldType.sCode_SimpleType.opt
+                        `type` = FieldType.sCode_SimpleType
                         title = "Наименование".opt
                         primaryKey = true.opt
                         name = "libName".opt
                     },
                     new DataSourceFieldProps {
                         required = true.opt
-                        `type` = FieldType.sCode_SimpleType.opt
+                        `type` = FieldType.sCode_SimpleType
                         title = "Версия".opt
                         primaryKey = true.opt
                         name = "libVersion".opt

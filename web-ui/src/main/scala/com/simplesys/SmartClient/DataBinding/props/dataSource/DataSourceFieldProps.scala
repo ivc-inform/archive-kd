@@ -14,7 +14,8 @@ import com.simplesys.System.Types.SummaryFunction.SummaryFunction
 import com.simplesys.System.Types.TimeDisplayFormat.TimeDisplayFormat
 import com.simplesys.System.Types._
 import com.simplesys.System.JSAny
-import com.simplesys.option.{IntString, ScNone, ScOption}
+import com.simplesys.System.Types.FormItemComponentType.FormItemComponentType
+import com.simplesys.option.{FieldType_FormItemComponentType, IntString, ScNone, ScOption}
 import com.simplesys.props.AbstractClassProps
 
 class DataSourceFieldProps extends AbstractClassProps {
@@ -127,7 +128,7 @@ class DataSourceFieldProps extends AbstractClassProps {
     var viewRequiresAuthentication: ScOption[Boolean] = ScNone
     var viewRequiresRole: ScOption[String] = ScNone
     var xmlAttribute: ScOption[Boolean] = ScNone
-    var `type`: ScOption[FieldType] = ScNone
+    var `type`: ScOption[FieldType_FormItemComponentType[FieldType, FormItemComponentType]] = ScNone
     var foreignField: ScOption[String] = ScNone
     var lookup: ScOption[Boolean] = ScNone
     var captionClassLookup: ScOption[String] = ScNone
