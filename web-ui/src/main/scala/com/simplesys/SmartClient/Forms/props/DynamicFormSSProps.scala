@@ -16,6 +16,7 @@ class DynamicFormSSProps extends DynamicFormProps {
 
     type classHandler <: DynamicFormSS
 
+    autoDraw = false.opt
     var createItem: ScOption[ThisFunction2[classHandler, FormItem, String, _]] = {
         (thiz: classHandler, item: FormItem, tp: String) =>
             //isc debugTrap item

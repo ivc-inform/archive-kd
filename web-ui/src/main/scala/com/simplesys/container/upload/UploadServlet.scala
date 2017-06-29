@@ -101,8 +101,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                 Try {
 
                     //@formatter:off
-                            var out: Node = <html><head><title>Servlet upload</title></head></html>
-                            //@formatter:on
+                    var out: Node = <html><head><title>Servlet upload</title></head></html>
+                    //@formatter:on
 
                     import UploadServlet._
 
@@ -124,8 +124,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                             }
                         }
                     }
-
-
+                    
                     //upload setProgressListener progressListener
                     var body = <body></body>
                     upload.parseRequest(request).asScala.foreach {
