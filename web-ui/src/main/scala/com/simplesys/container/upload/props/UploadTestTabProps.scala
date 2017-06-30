@@ -4,12 +4,12 @@ import com.simplesys.SmartClient.DataBinding.props.DataSourceSSProps
 import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldProps
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DSResponse}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.formsItems.props.{ButtonItemProps, ProgressbarItemProps, SubmitItemProps, UploadItemProps}
+import com.simplesys.SmartClient.Forms.formsItems.props._
 import com.simplesys.SmartClient.Forms.formsItems.{FormItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.{DynamicFormProps, DynamicFormSSProps}
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.FormItemComponentType
+import com.simplesys.System.Types.{Encoding, FormItemComponentType}
 import com.simplesys.System._
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.function._
@@ -30,7 +30,7 @@ class UploadTestTabProps extends HLayoutProps {
                 new DynamicFormProps {
                     //width = "100%"
                     //action = "UploadServlet".opt
-                    //encoding = Encoding.multipart.opt
+                    encoding = Encoding.multipart.opt
                     dataSource = DataSourceSS.create(
                         new DataSourceSSProps {
                             fields = Seq(
@@ -60,8 +60,9 @@ class UploadTestTabProps extends HLayoutProps {
                         ), ButtonItem(
                             new ButtonItemProps {
                                 disabled = true.opt
+                                //colSpan = 2
                                 title = "Upload".opt
-                                nameStrong = "upload".nameStrongOpt
+                                name = "upload".opt
                                 click = {
                                     (form: DynamicFormSS, item: FormItem) ⇒
                                         form.saveData(
