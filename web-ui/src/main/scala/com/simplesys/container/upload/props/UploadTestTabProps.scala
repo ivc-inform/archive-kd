@@ -29,7 +29,7 @@ class UploadTestTabProps extends HLayoutProps {
             val member = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     width = "100%"
-                    colWidths = Seq[JSAny]("50%", "*").opt
+                    //colWidths = Seq[JSAny]("50%", "*").opt
                     //action = "UploadServlet".opt
                     encoding = Encoding.multipart.opt
                     dataSource = DataSourceSS.create(
@@ -62,7 +62,7 @@ class UploadTestTabProps extends HLayoutProps {
                         ), ButtonItem(
                             new ButtonItemProps {
                                 disabled = true.opt
-                                colSpan = 2
+                                //colSpan = 2
                                 title = "Upload".ellipsis.opt
                                 name = "upload".opt
                                 click = {
@@ -80,7 +80,7 @@ class UploadTestTabProps extends HLayoutProps {
                         ),
                         ProgressbarItem(
                             new ProgressbarItemProps {
-                                colSpan = 2
+                                //colSpan = 2
                                 showTitle = false.opt
                                 title = "Процесс выгрузки".ellipsis.opt
                             }

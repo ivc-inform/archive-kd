@@ -12,8 +12,11 @@ trait ProgressbarItem extends CanvasItem {
     var minValue: Double
     var maxValue: Double
     var oneStep: Double
+    var length: String | Int
+    var breadth: Int
 
     def nextStep(): void
+    def setPercentDone(percentDone: Double): void
 }
 
 @js.native
