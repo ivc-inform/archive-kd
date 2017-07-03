@@ -9,7 +9,7 @@ import com.simplesys.SmartClient.Forms.formsItems.{FormItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.{DynamicFormProps, DynamicFormSSProps}
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{Encoding, FormItemComponentType}
+import com.simplesys.System.Types.{DSServerType, Encoding, FormItemComponentType}
 import com.simplesys.System._
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.function._
@@ -33,6 +33,7 @@ class UploadTestTabProps extends HLayoutProps {
                     encoding = Encoding.multipart.opt
                     dataSource = DataSourceSS.create(
                         new DataSourceSSProps {
+                            serverType = DSServerType.sql.opt
                             fields = Seq(
                                 new DataSourceFieldProps {
                                     name = "file".opt
