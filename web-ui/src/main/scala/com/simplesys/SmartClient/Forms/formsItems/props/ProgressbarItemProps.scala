@@ -16,11 +16,12 @@ import scala.scalajs.js._
 class ProgressbarItemProps extends CanvasItemProps {
     type classHandler <: ProgressbarItem
 
-    height = 20
-    width = "*"
+    height = 25
+    /*width = "*"
     rowSpan = "*"
+    colSpan = "*"
     endRow = true.opt
-    startRow = true.opt
+    startRow = true.opt*/
 
     var minValue: ScOption[Double] = 0.0.opt
     var maxValue: ScOption[Double] = 100.0.opt
@@ -30,7 +31,8 @@ class ProgressbarItemProps extends CanvasItemProps {
         (thizTop: classHandler, form: DynamicFormSS, item: CanvasItem) =>
             thizTop.progressBar = Progressbar.create(
                 new ProgressbarProps {
-                    breadth = 10.opt
+                    //breadth = 10.opt
+                    width = "100%"
                 }
             )
 

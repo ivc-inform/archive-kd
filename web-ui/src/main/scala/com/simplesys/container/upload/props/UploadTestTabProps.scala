@@ -26,9 +26,10 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
-            val member = DynamicForm.create(
-                new DynamicFormProps {
-                    //width = "100%"
+            val member = DynamicFormSS.create(
+                new DynamicFormSSProps {
+                    width = "100%"
+                    colWidths = Seq[JSAny]("50%", "*").opt
                     //action = "UploadServlet".opt
                     encoding = Encoding.multipart.opt
                     dataSource = DataSourceSS.create(
@@ -61,8 +62,8 @@ class UploadTestTabProps extends HLayoutProps {
                         ), ButtonItem(
                             new ButtonItemProps {
                                 disabled = true.opt
-                                //colSpan = 2
-                                title = "Upload".opt
+                                colSpan = 2
+                                title = "Upload".ellipsis.opt
                                 name = "upload".opt
                                 click = {
                                     (form: DynamicFormSS, item: FormItem) ⇒
@@ -79,8 +80,7 @@ class UploadTestTabProps extends HLayoutProps {
                         ),
                         ProgressbarItem(
                             new ProgressbarItemProps {
-                                colSpan = "*"
-                                width = "100%"
+                                colSpan = 2
                                 showTitle = false.opt
                                 title = "Процесс выгрузки".ellipsis.opt
                             }
