@@ -30,6 +30,7 @@ class ProgressbarItemProps extends CanvasItemProps {
     var minValue: ScOption[Double] = 0.0.opt
     var maxValue: ScOption[Double] = 100.0.opt
     var oneStep: ScOption[Double] = ScNone
+    var showProgressBarTitle: ScOption[Boolean] = true.opt
 
     var setPercentDone: ScOption[ThisFunction1[classHandler, Double, _]] = {
         (thiz: classHandler, percentDone: Double) ⇒
@@ -43,7 +44,7 @@ class ProgressbarItemProps extends CanvasItemProps {
                 new ProgressbarProps {
                     length = "*"
                     breadth = thizTop.breadth.opt
-                    showTitle = true.opt
+                    showTitle = thizTop.showProgressBarTitle.opt
                 }
             )
 

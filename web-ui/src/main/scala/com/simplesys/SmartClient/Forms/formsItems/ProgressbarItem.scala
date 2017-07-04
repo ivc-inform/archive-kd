@@ -14,6 +14,7 @@ trait ProgressbarItem extends CanvasItem {
     var oneStep: Double
     var length: String | Int
     var breadth: Int
+    var showProgressBarTitle: Boolean
 
     def nextStep(): void
     def setPercentDone(percentDone: Double): void
