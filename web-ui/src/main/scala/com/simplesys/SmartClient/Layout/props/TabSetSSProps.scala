@@ -12,10 +12,11 @@ import com.simplesys.option.{ScNone, ScOption}
 import scala.scalajs.js
 import scala.scalajs.js.{ThisFunction0, ThisFunction1}
 import scala.scalajs.js.UndefOr._
+import com.simplesys.option.DoubleType._
 
 class TabSetSSProps extends TabSetProps {
     type classHandler <: TabSetSS
-
+    
     var tabSet: ScOption[TabSetSS] = ScNone
     var tabsReordered: ScOption[js.ThisFunction0[classHandler, _]] = ScNone
     var afterRemoveTabs : ScOption[ThisFunction0[classHandler, _]] = ScNone
