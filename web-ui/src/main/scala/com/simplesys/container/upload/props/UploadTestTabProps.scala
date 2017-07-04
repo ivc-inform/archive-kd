@@ -32,7 +32,7 @@ class UploadTestTabProps extends HLayoutProps {
                     width = "100%"
                     //colWidths = Seq[JSAny]("50%", "*").opt
                     action = "UploadServlet".opt
-                    //target = "hiddenframe".opt
+                    //target = "hidden_frame".opt
                     encoding = Encoding.multipart.opt
                     /*dataSource = RestDataSource.create(
                         new RestDataSourceProps {
@@ -69,29 +69,17 @@ class UploadTestTabProps extends HLayoutProps {
 
                                 }.toFunc.opt
                             }
-                        ), ButtonItem(
-                            new ButtonItemProps {
+                        ), SubmitItem(
+                            new SubmitItemProps {
                                 disabled = true.opt
                                 //colSpan = 2
                                 title = "Upload".ellipsis.opt
                                 name = "upload".opt
-                                click = {
+                                /*click = {
                                     (form: DynamicFormSS, item: FormItem) ⇒
                                         form.submitForm()
-                                        /*form.saveData(
-                                            {
-                                                (response: DSResponse, obj: JSObject, request: DSRequest) ⇒
-                                                    if (response.status == DSResponse.STATUS_SUCCESS)
-                                                        isc ok "OK"
-                                            }.toFunc,
-                                            DSRequest(
-                                              new DSRequestProps{
-                                                 streamResults = true.opt
-                                              }
-                                            )
-                                        )*/
                                         false
-                                }.toFunc.opt
+                                }.toFunc.opt*/
                             }
                         ),
                         ProgressbarItem(
@@ -102,7 +90,9 @@ class UploadTestTabProps extends HLayoutProps {
                             }
                         ),
                         HiddenItem(
-                            new HiddenItemProps
+                            new HiddenItemProps {
+                                name = "hidden_frame".opt
+                            }
                         )
                     ).opt
                 }
