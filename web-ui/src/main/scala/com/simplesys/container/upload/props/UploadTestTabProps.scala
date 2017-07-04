@@ -15,6 +15,7 @@ import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.DoubleType._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS._
 
 class UploadTestTabProps extends HLayoutProps {
     type classHandler <: UploadTestTab
@@ -32,18 +33,7 @@ class UploadTestTabProps extends HLayoutProps {
                     //colWidths = Seq[JSAny]("50%", "*").opt
                     //action = "UploadServlet".opt
                     encoding = Encoding.multipart.opt
-                    dataSource = DataSourceSS.create(
-                        new DataSourceSSProps {
-                            serverType = DSServerType.sql.opt
-                            fields = Seq(
-                                new DataSourceFieldProps {
-                                    name = "file".opt
-                                    showFileInline = true.opt
-                                    `type` = FormItemComponentType.FileItem
-                                }
-                            ).opt
-                        }
-                    ).opt
+                    dataSource = test_upload_filesFile_content_DS.opt
                     items = Seq(
                         FileItem(
                             new FileItemProps {
@@ -54,7 +44,7 @@ class UploadTestTabProps extends HLayoutProps {
                                 changed = {
                                     (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                         val submit = form getItem "upload"
-                                        //value.map(_.toString.replace("C:\\fakepath\\", "")).foreach(isc ok (_))
+                                        value.map(_.toString.replace("C:\\fakepath\\", "")).foreach(isc ok (_))
                                         if (value.isDefined) submit.enable() else submit.disable()
 
                                 }.toFunc.opt
@@ -90,8 +80,6 @@ class UploadTestTabProps extends HLayoutProps {
             )
 
             thiz addMember member
-
-        //isc debugTrac (thiz.getClassName(), thiz.getIdentifier())
 
     }.toThisFunc.opt
 }

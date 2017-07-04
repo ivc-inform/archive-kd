@@ -4,7 +4,7 @@
 		<classes>
 			<classSimple name="upload_files" autoTableMapping="true" caption="Учет последовательных идентификаторов (ID)">
 				<attrs>
-					<attr name="id" type="id" mandatory="true" caption="Идентификатор"/>
+					<attr name="id" type="id" mandatory="true" genBySeq="true" caption="Идентификатор"/>
 					<attr name="file_name" type="sCaption" mandatory="true" caption="Наименование файла"/>
 					<attr name="file_content" type="blob" mandatory="false" caption="Содержимое файла файла"/>
 				</attrs>
