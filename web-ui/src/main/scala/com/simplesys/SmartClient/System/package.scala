@@ -142,6 +142,7 @@ package object System {
     object ButtonItem extends SCApply4Object[ButtonItem, ButtonItemProps]
     object UploadItem extends SCApply4Object[UploadItem, UploadItemProps]
     object FileItem extends SCApply4Object[FileItem, FileItemProps]
+    object HiddenItem extends SCApply4Object[HiddenItem, HiddenItemProps]
     object ProgressbarItem extends SCApply4Object[ProgressbarItem, ProgressbarItemProps]
 
     object FormItemWithButtons extends SCApply4Object[FormItemWithButtons, FormItemWithButtonsProps]
@@ -170,8 +171,8 @@ package object System {
     //</editor-fold>
 
     //<editor-fold desc="RPC">
-    object RPCRequest extends SCApply[RPCRequest, RPCRequestProps]
-    object DSRequest extends SCApply[DSRequest, DSRequestProps]
+    object RPCRequest extends SCApply4Object[RPCRequest, RPCRequestProps]
+    object DSRequest extends SCApply4Object[DSRequest, DSRequestProps]
     //</editor-fold>
 
     //<editor-fold desc="Grids">

@@ -1,7 +1,7 @@
 package com.simplesys.container.upload.props
 
-import com.simplesys.SmartClient.DataBinding.props.DataSourceSSProps
-import com.simplesys.SmartClient.DataBinding.props.dataSource.DataSourceFieldProps
+import com.simplesys.SmartClient.DataBinding.props.{DSRequestProps, DataSourceSSProps, RestDataSourceProps}
+import com.simplesys.SmartClient.DataBinding.props.dataSource.{DataSourceFieldProps, OperationBindingProps}
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DSResponse}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.props._
@@ -9,7 +9,7 @@ import com.simplesys.SmartClient.Forms.formsItems.{FormItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.{DynamicFormProps, DynamicFormSSProps}
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{DSServerType, Encoding, FormItemComponentType}
+import com.simplesys.System.Types._
 import com.simplesys.System._
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.function._
@@ -31,12 +31,32 @@ class UploadTestTabProps extends HLayoutProps {
                 new DynamicFormSSProps {
                     width = "100%"
                     //colWidths = Seq[JSAny]("50%", "*").opt
-                    //action = "UploadServlet".opt
+                    action = "UploadServlet".opt
+                    //target = "hiddenframe".opt
                     encoding = Encoding.multipart.opt
-                    dataSource = test_upload_filesFile_content_DS.opt
+                    /*dataSource = RestDataSource.create(
+                        new RestDataSourceProps {
+                            //serverType = DSServerType.sql.opt
+                            addDataURL = "UploadServlet".opt
+                            fields = Seq(
+                                new DataSourceFieldProps {
+                                    name = "file".opt
+                                    showFileInline = true.opt
+                                    `type` = FieldType.binary
+                                }
+                            ).opt
+                            operationBindings = Seq(
+                                new OperationBindingProps {
+                                    dataFormat = DSDataFormat.json.opt
+                                    dataProtocol = DSProtocol.postXML.opt
+                                    operationType = DSOperationType.add.opt
+                                }
+                            ).opt
+                        }
+                    ).opt*/
                     items = Seq(
-                        FileItem(
-                            new FileItemProps {
+                        UploadItem(
+                            new UploadItemProps {
                                 multiple = false.opt
                                 nameStrong = "file".nameStrongOpt
                                 showTitle = false.opt
@@ -44,7 +64,7 @@ class UploadTestTabProps extends HLayoutProps {
                                 changed = {
                                     (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                         val submit = form getItem "upload"
-                                        value.map(_.toString.replace("C:\\fakepath\\", "")).foreach(isc ok (_))
+                                        //value.map(_.toString.replace("C:\\fakepath\\", "")).foreach(isc ok (_))
                                         if (value.isDefined) submit.enable() else submit.disable()
 
                                 }.toFunc.opt
@@ -57,13 +77,19 @@ class UploadTestTabProps extends HLayoutProps {
                                 name = "upload".opt
                                 click = {
                                     (form: DynamicFormSS, item: FormItem) ⇒
-                                        form.saveData(
+                                        form.submitForm()
+                                        /*form.saveData(
                                             {
                                                 (response: DSResponse, obj: JSObject, request: DSRequest) ⇒
                                                     if (response.status == DSResponse.STATUS_SUCCESS)
                                                         isc ok "OK"
-                                            }.toFunc
-                                        )
+                                            }.toFunc,
+                                            DSRequest(
+                                              new DSRequestProps{
+                                                 streamResults = true.opt
+                                              }
+                                            )
+                                        )*/
                                         false
                                 }.toFunc.opt
                             }
@@ -74,6 +100,9 @@ class UploadTestTabProps extends HLayoutProps {
                                 showTitle = false.opt
                                 title = "Процесс выгрузки".ellipsis.opt
                             }
+                        ),
+                        HiddenItem(
+                            new HiddenItemProps
                         )
                     ).opt
                 }
