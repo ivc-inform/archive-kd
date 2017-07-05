@@ -14,8 +14,8 @@ object PluginDeps {
         //val xsbtWebVersion = "0.9.1"
         val sbtNativePackagerVersion = "1.2.0-M8"
 
-        val scalaJSPluginVersion = "0.6.17"
-        val jrabelPluginVersion = "0.10.0-SNAPSHOT"
+        val scalaJSPluginVersion = "0.6.18"
+        val jrabelPluginVersion = "0.10.1"
         val macroParadiseVersion = "2.1.0"
     }
 
@@ -46,7 +46,7 @@ object CommonDeps {
         //val ssysCoreVersion = "1.2.98"
 
         //val smartclientVersion = "10.1.1"
-        val smartclientVersion = "11.0-v20160805.11"
+        val smartclientVersion = "11.1-v20170703"
 
         val akkaVersion = "2.5.3"
         val akkaHttpVersion = "10.0.8"
@@ -59,8 +59,8 @@ object CommonDeps {
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
-        val scalaJSVersion = "1.3-SNAPSHOT"
-        //val scalaJSVersion = "1.3.2"
+        //val scalaJSVersion = "1.3-SNAPSHOT"
+        val scalaJSVersion = "1.3.4"
 
         val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
@@ -68,8 +68,9 @@ object CommonDeps {
         val jettyVersion = "9.4.6.v20170531"
         val jdbcOracle11DriverVersion = "11.2.0.4"
 
-        val commonsFileuploadVersion = "1.3.2"
+        val commonsFileuploadVersion = "1.3.3"
         val commonsIOVersion = "2.5"
+        val scalaURIVersion = "0.4.16"
     }
 
     val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
@@ -125,6 +126,8 @@ object CommonDeps {
 
     val commonsFileupload = Def.setting("commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion)
     val commonsIO = Def.setting("commons-io" % "commons-io" % versions.commonsIOVersion)
+
+    val scalaURI = Def.setting("com.netaporter" %% "scala-uri" % versions.scalaURIVersion)
 
 }
 

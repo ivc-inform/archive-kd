@@ -86,7 +86,7 @@ class LookupTreeGridEditorItemProps extends CanvasItemProps {
                     items = Seq(
                         TextItemSS(
                             new TextItemSSProps {
-                                colSpan = 2.opt
+                                colSpan = 2
                                 nameStrong = s"${item._name}_inner".nameStrongOpt
                                 _name = s"${item._name}_inner".opt
                                 width = "*"

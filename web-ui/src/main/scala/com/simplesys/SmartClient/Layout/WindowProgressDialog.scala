@@ -18,6 +18,7 @@ trait WindowProgressDialog extends WindowSS {
     var minValue: Double
     var maxValue: Double
     var oneStep: Double
+    var showProgressBarTitle: Boolean
     def getBreak(): JSUndefined[BreakType]
     var _breakType: JSUndefined[BreakType]
     def nextStep(): void

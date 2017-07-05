@@ -1,13 +1,15 @@
 package com.simplesys.container.upload
 
 import com.simplesys.SmartClient.Layout.{AbstractHLayoutCompanion, HLayout}
+import com.simplesys.System.JSUndefined
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSGlobal
-import scala.scalajs.js.|
 
 @js.native
 trait UploadTestTab extends HLayout {
+    var channelMessageEndUpload: JSUndefined[String]
+    var channelMessageNextStep: JSUndefined[String]
+    var channelMessageMaxValue: JSUndefined[String]
 }
 
 @js.native

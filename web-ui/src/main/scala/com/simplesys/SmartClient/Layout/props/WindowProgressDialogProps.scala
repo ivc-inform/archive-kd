@@ -35,6 +35,7 @@ class WindowProgressDialogProps extends WindowSSProps {
     var maxValue: ScOption[Double] = 100.0.opt
     var oneStep: ScOption[Double] = ScNone
     var _breakType: ScOption[BreakType] = BreakType.notBreak.opt
+    var showProgressBarTitle: ScOption[Boolean] = true.opt
 
     identifier = "3D4AD6BB-9715-38A9-7360-808559532CE8".opt
 
@@ -62,6 +63,7 @@ class WindowProgressDialogProps extends WindowSSProps {
                     //isc debugTrap (percentDone)
                     //println(s"percentDone: $percentDone")
 
+                    thiz.progressBar.showTitle = thiz.showProgressBarTitle
                     thiz.progressBar setPercentDone percentDone
                     thiz.progressBar setTitle s"Progress: ${thiz.progressBar.percentDone}%"
             }, 0)

@@ -70,7 +70,7 @@ class ComboboxItemWithButtonsJSProps extends FormItemWithButtonsProps {
                         ComboBoxItem(
                             new ComboBoxItemProps {
                                 width = "100%"
-                                colSpan = 2.opt
+                                colSpan = 2
                                 nameStrong = thisTop.comboBoxItemName.nameStrongOpt
                                 showTitle = false.opt
                                 defaultValue = thisTop.defaultValue.opt

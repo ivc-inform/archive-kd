@@ -110,7 +110,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.ssysXMLExtender.value,
         CommonDeps.ssysJsonExtender.value,
         CommonDeps.ssysIscMisc.value,
-        //CommonDeps.play.value,
 
         CommonDeps.smartclient.value,
 
@@ -126,6 +125,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
         CommonDeps.scalaJSWrapper.value,
         CommonDeps.scalaTags.value,
+        CommonDeps.scalaURI.value,
         CommonDepsScalaJS.smartClientWrapper.value,
         CommonDepsScalaJS.macroJS.value,
         CommonDepsScalaJS.scalaTags.value,

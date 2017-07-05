@@ -26,7 +26,7 @@ class ShadowItemProps extends FormItemWithButtonsProps {
     title = "Тень".opt
     typeEditorField = FormItemComponentType.TextAreaItem
     showTitle = false.opt
-    colSpan = 2.opt
+    colSpan = 2
 
     var shadow: ScOption[Shadow] = ScNone
 

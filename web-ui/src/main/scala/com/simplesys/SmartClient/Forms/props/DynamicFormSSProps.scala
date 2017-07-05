@@ -6,15 +6,16 @@ import com.simplesys.SmartClient.System.IscArray
 import com.simplesys.function._
 import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
+import com.simplesys.System._
+import com.simplesys.option.ScNone
 
 import scala.scalajs.js.ThisFunction2
 
 class DynamicFormSSProps extends DynamicFormProps {
 
-    import com.simplesys.System._
-    import com.simplesys.option.ScNone
-
     type classHandler <: DynamicFormSS
+
+    autoDraw = false.opt
 
     var createItem: ScOption[ThisFunction2[classHandler, FormItem, String, _]] = {
         (thiz: classHandler, item: FormItem, tp: String) =>

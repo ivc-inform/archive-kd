@@ -50,12 +50,10 @@ class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: 
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/LayoutSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/LayoutSpacerSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DynamicFormSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/FilterBuilderSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/HTMLPaneItem.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/FormItems/IButtonItem.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/TabSetSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/SkinBoxItem.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DataViewSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VStackSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/HStackSS.js"),
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VLayoutSS.js"),
@@ -89,6 +87,7 @@ class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: 
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/LookupEditor.js"),
 
                 script(src := s"javascript/generated/generatedComponentsJS/${if (fullOpt) "web-ui-opt.js" else "web-ui-fastopt.js"}"),
+                
                 link(href := "managed/css/common-webapp/logging_styles.css", rel := "stylesheet", `type` := "text/css"),
                 script(lastScript)
             )
