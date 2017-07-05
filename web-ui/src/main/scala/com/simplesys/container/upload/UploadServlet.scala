@@ -204,13 +204,14 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                         println(s"after pstmt.setString(2, $fileName) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
+                                        channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
+                                        
                                         pstmt.setBinaryStream(3, inputStream, fi.getSize)
 
                                         //pstmt.setBlob(3, inputStream, fi.getSize)
                                         println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.executeUpdate")
-                                        channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
 
                                         pstmt.execute()
                                         println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
