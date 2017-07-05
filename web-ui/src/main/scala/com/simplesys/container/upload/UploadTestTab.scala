@@ -9,6 +9,7 @@ import scala.scalajs.js
 trait UploadTestTab extends HLayout {
     var channelMessageEndUpload: JSUndefined[String]
     var channelMessageNextStep: JSUndefined[String]
+    var channelMessageMaxValue: JSUndefined[String]
 }
 
 @js.native

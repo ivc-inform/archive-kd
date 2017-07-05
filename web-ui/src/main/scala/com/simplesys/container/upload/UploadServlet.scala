@@ -68,6 +68,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
             val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
             val channelMessageNextStep = request.Parameter("channelMessageNextStep")
+            val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
 
             import UploadServlet._
 
@@ -125,7 +126,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
                             if (megaBytes != mBytes) {
                                 megaBytes = mBytes
-                                //println(s"We are currently reading item $pItems")
+                                println(s"We are currently reading item $pItems")
 
                                 if (pContentLength == -1L)
                                     println(s"So far, $pBytesRead bytes have been read.")

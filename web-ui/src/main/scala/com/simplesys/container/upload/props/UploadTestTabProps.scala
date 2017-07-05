@@ -1,9 +1,8 @@
 package com.simplesys.container.upload.props
 
-import com.netaporter.uri.Uri
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.formsItems.{ProgressbarItem, UploadItem}
 import com.simplesys.SmartClient.Forms.formsItems.props._
+import com.simplesys.SmartClient.Forms.formsItems.{ProgressbarItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
@@ -14,9 +13,12 @@ import com.simplesys.System._
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
-import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
-import com.netaporter.uri.dsl._
+import com.simplesys.option.{ScNone, ScOption}
+
+trait UploadTestData extends JSObject {
+    val maxValue: Double
+}
 
 class UploadTestTabProps extends HLayoutProps {
     type classHandler <: UploadTestTab
@@ -25,8 +27,7 @@ class UploadTestTabProps extends HLayoutProps {
 
     var channelMessageEndUpload: ScOption[String] = ScNone
     var channelMessageNextStep: ScOption[String] = ScNone
-
-    implicit def str2Uri(uri:Uri): ScOption[String] = uri.toString().opt
+    var channelMessageMaxValue: ScOption[String] = ScNone
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
@@ -45,12 +46,14 @@ class UploadTestTabProps extends HLayoutProps {
                 thiz.channelMessageNextStep = s"NextStep_${thiz.ID}"
 
 
+            if (thiz.channelMessageMaxValue.isEmpty)
+                thiz.channelMessageMaxValue = s"MaxValue_${thiz.ID}"
+
+
             val form = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     width = "100%"
-                    action = "UploadServlet" ?
-                      ("channelMessageEndUpload" → thiz.channelMessageEndUpload.get) &
-                      ("channelMessageNextStep" → thiz.channelMessageNextStep.get)
+                    action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}".opt
                     target = Iframe.create(
                         new IframeProps
                     ).ID.opt
@@ -95,7 +98,15 @@ class UploadTestTabProps extends HLayoutProps {
 
             isc.MessagingSS.subscribe(thiz.channelMessageNextStep.get,
                 (e: MessageJS) ⇒
-                  progressBar.nextStep()
+                    progressBar.nextStep()
+            )
+
+            isc.MessagingSS.subscribe(thiz.channelMessageMaxValue.get,
+                (e: MessageJS) ⇒
+                    e.data.foreach {
+                        data ⇒
+                            progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue
+                    }
             )
 
             thiz addMember form
