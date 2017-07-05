@@ -105,6 +105,7 @@ class UploadTestTabProps extends HLayoutProps {
                 (e: MessageJS) ⇒
                     e.data.foreach {
                         data ⇒
+                            progressBar setPercentDone 0.0
                             progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue
                     }
             )

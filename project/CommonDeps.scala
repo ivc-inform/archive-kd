@@ -68,7 +68,7 @@ object CommonDeps {
         val jettyVersion = "9.4.6.v20170531"
         val jdbcOracle11DriverVersion = "11.2.0.4"
 
-        val commonsFileuploadVersion = "1.3.2"
+        val commonsFileuploadVersion = "1.3.3"
         val commonsIOVersion = "2.5"
         val scalaURIVersion = "0.4.16"
     }

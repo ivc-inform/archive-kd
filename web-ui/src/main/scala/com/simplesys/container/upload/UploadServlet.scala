@@ -5,6 +5,7 @@ import java.util.Properties
 
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.isc.system.ServletActorDyn
+import com.simplesys.json.{JsonLong, JsonObject}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
 import com.simplesys.servlet.ContentType._
@@ -117,27 +118,36 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
                     import UploadServlet._
 
+                    var counter = 0L
+
                     val progressListener = new ProgressListener() {
                         private var megaBytes = -1L
 
                         override def update(pBytesRead: Long, pContentLength: Long, pItems: Int): Unit = {
 
-                            val mBytes = pBytesRead / 1024 * 1024 * 100
+                            /*println(s"Block: ${pBytesRead - counter}")
+                            counter = pBytesRead*/
+
+                            val mBytes = pBytesRead / 1024 * 1024 * 10
 
                             if (megaBytes != mBytes) {
                                 megaBytes = mBytes
-                                //println(s"We are currently reading item $pItems")
 
-                                if (pContentLength == -1L)
-                                    println(s"So far, $pBytesRead bytes have been read.")
-                                else
-                                    println(s"So far, $pBytesRead of $pContentLength bytes have been read.")
+                                //println(s"We are currently reading item $pItems")
+                                println(s"So far, $pBytesRead of $pContentLength bytes have been read. ($counter)")
+
+                                counter += 1
                             }
                         }
                     }
 
                     upload setProgressListener progressListener
                     var body = <body></body>
+
+                    /*val maxValue: Long = upload.parseRequest(request).asScala.foldLeft(0L) {
+                        (a, f) ⇒ a + f.getSize
+                    }*/
+
                     upload.parseRequest(request).asScala.foreach {
                         fi ⇒
                             if (!fi.isFormField) {
@@ -155,6 +165,9 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
                                 val sizeInBytes = fi.getSize
                                 println(s"sizeInBytes: $sizeInBytes")
+
+                                channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(sizeInBytes)), channels = channelMessageMaxValue)))
+
 
                                 //val file = new File(filePath + "//" + fileName)
                                 //fi write file
