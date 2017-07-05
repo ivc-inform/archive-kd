@@ -42,17 +42,14 @@ class UploadTestTabProps extends HLayoutProps {
             if (thiz.channelMessageRecordInBase.isEmpty)
                 thiz.channelMessageRecordInBase = s"RecordInBase_${thiz.ID}"
 
-            var infoRecInBase: JSUndefined[WindowSS] = jSUndefined
             var progressBar: JSUndefined[ProgressbarItem] = jSUndefined
 
             isc.MessagingSS.subscribe(thiz.channelMessageRecordInBase.get,
                 (e: MessageJS) ⇒
-                    infoRecInBase = isc info("Recording in base", "33BB2A90-9641-359E-8DD9-8159B3C61559")
+                    progressBar.foreach(_ setTitle "Recording in base")
             )
 
             isc.MessagingSS.subscribe(thiz.channelMessageEndUpload.get, { (e: MessageJS) ⇒
-
-                infoRecInBase.foreach(_.markForDestroy())
                 progressBar.foreach(_ setPercentDone 0.0)
 
                 isc ok("Upload is done", "33BB2A90-9641-359E-8DD9-8159B3C614B9")

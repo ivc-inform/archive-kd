@@ -32,6 +32,11 @@ class ProgressbarItemProps extends CanvasItemProps {
     var oneStep: ScOption[Double] = ScNone
     var showProgressBarTitle: ScOption[Boolean] = true.opt
 
+    var setTitle: ScOption[ThisFunction1[classHandler, String, _]] = {
+            (thiz: classHandler, title: String) ⇒
+                thiz.progressBar setTitle  title
+        }.toThisFunc.opt
+
     var setPercentDone: ScOption[ThisFunction1[classHandler, Double, _]] = {
         (thiz: classHandler, percentDone: Double) ⇒
             thiz.progressBar setPercentDone percentDone

@@ -18,6 +18,7 @@ trait ProgressbarItem extends CanvasItem {
 
     def nextStep(): void
     def setPercentDone(percentDone: Double): void
+    def setTitle(percentDone: String): void
 }
 
 @js.native
