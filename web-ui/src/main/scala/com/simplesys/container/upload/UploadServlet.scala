@@ -122,13 +122,28 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
                     val progressListener = new ProgressListener() {
                         private var megaBytes = -1L
+                        private var step = 1
+
+                        private var firstStep = true
 
                         override def update(pBytesRead: Long, pContentLength: Long, pItems: Int): Unit = {
 
                             /*println(s"Block: ${pBytesRead - counter}")
                             counter = pBytesRead*/
 
-                            val mBytes = pBytesRead / 1024 * 1024 * 10
+                            if (firstStep) {
+                                channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
+                                firstStep = false
+                            }
+
+                            val mBytes = pBytesRead / 10000000
+
+                            val stepSize = pContentLength / 100
+                            if (pBytesRead >= stepSize * step) {
+                                step += 1
+                                channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
+                            }
+
 
                             if (megaBytes != mBytes) {
                                 megaBytes = mBytes
@@ -165,9 +180,6 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
                                 val sizeInBytes = fi.getSize
                                 println(s"sizeInBytes: $sizeInBytes")
-
-                                channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(sizeInBytes)), channels = channelMessageMaxValue)))
-
 
                                 //val file = new File(filePath + "//" + fileName)
                                 //fi write file

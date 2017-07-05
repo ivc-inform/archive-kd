@@ -62,7 +62,7 @@ class UploadTestTabProps extends HLayoutProps {
                     items = Seq(
                         UploadItem(
                             new UploadItemProps {
-                                multiple = false.opt
+                                multiple = true.opt
                                 nameStrong = "file".nameStrongOpt
                                 showTitle = false.opt
                                 title = "Choose file".opt
