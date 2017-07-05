@@ -110,7 +110,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.ssysXMLExtender.value,
         CommonDeps.ssysJsonExtender.value,
         CommonDeps.ssysIscMisc.value,
-        //CommonDeps.play.value,
 
         CommonDeps.smartclient.value,
 
