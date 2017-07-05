@@ -5,6 +5,7 @@ import com.simplesys.SmartClient.Forms.formsItems.props._
 import com.simplesys.SmartClient.Forms.formsItems.{ProgressbarItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
+import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
@@ -28,6 +29,7 @@ class UploadTestTabProps extends HLayoutProps {
     var channelMessageEndUpload: ScOption[String] = ScNone
     var channelMessageNextStep: ScOption[String] = ScNone
     var channelMessageMaxValue: ScOption[String] = ScNone
+    var channelMessageRecordInBase: ScOption[String] = ScNone
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
@@ -37,10 +39,24 @@ class UploadTestTabProps extends HLayoutProps {
             if (thiz.channelMessageEndUpload.isEmpty)
                 thiz.channelMessageEndUpload = s"EndUpload_${thiz.ID}"
 
-            isc.MessagingSS.subscribe(thiz.channelMessageEndUpload.get,
+            if (thiz.channelMessageRecordInBase.isEmpty)
+                thiz.channelMessageRecordInBase = s"RecordInBase_${thiz.ID}"
+
+            var infoRecInBase: JSUndefined[WindowSS] = jSUndefined
+            var progressBar: JSUndefined[ProgressbarItem] = jSUndefined
+
+            isc.MessagingSS.subscribe(thiz.channelMessageRecordInBase.get,
                 (e: MessageJS) ⇒
-                    isc ok("Upload is done", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
+                    infoRecInBase = isc info("Recording in base", "33BB2A90-9641-359E-8DD9-8159B3C61559")
             )
+
+            isc.MessagingSS.subscribe(thiz.channelMessageEndUpload.get, { (e: MessageJS) ⇒
+
+                infoRecInBase.foreach(_.markForDestroy())
+                progressBar.foreach(_ setPercentDone 0.0)
+
+                isc ok("Upload is done", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
+            })
 
             if (thiz.channelMessageNextStep.isEmpty)
                 thiz.channelMessageNextStep = s"NextStep_${thiz.ID}"
@@ -53,7 +69,7 @@ class UploadTestTabProps extends HLayoutProps {
             val form = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     width = "100%"
-                    action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}".opt
+                    action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}".opt
                     target = Iframe.create(
                         new IframeProps
                     ).ID.opt
@@ -94,19 +110,22 @@ class UploadTestTabProps extends HLayoutProps {
                 }
             )
 
-            val progressBar = (form getItem "progressBar").asInstanceOf[ProgressbarItem]
+            progressBar = (form getItem "progressBar").asInstanceOf[ProgressbarItem]
 
             isc.MessagingSS.subscribe(thiz.channelMessageNextStep.get,
                 (e: MessageJS) ⇒
-                    progressBar.nextStep()
+                    progressBar.foreach(_.nextStep())
             )
 
             isc.MessagingSS.subscribe(thiz.channelMessageMaxValue.get,
                 (e: MessageJS) ⇒
                     e.data.foreach {
                         data ⇒
-                            progressBar setPercentDone 0.0
-                            progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue
+                            progressBar.foreach {
+                                progressBar ⇒
+                                    progressBar setPercentDone 0.0
+                                    progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue
+                            }
                     }
             )
 

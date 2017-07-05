@@ -70,6 +70,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
             val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
             val channelMessageNextStep = request.Parameter("channelMessageNextStep")
             val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
+            val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
 
             import UploadServlet._
 
@@ -209,6 +210,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                         println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.executeUpdate")
+                                        channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
+
                                         pstmt.execute()
                                         println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
