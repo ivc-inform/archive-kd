@@ -116,11 +116,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                     //@formatter:off
                     var out: Node = <html><head><title>Servlet upload</title></head></html>
                     //@formatter:on
-
-                    import UploadServlet._
-
-                    var counter = 0L
-
+                    
                     val progressListener = new ProgressListener() {
                         private var megaBytes = -1L
                         private var step = 1
@@ -128,18 +124,13 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                         private var firstStep = true
 
                         override def update(pBytesRead: Long, pContentLength: Long, pItems: Int): Unit = {
-
-                            /*println(s"Block: ${pBytesRead - counter}")
-                            counter = pBytesRead*/
+                            val stepSize = pContentLength / 100
 
                             if (firstStep) {
                                 channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
                                 firstStep = false
                             }
 
-                            val mBytes = pBytesRead / 10000000
-
-                            val stepSize = pContentLength / 100
                             if (pBytesRead >= stepSize * step) {
                                 step += 1
                                 channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
@@ -147,15 +138,6 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
                             if (pBytesRead == pContentLength)
                                 channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
-
-                            if (megaBytes != mBytes) {
-                                megaBytes = mBytes
-
-                                //println(s"We are currently reading item $pItems")
-                                println(s"So far, $pBytesRead of $pContentLength bytes have been read. ($counter)")
-
-                                counter += 1
-                            }
                         }
                     }
 
