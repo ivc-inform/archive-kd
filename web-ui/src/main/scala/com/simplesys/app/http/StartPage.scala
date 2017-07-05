@@ -87,7 +87,7 @@ class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: 
                 script(src := s"$subPath/coffeescript/isc-components/com/simplesys/LookupEditor.js"),
 
                 script(src := s"javascript/generated/generatedComponentsJS/${if (fullOpt) "web-ui-opt.js" else "web-ui-fastopt.js"}"),
-
+                
                 link(href := "managed/css/common-webapp/logging_styles.css", rel := "stylesheet", `type` := "text/css"),
                 script(lastScript)
             )

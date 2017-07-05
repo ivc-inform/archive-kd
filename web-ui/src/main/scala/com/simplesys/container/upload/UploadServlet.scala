@@ -199,7 +199,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                 conn.close()
                         }
 
-                        Out(<script>isc.ok("OK")</script>)
+                        Out("Ok")
                     case Failure(e) ⇒
 
                         OutFailure(e)
