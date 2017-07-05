@@ -1,15 +1,15 @@
 package com.simplesys.container.upload
 
-import java.io.{File, InputStream}
-import java.util.{Properties, UUID}
-import javax.servlet.annotation.WebServlet
+import java.io.File
+import java.util.Properties
 
 import com.simplesys.annotation.RSTransfer
-import com.simplesys.app.http.StartPage
 import com.simplesys.isc.system.ServletActorDyn
+import com.simplesys.messages.ActorConfig.SendMessage
+import com.simplesys.messages.Message
 import com.simplesys.servlet.ContentType._
-import com.simplesys.servlet.{GetData, HTMLContent, ServletActor, ServletContext}
-import com.simplesys.servlet.http.{HttpServlet, HttpServletRequest, HttpServletResponse}
+import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
+import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
 import oracle.jdbc.OracleConnection
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener}
@@ -58,6 +58,15 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
             val isMultipart = ServletFileUpload.isMultipartContent(request)
             response.ContentType = HTMLContent
+
+            println(" \n\n\n----------------------------------------------------------- Parametrs -------------------------------------------------------------------")
+            request.Parameters.foreach {
+                case (key, value) ⇒
+                    println(s"key: $key, value: ${value.getOrElse("None")}")
+            }
+            println(" ------------------------------------------------------- End Parametrs -------------------------------------------------------------------")
+
+            val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
 
             import UploadServlet._
 
@@ -124,7 +133,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                             }
                         }
                     }
-                    
+
                     //upload setProgressListener progressListener
                     var body = <body></body>
                     upload.parseRequest(request).asScala.foreach {
@@ -183,8 +192,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                         println(s"after conn.commit() elapsedTime for $fileName : ${DT(elapsedTime).toString}")
 
                                         //@formatter:off
-                                                body = body addChild <h2>{s"Uploaded File : $fileName" + s"; elapsedTime : ${DT(elapsedTime).toString}"}</h2>
-                                                //@formatter:on
+                                        body = body addChild <h2>{s"Uploaded File : $fileName" + s"; elapsedTime : ${DT(elapsedTime).toString}"}</h2>
+                                        //@formatter:on
                                 }
                             }
                     }
@@ -198,6 +207,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                 dcr.foreach(conn unregisterDatabaseChangeNotification _)
                                 conn.close()
                         }
+
+                        channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(channels = channelMessageEndUpload)))
 
                         Out("Ok")
                     case Failure(e) ⇒

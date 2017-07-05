@@ -92,12 +92,7 @@ trait DataBoundComponentProps extends ClassProps {
             transactionID.foreach {
                 transactionID ⇒
 
-                    isc.MessagingSS.subscribe(_channelMessage4RemoveOperation, {
-                        (e: MessageJS) ⇒
-                            //println(s"remove data: ${e.data.toString}")
-                            progressBar.foreach(_.nextStep())
-                    }
-                    )
+                    isc.MessagingSS.subscribe(_channelMessage4RemoveOperation, (e: MessageJS) ⇒progressBar.foreach(_.nextStep()))
 
                     isc.MessagingSS.subscribe(
                         _channelMessage4EndRemoveOperation, {
