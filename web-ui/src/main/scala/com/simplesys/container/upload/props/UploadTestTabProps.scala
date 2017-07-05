@@ -7,7 +7,7 @@ import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.props._
 import com.simplesys.SmartClient.Forms.formsItems.{FormItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.{DynamicFormProps, DynamicFormSSProps}
-import com.simplesys.SmartClient.Foundation.props.CanvasProps
+import com.simplesys.SmartClient.Foundation.props.{CanvasProps, IframeProps}
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types._
@@ -27,20 +27,14 @@ class UploadTestTabProps extends HLayoutProps {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
             thiz.Super("initWidget", arguments)
-
-            val iframe = Canvas.create(
-                new CanvasProps {
-                    visibility = Visibility.hidden.opt
-                }
-            )
-
-            iframe setContents "<IFRAME NAME=\""+ iframe.ID + "\" style=\"width:0;height:0;border:0\"></IFRAME>"
-
+            
             val member = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     width = "100%"
                     action = "UploadServlet".opt
-                    target = iframe.ID.opt
+                    target = Iframe.create(
+                        new IframeProps
+                    ).ID.opt
                     encoding = Encoding.multipart.opt
                     canSubmit = true.opt
                     items = Seq(

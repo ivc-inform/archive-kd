@@ -162,6 +162,7 @@ package object System {
 
     //<editor-fold desc="Foundation">
     object Canvas extends SCApply[Canvas, CanvasProps]
+    object Iframe extends SCApply[Iframe, IframeProps]
     object Label extends SCApply[Label, LabelProps]
     object HTMLFlow extends SCApply[HTMLFlow, HTMLFlowProps]
     object HTMLPane extends SCApply[HTMLPane, HTMLPaneProps]
