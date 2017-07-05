@@ -15,7 +15,7 @@ object PluginDeps {
         val sbtNativePackagerVersion = "1.2.0-M8"
 
         val scalaJSPluginVersion = "0.6.18"
-        val jrabelPluginVersion = "0.10.0-SNAPSHOT"
+        val jrabelPluginVersion = "0.10.1"
         val macroParadiseVersion = "2.1.0"
     }
 
