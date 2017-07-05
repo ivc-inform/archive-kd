@@ -1,7 +1,8 @@
 package com.simplesys.container.upload.props
 
+import com.netaporter.uri.Uri
 import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.formsItems.UploadItem
+import com.simplesys.SmartClient.Forms.formsItems.{ProgressbarItem, UploadItem}
 import com.simplesys.SmartClient.Forms.formsItems.props._
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
@@ -15,6 +16,7 @@ import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
+import com.netaporter.uri.dsl._
 
 class UploadTestTabProps extends HLayoutProps {
     type classHandler <: UploadTestTab
@@ -22,6 +24,9 @@ class UploadTestTabProps extends HLayoutProps {
     identifier = "69EC6EB4-E51F-B7A9-C1E0-CF216088816AF".opt
 
     var channelMessageEndUpload: ScOption[String] = ScNone
+    var channelMessageNextStep: ScOption[String] = ScNone
+
+    implicit def str2Uri(uri:Uri): ScOption[String] = uri.toString().opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
@@ -33,13 +38,19 @@ class UploadTestTabProps extends HLayoutProps {
 
             isc.MessagingSS.subscribe(thiz.channelMessageEndUpload.get,
                 (e: MessageJS) ⇒
-                    isc ok ("Upload is done", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
+                    isc ok("Upload is done", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
             )
+
+            if (thiz.channelMessageNextStep.isEmpty)
+                thiz.channelMessageNextStep = s"NextStep_${thiz.ID}"
+
 
             val form = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     width = "100%"
-                    action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}".opt
+                    action = "UploadServlet" ?
+                      ("channelMessageEndUpload" → thiz.channelMessageEndUpload.get) &
+                      ("channelMessageNextStep" → thiz.channelMessageNextStep.get)
                     target = Iframe.create(
                         new IframeProps
                     ).ID.opt
@@ -66,18 +77,25 @@ class UploadTestTabProps extends HLayoutProps {
                                 disabled = true.opt
                                 //colSpan = 2
                                 title = "Upload".ellipsis.opt
-                                name = "upload".opt
+                                nameStrong = "upload".nameStrongOpt
                             }
                         ),
                         ProgressbarItem(
                             new ProgressbarItemProps {
-                                //colSpan = 2
+                                nameStrong = "progressBar".nameStrongOpt
                                 showTitle = false.opt
                                 title = "Процесс выгрузки".ellipsis.opt
                             }
                         )
                     ).opt
                 }
+            )
+
+            val progressBar = (form getItem "progressBar").asInstanceOf[ProgressbarItem]
+
+            isc.MessagingSS.subscribe(thiz.channelMessageNextStep.get,
+                (e: MessageJS) ⇒
+                  progressBar.nextStep()
             )
 
             thiz addMember form

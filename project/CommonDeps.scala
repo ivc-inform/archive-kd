@@ -70,6 +70,7 @@ object CommonDeps {
 
         val commonsFileuploadVersion = "1.3.2"
         val commonsIOVersion = "2.5"
+        val scalaURIVersion = "0.4.16"
     }
 
     val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
@@ -125,6 +126,8 @@ object CommonDeps {
 
     val commonsFileupload = Def.setting("commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion)
     val commonsIO = Def.setting("commons-io" % "commons-io" % versions.commonsIOVersion)
+
+    val scalaURI = Def.setting("com.netaporter" %% "scala-uri" % versions.scalaURIVersion)
 
 }
 
