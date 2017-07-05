@@ -145,6 +145,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                 channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
                             }
 
+                            if (pBytesRead == pContentLength)
+                                channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
 
                             if (megaBytes != mBytes) {
                                 megaBytes = mBytes
@@ -204,7 +206,6 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                         println(s"after pstmt.setString(2, $fileName) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
-                                        channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
                                         
                                         pstmt.setBinaryStream(3, inputStream, fi.getSize)
 
