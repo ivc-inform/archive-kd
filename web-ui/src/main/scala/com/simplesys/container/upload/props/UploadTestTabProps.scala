@@ -7,6 +7,7 @@ import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.props._
 import com.simplesys.SmartClient.Forms.formsItems.{FormItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.{DynamicFormProps, DynamicFormSSProps}
+import com.simplesys.SmartClient.Foundation.props.CanvasProps
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types._
@@ -27,33 +28,21 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
+            val iframe = Canvas.create(
+                new CanvasProps {
+                    visibility = Visibility.hidden.opt
+                }
+            )
+
+            iframe setContents "<IFRAME NAME=\""+ iframe.ID + "\" style=\"width:0;height:0;border:0\"></IFRAME>"
+
             val member = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     width = "100%"
-                    //colWidths = Seq[JSAny]("50%", "*").opt
                     action = "UploadServlet".opt
-                    //target = "hidden_frame".opt
+                    target = iframe.ID.opt
                     encoding = Encoding.multipart.opt
-                    /*dataSource = RestDataSource.create(
-                        new RestDataSourceProps {
-                            //serverType = DSServerType.sql.opt
-                            addDataURL = "UploadServlet".opt
-                            fields = Seq(
-                                new DataSourceFieldProps {
-                                    name = "file".opt
-                                    showFileInline = true.opt
-                                    `type` = FieldType.binary
-                                }
-                            ).opt
-                            operationBindings = Seq(
-                                new OperationBindingProps {
-                                    dataFormat = DSDataFormat.json.opt
-                                    dataProtocol = DSProtocol.postXML.opt
-                                    operationType = DSOperationType.add.opt
-                                }
-                            ).opt
-                        }
-                    ).opt*/
+                    canSubmit = true.opt
                     items = Seq(
                         UploadItem(
                             new UploadItemProps {
@@ -69,17 +58,13 @@ class UploadTestTabProps extends HLayoutProps {
 
                                 }.toFunc.opt
                             }
-                        ), SubmitItem(
+                        ),
+                        SubmitItem(
                             new SubmitItemProps {
                                 disabled = true.opt
                                 //colSpan = 2
                                 title = "Upload".ellipsis.opt
                                 name = "upload".opt
-                                /*click = {
-                                    (form: DynamicFormSS, item: FormItem) ⇒
-                                        form.submitForm()
-                                        false
-                                }.toFunc.opt*/
                             }
                         ),
                         ProgressbarItem(
@@ -87,11 +72,6 @@ class UploadTestTabProps extends HLayoutProps {
                                 //colSpan = 2
                                 showTitle = false.opt
                                 title = "Процесс выгрузки".ellipsis.opt
-                            }
-                        ),
-                        HiddenItem(
-                            new HiddenItemProps {
-                                name = "hidden_frame".opt
                             }
                         )
                     ).opt
