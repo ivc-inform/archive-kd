@@ -35,7 +35,7 @@ class ProgressbarItemProps extends CanvasItemProps {
     var setPercentDone: ScOption[ThisFunction1[classHandler, Double, _]] = {
         (thiz: classHandler, percentDone: Double) ⇒
             thiz.progressBar setPercentDone percentDone
-            thiz.progressBar setTitle s"Progress: ${thiz.progressBar.percentDone}%"
+            thiz.progressBar setTitle s"Upload progress: ${thiz.progressBar.percentDone}%"
     }.toThisFunc.opt
 
     createCanvas = {
