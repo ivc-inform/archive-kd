@@ -43,7 +43,7 @@ class FormItemProps extends ClassProps {
     var ariaRole: ScOption[String] = ScNone
     var ariaState: ScOption[JSObject] = ScNone
     var autoComplete: ScOption[AutoComplete] = ScNone
-    var blur: ScOption[js.Function2[DynamicFormSS, FormItem, _]] = ScNone
+    var blur: ScOption[js.Function2[_ <: DynamicFormSS, _ <: FormItem, _]] = ScNone
     var browserSpellCheck: ScOption[Boolean] = ScNone
     var canEdit: ScOption[Boolean] = ScNone
     var canEditOpaqueValues: ScOption[Boolean] = ScNone
@@ -51,11 +51,11 @@ class FormItemProps extends ClassProps {
     var canSelectText: ScOption[Boolean] = ScNone
     var cellHeight: ScOption[Int] = ScNone
     var cellStyle: ScOption[FormItemBaseStyle] = ScNone
-    var change: ScOption[js.Function4[_ <: DynamicFormSS, FormItem, _ <:  JSUndefined[JSAny], _ <: JSUndefined[JSAny], Boolean]] = ScNone
+    var change: ScOption[js.Function4[_ <: DynamicFormSS, _ <: FormItem, _ <:  JSUndefined[JSAny], _ <: JSUndefined[JSAny], Boolean]] = ScNone
     var changed: ScOption[js.Function3[_ <: DynamicFormSS, _ <: FormItem, _ <: JSUndefined[JSAny], _]] = ScNone
     var changeOnKeypress: ScOption[Boolean] = ScNone
     var clearValue: ScOption[ThisFunction0[classHandler, _]] = ScNone
-    var click: ScOption[js.Function2[DynamicFormSS, FormItem, Boolean]] = ScNone
+    var click: ScOption[js.Function2[_ <: DynamicFormSS, _ <: FormItem, Boolean]] = ScNone
     var clipStaticValue: ScOption[Boolean] = ScNone
     var clipTitle: ScOption[Boolean] = ScNone
     var colSpan: ScOption[IntString[Int, String]] = ScNone

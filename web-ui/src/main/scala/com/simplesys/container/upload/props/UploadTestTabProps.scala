@@ -2,7 +2,7 @@ package com.simplesys.container.upload.props
 
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.props._
-import com.simplesys.SmartClient.Forms.formsItems.{ProgressbarItem, UploadItem}
+import com.simplesys.SmartClient.Forms.formsItems.{ButtonItem, ProgressbarItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Layout.WindowSS
@@ -73,9 +73,22 @@ class UploadTestTabProps extends HLayoutProps {
                     encoding = Encoding.multipart.opt
                     canSubmit = true.opt
                     items = Seq(
+                        ButtonItem(
+                            new ButtonItemProps {
+                                showTitle = false.opt
+                                title = "Choose file".opt
+                                click = {
+                                    (form: DynamicFormSS, item: ButtonItem) ⇒
+                                        val upload = form getItem "file"
+                                        upload.click(form, upload)
+                                        false;
+                                }.toFunc.opt
+                            }
+                        ),
                         UploadItem(
                             new UploadItemProps {
                                 //multiple = true.opt
+                                visible = false.opt
                                 nameStrong = "file".nameStrongOpt
                                 showTitle = false.opt
                                 title = "Choose file".opt
@@ -83,7 +96,7 @@ class UploadTestTabProps extends HLayoutProps {
                                     (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                         val submit = form getItem "upload"
                                         //value.map(_.toString.replace("C:\\fakepath\\", "")).foreach(isc ok (_))
-                                        isc info item.getDisplayValue().toString
+                                        ///isc info item.getDisplayValue().toString
                                         if (value.isDefined) submit.enable() else submit.disable()
 
                                 }.toFunc.opt

@@ -16,7 +16,7 @@ class DrawItemEditProxyProps extends EditProxyProps {
 
             val liveObject = thisTop.creator.asInstanceOf[DrawItem]
 
-            if (liveObject.drawPane.isDefined && liveObject.drawPane.get.editProxy.canSelectChildren.getOrElse(false) && thisTop.canSelect != false)
+            if (liveObject.drawPane.isDefined && liveObject.drawPane.get.editProxy.canSelectChildren.getOrElse(false) && thisTop.canSelect.getOrElse(false) != false)
                 if (isc.EventHandler.ctrlKeyDown())
                     liveObject.editContext.foreach(_.selectComponent(liveObject))
                 else
