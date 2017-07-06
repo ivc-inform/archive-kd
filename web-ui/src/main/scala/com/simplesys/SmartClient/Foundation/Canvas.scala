@@ -276,7 +276,7 @@ trait Canvas extends com.simplesys.SmartClient.System.Class {
     var layoutAlign: Alignment | VerticalAlignment
     def layoutChildren(reason: String): void
     val leavePageSpace: Int
-    var left:  Int
+    var left: Int
     def linkHTML(href: String, text: HTMLString = js.native, target: String = js.native, ID: String = js.native, tabIndex: Int = js.native, accessKey: String = js.native): HTMLString
     var locateChildrenBy: LocatorStrategy
     var locateChildrenType: LocatorTypeStrategy
@@ -480,6 +480,8 @@ abstract class AbstractCanvasCompanion extends AbstractClassCompanion {
     val neverUseFilters: Boolean = js.native
     val neverUsePNGWorkaround: Boolean = js.native
     def printComponents(components: IscArray[Canvas], printProperties: PrintProperties = js.native): void = js.native
+    def resizeFonts(fontIncrease: Double): void = js.native
+    def resizeControls(sizeIncrease: Double): void = js.native
     def setAllowExternalFilters(allExternalFilters: Boolean): void = js.native
     def setDefaultPageSpace(newDefaultPageSpace: Int): void = js.native
     def setNeverUseFilters(neverUseFilters: Boolean): void = js.native

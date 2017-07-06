@@ -78,7 +78,15 @@ trait WebTabSetApp extends TabSetStack {
 
                     if (simpleSyS.skin.isEmpty)
                         simpleSyS.skin = isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
-                    
+
+                    val fontIncrease = isc.getParams().fontIncrease.getOrElse(isc.OfflineSS.getNumber(s"fontIncrease$identifier", 3.0))
+                    simpleSyS.fontIncrease = fontIncrease
+                    isc.Canvas resizeFonts simpleSyS.fontIncrease.get
+
+                    val sizeIncrease = isc.getParams().fontIncrease.getOrElse(isc.OfflineSS.getNumber(s"sizeIncrease$identifier", 10.0))
+                    simpleSyS.sizeIncrease = sizeIncrease
+                    isc.Canvas resizeControls  simpleSyS.sizeIncrease.get
+
                     Page setAppImgDir appImageDir
 
                     FileLoader.loadSkin(

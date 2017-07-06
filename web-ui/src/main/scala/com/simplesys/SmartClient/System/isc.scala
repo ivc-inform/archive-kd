@@ -9,11 +9,10 @@ import com.simplesys.SmartClient.Forms.formsItems._
 import com.simplesys.SmartClient.Forms.{AbstractDateChooserCompanion, AbstractDynamicFormCompanion}
 import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, AbstractRichTextEditorCompanion}
 import com.simplesys.SmartClient.Grids._
-import com.simplesys.SmartClient.Layout.{AbstractWindowSSCompanion, WindowSS}
+import com.simplesys.SmartClient.Layout._
 import com.simplesys.SmartClient.Messaging.AbstractMessagingSSCompanion
 import com.simplesys.SmartClient.RPC.AbstractRPCManagerCompanion
 import com.simplesys.SmartClient.System.date.{AbstractDateCompanion, AbstractTimeCompanion}
-import com.simplesys.SmartClient.System.{ListGrid ⇒ _, ListGridEditor ⇒ _}
 import com.simplesys.SmartClient.Tools.EditContextCompanion
 import com.simplesys.SmartClient.Tools.editProxy.{AbstractDrawItemEditProxyCompanion, AbstractDrawPaneEditProxyCompanion}
 import com.simplesys.SmartClient.math.AbstractAffineTransformCompanion
@@ -23,6 +22,11 @@ import com.simplesys.System._
 import scala.scalajs.js
 import scala.scalajs.js.annotation.{JSBracketAccess, JSGlobal, JSName}
 import scala.scalajs.js.|
+
+trait Params extends JSObject {
+    val fontIncrease: JSUndefined[Double]
+    val sizeIncrease: JSUndefined[Double]
+}
 
 @js.native
 @JSGlobal
@@ -56,6 +60,7 @@ object isc extends JSObject {
     def getIconTop(icon: JSObject): Int = js.native
     def getKeyForValue(value: Int, valueMap: JSDictionary[JSObject], defaultKey: JSAny): JSAny = js.native
     def getKeys(obj: JSObject): IscArray[String] = js.native
+    def getParams(window: JSAny = js.native): Params = js.native
     def getValueForKey(value: Int, valueMap: JSDictionary[JSObject], defaultKey: JSAny): JSAny = js.native
     def getValues(obj: JSObject): IscArray[JSAny] = js.native
     def logEcho(value: JSAny, message: String): void = js.native
@@ -120,7 +125,7 @@ object isc extends JSObject {
 
 
     def error(message: String, identifier: ID = js.native, callback: Callback = js.native): WindowSS = js.native
-    def errorDetail(message: String , detailMessage: String , identifier: ID = js.native, detailIdentifier: ID = js.native): WindowSS = js.native
+    def errorDetail(message: String, detailMessage: String, identifier: ID = js.native, detailIdentifier: ID = js.native): WindowSS = js.native
     def info(message: String, identifier: ID = js.native, callback: Callback = js.native): WindowSS = js.native
     def ok(message: String, identifier: ID = js.native, callback: Callback = js.native): WindowSS = js.native
     def infos(gridProperties: ListGrid | ListGridEditor, identifier: ID = js.native, callback: Callback = js.native): WindowSS = js.native
