@@ -18,7 +18,7 @@ class IframeProps extends CanvasProps {
 
             thiz setContents "<IFRAME NAME=\""+ thiz.ID + "\" style=\"width:0;height:0;border:0\"></IFRAME>"
 
-            isc debugTrap thiz
+            //isc debugTrap thiz
 
     }.toThisFunc.opt
 }

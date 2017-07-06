@@ -37,10 +37,10 @@ class UploadTestTabProps extends HLayoutProps {
             thiz.Super("initWidget", arguments)
 
             if (thiz.channelMessageEndUpload.isEmpty)
-                thiz.channelMessageEndUpload = s"EndUpload_${thiz.ID}"
+                thiz.channelMessageEndUpload = s"EndUpload_${thiz.ID}_${simpleSyS.guid}"
 
             if (thiz.channelMessageRecordInBase.isEmpty)
-                thiz.channelMessageRecordInBase = s"RecordInBase_${thiz.ID}"
+                thiz.channelMessageRecordInBase = s"RecordInBase_${thiz.ID}_${simpleSyS.guid}"
 
             var progressBar: JSUndefined[ProgressbarItem] = jSUndefined
 
@@ -56,11 +56,11 @@ class UploadTestTabProps extends HLayoutProps {
             })
 
             if (thiz.channelMessageNextStep.isEmpty)
-                thiz.channelMessageNextStep = s"NextStep_${thiz.ID}"
+                thiz.channelMessageNextStep = s"NextStep_${thiz.ID}_${simpleSyS.guid}"
 
 
             if (thiz.channelMessageMaxValue.isEmpty)
-                thiz.channelMessageMaxValue = s"MaxValue_${thiz.ID}"
+                thiz.channelMessageMaxValue = s"MaxValue_${thiz.ID}_${simpleSyS.guid}"
 
 
             val form = DynamicFormSS.create(
@@ -75,7 +75,7 @@ class UploadTestTabProps extends HLayoutProps {
                     items = Seq(
                         UploadItem(
                             new UploadItemProps {
-                                multiple = true.opt
+                                //multiple = true.opt
                                 nameStrong = "file".nameStrongOpt
                                 showTitle = false.opt
                                 title = "Choose file".opt
@@ -83,6 +83,7 @@ class UploadTestTabProps extends HLayoutProps {
                                     (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                         val submit = form getItem "upload"
                                         //value.map(_.toString.replace("C:\\fakepath\\", "")).foreach(isc ok (_))
+                                        isc info item.getDisplayValue().toString
                                         if (value.isDefined) submit.enable() else submit.disable()
 
                                 }.toFunc.opt
