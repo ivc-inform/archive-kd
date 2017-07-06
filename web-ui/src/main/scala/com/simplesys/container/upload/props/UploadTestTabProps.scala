@@ -54,7 +54,7 @@ class UploadTestTabProps extends HLayoutProps {
                 progressBar.foreach(_ setPercentDone 0.0)
 
                 val elapsedTime = e.data.map (_.asInstanceOf[UploadTestData].elapsedTime.getOrElse("")).getOrElse("")
-                val fileSize = e.data.map (_.asInstanceOf[UploadTestData].maxValue.getOrElse(0)).getOrElse(0)
+                val fileSize = progressBar.get.maxValue
 
                 isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
             })

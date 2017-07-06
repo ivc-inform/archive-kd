@@ -18,6 +18,7 @@ import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
+import java.util.UUID
 
 import scala.collection.JavaConverters._
 import scala.util.{Failure, Success, Try}
@@ -80,7 +81,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
 
                 val factory = new DiskFileItemFactory()
 
-                val file = new File("./temp")
+                val file = new File(s"./temp${UUID.randomUUID.toString}")
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
 
