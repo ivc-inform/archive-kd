@@ -18,7 +18,8 @@ import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
 trait UploadTestData extends JSObject {
-    val maxValue: Double
+    val maxValue: JSUndefined[Double]
+    val elapsedTime: JSUndefined[String]
 }
 
 class UploadTestTabProps extends HLayoutProps {
@@ -52,7 +53,10 @@ class UploadTestTabProps extends HLayoutProps {
             isc.MessagingSS.subscribe(thiz.channelMessageEndUpload.get, { (e: MessageJS) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
-                isc ok("Upload is done", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
+                val elapsedTime = e.data.map (_.asInstanceOf[UploadTestData].elapsedTime.getOrElse("")).getOrElse("")
+                val fileSize = e.data.map (_.asInstanceOf[UploadTestData].maxValue.getOrElse(0)).getOrElse(0)
+
+                isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
             })
 
             if (thiz.channelMessageNextStep.isEmpty)
@@ -73,22 +77,10 @@ class UploadTestTabProps extends HLayoutProps {
                     encoding = Encoding.multipart.opt
                     canSubmit = true.opt
                     items = Seq(
-                        ButtonItem(
-                            new ButtonItemProps {
-                                showTitle = false.opt
-                                title = "Choose file".opt
-                                click = {
-                                    (form: DynamicFormSS, item: ButtonItem) ⇒
-                                        val upload = form getItem "file"
-                                        upload.click.foreach(_ (form, upload))
-                                        false;
-                                }.toFunc.opt
-                            }
-                        ),
                         UploadItem(
                             new UploadItemProps {
                                 //multiple = true.opt
-                                visible = false.opt
+                                //visible = false.opt
                                 nameStrong = "file".nameStrongOpt
                                 showTitle = false.opt
                                 title = "Choose file".opt
@@ -135,7 +127,7 @@ class UploadTestTabProps extends HLayoutProps {
                             progressBar.foreach {
                                 progressBar ⇒
                                     progressBar setPercentDone 0.0
-                                    progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue
+                                    progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue.getOrElse(0)
                             }
                     }
             )

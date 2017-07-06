@@ -5,7 +5,7 @@ import java.util.Properties
 
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.json.{JsonLong, JsonObject}
+import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
 import com.simplesys.servlet.ContentType._
@@ -222,7 +222,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                                 conn.close()
                         }
 
-                        channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(channels = channelMessageEndUpload)))
+                        channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)),
+                            channels = channelMessageEndUpload)))
 
                         Out("Ok")
                     case Failure(e) ⇒
