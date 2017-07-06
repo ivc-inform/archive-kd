@@ -69,6 +69,14 @@ trait WebTabSetApp extends TabSetStack {
 
     //@JSExport
     def getUIContent() {
+        val fontIncrease = isc.getParams().fontIncrease.getOrElse(isc.OfflineSS.getNumber(s"fontIncrease$identifier", 0.0))
+        simpleSyS.fontIncrease = fontIncrease
+        isc.Canvas resizeFonts simpleSyS.fontIncrease.get
+
+        val sizeIncrease = isc.getParams().fontIncrease.getOrElse(isc.OfflineSS.getNumber(s"sizeIncrease$identifier", 0.0))
+        simpleSyS.sizeIncrease = sizeIncrease
+        isc.Canvas resizeControls simpleSyS.sizeIncrease.get
+
         Page.setEvent(
             PageEvent.load, {
                 (target: JSObject) =>
@@ -76,21 +84,13 @@ trait WebTabSetApp extends TabSetStack {
                     isc.params.locale = "ru_RU"
                     //isc.params.locale = "en"
 
-                    if (simpleSyS.skin.isEmpty)
-                        simpleSyS.skin = isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
 
-                    val fontIncrease = isc.getParams().fontIncrease.getOrElse(isc.OfflineSS.getNumber(s"fontIncrease$identifier", 3.0))
-                    simpleSyS.fontIncrease = fontIncrease
-                    isc.Canvas resizeFonts simpleSyS.fontIncrease.get
-
-                    val sizeIncrease = isc.getParams().fontIncrease.getOrElse(isc.OfflineSS.getNumber(s"sizeIncrease$identifier", 10.0))
-                    simpleSyS.sizeIncrease = sizeIncrease
-                    isc.Canvas resizeControls  simpleSyS.sizeIncrease.get
+                    simpleSyS.skin = isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
 
                     Page setAppImgDir appImageDir
 
                     FileLoader.loadSkin(
-                        simpleSyS.skin.get , {
+                        simpleSyS.skin.get, {
                             () =>
                                 var localeFile = "isomorphic/locales/frameworkMessages.properties"
                                 if (isc.params.locale != "en")

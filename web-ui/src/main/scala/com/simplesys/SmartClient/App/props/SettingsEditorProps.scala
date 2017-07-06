@@ -3,7 +3,7 @@ package com.simplesys.SmartClient.App.props
 import com.simplesys.SmartClient.App.SettingsEditor
 import com.simplesys.SmartClient.Control.props.IButtonSSProps
 import com.simplesys.SmartClient.DataBinding.ErrorStructOld
-import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.Forms.formsItems.{FormItem, SelectItem}
 import com.simplesys.SmartClient.Forms.formsItems.props._
 import com.simplesys.SmartClient.Forms.props.{DynamicFormSSProps, ValidatorProps}
 import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS, Validator}
@@ -53,8 +53,14 @@ class SettingsEditorProps extends WindowSSProps {
         thizTop.Super("initWidget", arguments)
 
         val identifierApp = thizTop.identifier
+
         val oldSkin = simpleSyS.skin
+        val oldFontIncrease = simpleSyS.fontIncrease
+        val oldSizeIncrease = simpleSyS.sizeIncrease
+
         var skin: JSUndefined[String] = jSUndefined
+        var fontIncrease: JSUndefined[Double] = jSUndefined
+        var sizeIncrease: JSUndefined[Double] = jSUndefined
 
         //isc debugTrap thiz.customSettingItems
 
@@ -66,8 +72,7 @@ class SettingsEditorProps extends WindowSSProps {
                         new CheckboxItemProps {
                             title = "Показать дерево виджетов".opt
                             height = 25
-                            value =
-                              simpleSyS.expertMode.getOrElse(false).asInstanceOf[JSAny].opt
+                            value = simpleSyS.expertMode.getOrElse(false).asInstanceOf[JSAny].opt
                             disabled = true.opt
                             changed = {
                                 (form: DynamicForm,
@@ -86,6 +91,33 @@ class SettingsEditorProps extends WindowSSProps {
                                 (form: DynamicForm, item: FormItem, value: JSUndefined[String]) =>
                                     skin = value
                                     thizTop.okCancelPanel.foreach(_.show())
+                            }.toFunc.opt
+                        }
+                    ),
+                    SelectItem(
+                        new SelectItemProps {
+                            value = s"fontIncrease=${isc.OfflineSS.getNumber(s"fontIncrease$identifierApp", 0.0)}&sizeIncrease=${isc.OfflineSS.getNumber(s"sizeIncrease$identifierApp", 0.0)}".asInstanceOf[JSAny].opt
+                            title = "Плотность элементов".opt
+                            valueMap = js.Dictionary(
+                                "fontIncrease=0&sizeIncrease=0" → "Dense",
+                                "fontIncrease=1&sizeIncrease=2" → "Compact",
+                                "fontIncrease=2&sizeIncrease=4" → "Medium",
+                                "fontIncrease=2&sizeIncrease=6" → "Expanded",
+                                "fontIncrease=3&sizeIncrease=10" → "Spacious"
+                            ).opt
+
+                            changed = {
+                                (_: DynamicForm, _: SelectItem, value: JSUndefined[String]) =>
+
+                                    value.foreach {
+                                        value ⇒
+                                            val res = value split "&"
+                                            fontIncrease = res(0).substring(res(0).indexOf("=") + 1).toDouble
+                                            sizeIncrease = res(1).substring(res(0).indexOf("=") + 1).toDouble
+
+                                            thizTop.okCancelPanel.foreach(_.show())
+                                    }
+
                             }.toFunc.opt
                         }
                     )
@@ -342,15 +374,41 @@ class SettingsEditorProps extends WindowSSProps {
                 visibility = Visibility.hidden.opt
                 okFunction = {
                     (thiz: classHandler) =>
+                        var changed = false
+
                         if (oldSkin != skin) {
                             simpleSyS.skin = skin
 
                             isc.OfflineSS.put(s"Skin$identifierApp", skin)
-                            isc.OfflineSS.putBoolean(
-                                s"ScenarioTestMode$identifierApp",
-                                simpleSyS.scenarioTestMode.getOrElse(false))
-                            js.Dynamic.global.window.location.reload(false)
+                            isc.OfflineSS.putBoolean(s"ScenarioTestMode$identifierApp", simpleSyS.scenarioTestMode.getOrElse(false))
+
+                            changed = true
                         }
+
+                        fontIncrease.foreach {
+                            fontIncrease ⇒
+                                if (oldFontIncrease.getOrElse(0.0) != fontIncrease) {
+                                    simpleSyS.fontIncrease = fontIncrease
+
+                                    isc.OfflineSS.putNumber(s"fontIncrease$identifierApp", fontIncrease)
+
+                                    changed = true
+                                }
+                        }
+
+                        sizeIncrease.foreach {
+                            sizeIncrease ⇒
+                                if (oldSizeIncrease.getOrElse(0.0) != sizeIncrease) {
+                                    simpleSyS.sizeIncrease = sizeIncrease
+
+                                    isc.OfflineSS.putNumber(s"sizeIncrease$identifierApp", sizeIncrease)
+
+                                    changed = true
+                                }
+                        }
+
+                        if (changed)
+                            js.Dynamic.global.window.location.reload(false)
 
                 }.toThisFunc.opt
             }
