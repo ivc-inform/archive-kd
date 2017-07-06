@@ -81,14 +81,9 @@ class SettingsEditorProps extends WindowSSProps {
                     SkinBoxItem(
                         new SkinBoxItemProps {
                             title = "Темы оформления (Skins)".opt
-                            value = simpleSyS.skin
-                              .getOrElse(Skin.Enterprise.toString)
-                              .asInstanceOf[JSAny]
-                              .opt
+                            value = simpleSyS.skin.getOrElse(Skin.Enterprise.toString).asInstanceOf[JSAny].opt
                             changed = {
-                                (form: DynamicForm,
-                                 item: FormItem,
-                                 value: JSUndefined[String]) =>
+                                (form: DynamicForm, item: FormItem, value: JSUndefined[String]) =>
                                     skin = value
                                     thizTop.okCancelPanel.foreach(_.show())
                             }.toFunc.opt

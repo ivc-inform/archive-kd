@@ -76,17 +76,13 @@ trait WebTabSetApp extends TabSetStack {
                     isc.params.locale = "ru_RU"
                     //isc.params.locale = "en"
 
-                    val skin: String = simpleSyS.skin.toOption match {
-                        case Some(skin) => skin
-                        case None => isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
-                    }
-
-                    simpleSyS.skin = skin
-
+                    if (simpleSyS.skin.isEmpty)
+                        simpleSyS.skin = isc.OfflineSS.get(s"Skin$identifier", Skin.Enterprise.toString)
+                    
                     Page setAppImgDir appImageDir
 
                     FileLoader.loadSkin(
-                        skin, {
+                        simpleSyS.skin.get , {
                             () =>
                                 var localeFile = "isomorphic/locales/frameworkMessages.properties"
                                 if (isc.params.locale != "en")
