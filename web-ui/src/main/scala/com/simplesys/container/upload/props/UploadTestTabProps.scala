@@ -80,7 +80,7 @@ class UploadTestTabProps extends HLayoutProps {
                                 click = {
                                     (form: DynamicFormSS, item: ButtonItem) ⇒
                                         val upload = form getItem "file"
-                                        upload.click(form, upload)
+                                        upload.click.foreach(_ (form, upload))
                                         false;
                                 }.toFunc.opt
                             }

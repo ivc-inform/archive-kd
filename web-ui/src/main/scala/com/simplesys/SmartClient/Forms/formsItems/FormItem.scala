@@ -60,7 +60,7 @@ trait FormItem extends Class {
     var changeOnKeypress: Boolean
     def clearErrors(): void
     def clearValue(): void
-    var click: js.Function2[DynamicFormSS, FormItem, Boolean]
+    var click: JSUndefined[js.Function2[DynamicFormSS, FormItem, Boolean]]
     var clipStaticValue: Boolean
     var clipTitle: Boolean
     var colSpan: Int
