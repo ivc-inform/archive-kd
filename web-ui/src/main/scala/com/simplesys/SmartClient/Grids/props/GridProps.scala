@@ -556,6 +556,7 @@ class GridProps[T <: ListGridField, R <: ListGridRecord] extends VLayoutProps wi
     var warnOnUnmappedValueFieldChange: ScOption[Boolean] = ScNone
     var wrapCells: ScOption[Boolean] = ScNone
     var wrapHeaderTitles: ScOption[Boolean] = ScNone
+    var wrapHeaderSpanTitles: ScOption[Boolean] = ScNone
     var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingFields  : ScOption[Seq[FormItem]] = ScNone

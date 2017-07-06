@@ -848,6 +848,7 @@ trait Grid[T <: ListGridField, R <: JSAny] extends VLayout with DataBoundCompone
     var warnOnUnmappedValueFieldChange: Boolean
     var wrapCells: Boolean
     var wrapHeaderTitles: Boolean
+    var wrapHeaderSpanTitles: Boolean
     def getRowNumSelectedGridRecord(): Int
     def setSelectionChanged(func: js.Function2[R, Boolean, _]): void
     def setSelectionUpdated(func: js.Function2[R, IscArray[R], _]): void
