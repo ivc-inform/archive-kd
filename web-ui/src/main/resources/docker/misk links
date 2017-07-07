@@ -16,3 +16,14 @@ sudo docker start oracle221_eakd
 sqlplus system/dfqc2@//localhost:1521/test
 
 sqlplus sys/dfqc2@//localhost:1521/test as sysdba
+
+docker exec -it oracle221_eakd sqlplus system/dfqc2@//localhost:1521/test
+
+docker exec -it oracle221_eakd bash
+
+docker exec -it -u 0 oracle221_eakd bash
+
+CREATE OR REPLACE DIRECTORY dumps AS ‘/home/oracle/dumps’
+
+GRANT READ, WRITE ON DIRECTORY dumps TO test;
+
