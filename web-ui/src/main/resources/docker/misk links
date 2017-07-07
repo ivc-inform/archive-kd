@@ -38,6 +38,9 @@ CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 GRANT READ, WRITE ON DIRECTORY dumps TO eakd;
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-impdp system/dfqc2@test_pdb dumpfile=b404sp3_2017.dmp directory=dumps logfile=main.log
+impdp system/dfqc2@test_pdb dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
 
 select * from dba_directories;
+
+scp alustrov@orapg.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
+
