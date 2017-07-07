@@ -23,6 +23,17 @@ docker exec -it oracle221_eakd bash
 
 docker exec -it -u 0 oracle221_eakd bash
 
+------ CREATE USER [пользователь] IDENTIFIED BY [пароль] ----------------------------
+------ DEFAULT TABLESPACE [tablespace] QUOTA целое число [K][M] ON [tablespace] -----
+------ TEMPORARY TABLESPACE [tablespace] QUOTA  целое число [K][M] ON [tablespace] --
+
+CREATE USER eakd  IDENTIFIED BY eakd
+DEFAULT TABLESPACE USERS QUOTA 100G ON USERS
+TEMPORARY TABLESPACE TEMP QUOTA 10G ON TEMP
+
+GRANT CREATE SESSION TO eakd
+
+
 CREATE OR REPLACE DIRECTORY dumps AS ‘/home/oracle/dumps’
 
 GRANT READ, WRITE ON DIRECTORY dumps TO test;
