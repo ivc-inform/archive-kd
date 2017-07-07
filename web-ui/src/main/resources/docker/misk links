@@ -13,9 +13,9 @@ docker exec oracle221_eakd ./setPassword.sh dfqc2
 sudo docker stop oracle221_eakd
 sudo docker start oracle221_eakd
 
-sqlplus system/dfqc2@//localhost:1521/test
+sqlplus system/dfqc2
 
-sqlplus sys/dfqc2@//localhost:1521/test as sysdba
+sqlplus sys/dfqc2 as sysdba
 
 docker exec -it oracle221_eakd sqlplus system/dfqc2@//localhost:1521/test
 
@@ -27,13 +27,17 @@ docker exec -it -u 0 oracle221_eakd bash
 ------ DEFAULT TABLESPACE [tablespace] QUOTA целое число [K][M] ON [tablespace] -----
 ------ TEMPORARY TABLESPACE [tablespace] QUOTA  целое число [K][M] ON [tablespace] --
 
-CREATE USER eakd  IDENTIFIED BY eakd
+CREATE USER B404SP3  IDENTIFIED BY B404SP3
 DEFAULT TABLESPACE USERS QUOTA 100G ON USERS
 
 GRANT CREATE SESSION TO eakd
 
 
-CREATE OR REPLACE DIRECTORY dumps AS ‘/home/oracle/dumps’
+CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 
-GRANT READ, WRITE ON DIRECTORY dumps TO test;
+GRANT READ, WRITE ON DIRECTORY dumps TO eakd;
+GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
+impdp system/dfqc2@test_pdb dumpfile=b404sp3_2017.dmp directory=dumps logfile=main.log
+
+select * from dba_directories;
