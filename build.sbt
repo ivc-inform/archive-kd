@@ -77,6 +77,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           maxArity := 254,
           quoted := true,
           useDbPrefix := false,
+          useTablePrefix := false,
           sourceGenerators in Compile += (generateBoScalaCode in DevConfig)
       )
   }).settings(CommonSettings.defaultProjectSettings)
@@ -159,6 +160,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           contextPath in DevConfig := "archive-kd",
           maxArity in DevConfig := 254,
           useDbPrefix in DevConfig := false,
+          useTablePrefix in DevConfig := false,
           quoted in DevConfig := true,
           sourceGenerators in Compile += (generateScalaCode in DevConfig),
 
