@@ -75,8 +75,8 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           startPackageName in DevConfig := "ru.simplesys.defs",
           contextPath in DevConfig := "acrchive-kd",
           maxArity := 254,
-          useDbPrefix := false,
-          sourceGenerators in Compile += (generateBoScalaCode in DevConfig).value
+          useDbPrefix := false/*,
+          sourceGenerators in Compile += (generateBoScalaCode in DevConfig).value*/
       )
   }).settings(CommonSettings.defaultProjectSettings)
 
@@ -157,9 +157,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           startPackageName in DevConfig := "ru.simplesys.defs",
           contextPath in DevConfig := "archive-kd",
           maxArity in DevConfig := 254,
-          useDbPrefix in DevConfig := false,
-
-          sourceGenerators in Compile += (generateScalaCode in DevConfig).value,
+          useDbPrefix in DevConfig := false,/*
+          sourceGenerators in Compile += (generateScalaCode in DevConfig).value,*/
 
           //merger
           mergeMapping in MergeWebappConfig := Seq(
@@ -186,8 +185,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           ),
           currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
           currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
-          currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
-          merge in MergeWebappConfig := (merge in MergeWebappConfig).value.dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),
+          currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",/*
+          merge in MergeWebappConfig := (merge in MergeWebappConfig).value.dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),*/
 
           containerPort := 8083,
           containerArgs := Seq("--path", "/archive-kd"),
