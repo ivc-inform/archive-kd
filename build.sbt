@@ -75,8 +75,9 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           startPackageName in DevConfig := "ru.simplesys.defs",
           contextPath in DevConfig := "acrchive-kd",
           maxArity := 254,
-          useDbPrefix := false/*,
-          sourceGenerators in Compile += (generateBoScalaCode in DevConfig).value*/
+          quoted := true,
+          useDbPrefix := false,
+          sourceGenerators in Compile += (generateBoScalaCode in DevConfig)
       )
   }).settings(CommonSettings.defaultProjectSettings)
 
@@ -157,8 +158,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           startPackageName in DevConfig := "ru.simplesys.defs",
           contextPath in DevConfig := "archive-kd",
           maxArity in DevConfig := 254,
-          useDbPrefix in DevConfig := false,/*
-          sourceGenerators in Compile += (generateScalaCode in DevConfig).value,*/
+          useDbPrefix in DevConfig := false,
+          quoted in DevConfig := true,
+          sourceGenerators in Compile += (generateScalaCode in DevConfig),
 
           //merger
           mergeMapping in MergeWebappConfig := Seq(
