@@ -57,7 +57,7 @@ object EaKdProcWindowMain extends WebTabSetApp {
     )
 
     protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
-        RibbonGroupSS.create(
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -104,8 +104,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
-        RibbonGroupSS.create(
+        ),*/
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -289,8 +289,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
-        RibbonGroupSS.create(
+        ),*/
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -308,8 +308,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
-        RibbonGroupSS.create(
+        ),*/
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -327,7 +327,7 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
+        ),*/
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt

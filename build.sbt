@@ -231,7 +231,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
               }
 
               list ++= Seq(
-                  JsonObject("libName" -> "Исполнители :", "libVersion" -> "Юдин Андрей"),
+                  JsonObject("libName" -> "Разработка :", "libVersion" -> "АО ИВЦ \"Информ\" (info@ivc-inform.ru)"),
                   JsonObject("libName" -> "Версия :", "libVersion" -> version.value)
               )
 
