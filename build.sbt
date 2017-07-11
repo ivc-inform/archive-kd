@@ -77,7 +77,6 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           maxArity := 254,
           quoted := true,
           useDbPrefix := false,
-          useTablePrefix := false,
           sourceGenerators in Compile += (generateBoScalaCode in DevConfig)
       )
   }).settings(CommonSettings.defaultProjectSettings)
@@ -160,7 +159,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           contextPath in DevConfig := "archive-kd",
           maxArity in DevConfig := 254,
           useDbPrefix in DevConfig := false,
-          useTablePrefix in DevConfig := false,
           quoted in DevConfig := true,
           sourceGenerators in Compile += (generateScalaCode in DevConfig),
 
@@ -189,8 +187,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           ),
           currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
           currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
-          currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",/*
-          merge in MergeWebappConfig := (merge in MergeWebappConfig).value.dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),*/
+          currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
+          merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),
 
           containerPort := 8083,
           containerArgs := Seq("--path", "/archive-kd"),
