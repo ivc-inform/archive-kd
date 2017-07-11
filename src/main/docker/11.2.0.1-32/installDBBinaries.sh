@@ -53,9 +53,9 @@ unzip $INSTALL_FILE_2 && \
 rm $INSTALL_FILE_2    && \
 $INSTALL_DIR/database/runInstaller -silent -force -waitforcompletion -responseFile $INSTALL_DIR/$INSTALL_RSP -ignoreSysPrereqs -ignorePrereq && \
 rm -rf $INSTALL_DIR/database && \
-ln -s $ORACLE_BASE/$PWD_FILE $HOME/ && 
+ln -s $ORACLE_BASE/$PWD_FILE $HOME/  
 
 # Check whether Perl is working
-chmod ug+x $INSTALL_DIR/installPerl.sh && \
-$ORACLE_HOME/perl/bin/perl -v || \
-$INSTALL_DIR/installPerl.sh
+#chmod ug+x $INSTALL_DIR/installPerl.sh && \
+#$ORACLE_HOME/perl/bin/perl -v || \
+#$INSTALL_DIR/installPerl.sh
