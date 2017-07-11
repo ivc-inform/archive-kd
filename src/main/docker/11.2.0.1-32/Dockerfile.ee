@@ -10,7 +10,7 @@
 # ----------------------------------
 # (1) linux_11gR2_database_1of2.zip
 #     linux_11gR2_database_2of2.zip
-#     Download Oracle Database 12c Release 1 Enterprise Edition for Linux x64
+#     Download Oracle Database 11 Release 2 X86 Enterprise Edition for Linux x64
 #     from http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
 #
 # HOW TO BUILD THIS IMAGE
@@ -28,7 +28,7 @@ MAINTAINER Andrey Yudin <uag@ivc-inform.ru>
 # Environment variables required for this build (do NOT change)
 # -------------------------------------------------------------
 ENV ORACLE_BASE=/opt/oracle \
-    ORACLE_HOME=/opt/oracle/product/12.1.0.2/dbhome_1 \
+    ORACLE_HOME=/opt/oracle/product/11.2.0.1.0/dbhome_1 \
     INSTALL_FILE_1="linux_11gR2_database_1of2.zip" \
     INSTALL_FILE_2="linux_11gR2_database_2of2.zip" \
     INSTALL_RSP="db_inst.rsp" \
@@ -72,7 +72,7 @@ USER oracle
 WORKDIR /home/oracle
 
 VOLUME ["$ORACLE_BASE/oradata"]
-EXPOSE 1521 5500
+EXPOSE 1521
     
 # Define default command to start Oracle Database. 
 CMD exec $ORACLE_BASE/$RUN_FILE
