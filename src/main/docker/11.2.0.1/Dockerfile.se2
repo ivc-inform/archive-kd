@@ -8,8 +8,8 @@
 # 
 # REQUIRED FILES TO BUILD THIS IMAGE
 # ----------------------------------
-# (1) linux_11gR2_database_1of2.zip
-#     linux_11gR2_database_2of2.zip
+# (1) linux.x64_11gR2_database_1of2.zip
+#     linux.x64_11gR2_database_2of2.zip
 #     Download Oracle Database 12c Release 1 Standard Edition 2 for Linux x64
 #     from http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
 #
@@ -29,8 +29,8 @@ MAINTAINER Andrey Yudin <uag@ivc-inform.ru>
 # -------------------------------------------------------------
 ENV ORACLE_BASE=/opt/oracle \
     ORACLE_HOME=/opt/oracle/product/11.2.0.1.0/dbhome_1 \
-    INSTALL_FILE_1="linux_11gR2_database_1of2.zip" \
-    INSTALL_FILE_2="linux_11gR2_database_2of2.zip" \
+    INSTALL_FILE_1="linux.x64_11gR2_database_1of2.zip" \
+    INSTALL_FILE_2="linux.x64_11gR2_database_2of2.zip" \
     INSTALL_RSP="db_inst.rsp" \
     CONFIG_RSP="dbca.rsp.tmpl" \
     PWD_FILE="setPassword.sh" \
