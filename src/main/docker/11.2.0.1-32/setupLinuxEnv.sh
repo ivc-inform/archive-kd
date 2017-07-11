@@ -15,7 +15,7 @@
 # ------------------------------------------------------------
 mkdir -p $ORACLE_BASE/oradata && \
 chmod ug+x $ORACLE_BASE/*.sh && \
-yum -y install oracle-rdbms-server-12cR1-preinstall unzip wget tar openssl && \
+yum -y install oracle-rdbms-server-11gR2-preinstall unzip wget tar openssl && \
 yum clean all && \
 echo oracle:oracle | chpasswd && \
 chown -R oracle:dba $ORACLE_BASE
