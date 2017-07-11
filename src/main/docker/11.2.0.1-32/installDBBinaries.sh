@@ -51,7 +51,7 @@ unzip $INSTALL_FILE_1 && \
 rm $INSTALL_FILE_1    && \
 unzip $INSTALL_FILE_2 && \
 rm $INSTALL_FILE_2    && \
-$INSTALL_DIR/database/runInstaller -silent -force -waitforcompletion -responsefile $INSTALL_DIR/$INSTALL_RSP -ignoresysprereqs -ignoreprereq && \
+$INSTALL_DIR/database/runInstaller -silent -force -waitforcompletion -responseFile $INSTALL_DIR/$INSTALL_RSP -ignoreSysPrereqs -ignorePrereq && \
 rm -rf $INSTALL_DIR/database && \
 ln -s $ORACLE_BASE/$PWD_FILE $HOME/ && \
 echo "DEDICATED_THROUGH_BROKER_LISTENER=ON"  >> $ORACLE_HOME/network/admin/listener.ora && \
