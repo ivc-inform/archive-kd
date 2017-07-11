@@ -178,6 +178,7 @@
 		<xs:attribute type="xs:string" name="name" use="required"/>
 		<xs:attribute type="xs:string" name="caption" use="optional"/>
 		<xs:attribute type="xs:boolean" name="autoTableMapping" use="required"/>
+		<xs:attribute name="useTablePrefix" type="xs:boolean"/>
 	</xs:attributeGroup>
 
 	<xs:attributeGroup name="hierarchy.group">
@@ -265,6 +266,7 @@
 		<xs:attribute type="xs:string" name="caption" use="optional"/>
 		<xs:attribute type="xs:boolean" name="hidden" use="optional"/>
 		<xs:attribute type="xs:boolean" name="genBySeq" use="optional"/>
+		<xs:attribute name="useDbPrefix" type="xs:boolean"/>
 		<!--<xs:attributeGroup ref="attrTypeAttribute.group"/>-->
 	</xs:complexType>
 
