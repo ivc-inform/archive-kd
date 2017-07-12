@@ -30,15 +30,14 @@ docker exec -it -u 0 oracle221_eakd bash
 CREATE USER B404SP3  IDENTIFIED BY B404SP3
 DEFAULT TABLESPACE USERS QUOTA 100G ON USERS
 
-GRANT CREATE SESSION TO eakd
-
+GRANT CREATE SESSION TO B404SP3;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 
-GRANT READ, WRITE ON DIRECTORY dumps TO eakd;
+GRANT READ, WRITE ON DIRECTORY dumps TO  B404SP3;
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-impdp system/dfqc2@test_pdb dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
+impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
 
 select * from dba_directories;
 
