@@ -3,7 +3,7 @@
 # DOCKERFILE FOR ORACLE DB 11g
 # --------------------------
 
-FROM oraclelinux:7.1
+FROM oraclelinux:latest
 
 
 ########################################
