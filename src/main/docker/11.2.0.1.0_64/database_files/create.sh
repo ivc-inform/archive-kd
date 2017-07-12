@@ -6,6 +6,8 @@ ORACLE_HOME=$ORACLE_BASE/product/11.2/db_1
 date
 echo "Creating database..."
 sudo -u oracle -i bash -c "sqlplus /nolog @$ORACLE_HOME/config/scripts/createdb.sql"
+sudo -u oracle -i bash -c "sqlplus ALTER USER SYS IDENTIFIED BY dfqc2"
+sudo -u oracle -i bash -c "sqlplus ALTER USER SYSTEM IDENTIFIED BY dfqc2"
 echo ""
 
 date

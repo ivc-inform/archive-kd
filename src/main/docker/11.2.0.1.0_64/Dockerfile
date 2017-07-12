@@ -21,8 +21,6 @@ RUN yum -y install oracle-rdbms-server-11gR2-preinstall
 
 RUN yum clean all
 
-
-
 ########################################
 # Install ORACLE 11g Enterprise Edition
 ########################################
