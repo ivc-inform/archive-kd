@@ -15,7 +15,7 @@ cp catalog.sql catalog-e.sql
 echo "exit" >> catalog-e.sql
 sudo -u oracle -i bash -c "sqlplus / as sysdba @$ORACLE_HOME/rdbms/admin/catalog-e.sql > /tmp/catalog.log"
 rm catalog-e.sql
-echo ""
+echo "Done catalog.sql"
 
 date
 echo "Running catproc.sql operation is too long ))))..."
@@ -24,7 +24,7 @@ cp catproc.sql catproc-e.sql
 echo "exit" >> catproc-e.sql
 sudo -u oracle -i bash -c "sqlplus / as sysdba @$ORACLE_HOME/rdbms/admin/catproc-e.sql > /tmp/catproc.log"
 rm catproc-e.sql
-echo ""
+echo "Done catproc.sql"
 
 date
 echo "Running pupbld.sql..."
@@ -33,7 +33,7 @@ cp pupbld.sql pupbld-e.sql
 echo "exit" >> pupbld-e.sql
 sudo -u oracle -i bash -c "sqlplus system/manager @$ORACLE_HOME/sqlplus/admin/pupbld-e.sql > /tmp/pupbld.log"
 rm pupbld-e.sql
-echo ""
+echo "Done pupbld.sql"
 
 date
 echo "Create is done; commit the container now"

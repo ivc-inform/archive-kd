@@ -64,7 +64,7 @@ RUN /tmp/install/database/runInstaller -silent -ignoreSysPrereqs -ignorePrereq -
     ORACLE_HOME=$ORACLE_HOME \
     ORACLE_HOME_NAME="OraDb11g_Home1" \
     ORACLE_BASE=$ORACLE_BASE \
-    oracle.install.db.InstallEdition=SE \
+    oracle.install.db.InstallEdition=EE \
     oracle.install.db.isCustomInstall=false \
     oracle.install.db.DBA_GROUP=dba \
     oracle.install.db.OPER_GROUP=dba \
