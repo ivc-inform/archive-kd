@@ -30,7 +30,9 @@ docker exec -it -u 0 oracle221_eakd bash
 CREATE USER B404SP3  IDENTIFIED BY B404SP3
 DEFAULT TABLESPACE USERS QUOTA 100G ON USERS
 
-GRANT CREATE SESSION TO B404SP3;
+ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2
+
+GRANT CREATE SESSION TO B404SP3DEMO;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 
@@ -42,4 +44,12 @@ impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.lo
 select * from dba_directories;
 
 scp alustrov@orapg.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
+
+docker run -d -p 1521:1521 --name oracle-11x64g oracle-11x64g:1.0.1
+
+show parameter SHARED_POOL_SIZE;
+show parameter LARGE_POOL_SIZE;
+show parameter JAVA_POOL_SIZE;
+show parameter DB_CACHE_SIZE;
+show parameter STREAMS_POOL_SIZE;
 
