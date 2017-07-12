@@ -17,7 +17,7 @@ RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
 # changing the field enabled=0 to enabled=1 to reflect repositories that correspond to the machine's operating system release. 
 RUN sed "s|enabled=0|enabled=1|g" public-yum-ol6.repo
 
-RUN yum -y install oracle-rdbms-server-11gR2-preinstall
+RUN yum -y install oracle-rdbms-server-11gR2-preinstall ld-linux.so.2
 
 RUN yum clean all
                                                                               
