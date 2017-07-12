@@ -20,7 +20,7 @@ RUN sed "s|enabled=0|enabled=1|g" public-yum-ol6.repo
 RUN yum -y install oracle-rdbms-server-11gR2-preinstall
 
 RUN yum clean all
-
+                                                                              
 
 
 ########################################
@@ -32,7 +32,7 @@ ADD installation_files/oraInst.loc /etc/oraInst.loc
 ADD installation_files/oracle.sh /usr/local/bin/oracle.sh
 RUN chmod -R 775 /usr/local/bin/oracle.sh
 
-RUN cd /tmp/install && unzip linux.x64_11gR2_database_1of2 && unzip linux.x64_11gR2_database_2of2 && rm *.zip
+RUN cd /tmp/install && unzip linux_11gR2_database_1of2 && unzip linux_11gR2_database_2of2 && rm *.zip
 
 #RUN groupadd -g 54321 oinstall && groupadd -g 54322 dba
 RUN userdel oracle && rm -rf /home/oracle && rm /var/spool/mail/oracle
