@@ -12,7 +12,7 @@ import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
 import com.simplesys.tuple.TupleSS6
-import ru.simplesys.defs.bo.admin.{User, UserDS}
+import ru.simplesys.defs.bo.admin.{User, UserBo, UserDS}
 
 import scalaz.{Failure, Success}
 
@@ -70,11 +70,13 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
             logger trace (s"login: ${login}")
             logger trace (s"pasword: ${password}")
 
-            val user = UserDS(sessionContext.getDS)
+            val user = UserBo(sessionContext.getDS)
 
-            user.selectOne(user.diUser ~ user.loginUser ~ user.captionUser ~ user.codeGroupUserGroup_Group ~ user.loginUser ~ user.passwordUser, where = Where(user.loginUser === login) And (user.passwordUser === password)) result match {
+            logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
+            logger debug s"login: $login, password: $password"
+
+            user.selectOne(user.di ~ user.login ~ user.caption ~ user.group ~ user.login ~ user.password, where = Where(user.login === login) And (user.password === password)) result match {
                 case Success(TupleSS6(userID, loginedUser, captionUser, loginedGroup, _, _)) =>
-                    logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
                     logger debug s"userID $userID, loginedUser: $loginedUser, captionUser: $captionUser, loginedGroup: $loginedGroup"
                     logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
@@ -86,12 +88,12 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                         _session.Attribute("loginedGroup", Some(loginedGroup))
                         _session.Attribute("logged", Some(true))
                     }
-                    LoginedData1(strEmpty, login, userID, captionUser, loginedGroup)
+                    //LoginedData1(strEmpty, login, userID, captionUser, loginedGroup)
+                    LoginedData1(strEmpty, login, userID, captionUser, "")
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
-
-                        logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
+                        
                         logger debug s"NoDataFoundException"
                         logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
@@ -104,7 +106,7 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                                 _session RemoveAttribute "logged"
 
                                 if (login === "root") {
-                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None, lastName = "root", password = "qwerty", active = true, group = None)) result match {
+                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None, lastName = login, password = password, active = true, group = None)) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
                                                 _session.Attribute("userId", Some(0))
@@ -118,7 +120,7 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                                             LoginedData1("Аутентификация не прошла :-(")
                                     }
                                 } else
-                                    user.selectOne(user.diUser ~ user.captionUser ~ user.loginUser, where = Where(user.loginUser === "root")) result match {
+                                    user.selectOne(user.di ~ user.caption ~ user.login, where = Where(user.login === "root")) result match {
                                         case Success(_) =>
                                             LoginedData1("Аутентификация не прошла :-(")
                                         case Failure(e) => e match {
