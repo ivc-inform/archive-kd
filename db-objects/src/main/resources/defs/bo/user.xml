@@ -56,7 +56,7 @@
 					<uc uniqueType="pk">
 						<attrName>di</attrName>
 					</uc>
-					<fk parent="UserGroup" linkType="refIsOwner" mandatory="true">
+					<fk parent="UserGroup" linkType="refIsOwner" mandatory="false">
 						<mapping attrNameLocal="group" attrNameRemote="di"/>
 					</fk>
 					<uc uniqueType="uq">

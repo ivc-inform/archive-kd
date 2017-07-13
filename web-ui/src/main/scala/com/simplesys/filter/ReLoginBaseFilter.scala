@@ -94,7 +94,7 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                                 _session RemoveAttribute "logged"
 
                                 if (login === "root") {
-                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None,lastName = "root", password = "qwerty", active = true, group = 0L)) result match {
+                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None,lastName = "root", password = "qwerty", active = true, group = None)) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
                                                 _session.Attribute("userId", Some(0))
