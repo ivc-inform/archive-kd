@@ -90,7 +90,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                 //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
                 ds.setURL("jdbc:oracle:thin:@//localhost:1521/orcl")
 
-                ds.setUser("B404SP3DEMO_DOCKER")
+                ds.setUser("B404SP3DEMO")
                 ds.setPassword("dfqc2")
 
                 val conn = Option(ds.getConnection.asInstanceOf[OracleConnection])
