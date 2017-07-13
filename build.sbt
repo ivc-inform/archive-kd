@@ -39,8 +39,8 @@ lazy val root = (project in file(".")).
 
 lazy val common = Project(id = "common", base = file("common")).settings(
     libraryDependencies ++= Seq(
-        CommonDeps.commonsIO.value,
-        CommonDeps.scalaTest.value % Test
+        CommonDeps.commonsIO,
+        CommonDeps.scalaTest % Test
     )
 ).settings(CommonSettings.defaultProjectSettings)
 
@@ -49,9 +49,9 @@ lazy val testModule = Project(id = "test", base = file("test")).
   dependsOn(dbObjects).
   settings(
       libraryDependencies ++= Seq(
-          CommonDeps.ssysJDBCWrapper.value,
-          CommonDeps.ssysBoneCPWrapper.value,
-          CommonDeps.scalaTest.value % Test
+          CommonDeps.ssysJDBCWrapper,
+          CommonDeps.ssysBoneCPWrapper,
+          CommonDeps.scalaTest % Test
       )
   ).settings(CommonSettings.defaultProjectSettings)
 
@@ -60,12 +60,12 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
   enablePlugins(DevPlugin).
   settings(
       libraryDependencies ++= Seq(
-          CommonDeps.ssysCoreLibrary.value,
-          CommonDeps.ssysJsonExtender.value,
-          CommonDeps.ssysJDBCWrapper.value,
-          CommonDeps.jodaTime.value,
-          CommonDeps.jodaConvert.value,
-          CommonDeps.scalaTest.value % Test
+          CommonDeps.ssysCoreLibrary,
+          CommonDeps.ssysJsonExtender,
+          CommonDeps.ssysJDBCWrapper,
+          CommonDeps.jodaTime,
+          CommonDeps.jodaConvert,
+          CommonDeps.scalaTest % Test
       )
   ).settings(DevPlugin.devPluginGeneratorSettings).
   settings({
@@ -102,28 +102,28 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     ),
 
     libraryDependencies ++= Seq(
-        CommonDeps.servletAPI.value % Provided,
-        CommonDeps.ssysCommonWebapp.value,
-        CommonDeps.ssysIscComponents.value,
-        CommonDeps.ssysXMLExtender.value,
-        CommonDeps.ssysJsonExtender.value,
-        CommonDeps.ssysIscMisc.value,
+        CommonDeps.servletAPI % Provided,
+        CommonDeps.ssysCommonWebapp,
+        CommonDeps.ssysIscComponents,
+        CommonDeps.ssysXMLExtender,
+        CommonDeps.ssysJsonExtender,
+        CommonDeps.ssysIscMisc,
 
-        CommonDeps.smartclient.value,
+        CommonDeps.smartclient,
 
-        CommonDeps.akkaActor.value,
-        CommonDeps.akkaHttp.value,
-        CommonDeps.akkaHttpCore.value,
-        CommonDeps.akkaHttpXml.value,
-        CommonDeps.akkaHttpSprayJson.value,
-        CommonDeps.commonsFileupload.value,
-        CommonDeps.commonsIO.value,
+        CommonDeps.akkaActor,
+        CommonDeps.akkaHttp,
+        CommonDeps.akkaHttpCore,
+        CommonDeps.akkaHttpXml,
+        CommonDeps.akkaHttpSprayJson,
+        CommonDeps.commonsFileupload,
+        CommonDeps.commonsIO,
 
-        CommonDeps.scalaTest.value % Test,
+        CommonDeps.scalaTest % Test,
 
-        CommonDeps.scalaJSWrapper.value,
-        CommonDeps.scalaTags.value,
-        CommonDeps.scalaURI.value,
+        CommonDeps.scalaJSWrapper,
+        CommonDeps.scalaTags,
+        CommonDeps.scalaURI,
         CommonDepsScalaJS.smartClientWrapper.value,
         CommonDepsScalaJS.macroJS.value,
         CommonDepsScalaJS.scalaTags.value,
@@ -192,7 +192,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           containerPort := 8083,
           containerArgs := Seq("--path", "/archive-kd"),
           containerLibs in Jetty := Seq(
-              CommonDeps.jettyRuner.value intransitive()
+              CommonDeps.jettyRuner intransitive()
           ),
           artifactName := { (v: ScalaVersion, m: ModuleID, a: Artifact) =>
               a.name + "." + a.extension

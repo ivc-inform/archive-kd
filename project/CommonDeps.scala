@@ -73,68 +73,56 @@ object CommonDeps {
         val scalaURIVersion = "0.4.16"
     }
 
-    val scalaXml: Def.Initialize[Option[ModuleID]] = Def.setting(
-        DepsHelper.moduleId(scalaVersion.value, Some("org.scala-lang.modules" %% "scala-xml" % versions.scalaModulesVersion), None)
-    )
+    val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
 
+    val jodaTime = "joda-time" % "joda-time" % versions.jodaVersion
+    val jodaConvert = "org.joda" % "joda-convert" % versions.jodaConvertVersion
 
-    val servletAPI = Def.setting("javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion)
+    val akkaActor = "com.typesafe.akka" %% "akka-actor" % versions.akkaVersion
+    val akkaSLF4J = "com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion
+    val akkaPersistence = "com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion
 
-    val jodaTime = Def.setting("joda-time" % "joda-time" % versions.jodaVersion)
-    val jodaConvert = Def.setting("org.joda" % "joda-convert" % versions.jodaConvertVersion)
+    val akkaTestKit = "com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion
+    val akkaHttpCore = "com.typesafe.akka" %% "akka-http-core" % versions.akkaHttpVersion
+    val akkaHttp = "com.typesafe.akka" %% "akka-http" % versions.akkaHttpVersion
+    val akkaHttpXml = "com.typesafe.akka" %% "akka-http-xml" % versions.akkaHttpVersion
+    val akkaHttpSprayJson = "com.typesafe.akka" %% "akka-http-spray-json" % versions.akkaHttpVersion
+    val akkaQuery = "com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion
 
-    val akkaActor = Def.setting("com.typesafe.akka" %% "akka-actor" % versions.akkaVersion)
-    val akkaSLF4J = Def.setting("com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion)
-    val akkaPersistence = Def.setting("com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion)
+    val smartclient = "com.simplesys" % "smartclient-js" % versions.smartclientVersion
 
-    val akkaTestKit = Def.setting("com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion)
-    val akkaHttpCore = Def.setting("com.typesafe.akka" %% "akka-http-core" % versions.akkaHttpVersion)
-    val akkaHttp = Def.setting("com.typesafe.akka" %% "akka-http" % versions.akkaHttpVersion)
-    val akkaHttpXml = Def.setting("com.typesafe.akka" %% "akka-http-xml" % versions.akkaHttpVersion)
-    val akkaHttpSprayJson = Def.setting("com.typesafe.akka" %% "akka-http-spray-json" % versions.akkaHttpVersion)
-    val akkaQuery = Def.setting("com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion)
-
-    val smartclient = Def.setting("com.simplesys" % "smartclient-js" % versions.smartclientVersion)
-
-    val ssysIscMisc = Def.setting("com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion)
-    val ssysIscComponents = Def.setting("com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion)
-    val ssysXMLExtender = Def.setting("com.simplesys.core" %% "xml-extender" % versions.ssysCoreVersion)
-    val ssysCommonWebapp = Def.setting("com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion)
-    val ssysCoreLibrary = Def.setting("com.simplesys.core" %% "core-library" % versions.ssysCoreVersion)
-    val ssysCoreUtils = Def.setting("com.simplesys.core" %% "core-utils" % versions.ssysCoreVersion)
-    val ssysAkkaExtender = Def.setting("com.simplesys.core" %% "akka-extender" % versions.ssysCoreVersion)
-    val ssysConfigWrapper = Def.setting("com.simplesys.core" %% "config-wrapper" % versions.ssysCoreVersion)
-    val ssysCommon = Def.setting("com.simplesys.core" %% "common" % versions.ssysCoreVersion)
-    val ssysScalaIOExtender = Def.setting("com.simplesys.core" %% "scala-io-extender" % versions.ssysCoreVersion)
-    val ssysJsonExtender = Def.setting("com.simplesys.core" %% "json-extender-typesafe" % versions.ssysCoreVersion)
-    val ssysJDBCWrapper = Def.setting("com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion)
-    val ssysCoreDomains = Def.setting("com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion)
-    val ssysScalaGen = Def.setting("com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion)
-    val ssysBoneCPWrapper = Def.setting("com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion)
-    val ssysLogBackWrapper = Def.setting("com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion)
-    val scalaJSWrapper = Def.setting("com.simplesys" %% "common-types" % versions.scalaJSVersion)
-    val scalaTags = Def.setting("com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion)
-    val uPickle = Def.setting("com.lihaoyi" %% "upickle" % versions.uPickleVersion)
+    val ssysIscMisc = "com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion
+    val ssysIscComponents = "com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion
+    val ssysXMLExtender = "com.simplesys.core" %% "xml-extender" % versions.ssysCoreVersion
+    val ssysCommonWebapp = "com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion
+    val ssysCoreLibrary = "com.simplesys.core" %% "core-library" % versions.ssysCoreVersion
+    val ssysCoreUtils = "com.simplesys.core" %% "core-utils" % versions.ssysCoreVersion
+    val ssysAkkaExtender = "com.simplesys.core" %% "akka-extender" % versions.ssysCoreVersion
+    val ssysConfigWrapper = "com.simplesys.core" %% "config-wrapper" % versions.ssysCoreVersion
+    val ssysCommon = "com.simplesys.core" %% "common" % versions.ssysCoreVersion
+    val ssysScalaIOExtender = "com.simplesys.core" %% "scala-io-extender" % versions.ssysCoreVersion
+    val ssysJsonExtender = "com.simplesys.core" %% "json-extender-typesafe" % versions.ssysCoreVersion
+    val ssysJDBCWrapper = "com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion
+    val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
+    val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion
+    val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
+    val ssysLogBackWrapper = "com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion
+    val scalaJSWrapper = "com.simplesys" %% "common-types" % versions.scalaJSVersion
+    val scalaTags = "com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion
+    val uPickle = "com.lihaoyi" %% "upickle" % versions.uPickleVersion
     
-    val jettyRuner = Def.setting("org.eclipse.jetty" % "jetty-runner" % versions.jettyVersion)
+    val jettyRuner = "org.eclipse.jetty" % "jetty-runner" % versions.jettyVersion
 
-    val scalaTest = Def.setting("org.scalatest" %% "scalatest" % versions.scalaTestVersion)
-    val jdbcOracle11Driver = Def.setting("com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion)
+    val scalaTest = "org.scalatest" %% "scalatest" % versions.scalaTestVersion
+    val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
 
-    val doobieCore = Def.setting("org.tpolecat" %% "doobie-core" % versions.doobieVersion)
-    val doobieCoreCats = Def.setting("org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion)
+    val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
+    val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion
 
-    val commonsFileupload = Def.setting("commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion)
-    val commonsIO = Def.setting("commons-io" % "commons-io" % versions.commonsIOVersion)
+    val commonsFileupload = "commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion
+    val commonsIO = "commons-io" % "commons-io" % versions.commonsIOVersion
 
-    val scalaURI = Def.setting("com.netaporter" %% "scala-uri" % versions.scalaURIVersion)
+    val scalaURI = "com.netaporter" %% "scala-uri" % versions.scalaURIVersion
 
 }
 
-object DepsHelper {
-    def moduleId(scalaVer: String, moduleId_2_11: Option[ModuleID], moduleId_2_10: Option[ModuleID]): Option[ModuleID] =
-        CrossVersion.partialVersion(scalaVer) match {
-            case Some((2, scalaMajor)) if scalaMajor >= 11 => moduleId_2_11
-            case _ => moduleId_2_10
-        }
-}
