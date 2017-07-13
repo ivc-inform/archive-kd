@@ -74,6 +74,11 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
 
             user.selectOne(user.diUser ~ user.loginUser ~ user.captionUser ~ user.codeGroupUserGroup_Group ~ user.loginUser ~ user.passwordUser, where = Where(user.loginUser === login) And (user.passwordUser === password)) result match {
                 case Success(TupleSS6(userID, loginedUser, captionUser, loginedGroup, _, _)) =>
+                    logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
+                    logger debug s"userID $userID, loginedUser: $loginedUser, captionUser: $captionUser, loginedGroup: $loginedGroup"
+                    logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
+
+
                     for (_session <- session) {
                         _session.Attribute("userId", Some(userID))
                         _session.Attribute("loginedUser", Some(loginedUser))
@@ -85,6 +90,11 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
+
+                        logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
+                        logger debug s"NoDataFoundException"
+                        logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
+
                         session match {
                             case Some(_session) =>
                                 _session RemoveAttribute "userId"
@@ -94,7 +104,7 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                                 _session RemoveAttribute "logged"
 
                                 if (login === "root") {
-                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None,lastName = "root", password = "qwerty", active = true, group = None)) result match {
+                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None, lastName = "root", password = "qwerty", active = true, group = None)) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
                                                 _session.Attribute("userId", Some(0))
