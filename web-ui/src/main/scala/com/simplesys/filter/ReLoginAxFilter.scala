@@ -14,11 +14,11 @@ import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
 import com.simplesys.tuple.{TupleSS5, TupleSS6}
-import ru.simplesys.defs.bo.arx.{User, UserBo}
+import ru.simplesys.defs.bo.arx.{User, UserBo, UserDS}
 
 import scalaz.{Failure, Success}
 
-@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
+//@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
 class ReLoginAxFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
@@ -73,12 +73,12 @@ class ReLoginAxFilter extends AkkaPartialFilter {
             logger trace (s"login: ${login}")
             logger trace (s"pasword: ${password}")
 
-            val user = UserBo(sessionContext.getDS)
+            val user = UserDS(sessionContext.getDS)
 
             logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
             logger debug s"login: $login, password: $password"
 
-            user.selectOne(user.id ~ user.plogin ~ user.usname ~ user.uscode ~ user.password ~ user.bmain, where = Where(user.plogin === login) And (user.password === password)) result match {
+            user.selectOne(user.idUser ~ user.ploginUser ~ user.usnameUser ~ user.uscodeUser ~ user.passwordUser ~ user.bmainUser, where = Where(user.ploginUser === login) And (user.passwordUser === password)) result match {
                 case Success(TupleSS6(id, plogin, usname, uscode, _, bmain)) =>
                     logger debug s"id $id, plogin: $plogin, usname: ${usname.headOption.getOrElse("None")}, usecode: ${uscode.headOption.getOrElse("None")} bmain: ${bmain.headOption.getOrElse(false)}"
                     logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
@@ -122,7 +122,7 @@ class ReLoginAxFilter extends AkkaPartialFilter {
                                             LoginedData1("Аутентификация не прошла :-(")
                                     }
                                 } else
-                                    user.selectOne(user.id ~ user.plogin, where = Where(user.plogin === "root")) result match {
+                                    user.selectOne(user.idUser ~ user.ploginUser, where = Where(user.ploginUser === "root")) result match {
                                         case Success(_) =>
                                             LoginedData1("Аутентификация не прошла :-(")
                                         case Failure(e) => e match {
