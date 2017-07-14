@@ -1,0 +1,36 @@
+<objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
+	<group caption="Электоронный архив технической документации (Насонов)" name="arx" prefix="ARX">
+		<classes>
+        <classSimple name="User" autoTableMapping="true" caption="Пользователи">
+					<attrs>
+						<attr name="id" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true" useDbPrefix="false"/>
+						<attr name="plogin" type="sCode" caption="Логин" mandatory="false" useDbPrefix="false"/>
+						<attr name="usname" caption="Имя" type="sCaption" mandatory="false" useDbPrefix="false"/>
+						<attr name="uscode" caption="Код" type="sCaption" mandatory="false" useDbPrefix="false"/>
+						<attr name="usrdesc" caption="Описание" type="sDescription" useDbPrefix="false"/>
+						<attr name="password" type="sPasswordPlain" caption="Пароль" useDbPrefix="false"/>
+						<attr name="tdatein" type="dDate" caption="Дата внесения в список" useDbPrefix="false"/>
+						<attr name="bmain" type="bBoolean" caption="Самый главный" useDbPrefix="false"/>
+						<attr name="idprofile" type="fDouble" caption="Идентификатор профайла" useDbPrefix="false" hidden="true"/>
+					</attrs>
+					<defaults>
+						<showAttrs>
+							<attrName>usname</attrName>
+						</showAttrs>
+						<classifier>
+							<attrName>plogin</attrName>
+						</classifier>
+						<uiSettings uiFormType="singleListGrid"/>
+					</defaults>
+					<constraints>
+						<uc uniqueType="pk">
+							<attrName>id</attrName>
+						</uc>
+						<uc uniqueType="uq">
+							<attrName>plogin</attrName>
+						</uc>
+					</constraints>
+				</classSimple>
+    </classes>
+  </group>
+</objectSchema>
