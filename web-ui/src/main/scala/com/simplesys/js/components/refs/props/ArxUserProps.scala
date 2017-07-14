@@ -10,7 +10,7 @@ import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.DataSourcesJS
 
 trait NewDSRequestData extends JSObject {
-    val active: Boolean
+    val bmain: Boolean
 }
 
 class ArxUserProps extends CommonListGridEditorComponentProps {
@@ -26,7 +26,7 @@ class ArxUserProps extends CommonListGridEditorComponentProps {
             DSRequest(
                 new DSRequestProps {
                     data = (new NewDSRequestData {
-                        override val active = true
+                        override val bmain = true
                     }).opt
                 }
             )
