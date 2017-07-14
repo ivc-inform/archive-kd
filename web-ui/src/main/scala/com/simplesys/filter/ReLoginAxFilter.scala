@@ -96,7 +96,7 @@ class ReLoginAxFilter extends AkkaPartialFilter {
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
-                        
+
                         logger debug s"NoDataFoundException"
                         logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
@@ -109,7 +109,7 @@ class ReLoginAxFilter extends AkkaPartialFilter {
                                 _session RemoveAttribute "logged"
 
                                 if (login === "root") {
-                                    user.insertP(User(bmain = Some(true), id = 0L, idprofile = None, password = Some(password), plogin = Some("root"), tdatein = None,  uscode = None, usname = Some(login), usrdesc = None)) result match {
+                                    user.insertP(User(bmain = Some(true), id = 0L, idprofile = None, password = password, plogin = "root", tdatein = None, uscode = None, usname = Some(login), usrdesc = None)) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
                                                 _session.Attribute("userId", Some(0))

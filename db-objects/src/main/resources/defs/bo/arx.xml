@@ -4,11 +4,11 @@
         <classSimple name="User" autoTableMapping="true" caption="Пользователи">
 					<attrs>
 						<attr name="id" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true" useDbPrefix="false"/>
-						<attr name="plogin" type="sCode" caption="Логин" mandatory="false" useDbPrefix="false"/>
-						<attr name="usname" caption="Имя" type="sCaption" mandatory="false" useDbPrefix="false"/>
-						<attr name="uscode" caption="Код" type="sCaption" mandatory="false" useDbPrefix="false"/>
+						<attr name="plogin" type="sCode" caption="Логин" mandatory="true" useDbPrefix="false"/>
+						<attr name="usname" caption="Имя" type="sCaption" useDbPrefix="false"/>
+						<attr name="uscode" caption="Код" type="sCaption" useDbPrefix="false"/>
 						<attr name="usrdesc" caption="Описание" type="sDescription" useDbPrefix="false"/>
-						<attr name="password" type="sPasswordPlain" caption="Пароль" useDbPrefix="false"/>
+						<attr name="password" type="sPasswordPlain" mandatory="true" caption="Пароль" useDbPrefix="false"/>
 						<attr name="tdatein" type="dDate" caption="Дата внесения в список" useDbPrefix="false"/>
 						<attr name="bmain" type="bBoolean" caption="Самый главный" useDbPrefix="false"/>
 						<attr name="idprofile" type="fDouble" caption="Идентификатор профайла" useDbPrefix="false" hidden="true"/>
