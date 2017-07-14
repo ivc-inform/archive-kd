@@ -68,6 +68,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
             println(" ------------------------------------------------------- End Parametrs -------------------------------------------------------------------")
 
             val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
+            val channelMessageError = request.Parameter("channelMessageError")
             val channelMessageNextStep = request.Parameter("channelMessageNextStep")
             val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
             val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
@@ -231,6 +232,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                         Out("Ok")
                     case Failure(e) ⇒
 
+                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack"→ JsonString(e.getStackTraceString)),channels = channelMessageError)))
                         OutFailure(e)
                         conn.foreach(_.close())
                 }
