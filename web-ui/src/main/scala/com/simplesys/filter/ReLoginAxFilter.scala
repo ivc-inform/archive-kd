@@ -84,14 +84,16 @@ class ReLoginAxFilter extends AkkaPartialFilter {
                     logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
 
+                    val loginedGroup:String = if (bmain.headOption.getOrElse(false)) "admins" else uscode.headOption.getOrElse("Unknown")
+
                     for (_session <- session) {
                         _session.Attribute("userId", Some(id))
                         _session.Attribute("loginedUser", Some(plogin))
                         _session.Attribute("captionUser", Some(usname))
-                        _session.Attribute("loginedGroup", Some(if (bmain.headOption.getOrElse(false)) "admins" else uscode))
+                        _session.Attribute("loginedGroup", Some(loginedGroup))
                         _session.Attribute("logged", Some(true))
                     }
-                    LoginedData1(strEmpty, login, id, usname.headOption.getOrElse("не задан"), if (bmain.headOption.getOrElse(false)) "admins" else uscode)
+                    LoginedData1(strEmpty, login, id, usname.headOption.getOrElse("не задан"), loginedGroup)
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
