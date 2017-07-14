@@ -18,7 +18,7 @@ import ru.simplesys.defs.bo.arx.{User, UserBo}
 
 import scalaz.{Failure, Success}
 
-//@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
+@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
 class ReLoginAxFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
@@ -91,8 +91,7 @@ class ReLoginAxFilter extends AkkaPartialFilter {
                         _session.Attribute("loginedGroup", Some(if (bmain.headOption.getOrElse(false)) "admins" else uscode))
                         _session.Attribute("logged", Some(true))
                     }
-                    //LoginedData1(strEmpty, login, userID, captionUser, loginedGroup)
-                    LoginedData1(strEmpty, login, id, usname.headOption.getOrElse("не задан"), "")
+                    LoginedData1(strEmpty, login, id, usname.headOption.getOrElse("не задан"), "admins")
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>

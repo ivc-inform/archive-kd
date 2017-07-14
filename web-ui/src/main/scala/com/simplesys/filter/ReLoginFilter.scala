@@ -13,12 +13,12 @@ import com.simplesys.jdbc.exception.NoDataFoundException
 import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
-import com.simplesys.tuple.TupleSS6
-import ru.simplesys.defs.bo.admin.{User, UserBo}
+import com.simplesys.tuple.{TupleSS2, TupleSS6}
+import ru.simplesys.defs.bo.admin._
 
 import scalaz.{Failure, Success}
 
-@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
+//@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
 class ReLoginFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
@@ -74,13 +74,14 @@ class ReLoginFilter extends AkkaPartialFilter {
             logger trace (s"pasword: ${password}")
 
             val user = UserBo(sessionContext.getDS)
+            val userGroup = UserGroupBo(sessionContext.getDS)
 
             logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
             logger debug s"login: $login, password: $password"
 
             user.selectOne(user.di ~ user.login ~ user.caption ~ user.group ~ user.login ~ user.password, where = Where(user.login === login) And (user.password === password)) result match {
-                case Success(TupleSS6(userID, loginedUser, captionUser, codeGroup, _, _)) =>
-                    logger debug s"userID $userID, loginedUser: $loginedUser, captionUser: $captionUser, codeGroup: $codeGroup"
+                case Success(TupleSS6(userID, loginedUser, captionUser, code, _, _)) =>
+                    logger debug s"userID $userID, loginedUser: $loginedUser, captionUser: $captionUser, codeGroup: $code"
                     logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
 
@@ -88,15 +89,27 @@ class ReLoginFilter extends AkkaPartialFilter {
                         _session.Attribute("userId", Some(userID))
                         _session.Attribute("loginedUser", Some(loginedUser))
                         _session.Attribute("captionUser", Some(captionUser))
-                        _session.Attribute("codeGroup", Some(codeGroup))
+                        _session.Attribute("codeGroup", Some(code))
                         _session.Attribute("logged", Some(true))
                     }
-                    //LoginedData1(strEmpty, login, userID, captionUser, codeGroup)
-                    LoginedData1(strEmpty, login, userID, captionUser, "")
+
+                    code.headOption match {
+                        case None ⇒
+                            LoginedData1(strEmpty, login, userID, captionUser, "Unknown")
+                        case Some(group) ⇒
+                            userGroup.selectOne(userGroup.di ~ userGroup.codeGroup, where = Where(userGroup.di === group)) result match {
+                                case Success(TupleSS2(di, codeGroup)) ⇒
+                                    LoginedData1(strEmpty, login, userID, captionUser, codeGroup)
+                                case Failure(e) => e match {
+                                    case e: NoDataFoundException =>
+                                        LoginedData1(e.getMessage)
+                                }
+                            }
+                    }
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
-                        
+
                         logger debug s"NoDataFoundException"
                         logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
