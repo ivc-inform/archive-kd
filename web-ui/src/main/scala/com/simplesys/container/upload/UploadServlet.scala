@@ -55,7 +55,6 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
     def receive = {
         case GetData => {
 
-
             val startTime = System.currentTimeMillis()
 
             val isMultipart = ServletFileUpload.isMultipartContent(request)
@@ -80,8 +79,8 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
             } else {
 
                 val factory = new DiskFileItemFactory()
+                val file = new File(s"./temp")
 
-                val file = new File(s"./temp${UUID.randomUUID.toString}")
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
 
@@ -110,7 +109,6 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                         })
                         dcr
                 }
-
 
                 Try {
 
@@ -149,8 +147,12 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                         (a, f) ⇒ a + f.getSize
                     }*/
 
+                    println("point 1")
                     upload.parseRequest(request).asScala.foreach {
                         fi ⇒
+                            println("point 2")
+                            println(fi.isFormField)
+
                             if (!fi.isFormField) {
                                 val fieldName = fi.getFieldName
                                 println(s"fieldName: $fieldName")

@@ -28,6 +28,7 @@ class UploadTestTabProps extends HLayoutProps {
     identifier = "69EC6EB4-E51F-B7A9-C1E0-CF216088816AF".opt
 
     var channelMessageEndUpload: ScOption[String] = ScNone
+    var channelMessageError: ScOption[String] = ScNone
     var channelMessageNextStep: ScOption[String] = ScNone
     var channelMessageMaxValue: ScOption[String] = ScNone
     var channelMessageRecordInBase: ScOption[String] = ScNone
@@ -37,8 +38,13 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
+            def unsubscribe(): Unit = isc.MessagingSS.unsubscribe(IscArray(thiz.channelMessageEndUpload, thiz.channelMessageError, thiz.channelMessageNextStep, thiz.channelMessageMaxValue, thiz.channelMessageRecordInBase))
+
             if (thiz.channelMessageEndUpload.isEmpty)
                 thiz.channelMessageEndUpload = s"EndUpload_${thiz.ID}_${simpleSyS.guid}"
+
+            if (thiz.channelMessageError.isEmpty)
+                thiz.channelMessageError = s"Error_${thiz.ID}_${simpleSyS.guid}"
 
             if (thiz.channelMessageRecordInBase.isEmpty)
                 thiz.channelMessageRecordInBase = s"RecordInBase_${thiz.ID}_${simpleSyS.guid}"
@@ -53,10 +59,18 @@ class UploadTestTabProps extends HLayoutProps {
             isc.MessagingSS.subscribe(thiz.channelMessageEndUpload.get, { (e: MessageJS) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
-                val elapsedTime = e.data.map (_.asInstanceOf[UploadTestData].elapsedTime.getOrElse("")).getOrElse("")
+                val elapsedTime = e.data.map(_.asInstanceOf[UploadTestData].elapsedTime.getOrElse("")).getOrElse("")
                 val fileSize = progressBar.get.maxValue
 
                 isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
+                unsubscribe()
+            })
+
+            isc.MessagingSS.subscribe(thiz.channelMessageError.get, { (e: MessageJS) ⇒
+                progressBar.foreach(_ setPercentDone 0.0)
+
+                isc error(e.data.asInstanceOf[String], "33BB2A90-9641-359E-8DD9-8159B35814B9")
+                unsubscribe()
             })
 
             if (thiz.channelMessageNextStep.isEmpty)
