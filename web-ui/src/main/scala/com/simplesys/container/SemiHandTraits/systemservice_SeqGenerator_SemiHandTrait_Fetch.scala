@@ -1,11 +1,12 @@
-// This file is generated automatically (at 09.06.2016 13:27:41), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 14.07.2017 12:12:12), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
-package ru.simplesys.defs.app.scala.container
+package ru.simplesys.defs.app.scala.container.systemservice
 
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.common.Strings._
+import com.simplesys.jdbc.control.clob._
 import akka.actor.Actor
 import ru.simplesys.defs.bo.systemservice._
 
@@ -20,5 +21,7 @@ trait systemservice_SeqGenerator_SemiHandTrait_Fetch extends SessionContextSuppo
     val dataSet = SeqGeneratorDS(ds)    
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
-     def receiveBase: Option[Actor.Receive] = None
+     def receiveBase: Option[Actor.Receive] = None    
+    
+     def wrapperBlobGetter(blob: Blob): String = blob.asString
 }
