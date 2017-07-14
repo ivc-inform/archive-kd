@@ -18,7 +18,7 @@ import ru.simplesys.defs.bo.arx.{User, UserBo}
 
 import scalaz.{Failure, Success}
 
-@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
+//@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
 class ReLoginAxFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {

@@ -18,7 +18,7 @@ import ru.simplesys.defs.bo.admin.{User, UserBo}
 
 import scalaz.{Failure, Success}
 
-//@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
+@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
 class ReLoginFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
@@ -79,8 +79,8 @@ class ReLoginFilter extends AkkaPartialFilter {
             logger debug s"login: $login, password: $password"
 
             user.selectOne(user.di ~ user.login ~ user.caption ~ user.group ~ user.login ~ user.password, where = Where(user.login === login) And (user.password === password)) result match {
-                case Success(TupleSS6(userID, loginedUser, captionUser, loginedGroup, _, _)) =>
-                    logger debug s"userID $userID, loginedUser: $loginedUser, captionUser: $captionUser, loginedGroup: $loginedGroup"
+                case Success(TupleSS6(userID, loginedUser, captionUser, codeGroup, _, _)) =>
+                    logger debug s"userID $userID, loginedUser: $loginedUser, captionUser: $captionUser, codeGroup: $codeGroup"
                     logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
 
@@ -88,10 +88,10 @@ class ReLoginFilter extends AkkaPartialFilter {
                         _session.Attribute("userId", Some(userID))
                         _session.Attribute("loginedUser", Some(loginedUser))
                         _session.Attribute("captionUser", Some(captionUser))
-                        _session.Attribute("loginedGroup", Some(loginedGroup))
+                        _session.Attribute("codeGroup", Some(codeGroup))
                         _session.Attribute("logged", Some(true))
                     }
-                    //LoginedData1(strEmpty, login, userID, captionUser, loginedGroup)
+                    //LoginedData1(strEmpty, login, userID, captionUser, codeGroup)
                     LoginedData1(strEmpty, login, userID, captionUser, "")
 
                 case Failure(e) => e match {
@@ -105,7 +105,7 @@ class ReLoginFilter extends AkkaPartialFilter {
                                 _session RemoveAttribute "userId"
                                 _session RemoveAttribute "loginedUser"
                                 _session RemoveAttribute "captionUser"
-                                _session RemoveAttribute "loginedGroup"
+                                _session RemoveAttribute "codeGroup"
                                 _session RemoveAttribute "logged"
 
                                 if (login === "root") {
@@ -115,7 +115,7 @@ class ReLoginFilter extends AkkaPartialFilter {
                                                 _session.Attribute("userId", Some(0))
                                                 _session.Attribute("loginedUser", Some("root"))
                                                 _session.Attribute("captionUser", Some("root"))
-                                                _session.Attribute("loginedGroup", Some(strEmpty))
+                                                _session.Attribute("codeGroup", Some(strEmpty))
                                                 _session.Attribute("logged", Some(true))
                                             }
                                             LoginedData1(strEmpty, "root")

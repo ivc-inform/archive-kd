@@ -400,8 +400,10 @@ trait WebTabSetApp extends TabSetStack {
 
                                                                 } else {
                                                                     RPCManagerSS.logoutRequired()
+
                                                                     thiz setTitle "Вход".ellipsis
                                                                     thiz setIcon Common.login
+
                                                                     LoggedGroup.logged = false
                                                                     managedUsersGroups.foreach(_.hide())
                                                                     managedAdminsGroups.foreach(_.hide())
