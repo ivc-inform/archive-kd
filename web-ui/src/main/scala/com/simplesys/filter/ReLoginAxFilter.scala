@@ -91,7 +91,7 @@ class ReLoginAxFilter extends AkkaPartialFilter {
                         _session.Attribute("loginedGroup", Some(if (bmain.headOption.getOrElse(false)) "admins" else uscode))
                         _session.Attribute("logged", Some(true))
                     }
-                    LoginedData1(strEmpty, login, id, usname.headOption.getOrElse("не задан"), "admins")
+                    LoginedData1(strEmpty, login, id, usname.headOption.getOrElse("не задан"), if (bmain.headOption.getOrElse(false)) "admins" else uscode)
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
