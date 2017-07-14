@@ -1,5 +1,7 @@
 package com.simplesys.filter
 
+import javax.servlet.annotation.WebFilter
+
 import com.simplesys.akka.http.LoginedData1
 import com.simplesys.akka.http.filter.AkkaPartialFilter
 import com.simplesys.app._
@@ -12,11 +14,12 @@ import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
 import com.simplesys.tuple.TupleSS6
-import ru.simplesys.defs.bo.admin.{User, UserBo, UserDS}
+import ru.simplesys.defs.bo.admin.{User, UserBo}
 
 import scalaz.{Failure, Success}
 
-class ReLoginBaseFilter extends AkkaPartialFilter {
+//@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
+class ReLoginFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
 
