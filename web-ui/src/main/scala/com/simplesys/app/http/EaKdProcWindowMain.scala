@@ -1,6 +1,7 @@
 package com.simplesys.app.http
 
-import com.simplesys.SmartClient.App.props.SettingsEditorProps
+import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
+import com.simplesys.SmartClient.App.props.{EditorUserGroupsProps, EditorUsersProps, SettingsEditorProps}
 import com.simplesys.SmartClient.App.{SettingsEditor, WebTabSetApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
@@ -55,6 +56,71 @@ object EaKdProcWindowMain extends WebTabSetApp {
             identifier = self.identifier.opt
         }
     )
+
+    override protected val managedAdminsGroups: Seq[RibbonGroupSS] = Seq(
+        RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Администраторы".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
+                            title = "Администрирование".ellipsis.opt
+                            icon = Common.ref.opt
+                            identifier = "33EE1839-8D4D-FFA0-E491-22B54F2C772A".opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq(
+                                        new MenuSSItemProps {
+                                            name = "users".opt
+                                            icon = Common.admin_User.opt
+                                            title = "Пользователи".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(EditorUsers.create(
+                                                        new EditorUsersProps {
+                                                            dataSourceList = dataSourcesJS_admin_User_DS.opt
+                                                            dataSourceTree = dataSourcesJS_admin_UserGroup_DS.opt
+
+                                                            fieldsTree = listGridFiledsJS_admin_UserGroup_FLDS.opt
+                                                            editingTreeFields = formItemsJS_admin_UserGroup_FRMITM.opt
+
+                                                            fieldsList = listGridFiledsJS_admin_User_FLDS.opt
+                                                            editingListFields = formItemsJS_admin_User_FRMITM.opt
+
+                                                            val userGroupEditor = EditorUserGroups.create(
+                                                                new EditorUserGroupsProps {
+                                                                    dataSource = dataSourcesJS_admin_UserGroup_DS.opt
+                                                                    fields = listGridFiledsJS_admin_UserGroup_FLDS.opt
+                                                                    editingFields = formItemsJS_admin_UserGroup_FRMITM.opt
+                                                                })
+
+                                                            replacingFieldsList = Seq(
+                                                                new ListGridFieldProps {
+                                                                    nameStrong = admin_User_codeGroup_NameStrong.opt
+                                                                    editorType = FormItemComponentType.LookupTreeGridEditorItem
+                                                                    editorProperties = LookupTreeGridEditorItem(
+                                                                        new LookupTreeGridEditorItemProps {
+                                                                            treeGridEditor = userGroupEditor.opt
+                                                                        }).opt
+                                                                }
+                                                            ).opt
+                                                        }
+                                                    ), item)
+                                            }.toFunc.opt
+                                        }
+                                    ).opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
+            }
+        )
+    ).map {
+        item =>
+            item.hide()
+            item
+    }
 
     protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
         /*RibbonGroupSS.create(

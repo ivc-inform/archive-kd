@@ -116,5 +116,6 @@ package object app {
     object Cards extends SCApply[Cards, CardsProps]
     object Zapros extends SCApply[Zapros, ZaprosProps]
     object DocIzv extends SCApply[DocIzv, DocIzvProps]
+    object ArxUser extends SCApply[ArxUser, ArxUserProps]
     object UploadTestTab extends SCApply[UploadTestTab, UploadTestTabProps]
 }
