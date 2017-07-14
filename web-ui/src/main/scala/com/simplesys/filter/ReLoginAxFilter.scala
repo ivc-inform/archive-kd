@@ -78,17 +78,17 @@ class ReLoginAxFilter extends AkkaPartialFilter {
             logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
             logger debug s"login: $login, password: $password"
 
-            user.selectOne(user.id ~ user.plogin ~ user.usname ~ user.uscode ~ user.password, where = Where(user.plogin === login) And (user.password === password)) result match {
-                case Success(TupleSS5(id, ologin, usname, uscode, _)) =>
-                    logger debug s"userID $id, loginedUser: $ologin, captionUser: $usname, loginedGroup: $uscode"
+            user.selectOne(user.id ~ user.plogin ~ user.usname ~ user.uscode ~ user.password ~ user.bmain, where = Where(user.plogin === login) And (user.password === password)) result match {
+                case Success(TupleSS6(id, plogin, usname, uscode, _, bmain)) =>
+                    logger debug s"id $id, plogin: $plogin, usname: ${usname.headOption.getOrElse("None")}, usecode: ${uscode.headOption.getOrElse("None")} bmain: ${bmain.headOption.getOrElse(false)}"
                     logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
 
 
                     for (_session <- session) {
                         _session.Attribute("userId", Some(id))
-                        _session.Attribute("loginedUser", Some(ologin))
+                        _session.Attribute("loginedUser", Some(plogin))
                         _session.Attribute("captionUser", Some(usname))
-                        _session.Attribute("loginedGroup", Some(uscode))
+                        _session.Attribute("loginedGroup", Some(if (bmain.headOption.getOrElse(false)) "admins" else uscode))
                         _session.Attribute("logged", Some(true))
                     }
                     //LoginedData1(strEmpty, login, userID, captionUser, loginedGroup)
