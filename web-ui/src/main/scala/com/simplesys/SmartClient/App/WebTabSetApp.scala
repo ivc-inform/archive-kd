@@ -357,14 +357,15 @@ trait WebTabSetApp extends TabSetStack {
                                                             (thiz: classHandler) =>
                                                                 if (!LoggedGroup.logged) {
                                                                     RPCManagerSS.loginRequired({
-                                                                        (res: Boolean, captionUser: JSUndefined[String], codeGroup: JSUndefined[String]) =>
+                                                                        (res: Boolean, captionUser: JSUndefined[String], loginedGroup: JSUndefined[String]) =>
                                                                             if (res) {
 
                                                                                 captionUserLabel setContents s"Работает: '${captionUser.toOption.getOrElse("Не определен")}'"
                                                                                 captionUserLabel.show()
                                                                                 managedUsersGroups.foreach(_.show())
                                                                                 infoGroup.foreach(_.show())
-                                                                                LoggedGroup.codeGroup = codeGroup.toOption
+
+                                                                                LoggedGroup.loginedGroup = loginedGroup.toOption
 
                                                                                 if (LoggedGroup.isAdminsGroup() || LoggedGroup.isDevsGroup())
                                                                                     managedAdminsGroups.foreach(_.show())
@@ -399,8 +400,10 @@ trait WebTabSetApp extends TabSetStack {
 
                                                                 } else {
                                                                     RPCManagerSS.logoutRequired()
+
                                                                     thiz setTitle "Вход".ellipsis
                                                                     thiz setIcon Common.login
+
                                                                     LoggedGroup.logged = false
                                                                     managedUsersGroups.foreach(_.hide())
                                                                     managedAdminsGroups.foreach(_.hide())

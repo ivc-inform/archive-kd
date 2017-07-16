@@ -15,7 +15,7 @@
     </appender>
     <appender name="FILE_FETCH" class="ch.qos.logback.core.FileAppender">
         <file>main-fetch.log</file>
-        <append>false</append>
+        <append>false</append>                                                                                                          
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%t] %-5p %logger{255} - %msg%n</pattern>
         </encoder>
@@ -24,7 +24,9 @@
     <logger name="com.simplesys.servlet.http.HttpServletRequest" level="debug"/>
     <logger name="ru.simplesys.defs.bo.scenarios.Scr_CmpgnDS" level="debug"/>
     <logger name="ru.simplesys.defs.bo.admin.UserDS" level="debug"/>
+    <logger name="ru.simplesys.defs.bo.admin.UserBo" level="debug"/>
     <logger name="ru.simplesys.defs.bo.eakd.AbonentsDS" level="debug"/>
+    <logger name="com.simplesys.jdbc.control.ClassBO" level="debug"/>
 
     <!--Вывод регистрации сервлетов-->
     <logger name="com.simplesys.listener.AppLifeCycleEvent" level="debug"/>

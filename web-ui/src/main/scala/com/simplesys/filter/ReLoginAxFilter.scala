@@ -1,5 +1,7 @@
 package com.simplesys.filter
 
+import javax.servlet.annotation.WebFilter
+
 import com.simplesys.akka.http.LoginedData1
 import com.simplesys.akka.http.filter.AkkaPartialFilter
 import com.simplesys.app._
@@ -11,12 +13,13 @@ import com.simplesys.jdbc.exception.NoDataFoundException
 import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
-import com.simplesys.tuple.TupleSS6
-import ru.simplesys.defs.bo.admin.{User, UserDS}
+import com.simplesys.tuple.{TupleSS5, TupleSS6}
+import ru.simplesys.defs.bo.arx.{User, UserBo, UserDS}
 
 import scalaz.{Failure, Success}
 
-class ReLoginBaseFilter extends AkkaPartialFilter {
+@WebFilter(urlPatterns = Array("/logic/*"), asyncSupported = true)
+class ReLoginAxFilter extends AkkaPartialFilter {
 
     override protected def DoFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
 
@@ -72,19 +75,32 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
 
             val user = UserDS(sessionContext.getDS)
 
-            user.selectOne(user.diUser ~ user.loginUser ~ user.captionUser ~ user.codeGroupUserGroup_Group ~ user.loginUser ~ user.passwordUser, where = Where(user.loginUser === login) And (user.passwordUser === password)) result match {
-                case Success(TupleSS6(userID, loginedUser, captionUser, loginedGroup, _, _)) =>
+            logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
+            logger debug s"login: $login, password: $password"
+
+            user.selectOne(user.idUser ~ user.ploginUser ~ user.usnameUser ~ user.uscodeUser ~ user.passwordUser ~ user.bmainUser, where = Where(user.ploginUser === login) And (user.passwordUser === password)) result match {
+                case Success(TupleSS6(id, plogin, usname, uscode, _, bmain)) =>
+                    logger debug s"id $id, plogin: $plogin, usname: ${usname.headOption.getOrElse("None")}, usecode: ${uscode.headOption.getOrElse("None")} bmain: ${bmain.headOption.getOrElse(false)}"
+                    logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
+
+
+                    val loginedGroup:String = if (bmain.headOption.getOrElse(false)) "admins" else uscode.headOption.getOrElse("Unknown")
+
                     for (_session <- session) {
-                        _session.Attribute("userId", Some(userID))
-                        _session.Attribute("loginedUser", Some(loginedUser))
-                        _session.Attribute("captionUser", Some(captionUser))
+                        _session.Attribute("userId", Some(id))
+                        _session.Attribute("loginedUser", Some(plogin))
+                        _session.Attribute("captionUser", Some(usname))
                         _session.Attribute("loginedGroup", Some(loginedGroup))
                         _session.Attribute("logged", Some(true))
                     }
-                    LoginedData1(strEmpty, login, userID, captionUser, loginedGroup)
+                    LoginedData1(strEmpty, login, id, usname.headOption.getOrElse("не задан"), loginedGroup)
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
+
+                        logger debug s"NoDataFoundException"
+                        logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
+
                         session match {
                             case Some(_session) =>
                                 _session RemoveAttribute "userId"
@@ -94,7 +110,7 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                                 _session RemoveAttribute "logged"
 
                                 if (login === "root") {
-                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None,lastName = "root", password = "qwerty", active = true, group = 0L)) result match {
+                                    user.insertP(User(bmain = Some(true), id = 0L, idprofile = None, password = password, plogin = "root", tdatein = None, uscode = None, usname = Some(login), usrdesc = None)) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
                                                 _session.Attribute("userId", Some(0))
@@ -108,7 +124,7 @@ class ReLoginBaseFilter extends AkkaPartialFilter {
                                             LoginedData1("Аутентификация не прошла :-(")
                                     }
                                 } else
-                                    user.selectOne(user.diUser ~ user.captionUser ~ user.loginUser, where = Where(user.loginUser === "root")) result match {
+                                    user.selectOne(user.idUser ~ user.ploginUser, where = Where(user.ploginUser === "root")) result match {
                                         case Success(_) =>
                                             LoginedData1("Аутентификация не прошла :-(")
                                         case Failure(e) => e match {

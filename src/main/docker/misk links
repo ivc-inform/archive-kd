@@ -30,17 +30,53 @@ docker exec -it -u 0 oracle221_eakd bash
 CREATE USER B404SP3  IDENTIFIED BY B404SP3
 DEFAULT TABLESPACE USERS QUOTA 100G ON USERS
 
-GRANT CREATE SESSION TO eakd
+ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2
+ALTER USER system IDENTIFIED BY dfqc2;
 
+GRANT CREATE SESSION TO B404SP3DEMO;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 
-GRANT READ, WRITE ON DIRECTORY dumps TO eakd;
+GRANT READ, WRITE ON DIRECTORY dumps TO  B404SP3;
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-impdp system/dfqc2@test_pdb dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
+impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
 
 select * from dba_directories;
 
 scp alustrov@orapg.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
+docker cp /home/uandrew/b404sp3demo_2017.dmp oracle-11x64g:/home/oracle/dumps;
+
+docker run -d -p 1521:1521 --name oracle-11x64g oracle-11x64g:1.0.0
+docker exec -u oracle  -it oracle-11x64g bash
+
+
+show parameter SHARED_POOL_SIZE;
+show parameter LARGE_POOL_SIZE;
+show parameter JAVA_POOL_SIZE;
+show parameter DB_CACHE_SIZE;
+show parameter STREAMS_POOL_SIZE;
+
+ALTER SYSTEM SET SGA_TARGET=50G scope=spfile;
+ALTER SYSTEM SET SHARED_POOL_SIZE=5G scope=spfile;
+ALTER SYSTEM SET LARGE_POOL_SIZE=5G scope=spfile;
+ALTER SYSTEM SET JAVA_POOL_SIZE=500M scope=spfile;
+ALTER SYSTEM SET DB_CACHE_SIZE=35G scope=spfile;
+ALTER SYSTEM SET STREAMS_POOL_SIZE=5G scope=spfile;
+
+ALTER DATABASE CHARACTER SET CL8MSWIN1251;
+ALTER DATABASE NATIONAL CHARACTER SET CL8MSWIN1251;
+
+show parameter control_file
+
+shutdown immediate;
+startup;
+
+CREATE TABLE
+    TEST_UPLOAD_FILES
+    (
+        ID NUMBER(15) NOT NULL,
+        SFILE_NAME VARCHAR2(255) NOT NULL,
+        BLOB_VALUE BLOB
+    );
 

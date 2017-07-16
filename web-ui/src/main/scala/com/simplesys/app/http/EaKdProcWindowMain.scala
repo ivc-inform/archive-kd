@@ -1,6 +1,7 @@
 package com.simplesys.app.http
 
-import com.simplesys.SmartClient.App.props.SettingsEditorProps
+import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
+import com.simplesys.SmartClient.App.props.{EditorUserGroupsProps, EditorUsersProps, SettingsEditorProps}
 import com.simplesys.SmartClient.App.{SettingsEditor, WebTabSetApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
@@ -56,8 +57,44 @@ object EaKdProcWindowMain extends WebTabSetApp {
         }
     )
 
-    protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
+    override protected val managedAdminsGroups: Seq[RibbonGroupSS] = Seq(
         RibbonGroupSS.create(
+            new RibbonGroupSSProps {
+                title = "Администраторы".ellipsis.opt
+                controls = Seq(
+                    IconMenuButtonSS.create(
+                        new IconMenuButtonSSProps {
+                            title = "Администрирование".ellipsis.opt
+                            icon = Common.ref.opt
+                            identifier = "33EE1839-8D4D-FFA0-E491-22B54F2C772A".opt
+                            menu = MenuSS.create(
+                                new MenuSSProps {
+                                    items = Seq(
+                                        new MenuSSItemProps {
+                                            name = "users".opt
+                                            icon = Common.admin_User.opt
+                                            title = "Пользователи".ellipsis.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                    addTab(ArxUser.create(new ArxUserProps), item)
+                                            }.toFunc.opt
+                                        }
+                                    ).opt
+                                }
+                            ).opt
+                        }
+                    )
+                ).opt
+            }
+        )
+    ).map {
+        item =>
+            item.hide()
+            item
+    }
+
+    protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -104,8 +141,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
-        RibbonGroupSS.create(
+        ),*/
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -289,8 +326,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
-        RibbonGroupSS.create(
+        ),*/
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -308,8 +345,8 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
-        RibbonGroupSS.create(
+        ),*/
+        /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
@@ -327,7 +364,7 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),
+        ),*/
         RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt

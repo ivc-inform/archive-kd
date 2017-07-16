@@ -19,8 +19,7 @@ Parameters:
    -v: version to build
        Choose one of: $(for i in $(ls -d */); do echo -n "${i%%/}  "; done)
    -e: creates image based on 'Enterprise Edition'
-   -s: creates image based on 'Standard Edition 2'
-   -x: creates image based on 'Express Edition'
+   -s: creates image based on 'Standard Edition'
    -i: ignores the MD5 checksums
 
 * select one edition only: -e, -s, or -x
@@ -77,9 +76,6 @@ while getopts "hesxiv:" optname; do
       ;;
     "s")
       STANDARD=1
-      ;;
-    "x")
-      EXPRESS=1
       ;;
     "v")
       VERSION="$OPTARG"

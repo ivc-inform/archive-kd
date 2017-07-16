@@ -2,10 +2,11 @@ package com.simplesys.SmartClient.App
 
 object LoggedGroup {
     var logged = false
-    var codeGroup: Option[String] = None
-    def isDevsGroup(): Boolean = codeGroup.getOrElse("") == "developers"
-    def isAdminsGroup(): Boolean = codeGroup.getOrElse("") == "admins"
-    def isAnalystsGroup(): Boolean = codeGroup.getOrElse("") == "analysts"
-    def isRoot(): Boolean = codeGroup.getOrElse("") == "root"
+    var loginedGroup: Option[String] = None
+
+    def isDevsGroup(): Boolean = loginedGroup.getOrElse("") == "developers"
+    def isAdminsGroup(): Boolean = loginedGroup.getOrElse("") == "admins"
+    def isAnalystsGroup(): Boolean = loginedGroup.getOrElse("") == "analysts"
+    def isRoot(): Boolean = loginedGroup.getOrElse("") == "root"
 }
 

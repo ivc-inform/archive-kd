@@ -55,7 +55,6 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
     def receive = {
         case GetData => {
 
-
             val startTime = System.currentTimeMillis()
 
             val isMultipart = ServletFileUpload.isMultipartContent(request)
@@ -69,6 +68,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
             println(" ------------------------------------------------------- End Parametrs -------------------------------------------------------------------")
 
             val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
+            val channelMessageError = request.Parameter("channelMessageError")
             val channelMessageNextStep = request.Parameter("channelMessageNextStep")
             val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
             val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
@@ -80,18 +80,18 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
             } else {
 
                 val factory = new DiskFileItemFactory()
+                val file = new File(s"./temp")
 
-                val file = new File(s"./temp${UUID.randomUUID.toString}")
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
 
                 val ds = new OracleDataSource
 
                 //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
-                ds.setURL("jdbc:oracle:thin:@//localhost:1521/test")
+                ds.setURL("jdbc:oracle:thin:@//localhost:1521/orcl")
 
-                ds.setUser("eakd")
-                ds.setPassword("eakd")
+                ds.setUser("B404SP3DEMO")
+                ds.setPassword("dfqc2")
 
                 val conn = Option(ds.getConnection.asInstanceOf[OracleConnection])
 
@@ -110,7 +110,6 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                         })
                         dcr
                 }
-
 
                 Try {
 
@@ -149,8 +148,12 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                         (a, f) ⇒ a + f.getSize
                     }*/
 
+                    println("point 1")
                     upload.parseRequest(request).asScala.foreach {
                         fi ⇒
+                            println("point 2")
+                            println(fi.isFormField)
+
                             if (!fi.isFormField) {
                                 val fieldName = fi.getFieldName
                                 println(s"fieldName: $fieldName")
@@ -229,6 +232,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
                         Out("Ok")
                     case Failure(e) ⇒
 
+                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack"→ JsonString(e.getStackTraceString)),channels = channelMessageError)))
                         OutFailure(e)
                         conn.foreach(_.close())
                 }

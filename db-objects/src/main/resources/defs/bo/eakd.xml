@@ -545,7 +545,7 @@
 					<attr caption="Код магнитотеки" mandatory="false" name="mcode" type="sCode"></attr>
 					<attr caption="Наименование магнитотеки" mandatory="false" name="mname" type="sCaption"></attr>
 					<attr caption="Наименование файла магнитотеки" mandatory="false" name="mfilecode" type="sCaption"></attr>
-					<attr caption="Дата заптси" mandatory="false" name="mdatein" type="dDate"></attr>
+					<attr caption="Дата записи" mandatory="false" name="mdatein" type="dDate"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

@@ -1,11 +1,12 @@
-// This file is generated automatically (at 16.06.2016 09:34:32), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 14.07.2017 12:12:12), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
-package ru.simplesys.defs.app.scala.container
+package ru.simplesys.defs.app.scala.container.eakd
 
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.common.Strings._
+import com.simplesys.jdbc.control.clob._
 import akka.actor.Actor
 import ru.simplesys.defs.bo.eakd._
 
@@ -20,5 +21,7 @@ trait eakd_docizvop_SemiHandTrait_Remove extends SessionContextSupport with Serv
     val dataSet = DocizvopDS(ds)    
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
-     def receiveBase: Option[Actor.Receive] = None
+     def receiveBase: Option[Actor.Receive] = None    
+    
+     def wrapperBlobGetter(blob: Blob): String = blob.asString
 }
