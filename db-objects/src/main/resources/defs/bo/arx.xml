@@ -49,7 +49,7 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
-					<fk linkType="refIsOwner" parent="docitem">
+					<fk linkType="refIsOwner" parent="docitem" mandatory="false">
 						<mapping attrNameLocal="iddocitem" attrNameRemote="id"></mapping>
 					</fk>
 				</constraints>

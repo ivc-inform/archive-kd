@@ -342,7 +342,7 @@
 		<xs:attribute type="xs:string" name="parent" use="required"/>
 		<xs:attribute type="xs:string" name="parentGroup" use="optional"/>
 		<xs:attribute type="linkList.type" name="linkType" use="required"/>
-		<xs:attribute type="xs:boolean" name="mandatory" use="optional"/>
+		<xs:attribute type="xs:boolean" name="mandatory" use="required"/>
 	</xs:complexType>
 
 
