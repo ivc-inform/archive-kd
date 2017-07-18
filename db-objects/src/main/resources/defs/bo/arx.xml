@@ -112,8 +112,8 @@
           <attr caption="Идентификатор файла" name="vfileident" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Прим." name="idcrd_fk" type="nInt" useDbPrefix="false" hidden="true"></attr>
 					<attr caption="Инвентарный номер" name="vcrinvent" type="sCaption" useDbPrefix="false"></attr>
-					<attr caption="Количество листов" name="vcrkolpages" type="sCaption" useDbPrefix="false"></attr>
-					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Количество листов" name="vcrkolpages" type="sCaption" useDbPrefix="false" hidden="true"></attr>
+					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption" useDbPrefix="false" hidden="true"></attr>
 					<attr caption="Форматы" name="vformats" type="sCaption" useDbPrefix="false" hidden="true"></attr>
 					<attr caption="Разработчик" name="vrazr" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
