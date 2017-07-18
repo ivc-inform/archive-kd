@@ -70,21 +70,20 @@ class ReLoginAxFilter extends AkkaPartialFilter {
             val login = requestData.getString("login")
             val password = requestData.getString("password")
 
-            logger trace (s"login: ${login}")
-            logger trace (s"pasword: ${password}")
 
             val user = UserDS(sessionContext.getDS)
 
-            logger debug "---------------------------------------------------------------------------------------------------------------------------------------"
-            logger debug s"login: $login, password: $password"
+            logger trace "---------------------------------------------------------------------------------------------------------------------------------------"
+            logger trace (s"login: ${login}")
+            logger trace (s"pasword: ${password}")
 
             user.selectOne(user.idUser ~ user.ploginUser ~ user.usnameUser ~ user.uscodeUser ~ user.passwordUser ~ user.bmainUser, where = Where(user.ploginUser === login) And (user.passwordUser === password)) result match {
                 case Success(TupleSS6(id, plogin, usname, uscode, _, bmain)) =>
-                    logger debug s"id $id, plogin: $plogin, usname: ${usname.headOption.getOrElse("None")}, usecode: ${uscode.headOption.getOrElse("None")} bmain: ${bmain.headOption.getOrElse(false)}"
-                    logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
+                    logger trace s"id $id, usname: ${usname.headOption.getOrElse("None")}, usecode: ${uscode.headOption.getOrElse("None")} bmain: ${bmain.headOption.getOrElse(false)}"
+                    logger trace "--------------------------------------------------------------------------------------------------------------------------------------"
 
 
-                    val loginedGroup:String = if (bmain.headOption.getOrElse(false)) "admins" else uscode.headOption.getOrElse("Unknown")
+                    val loginedGroup: String = if (bmain.headOption.getOrElse(false)) "admins" else uscode.headOption.getOrElse("Unknown")
 
                     for (_session <- session) {
                         _session.Attribute("userId", Some(id))
@@ -98,8 +97,8 @@ class ReLoginAxFilter extends AkkaPartialFilter {
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
 
-                        logger debug s"NoDataFoundException"
-                        logger debug "--------------------------------------------------------------------------------------------------------------------------------------"
+                        logger trace s"NoDataFoundException"
+                        logger trace "--------------------------------------------------------------------------------------------------------------------------------------"
 
                         session match {
                             case Some(_session) =>

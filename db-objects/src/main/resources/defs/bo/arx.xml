@@ -28,16 +28,16 @@
 				<attrs>
 					<attr caption="ID карточки учета" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
 					<attr caption="idcrdfk" hidden="true" name="idcrdfk" type="nInt" useDbPrefix="false"></attr>
+          <attr caption="Обозначение" name="vcrcode" type="sCode" useDbPrefix="false"></attr>
 					<attr caption="Наименование" name="vcrname" type="sCaption" useDbPrefix="false"></attr>
-					<attr caption="Обозначение" name="vcrcode" type="sCode" useDbPrefix="false"></attr>
+          <attr caption="Дата создания" name="datecard" type="dDate" useDbPrefix="false"></attr>
+          <attr caption="Идентификатор файла" hidden="true" name="vfileident" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Описание" name="vcrsdescr" type="sDescription" useDbPrefix="false"></attr>
-					<attr caption="Дата создания" name="datecard" type="dDate" useDbPrefix="false"></attr>
 					<attr caption="Код документа входимости" mandatory="true" name="idcrd_fk" type="nInt" useDbPrefix="false"></attr>
 					<attr caption="Инвентарный номер" name="vcrinvent" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Количество листов" name="vcrkolpages" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Форматы" name="vformats" type="sCaption" useDbPrefix="false"></attr>
-					<attr caption="vfileident" hidden="true" name="vfileident" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
