@@ -13,7 +13,85 @@
 					<showAttrs>
 						<attrName>vitcode</attrName>
 						<attrName>vitname</attrName>
-						<attrName>vdesc</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Типы документов" name="doctypes">
+				<attrs>
+					<attr caption="ID типа документов" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код типа документов" mandatory="true" name="vtycode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Наименование типа документов" mandatory="true" name="vtyname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vtyname</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Виды документов" name="doccats">
+				<attrs>
+					<attr caption="ID вида документов" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код вида документов" mandatory="true" name="vctcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Наименование вида документов" mandatory="true" name="vctname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vctname</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Состояния" name="state">
+				<attrs>
+					<attr caption="ID состояния" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код состояния" mandatory="true" name="vsecode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Наименование состояния" mandatory="true" name="vsecaption" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"> useDbPrefix="false"</attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vsecaption</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Группы" name="groupitem">
+				<attrs>
+					<attr caption="ID группы" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код группы" mandatory="true" name="vgicode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Наименование группы" mandatory="true" name="vginame" type="sCaption" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vginame</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
@@ -50,6 +128,18 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
+					<fk linkType="refIsOwner" mandatory="false" parent="doctypes">
+						<mapping attrNameLocal="idtype" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="false" parent="doccats">
+						<mapping attrNameLocal="idcats" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="false" parent="state">
+						<mapping attrNameLocal="idstate" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="false" parent="groupitem">
+						<mapping attrNameLocal="idgroup" attrNameRemote="id"></mapping>
+					</fk>
 					<fk linkType="refIsOwner" mandatory="false" parent="docitem">
 						<mapping attrNameLocal="iddocitem" attrNameRemote="id"></mapping>
 					</fk>
