@@ -89,9 +89,6 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
-					<fk linkType="refIsOwner" mandatory="true" parent="card">
-						<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
-					</fk>
 					<fk linkType="refIsOwner" mandatory="true" parent="docizv">
 						<mapping attrNameLocal="idizv" attrNameRemote="id"></mapping>
 					</fk>

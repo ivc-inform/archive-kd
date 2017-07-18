@@ -147,6 +147,29 @@
 				</constraints>
 			</classSimple>
 
+			<classSimple autoTableMapping="true" caption="Вложения" name="attach">
+				<attrs>
+					<attr caption="ID вложения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код вложения" mandatory="false" name="vatcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Файл вложения" mandatory="false" name="attfile" type="blob" useDbPrefix="false"></attr>
+					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDate" useDbPrefix="false"></attr>
+					<attr caption="Описание вложения" mandatory="false" name="vatdescr" type="sDescription" useDbPrefix="false"></attr>
+					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vatcode</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+
 			<classSimple autoTableMapping="true" caption="Пользователи" name="User">
 				<attrs>
 					<attr caption="Идентификатор" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
