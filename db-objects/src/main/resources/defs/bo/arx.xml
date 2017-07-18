@@ -26,8 +26,8 @@
 
 			<classSimple autoTableMapping="true" caption="Карточка" name="card">
 				<attrs>
-					<attr caption="ID карточки учета" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="IdcrdFk" hidden="true" name="IdcrdFk" type="nInt"></attr>
+					<attr caption="ID карточки учета" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="IdcrdFk" hidden="true" name="IdcrdFk" type="nInt"  useDbPrefix="false"></attr>
 					<attr caption="Наименование" name="vcrname" type="sCaption"></attr>
 					<attr caption="Обозначение" name="vcrcode" type="sCode"></attr>
 					<attr caption="Описание" name="vcrsdescr" type="sDescription"></attr>
