@@ -3,11 +3,11 @@
 		<classes>
 			<classSimple autoTableMapping="true" caption="Шифр изделия" name="docitem">
 				<attrs>
-					<attr caption="ID шифра изделия" genBySeq="true" hidden="true" mandatory="true" name="id" type="id"></attr>
-					<attr caption="Дата" name="tdatein" type="dDate"></attr>
-					<attr caption="Код шифра изделия" mandatory="true" name="vitcode" type="sCode"></attr>
-					<attr caption="Шифр изделия" mandatory="true" name="vitname" type="sCaption"></attr>
-					<attr caption="Изделие" mandatory="true" name="vdesc" type="sCaption"></attr>
+					<attr caption="ID шифра изделия" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Дата" name="tdatein" type="dDate" useDbPrefix="false"></attr>
+					<attr caption="Код шифра изделия" mandatory="true" name="vitcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Шифр изделия" mandatory="true" name="vitname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Изделие" mandatory="true" name="vdesc" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -27,17 +27,17 @@
 			<classSimple autoTableMapping="true" caption="Карточка" name="card">
 				<attrs>
 					<attr caption="ID карточки учета" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
-					<attr caption="IdcrdFk" hidden="true" name="IdcrdFk" type="nInt"  useDbPrefix="false"></attr>
-					<attr caption="Наименование" name="vcrname" type="sCaption"></attr>
-					<attr caption="Обозначение" name="vcrcode" type="sCode"></attr>
-					<attr caption="Описание" name="vcrsdescr" type="sDescription"></attr>
-					<attr caption="Дата создания" name="datecard" type="dDate"></attr>
-					<attr caption="Код документа входимости" mandatory="true" name="idcrd_fk" type="nInt"></attr>
-					<attr caption="Инвентарный номер" name="vcrinvent" type="sCaption"></attr>
-					<attr caption="Количество листов" name="vcrkolpages" type="sCaption"></attr>
-					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption"></attr>
-					<attr caption="Форматы" name="vformats" type="sCaption"></attr>
-					<attr caption="vfileident" hidden="true" name="vfileident" type="sCaption"></attr>
+					<attr caption="idcrdfk" hidden="true" name="idcrdfk" type="nInt" useDbPrefix="false"></attr>
+					<attr caption="Наименование" name="vcrname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Обозначение" name="vcrcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Описание" name="vcrsdescr" type="sDescription" useDbPrefix="false"></attr>
+					<attr caption="Дата создания" name="datecard" type="dDate" useDbPrefix="false"></attr>
+					<attr caption="Код документа входимости" mandatory="true" name="idcrd_fk" type="nInt" useDbPrefix="false"></attr>
+					<attr caption="Инвентарный номер" name="vcrinvent" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Количество листов" name="vcrkolpages" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Форматы" name="vformats" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="vfileident" hidden="true" name="vfileident" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

@@ -1,12 +1,10 @@
 package com.simplesys
 
-import com.simplesys.SmartClient.App.EditorUsers
-import com.simplesys.SmartClient.App.props.EditorUsersProps
 import com.simplesys.SmartClient.System.SCApply
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.container.upload.props.UploadTestTabProps
-import com.simplesys.js.components.cards.{Cards, DocIzv, Zapros}
-import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
+import com.simplesys.js.components.cards.Cards
+import com.simplesys.js.components.cards.props.CardsProps
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
 
