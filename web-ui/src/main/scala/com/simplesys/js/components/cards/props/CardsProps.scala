@@ -26,5 +26,5 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     editingFields = FormItemsJS.arx_card_FRMITM.opt
     fields = ListGridFiledsJS.arx_card_FLDS.opt
 
-    //autoFetchData = false.opt
+    canExpandRecords = true.opt
 }
