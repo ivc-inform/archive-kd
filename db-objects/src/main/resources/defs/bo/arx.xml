@@ -37,7 +37,7 @@
 					<attr caption="Количество листов" name="vcrkolpages" type="sCaption"></attr>
 					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption"></attr>
 					<attr caption="Форматы" name="vformats" type="sCaption"></attr>
-					<attr caption="vfileident" name="vfileident" hidden="true" type="sCaption"></attr>
+					<attr caption="vfileident" hidden="true" name="vfileident" type="sCaption"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -49,7 +49,7 @@
 					<uc uniqueType="pk">
 						<attrName>id</attrName>
 					</uc>
-					<fk linkType="refIsOwner" parent="docitem" mandatory="false">
+					<fk linkType="refIsOwner" mandatory="false" parent="docitem">
 						<mapping attrNameLocal="iddocitem" attrNameRemote="id"></mapping>
 					</fk>
 				</constraints>

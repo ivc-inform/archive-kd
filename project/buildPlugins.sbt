@@ -5,16 +5,16 @@ import sbt._
 
 
 //lazy val scenarioPlugin = uri("../../sbt-plugins/scenario-plugin")
-//lazy val devPlugin = uri("../../sbt-plugins/dev-plugin")
+lazy val devPlugin = uri("../../sbt-plugins/dev-plugin")
 //lazy val scalaFmtPlugin = uri("../../sbt-plugins/scala-fmt")
 //lazy val transpileCoffeeScript = uri("../../sbt-plugins/transpile-coffeescript")
 
-lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*//* devPlugin */ /*transpileCoffeeScript*/).
+lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*/ devPlugin  /*transpileCoffeeScript*/).
   settings(inThisBuild(CommonSettings.defaultSettings ++ Seq(
       git.baseVersion := CommonSettings.settingValues.baseVersion
   ))).
   settings(
-      PluginDeps.devPlugin,
+      //PluginDeps.devPlugin,
       PluginDeps.transpileCoffeeScript,
       PluginDeps.mergeJS,
       PluginDeps.xsbtWeb,
