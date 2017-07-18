@@ -24,6 +24,7 @@ object ListGridContextMenuProps {
         }
         record
     }
+
     def newMenuItemWithForm = MenuSSItem(
         new MenuSSItemProps {
             title = "Новый".ellipsis.opt
@@ -37,7 +38,6 @@ object ListGridContextMenuProps {
             enableIf = {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
                     true
-
             }.toFunc.opt
         })
 
@@ -46,7 +46,10 @@ object ListGridContextMenuProps {
             title = "Новый".ellipsis.opt
             identifier = "new".opt
             icon = Common.iconAdd.opt
-            enabled = _enabled.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    _enabled
+            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -64,7 +67,10 @@ object ListGridContextMenuProps {
             title = "Копировать".opt
             identifier = "copy".opt
             icon = Common.copy_icon.opt
-            enabled = _enabled.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    _enabled
+            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -86,7 +92,10 @@ object ListGridContextMenuProps {
             title = "Изменить".opt
             identifier = "edit".opt
             icon = Common.Actions_document_edit_icon.opt
-            enabled = _enabled.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    _enabled
+            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -107,7 +116,10 @@ object ListGridContextMenuProps {
             title = "Удалить".opt
             identifier = "remove".opt
             icon = Common.delete_icon.opt
-            enabled = _enabled.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    _enabled
+            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -132,7 +144,10 @@ object ListGridContextMenuProps {
             title = "Обновить".opt
             identifier = "refresh".opt
             icon = "Refresh.png".opt
-            enabled = _enabled.opt
+            enableIf = {
+                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
+                    _enabled
+            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
