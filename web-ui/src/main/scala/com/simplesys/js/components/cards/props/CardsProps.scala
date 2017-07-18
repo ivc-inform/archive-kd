@@ -20,9 +20,11 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
         }
     ).opt
 
-    dataSource = DataSourcesJS.eakd_card_DS.opt
+    dataSource = DataSourcesJS.arx_card_DS.opt
     identifier = "D8DC1876-F489-3172-EE97-729FFB73B575".opt
 
-    editingFields = FormItemsJS.eakd_card_FRMITM.opt
-    fields = ListGridFiledsJS.eakd_card_FLDS.opt
+    editingFields = FormItemsJS.arx_card_FRMITM.opt
+    fields = ListGridFiledsJS.arx_card_FLDS.opt
+
+    //autoFetchData = false.opt
 }

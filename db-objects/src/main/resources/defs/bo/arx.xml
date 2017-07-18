@@ -1,36 +1,182 @@
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
-	<group caption="Электоронный архив технической документации (Насонов)" name="arx" prefix="ARX">
+	<group caption="Электоронный архив технической документации" name="arx" prefix="ARX">
 		<classes>
-        <classSimple name="User" autoTableMapping="true" caption="Пользователи">
-					<attrs>
-						<attr name="id" type="id" mandatory="true" hidden="true" caption="Идентификатор" genBySeq="true" useDbPrefix="false"/>
-						<attr name="plogin" type="sCode" caption="Логин" mandatory="true" useDbPrefix="false"/>
-						<attr name="usname" caption="Имя" type="sCaption" useDbPrefix="false"/>
-						<attr name="uscode" caption="Код" type="sCaption" useDbPrefix="false"/>
-						<attr name="usrdesc" caption="Описание" type="sDescription" useDbPrefix="false"/>
-						<attr name="password" type="sPasswordPlain" mandatory="true" caption="Пароль" useDbPrefix="false"/>
-						<attr name="tdatein" type="dDate" caption="Дата внесения в список" useDbPrefix="false"/>
-						<attr name="bmain" type="bBoolean" caption="Самый главный" useDbPrefix="false"/>
-						<attr name="idprofile" type="fDouble" caption="Идентификатор профайла" useDbPrefix="false" hidden="true"/>
-					</attrs>
-					<defaults>
-						<showAttrs>
-							<attrName>usname</attrName>
-						</showAttrs>
-						<classifier>
-							<attrName>plogin</attrName>
-						</classifier>
-						<uiSettings uiFormType="singleListGrid"/>
-					</defaults>
-					<constraints>
-						<uc uniqueType="pk">
-							<attrName>id</attrName>
-						</uc>
-						<uc uniqueType="uq">
-							<attrName>plogin</attrName>
-						</uc>
-					</constraints>
-				</classSimple>
-    </classes>
-  </group>
+			<classSimple autoTableMapping="true" caption="Шифр изделия" name="docitem">
+				<attrs>
+					<attr caption="ID шифра изделия" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Дата" name="tdatein" type="dDate" useDbPrefix="false"></attr>
+					<attr caption="Код шифра изделия" mandatory="true" name="vitcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Шифр изделия" mandatory="true" name="vitname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Изделие" mandatory="true" name="vdesc" type="sCaption" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vitcode</attrName>
+						<attrName>vitname</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Типы документов" name="doctypes">
+				<attrs>
+					<attr caption="ID типа документа" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код типа документа" mandatory="true" name="vtycode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Тип документа" mandatory="true" name="vtyname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vtyname</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Виды документов" name="doccats">
+				<attrs>
+					<attr caption="ID вида документа" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код вида документа" mandatory="true" name="vctcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Вид документа" mandatory="true" name="vctname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vctname</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Состояния" name="state">
+				<attrs>
+					<attr caption="ID состояния" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код состояния" mandatory="true" name="vsecode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Состояние" mandatory="true" name="vsecaption" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate"> useDbPrefix="false"</attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vsecaption</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Группы" name="groupitem">
+				<attrs>
+					<attr caption="ID группы" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Код группы" mandatory="true" name="vgicode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Группа" mandatory="true" name="vginame" type="sCaption" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vginame</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Карточка" name="card">
+				<attrs>
+					<attr caption="Наименование" name="vcrname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Обозначение" name="vcrcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Описание" name="vcrsdesc" type="sDescription" useDbPrefix="false"></attr>
+					<attr caption="ID card" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Дата создания" name="datecard" type="dDate" useDbPrefix="false"></attr>
+          <attr caption="Идентификатор файла" name="vfileident" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Прим." name="idcrd_fk" type="nInt" useDbPrefix="false" hidden="true"></attr>
+					<attr caption="Инвентарный номер" name="vcrinvent" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Количество листов" name="vcrkolpages" type="sCaption" useDbPrefix="false" hidden="true"></attr>
+					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption" useDbPrefix="false" hidden="true"></attr>
+					<attr caption="Форматы" name="vformats" type="sCaption" useDbPrefix="false" hidden="true"></attr>
+					<attr caption="Разработчик" name="vrazr" type="sCaption" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>vcrcode</attrName>
+						<attrName>vitname</attrName>
+						<attrName>vcrsdesc</attrName>
+					</showAttrs>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<fk linkType="refIsOwner" mandatory="false" parent="doctypes">
+						<mapping attrNameLocal="idtype" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="false" parent="doccats">
+						<mapping attrNameLocal="idcats" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="false" parent="state">
+						<mapping attrNameLocal="idstate" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="false" parent="groupitem">
+						<mapping attrNameLocal="idgroup" attrNameRemote="id"></mapping>
+					</fk>
+					<fk linkType="refIsOwner" mandatory="false" parent="docitem">
+						<mapping attrNameLocal="iddocitem" attrNameRemote="id"></mapping>
+					</fk>
+				</constraints>
+			</classSimple>
+
+			<classSimple autoTableMapping="true" caption="Пользователи" name="User">
+				<attrs>
+					<attr caption="Идентификатор" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
+					<attr caption="Логин" mandatory="true" name="plogin" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Имя" name="usname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Код" name="uscode" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Описание" name="usrdesc" type="sDescription" useDbPrefix="false"></attr>
+					<attr caption="Пароль" mandatory="true" name="password" type="sPasswordPlain" useDbPrefix="false"></attr>
+					<attr caption="Дата внесения в список" name="tdatein" type="dDate" useDbPrefix="false"></attr>
+					<attr caption="Самый главный" name="bmain" type="bBoolean" useDbPrefix="false"></attr>
+					<attr caption="Идентификатор профайла" hidden="true" name="idprofile" type="fDouble" useDbPrefix="false"></attr>
+				</attrs>
+				<defaults>
+					<showAttrs>
+						<attrName>usname</attrName>
+					</showAttrs>
+					<classifier>
+						<attrName>plogin</attrName>
+					</classifier>
+					<uiSettings uiFormType="singleListGrid"></uiSettings>
+				</defaults>
+				<constraints>
+					<uc uniqueType="pk">
+						<attrName>id</attrName>
+					</uc>
+					<uc uniqueType="uq">
+						<attrName>plogin</attrName>
+					</uc>
+				</constraints>
+			</classSimple>
+		</classes>
+	</group>
 </objectSchema>
