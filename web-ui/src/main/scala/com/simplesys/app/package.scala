@@ -49,6 +49,7 @@ package object app {
     val iconFunctions = "function-selection.png"
     val iconStatistiq = "global_manager.png"
     val iconEdit = "edit.png"
+    val inventory = "inventory.png"
     val delete_Column = "Delete_Column.png"
     val delete_icon = "Delete-icon.png"
     val iconSave = "Save-icon.png"
