@@ -31,9 +31,8 @@
 					<attr caption="Описание" name="vcrsdesc" type="sDescription" useDbPrefix="false"></attr>
 					<attr caption="ID card" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
 					<attr caption="Дата создания" name="datecard" type="dDate" useDbPrefix="false"></attr>
-					<attr caption="idcrdfk" hidden="true" name="idcrdfk" type="nInt" useDbPrefix="false"></attr>
-          <attr caption="Идентификатор файла" hidden="true" name="vfileident" type="sCaption" useDbPrefix="false"></attr>
-					<attr caption="Код документа" name="idcrd_fk" type="nInt" useDbPrefix="false"></attr>
+          <attr caption="Идентификатор файла" name="vfileident" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Прим." name="idcrd_fk" type="nInt" useDbPrefix="false" hidden="true"></attr>
 					<attr caption="Инвентарный номер" name="vcrinvent" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Количество листов" name="vcrkolpages" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Применяемость" name="vcrcodeprn" type="sCaption" useDbPrefix="false"></attr>
@@ -42,6 +41,8 @@
 				<defaults>
 					<showAttrs>
 						<attrName>vcrcode</attrName>
+						<attrName>vitname</attrName>
+						<attrName>vcrsdesc</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
