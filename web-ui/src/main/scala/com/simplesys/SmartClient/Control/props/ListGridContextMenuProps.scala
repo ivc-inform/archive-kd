@@ -46,10 +46,6 @@ object ListGridContextMenuProps {
             title = "Новый".ellipsis.opt
             identifier = "new".opt
             icon = Common.iconAdd.opt
-            enableIf = {
-                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
-                    _enabled
-            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -58,7 +54,7 @@ object ListGridContextMenuProps {
             }.toFunc.opt
             enableIf = {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
-                    true
+                    _enabled
             }.toFunc.opt
         })
 
@@ -67,10 +63,6 @@ object ListGridContextMenuProps {
             title = "Копировать".opt
             identifier = "copy".opt
             icon = Common.copy_icon.opt
-            enableIf = {
-                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
-                    _enabled
-            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -83,7 +75,7 @@ object ListGridContextMenuProps {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
-                    owner.getSelectedRecords().length > 0
+                    _enabled && owner.getSelectedRecords().length > 0
             }.toFunc.opt
         })
 
@@ -92,10 +84,6 @@ object ListGridContextMenuProps {
             title = "Изменить".opt
             identifier = "edit".opt
             icon = Common.Actions_document_edit_icon.opt
-            enableIf = {
-                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
-                    _enabled
-            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -107,7 +95,7 @@ object ListGridContextMenuProps {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
-                    owner.getSelectedRecords().length == 1
+                    _enabled && owner.getSelectedRecords().length == 1
             }.toFunc.opt
         })
 
@@ -116,10 +104,6 @@ object ListGridContextMenuProps {
             title = "Удалить".opt
             identifier = "remove".opt
             icon = Common.delete_icon.opt
-            enableIf = {
-                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
-                    _enabled
-            }.toFunc.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -135,7 +119,7 @@ object ListGridContextMenuProps {
                 (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
                     simpleSyS checkOwner owner
-                    owner.getSelectedRecords().length > 0
+                    _enabled && owner.getSelectedRecords().length > 0
             }.toFunc.opt
         })
 
@@ -154,10 +138,6 @@ object ListGridContextMenuProps {
                     simpleSyS checkOwner owner
                     owner.fullRefresh()
             }.toFunc.opt
-            enableIf = {
-                (target: Canvas, menu: MenuSS, item: MenuSSItem) =>
-                    true
-            }.toFunc.opt
         })
 
     def separetorMenuItem = MenuSSItem(
@@ -170,22 +150,26 @@ object ListGridContextMenuProps {
 
 
         itemsType.find(_.name == miNew().name) match {
-            case Some(menuItem) ⇒ res += newMenuItem(menuItem.enabled)
+            case Some(menuItem) ⇒
+                res += newMenuItem(menuItem.enabled)
             case _ ⇒
         }
 
         itemsType.find(_.name == miCopy().name) match {
-            case Some(menuItem) ⇒ res += copyMenuItem(menuItem.enabled)
+            case Some(menuItem) ⇒
+                res += copyMenuItem(menuItem.enabled)
             case _ ⇒
         }
 
         itemsType.find(_.name == miEdit().name) match {
-            case Some(menuItem) ⇒ res += editMenuItem(menuItem.enabled)
+            case Some(menuItem) ⇒
+                res += editMenuItem(menuItem.enabled)
             case _ ⇒
         }
 
         itemsType.find(_.name == miDelete().name) match {
-            case Some(menuItem) ⇒ res += deleteMenuItem(menuItem.enabled)
+            case Some(menuItem) ⇒ res +=
+              deleteMenuItem(menuItem.enabled)
             case _ ⇒
         }
 
