@@ -1,11 +1,16 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
+import com.simplesys.SmartClient.Foundation.Canvas
+import com.simplesys.SmartClient.Foundation.props.CanvasProps
+import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
+import com.simplesys.System.JSUndefined
 import com.simplesys.js.components.cards.Cards
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
+import com.simplesys.function._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
@@ -27,4 +32,17 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     fields = ListGridFiledsJS.arx_card_FLDS.opt
 
     canExpandRecords = true.opt
+    expandRecord = {
+        (thiz: classHandler, component: JSUndefined[Canvas], record: ListGridRecord) ⇒
+            thiz.Super("expandRecord", IscArray(component, record))
+    }.toThisFunc.opt
+
+    getExpansionComponent = {
+        (record: ListGridRecord) ⇒
+            Canvas.create(
+                new CanvasProps {
+                    height = 200
+                }
+            )
+    }.toFunc.opt
 }
