@@ -1,7 +1,6 @@
 package com.simplesys.SmartClient.Control.props
 
-import com.simplesys.SmartClient.App.props.MenuItemType
-import com.simplesys.SmartClient.App.props.MenuItemType.MenuItemType
+import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.Control.{ListGridContextMenu, MenuSS}
@@ -42,11 +41,12 @@ object ListGridContextMenuProps {
             }.toFunc.opt
         })
 
-    def newMenuItem = MenuSSItem(
+    def newMenuItem(_enabled: Boolean = true) = MenuSSItem(
         new MenuSSItemProps {
             title = "Новый".ellipsis.opt
             identifier = "new".opt
             icon = Common.iconAdd.opt
+            enabled = _enabled.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -59,11 +59,12 @@ object ListGridContextMenuProps {
             }.toFunc.opt
         })
 
-    def copyMenuItem = MenuSSItem(
+    def copyMenuItem(_enabled: Boolean = true) = MenuSSItem(
         new MenuSSItemProps {
             title = "Копировать".opt
             identifier = "copy".opt
             icon = Common.copy_icon.opt
+            enabled = _enabled.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -80,11 +81,12 @@ object ListGridContextMenuProps {
             }.toFunc.opt
         })
 
-    def editMenuItem = MenuSSItem(
+    def editMenuItem(_enabled: Boolean = true) = MenuSSItem(
         new MenuSSItemProps {
             title = "Изменить".opt
             identifier = "edit".opt
             icon = Common.Actions_document_edit_icon.opt
+            enabled = _enabled.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -100,11 +102,12 @@ object ListGridContextMenuProps {
             }.toFunc.opt
         })
 
-    def deleteMenuItem = MenuSSItem(
+    def deleteMenuItem(_enabled: Boolean = true) = MenuSSItem(
         new MenuSSItemProps {
             title = "Удалить".opt
             identifier = "remove".opt
             icon = Common.delete_icon.opt
+            enabled = _enabled.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -124,11 +127,12 @@ object ListGridContextMenuProps {
             }.toFunc.opt
         })
 
-    def refreshMenuItem = System.MenuSSItem(
+    def refreshMenuItem(_enabled: Boolean = true) = System.MenuSSItem(
         new MenuSSItemProps {
             title = "Обновить".opt
             identifier = "refresh".opt
             icon = "Refresh.png".opt
+            enabled = _enabled.opt
             click = {
                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                     val owner = item.owner.asInstanceOf[ListGridEditor]
@@ -146,20 +150,35 @@ object ListGridContextMenuProps {
             isSeparator = true.opt
         })
 
-    def otherItems(itemsType: Seq[MenuItemType] = Seq(MenuItemType.miCopy, MenuItemType.miDelete, MenuItemType.miEdit, MenuItemType.miRefresh)): Seq[MenuSSItem] = {
+    def otherItems(itemsType: Seq[MenuItemType] = Seq(miNew(), miCopy(), miDelete(), miEdit(), miRefresh())): Seq[MenuSSItem] = {
         val res = ArrayBuffer.empty[MenuSSItem]
 
-        if (itemsType.contains(MenuItemType.miCopy))
-            res += copyMenuItem
 
-        if (itemsType.contains(MenuItemType.miEdit))
-            res += editMenuItem
+        itemsType.find(_.name == miNew().name) match {
+            case Some(menuItem) ⇒ res += newMenuItem(menuItem.enabled)
+            case _ ⇒
+        }
 
-        if (itemsType.contains(MenuItemType.miDelete))
-            res += deleteMenuItem
+        itemsType.find(_.name == miCopy().name) match {
+            case Some(menuItem) ⇒ res += copyMenuItem(menuItem.enabled)
+            case _ ⇒
+        }
 
-        if (itemsType.contains(MenuItemType.miRefresh))
-            res += refreshMenuItem
+        itemsType.find(_.name == miEdit().name) match {
+            case Some(menuItem) ⇒ res += editMenuItem(menuItem.enabled)
+            case _ ⇒
+        }
+
+        itemsType.find(_.name == miDelete().name) match {
+            case Some(menuItem) ⇒ res += deleteMenuItem(menuItem.enabled)
+            case _ ⇒
+        }
+
+        itemsType.find(_.name == miRefresh().name) match {
+            case Some(menuItem) ⇒ res += refreshMenuItem(menuItem.enabled)
+            case _ ⇒
+        }
+
         res.toSeq
     }
 
@@ -213,7 +232,7 @@ object ListGridContextMenuProps {
 
     def getCustomMenuItems(customMenu: JSUndefined[IscArray[MenuSSItem]]): Seq[MenuSSItem] = {
         if (customMenu.isEmpty)
-            Seq.empty[MenuSSItem]
+            Seq()
         else {
             Seq(
                 MenuSSItem(
@@ -229,13 +248,12 @@ class ListGridContextMenuProps extends MenuSSProps {
     type classHandler <: ListGridContextMenu
 
     var customMenu: ScOption[Seq[MenuSSItem]] = ScNone
-    var itemsType: ScOption[Seq[MenuItemType]] = Seq(MenuItemType.miCopy, MenuItemType.miDelete, MenuItemType.miEdit, MenuItemType.miRefresh).opt
+    var itemsType: ScOption[Seq[MenuItemType]] = Seq(miNew(), miCopy(), miDelete(), miEdit(), miRefresh()).opt
 
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
 
-            val items = Seq(ListGridContextMenuProps.newMenuItem) ++
-              ListGridContextMenuProps.otherItems(if (thiz.itemsType.isDefined) thiz.itemsType.get else Seq.empty[MenuItemType]) ++
+            val items = ListGridContextMenuProps.otherItems(if (thiz.itemsType.isDefined) thiz.itemsType.get else Seq()) ++
               ListGridContextMenuProps.getCustomMenuItems(thiz.customMenu) ++
               ListGridContextMenuProps.otherItems1
 
@@ -248,13 +266,12 @@ class ListGridContextMenuWithFormProps extends MenuSSProps {
     type classHandler <: ListGridContextMenu
 
     var customMenu: ScOption[Seq[MenuSSItem]] = ScNone
-    var itemsType: ScOption[Seq[MenuItemType]] = Seq(MenuItemType.miCopy, MenuItemType.miDelete, MenuItemType.miEdit, MenuItemType.miRefresh).opt
+    var itemsType: ScOption[Seq[MenuItemType]] = Seq(miNew(), miCopy(), miDelete(), miEdit(), miRefresh()).opt
 
     initWidget = {
         (thiz: classHandler, args: IscArray[JSAny]) =>
 
-            val items = Seq(ListGridContextMenuProps.newMenuItemWithForm) ++
-              ListGridContextMenuProps.otherItems(if (thiz.itemsType.isDefined) thiz.itemsType.get else Seq.empty[MenuItemType]) ++
+            val items = ListGridContextMenuProps.otherItems(if (thiz.itemsType.isDefined) thiz.itemsType.get else Seq()) ++
               ListGridContextMenuProps.getCustomMenuItems(thiz.customMenu) ++
               ListGridContextMenuProps.otherItems1
 

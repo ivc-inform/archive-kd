@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.App
 
-import com.simplesys.SmartClient.App.props.MenuItemType.MenuItemType
+import com.simplesys.SmartClient.App.props.MenuItemType
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Grids.{AbstractListGridEditorCompanion, ListGridEditor}
 import com.simplesys.SmartClient.System.IscArray
