@@ -34,6 +34,7 @@ ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2
 ALTER USER system IDENTIFIED BY dfqc2;
 
 GRANT CREATE SESSION TO B404SP3DEMO;
+DROP USER B404SP3DEMO cascade;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 
@@ -81,8 +82,26 @@ CREATE TABLE
     );
 
 @/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql;
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql;
+
+ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
+
 @/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
+
 
 @/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
+
+SELECT comp_id, comp_name FROM dba_registry;
+
+drop user ordsys cascade;
+drop user mdsys cascade;
+drop user ORDDATA cascade;
+drop user ORDPLUGINS cascade;
+drop user SI_INFORMTN_SCHEMA cascade;
+
 
