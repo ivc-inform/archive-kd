@@ -1,4 +1,4 @@
-// This file is generated automatically (at 18.07.2017 17:18:35), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 19.07.2017 19:27:32), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
 package ru.simplesys.defs.app.scala.container.arx
 
@@ -11,14 +11,14 @@ import akka.actor.Actor
 import ru.simplesys.defs.bo.arx._
 
  
-trait arx_attach_SemiHandTrait_Update extends SessionContextSupport with ServletActorDyn {
+trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with ServletActorDyn {
     
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     val requestData = new DSRequestDyn(request)    
     
-    logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
+    logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = AttachDS(ds)    
+    val dataSet = AttatchDS(ds)    
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

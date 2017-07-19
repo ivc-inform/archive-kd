@@ -1,7 +1,7 @@
 <objectSchema xmlns="http://simpleSys.ru/xml/library/bo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://simpleSys.ru/xml/library/bo http://toucan.simplesys.lan/xml/xsd/v1.0.0-1/schema.xsd">
 	<group caption="Электоронный архив технической документации" name="arx" prefix="ARX">
 		<classes>
-			<classSimple autoTableMapping="true" caption="Вложения" name="attach">
+			<classSimple autoTableMapping="true" caption="Вложения" name="attatch">
 				<attrs>
 					<attr caption="ID вложения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
 					<attr caption="Код ревизии" name="vatcode" type="sCode" useDbPrefix="false"></attr>
