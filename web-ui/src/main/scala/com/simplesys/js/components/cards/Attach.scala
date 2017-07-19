@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.App.{AbstractCommonListGridEditorComponentCompa
 import scala.scalajs.js
 
 @js.native
-trait Attachments extends CommonListGridEditorComponent {
+trait Attach extends CommonListGridEditorComponent {
 }
 
 @js.native

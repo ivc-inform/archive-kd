@@ -3,8 +3,8 @@ package com.simplesys
 import com.simplesys.SmartClient.System.SCApply
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.container.upload.props.UploadTestTabProps
-import com.simplesys.js.components.cards.{Attachments, Cards}
-import com.simplesys.js.components.cards.props.{AttachmentsProps, CardsProps}
+import com.simplesys.js.components.cards.{Attach, Cards}
+import com.simplesys.js.components.cards.props.{AttachProps, CardsProps}
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
 
@@ -113,7 +113,7 @@ package object app {
     //    object StatVersion extends SCApply[StatVersion, StatVersionProps]
     //    object MVid extends SCApply[MVid, MVidProps]
     object Cards extends SCApply[Cards, CardsProps]
-    object Attachments extends SCApply[Attachments, AttachmentsProps]
+    object Attach extends SCApply[Attach, AttachProps]
     //    object Zapros extends SCApply[Zapros, ZaprosProps]
     //    object DocIzv extends SCApply[DocIzv, DocIzvProps]
     object ArxUser extends SCApply[ArxUser, ArxUserProps]

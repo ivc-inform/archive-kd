@@ -13,7 +13,7 @@ import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.{JSAny, JSUndefined}
 import com.simplesys.System.Types.OperatorId
-import com.simplesys.app.Attachments
+import com.simplesys.app.Attach
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Cards
 import com.simplesys.js.components.cards.props.ExpandAttahes.ExpandAttahes
@@ -106,7 +106,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
         (thiz: classHandler, record: CardDataRecord) ⇒
             thiz.expandAttahes match {
                 case ExpandAttahes.attachments ⇒
-                    Attachments.create(new AttachmentsProps {
+                    Attach.create(new AttachProps {
                         /*initialCriteria = AdvancedCriteria(
                             new AdvancedCriteriaProps {
                                 operator = OperatorId.and.opt
