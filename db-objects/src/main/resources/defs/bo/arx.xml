@@ -28,7 +28,7 @@
 					<fk linkType="refIsOwner" mandatory="false" parent="attatchtypes">
 						<mapping attrNameLocal="idattypes" attrNameRemote="id"></mapping>
 					</fk>
-					<fk linkType="refIsOwner" mandatory="false" parent="card">
+					<fk linkType="refIsOwner" mandatory="true" parent="card">
 						<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
 					</fk>
 				</constraints>
