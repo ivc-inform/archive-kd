@@ -120,8 +120,6 @@
 				<defaults>
 					<showAttrs>
 						<attrName>vcrcode</attrName>
-						<attrName>vitname</attrName>
-						<attrName>vcrsdesc</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>

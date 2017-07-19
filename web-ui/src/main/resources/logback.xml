@@ -25,13 +25,17 @@
     <logger name="ru.simplesys.defs.bo.scenarios.Scr_CmpgnDS" level="debug"/>
     <logger name="ru.simplesys.defs.bo.admin.UserDS" level="debug"/>
     <logger name="ru.simplesys.defs.bo.arx.CardDS" level="debug"/>
+    <logger name="ru.simplesys.defs.bo.arx.UserDS" level="debug"/>
+    <logger name="ru.simplesys.defs.bo.arx.UserBo" level="debug"/>
+    <logger name="ru.simplesys.defs.bo.arx.table.UserTbl" level="debug"/>
     <logger name="ru.simplesys.defs.bo.admin.UserBo" level="debug"/>
     <logger name="ru.simplesys.defs.bo.eakd.AbonentsDS" level="debug"/>
     <logger name="com.simplesys.jdbc.control.ClassBO" level="debug"/>
+    <logger name="com.simplesys.jdbc.control.Table" level="debug"/>
 
     <!--Вывод регистрации сервлетов-->
     <logger name="com.simplesys.listener.AppLifeCycleEvent" level="debug"/>
-    <logger name="com.simplesys.listener.CommonWebAppListener" level="trace"/>
+    <logger name="com.simplesys.listener.CommonWebAppListener" level="debug"/>
 
     <!--<logger name="com.simplesys.mfms.containers.ManagerOfFixedTemplates_FetchTemplateActor" level="debug" additivity="false">
         <appender-ref ref="FILE_FETCH"/>
