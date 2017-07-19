@@ -25,16 +25,16 @@
 					<fk linkType="refIsOwner" mandatory="false" parent="docizv">
 						<mapping attrNameLocal="idizv" attrNameRemote="id"></mapping>
 					</fk>
-					<fk linkType="refIsOwner" mandatory="false" parent="attachtypes">
+					<fk linkType="refIsOwner" mandatory="false" parent="attatchtypes">
 						<mapping attrNameLocal="idattypes" attrNameRemote="id"></mapping>
 					</fk>
-					<fk linkType="refIsOwner" mandatory="true" parent="card">
+					<fk linkType="refIsOwner" mandatory="false" parent="card">
 						<mapping attrNameLocal="idcard" attrNameRemote="id"></mapping>
 					</fk>
 				</constraints>
 			</classSimple>
 
-			<classSimple autoTableMapping="true" caption="Тип вложения" name="attachtypes">
+			<classSimple autoTableMapping="true" caption="Тип вложения" name="attatchtypes">
 				<attrs>
 					<attr caption="ID типа вложения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
 					<attr caption="Наименование" mandatory="true" name="vattypename" type="sCaption" useDbPrefix="false"></attr>
