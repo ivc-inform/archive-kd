@@ -5,6 +5,7 @@ import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.DataBinding.Callbacks._
 import com.simplesys.SmartClient.DataBinding.{DSRequest, DataSource}
 import com.simplesys.SmartClient.Forms.formsItems.FormItem
+import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord, MasterDetailMapping}
 import com.simplesys.SmartClient.Layout.{AbstractVLayoutSSCompanion, VLayoutSS}
 import com.simplesys.SmartClient.System.IscArray
@@ -41,7 +42,7 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     def getDataLength(): Int
     def applyRecordData(recordData: IscArray[Record]): void
     def invalidateRecordComponents(): void
-    def refreshRecordComponent(rowNum:Int, colNum:Int = js.native): void
+    def refreshRecordComponent(rowNum: Int, colNum: Int = js.native): void
     var showRecordComponentsByCell: Boolean
     var showRecordComponents: Boolean
     var filterOnKeypress: Boolean
@@ -146,6 +147,8 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     val datetimeFormatter: DateDisplayFormat
     val dateFormatter: DateDisplayFormat
     def refreshData(callBack: DSCallback = js.native): void
+    var getExpansionComponent: Function1[ListGridRecord, Canvas]
+    def setGetExpansionComponent(func: Function1[ListGridRecord, Canvas]): void
 }
 
 @js.native

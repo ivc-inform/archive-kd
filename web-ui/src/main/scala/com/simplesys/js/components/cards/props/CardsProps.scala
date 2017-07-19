@@ -40,7 +40,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
 
     canExpandRecords = true.opt
     expandRecord = {
-        (thiz: classHandler, component: JSUndefined[Canvas], record: ListGridRecord) ⇒
+        (thiz: classHandler, record: ListGridRecord) ⇒
             MenuSS.create(
                 new MenuSSProps {
                     items = Seq(
@@ -50,12 +50,12 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
                             icon = Common.attach.opt
                             click = {
                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                    val component = Attachments.create(
-                                        new AttachmentsProps {
+                                    val thizTop = thiz
 
-                                        }
-                                    )
-                                    thiz.Super("expandRecord", IscArray(component, record))
+                                    thizTop setGetExpansionComponent ((record: ListGridRecord) ⇒ Attachments.create(new AttachmentsProps {}))
+
+                                    thizTop.Super("expandRecord", IscArray(record))
+                                    
                                     false
                             }.toFunc.opt
                             enableIf = {

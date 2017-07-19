@@ -88,7 +88,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var initialCriteria: ScOption[Criteria] = ScNone
 
     var getExpansionComponent: ScOption[Function1[ListGridRecord, Canvas]] = ScNone
-    var expandRecord: ScOption[ThisFunction2[classHandler, JSUndefined[Canvas], ListGridRecord, _]] = ScNone
+    var expandRecord: ScOption[ThisFunction1[classHandler, ListGridRecord, _]] = ScNone
     var expandRecords: ScOption[Function1[IscArray[ListGridRecord], _]] = ScNone
 
     var createRecordComponent: ScOption[ThisFunction2[classHandler, ListGridRecord, Int, JSUndefined[Canvas]]] = ScNone

@@ -88,6 +88,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 ).aggregate(dbObjects).settings(
 
     addCommandAlias("debug-restart", "; jetty:stop ; fastOptJS ; package ; jetty:start"),
+    addCommandAlias("reset", "; clean ; compile ; fastOptJS "),
 
     scalacOptions += "-P:scalajs:sjsDefinedByDefault",
     JRebelPlugin.jrebelSettings,
