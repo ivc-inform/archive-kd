@@ -80,3 +80,9 @@ CREATE TABLE
         BLOB_VALUE BLOB
     );
 
+@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
+@/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
+
+@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
+

@@ -5,12 +5,14 @@ import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
+import com.simplesys.SmartClient.DataBinding.props.{AdvancedCriteriaProps, CriterionProps}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.CanvasProps
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.JSUndefined
+import com.simplesys.System.{JSAny, JSUndefined}
+import com.simplesys.System.Types.OperatorId
 import com.simplesys.app.Attachments
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Cards
@@ -19,6 +21,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
+import ru.simplesys.defs.app.scala.container.arx.CardDataRecord
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     simpleTable = false.opt
@@ -45,7 +48,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     var expandAttahes: ScOption[ExpandAttahes] = ExpandAttahes.none.opt
 
     expandRecord = {
-        (thizTop: classHandler, record: ListGridRecord) ⇒
+        (thizTop: classHandler, record: CardDataRecord) ⇒
             MenuSS.create(
                 new MenuSSProps {
                     items = Seq(
@@ -58,7 +61,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
                                     thizTop.expandAttahes = ExpandAttahes.attachments
 
                                     thizTop.Super("expandRecord", IscArray(record))
-                                    
+
                                     false
                             }.toFunc.opt
                             enableIf = {
@@ -100,14 +103,26 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     }.toThisFunc.opt
 
     getExpansionComponent = {
-        (thiz: classHandler, record: ListGridRecord) ⇒
-          thiz.expandAttahes match {
-              case ExpandAttahes.attachments ⇒
-                  Attachments.create(new AttachmentsProps {
-
-                  })
-              case _ ⇒
-                  null
-          }
+        (thiz: classHandler, record: CardDataRecord) ⇒
+            thiz.expandAttahes match {
+                case ExpandAttahes.attachments ⇒
+                    Attachments.create(new AttachmentsProps {
+                        /*initialCriteria = AdvancedCriteria(
+                            new AdvancedCriteriaProps {
+                                operator = OperatorId.and.opt
+                                criteria = Seq(
+                                    Criterion(
+                                        new CriterionProps {
+                                            fieldName = scenarios_Scr_ScenarioJsonStorage_scenario_id_scenario_NameStrong.name.opt
+                                            operator = OperatorId.equals.opt
+                                            value = idScenario.asInstanceOf[JSAny].opt
+                                        })
+                                ).opt
+                            }
+                        )*/
+                    })
+                case _ ⇒
+                    null
+            }
     }.toThisFunc.opt
 }

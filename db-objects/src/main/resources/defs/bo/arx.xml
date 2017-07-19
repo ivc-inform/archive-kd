@@ -150,12 +150,11 @@
 			<classSimple autoTableMapping="true" caption="Типы извещений" name="docizvtype">
 				<attrs>
 					<attr caption="ID типа извещений" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
-					<attr caption="Код типа извещений" mandatory="true" name="vizvcode" type="sCode" useDbPrefix="false"></attr>
-					<attr caption="Наименование типа извещений" mandatory="true" name="vizvname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Код типа извещений" name="vizvcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Тип извещения" name="vizvname" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vizvcode</attrName>
 						<attrName>vizvname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
@@ -170,7 +169,7 @@
 			<classSimple autoTableMapping="true" caption="Статусы извещений" name="docizvstat">
 				<attrs>
 					<attr caption="ID статуса извещения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
-					<attr caption="Наименование статуса извещения" mandatory="true" name="vname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Статус извещения" mandatory="true" name="vname" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -208,7 +207,7 @@
 			<classSimple autoTableMapping="true" caption="Извещения" name="docizv">
 				<attrs>
 					<attr caption="ID извещения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
-					<attr caption="Код извещения" mandatory="false" name="vizcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Номер извещения" mandatory="false" name="vizcode" type="sCode" useDbPrefix="false"></attr>
 					<attr caption="Наименование извещения" mandatory="false" name="vizname" type="sCaption" useDbPrefix="false"></attr>
 					<attr caption="Описание извещения" mandatory="false" name="vizdescr" type="sDescription" useDbPrefix="false"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate" useDbPrefix="false"></attr>
@@ -258,11 +257,11 @@
 			<classSimple autoTableMapping="true" caption="Вложения" name="attach">
 				<attrs>
 					<attr caption="ID вложения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
-					<attr caption="Код вложения" mandatory="false" name="vatcode" type="sCode" useDbPrefix="false"></attr>
-					<attr caption="Файл вложения" mandatory="false" name="attfile" type="blob" useDbPrefix="false"></attr>
-					<attr caption="Дата записи" mandatory="false" name="ddatein" type="dDate" useDbPrefix="false"></attr>
-					<attr caption="Описание вложения" mandatory="false" name="vatdescr" type="sDescription" useDbPrefix="false"></attr>
-					<attr caption="Инв.номер ЭНЗ" mandatory="false" name="invnumenz" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Код ревизии" name="vatcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Файл вложения" name="attfile" type="blob" useDbPrefix="false"></attr>
+					<attr caption="Дата " name="ddatein" type="dDate" useDbPrefix="false"></attr>
+					<attr caption="Описание" name="vatdescr" type="sDescription" useDbPrefix="false"></attr>
+					<attr caption="Инв.номер ЭНЗ" name="invnumenz" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
