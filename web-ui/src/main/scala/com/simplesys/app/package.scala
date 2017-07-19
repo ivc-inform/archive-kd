@@ -3,8 +3,8 @@ package com.simplesys
 import com.simplesys.SmartClient.System.SCApply
 import com.simplesys.container.upload.UploadTestTab
 import com.simplesys.container.upload.props.UploadTestTabProps
-import com.simplesys.js.components.cards.Cards
-import com.simplesys.js.components.cards.props.CardsProps
+import com.simplesys.js.components.cards.{Attachments, Cards}
+import com.simplesys.js.components.cards.props.{AttachmentsProps, CardsProps}
 import com.simplesys.js.components.refs._
 import com.simplesys.js.components.refs.props._
 
@@ -94,27 +94,28 @@ package object app {
     val admin_UserGroup = "admin_UserGroup.png"
     val Actions_document_edit_icon = "Actions-document-edit-icon.png"
 
-//    object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
-//    object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
-//    object Abonents extends SCApply[Abonents, AbonentsProps]
-//    object AttachTypes extends SCApply[AttachTypes, AttachTypesProps]
-//    object AuStat extends SCApply[AuStat, AuStatProps]
-//    object DocTypes extends SCApply[DocTypes, DocTypesProps]
-//    object DocFormats extends SCApply[DocFormats, DocFormatsProps]
-//    object DocCats extends SCApply[DocCats, DocCatsProps]
-//    object DocItem extends SCApply[DocItem, DocItemProps]
-//    object DocIzvStat extends SCApply[DocIzvStat, DocIzvStatProps]
-//    object DocIzvType extends SCApply[DocIzvType, DocIzvTypeProps]
-//    object DocLiter extends SCApply[DocLiter, DocLiterProps]
-//    object GroupItem extends SCApply[GroupItem, GroupItemProps]
-//    object MType extends SCApply[MType, MTypeProps]
-//    object State extends SCApply[State, StateProps]
-//    object Status extends SCApply[Status, StatusProps]
-//    object StatVersion extends SCApply[StatVersion, StatVersionProps]
-//    object MVid extends SCApply[MVid, MVidProps]
+    //    object AbonentsOrg extends SCApply[AbonentsOrg, AbonentsOrgProps]
+    //    object AbonentsTypes extends SCApply[AbonentsTypes, AbonentsTypesProps]
+    //    object Abonents extends SCApply[Abonents, AbonentsProps]
+    //    object AttachTypes extends SCApply[AttachTypes, AttachTypesProps]
+    //    object AuStat extends SCApply[AuStat, AuStatProps]
+    //    object DocTypes extends SCApply[DocTypes, DocTypesProps]
+    //    object DocFormats extends SCApply[DocFormats, DocFormatsProps]
+    //    object DocCats extends SCApply[DocCats, DocCatsProps]
+    //    object DocItem extends SCApply[DocItem, DocItemProps]
+    //    object DocIzvStat extends SCApply[DocIzvStat, DocIzvStatProps]
+    //    object DocIzvType extends SCApply[DocIzvType, DocIzvTypeProps]
+    //    object DocLiter extends SCApply[DocLiter, DocLiterProps]
+    //    object GroupItem extends SCApply[GroupItem, GroupItemProps]
+    //    object MType extends SCApply[MType, MTypeProps]
+    //    object State extends SCApply[State, StateProps]
+    //    object Status extends SCApply[Status, StatusProps]
+    //    object StatVersion extends SCApply[StatVersion, StatVersionProps]
+    //    object MVid extends SCApply[MVid, MVidProps]
     object Cards extends SCApply[Cards, CardsProps]
-//    object Zapros extends SCApply[Zapros, ZaprosProps]
-//    object DocIzv extends SCApply[DocIzv, DocIzvProps]
+    object Attachments extends SCApply[Attachments, AttachmentsProps]
+    //    object Zapros extends SCApply[Zapros, ZaprosProps]
+    //    object DocIzv extends SCApply[DocIzv, DocIzvProps]
     object ArxUser extends SCApply[ArxUser, ArxUserProps]
     object UploadTestTab extends SCApply[UploadTestTab, UploadTestTabProps]
 }
