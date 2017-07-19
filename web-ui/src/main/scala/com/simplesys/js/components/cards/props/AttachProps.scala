@@ -10,7 +10,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
     type classHandler <: Attach
 
     simpleTable = false.opt
-    autoFetchData = false.opt
+    //autoFetchData = false.opt
 
     dataSource = DataSourcesJS.arx_attach_DS.opt
     identifier = "12DC1876-F489-3172-EE97-729FFB73B575".opt

@@ -20,7 +20,7 @@ import com.simplesys.js.components.cards.props.ExpandAttahes.ExpandAttahes
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS, arx_attach_idcard_NameStrong}
 import ru.simplesys.defs.app.scala.container.arx.CardDataRecord
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
@@ -107,19 +107,19 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
             thiz.expandAttahes match {
                 case ExpandAttahes.attachments ⇒
                     Attach.create(new AttachProps {
-                        /*initialCriteria = AdvancedCriteria(
+                        initialCriteria = AdvancedCriteria(
                             new AdvancedCriteriaProps {
                                 operator = OperatorId.and.opt
                                 criteria = Seq(
                                     Criterion(
                                         new CriterionProps {
-                                            fieldName = scenarios_Scr_ScenarioJsonStorage_scenario_id_scenario_NameStrong.name.opt
+                                            fieldName = arx_attach_idcard_NameStrong.name.opt
                                             operator = OperatorId.equals.opt
-                                            value = idScenario.asInstanceOf[JSAny].opt
+                                            value = record.id.getOrElse(0).asInstanceOf[JSAny].opt
                                         })
                                 ).opt
                             }
-                        )*/
+                        ).opt
                     })
                 case _ ⇒
                     null
