@@ -51,6 +51,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var showRowNumbers: ScOption[Boolean] = ScNone
     var autoSaveConfig: ScOption[Boolean] = ScNone
     var showAdvancedFilter: ScOption[Boolean] = ScNone
+    var canExpandRecords: ScOption[Boolean] = ScNone
     var emptyMessage: ScOption[String] = ScNone
     var wrapCells: ScOption[Boolean] = ScNone
     var autoFetchTextMatchStyle: ScOption[TextMatchStyle] = ScNone
@@ -86,6 +87,10 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var initialSort: ScOption[Seq[SortSpecifier]] = ScNone
     var initialCriteria: ScOption[Criteria] = ScNone
 
+    var getExpansionComponent: ScOption[Function1[ListGridRecord, Canvas]] = ScNone
+    var expandRecord: ScOption[ThisFunction2[classHandler, JSUndefined[Canvas], ListGridRecord, _]] = ScNone
+    var expandRecords: ScOption[Function1[IscArray[ListGridRecord], _]] = ScNone
+
     var createRecordComponent: ScOption[ThisFunction2[classHandler, ListGridRecord, Int, JSUndefined[Canvas]]] = ScNone
     var updateRecordComponent: ScOption[ThisFunction4[classHandler, ListGridRecord, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
 
@@ -117,8 +122,6 @@ class ListGridEditorProps extends GridEditorProps[ListGridFieldProps, ListGridRe
             }
 
             def getGriteria(): Criteria = if (criteria.isEmpty) thiz.getCriteria() else criteria.get
-
-            //isc debugTrap 0
 
             thiz.fetchData(
                 isc.addProperties(getGriteria(), timestamProp), {

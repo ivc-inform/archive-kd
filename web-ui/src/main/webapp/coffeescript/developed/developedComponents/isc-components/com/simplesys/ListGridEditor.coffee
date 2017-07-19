@@ -315,6 +315,8 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 			"dateFormatter"                   : @dateFormatter
 			"datetimeFormatter"               : @datetimeFormatter
 			"selectFirstRecordAfterFetch"     : @selectFirstRecordAfterFetch
+			"expandRecord"                    : @expandRecord
+			"expandRecords"                   : @expandRecords
 
 		@grid.rowClick = @rowClick if @rowClick? and isc.isA.Functtion @rowClick ## Убирать нельзя
 

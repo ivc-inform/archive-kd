@@ -1,7 +1,6 @@
 package com.simplesys.app.http
 
-import com.simplesys.SmartClient.App.formItems.props.LookupTreeGridEditorItemProps
-import com.simplesys.SmartClient.App.props.{EditorUserGroupsProps, EditorUsersProps, SettingsEditorProps}
+import com.simplesys.SmartClient.App.props.SettingsEditorProps
 import com.simplesys.SmartClient.App.{SettingsEditor, WebTabSetApp}
 import com.simplesys.SmartClient.Control.MenuSS
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
@@ -19,7 +18,7 @@ import com.simplesys.System._
 import com.simplesys.app
 import com.simplesys.app._
 import com.simplesys.function._
-import com.simplesys.js.components.cards.props.{CardsProps, DocIzvProps, ZaprosProps}
+import com.simplesys.js.components.cards.props.CardsProps
 import com.simplesys.js.components.refs.props._
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen
@@ -94,13 +93,13 @@ object EaKdProcWindowMain extends WebTabSetApp {
     }
 
     protected val managedUsersGroups: Seq[RibbonGroupSS] = Seq(
-        /*RibbonGroupSS.create(
+        RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
                 controls = Seq(
                     IconMenuButtonSS.create(
                         new IconMenuButtonSSProps {
-                            title = "Картотека".ellipsis.opt
+                            title = "Магнитотека".ellipsis.opt
                             icon = app.cards.opt
                             identifier = "33EE1839-8D4D-FFA0-E491-22B54F55772A".opt
                             menu = MenuSS.create(
@@ -109,7 +108,7 @@ object EaKdProcWindowMain extends WebTabSetApp {
                                         new MenuSSItemProps {
                                             name = "cards".opt
                                             icon = app.card.opt
-                                            title = "Картотека".ellipsis.opt
+                                            title = "Карточки МГТ".ellipsis.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
                                                     addTab(Cards.create(new CardsProps), item)
@@ -119,18 +118,30 @@ object EaKdProcWindowMain extends WebTabSetApp {
                                             name = "zapros".opt
                                             icon = app.zapros.opt
                                             title = "Запросы".ellipsis.opt
+                                            enabled = false.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(Zapros.create(new ZaprosProps), item)
+                                                //addTab(Zapros.create(new ZaprosProps), item)
                                             }.toFunc.opt
                                         },
                                         new MenuSSItemProps {
                                             name = "docizv".opt
                                             icon = app.docizv.opt
                                             title = "Извещения".ellipsis.opt
+                                            enabled = false.opt
                                             click = {
                                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                                    addTab(DocIzv.create(new DocIzvProps), item)
+                                                //addTab(DocIzv.create(new DocIzvProps), item)
+                                            }.toFunc.opt
+                                        },
+                                        new MenuSSItemProps {
+                                            name = "inventory".opt
+                                            icon = app.inventory.opt
+                                            title = "Описи".ellipsis.opt
+                                            enabled = false.opt
+                                            click = {
+                                                (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
+                                                //addTab(DocIzv.create(new DocIzvProps), item)
                                             }.toFunc.opt
                                         }
 
@@ -141,7 +152,7 @@ object EaKdProcWindowMain extends WebTabSetApp {
                     )
                 ).opt
             }
-        ),*/
+        ),
         /*RibbonGroupSS.create(
             new RibbonGroupSSProps {
                 title = "Пользователи".ellipsis.opt
@@ -365,25 +376,6 @@ object EaKdProcWindowMain extends WebTabSetApp {
                 ).opt
             }
         ),*/
-        RibbonGroupSS.create(
-            new RibbonGroupSSProps {
-                title = "Пользователи".ellipsis.opt
-                controls = Seq(
-                    IconMenuButtonSS.create(
-                        new IconMenuButtonSSProps {
-                            title = "Магнитотека".ellipsis.opt
-                            icon = app.recorder.opt
-                            identifier = "33EE1839-8D4D-F550-E491-22B54F2C772A".opt
-                            menu = MenuSS.create(
-                                new MenuSSProps {
-                                    items = Seq().opt
-                                }
-                            ).opt
-                        }
-                    )
-                ).opt
-            }
-        )
 
     ).map {
         item =>

@@ -9,7 +9,7 @@ import sbt._
 //lazy val scalaFmtPlugin = uri("../../sbt-plugins/scala-fmt")
 //lazy val transpileCoffeeScript = uri("../../sbt-plugins/transpile-coffeescript")
 
-lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*//* devPlugin */ /*transpileCoffeeScript*/).
+lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*/ /*devPlugin*/  /*transpileCoffeeScript*/).
   settings(inThisBuild(CommonSettings.defaultSettings ++ Seq(
       git.baseVersion := CommonSettings.settingValues.baseVersion
   ))).
