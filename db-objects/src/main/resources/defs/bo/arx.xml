@@ -6,8 +6,8 @@
 					<attr caption="ID вложения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
 					<attr caption="Код ревизии" name="vatcode" type="sCode" useDbPrefix="false"></attr>
 					<attr caption="Файл вложения" name="attfile" type="blob" useDbPrefix="false"></attr>
-          <attr caption="Выбирите файл" name="uploadBtn" type="sCaption" mandatory="true" calculated="true" formula='""'/>
-          <attr caption="Наименование файла" name="fileName" type="sCaption" mandatory="true" calculated="true" formula='""'/>
+          <attr caption="Выбирите файл" name="uploadBtn" type="sCaption" mandatory="true" calculated="true" formula='""' useDbPrefix="false"/>
+          <attr caption="Наименование файла" name="fileName" type="sCaption" mandatory="true" calculated="true" formula='""' useDbPrefix="false"/>
 					<attr caption="Дата " name="ddatein" type="dDate" useDbPrefix="false"></attr>
 					<attr caption="Описание" name="vatdescr" type="sDescription" useDbPrefix="false"></attr>
 					<attr caption="Инв.номер ЭНЗ" name="invnumenz" type="sCaption" useDbPrefix="false"></attr>

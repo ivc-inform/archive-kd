@@ -20,7 +20,7 @@ import com.simplesys.js.components.cards.props.ExpandAttahes.ExpandAttahes
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS, arx_attach_idcard_NameStrong}
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.CardDataRecord
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
@@ -113,7 +113,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
                                 criteria = Seq(
                                     Criterion(
                                         new CriterionProps {
-                                            fieldName = arx_attach_idcard_NameStrong.name.opt
+                                            fieldName = arx_attatch_idcard_NameStrong.name.opt
                                             operator = OperatorId.equals.opt
                                             value = record.id.getOrElse(0).asInstanceOf[JSAny].opt
                                         })

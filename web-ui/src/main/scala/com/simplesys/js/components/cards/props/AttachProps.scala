@@ -12,11 +12,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
     simpleTable = false.opt
     //autoFetchData = false.opt
 
-    dataSource = DataSourcesJS.arx_attach_DS.opt
+    dataSource = DataSourcesJS.arx_attatch_DS.opt
     identifier = "12DC1876-F489-3172-EE97-729FFB73B575".opt
 
-    editingFields = FormItemsJS.arx_attach_FRMITM.opt
-    fields = ListGridFiledsJS.arx_attach_FLDS.opt
+    editingFields = FormItemsJS.arx_attatch_FRMITM.opt
+    fields = ListGridFiledsJS.arx_attatch_FLDS.opt
 
     height = 250
 }
