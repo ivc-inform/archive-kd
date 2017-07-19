@@ -87,7 +87,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var initialSort: ScOption[Seq[SortSpecifier]] = ScNone
     var initialCriteria: ScOption[Criteria] = ScNone
 
-    var getExpansionComponent: ScOption[Function1[ListGridRecord, Canvas]] = ScNone
+    var getExpansionComponent: ScOption[ThisFunction1[classHandler, ListGridRecord, Canvas]] = ScNone
     var expandRecord: ScOption[ThisFunction1[classHandler, ListGridRecord, _]] = ScNone
     var expandRecords: ScOption[Function1[IscArray[ListGridRecord], _]] = ScNone
 

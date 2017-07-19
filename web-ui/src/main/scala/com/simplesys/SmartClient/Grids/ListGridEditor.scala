@@ -148,7 +148,6 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     val dateFormatter: DateDisplayFormat
     def refreshData(callBack: DSCallback = js.native): void
     var getExpansionComponent: Function1[ListGridRecord, Canvas]
-    def setGetExpansionComponent(func: Function1[ListGridRecord, Canvas]): void
 }
 
 @js.native

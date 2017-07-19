@@ -3,6 +3,7 @@ package com.simplesys.js.components.cards.props
 import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
 import com.simplesys.js.components.cards.Attachments
 import com.simplesys.option.ScOption._
+import com.simplesys.option.DoubleType._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
 class AttachmentsProps extends CommonListGridEditorComponentProps {
@@ -16,4 +17,6 @@ class AttachmentsProps extends CommonListGridEditorComponentProps {
 
     editingFields = FormItemsJS.arx_attach_FRMITM.opt
     fields = ListGridFiledsJS.arx_attach_FLDS.opt
+
+    height = 250
 }

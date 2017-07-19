@@ -85,7 +85,6 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"showRowNumbers"            : true
 	"autoSaveConfig"            : true
 	"getExpansionComponent"     : -> null
-	"setGetExpansionComponent"  : (func) -> @grid.getExpansionComponent = func; return
 	"removeSelectedData"        : (callback, requestProperties) ->
 		@grid.removeSelectedData callback, requestProperties
 		return

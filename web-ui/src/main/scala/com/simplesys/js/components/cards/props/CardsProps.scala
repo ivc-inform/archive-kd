@@ -14,7 +14,9 @@ import com.simplesys.System.JSUndefined
 import com.simplesys.app.Attachments
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Cards
+import com.simplesys.js.components.cards.props.ExpandAttahes.ExpandAttahes
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen.{DataSourcesJS, FormItemsJS, ListGridFiledsJS}
 
@@ -39,8 +41,11 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
 
     canExpandRecords = true.opt
+
+    var expandAttahes: ScOption[ExpandAttahes] = ExpandAttahes.none.opt
+
     expandRecord = {
-        (thiz: classHandler, record: ListGridRecord) ⇒
+        (thizTop: classHandler, record: ListGridRecord) ⇒
             MenuSS.create(
                 new MenuSSProps {
                     items = Seq(
@@ -50,9 +55,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
                             icon = Common.attach.opt
                             click = {
                                 (target: Canvas, item: MenuSSItem, menu: MenuSS, colNum: JSUndefined[Int]) =>
-                                    val thizTop = thiz
-
-                                    thizTop setGetExpansionComponent ((record: ListGridRecord) ⇒ Attachments.create(new AttachmentsProps {}))
+                                    thizTop.expandAttahes = ExpandAttahes.attachments
 
                                     thizTop.Super("expandRecord", IscArray(record))
                                     
@@ -94,5 +97,17 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
                     ).opt
                 }
             ).showContextMenu()
+    }.toThisFunc.opt
+
+    getExpansionComponent = {
+        (thiz: classHandler, record: ListGridRecord) ⇒
+          thiz.expandAttahes match {
+              case ExpandAttahes.attachments ⇒
+                  Attachments.create(new AttachmentsProps {
+
+                  })
+              case _ ⇒
+                  null
+          }
     }.toThisFunc.opt
 }
