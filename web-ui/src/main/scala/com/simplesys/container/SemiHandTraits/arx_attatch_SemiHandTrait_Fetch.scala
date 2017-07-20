@@ -2,26 +2,76 @@
 
 package ru.simplesys.defs.app.scala.container.arx
 
-import com.simplesys.app.SessionContextSupport
-import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.isc.dataBinging.DSRequestDyn
-import com.simplesys.common.Strings._
-import com.simplesys.jdbc.control.clob._
 import akka.actor.Actor
-import ru.simplesys.defs.bo.arx._
+import com.simplesys.app.SessionContextSupport
+import com.simplesys.common.Strings._
+import com.simplesys.isc.dataBinging.RPC.RPCResponseDyn
+import com.simplesys.isc.dataBinging.dataSource.RecordDyn
+import com.simplesys.isc.dataBinging.{DSRequestDyn, DSResponseDyn, DSResponseFailureExDyn}
+import com.simplesys.isc.grids.RecordsDynList
+import com.simplesys.isc.system.ServletActorDyn
+import com.simplesys.jdbc._
+import com.simplesys.jdbc.control.DSRequest
+import com.simplesys.jdbc.control.clob._
+import com.simplesys.servlet.GetData
+import com.simplesys.tuple.TupleSS14
+import org.joda.time.LocalDateTime
+import ru.simplesys.defs.bo.arx.AttatchDS
 
- 
+import scalaz.{Failure, Success}
+
+
 trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with ServletActorDyn {
-    
-/////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
-    val requestData = new DSRequestDyn(request)    
-    
-    logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
-    
-    val dataSet = AttatchDS(ds)    
-/////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
-    
-     def receiveBase: Option[Actor.Receive] = None    
-    
-     def wrapperBlobGetter(blob: Blob): String = blob.asString
+
+    /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////
+    val requestData = new DSRequestDyn(request)
+
+    logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
+
+    val dataSet = AttatchDS(ds)
+    /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////
+
+    def receiveBase: Option[Actor.Receive] = Some(
+        {
+            case GetData => {
+                logger debug s"request: ${newLine + requestData.toPrettyString}"
+
+                val data = requestData.Data
+                logger debug s"data: ${newLine + data.toPrettyString}"
+
+                val _data = RecordsDynList()
+                val qty: Int = requestData.EndRow.toInt - requestData.StartRow.toInt + 1
+
+                val select = dataSet.Fetch(dsRequest = DSRequest(sqlDialect = sessionContext.getSQLDialect, startRow = requestData.StartRow, endRow = requestData.EndRow, sortBy = requestData.SortBy, data = data, textMatchStyle = requestData.TextMatchStyle.toString))
+
+                Out(classDyn = select.result match {
+                    case Success(list) => {
+                        list foreach {
+                            case TupleSS14(ddateinAttatch: Array[LocalDateTime], idAttatch: Long, idattypesAttatch: Array[Long], idcardAttatch: Long, idizvAttatch: Array[Long], invnumenzAttatch: Array[String], vatcodeAttatch: Array[String], vatdescrAttatch: Array[String], idAttatchtypes: Long, vattypenameAttatchtypes: String, idCard: Long, vcrcodeCard: Array[String], idDocizv: Long, vizcodeDocizv: Array[String]) =>
+                                _data += RecordDyn("id" -> idAttatch, "vatcode" -> vatcodeAttatch, "ddatein" -> ddateinAttatch, "vatdescr" -> vatdescrAttatch, "invnumenz" -> invnumenzAttatch, "idizv" -> idizvAttatch, "idattypes" -> idattypesAttatch, "idcard" -> idcardAttatch, "vizcode" -> vizcodeDocizv, "vattypename" -> vattypenameAttatchtypes, "vcrcode" -> vcrcodeCard)
+                            case x =>
+                                new RuntimeException(s"mached as : $x")
+                        }
+
+                        logger debug s"_data: ${newLine + _data.toPrettyString}"
+
+
+                        new DSResponseDyn {
+                            Status = RPCResponseDyn.statusSuccess
+                            Data = _data
+                            TotalRows = requestData.StartRow.toInt + (if (qty == list.length) qty * 2 else list.length)
+                        }
+                    }
+                    case Failure(_) =>
+                        new DSResponseFailureExDyn(select)
+                })
+
+                selfStop()
+            }
+            case x =>
+                throw new RuntimeException(s"Bad branch $x")
+        }
+    )
+
+    def wrapperBlobGetter(blob: Blob): String = blob.asString
 }
