@@ -12,7 +12,7 @@ import com.simplesys.isc.grids.RecordsDynList
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
-import com.simplesys.jdbc.control.classBO.Where
+import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
@@ -68,7 +68,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                             idDocizv: Long,
                             vizcodeDocizv: Array[String]) ⇒
 
-                                dataSetDocIzvStat.selectPOne(where = Where(dataSetDocIzvStat.idDocizvstat === dataSet.idstsDocizv_Idizv)) result match {
+                                dataSetDocIzvStat.selectPList(where = Where(dataSetDocIzvStat.idDocizvstat === idDocizv)) result match {
                                     case Success(item) ⇒
                                         _data += RecordDyn(
                                             arx_attatch_id_NameStrong.name → idAttatch,
