@@ -16,7 +16,8 @@ import com.simplesys.jdbc.control.clob._
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
 import org.joda.time.LocalDateTime
-import ru.simplesys.defs.bo.arx.AttatchDS
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
+import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvstatDS, DocizvtypeDS}
 
 import scalaz.{Failure, Success}
 
@@ -30,6 +31,9 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
 
     val dataSet = AttatchDS(ds)
     /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////
+
+    val dataSetDocIzvStat = DocizvstatDS(ds)
+    val dataSetDocIzvType = DocizvtypeDS(ds)
 
     def receiveBase: Option[Actor.Receive] = Some(
         {
@@ -47,8 +51,35 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                 Out(classDyn = select.result match {
                     case Success(list) => {
                         list foreach {
-                            case TupleSS14(ddateinAttatch: Array[LocalDateTime], idAttatch: Long, idattypesAttatch: Array[Long], idcardAttatch: Long, idizvAttatch: Array[Long], invnumenzAttatch: Array[String], vatcodeAttatch: Array[String], vatdescrAttatch: Array[String], idAttatchtypes: Long, vattypenameAttatchtypes: String, idCard: Long, vcrcodeCard: Array[String], idDocizv: Long, vizcodeDocizv: Array[String]) =>
-                                _data += RecordDyn("id" -> idAttatch, "vatcode" -> vatcodeAttatch, "ddatein" -> ddateinAttatch, "vatdescr" -> vatdescrAttatch, "invnumenz" -> invnumenzAttatch, "idizv" -> idizvAttatch, "idattypes" -> idattypesAttatch, "idcard" -> idcardAttatch, "vizcode" -> vizcodeDocizv, "vattypename" -> vattypenameAttatchtypes, "vcrcode" -> vcrcodeCard)
+                            case TupleSS14(
+                            ddateinAttatch: Array[LocalDateTime],
+                            idAttatch: Long,
+                            idattypesAttatch: Array[Long],
+                            idcardAttatch: Long,
+                            idizvAttatch: Array[Long],
+                            invnumenzAttatch: Array[String],
+                            vatcodeAttatch: Array[String],
+                            vatdescrAttatch: Array[String],
+                            idAttatchtypes: Long,
+                            vattypenameAttatchtypes: String,
+                            idCard: Long,
+                            vcrcodeCard: Array[String],
+                            idDocizv: Long,
+                            vizcodeDocizv: Array[String]) ⇒
+
+                                _data += RecordDyn(
+                                    arx_attatch_id_NameStrong.name -> idAttatch,
+                                    arx_attatch_vatcode_NameStrong.name -> vatcodeAttatch,
+                                    arx_attatch_ddatein_NameStrong.name -> ddateinAttatch,
+                                    arx_attatch_vatdescr_NameStrong.name -> vatdescrAttatch,
+                                    arx_attatch_invnumenz_NameStrong.name -> invnumenzAttatch,
+                                    arx_attatch_idizv_NameStrong.name -> idizvAttatch,
+                                    arx_attatch_idattypes_NameStrong.name -> idattypesAttatch,
+                                    arx_attatch_idcard_NameStrong.name -> idcardAttatch,
+                                    arx_attatch_vizcode_NameStrong.name -> vizcodeDocizv,
+                                    arx_attatch_vattypename_NameStrong.name -> vattypenameAttatchtypes,
+                                    arx_attatch_vcrcode_NameStrong.name -> vcrcodeCard
+                                )
                             case x =>
                                 new RuntimeException(s"mached as : $x")
                         }
