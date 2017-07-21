@@ -104,4 +104,4 @@ drop user ORDDATA cascade;
 drop user ORDPLUGINS cascade;
 drop user SI_INFORMTN_SCHEMA cascade;
 
-
+http://idea.imsxm.com/
