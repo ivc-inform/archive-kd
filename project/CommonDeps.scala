@@ -115,7 +115,7 @@ object CommonDeps {
     val jettyRuner = "org.eclipse.jetty" % "jetty-runner" % versions.jettyVersion
 
     val scalaTest = "org.scalatest" %% "scalatest" % versions.scalaTestVersion
-    val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
+    //val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
 
     val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
     val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion

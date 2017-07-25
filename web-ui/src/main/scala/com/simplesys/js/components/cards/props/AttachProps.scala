@@ -21,6 +21,13 @@ import com.simplesys.function._
 
 import scala.scalajs.js.UndefOr._
 
+trait AttatchDataRecordExt extends AttatchDataRecord {
+  val fileName: JSUndefined[String]
+  val uploadFile: JSUndefined[String]
+  val vname: JSUndefined[String]
+  val viztname: JSUndefined[String]
+}
+
 class AttachProps extends CommonListGridEditorComponentProps {
     type classHandler <: Attach
 
@@ -74,14 +81,14 @@ class AttachProps extends CommonListGridEditorComponentProps {
     height = 250
 
     createRecordComponent = {
-        (thiz: classHandler, record: AttatchDataRecord, colNum: Int) ⇒
+        (thiz: classHandler, record: AttatchDataRecordExt, colNum: Int) ⇒
             thiz.getFieldName(colNum) match {
                 case fileNameField.name ⇒
                     any2undefOrA(Progressbar.create(
                         new ProgressbarProps {
                             height = 20
                             width = "100%"
-                            title = "Unknown".opt
+                            title = record.fileName.opt
                             showTitle = true.opt
                         }
                     ))

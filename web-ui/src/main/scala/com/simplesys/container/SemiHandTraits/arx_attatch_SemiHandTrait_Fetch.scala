@@ -2,6 +2,8 @@
 
 package ru.simplesys.defs.app.scala.container.arx
 
+import java.sql.Connection
+
 import akka.actor.Actor
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings._
@@ -17,12 +19,12 @@ import com.simplesys.jdbc.control.clob._
 import com.simplesys.json.JsonString
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
+import oracle.sql._
 import org.joda.time.LocalDateTime
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
-import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS, DocizvstatDS, DocizvtypeDS}
+import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS}
 
 import scalaz.{Failure, Success}
-
 
 trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with ServletActorDyn {
 
@@ -67,6 +69,8 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                             vcrcodeCard: Array[String],
                             idDocizv: Long,
                             vizcodeDocizv: Array[String]) ⇒
+
+                                ds
 
                                 val record = RecordDyn(
                                     arx_attatch_id_NameStrong.name → idAttatch,
