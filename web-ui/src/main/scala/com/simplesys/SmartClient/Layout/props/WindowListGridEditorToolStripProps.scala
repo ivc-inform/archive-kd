@@ -119,7 +119,8 @@ class WindowListGridEditorToolStripProps extends ToolStripProps {
                         owner.hasChanges() && !owner.hasErrors()
                 }.toThisFunc.opt
             }
-        ), ToolStripButton.create(
+        ),
+        ToolStripButton.create(
             new ToolStripButtonProps {
                 icon = Common.cancel.opt
                 prompt = "Отменить изменения".opt

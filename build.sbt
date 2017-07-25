@@ -88,6 +88,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 ).aggregate(dbObjects).settings(
 
     addCommandAlias("debug-restart", "; jetty:stop ; fastOptJS ; package ; jetty:start"),
+    addCommandAlias("reset", "; clean ; compile ; fastOptJS "),
 
     scalacOptions += "-P:scalajs:sjsDefinedByDefault",
     JRebelPlugin.jrebelSettings,
@@ -186,7 +187,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
           currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
           currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
-          //merge in MergeWebappConfig <<= (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets),
           merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
 
           containerPort := 8083,

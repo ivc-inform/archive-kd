@@ -22,7 +22,7 @@ import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPool
 import com.simplesys.System.Types.SelectionAppearance.SelectionAppearance
 import com.simplesys.System.Types.SelectionStyle._
 import com.simplesys.System.Types.TextMatchStyle.TextMatchStyle
-import com.simplesys.System.Types.{Criteria, DateDisplayFormat, ExportFormat}
+import com.simplesys.System.Types.{Criteria, DateDisplayFormat, ExportFormat, Record}
 import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.function._
 import com.simplesys.option.ScOption._
@@ -51,6 +51,7 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var showRowNumbers: ScOption[Boolean] = ScNone
     var autoSaveConfig: ScOption[Boolean] = ScNone
     var showAdvancedFilter: ScOption[Boolean] = ScNone
+    var canExpandRecords: ScOption[Boolean] = ScNone
     var emptyMessage: ScOption[String] = ScNone
     var wrapCells: ScOption[Boolean] = ScNone
     var autoFetchTextMatchStyle: ScOption[TextMatchStyle] = ScNone
@@ -74,8 +75,8 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var canDragRecordsOut: ScOption[Boolean] = ScNone
     var canReorderRecords: ScOption[Boolean] = ScNone
     var dragDataAction: ScOption[DragDataAction] = ScNone
-    var startEditingNewInForm: ScOption[Function4[JSObject, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
-    var startEditingInForm: ScOption[Function4[JSObject, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
+    var startEditingNewInForm: ScOption[Function4[_ <: Record, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
+    var startEditingInForm: ScOption[Function4[_ <: Record, Seq[FormItem], DSCallback, DSRequest, _]] = ScNone
     var newRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editRequestProperties: ScOption[ThisFunction0[classHandler, DSRequest]] = ScNone
     var editingFields: ScOption[Seq[FormItem]] = ScNone
@@ -86,8 +87,12 @@ class GridEditorProps[T <: ListGridFieldProps, R <: ListGridRecordProps] extends
     var initialSort: ScOption[Seq[SortSpecifier]] = ScNone
     var initialCriteria: ScOption[Criteria] = ScNone
 
-    var createRecordComponent: ScOption[ThisFunction2[classHandler, ListGridRecord, Int, JSUndefined[Canvas]]] = ScNone
-    var updateRecordComponent: ScOption[ThisFunction4[classHandler, ListGridRecord, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
+    var getExpansionComponent: ScOption[ThisFunction1[classHandler, _ <: Record, Canvas]] = ScNone
+    var expandRecord: ScOption[ThisFunction1[classHandler, _ <: Record, _]] = ScNone
+    var expandRecords: ScOption[Function1[IscArray[_ <: Record], _]] = ScNone
+
+    var createRecordComponent: ScOption[ThisFunction2[classHandler, _ <: Record, Int, JSUndefined[Canvas]]] = ScNone
+    var updateRecordComponent: ScOption[ThisFunction4[classHandler, _ <: Record, Int, Canvas, Boolean, JSUndefined[Canvas]]] = ScNone
 
     var selectFirstRecordAfterFetch: ScOption[Boolean] = ScNone
     var replacingFields: ScOption[Seq[ListGridFieldProps]] = ScNone

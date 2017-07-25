@@ -18,7 +18,6 @@ import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
-import java.util.UUID
 
 import scala.collection.JavaConverters._
 import scala.util.{Failure, Success, Try}

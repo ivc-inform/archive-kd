@@ -19,7 +19,7 @@ class ArxUserProps extends CommonListGridEditorComponentProps {
     identifier = "15EC1A89-2233-128F-1186-372AF0FD1DC2".opt
     simpleTable = true.opt
 
-    dataSource = DataSourcesJS.arx_User_DS.opt
+    dataSource = DataSourcesJS.arx_user_DS.opt
 
     newRequestProperties = {
         (thiz: classHandler) =>

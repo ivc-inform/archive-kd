@@ -1,13 +1,11 @@
 package com.simplesys.SmartClient.App.props
 
 import com.simplesys.SmartClient.App.CommonListGridEditorComponent
-import com.simplesys.SmartClient.App.props.MenuItemType.MenuItemType
 import com.simplesys.SmartClient.Control.menu.MenuSSItem
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps}
 import com.simplesys.SmartClient.Grids.props.ListGridEditorProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.TextMatchStyle._
-import com.simplesys.System.Types.{FetchMode, SelectionStyle, TextMatchStyle}
+import com.simplesys.System.Types.{SelectionStyle, TextMatchStyle}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
@@ -35,7 +33,7 @@ trait CommonListGridEditorComponentProps extends ListGridEditorProps with Initia
     autoFetchTextMatchStyle = TextMatchStyle.substring.opt
 
     var customMenu: ScOption[Seq[MenuSSItem]] = ScNone
-    var itemsType: ScOption[Seq[MenuItemType]] = Seq(MenuItemType.miCopy, MenuItemType.miDelete, MenuItemType.miEdit, MenuItemType.miRefresh).opt
+    var itemsType: ScOption[Seq[MenuItemType]] = Seq(miNew(), miCopy(), miDelete(), miEdit(), miRefresh()).opt
 
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
