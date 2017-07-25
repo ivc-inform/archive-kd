@@ -1,6 +1,6 @@
 package com.simplesys.js.components.cards.props
 
-import com.simplesys.SmartClient.App.props.CommonListGridEditorComponentProps
+import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.System.Types.ListGridFieldType
 import com.simplesys.js.components.cards.Attach
@@ -15,6 +15,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     simpleTable = false.opt
     //autoFetchData = false.opt
+
+    itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
 
     dataSource = DataSourcesJS.arx_attatch_DS.opt
     identifier = "12DC1876-F489-3172-EE97-729FFB73B575".opt

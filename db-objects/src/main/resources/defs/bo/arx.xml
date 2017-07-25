@@ -138,7 +138,7 @@
 			<classSimple autoTableMapping="true" caption="Статусы извещений" name="docizvstat">
 				<attrs>
 					<attr caption="ID статуса извещения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
-					<attr caption="Статус извещения" mandatory="true" name="vname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Статус извещения" name="vname" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
@@ -207,9 +207,9 @@
 			<classSimple autoTableMapping="true" caption="Описи" name="docizvop">
 				<attrs>
 					<attr caption="ID описи" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
-					<attr caption="Код описи" mandatory="true" name="vopcode" type="sCode" useDbPrefix="false"></attr>
-					<attr caption="Наименование описи" mandatory="true" name="vopname" type="sCaption" useDbPrefix="false"></attr>
-					<attr caption="Дата" mandatory="false" name="ddate" type="dDate" useDbPrefix="false"></attr>
+					<attr caption="Код описи" name="vopcode" type="sCode" useDbPrefix="false"></attr>
+					<attr caption="Наименование описи" name="vopname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Дата" name="ddate" type="dDate" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

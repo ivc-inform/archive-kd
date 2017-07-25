@@ -14,6 +14,7 @@ import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
+import com.simplesys.json.JsonString
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
 import org.joda.time.LocalDateTime
@@ -41,7 +42,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                 logger debug s"request: ${newLine + requestData.toPrettyString}"
 
                 val data = requestData.Data
-                logger debug s"data: ${newLine + data.toPrettyString}"
+                logger debug s"requestData.Data: ${newLine + data.toPrettyString}"
 
                 val _data = RecordsDynList()
                 val qty: Int = requestData.EndRow.toInt - requestData.StartRow.toInt + 1
@@ -67,18 +68,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                             idDocizv: Long,
                             vizcodeDocizv: Array[String]) ⇒
 
-                                dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)).result match {
-                                    case Success(list) ⇒
-                                        list.foreach {
-                                            item ⇒
-                                                logger debug s"idstsDocizv: ${item}"
-                                        }
-                                    case Failure(e) ⇒
-                                        logger error e.getMessage
-
-                                }
-
-                                _data += RecordDyn(
+                                val record = RecordDyn(
                                     arx_attatch_id_NameStrong.name → idAttatch,
                                     arx_attatch_vatcode_NameStrong.name → vatcodeAttatch,
                                     arx_attatch_ddatein_NameStrong.name → ddateinAttatch,
@@ -89,24 +79,28 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                     arx_attatch_idcard_NameStrong.name → idcardAttatch,
                                     arx_attatch_vizcode_NameStrong.name → vizcodeDocizv,
                                     arx_attatch_vattypename_NameStrong.name → vattypenameAttatchtypes,
-                                    arx_attatch_vcrcode_NameStrong.name → vcrcodeCard /*,
-                                                                            arx_docizvstat_vname_NameStrong.name → vnameDocizvstat*/
+                                    arx_attatch_vcrcode_NameStrong.name → vcrcodeCard
                                 )
 
-                                logger debug s"idDocizv: $idDocizv"
-                            /*dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)) result match {
-                                case Success(item) ⇒
+                                dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)).result match {
+                                    case Success(list) ⇒
+                                        list.foreach {
+                                            item ⇒
+                                                record += (arx_docizvstat_vname_NameStrong.name → JsonString(item.vnameDocizvstat_Idsts.headOption.getOrElse("")))
+                                                record += (arx_docizvtype_viztname_NameStrong.name → JsonString(item.viztnameDocizvtype_Idtypiz.headOption.getOrElse("")))
+                                        }
+                                    case Failure(e) ⇒
+                                        logger error e.getStackTraceString
+                                }
+
+                                _data += record
 
 
-                                case x =>
-                                    new RuntimeException(s"mached as : $x")
-                            }*/
                             case x =>
                                 new RuntimeException(s"mached as : $x")
                         }
 
                         logger debug s"_data: ${newLine + _data.toPrettyString}"
-
 
                         new DSResponseDyn {
                             Status = RPCResponseDyn.statusSuccess
