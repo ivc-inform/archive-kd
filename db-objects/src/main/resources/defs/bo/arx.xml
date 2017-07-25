@@ -158,7 +158,7 @@
 					<attr caption="ID извещения" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
 					<attr caption="Номер извещения" mandatory="false" name="vizcode" type="sCode" useDbPrefix="false"></attr>
 					<attr caption="Наименование извещения" mandatory="false" name="vizname" type="sCaption" useDbPrefix="false"></attr>
-					<attr caption="Описание извещения" mandatory="false" name="vizdescr" type="sDescription" useDbPrefix="false"></attr>
+					<attr caption="Описание извещения" mandatory="false" name="vizdesc" type="sDescription" useDbPrefix="false"></attr>
 					<attr caption="Дата записи" mandatory="false" name="tdatein" type="dDate" useDbPrefix="false"></attr>
 					<attr caption="Дата начала действия" mandatory="false" name="dateon" type="dDate" useDbPrefix="false"></attr>
 					<attr caption="Дата конца действия" mandatory="false" name="dateoff" type="dDate" useDbPrefix="false"></attr>
