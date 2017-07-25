@@ -1,15 +1,13 @@
 package com.simplesys.SmartClient.Forms.formsItems.props
 
 import com.simplesys.SmartClient.Control.props.ProgressbarProps
-import com.simplesys.SmartClient.Forms.{DynamicForm, DynamicFormSS}
+import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.{CanvasItem, ProgressbarItem}
-import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.FormItemComponentType
-import com.simplesys.System._
 import com.simplesys.function._
-import com.simplesys.option.ScOption._
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption._
 import com.simplesys.option.{IntString, ScNone, ScOption}
 
 import scala.scalajs.js._
