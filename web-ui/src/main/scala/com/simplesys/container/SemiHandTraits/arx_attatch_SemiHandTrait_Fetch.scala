@@ -34,8 +34,6 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
     /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////
 
     val dataSetDocIzv = DocizvDS(ds)
-    val dataSetDocIzvStat = DocizvstatDS(ds)
-    val dataSetDocIzvType = DocizvtypeDS(ds)
 
     def receiveBase: Option[Actor.Receive] = Some(
         {
@@ -69,6 +67,17 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                             idDocizv: Long,
                             vizcodeDocizv: Array[String]) ⇒
 
+                                dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)).result match {
+                                    case Success(list) ⇒
+                                        list.foreach {
+                                            item ⇒
+                                                logger debug s"idstsDocizv: ${item}"
+                                        }
+                                    case Failure(e) ⇒
+                                        logger error e.getMessage
+
+                                }
+
                                 _data += RecordDyn(
                                     arx_attatch_id_NameStrong.name → idAttatch,
                                     arx_attatch_vatcode_NameStrong.name → vatcodeAttatch,
@@ -85,13 +94,13 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                 )
 
                                 logger debug s"idDocizv: $idDocizv"
-                                /*dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)) result match {
-                                    case Success(item) ⇒
+                            /*dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)) result match {
+                                case Success(item) ⇒
 
 
-                                    case x =>
-                                        new RuntimeException(s"mached as : $x")
-                                }*/
+                                case x =>
+                                    new RuntimeException(s"mached as : $x")
+                            }*/
                             case x =>
                                 new RuntimeException(s"mached as : $x")
                         }

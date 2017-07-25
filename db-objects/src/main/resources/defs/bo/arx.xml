@@ -189,11 +189,11 @@
 				<attrs>
 					<attr caption="ID типа извещений" genBySeq="true" hidden="true" mandatory="true" name="id" type="id" useDbPrefix="false"></attr>
 					<attr caption="Код типа извещений" name="vizvcode" type="sCode" useDbPrefix="false"></attr>
-					<attr caption="Тип извещения" name="vizvname" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Тип извещения" name="viztname" type="sCaption" useDbPrefix="false"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>
-						<attrName>vizvname</attrName>
+						<attrName>viztname</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleListGrid"></uiSettings>
 				</defaults>
