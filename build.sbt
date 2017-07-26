@@ -40,6 +40,7 @@ lazy val root = (project in file(".")).
 lazy val common = Project(id = "common", base = file("common")).settings(
     libraryDependencies ++= Seq(
         CommonDeps.commonsIO,
+        //CommonDeps.jdbcOracle12Driver,
         CommonDeps.scalaTest % Test
     )
 ).settings(CommonSettings.defaultProjectSettings)
