@@ -1,13 +1,10 @@
 package test
 
-import java.io._
-
-import com.simplesys.util.DT
-import oracle.jdbc.OraclePreparedStatement
+import com.simplesys.container.{Helper, OrdDoc}
+import oracle.jdbc.OracleResultSet
 import oracle.jdbc.driver.OracleConnection
 import oracle.jdbc.pool.OracleDataSource
-import org.apache.commons.io._
-import org.joda.time.DateTime
+import oracle.sql.NUMBER
 
 object TestApp2 {
     def main(args: Array[String]): Unit = {
@@ -30,39 +27,59 @@ object TestApp2 {
         println(s"JDBC driver version is ${meta.getDriverVersion}")
 
         val startTime = System.currentTimeMillis()
-//
-//        //val fileName = "Red_Hot.mkv"
-//        //val fileName = "Кейт и Лео.avi"
-//        //val fileName = "SoapUI-x64-5.3.0.sh"
-//        val fileName = "files/Вий.avi"
-//        //val fileName = "Chelovek_bez_pasporta.avi"
-//        //val fileName = "build.sbt"
-//
-//        println(s"Start at ${DateTime.now()} file: $fileName")
-//
-//        val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
-//        //val pstmt = conn prepareStatement sql
-//        val pstmt = (conn prepareStatement sql).asInstanceOf[OraclePreparedStatement]
-//
-//        pstmt.setLong(1, 1L)
-//        pstmt.setString(2, fileName)
-//
-//        val file = new File(fileName)
-//        val inputStream = new FileInputStream(file)
-//
-//        pstmt.setBlob(3, inputStream, file.length())
-//        //pstmt.setBinaryStream(3, )
-//
-//        pstmt.execute()
-//        println(s"pstmt.executeUpdate")
-//
-//        conn.commit()
-//        println(s"con.commit")
-//
-//        val elapsedTime = System.currentTimeMillis() - startTime
-//
-//        println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
-//        println("Test executed")
-//        println(s"Stop at ${DateTime.now()}")
+
+        val stmt = conn.createStatement
+
+        val ors = stmt.executeQuery("select ATTFILE from ARX_ATTATCH").asInstanceOf[OracleResultSet]
+        val ordDoc = if (ors.next())
+            Some(ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc])
+        else
+            None
+
+
+        var nextExists = ors.next()
+        
+        while(nextExists){
+          val ordDoc = ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc]
+            println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format.getString}, mimeType: ${ordDoc.mimeType.getString}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}, comments: ${Helper.clobToString(ordDoc.comments)}")
+            nextExists = ors.next()
+
+        }
+
+
+        //
+        //        //val fileName = "Red_Hot.mkv"
+        //        //val fileName = "Кейт и Лео.avi"
+        //        //val fileName = "SoapUI-x64-5.3.0.sh"
+        //        val fileName = "files/Вий.avi"
+        //        //val fileName = "Chelovek_bez_pasporta.avi"
+        //        //val fileName = "build.sbt"
+        //
+        //        println(s"Start at ${DateTime.now()} file: $fileName")
+        //
+        //        val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
+        //        //val pstmt = conn prepareStatement sql
+        //        val pstmt = (conn prepareStatement sql).asInstanceOf[OraclePreparedStatement]
+        //
+        //        pstmt.setLong(1, 1L)
+        //        pstmt.setString(2, fileName)
+        //
+        //        val file = new File(fileName)
+        //        val inputStream = new FileInputStream(file)
+        //
+        //        pstmt.setBlob(3, inputStream, file.length())
+        //        //pstmt.setBinaryStream(3, )
+        //
+        //        pstmt.execute()
+        //        println(s"pstmt.executeUpdate")
+        //
+        //        conn.commit()
+        //        println(s"con.commit")
+        //
+        //        val elapsedTime = System.currentTimeMillis() - startTime
+        //
+        //        println(s"elapsedTime for $fileName : ${DT(elapsedTime).toString}")
+        //        println("Test executed")
+        //        println(s"Stop at ${DateTime.now()}")
     }
 }
