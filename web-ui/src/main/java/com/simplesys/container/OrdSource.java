@@ -17,6 +17,13 @@ public class OrdSource implements OracleData, OracleDataFactory {
   DATE updateTime;
   NUMBER local;
 
+  static final OrdSource _ordSource = new OrdSource();
+
+  public static OracleDataFactory getOracleDataFactory()
+    {
+      return _ordSource;
+    }
+
   public OrdSource() {
   }
 

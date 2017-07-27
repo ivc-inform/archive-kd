@@ -19,6 +19,12 @@ public class OrdDoc implements OracleData, OracleDataFactory {
   NUMBER contentLength;
   CLOB comments;
 
+  static final OrdDoc _ordDoc = new OrdDoc();
+
+  public static OracleDataFactory getOracleDataFactory() {
+    return _ordDoc;
+  }
+
   public OrdDoc() {
   }
 
