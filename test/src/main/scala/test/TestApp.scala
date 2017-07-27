@@ -7,6 +7,9 @@ import oracle.jdbc.pool.OracleDataSource
 import oracle.sql.NUMBER
 
 object TestApp2 {
+
+    
+
     def main(args: Array[String]): Unit = {
         val ds = new OracleDataSource
 
@@ -43,7 +46,7 @@ object TestApp2 {
         while (nextExists) {
             val ordDoc = Option(ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc])
             //println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format.getString}, mimeType: ${ordDoc.mimeType.getString}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}, comments: ${Helper.clobToString(ordDoc.comments)}")
-            ordDoc.foreach{ordDoc ⇒ println(s"#$i ordDoc: {source: ${ordDoc.source}"); i += 1}
+            ordDoc.foreach{ordDoc ⇒ println(s"#$i ordDoc: {source: ${ordDoc.source}, format: ${Helper.asString(ordDoc.format)}, mimeType: ${Helper.asString(ordDoc.mimeType)}"); i += 1}
             nextExists = ors.next()
         }
 

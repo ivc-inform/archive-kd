@@ -1,5 +1,6 @@
 package com.simplesys.container;
 
+import oracle.sql.CHAR;
 import oracle.sql.CLOB;
 
 import java.io.BufferedReader;
@@ -25,5 +26,12 @@ public class Helper {
       // handle this exception
     }
     return sb.toString();
+  }
+
+  public static String asString(CHAR ch) throws SQLException {
+    if (ch == null)
+      return "";
+    else
+      return ch.getString();
   }
 }
