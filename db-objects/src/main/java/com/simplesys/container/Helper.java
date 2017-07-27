@@ -31,14 +31,14 @@ public class Helper {
 
   public static String asString(CHAR ch) throws SQLException {
     if (ch == null)
-      return "null";
+      return null;
     else
       return ch.getString();
   }
 
   public static BigDecimal asBigDecimal(NUMBER n) throws SQLException {
     if (n == null)
-      return new BigDecimal("-99999999999999999999999999999999999999999999999999");
+      return null;
     else
       return NUMBER.toBigDecimal(n.toBytes());
   }

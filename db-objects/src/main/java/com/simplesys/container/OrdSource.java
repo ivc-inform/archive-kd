@@ -30,7 +30,7 @@ public class OrdSource implements OracleData, OracleDataFactory {
   @Override
   public String toString() {
     try {
-      return "localData: BLOB" + " ,srcType: " + srcType + " ,srcLocation: " + srcLocation + " ,srcName: " + srcName + " ,updateTime: " + updateTime.toString() + " ,local: " + Helper.asBigDecimal(local).toString();
+      return "localData: BLOB" + " ,srcType: " + srcType + " ,srcLocation: " + srcLocation + " ,srcName: " + srcName + " ,updateTime: " + updateTime.toString() + " ,local: " + Helper.asBigDecimal(local);
     } catch (SQLException e) {
       return e.getMessage();
     }
