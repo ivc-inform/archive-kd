@@ -73,6 +73,7 @@ object CommonDeps {
         val commonsFileuploadVersion = "1.3.3"
         val commonsIOVersion = "2.5"
         val scalaURIVersion = "0.4.16"
+        val slickVersion = "3.2.1"
     }
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
@@ -126,6 +127,7 @@ object CommonDeps {
     val commonsIO = "commons-io" % "commons-io" % versions.commonsIOVersion
 
     val scalaURI = "com.netaporter" %% "scala-uri" % versions.scalaURIVersion
+    val slick = "com.typesafe.slick" %% "slick" % versions.slickVersion
 
 }
 

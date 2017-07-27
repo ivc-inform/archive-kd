@@ -45,13 +45,13 @@ lazy val common = Project(id = "common", base = file("common")).settings(
     )
 ).settings(CommonSettings.defaultProjectSettings)
 
-lazy val testModule = Project(id = "test", base = file("test")).
-  enablePlugins(ScalaJSPlugin).
+lazy val testModule = Project(id = "test", base = file("test")). 
   dependsOn(dbObjects).
   settings(
       libraryDependencies ++= Seq(
           CommonDeps.ssysJDBCWrapper,
           CommonDeps.ssysBoneCPWrapper,
+          CommonDeps.slick,
           CommonDeps.scalaTest % Test
       )
   ).settings(CommonSettings.defaultProjectSettings)
