@@ -38,11 +38,13 @@ object TestApp2 {
         var i = 1
 
         while (nextExists) {
-            val ordDoc = Option(ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc])
+            val ordDoc = Option(ors.getObject(1, OrdDoc.getOracleDataFactory()))
             ordDoc match {
-                case Some(ordDoc) ⇒
+                case Some(ordDoc: OrdDoc) ⇒
                     println(s"#$i ordDoc: {source: ${ordDoc.getSource}, format: ${ordDoc.getFormat}, mimeType: ${ordDoc.getMimeType}, contentLength: ${ordDoc.getContentLength}, comments: ${ordDoc.getComments}")
                 case None ⇒
+                    println(s"#$i ordDoc: null")
+                case _ ⇒
                     println(s"#$i ordDoc: null")
             }
             nextExists = ors.next()
