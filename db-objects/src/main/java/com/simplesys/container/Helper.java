@@ -12,8 +12,7 @@ public class Helper {
   public static String clobToString(CLOB data) {
     StringBuilder sb = new StringBuilder();
     try {
-      Reader reader = data.getCharacterStream();
-      BufferedReader br = new BufferedReader(reader);
+      BufferedReader br = new BufferedReader(data.getCharacterStream());
 
       String line;
       while (null != (line = br.readLine())) {

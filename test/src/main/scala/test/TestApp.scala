@@ -8,7 +8,6 @@ import oracle.sql.NUMBER
 
 object TestApp2 {
 
-    
 
     def main(args: Array[String]): Unit = {
         val ds = new OracleDataSource
@@ -39,15 +38,19 @@ object TestApp2 {
         else
             None
 
-
         var nextExists = ors.next()
         var i = 1
 
         while (nextExists) {
             val ordDoc = Option(ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc])
-            //println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format.getString}, mimeType: ${ordDoc.mimeType.getString}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}, comments: ${Helper.clobToString(ordDoc.comments)}")
-            ordDoc.foreach{ordDoc ⇒ println(s"#$i ordDoc: {source: ${ordDoc.source}, format: ${Helper.asString(ordDoc.format)}, mimeType: ${Helper.asString(ordDoc.mimeType)}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}"); i += 1}
+            ordDoc match {
+                case Some(ordDoc) ⇒
+                    println(s"#$i ordDoc: {source: ${ordDoc.source}, format: ${Helper.asString(ordDoc.format)}, mimeType: ${Helper.asString(ordDoc.mimeType)}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}, comments: ${Helper.clobToString(ordDoc.comments)}")
+                case None ⇒
+                    println(s"#$i ordDoc: null")
+            }
             nextExists = ors.next()
+            i += 1
         }
 
 
