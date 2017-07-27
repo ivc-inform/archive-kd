@@ -30,7 +30,7 @@ public class Helper {
 
   public static String asString(CHAR ch) throws SQLException {
     if (ch == null)
-      return "";
+      return "null";
     else
       return ch.getString();
   }
