@@ -38,12 +38,13 @@ object TestApp2 {
 
 
         var nextExists = ors.next()
-        
-        while(nextExists){
-          val ordDoc = ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc]
-            println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format.getString}, mimeType: ${ordDoc.mimeType.getString}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}, comments: ${Helper.clobToString(ordDoc.comments)}")
-            nextExists = ors.next()
+        var i = 1
 
+        while (nextExists) {
+            val ordDoc = Option(ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc])
+            //println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format.getString}, mimeType: ${ordDoc.mimeType.getString}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}, comments: ${Helper.clobToString(ordDoc.comments)}")
+            ordDoc.foreach{ordDoc ⇒ println(s"#$i ordDoc: {source: ${ordDoc.source}"); i += 1}
+            nextExists = ors.next()
         }
 
 
