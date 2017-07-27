@@ -2,27 +2,46 @@ package com.simplesys.container;
 
 import oracle.jdbc.OracleData;
 import oracle.jdbc.OracleDataFactory;
-import oracle.sql.CHAR;
-import oracle.sql.CLOB;
-import oracle.sql.NUMBER;
-import oracle.sql.STRUCT;
+import oracle.sql.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Struct;
+import java.sql.Timestamp;
 
 public class OrdDoc implements OracleData, OracleDataFactory {
 
-  public OrdSource source;
-  public CHAR format;
-  public CHAR mimeType;
-  public NUMBER contentLength;
-  public CLOB comments;
+  OrdSource source;
+  CHAR format;
+  CHAR mimeType;
+  NUMBER contentLength;
+  CLOB comments;
 
   static final OrdDoc _ordDoc = new OrdDoc();
+
+  public OrdSource getSource() {
+    return this.source;
+  }
+
+  public String getFormat() throws SQLException {
+    return Helper.asString(this.format);
+  }
+
+  public String getMimeType() throws SQLException {
+    return Helper.asString(this.mimeType);
+  }
+
+  public BigDecimal getContentLength() throws SQLException {
+    return NUMBER.toBigDecimal(this.contentLength.getBytes());
+  }
+
+  public String getComments() throws SQLException {
+    return Helper.clobToString(this.comments);
+  }
 
   public static OracleDataFactory getOracleDataFactory() {
     return _ordDoc;
@@ -56,9 +75,24 @@ public class OrdDoc implements OracleData, OracleDataFactory {
     if (o == null) return null;
 
     Object[] attributes = ((STRUCT) o).getOracleAttributes();
+    Object[] attributesOrdSource = ((STRUCT) attributes[0]).getAttributes();
+
+    BLOB a = (BLOB) attributesOrdSource[0];
+    String b = (String) attributesOrdSource[1];
+    String c = (String) attributesOrdSource[2];
+    String d = (String) attributesOrdSource[3];
+    Timestamp e = (Timestamp) attributesOrdSource[4];
+    NUMBER f = (NUMBER) attributesOrdSource[5];
+
     return new OrdDoc(
-            //(OrdSource) attributes[0],
-            null,
+            (OrdSource) new OrdSource(
+                    a,
+                    b,
+                    c,
+                    d,
+                    e,
+                    f
+            ),
             (CHAR) attributes[1],
             (CHAR) attributes[2],
             (NUMBER) attributes[3],

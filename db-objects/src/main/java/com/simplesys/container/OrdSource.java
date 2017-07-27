@@ -7,31 +7,40 @@ import oracle.sql.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Struct;
+import java.sql.Timestamp;
 
 public class OrdSource implements OracleData, OracleDataFactory {
 
   BLOB localData;
-  CHAR srcType;
-  CHAR srcLocation;
-  CHAR srcName;
-  DATE updateTime;
+  String srcType;
+  String srcLocation;
+  String srcName;
+  Timestamp updateTime;
   NUMBER local;
 
   static final OrdSource _ordSource = new OrdSource();
 
-  public static OracleDataFactory getOracleDataFactory()
-    {
-      return _ordSource;
-    }
+  public static OracleDataFactory getOracleDataFactory() {
+    return _ordSource;
+  }
 
   public OrdSource() {
   }
 
+  @Override
+  public String toString() {
+    try {
+      return "localData: BLOB" + " ,srcType: " + srcType + " ,srcLocation: " + srcLocation + " ,srcName: " + srcName + " ,updateTime: " + updateTime.toString() + " ,local: " + Helper.asBigDecimal(local).toString();
+    } catch (SQLException e) {
+      return e.getMessage();
+    }
+  }
+
   public OrdSource(BLOB localData,
-                   CHAR srcType,
-                   CHAR srcLocation,
-                   CHAR srcName,
-                   DATE updateTime,
+                   String srcType,
+                   String srcLocation,
+                   String srcName,
+                   Timestamp updateTime,
                    NUMBER local) {
     this.localData = localData;
     this.srcType = srcType;
@@ -55,10 +64,10 @@ public class OrdSource implements OracleData, OracleDataFactory {
     Object[] attributes = ((STRUCT) o).getOracleAttributes();
     return new OrdSource(
             (BLOB) attributes[0],
-            (CHAR) attributes[1],
-            (CHAR) attributes[2],
-            (CHAR) attributes[3],
-            (DATE) attributes[4],
+            (String) attributes[1],
+            (String) attributes[2],
+            (String) attributes[3],
+            (Timestamp) attributes[4],
             (NUMBER) attributes[5]);
   }
 }

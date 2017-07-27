@@ -2,10 +2,12 @@ package com.simplesys.container;
 
 import oracle.sql.CHAR;
 import oracle.sql.CLOB;
+import oracle.sql.NUMBER;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 public class Helper {
@@ -32,5 +34,12 @@ public class Helper {
       return "null";
     else
       return ch.getString();
+  }
+
+  public static BigDecimal asBigDecimal(NUMBER n) throws SQLException {
+    if (n == null)
+      return new BigDecimal("-99999999999999999999999999999999999999999999999999");
+    else
+      return NUMBER.toBigDecimal(n.toBytes());
   }
 }

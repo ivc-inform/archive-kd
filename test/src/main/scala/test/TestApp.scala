@@ -33,10 +33,6 @@ object TestApp2 {
         val stmt = conn.createStatement
 
         val ors = stmt.executeQuery("select ATTFILE from ARX_ATTATCH").asInstanceOf[OracleResultSet]
-        val ordDoc = if (ors.next())
-            Some(ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc])
-        else
-            None
 
         var nextExists = ors.next()
         var i = 1
@@ -45,7 +41,7 @@ object TestApp2 {
             val ordDoc = Option(ors.getObject(1, OrdDoc.getOracleDataFactory()).asInstanceOf[OrdDoc])
             ordDoc match {
                 case Some(ordDoc) ⇒
-                    println(s"#$i ordDoc: {source: ${ordDoc.source}, format: ${Helper.asString(ordDoc.format)}, mimeType: ${Helper.asString(ordDoc.mimeType)}, contentLength: ${NUMBER.toBigDecimal(ordDoc.contentLength.toBytes)}, comments: ${Helper.clobToString(ordDoc.comments)}")
+                    println(s"#$i ordDoc: {source: ${ordDoc.getSource}, format: ${ordDoc.getFormat}, mimeType: ${ordDoc.getMimeType}, contentLength: ${ordDoc.getContentLength}, comments: ${ordDoc.getComments}")
                 case None ⇒
                     println(s"#$i ordDoc: null")
             }
