@@ -11,21 +11,25 @@ import java.sql.SQLException;
 
 public class Helper {
   public static String clobToString(OracleClob data) {
-    StringBuilder sb = new StringBuilder();
-    try {
-      BufferedReader br = new BufferedReader(data.getCharacterStream());
+    if (data == null)
+      return null;
+    else {
+      StringBuilder sb = new StringBuilder();
+      try {
+        BufferedReader br = new BufferedReader(data.getCharacterStream());
 
-      String line;
-      while (null != (line = br.readLine())) {
-        sb.append(line);
+        String line;
+        while (null != (line = br.readLine())) {
+          sb.append(line);
+        }
+        br.close();
+      } catch (SQLException e) {
+        // handle this exception
+      } catch (IOException e) {
+        // handle this exception
       }
-      br.close();
-    } catch (SQLException e) {
-      // handle this exception
-    } catch (IOException e) {
-      // handle this exception
+      return sb.toString();
     }
-    return sb.toString();
   }
 
   public static String asString(CHAR ch) throws SQLException {

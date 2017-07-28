@@ -18,11 +18,11 @@ import java.sql.Timestamp;
 
 public class OrdDoc implements OracleData, OracleDataFactory {
 
-  OrdSource source;
-  CHAR format;
-  CHAR mimeType;
-  NUMBER contentLength;
-  OracleClob comments;
+  public OrdSource source;
+  public CHAR format;
+  public CHAR mimeType;
+  public NUMBER contentLength;
+  public OracleClob comments;
 
   static final OrdDoc _ordDoc = new OrdDoc();
 

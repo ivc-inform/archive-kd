@@ -10,7 +10,7 @@ import oracle.sql.NUMBER
 
 object OrdSource {
 
-    def JOrdSource2SOrdSource(ordSource: JOrdSource): OrdSource = new OrdSource {
+    implicit def JOrdSource2SOrdSource(ordSource: JOrdSource): OrdSource = new OrdSource {
         override val srcName: Option[String] = Option(ordSource.srcName)
         override val srcLocation: Option[String] = Option(ordSource.srcLocation)
         override val updateTime: Option[LocalDateTime] = Option(ordSource.updateTime).map(_.toLocalDateTime)
@@ -19,7 +19,7 @@ object OrdSource {
         override val localData: Option[OracleBlob] = Option(ordSource.localData)
     }
 
-    def SOrdSource2JOrdSource(ordSource: OrdSource): JOrdSource = {
+    implicit def SOrdSource2JOrdSource(ordSource: OrdSource): JOrdSource = {
         val res = new JOrdSource {}
         ordSource.srcName.foreach(res.srcName = _)
         ordSource.srcLocation.foreach(res.srcLocation = _)
