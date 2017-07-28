@@ -8,8 +8,26 @@ import oracle.jdbc.driver.OracleConnection
 import oracle.jdbc.pool.OracleDataSource
 import oracle.sql.NUMBER
 
-object TestApp2 {
+object GetAttFile {
+    def getOrdDoc(id: BigDecimal)(implicit oracleConnection: OracleConnection): Option[OrdDoc] = {
 
+        val selectSQL = "select ATTFILE from ARX_ATTATCH where ID = ?"
+        val preparedStatement = oracleConnection.prepareStatement(selectSQL)
+        preparedStatement.setBigDecimal(1, id.bigDecimal)
+        val ors = preparedStatement.executeQuery().asInstanceOf[OracleResultSet]
+
+        if (ors.next()) {
+            val jOrdDoc = ors.getObject(1, JOrdDoc.getOracleDataFactory()).asInstanceOf[JOrdDoc]
+            val ordDoc: OrdDoc = jOrdDoc
+            Some(ordDoc)
+        } else
+            None
+    }
+
+    def getOrdDocs(ids: BigDecimal*)(implicit oracleConnection: OracleConnection): Seq[OrdDoc] = ids.map(getOrdDoc).filter(_.nonEmpty).map(_.get)
+}
+
+object TestApp2 {
 
     def main(args: Array[String]): Unit = {
         val ds = new OracleDataSource
@@ -21,7 +39,7 @@ object TestApp2 {
         ds.setUser("B404SP3DEMO")
         ds.setPassword("dfqc2")
 
-        val conn = ds.getConnection.asInstanceOf[OracleConnection]
+        implicit val conn = ds.getConnection.asInstanceOf[OracleConnection]
         conn setAutoCommit false
 
         // Create Oracle DatabaseMetaData object
@@ -32,28 +50,11 @@ object TestApp2 {
 
         val startTime = System.currentTimeMillis()
 
-        val stmt = conn.createStatement
-
-        val ors = stmt.executeQuery("select ATTFILE from ARX_ATTATCH").asInstanceOf[OracleResultSet]
-
-        var nextExists = ors.next()
-        var i = 1
-
-        while (nextExists) {
-            val ordDoc = Option(ors.getObject(1, JOrdDoc.getOracleDataFactory()))
-            ordDoc match {
-                case Some(jOrdDoc: JOrdDoc) ⇒
-                    val ordDoc: OrdDoc = jOrdDoc
-                    println(s"#$i ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}")
-                case None ⇒
-                    println(s"#$i ordDoc: null")
-                case _ ⇒
-                    println(s"#$i ordDoc: null")
-            }
-            nextExists = ors.next()
-            i += 1
+        val ordDoc = GetAttFile.getOrdDocs(131, 132, 133)
+        ordDoc.foreach {
+            ordDoc ⇒
+                println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}")
         }
-
 
         //
         //        //val fileName = "Red_Hot.mkv"
