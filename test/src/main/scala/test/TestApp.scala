@@ -1,31 +1,9 @@
 package test
 
-import com.simplesys.container.Helper
-import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
-import com.simplesys.container.scala.OrdDoc
-import oracle.jdbc.OracleResultSet
+import com.simplesys.container.scala.GetAttFile
 import oracle.jdbc.driver.OracleConnection
 import oracle.jdbc.pool.OracleDataSource
-import oracle.sql.NUMBER
 
-object GetAttFile {
-    def getOrdDoc(id: BigDecimal)(implicit oracleConnection: OracleConnection): Option[OrdDoc] = {
-
-        val selectSQL = "select ATTFILE from ARX_ATTATCH where ID = ?"
-        val preparedStatement = oracleConnection.prepareStatement(selectSQL)
-        preparedStatement.setBigDecimal(1, id.bigDecimal)
-        val ors = preparedStatement.executeQuery().asInstanceOf[OracleResultSet]
-
-        if (ors.next()) {
-            val jOrdDoc = ors.getObject(1, JOrdDoc.getOracleDataFactory()).asInstanceOf[JOrdDoc]
-            val ordDoc: OrdDoc = jOrdDoc
-            Some(ordDoc)
-        } else
-            None
-    }
-
-    def getOrdDocs(ids: BigDecimal*)(implicit oracleConnection: OracleConnection): Seq[OrdDoc] = ids.map(getOrdDoc).filter(_.nonEmpty).map(_.get)
-}
 
 object TestApp2 {
 
@@ -50,11 +28,9 @@ object TestApp2 {
 
         val startTime = System.currentTimeMillis()
 
-        val ordDoc = GetAttFile.getOrdDocs(131, 132, 133)
-        ordDoc.foreach {
-            ordDoc ⇒
-                println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}")
-        }
+        val ordDoc = GetAttFile.getOrdDocs((131 to 190).map(BigDecimal(_)): _*)
+
+        ordDoc.foreach (ordDoc ⇒println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}"))
 
         //
         //        //val fileName = "Red_Hot.mkv"

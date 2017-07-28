@@ -1,14 +1,10 @@
 package com.simplesys.container.scala
 
-import java.sql.Connection
-import java.time.LocalDateTime
-
 import com.simplesys.container.Helper
-import oracle.jdbc.{OracleBlob, OracleClob, OracleConnection}
 import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
-import OrdSource._
+import com.simplesys.container.scala.OrdSource._
+import oracle.jdbc.OracleConnection
 import oracle.sql.{CLOB, NUMBER}
-import javax.sql.rowset.serial.SerialClob
 
 object OrdDoc {
     implicit def JOrdSource2SOrdSource(ordDoc: JOrdDoc): OrdDoc = new OrdDoc {
