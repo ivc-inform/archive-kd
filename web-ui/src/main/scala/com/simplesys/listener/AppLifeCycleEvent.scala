@@ -16,35 +16,15 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        //val pds = PoolDataSourceFactory.getPoolDataSource
-
         val ds: BoneCPDataSource = getString("dbPool.default") match {
             case x@"oracleEAKD" => cpStack OracleDataSource x
             case any => throw new RuntimeException(s"Bad: ${any}")
         }
 
-        //        val dsProd: BoneCPDataSource = getString("dbPool.defaultProd") match {
-        //            case x@"oracleMFMSProd" => cpStack OracleDataSource x
-        //            case any => throw new RuntimeException(s"Bad: ${any}")
-        //        }
-        //
-        //        val dsSave: BoneCPDataSource = getString("dbPool.defaultSave") match {
-        //            case x@"oracleMFMSSave" => cpStack OracleDataSource x
-        //            case any => throw new RuntimeException(s"Bad: ${any}")
-        //        }
-        //
-        //        val dsConfig: BoneCPDataSource = getString("dbPool.defaultConfig") match {
-        //            case x@"oracleMFMSConfig" => cpStack OracleDataSource x
-        //            case any => throw new RuntimeException(s"Bad: ${any}")
-        //        }
-
         sce.ServletContext.Attribute("ds", Some(ds))
-        //        sce.ServletContext.Attribute("dsProd", Some(dsProd))
-        //        sce.ServletContext.Attribute("dsSave", Some(dsSave))
-        //        sce.ServletContext.Attribute("dsConfig", Some(dsConfig))
 
         try {
-            //ds.Connection.close()
+            ds.Connection.close()
             logger trace "ds checked"
             sce.ServletContext.Attribute("ds", Some(ds))
         }

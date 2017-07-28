@@ -1,6 +1,8 @@
 package test
 
 import com.simplesys.container.scala.GetAttFile
+import com.simplesys.oracle.pool.PoolDataSource
+import oracle.jdbc.OracleConnection
 import oracle.jdbc.driver.OracleConnection
 import oracle.jdbc.pool.OracleDataSource
 
@@ -8,16 +10,11 @@ import oracle.jdbc.pool.OracleDataSource
 object TestApp2 {
 
     def main(args: Array[String]): Unit = {
-        val ds = new OracleDataSource
 
         val bufferSize = 1024 * 1024 * 100
 
-        //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
-        ds.setURL("jdbc:oracle:thin:@//localhost:1521/orcl")
-        ds.setUser("B404SP3DEMO")
-        ds.setPassword("dfqc2")
-
-        implicit val conn = ds.getConnection.asInstanceOf[OracleConnection]
+        val dataSource = new PoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+        val conn: OracleConnection = dataSource.getConnection()
         conn setAutoCommit false
 
         // Create Oracle DatabaseMetaData object

@@ -109,16 +109,20 @@ object CommonDeps {
     val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
     val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion
     //val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
+    val oraclePoolDataSources = "com.simplesys.core" %% "oracle-pool-datasource" % versions.ssysCoreVersion
     val ssysLogBackWrapper = "com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion
     val scalaJSWrapper = "com.simplesys" %% "common-types" % versions.scalaJSVersion
     val scalaTags = "com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion
     val uPickle = "com.lihaoyi" %% "upickle" % versions.uPickleVersion
-    
+
     val jettyRuner = "org.eclipse.jetty" % "jetty-runner" % versions.jettyVersion
 
     val scalaTest = "org.scalatest" %% "scalatest" % versions.scalaTestVersion
     //val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
-    //val jdbcOracle12Driver = "com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion
+
+    val jdbcOracle12 = Def.setting("com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion)
+    val jdbcOracle12UCP = Def.setting("com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion)
+    val jdbcOracleN18_12 = Def.setting("com.oracle.jdbc" % "orai18n" % versions.jdbcOracle12DriverVersion)
 
     val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
     val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion

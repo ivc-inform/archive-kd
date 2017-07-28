@@ -50,7 +50,6 @@ lazy val testModule = Project(id = "test", base = file("test")).
   settings(
       libraryDependencies ++= Seq(
           CommonDeps.ssysJDBCWrapper,
-          //CommonDeps.ssysBoneCPWrapper,
           CommonDeps.slick,
           CommonDeps.scalaTest % Test
       )
@@ -64,6 +63,10 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           CommonDeps.ssysCoreLibrary,
           CommonDeps.ssysJsonExtender,
           CommonDeps.ssysJDBCWrapper,
+          CommonDeps.oraclePoolDataSources,
+          CommonDeps.jdbcOracle12,
+          CommonDeps.jdbcOracle12UCP,
+          CommonDeps.jdbcOracleN18_12,
           CommonDeps.jodaTime,
           CommonDeps.jodaConvert,
           CommonDeps.scalaTest % Test
