@@ -3,9 +3,8 @@ package com.simplesys.listener
 import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
-import com.simplesys.bonecp.BoneCPDataSource
+import com.simplesys.oracle.pool.PoolDataSource
 import com.simplesys.servlet.ServletContextEvent
-import oracle.ucp.jdbc.PoolDataSourceFactory
 
 @WebListener
 class AppLifeCycleEvent extends CommonWebAppListener {
@@ -16,24 +15,21 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val ds: BoneCPDataSource = getString("dbPool.default") match {
-            case x@"oracleEAKD" => cpStack OracleDataSource x
-            case any => throw new RuntimeException(s"Bad: ${any}")
-        }
+        val ds = new PoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
 
         sce.ServletContext.Attribute("ds", Some(ds))
 
         try {
-            ds.Connection.close()
+            ds.getConnection().close()
             logger trace "ds checked"
             sce.ServletContext.Attribute("ds", Some(ds))
         }
         catch {
-            case ex: SQLException => throw new RuntimeException(s"Not database conection ${ds.getUsername}")
+            case ex: SQLException => throw new RuntimeException(s"Not database conection ${ds.settings.user}")
             case ex: Throwable => throw ex
         }
 
-        logger.trace(s"DriverClass: ${ds.getDriverClass}")
+        logger.trace(s"DriverClass: ${ds.settings.className}")
 
         super.UserContextInitialized(sce)
     }

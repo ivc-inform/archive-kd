@@ -41,6 +41,7 @@ lazy val common = Project(id = "common", base = file("common")).settings(
     libraryDependencies ++= Seq(
         CommonDeps.commonsIO,
         CommonDeps.configWrapper,
+        CommonDeps.ssysCommon,
         //CommonDeps.jdbcOracle12Driver,
         CommonDeps.scalaTest % Test
     )
