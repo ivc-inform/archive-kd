@@ -30,7 +30,7 @@ object TestApp2 {
 
         val ordDoc = GetAttFile.getOrdDocs((131 to 190).map(BigDecimal(_)): _*)
 
-        ordDoc.foreach (ordDoc ⇒println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}"))
+        ordDoc.foreach(ordDoc ⇒ println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}"))
 
         //
         //        //val fileName = "Red_Hot.mkv"

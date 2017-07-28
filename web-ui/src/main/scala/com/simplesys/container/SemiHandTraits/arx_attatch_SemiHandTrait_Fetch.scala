@@ -16,6 +16,7 @@ import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
+import com.simplesys.js.components.cards.props.AttachProps
 import com.simplesys.json.JsonString
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
@@ -92,6 +93,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                             item ⇒
                                                 record += (arx_docizvstat_vname_NameStrong.name → JsonString(item.vnameDocizvstat_Idsts.headOption.getOrElse("")))
                                                 record += (arx_docizvtype_viztname_NameStrong.name → JsonString(item.viztnameDocizvtype_Idtypiz.headOption.getOrElse("")))
+                                                record += ("fileName" → JsonString("555555555555888888888888888888888888888888888888"))
                                         }
                                     case Failure(e) ⇒
                                         logger error e.getStackTraceString

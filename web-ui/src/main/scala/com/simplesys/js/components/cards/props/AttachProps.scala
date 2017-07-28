@@ -22,14 +22,20 @@ import com.simplesys.function._
 import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
-  val fileName: JSUndefined[String]
-  val uploadFile: JSUndefined[String]
-  val vname: JSUndefined[String]
-  val viztname: JSUndefined[String]
+    val fileName: JSUndefined[String]
+    val uploadFile: JSUndefined[String]
+    val vname: JSUndefined[String]
+    val viztname: JSUndefined[String]
+}
+
+object AttachProps extends JSObject {
+    val fileNameField = "fileName".nameStrong
+    val uploadFileField = "uploadFile".nameStrong
 }
 
 class AttachProps extends CommonListGridEditorComponentProps {
     type classHandler <: Attach
+    import AttachProps._
 
     simpleTable = false.opt
     //autoFetchData = false.opt
@@ -51,9 +57,6 @@ class AttachProps extends CommonListGridEditorComponentProps {
             `type` = ListGridFieldType.sCode_SimpleType.opt
         }).opt
 
-
-    val fileNameField = "fileName".nameStrong
-    val uploadFileField = "uploadFile".nameStrong
 
     fields = (ListGridFiledsJS.arx_attatch_FLDS ++ Seq(
         new ListGridFieldProps {
@@ -87,9 +90,10 @@ class AttachProps extends CommonListGridEditorComponentProps {
                     any2undefOrA(Progressbar.create(
                         new ProgressbarProps {
                             height = 20
-                            width = "100%"
+                            width = 400
                             title = record.fileName.opt
                             showTitle = true.opt
+                            autoFit = true.opt
                         }
                     ))
 
@@ -110,12 +114,12 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             showTitle = false.opt
                                             changed = {
                                                 (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
-                                                   isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?" , {
-                                                       (value: Boolean) ⇒
-                                                         if (value)
-                                                           isc.ok(value.toString)
-                                                           //form.submitForm()
-                                                   }.toFunc)
+                                                    isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?", {
+                                                        (value: Boolean) ⇒
+                                                            if (value)
+                                                                isc.ok(value.toString)
+                                                        //form.submitForm()
+                                                    }.toFunc)
 
                                             }.toFunc.opt
                                         }
