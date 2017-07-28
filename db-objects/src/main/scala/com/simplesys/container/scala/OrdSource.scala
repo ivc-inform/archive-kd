@@ -38,4 +38,15 @@ trait OrdSource {
     val srcName: Option[String]
     val updateTime: Option[LocalDateTime]
     val local: Option[BigDecimal]
+    
+    override def toString: String = {
+        val res = new StringBuilder
+        res append s"localData: $localData ,"
+        res append s"srcType: $srcType ,"
+        res append s"srcLocation: $srcLocation ,"
+        res append s"srcName: $srcName, "
+        res append s"updateTime: $updateTime ,"
+        res append s"local: $local"
+        res.toString()
+    }
 }
