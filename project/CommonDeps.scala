@@ -74,6 +74,7 @@ object CommonDeps {
         val commonsIOVersion = "2.5"
         val scalaURIVersion = "0.4.16"
         val slickVersion = "3.2.1"
+        val configWrapperVersion= "0.4.4"
     }
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
@@ -120,9 +121,9 @@ object CommonDeps {
     val scalaTest = "org.scalatest" %% "scalatest" % versions.scalaTestVersion
     //val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
 
-    val jdbcOracle12 = Def.setting("com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion)
-    val jdbcOracle12UCP = Def.setting("com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion)
-    val jdbcOracleN18_12 = Def.setting("com.oracle.jdbc" % "orai18n" % versions.jdbcOracle12DriverVersion)
+    val jdbcOracle12 = "com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion
+    val jdbcOracle12UCP = "com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion
+    val jdbcOracleN18_12 = "com.oracle.jdbc" % "orai18n" % versions.jdbcOracle12DriverVersion
 
     val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
     val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion
@@ -132,6 +133,8 @@ object CommonDeps {
 
     val scalaURI = "com.netaporter" %% "scala-uri" % versions.scalaURIVersion
     val slick = "com.typesafe.slick" %% "slick" % versions.slickVersion
+
+    val configWrapper = "com.github.kxbmap" %% "configs" % versions.configWrapperVersion
 
 }
 

@@ -3,9 +3,6 @@ package test
 import com.simplesys.container.scala.GetAttFile
 import com.simplesys.oracle.pool.PoolDataSource
 import oracle.jdbc.OracleConnection
-import oracle.jdbc.driver.OracleConnection
-import oracle.jdbc.pool.OracleDataSource
-
 
 object TestApp2 {
 
@@ -14,7 +11,7 @@ object TestApp2 {
         val bufferSize = 1024 * 1024 * 100
 
         val dataSource = new PoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
-        val conn: OracleConnection = dataSource.getConnection()
+        implicit val conn: OracleConnection = dataSource.getConnection()
         conn setAutoCommit false
 
         // Create Oracle DatabaseMetaData object
