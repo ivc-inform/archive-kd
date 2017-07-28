@@ -110,6 +110,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
     libraryDependencies ++= Seq(
         CommonDeps.servletAPI % Provided,
+        CommonDeps.ssysCommon,
         CommonDeps.ssysCommonWebapp,
         CommonDeps.ssysIscComponents,
         CommonDeps.ssysXMLExtender,
