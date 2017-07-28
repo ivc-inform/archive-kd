@@ -5,6 +5,7 @@ import com.simplesys.log.Logging
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.http.HttpSession
 import com.simplesys.servlet.{ServletActor, ServletContext}
+import com.simplesys.sql.SQLDialect
 
 trait SessionContextSupport {
     this: ServletActor =>
