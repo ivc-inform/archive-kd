@@ -32,7 +32,11 @@ public class Helper {
       } catch (IOException e) {
         // handle this exception
       }
-      return sb.toString();
+      String res = sb.toString();
+      if (res.isEmpty())
+        return null;
+      else
+        return sb.toString();
     }
   }
 

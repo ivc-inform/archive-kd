@@ -16,7 +16,7 @@ object OrdDoc {
         override val format: Option[String] = Option(ordDoc.format).map(Helper.asString(_))
         override val mimeType: Option[String] = Option(ordDoc.mimeType).map(Helper.asString(_))
         override val contentLength: Option[BigDecimal] = Option(ordDoc.contentLength).map(Helper.asBigDecimal(_))
-        override val comments: Option[String] = Option(ordDoc.comments).map(Helper.clobToString(_))
+        override val comments: Option[String] = Option(Helper.clobToString(ordDoc.comments))
     }
 
     implicit def SOrdSource2SOrdSource(ordDoc: OrdDoc)(implicit connection: OracleConnection): JOrdDoc = {
