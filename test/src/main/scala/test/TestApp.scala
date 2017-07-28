@@ -1,7 +1,8 @@
 package test
 
 import com.simplesys.container.Helper
-import com.simplesys.container.java.OrdDoc
+import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
+import com.simplesys.container.scala.OrdDoc
 import oracle.jdbc.OracleResultSet
 import oracle.jdbc.driver.OracleConnection
 import oracle.jdbc.pool.OracleDataSource
@@ -39,10 +40,11 @@ object TestApp2 {
         var i = 1
 
         while (nextExists) {
-            val ordDoc = Option(ors.getObject(1, OrdDoc.getOracleDataFactory()))
+            val ordDoc = Option(ors.getObject(1, JOrdDoc.getOracleDataFactory()))
             ordDoc match {
-                case Some(ordDoc: OrdDoc) ⇒
-                    //println(s"#$i ordDoc: {source: ${ordDoc.getSource}, format: ${ordDoc.getFormat}, mimeType: ${ordDoc.getMimeType}, contentLength: ${ordDoc.getContentLength}, comments: ${ordDoc.getComments}")
+                case Some(jOrdDoc: JOrdDoc) ⇒
+                    val ordDoc: OrdDoc = jOrdDoc
+                    println(s"#$i ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}")
                 case None ⇒
                     println(s"#$i ordDoc: null")
                 case _ ⇒

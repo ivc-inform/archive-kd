@@ -14,7 +14,7 @@ object OrdSource {
         override val srcName: Option[String] = Option(ordSource.srcName)
         override val srcLocation: Option[String] = Option(ordSource.srcLocation)
         override val updateTime: Option[LocalDateTime] = Option(ordSource.updateTime).map(_.toLocalDateTime)
-        override val local: Option[BigDecimal] = Option(Helper.asBigDecimal(ordSource.local))
+        override val local: Option[BigDecimal] = Option(ordSource.local).map(Helper.asBigDecimal(_))
         override val srcType: Option[String] = Option(ordSource.srcType)
         override val localData: Option[OracleBlob] = Option(ordSource.localData)
     }

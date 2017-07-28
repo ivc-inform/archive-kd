@@ -1,13 +1,17 @@
 package com.simplesys.container;
 
+import net.sf.saxon.serialize.charcode.CharacterSetFactory;
 import oracle.jdbc.OracleClob;
 import oracle.sql.CHAR;
+import oracle.sql.CharacterSet;
 import oracle.sql.NUMBER;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+
+import static oracle.sql.CharacterSet.CL8MSWIN1251_CHARSET;
 
 public class Helper {
   public static String clobToString(OracleClob data) {
@@ -37,6 +41,13 @@ public class Helper {
       return null;
     else
       return ch.getString();
+  }
+
+  public static CHAR asCHAR(String str) throws SQLException {
+    if (str == null)
+      return null;
+    else
+      return new CHAR(str, CharacterSet.make(CL8MSWIN1251_CHARSET));
   }
 
   public static BigDecimal asBigDecimal(NUMBER n) throws SQLException {
