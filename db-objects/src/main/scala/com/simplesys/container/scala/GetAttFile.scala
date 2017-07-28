@@ -1,12 +1,13 @@
 package com.simplesys.container.scala
 
-import oracle.jdbc.OracleResultSet
-import oracle.jdbc.driver.OracleConnection
+import java.sql.Connection
+
 import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
+import oracle.jdbc.{OracleConnection, OracleResultSet}
 
 object GetAttFile {
-    def getOrdDoc(id: BigDecimal)(implicit oracleConnection: OracleConnection): Option[OrdDoc] = {
+    def getOrdDoc(id: BigDecimal)(implicit oracleConnection: Connection): Option[OrdDoc] = {
 
         val selectSQL = "select ATTFILE from ARX_ATTATCH where ID = ?"
 

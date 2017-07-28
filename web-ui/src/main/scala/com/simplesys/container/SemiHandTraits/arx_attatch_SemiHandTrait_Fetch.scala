@@ -2,11 +2,10 @@
 
 package ru.simplesys.defs.app.scala.container.arx
 
-import java.sql.Connection
-
 import akka.actor.Actor
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings._
+import com.simplesys.container.scala.GetAttFile
 import com.simplesys.isc.dataBinging.RPC.RPCResponseDyn
 import com.simplesys.isc.dataBinging.dataSource.RecordDyn
 import com.simplesys.isc.dataBinging.{DSRequestDyn, DSResponseDyn, DSResponseFailureExDyn}
@@ -16,11 +15,10 @@ import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
-import com.simplesys.js.components.cards.props.AttachProps
 import com.simplesys.json.JsonString
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
-import oracle.sql._
+import oracle.jdbc.OracleConnection
 import org.joda.time.LocalDateTime
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS}
@@ -51,6 +49,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                 val qty: Int = requestData.EndRow.toInt - requestData.StartRow.toInt + 1
 
                 val select = dataSet.Fetch(dsRequest = DSRequest(sqlDialect = sessionContext.getSQLDialect, startRow = requestData.StartRow, endRow = requestData.EndRow, sortBy = requestData.SortBy, data = data, textMatchStyle = requestData.TextMatchStyle.toString))
+                implicit val oraConnection = ds.Connection
 
                 Out(classDyn = select.result match {
                     case Success(list) => {
@@ -70,8 +69,6 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                             vcrcodeCard: Array[String],
                             idDocizv: Long,
                             vizcodeDocizv: Array[String]) ⇒
-
-                                ds
 
                                 val record = RecordDyn(
                                     arx_attatch_id_NameStrong.name → idAttatch,
@@ -93,10 +90,16 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                             item ⇒
                                                 record += (arx_docizvstat_vname_NameStrong.name → JsonString(item.vnameDocizvstat_Idsts.headOption.getOrElse("")))
                                                 record += (arx_docizvtype_viztname_NameStrong.name → JsonString(item.viztnameDocizvtype_Idtypiz.headOption.getOrElse("")))
-                                                record += ("fileName" → JsonString("555555555555888888888888888888888888888888888888"))
                                         }
                                     case Failure(e) ⇒
                                         logger error e.getStackTraceString
+                                }
+
+                                GetAttFile.getOrdDoc(idAttatch).foreach {
+                                    _.source.foreach {
+                                        ordSource ⇒
+                                            ordSource.srcName.foreach(srcName ⇒ record += ("fileName" → JsonString(srcName)))
+                                    }
                                 }
 
                                 _data += record

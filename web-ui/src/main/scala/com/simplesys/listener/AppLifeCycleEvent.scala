@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebListener
 
 import com.simplesys.bonecp.BoneCPDataSource
 import com.simplesys.servlet.ServletContextEvent
+import oracle.ucp.jdbc.PoolDataSourceFactory
 
 @WebListener
 class AppLifeCycleEvent extends CommonWebAppListener {
@@ -14,6 +15,8 @@ class AppLifeCycleEvent extends CommonWebAppListener {
     override def UserContextInitialized(sce: ServletContextEvent) {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
+
+        //val pds = PoolDataSourceFactory.getPoolDataSource
 
         val ds: BoneCPDataSource = getString("dbPool.default") match {
             case x@"oracleEAKD" => cpStack OracleDataSource x

@@ -50,7 +50,7 @@ lazy val testModule = Project(id = "test", base = file("test")).
   settings(
       libraryDependencies ++= Seq(
           CommonDeps.ssysJDBCWrapper,
-          CommonDeps.ssysBoneCPWrapper,
+          //CommonDeps.ssysBoneCPWrapper,
           CommonDeps.slick,
           CommonDeps.scalaTest % Test
       )

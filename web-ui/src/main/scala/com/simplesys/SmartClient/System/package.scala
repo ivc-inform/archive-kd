@@ -79,6 +79,7 @@ package object System {
     object Dialog extends SCApply[Dialog, DialogProps]
     object DialogSS extends SCApply[DialogSS, DialogSSProps]
     object IButtonSS extends SCApply[IButtonSS, IButtonSSProps]
+    object ImgButton extends SCApply[ImgButton, ImgButtonProps]
     object CancelButton extends SCApply[CancelButton, CancelButtonProps]
     object IMenuButton extends SCApply[IMenuButton, IMenuButtonProps]
     object Slider extends SCApply[Slider, SliderProps]

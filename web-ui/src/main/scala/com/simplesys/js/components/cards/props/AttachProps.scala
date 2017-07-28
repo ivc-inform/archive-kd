@@ -1,7 +1,7 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
-import com.simplesys.SmartClient.Control.props.ProgressbarProps
+import com.simplesys.SmartClient.Control.props.{ImgButtonProps, ProgressbarProps}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.UploadItem
 import com.simplesys.SmartClient.Forms.formsItems.props.UploadItemProps
@@ -9,13 +9,15 @@ import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
-import com.simplesys.System.Types.{Encoding, ListGridFieldType}
+import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
+import com.simplesys.System.Types.{Alignment, Encoding, ListGridFieldType}
 import com.simplesys.js.components.cards.Attach
 import com.simplesys.option.ScOption._
 import com.simplesys.option.DoubleType._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import com.simplesys.System._
 import com.simplesys.SmartClient.System._
+import com.simplesys.System.Types.Alignment.Alignment
 import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 import com.simplesys.function._
 
@@ -30,11 +32,11 @@ trait AttatchDataRecordExt extends AttatchDataRecord {
 
 object AttachProps extends JSObject {
     val fileNameField = "fileName".nameStrong
-    val uploadFileField = "uploadFile".nameStrong
 }
 
 class AttachProps extends CommonListGridEditorComponentProps {
     type classHandler <: Attach
+
     import AttachProps._
 
     simpleTable = false.opt
@@ -60,11 +62,6 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     fields = (ListGridFiledsJS.arx_attatch_FLDS ++ Seq(
         new ListGridFieldProps {
-            nameStrong = uploadFileField.opt
-            title = "Файл ревизии".ellipsis.opt
-            `type` = ListGridFieldType.sCode_SimpleType.opt
-        },
-        new ListGridFieldProps {
             nameStrong = fileNameField.opt
             title = "Файл ревизии".opt
             `type` = ListGridFieldType.sCode_SimpleType.opt
@@ -87,17 +84,40 @@ class AttachProps extends CommonListGridEditorComponentProps {
         (thiz: classHandler, record: AttatchDataRecordExt, colNum: Int) ⇒
             thiz.getFieldName(colNum) match {
                 case fileNameField.name ⇒
-                    any2undefOrA(Progressbar.create(
-                        new ProgressbarProps {
-                            height = 20
-                            width = 400
-                            title = record.fileName.opt
-                            showTitle = true.opt
-                            autoFit = true.opt
-                        }
-                    ))
+                    any2undefOrA(
+                        HLayoutSS.create(
+                            new HLayoutSSProps {
+                                height = 20
+                                width = "100%"
+                                members = Seq(
+                                    Progressbar.create(
+                                        new ProgressbarProps {
+                                            //height = 20
+                                            length = "*"
+                                            title = record.fileName.opt
+                                            showTitle = true.opt
+                                        }
+                                    ),
+                                    ImgButton.create(
+                                        new ImgButtonProps{
+                                            showDown = false.opt
+                                            showRollOver = false.opt
+                                            layoutAlign = Alignment.center
+                                            prompt = "Изменить файл".ellipsis.opt
+                                            height = 18
+                                            width = 18
+                                            src = Common.attach.opt
+                                            click = {
+                                                (thiz:classHandler) ⇒
+                                                    false
+                                            }.toThisFunc.opt
+                                        }
+                                    )
+                                ).opt
+                            }
+                        ))
 
-                case uploadFileField.name ⇒
+                /*case uploadFileField.name ⇒
                     any2undefOrA(
                         DynamicFormSS.create(
                             new DynamicFormSSProps {
@@ -127,7 +147,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                 ).opt
                             }
                         )
-                    )
+                    )*/
                 case _ ⇒
                     jSUndefined
 

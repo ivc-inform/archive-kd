@@ -108,7 +108,7 @@ object CommonDeps {
     val ssysJDBCWrapper = "com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion
     val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
     val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion
-    val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
+    //val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
     val ssysLogBackWrapper = "com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion
     val scalaJSWrapper = "com.simplesys" %% "common-types" % versions.scalaJSVersion
     val scalaTags = "com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion
