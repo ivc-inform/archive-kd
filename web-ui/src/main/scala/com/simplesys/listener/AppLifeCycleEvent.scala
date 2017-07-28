@@ -36,6 +36,6 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
 
     override def ContextDestroyed1(sce: ServletContextEvent) {
-        cpStack.Close()
+        
     }
 }

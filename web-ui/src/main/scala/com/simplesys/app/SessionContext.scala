@@ -35,7 +35,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
     private[this] var ds: PoolDataSource = null
     def getDS = ds
 
-    def getSQLDialect = ds.SQLDialect
+    def getSQLDialect = ds.sqlDialect
 
     /*private[this] var birtEngine: IReportEngine = null
     def getBirtEngine = birtEngine*/
