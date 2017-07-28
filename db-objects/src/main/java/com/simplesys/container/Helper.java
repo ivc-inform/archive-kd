@@ -1,17 +1,16 @@
 package com.simplesys.container;
 
+import oracle.jdbc.OracleClob;
 import oracle.sql.CHAR;
-import oracle.sql.CLOB;
 import oracle.sql.NUMBER;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
 public class Helper {
-  public static String clobToString(CLOB data) {
+  public static String clobToString(OracleClob data) {
     StringBuilder sb = new StringBuilder();
     try {
       BufferedReader br = new BufferedReader(data.getCharacterStream());

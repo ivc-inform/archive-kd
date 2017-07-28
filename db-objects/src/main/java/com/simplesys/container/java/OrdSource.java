@@ -1,22 +1,24 @@
-package com.simplesys.container;
+package com.simplesys.container.java;
 
+import com.simplesys.container.Helper;
+import oracle.jdbc.OracleBlob;
 import oracle.jdbc.OracleData;
 import oracle.jdbc.OracleDataFactory;
-import oracle.sql.*;
+import oracle.jdbc.internal.OracleStruct;
+import oracle.sql.NUMBER;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Struct;
 import java.sql.Timestamp;
 
 public class OrdSource implements OracleData, OracleDataFactory {
 
-  BLOB localData;
-  String srcType;
-  String srcLocation;
-  String srcName;
-  Timestamp updateTime;
-  NUMBER local;
+  public OracleBlob localData;
+  public String srcType;
+  public String srcLocation;
+  public String srcName;
+  public Timestamp updateTime;
+  public NUMBER local;
 
   static final OrdSource _ordSource = new OrdSource();
 
@@ -36,7 +38,7 @@ public class OrdSource implements OracleData, OracleDataFactory {
     }
   }
 
-  public OrdSource(BLOB localData,
+  public OrdSource(OracleBlob localData,
                    String srcType,
                    String srcLocation,
                    String srcName,
@@ -61,9 +63,9 @@ public class OrdSource implements OracleData, OracleDataFactory {
     if (o == null)
       return null;
 
-    Object[] attributes = ((STRUCT) o).getOracleAttributes();
+    Object[] attributes = ((OracleStruct) o).getOracleAttributes();
     return new OrdSource(
-            (BLOB) attributes[0],
+            (OracleBlob) attributes[0],
             (String) attributes[1],
             (String) attributes[2],
             (String) attributes[3],
