@@ -2,7 +2,7 @@ package com.simplesys.app
 
 import com.simplesys.common.Strings._
 import com.simplesys.log.Logging
-import com.simplesys.oracle.pool.PoolDataSource
+import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.http.HttpSession
 import com.simplesys.servlet.{ServletActor, ServletContext}
 
@@ -32,7 +32,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
     private[this] var captionUser = strEmpty
     def getCaptionUser = captionUser
 
-    private[this] var ds: PoolDataSource = null
+    private[this] var ds: OraclePoolDataSource = null
     def getDS = ds
 
     def getSQLDialect = ds.sqlDialect
@@ -68,7 +68,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
         }
 
         ds = servletContext.Attribute(s"ds") match {
-            case Some(value: PoolDataSource) => value
+            case Some(value: OraclePoolDataSource) => value
             case _ => throw new RuntimeException(s"Нет DS")
         }
     }

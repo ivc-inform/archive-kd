@@ -3,7 +3,7 @@ package com.simplesys.listener
 import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
-import com.simplesys.oracle.pool.PoolDataSource
+import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ServletContextEvent
 
 @WebListener
@@ -15,7 +15,7 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val ds = new PoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+        val ds = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
 
         sce.ServletContext.Attribute("ds", Some(ds))
 

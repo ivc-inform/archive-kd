@@ -1,7 +1,7 @@
 package test
 
 import com.simplesys.container.scala.GetAttFile
-import com.simplesys.oracle.pool.PoolDataSource
+import com.simplesys.oracle.pool.OraclePoolDataSource
 import oracle.jdbc.OracleConnection
 
 object TestApp2 {
@@ -10,7 +10,7 @@ object TestApp2 {
 
         val bufferSize = 1024 * 1024 * 100
 
-        val dataSource = new PoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+        val dataSource = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
         implicit val conn: OracleConnection = dataSource.getConnection()
         conn setAutoCommit false
 
