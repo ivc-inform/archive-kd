@@ -46,13 +46,10 @@ class WindowSSDialogProps extends WindowSSProps {
             thisTop.Super("initWidget", args)
             thisTop.wrapCanvas.foreach(thisTop addItem _)
 
-            //isc debugTrap thisTop.okCancelPanel
-
             thisTop.okCancelPanel = OkCancelPanel.create(
                 new OkCancelPanelProps {
                     identifier = "56EA8234-06D5-27B6-034B-4070B9FB0F59".opt
                     owner = thisTop.opt
-                    //okCaption = thisTop.okCaption.opt
                     okCaption = if (thisTop.okCaption.isEmpty) ScNone else thisTop.okCaption.get.opt
                     cancelCaption = if (thisTop.cancelCaption.isEmpty) ScNone else thisTop.cancelCaption.get.opt
                     ownerDestroy = false.opt

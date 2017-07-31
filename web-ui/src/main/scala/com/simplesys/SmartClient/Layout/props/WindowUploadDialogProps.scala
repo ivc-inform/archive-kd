@@ -19,6 +19,11 @@ import scala.scalajs.js._
 class WindowUploadDialogProps extends WindowSSDialogProps {
     type classHandler <: WindowUploadDialog
 
+    title = "Загрузить файл".ellipsis.opt
+    headerIconPath = Common.attach.opt
+    identifier = "FD82E8FF-4045-9803-9CE3-B94E96FC5D56".opt
+    height = 100
+    isModal = true.opt
 
     initWidget = {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
@@ -32,10 +37,13 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
                       ).ID.opt
                       encoding = Encoding.multipart.opt
                       canSubmit = true.opt
+                      width =  "100%"
                       items = Seq(
                           UploadItem(
                               new UploadItemProps {
                                   showTitle = false.opt
+                                  height = 30
+                                  width =  "100%"
                                   changed = {
                                       (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                       //                                                                  isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?", {
@@ -53,6 +61,7 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
               )
 
             thisTop.Super("initWidget", args)
+            thisTop.okCancelPanel.foreach(_ setHeight "*")
 
     }.toThisFunc.opt
 
