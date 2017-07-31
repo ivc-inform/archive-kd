@@ -2,24 +2,17 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.props.{ImgButtonProps, ProgressbarProps}
-import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.formsItems.UploadItem
-import com.simplesys.SmartClient.Forms.formsItems.props.UploadItemProps
-import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
-import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
-import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
-import com.simplesys.System.Types.{Alignment, Encoding, ListGridFieldType}
-import com.simplesys.js.components.cards.Attach
-import com.simplesys.option.ScOption._
-import com.simplesys.option.DoubleType._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
-import com.simplesys.System._
+import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, WindowUploadDialogProps}
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.Alignment.Alignment
-import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
+import com.simplesys.System.Types.{Alignment, ListGridFieldType}
+import com.simplesys.System._
 import com.simplesys.function._
+import com.simplesys.js.components.cards.Attach
+import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
+import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
 import scala.scalajs.js.UndefOr._
 
@@ -121,6 +114,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             src = Common.attach.opt
                                             click = {
                                                 (thiz: classHandler) ⇒
+                                                    WindowUploadDialog.create(
+                                                        new WindowUploadDialogProps{
+
+                                                        }
+                                                    )
                                                     false
                                             }.toThisFunc.opt
                                         }
