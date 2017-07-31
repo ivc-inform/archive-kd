@@ -56,7 +56,6 @@ object PrepareJSCode extends StaticJSCode {
         isc.defineClass(WindowListGridEditorToolStrip.getClass.getSimpleName, ToolStrip.getClass.getSimpleName)
         isc.defineClass[WindowSSDialog](WindowSSDialog.getClass.getSimpleName, WindowSS.getClass.getSimpleName).addProperties(WindowSSDialog(new WindowSSDialogProps))
         isc.defineClass[DrawLinePathSS](DrawLinePathSS.getClass.getSimpleName, DrawPath.getClass.getSimpleName).addProperties(DrawLinePathSS(new DrawLinePathSSProps))
-        isc.defineClass(WindowUploadDialog.getClass.getSimpleName, WindowSSDialog.getClass.getSimpleName)
 
         isc.defineClass(DrawItemTile.getClass.getSimpleName, SimpleTile.getClass.getSimpleName)
         isc.defineClass(EditContextSS.getClass.getSimpleName, EditContext.getClass.getSimpleName)

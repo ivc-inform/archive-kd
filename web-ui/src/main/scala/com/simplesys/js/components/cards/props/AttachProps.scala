@@ -3,7 +3,7 @@ package com.simplesys.js.components.cards.props
 import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.props.{ImgButtonProps, ProgressbarProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
-import com.simplesys.SmartClient.Layout.props.{HLayoutSSProps, WindowUploadDialogProps}
+import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
