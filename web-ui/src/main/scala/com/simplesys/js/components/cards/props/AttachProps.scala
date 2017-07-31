@@ -7,6 +7,7 @@ import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
+import com.simplesys.app.WindowUploadDialog
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Attach
 import com.simplesys.option.DoubleType._
