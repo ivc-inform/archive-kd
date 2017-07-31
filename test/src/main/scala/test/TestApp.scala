@@ -11,7 +11,7 @@ object TestApp2 {
         val bufferSize = 1024 * 1024 * 100
 
         val dataSource = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
-        implicit val conn: OracleConnection = dataSource.getConnection()
+        implicit val conn: OracleConnection = dataSource.getConnection().asInstanceOf[OracleConnection]
         conn setAutoCommit false
 
         // Create Oracle DatabaseMetaData object
@@ -19,6 +19,7 @@ object TestApp2 {
 
         // gets driver info:
         println(s"JDBC driver version is ${meta.getDriverVersion}")
+        println(s"sqlDialect is ${dataSource.sqlDialect}")
 
         val startTime = System.currentTimeMillis()
 
