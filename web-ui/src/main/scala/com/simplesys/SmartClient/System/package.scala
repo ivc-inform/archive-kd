@@ -201,6 +201,7 @@ package object System {
     object WindowSS extends SCApply[WindowSS, WindowSSProps]
     object WindowSSDialog extends SCApply[WindowSSDialog, WindowSSDialogProps]
     object WindowProgressDialog extends SCApply[WindowProgressDialog, WindowProgressDialogProps]
+    object WindowUploadDialog extends SCApply[WindowUploadDialog, WindowUploadDialogProps]
     object ToolStrip extends SCApply[ToolStrip, ToolStripProps]
     object WindowListGridEditorToolStrip extends SCApply[WindowListGridEditorToolStrip, WindowListGridEditorToolStripProps]
     object ToolStripMenuButton extends SCApply[ToolStripMenuButton, ToolStripMenuButtonProps]

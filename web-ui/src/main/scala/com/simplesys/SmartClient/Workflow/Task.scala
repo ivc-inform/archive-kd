@@ -1,4 +1,4 @@
-package com.simplesys.SmartClient.Workdlow
+package com.simplesys.SmartClient.Workflow
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSGlobal

@@ -1,4 +1,4 @@
-package com.simplesys.SmartClient.Workdlow
+package com.simplesys.SmartClient.Workflow
 
 import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class}
 

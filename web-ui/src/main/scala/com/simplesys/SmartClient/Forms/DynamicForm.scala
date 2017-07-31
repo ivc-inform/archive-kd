@@ -8,7 +8,7 @@ import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Canvas}
 import com.simplesys.SmartClient.Grids.listGrid.{ListGridField, ListGridRecord}
 import com.simplesys.SmartClient.Grids.{Grid, ListGrid}
 import com.simplesys.SmartClient.System.{IscArray, KeyIdentifier}
-import com.simplesys.SmartClient.Workdlow.UserTask
+import com.simplesys.SmartClient.Workflow.UserTask
 import com.simplesys.System.Types.Alignment.Alignment
 import com.simplesys.System.Types.AutoComplete.AutoComplete
 import com.simplesys.System.Types.DSOperationType.DSOperationType
