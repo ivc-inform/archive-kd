@@ -128,7 +128,7 @@ class UploadTestTabProps extends VLayoutSSProps {
                 def unsubscribe(): Unit = {
                     val submit = form getItem "upload"
                     submit.disable()
-                    isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageRecordInBase, channelMessageNextStep, channelMessageMaxValue))
+                    //isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageRecordInBase, channelMessageNextStep, channelMessageMaxValue))
                 }
 
                 isc.MessagingSS.subscribe(channelMessageEndUpload, { (e: MessageJS) ⇒
