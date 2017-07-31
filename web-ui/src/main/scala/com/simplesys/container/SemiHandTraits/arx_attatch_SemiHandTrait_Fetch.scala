@@ -5,6 +5,7 @@ package ru.simplesys.defs.app.scala.container.arx
 import akka.actor.Actor
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings._
+import com.simplesys.container.scala.GetAttFile
 import com.simplesys.isc.dataBinging.RPC.RPCResponseDyn
 import com.simplesys.isc.dataBinging.dataSource.RecordDyn
 import com.simplesys.isc.dataBinging.{DSRequestDyn, DSResponseDyn, DSResponseFailureExDyn}
@@ -14,15 +15,15 @@ import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
-import com.simplesys.json.JsonString
+import com.simplesys.json.{JsonDouble, JsonString}
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
+import oracle.jdbc.OracleConnection
 import org.joda.time.LocalDateTime
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
-import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS, DocizvstatDS, DocizvtypeDS}
+import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS}
 
 import scalaz.{Failure, Success}
-
 
 trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with ServletActorDyn {
 
@@ -48,6 +49,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                 val qty: Int = requestData.EndRow.toInt - requestData.StartRow.toInt + 1
 
                 val select = dataSet.Fetch(dsRequest = DSRequest(sqlDialect = sessionContext.getSQLDialect, startRow = requestData.StartRow, endRow = requestData.EndRow, sortBy = requestData.SortBy, data = data, textMatchStyle = requestData.TextMatchStyle.toString))
+                implicit val oraConnection = ds.getConnection
 
                 Out(classDyn = select.result match {
                     case Success(list) => {
@@ -91,6 +93,16 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                         }
                                     case Failure(e) ⇒
                                         logger error e.getStackTraceString
+                                }
+
+                                GetAttFile.getOrdDoc(idAttatch).foreach {
+                                    ordDoc ⇒
+                                        ordDoc.source.foreach {
+                                            ordSource ⇒
+                                                ordSource.srcName.foreach(srcName ⇒ record += ("fileName" → JsonString(srcName)))
+                                                ordDoc.contentLength.foreach(contentLength ⇒ record += ("contentLength" → JsonString(s"${(contentLength/ (1024 * 1024)).setScale(4, BigDecimal.RoundingMode.HALF_UP)} MB")))
+                                                ordDoc.mimeType.foreach(mimeType ⇒ record += ("mimeType" → JsonString(mimeType)))
+                                        }
                                 }
 
                                 _data += record

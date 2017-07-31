@@ -1,10 +1,11 @@
 package com.simplesys.app
 
-import com.simplesys.bonecp.BoneCPDataSource
 import com.simplesys.common.Strings._
 import com.simplesys.log.Logging
+import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.http.HttpSession
 import com.simplesys.servlet.{ServletActor, ServletContext}
+import com.simplesys.sql.SQLDialect
 
 trait SessionContextSupport {
     this: ServletActor =>
@@ -16,9 +17,6 @@ trait SessionContextSupport {
     def getUserId = sessionContext.getUserId
 
     implicit def ds = sessionContext.getDS  //Не убирать !!!
-    def dsProd = sessionContext.getDSProd
-    def dsSave = sessionContext.getDSSave
-    def dsConfig = sessionContext.getDSConfig
 }
 
 class SessionContext(protected val session: Option[HttpSession]) extends Logging {
@@ -31,24 +29,14 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
 
     private[this] var loginedUser = strEmpty
     def getLoginedUser = loginedUser
-    //def setLoginedUser (loginedUser:String) = this.loginedUser = loginedUser
 
     private[this] var captionUser = strEmpty
     def getCaptionUser = captionUser
 
-    private[this] var ds: BoneCPDataSource = null
+    private[this] var ds: OraclePoolDataSource = null
     def getDS = ds
 
-    private[this] var dsProd: BoneCPDataSource = null
-    def getDSProd = dsProd
-
-    private[this] var dsSave: BoneCPDataSource = null
-    def getDSSave = dsSave
-
-    private[this] var dsConfig: BoneCPDataSource = null
-    def getDSConfig = dsConfig
-
-    def getSQLDialect = ds.SQLDialect
+    def getSQLDialect: SQLDialect = ds.sqlDialect
 
     /*private[this] var birtEngine: IReportEngine = null
     def getBirtEngine = birtEngine*/
@@ -81,29 +69,9 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
         }
 
         ds = servletContext.Attribute(s"ds") match {
-            case Some(value: BoneCPDataSource) => value
+            case Some(value: OraclePoolDataSource) => value
             case _ => throw new RuntimeException(s"Нет DS")
         }
-
-        /*dsProd = servletContext.Attribute("dsProd") match {
-            case Some(value: BoneCPDataSource) => value
-            case _ => throw new RuntimeException(s"Нет DSProd")
-        }*/
-
-        /*dsSave = servletContext.Attribute("dsSave") match {
-            case Some(value: BoneCPDataSource) => value
-            case _ => throw new RuntimeException(s"Нет DSSave")
-        }*/
-
-        /*dsConfig = servletContext.Attribute("dsConfig") match {
-            case Some(value: BoneCPDataSource) => value
-            case _ => throw new RuntimeException(s"Нет dsConfig")
-        }*/
-
-        /*birtEngine = servletContext.Attribute(s"birtEngine") match {
-          case Some(value: IReportEngine) => value
-          case _ => throw new RuntimeException(s"Нет birtEngine/IReportEngine")
-        }*/
     }
 
     def Invalidate() {

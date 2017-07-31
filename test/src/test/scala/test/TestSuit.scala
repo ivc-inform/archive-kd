@@ -1,4 +1,4 @@
-package blob
+package test
 
 import com.simplesys.connectionStack.BoneCPStack
 import oracle.jdbc.pool.OracleDataSource

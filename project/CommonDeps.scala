@@ -15,7 +15,7 @@ object PluginDeps {
         //val xsbtWebVersion = "0.9.1"
         val sbtNativePackagerVersion = "1.2.0-M8"
 
-        val scalaJSPluginVersion = "0.6.18"
+        val scalaJSPluginVersion = "0.6.19"
         val jrabelPluginVersion = "0.10.1"
         val macroParadiseVersion = "2.1.0"
     }
@@ -60,24 +60,27 @@ object CommonDeps {
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
-        //val scalaJSVersion = "1.3-SNAPSHOT"
-        val scalaJSVersion = "1.3.5"
+        val scalaJSVersion = "1.3-SNAPSHOT"
+        //val scalaJSVersion = "1.3.5"
 
         val scalajsDOMVersion = "0.9.1"
         val scalajsJQueryVersion = "0.9.0"
 
         val jettyVersion = "9.4.6.v20170531"
         val jdbcOracle11DriverVersion = "11.2.0.4"
+        val jdbcOracle12DriverVersion = "12.2.0.1"
 
         val commonsFileuploadVersion = "1.3.3"
         val commonsIOVersion = "2.5"
         val scalaURIVersion = "0.4.16"
+        val slickVersion = "3.2.1"
+        val configWrapperVersion= "0.4.4"
     }
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
 
-    val jodaTime = "joda-time" % "joda-time" % versions.jodaVersion
-    val jodaConvert = "org.joda" % "joda-convert" % versions.jodaConvertVersion
+//    val jodaTime = "joda-time" % "joda-time" % versions.jodaVersion
+//    val jodaConvert = "org.joda" % "joda-convert" % versions.jodaConvertVersion
 
     val akkaActor = "com.typesafe.akka" %% "akka-actor" % versions.akkaVersion
     val akkaSLF4J = "com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion
@@ -106,16 +109,21 @@ object CommonDeps {
     val ssysJDBCWrapper = "com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion
     val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
     val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion
-    val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
+    //val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
+    val poolsDataSources = "com.simplesys.core" %% "pools-datasources" % versions.ssysCoreVersion
     val ssysLogBackWrapper = "com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion
     val scalaJSWrapper = "com.simplesys" %% "common-types" % versions.scalaJSVersion
     val scalaTags = "com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion
     val uPickle = "com.lihaoyi" %% "upickle" % versions.uPickleVersion
-    
+
     val jettyRuner = "org.eclipse.jetty" % "jetty-runner" % versions.jettyVersion
 
     val scalaTest = "org.scalatest" %% "scalatest" % versions.scalaTestVersion
-    val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
+    //val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
+
+    val jdbcOracle12 = "com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion
+    val jdbcOracle12UCP = "com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion
+    val jdbcOracleN18_12 = "com.oracle.jdbc" % "orai18n" % versions.jdbcOracle12DriverVersion
 
     val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
     val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion
@@ -124,6 +132,9 @@ object CommonDeps {
     val commonsIO = "commons-io" % "commons-io" % versions.commonsIOVersion
 
     val scalaURI = "com.netaporter" %% "scala-uri" % versions.scalaURIVersion
+    val slick = "com.typesafe.slick" %% "slick" % versions.slickVersion
+
+    val configWrapper = "com.github.kxbmap" %% "configs" % versions.configWrapperVersion
 
 }
 
