@@ -47,8 +47,8 @@ object UploadServlet {
     }
 }
 
-@RSTransfer(urlPattern = "/UploadServlet")
-class StartPageContainer(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends ServletActorDyn {
+@RSTransfer(urlPattern = "/TestUploadServlet")
+class TestUploadServlet(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends ServletActorDyn {
     private val filePath: String = "web-ui/target/upload"
 
     def receive = {

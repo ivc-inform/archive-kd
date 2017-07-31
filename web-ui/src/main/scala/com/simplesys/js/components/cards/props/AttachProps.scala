@@ -127,7 +127,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                         DynamicFormSS.create(
                             new DynamicFormSSProps {
                                 width = "100%"
-                                /*action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}&channelMessageError=${thiz.channelMessageError.get}".opt*/
+                                /*action = s"TestUploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}&channelMessageError=${thiz.channelMessageError.get}".opt*/
                                 target = Iframe.create(
                                     new IframeProps
                                 ).ID.opt

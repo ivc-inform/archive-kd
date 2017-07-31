@@ -44,6 +44,7 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
                                   showTitle = false.opt
                                   height = 30
                                   width =  "100%"
+                                  multiple = false.opt
                                   changed = {
                                       (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
                                       //                                                                  isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?", {
