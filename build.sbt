@@ -65,7 +65,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           CommonDeps.ssysCoreLibrary,
           CommonDeps.ssysJsonExtender,
           CommonDeps.ssysJDBCWrapper,
-          CommonDeps.oraclePoolDataSources,
+          CommonDeps.poolsDataSources,
           CommonDeps.jdbcOracle12,
           CommonDeps.jdbcOracle12UCP,
           CommonDeps.jdbcOracleN18_12,
