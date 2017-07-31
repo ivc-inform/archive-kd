@@ -1,12 +1,12 @@
 package com.simplesys.container.upload
 
-import com.simplesys.SmartClient.Layout.{AbstractHLayoutCompanion, HLayout, VLayout, VLayoutSS}
+import com.simplesys.SmartClient.Layout.{AbstractHLayoutCompanion, HLayout}
 import com.simplesys.System.JSUndefined
 
 import scala.scalajs.js
 
 @js.native
-trait UploadTestTab extends VLayoutSS {
+trait UploadTestTab extends HLayout {
 }
 
 @js.native
