@@ -116,7 +116,7 @@ class UploadTestTabProps extends HLayoutProps {
             thiz addMember form
 
             def unsubscribe(): Unit = {
-                isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
+                //isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
                 val submit = form getItem "upload"
                 submit.disable()
             }
