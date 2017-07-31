@@ -67,11 +67,6 @@ class AttachProps extends CommonListGridEditorComponentProps {
             `type` = ListGridFieldType.sCaption_SimpleType.opt
         },
         new ListGridFieldProps {
-            nameStrong = mimeType.opt
-            title = "Тип файла".opt
-            `type` = ListGridFieldType.sCaption_SimpleType.opt
-        },
-        new ListGridFieldProps {
             nameStrong = arx_docizvstat_vname_NameStrong.opt
             title = "Статус извещения".opt
             `type` = ListGridFieldType.sCaption_SimpleType.opt
