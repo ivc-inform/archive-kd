@@ -191,9 +191,9 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
 
                                         println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
 
-                                        pstmt.setBinaryStream(3, inputStream, fi.getSize)
+                                        //pstmt.setBinaryStream(3, inputStream, fi.getSize)
 
-                                        //pstmt.setBlob(3, inputStream, fi.getSize)
+                                        pstmt.setBlob(3, inputStream, fi.getSize)
                                         println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.executeUpdate")
