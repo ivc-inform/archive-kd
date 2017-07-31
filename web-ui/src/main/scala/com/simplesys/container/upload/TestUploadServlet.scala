@@ -143,10 +143,6 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                     upload setProgressListener progressListener
                     var body = <body></body>
 
-                    /*val maxValue: Long = upload.parseRequest(request).asScala.foldLeft(0L) {
-                        (a, f) ⇒ a + f.getSize
-                    }*/
-
                     println("point 1")
                     upload.parseRequest(request).asScala.foreach {
                         fi ⇒
