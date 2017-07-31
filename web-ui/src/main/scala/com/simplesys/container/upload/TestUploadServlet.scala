@@ -79,7 +79,10 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
             } else {
 
                 val factory = new DiskFileItemFactory()
+                
                 val file = new File(s"./temp")
+                if (!file.exists() || !file.isDirectory)
+                    file.mkdir()
 
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
@@ -115,7 +118,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                     //@formatter:off
                     var out: Node = <html><head><title>Servlet upload</title></head></html>
                     //@formatter:on
-                    
+
                     val progressListener = new ProgressListener() {
                         private var megaBytes = -1L
                         private var step = 1
@@ -187,7 +190,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                                         println(s"after pstmt.setString(2, $fileName) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
-                                        
+
                                         pstmt.setBinaryStream(3, inputStream, fi.getSize)
 
                                         //pstmt.setBlob(3, inputStream, fi.getSize)
@@ -227,7 +230,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                         Out("Ok")
                     case Failure(e) ⇒
 
-                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack"→ JsonString(e.getStackTraceString)),channels = channelMessageError)))
+                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
                         OutFailure(e)
                         conn.foreach(_.close())
                 }

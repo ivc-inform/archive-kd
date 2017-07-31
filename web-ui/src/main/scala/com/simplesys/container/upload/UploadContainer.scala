@@ -79,11 +79,10 @@ object UploadContainer {
                 }
 
                 val factory = new DiskFileItemFactory()
-                //val file = new File(s"./temp")
                 val file = new File(s"./temp")
 
                 if (!file.exists() || !file.isDirectory)
-                    file.createNewFile()
+                    file.mkdir()
 
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
