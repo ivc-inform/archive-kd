@@ -127,7 +127,7 @@ object UploadContainer {
                                         val blob:OracleBlob = connection.createBlob().asInstanceOf[OracleBlob]
                                         val out: InputStream = blob.getBinaryStream()
                                         val in: OutputStream = fi.getOutputStream
-                                        copy(in, out)
+                                        //copy(in, out)
                                         
                                         def getEmptySource =
                                             new OrdSource {
