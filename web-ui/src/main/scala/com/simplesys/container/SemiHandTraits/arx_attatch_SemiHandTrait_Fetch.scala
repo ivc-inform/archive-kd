@@ -15,7 +15,7 @@ import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
-import com.simplesys.json.JsonString
+import com.simplesys.json.{JsonDouble, JsonString}
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.TupleSS14
 import oracle.jdbc.OracleConnection
@@ -96,10 +96,13 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                 }
 
                                 GetAttFile.getOrdDoc(idAttatch).foreach {
-                                    _.source.foreach {
-                                        ordSource ⇒
-                                            ordSource.srcName.foreach(srcName ⇒ record += ("fileName" → JsonString(srcName)))
-                                    }
+                                    ordDoc ⇒
+                                        ordDoc.source.foreach {
+                                            ordSource ⇒
+                                                ordSource.srcName.foreach(srcName ⇒ record += ("fileName" → JsonString(srcName)))
+                                                ordDoc.contentLength.foreach(contentLength ⇒ record += ("contentLength" → JsonString(s"${(contentLength/ (1024 * 1024)).setScale(4, BigDecimal.RoundingMode.HALF_UP)} MB")))
+                                                ordDoc.mimeType.foreach(mimeType ⇒ record += ("mimeType" → JsonString(mimeType)))
+                                        }
                                 }
 
                                 _data += record

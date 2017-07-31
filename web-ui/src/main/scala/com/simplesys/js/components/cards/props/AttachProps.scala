@@ -32,6 +32,8 @@ trait AttatchDataRecordExt extends AttatchDataRecord {
 
 object AttachProps extends JSObject {
     val fileNameField = "fileName".nameStrong
+    val contentLength = "contentLength".nameStrong
+    val mimeType = "mimeType".nameStrong
 }
 
 class AttachProps extends CommonListGridEditorComponentProps {
@@ -67,6 +69,16 @@ class AttachProps extends CommonListGridEditorComponentProps {
             `type` = ListGridFieldType.sCode_SimpleType.opt
         },
         new ListGridFieldProps {
+            nameStrong = contentLength.opt
+            title = "Размер файла".opt
+            `type` = ListGridFieldType.sCaption_SimpleType.opt
+        },
+        new ListGridFieldProps {
+            nameStrong = mimeType.opt
+            title = "Тип файла".opt
+            `type` = ListGridFieldType.sCaption_SimpleType.opt
+        },
+        new ListGridFieldProps {
             nameStrong = arx_docizvstat_vname_NameStrong.opt
             title = "Статус извещения".opt
             `type` = ListGridFieldType.sCaption_SimpleType.opt
@@ -99,7 +111,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         }
                                     ),
                                     ImgButton.create(
-                                        new ImgButtonProps{
+                                        new ImgButtonProps {
                                             showDown = false.opt
                                             showRollOver = false.opt
                                             layoutAlign = Alignment.center
@@ -108,7 +120,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             width = 18
                                             src = Common.attach.opt
                                             click = {
-                                                (thiz:classHandler) ⇒
+                                                (thiz: classHandler) ⇒
                                                     false
                                             }.toThisFunc.opt
                                         }
