@@ -2,7 +2,7 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.Control.{ImgButton, Progressbar}
 import com.simplesys.SmartClient.Control.props.ImgButtonProps
-import com.simplesys.SmartClient.System.{IscArray, isc}
+import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.URL
 import com.simplesys.function._
@@ -55,7 +55,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         def getParams: String = params.toString()
 
                         def getNo = s"p${i}"
-                        def getNo1 = s"${getNo}_${id}"
+                        def getNo1 = s"${getNo}_${id}_${simpleSyS.guid}"
 
                         thisTop.channelMessageEndUpload = getNo1
                         addParam()
