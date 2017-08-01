@@ -1,2 +1,3 @@
-isc.defineClass("VLayoutSS", isc.VLayout).addProperties
+isc.defineClass("VLayoutSS", isc.LayoutSS).addProperties
+	"vertical": true
 

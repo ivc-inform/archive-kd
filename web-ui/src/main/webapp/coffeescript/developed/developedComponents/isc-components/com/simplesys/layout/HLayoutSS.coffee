@@ -1,5 +1,5 @@
 isc.defineClass("HLayoutSS", isc.LayoutSS).addProperties
-    "initWidget": ->
-        this.Super "initWidget", arguments
+    ###"initWidget": ->
+        this.Super "initWidget", arguments###
     "vertical": false
 
