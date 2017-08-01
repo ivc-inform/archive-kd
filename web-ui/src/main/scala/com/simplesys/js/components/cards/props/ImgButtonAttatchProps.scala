@@ -79,8 +79,6 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         addParam("")
 
                         thisTop.actionURL = s"/logic/arx_attatch/Upload?${getParams}"
-
-
                 }
             }
 
