@@ -4,12 +4,14 @@ import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.props.{ImgButtonProps, ProgressbarProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
+import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.app.WindowUploadDialog
+import com.simplesys.container.upload.{ErrorStr, UploadTestData}
 import com.simplesys.function._
-import com.simplesys.js.components.cards.Attach
+import com.simplesys.js.components.cards.{Attach, WindowUploadDialog}
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._

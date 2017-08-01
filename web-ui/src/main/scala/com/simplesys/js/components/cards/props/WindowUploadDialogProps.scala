@@ -7,15 +7,14 @@ import com.simplesys.SmartClient.Forms.formsItems.props.UploadItemProps
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Layout.props.WindowSSDialogProps
-import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.{Encoding, URL}
+import com.simplesys.System.Types.Encoding
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.js.components.cards.WindowUploadDialog
 import com.simplesys.option.DoubleType._
-import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
+import com.simplesys.option.{ScNone, ScOption}
 
 import scala.scalajs.js.UndefOr
 
@@ -41,7 +40,6 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
 
     initWidget = {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
-            //val channelMessageEndUpload =
 
             def getAction(): UndefOr[String] = thisTop.record.map(item ⇒ item.id.map(id ⇒ s"logic/arx_attatch/Upload?p1=p1_${id}&")).flatten
 
@@ -108,12 +106,7 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
                                               multiple = false.opt
                                               changed = {
                                                   (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
-                                                  //                                                                  isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?", {
-                                                  //                                                                      (value: Boolean) ⇒
-                                                  //                                                                          if (value)
-                                                  //                                                                              isc.ok(value.toString)
-                                                  //                                                                      //form.submitForm()
-                                                  //                                                                  }.toFunc)
+                                                      value.foreach(_ ⇒ thisTop.okCancelPanel.foreach(_.okBtn.enable()))
 
                                               }.toFunc.opt
                                           }
@@ -127,14 +120,51 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
 
 
             thisTop.Super("initWidget", args)
-            thisTop.okCancelPanel.foreach(_ setHeight "*")
+            thisTop.okCancelPanel.foreach {
+                item ⇒
+                    item setHeight "*"
+                    item.okBtn.disable()
+                    item.okBtn.showDisabledIcon = false
+            }
 
     }.toThisFunc.opt
 
     okFunction = {
         (thiz: classHandler) ⇒
-            thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)))
-            thiz.channelMessageNextStep.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep()))
+            isc ok(message = "okFunction", callback = { () ⇒ thiz.hide() }.toFunc)
+        //            thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)))
+        //            thiz.channelMessageNextStep.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep())))
+        //            thiz.channelMessageMaxValue.foreach(isc.MessagingSS.subscribe(_,
+        //                (e: MessageJS) ⇒
+        //                    e.data.foreach {
+        //                        data ⇒
+        //                            thiz.progressBar.foreach {
+        //                                progressBar ⇒
+        //                                    progressBar setPercentDone 0.0
+        //                                    progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue.getOrElse(0)
+        //                            }
+        //                    }
+        //            ))
+        //
+        //            def unsubscribe(): Unit = {
+        //                //                isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
+        //                //                            val file = form getItem "file"
+        //                //                            file.enable()
+        //            }
+        //
+        //            thiz.channelMessageEndUpload.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
+        //                progressBar.foreach(_ setPercentDone 0.0)
+        //                unsubscribe()
+        //            }))
+        //
+        //            thiz.channelMessageError.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
+        //                progressBar.foreach(_ setPercentDone 0.0)
+        //
+        //                val error = e.data.asInstanceOf[ErrorStr]
+        //                isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
+        //                unsubscribe()
+        //            }))
+
 
     }.toThisFunc.opt
 

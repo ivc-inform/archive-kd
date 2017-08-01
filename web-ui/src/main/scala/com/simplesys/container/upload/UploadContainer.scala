@@ -4,6 +4,7 @@ import java.io.{File, InputStream, OutputStream}
 import java.time.{Instant, LocalDateTime, ZoneId}
 import java.util.Properties
 
+import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
@@ -29,6 +30,17 @@ import org.apache.commons.io.IOUtils.copy
 
 import scala.collection.JavaConverters._
 import scala.util.{Failure, Success, Try}
+
+trait UploadTestData extends JSObject {
+    val maxValue: JSUndefined[Double]
+    val elapsedTime: JSUndefined[String]
+}
+
+trait ErrorStr extends JSObject {
+    val message: JSUndefined[String]
+    val stack: JSUndefined[String]
+}
+
 
 object UploadContainer {
 

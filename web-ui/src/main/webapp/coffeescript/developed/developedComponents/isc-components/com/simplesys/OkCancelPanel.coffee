@@ -39,7 +39,7 @@ isc.defineClass("OkCancelPanel", isc.HPanelSS).addProperties
 							"prompt"          : @okCaption
 							"icon"            : @okIcon
 							"width"           : 100
-							"showDisabledIcon": true
+							"showDisabledIcon": false
 
 						isc.LayoutSpacerSS.create
 							"width": "*"
@@ -102,7 +102,7 @@ isc.defineClass("OkPanel", isc.HPanelSS).addProperties
 				"title": @okCaption
 				"icon":  @okIcon
 				"width": 100
-				"showDisabledIcon": true
+				"showDisabledIcon": false
 
 			isc.LayoutSpacerSS.create
 				"width": "*"

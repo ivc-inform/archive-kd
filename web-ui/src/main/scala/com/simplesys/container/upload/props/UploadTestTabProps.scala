@@ -11,21 +11,11 @@ import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types._
 import com.simplesys.System._
-import com.simplesys.container.upload.UploadTestTab
+import com.simplesys.container.upload.{ErrorStr, UploadTestData, UploadTestTab}
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
-
-trait UploadTestData extends JSObject {
-    val maxValue: JSUndefined[Double]
-    val elapsedTime: JSUndefined[String]
-}
-
-trait Error extends JSObject {
-    val message: JSUndefined[String]
-    val stack: JSUndefined[String]
-}
 
 class UploadTestTabProps extends HLayoutProps {
     type classHandler <: UploadTestTab
@@ -142,7 +132,7 @@ class UploadTestTabProps extends HLayoutProps {
             isc.MessagingSS.subscribe(channelMessageError, { (e: MessageJS) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
-                val error = e.data.asInstanceOf[Error]
+                val error = e.data.asInstanceOf[ErrorStr]
                 isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
                 unsubscribe()
             })
