@@ -16,7 +16,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
 
-import scala.scalajs.js.UndefOr
+import scala.scalajs.js.{ThisFunction0, UndefOr}
 
 class WindowUploadDialogProps extends WindowSSDialogProps {
     type classHandler <: WindowUploadDialog
@@ -27,40 +27,41 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
     height = 100
     isModal = true.opt
     //autoSize = true.opt
+
     var action: ScOption[URL] = ScNone
+    var form: ScOption[DynamicFormSS] = ScNone
 
     initWidget = {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
+            thisTop.form = DynamicFormSS.create(
+                new DynamicFormSSProps {
+                    width = "100%"
+                    action = thisTop.action.opt
+                    target = Iframe.create(
+                        new IframeProps
+                    ).ID.opt
+                    encoding = Encoding.multipart.opt
+                    canSubmit = true.opt
+                    colWidths = Seq[JSAny]("30%", "*").opt
+                    items = Seq(
+                        UploadItem(
+                            new UploadItemProps {
+                                showTitle = false.opt
+                                height = 30
+                                width = "100%"
+                                multiple = false.opt
+                                changed = {
+                                    (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
+                                        value.foreach(_ ⇒ thisTop.okCancelPanel.foreach(_.okBtn.enable()))
 
-            thisTop addItem
-              DynamicFormSS.create(
-                  new DynamicFormSSProps {
-                      width = "100%"
-                      action = thisTop.action.opt
-                      target = Iframe.create(
-                          new IframeProps
-                      ).ID.opt
-                      encoding = Encoding.multipart.opt
-                      canSubmit = true.opt
-                      colWidths = Seq[JSAny]("30%", "*").opt
-                      items = Seq(
-                          UploadItem(
-                              new UploadItemProps {
-                                  showTitle = false.opt
-                                  height = 30
-                                  width = "100%"
-                                  multiple = false.opt
-                                  changed = {
-                                      (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
-                                          value.foreach(_ ⇒ thisTop.okCancelPanel.foreach(_.okBtn.enable()))
+                                }.toFunc.opt
+                            }
+                        )
+                    ).opt
+                }
+            )
 
-                                  }.toFunc.opt
-                              }
-                          )
-                      ).opt
-                  }
-              )
-
+            thisTop addItem thisTop.form.get
 
             thisTop.Super("initWidget", args)
             thisTop.okCancelPanel.foreach {

@@ -2,6 +2,7 @@ package com.simplesys.js.components.cards
 
 import com.simplesys.SmartClient.Control.{AbstractImgButtonCompanion, ImgButton, Progressbar}
 import com.simplesys.System.JSUndefined
+import com.simplesys.System.Types.void
 import com.simplesys.js.components.cards.props.AttatchDataRecordExt
 
 import scala.scalajs.js
@@ -17,6 +18,8 @@ trait ImgButtonAttatch extends ImgButton {
     val progressBar: JSUndefined[Progressbar]
     val record: JSUndefined[AttatchDataRecordExt]
     var actionURL: JSUndefined[String]
+
+    def okFunction ():void
 }
 
 @js.native

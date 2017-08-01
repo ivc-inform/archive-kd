@@ -4,10 +4,12 @@ import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.props.{ImgButtonProps, ProgressbarProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
+import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.app.{ImgButtonAttatch, WindowUploadDialog}
+import com.simplesys.container.upload.{ErrorStr, UploadTestData}
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Attach
 import com.simplesys.option.DoubleType._
@@ -113,48 +115,52 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             src = Common.attach.opt
                                             progressBar = _progressBar.opt
                                             record = _record.opt
-                                            click = {
+                                            okFunction = {
                                                 (thiz: classHandler) ⇒
+                                                    thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)))
+                                                    thiz.channelMessageNextStep.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep())))
+                                                    thiz.channelMessageMaxValue.foreach(isc.MessagingSS.subscribe(_,
+                                                        (e: MessageJS) ⇒
+                                                            e.data.foreach {
+                                                                data ⇒
+                                                                    thiz.progressBar.foreach {
+                                                                        progressBar ⇒
+                                                                            progressBar setPercentDone 0.0
+                                                                            progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue.getOrElse(0)
+                                                                    }
+                                                            }
+                                                    ))
+
+                                                    def unsubscribe(): Unit = {
+                                                        //                isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
+                                                        //                            val file = form getItem "file"
+                                                        //                            file.enable()
+                                                    }
+
+                                                    thiz.channelMessageEndUpload.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
+                                                        progressBar.foreach(_ setPercentDone 0.0)
+                                                        unsubscribe()
+                                                    }))
+
+                                                    thiz.channelMessageError.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
+                                                        progressBar.foreach(_ setPercentDone 0.0)
+
+                                                        val error = e.data.asInstanceOf[ErrorStr]
+                                                        isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
+                                                        unsubscribe()
+                                                    }))
+
+
+                                            }.toThisFunc.opt
+                                            click = {
+                                                (thizTop: classHandler) ⇒
                                                     WindowUploadDialog.create(
                                                         new WindowUploadDialogProps {
-                                                            action = thiz.actionURL.opt
+                                                            action = thizTop.actionURL.opt
                                                             okFunction = {
                                                                 (thiz: classHandler) ⇒
-                                                                    isc ok(message = "okFunction", callback = { () ⇒ thiz.hide() }.toFunc)
-                                                                //            thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)))
-                                                                //            thiz.channelMessageNextStep.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep())))
-                                                                //            thiz.channelMessageMaxValue.foreach(isc.MessagingSS.subscribe(_,
-                                                                //                (e: MessageJS) ⇒
-                                                                //                    e.data.foreach {
-                                                                //                        data ⇒
-                                                                //                            thiz.progressBar.foreach {
-                                                                //                                progressBar ⇒
-                                                                //                                    progressBar setPercentDone 0.0
-                                                                //                                    progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue.getOrElse(0)
-                                                                //                            }
-                                                                //                    }
-                                                                //            ))
-                                                                //
-                                                                //            def unsubscribe(): Unit = {
-                                                                //                //                isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
-                                                                //                //                            val file = form getItem "file"
-                                                                //                //                            file.enable()
-                                                                //            }
-                                                                //
-                                                                //            thiz.channelMessageEndUpload.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
-                                                                //                progressBar.foreach(_ setPercentDone 0.0)
-                                                                //                unsubscribe()
-                                                                //            }))
-                                                                //
-                                                                //            thiz.channelMessageError.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
-                                                                //                progressBar.foreach(_ setPercentDone 0.0)
-                                                                //
-                                                                //                val error = e.data.asInstanceOf[ErrorStr]
-                                                                //                isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
-                                                                //                unsubscribe()
-                                                                //            }))
-
-
+                                                                    thizTop.okFunction()
+                                                                    thiz.form.foreach(_.submitForm())
                                                             }.toThisFunc.opt
                                                         }
                                                     )

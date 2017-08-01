@@ -2,7 +2,7 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.Control.{ImgButton, Progressbar}
 import com.simplesys.SmartClient.Control.props.ImgButtonProps
-import com.simplesys.SmartClient.System.IscArray
+import com.simplesys.SmartClient.System.{IscArray, isc}
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.URL
 import com.simplesys.function._
@@ -10,7 +10,7 @@ import com.simplesys.js.components.cards.ImgButtonAttatch
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.UndefOr
+import scala.scalajs.js.{ThisFunction0, UndefOr}
 
 class ImgButtonAttatchProps extends ImgButtonProps {
     type classHandler <: ImgButtonAttatch
@@ -24,6 +24,11 @@ class ImgButtonAttatchProps extends ImgButtonProps {
     var progressBar: ScOption[Progressbar] = ScNone
     var record: ScOption[AttatchDataRecordExt] = ScNone
     var actionURL: ScOption[URL] = ScNone
+
+    var okFunction: ScOption[ThisFunction0[classHandler, _]] = {
+        (thiz: classHandler) ⇒
+            isc info "Нет реализации."
+    }.toThisFunc.opt
 
     initWidget = {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
