@@ -42,7 +42,6 @@ lazy val common = Project(id = "common", base = file("common")).settings(
         CommonDeps.commonsIO,
         CommonDeps.configWrapper,
         CommonDeps.ssysCommon,
-        //CommonDeps.jdbcOracle12Driver,
         CommonDeps.scalaTest % Test
     )
 ).settings(CommonSettings.defaultProjectSettings)
