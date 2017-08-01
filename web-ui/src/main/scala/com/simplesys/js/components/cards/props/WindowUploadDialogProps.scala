@@ -8,13 +8,15 @@ import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Layout.props.WindowSSDialogProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.Encoding
+import com.simplesys.System.Types.{Encoding, URL}
 import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.js.components.cards.WindowUploadDialog
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
+
+import scala.scalajs.js.UndefOr
 
 class WindowUploadDialogProps extends WindowSSDialogProps {
     type classHandler <: WindowUploadDialog
@@ -31,41 +33,90 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
     //autoSize = true.opt
 
     initWidget = {
-        (thisTop: classHandler, args: IscArray[JSAny]) ⇒           
+        (thisTop: classHandler, args: IscArray[JSAny]) ⇒
+            //val channelMessageEndUpload =
 
-            thisTop addItem
-              DynamicFormSS.create(
-                  new DynamicFormSSProps {
-                      width = "100%"
-                      //                      action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}&channelMessageError=${thiz.channelMessageError.get}".opt
-                      target = Iframe.create(
-                          new IframeProps
-                      ).ID.opt
-                      encoding = Encoding.multipart.opt
-                      canSubmit = true.opt
-                      colWidths = Seq[JSAny]("30%", "*").opt
-                      items = Seq(
-                          UploadItem(
-                              new UploadItemProps {
-                                  showTitle = false.opt
-                                  height = 30
+            def getAction(): UndefOr[String] = thisTop.record.map(item ⇒ item.id.map(id ⇒ s"logic/arx_attatch/Upload?p1=p1_${id}&")).flatten
+
+            thisTop.record.map {
+                _.id.map {
+                    id ⇒
+                        var i = 1
+                        val params = new StringBuilder
+                        params append "id"
+                        params append "="
+                        params append id
+                        params append "&"
+
+                        def addParam(end: String = "&") {
+                            params append getNo
+                            params append "="
+                            params append getNo1
+                            params append end
+                        }
+
+                        def getParams: String = params.toString()
+
+                        def getNo = s"p${i}"
+                        def getNo1 = s"${getNo}_${id}"
+
+                        val channelMessageEndUpload = getNo1
+                        addParam()
+
+                        i += 1 
+                        val channelMessageNextStep = getNo1
+                        addParam()
+
+                        i += 1
+                        val channelMessageMaxValue = getNo1
+                        addParam()
+
+                        i += 1
+                        val channelMessageRecordInBase = getNo1
+                        addParam()
+
+                        i += 1
+                        val channelMessageError = getNo1
+                        addParam("")
+
+                        val _action = s"/logic/arx_attatch/Upload?${getParams}"
+                        thisTop addItem
+                          DynamicFormSS.create(
+                              new DynamicFormSSProps {
                                   width = "100%"
-                                  multiple = false.opt
-                                  changed = {
-                                      (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
-                                      //                                                                  isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?", {
-                                      //                                                                      (value: Boolean) ⇒
-                                      //                                                                          if (value)
-                                      //                                                                              isc.ok(value.toString)
-                                      //                                                                      //form.submitForm()
-                                      //                                                                  }.toFunc)
+                                  action = _action.opt
+                                  target = Iframe.create(
+                                      new IframeProps
+                                  ).ID.opt
+                                  encoding = Encoding.multipart.opt
+                                  canSubmit = true.opt
+                                  colWidths = Seq[JSAny]("30%", "*").opt
+                                  items = Seq(
+                                      UploadItem(
+                                          new UploadItemProps {
+                                              showTitle = false.opt
+                                              height = 30
+                                              width = "100%"
+                                              multiple = false.opt
+                                              changed = {
+                                                  (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
+                                                  //                                                                  isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?", {
+                                                  //                                                                      (value: Boolean) ⇒
+                                                  //                                                                          if (value)
+                                                  //                                                                              isc.ok(value.toString)
+                                                  //                                                                      //form.submitForm()
+                                                  //                                                                  }.toFunc)
 
-                                  }.toFunc.opt
+                                              }.toFunc.opt
+                                          }
+                                      )
+                                  ).opt
                               }
                           )
-                      ).opt
-                  }
-              )
+
+                }
+            }
+
 
             thisTop.Super("initWidget", args)
             thisTop.okCancelPanel.foreach(_ setHeight "*")

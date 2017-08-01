@@ -56,12 +56,12 @@ object UploadContainer {
                 }
                 logger.debug(" ------------------------------------------------------- End Parametrs -------------------------------------------------------------------")
 
-                val idAttatch = request.Parameter("idAttach").map(_.toLong)
-                val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
-                val channelMessageError = request.Parameter("channelMessageError")
-                val channelMessageNextStep = request.Parameter("channelMessageNextStep")
-                val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
-                val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
+                val idAttatch = request.Parameter("id").map(_.toLong)
+                val channelMessageEndUpload = request.Parameter("p1")
+                val channelMessageError = request.Parameter("p2")
+                val channelMessageNextStep = request.Parameter("p3")
+                val channelMessageMaxValue = request.Parameter("p4")
+                val channelMessageRecordInBase = request.Parameter("p5")
 
                 val dcr = {
                     connection setAutoCommit false
@@ -123,11 +123,11 @@ object UploadContainer {
                             fi ⇒
                                 idAttatch.foreach {
                                     idAttatch ⇒
-                                        val blob:OracleBlob = connection.createBlob().asInstanceOf[OracleBlob]
+                                        val blob: OracleBlob = connection.createBlob().asInstanceOf[OracleBlob]
                                         val out: InputStream = blob.getBinaryStream()
                                         val in: OutputStream = fi.getOutputStream
                                         //copy(in, out)
-                                        
+
                                         def getEmptySource =
                                             new OrdSource {
                                                 override val srcName: Option[String] = Some(fi.getName)

@@ -127,38 +127,6 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             }
                         )
                     }
-
-                /*case uploadFileField.name ⇒
-                    any2undefOrA(
-                        DynamicFormSS.create(
-                            new DynamicFormSSProps {
-                                width = "100%"
-                                /*action = s"TestUploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}&channelMessageError=${thiz.channelMessageError.get}".opt*/
-                                target = Iframe.create(
-                                    new IframeProps
-                                ).ID.opt
-                                encoding = Encoding.multipart.opt
-                                canSubmit = true.opt
-                                items = Seq(
-                                    UploadItem(
-                                        new UploadItemProps {
-                                            showTitle = false.opt
-                                            changed = {
-                                                (form: DynamicFormSS, item: UploadItem, value: JSUndefined[JSAny]) ⇒
-                                                    isc.confirm(s"Выбран файл: ${value.asInstanceOf[String].replace("C:\\fakepath\\", "")}, выгружать?", {
-                                                        (value: Boolean) ⇒
-                                                            if (value)
-                                                                isc.ok(value.toString)
-                                                        //form.submitForm()
-                                                    }.toFunc)
-
-                                            }.toFunc.opt
-                                        }
-                                    )
-                                ).opt
-                            }
-                        )
-                    )*/
                 case _ ⇒
                     jSUndefined
 
