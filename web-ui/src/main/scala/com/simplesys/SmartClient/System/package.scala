@@ -54,6 +54,8 @@ import com.simplesys.SmartClient.Tools.palette.props._
 import com.simplesys.SmartClient.Tools.props._
 import com.simplesys.SmartClient.Tools.props.editProxy.DrawPaneEditProxyProps
 import com.simplesys.SmartClient.Tools.{EditContext, EditContextSS, EditProxy, PaletteNode}
+import com.simplesys.js.components.cards.WindowUploadDialog
+import com.simplesys.js.components.cards.props.WindowUploadDialogProps
 
 
 //Должны быть
@@ -189,7 +191,9 @@ package object System {
     object Layout extends SCApply[Layout, LayoutProps]
     object LayoutSS extends SCApply[LayoutSS, LayoutSSProps]
     object HLayoutSS extends SCApply[HLayoutSS, HLayoutSSProps]
+    object HLayout extends SCApply[HLayout, HLayoutProps]
     object VLayoutSS extends SCApply[VLayoutSS, VLayoutSSProps]
+    object VLayout extends SCApply[VLayout, VLayoutProps]
     object IconButton extends SCApply[IconButton, IconButtonProps]
     object IconButtonSS extends SCApply[IconButtonSS, IconButtonSSProps]
     object IconMenuButton extends SCApply[IconMenuButton, IconMenuButtonProps]

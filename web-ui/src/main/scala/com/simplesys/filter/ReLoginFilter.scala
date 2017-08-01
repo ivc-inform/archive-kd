@@ -75,16 +75,16 @@ class ReLoginFilter extends AkkaPartialFilter {
 
             val user = UserDS(sessionContext.getDS)
 
-            user.selectOne(user.diUser ~ user.loginUser ~ user.captionUser ~ user.codeGroupUserGroup_Group ~ user.loginUser ~ user.passwordUser, where = Where(user.loginUser === login) And (user.passwordUser === password)) result match {
-                case Success(TupleSS6(userID, loginedUser, captionUser, loginedGroup, _, _)) =>
+            user.selectPOne(where = Where(user.loginUser === login) And (user.passwordUser === password)) result match {
+                case Success(item) =>
                     for (_session <- session) {
-                        _session.Attribute("userId", Some(userID))
-                        _session.Attribute("loginedUser", Some(loginedUser))
-                        _session.Attribute("captionUser", Some(captionUser))
-                        _session.Attribute("loginedGroup", Some(loginedGroup))
+                        _session.Attribute("userId", Some(item.diUser))
+                        _session.Attribute("loginedUser", Some(item.loginUser))
+                        _session.Attribute("captionUser", Some(item.captionUser))
+                        _session.Attribute("loginedGroup", Some(item.groupUser))
                         _session.Attribute("logged", Some(true))
                     }
-                    LoginedData1(strEmpty, login, userID, captionUser, loginedGroup)
+                    LoginedData1(strEmpty, login, item.diUser, item.captionUser, item.codeGroupUserGroup_Group)
 
                 case Failure(e) => e match {
                     case e: NoDataFoundException =>
@@ -111,7 +111,7 @@ class ReLoginFilter extends AkkaPartialFilter {
                                             LoginedData1("Аутентификация не прошла :-(")
                                     }
                                 } else
-                                    user.selectOne(user.diUser ~ user.captionUser ~ user.loginUser, where = Where(user.loginUser === "root")) result match {
+                                    user.selectPOne(where = Where(user.loginUser === "root")) result match {
                                         case Success(_) =>
                                             LoginedData1("Аутентификация не прошла :-(")
                                         case Failure(e) => e match {

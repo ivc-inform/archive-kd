@@ -15,7 +15,7 @@ object PluginDeps {
         //val xsbtWebVersion = "0.9.1"
         val sbtNativePackagerVersion = "1.2.0-M8"
 
-        val scalaJSPluginVersion = "0.6.18"
+        val scalaJSPluginVersion = "0.6.19"
         val jrabelPluginVersion = "0.10.1"
         val macroParadiseVersion = "2.1.0"
     }
@@ -79,8 +79,8 @@ object CommonDeps {
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
 
-    val jodaTime = "joda-time" % "joda-time" % versions.jodaVersion
-    val jodaConvert = "org.joda" % "joda-convert" % versions.jodaConvertVersion
+//    val jodaTime = "joda-time" % "joda-time" % versions.jodaVersion
+//    val jodaConvert = "org.joda" % "joda-convert" % versions.jodaConvertVersion
 
     val akkaActor = "com.typesafe.akka" %% "akka-actor" % versions.akkaVersion
     val akkaSLF4J = "com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion
@@ -110,7 +110,7 @@ object CommonDeps {
     val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
     val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion
     //val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
-    val oraclePoolDataSources = "com.simplesys.core" %% "oracle-pool-datasource" % versions.ssysCoreVersion
+    val poolsDataSources = "com.simplesys.core" %% "pools-datasources" % versions.ssysCoreVersion
     val ssysLogBackWrapper = "com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion
     val scalaJSWrapper = "com.simplesys" %% "common-types" % versions.scalaJSVersion
     val scalaTags = "com.lihaoyi" %% "scalatags" % versions.scalaTagsVersion

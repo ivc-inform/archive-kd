@@ -294,6 +294,7 @@
 					<attr caption="Дата внесения в список" name="tdatein" type="dDate" useDbPrefix="false"></attr>
 					<attr caption="Самый главный" name="bmain" type="bBoolean" useDbPrefix="false"></attr>
 					<attr caption="Идентификатор профайла" hidden="true" name="idprofile" type="fDouble" useDbPrefix="false"></attr>
+					<attr caption="Группа" name="group" type="sCaption" mandatory="false"/>
 				</attrs>
 				<defaults>
 					<showAttrs>

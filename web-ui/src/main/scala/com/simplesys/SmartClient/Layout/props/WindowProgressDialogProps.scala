@@ -82,13 +82,7 @@ class WindowProgressDialogProps extends WindowSSProps {
             )
 
             thizTop.oneStep = 1 / ((thizTop.maxValue - thizTop.minValue) / 100)
-
-//            println(s"thizTop.maxValue: ${thizTop.maxValue}")
-//            println(s"thizTop.minValue: ${thizTop.minValue}")
-//            println(s"thizTop.oneStep: ${thizTop.oneStep}")
-
-//            isc debugTrap (thizTop.maxValue, thizTop.minValue, thizTop.oneStep)
-
+            
             thizTop addItem thizTop.progressBar
 
             import com.simplesys.SmartClient.System._

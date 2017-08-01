@@ -2,24 +2,18 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.props.{ImgButtonProps, ProgressbarProps}
-import com.simplesys.SmartClient.Forms.DynamicFormSS
-import com.simplesys.SmartClient.Forms.formsItems.UploadItem
-import com.simplesys.SmartClient.Forms.formsItems.props.UploadItemProps
-import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
-import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
-import com.simplesys.System.Types.{Alignment, Encoding, ListGridFieldType}
-import com.simplesys.js.components.cards.Attach
-import com.simplesys.option.ScOption._
-import com.simplesys.option.DoubleType._
-import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
-import com.simplesys.System._
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.Alignment.Alignment
-import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
+import com.simplesys.System.Types.{Alignment, ListGridFieldType}
+import com.simplesys.System._
+import com.simplesys.app.WindowUploadDialog
 import com.simplesys.function._
+import com.simplesys.js.components.cards.Attach
+import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption._
+import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
+import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
 import scala.scalajs.js.UndefOr._
 
@@ -32,6 +26,8 @@ trait AttatchDataRecordExt extends AttatchDataRecord {
 
 object AttachProps extends JSObject {
     val fileNameField = "fileName".nameStrong
+    val contentLength = "contentLength".nameStrong
+    val mimeType = "mimeType".nameStrong
 }
 
 class AttachProps extends CommonListGridEditorComponentProps {
@@ -67,6 +63,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
             `type` = ListGridFieldType.sCode_SimpleType.opt
         },
         new ListGridFieldProps {
+            nameStrong = contentLength.opt
+            title = "Размер файла".opt
+            `type` = ListGridFieldType.sCaption_SimpleType.opt
+        },
+        new ListGridFieldProps {
             nameStrong = arx_docizvstat_vname_NameStrong.opt
             title = "Статус извещения".opt
             `type` = ListGridFieldType.sCaption_SimpleType.opt
@@ -99,7 +100,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         }
                                     ),
                                     ImgButton.create(
-                                        new ImgButtonProps{
+                                        new ImgButtonProps {
                                             showDown = false.opt
                                             showRollOver = false.opt
                                             layoutAlign = Alignment.center
@@ -108,7 +109,12 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             width = 18
                                             src = Common.attach.opt
                                             click = {
-                                                (thiz:classHandler) ⇒
+                                                (thiz: classHandler) ⇒
+                                                    WindowUploadDialog.create(
+                                                        new WindowUploadDialogProps{
+
+                                                        }
+                                                    )
                                                     false
                                             }.toThisFunc.opt
                                         }
@@ -122,7 +128,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                         DynamicFormSS.create(
                             new DynamicFormSSProps {
                                 width = "100%"
-                                /*action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}&channelMessageError=${thiz.channelMessageError.get}".opt*/
+                                /*action = s"TestUploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}&channelMessageError=${thiz.channelMessageError.get}".opt*/
                                 target = Iframe.create(
                                     new IframeProps
                                 ).ID.opt

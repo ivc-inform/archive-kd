@@ -32,46 +32,28 @@ class UploadTestTabProps extends HLayoutProps {
 
     identifier = "69EC6EB4-E51F-B7A9-C1E0-CF216088816AF".opt
 
-    var channelMessageEndUpload: ScOption[String] = ScNone
-    var channelMessageError: ScOption[String] = ScNone
-    var channelMessageNextStep: ScOption[String] = ScNone
-    var channelMessageMaxValue: ScOption[String] = ScNone
-    var channelMessageRecordInBase: ScOption[String] = ScNone
-
     initWidget = {
         (thiz: classHandler, arguments: IscArray[JSAny]) =>
 
             thiz.Super("initWidget", arguments)
 
-            if (thiz.channelMessageEndUpload.isEmpty)
-                thiz.channelMessageEndUpload = s"EndUpload_${thiz.ID}_${simpleSyS.guid}"
-
-            if (thiz.channelMessageError.isEmpty)
-                thiz.channelMessageError = s"Error_${thiz.ID}_${simpleSyS.guid}"
-
-            if (thiz.channelMessageRecordInBase.isEmpty)
-                thiz.channelMessageRecordInBase = s"RecordInBase_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageEndUpload = s"EndUpload_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageError = s"Error_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageRecordInBase = s"RecordInBase_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageNextStep = s"NextStep_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageMaxValue = s"MaxValue_${thiz.ID}_${simpleSyS.guid}"
 
             var progressBar: JSUndefined[ProgressbarItem] = jSUndefined
 
-            isc.MessagingSS.subscribe(thiz.channelMessageRecordInBase.get,
+            isc.MessagingSS.subscribe(channelMessageRecordInBase,
                 (e: MessageJS) ⇒
                     progressBar.foreach(_ setTitle "Recording in base")
             )
 
-
-            if (thiz.channelMessageNextStep.isEmpty)
-                thiz.channelMessageNextStep = s"NextStep_${thiz.ID}_${simpleSyS.guid}"
-
-
-            if (thiz.channelMessageMaxValue.isEmpty)
-                thiz.channelMessageMaxValue = s"MaxValue_${thiz.ID}_${simpleSyS.guid}"
-
-
             val form = DynamicFormSS.create(
                 new DynamicFormSSProps {
                     width = "100%"
-                    action = s"UploadServlet?channelMessageEndUpload=${thiz.channelMessageEndUpload.get}&channelMessageNextStep=${thiz.channelMessageNextStep.get}&channelMessageMaxValue=${thiz.channelMessageMaxValue.get}&channelMessageRecordInBase=${thiz.channelMessageRecordInBase.get}&channelMessageError=${thiz.channelMessageError.get}".opt
+                    action = s"TestUploadServlet?channelMessageEndUpload=${channelMessageEndUpload}&channelMessageNextStep=${channelMessageNextStep}&channelMessageMaxValue=${channelMessageMaxValue}&channelMessageRecordInBase=${channelMessageRecordInBase}&channelMessageError=${channelMessageError}".opt
                     target = Iframe.create(
                         new IframeProps
                     ).ID.opt
@@ -114,12 +96,12 @@ class UploadTestTabProps extends HLayoutProps {
 
             progressBar = (form getItem "progressBar").asInstanceOf[ProgressbarItem]
 
-            isc.MessagingSS.subscribe(thiz.channelMessageNextStep.get,
+            isc.MessagingSS.subscribe(channelMessageNextStep,
                 (e: MessageJS) ⇒
                     progressBar.foreach(_.nextStep())
             )
 
-            isc.MessagingSS.subscribe(thiz.channelMessageMaxValue.get,
+            isc.MessagingSS.subscribe(channelMessageMaxValue,
                 (e: MessageJS) ⇒
                     e.data.foreach {
                         data ⇒
@@ -134,12 +116,12 @@ class UploadTestTabProps extends HLayoutProps {
             thiz addMember form
 
             def unsubscribe(): Unit = {
-                //isc.MessagingSS.unsubscribe(IscArray(thiz.channelMessageEndUpload.get, thiz.channelMessageError.get, thiz.channelMessageNextStep.get, thiz.channelMessageMaxValue.get, thiz.channelMessageRecordInBase.get))
+                //isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
                 val submit = form getItem "upload"
                 submit.disable()
             }
 
-            isc.MessagingSS.subscribe(thiz.channelMessageEndUpload.get, { (e: MessageJS) ⇒
+            isc.MessagingSS.subscribe(channelMessageEndUpload, { (e: MessageJS) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
                 val elapsedTime = e.data.map(_.asInstanceOf[UploadTestData].elapsedTime.getOrElse("")).getOrElse("")
@@ -149,7 +131,7 @@ class UploadTestTabProps extends HLayoutProps {
                 unsubscribe()
             })
 
-            isc.MessagingSS.subscribe(thiz.channelMessageError.get, { (e: MessageJS) ⇒
+            isc.MessagingSS.subscribe(channelMessageError, { (e: MessageJS) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
                 val error = e.data.asInstanceOf[Error]
