@@ -67,11 +67,11 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
             }
             println(" ------------------------------------------------------- End Parametrs -------------------------------------------------------------------")
 
-//            val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
-//            val channelMessageError = request.Parameter("channelMessageError")
-//            val channelMessageNextStep = request.Parameter("channelMessageNextStep")
-//            val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
-//            val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
+            val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
+            val channelMessageError = request.Parameter("channelMessageError")
+            val channelMessageNextStep = request.Parameter("channelMessageNextStep")
+            val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
+            val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
 
             import UploadServlet._
 
@@ -122,17 +122,17 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                             val stepSize = pContentLength / 100
 
                             if (firstStep) {
-                                //channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
+                                channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
                                 firstStep = false
                             }
 
                             if (pBytesRead >= stepSize * step) {
                                 step += 1
-                                //channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
+                                channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
                             }
 
-                            //if (pBytesRead == pContentLength)
-                            //channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
+                            if (pBytesRead == pContentLength)
+                                channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
                         }
                     }
 
@@ -191,7 +191,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
 
                                         println(s"before pstmt.executeUpdate")
 
-                                        pstmt.execute()
+                                        pstmt.executeUpdate()
                                         println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         conn.commit()
@@ -217,12 +217,12 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                                 conn.close()
                         }
 
-                        //channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)), channels = channelMessageEndUpload)))
+                        channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)), channels = channelMessageEndUpload)))
 
                         Out("Ok")
                     case Failure(e) ⇒
 
-                        //channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
+                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
                         OutFailure(e)
                         conn.foreach(_.close())
                 }
