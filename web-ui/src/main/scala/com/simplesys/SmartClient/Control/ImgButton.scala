@@ -1,12 +1,10 @@
 package com.simplesys.SmartClient.Control
 
-import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, Img}
-import com.simplesys.System.Types.State.State
-import com.simplesys.System.Types.VerticalAlignment.VerticalAlignment
-import com.simplesys.System.Types.{SCImgURL, URL, CSSStyleName, void}
+import com.simplesys.SmartClient.Foundation.{AbstractStatefulCanvasCompanion, Img, AbstractImgCompanion}
+import com.simplesys.System.Types.void
 
 import scala.scalajs.js
-import scala.scalajs.js.|
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait ImgButton extends Img {
@@ -22,6 +20,10 @@ trait ImgButton extends Img {
     var titleClipped: js.Function1[void, Boolean]
     var titleHover: js.Function1[void, Boolean]
 }
+
+@js.native
+@JSGlobal
+abstract class AbstractImgButtonCompanion extends AbstractImgCompanion
 
 
 

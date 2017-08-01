@@ -1,10 +1,10 @@
 package com.simplesys.SmartClient.Foundation
 
-import com.simplesys.System.Types.{SCImgURL, URL, void, HTMLString}
 import com.simplesys.System.Types.ImageStyle.ImageStyle
+import com.simplesys.System.Types.{SCImgURL, URL, void}
 
 import scala.scalajs.js
-import scala.scalajs.js.|
+import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
 trait Img extends StatefulCanvas {
@@ -21,6 +21,10 @@ trait Img extends StatefulCanvas {
     var src: SCImgURL
     var usePNGFix: Boolean
 }
+
+@js.native
+@JSGlobal
+abstract class AbstractImgCompanion extends AbstractStatefulCanvasCompanion
 
 
 
