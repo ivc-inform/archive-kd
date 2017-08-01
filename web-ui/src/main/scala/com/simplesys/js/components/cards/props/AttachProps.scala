@@ -132,7 +132,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                     ))
 
                                                     def unsubscribe(): Unit = {
-                                                        isc.MessagingSS.unsubscribe(IscArray(thiz.channelMessageEndUpload, thiz.channelMessageError, thiz.channelMessageNextStep, thiz.channelMessageMaxValue, thiz.channelMessageRecordInBase))
+                                                        thiz.channelMessageEndUpload.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageError.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageNextStep.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageMaxValue.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.unsubscribe(_))
                                                         thiz.enable()
                                                     }
 

@@ -23,6 +23,7 @@ import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener}
 import oracle.jdbc.{OracleBlob, OracleConnection}
+import oracle.sql.BLOB
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
@@ -135,10 +136,8 @@ object UploadContainer {
                             fi ⇒
                                 idAttatch.foreach {
                                     idAttatch ⇒
-                                        val blob: OracleBlob = connection.createBlob().asInstanceOf[OracleBlob]
-                                        val out: InputStream = blob.getBinaryStream()
-                                        val in: OutputStream = fi.getOutputStream
-                                        //copy(in, out)
+                                        val blob: BLOB = connection.createBlob().asInstanceOf[BLOB]
+                                        blob.setBytes(fi.get())
 
                                         def getEmptySource =
                                             new OrdSource {
