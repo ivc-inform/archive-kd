@@ -76,13 +76,21 @@ class UploadTestTabProps extends HLayoutProps {
                                 }.toFunc.opt
                             }
                         ),
-                        SubmitItem(
-                            new SubmitItemProps {
+                        ButtonItem(
+                            new ButtonItemProps {
                                 disabled = true.opt
                                 //nameStrong = "upload".nameStrongOpt
                                 //colSpan = 2
                                 title = "Upload".ellipsis.opt
                                 nameStrong = "upload".nameStrongOpt
+                                click = {
+                                    (form: DynamicFormSS, item: ButtonItem) ⇒
+                                        item.disable()
+                                        val file = form getItem "file"
+                                        form.submitForm()
+                                        file.disable()
+                                        false
+                                }.toFunc.opt
                             }
                         ),
                         ProgressbarItem(
@@ -118,9 +126,9 @@ class UploadTestTabProps extends HLayoutProps {
             thiz addMember form
 
             def unsubscribe(): Unit = {
-                //isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
-                val submit = form getItem "upload"
-                submit.disable()
+//                isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
+                val file = form getItem "file"
+                file.enable()
             }
 
             isc.MessagingSS.subscribe(channelMessageEndUpload, { (e: MessageJS) ⇒
