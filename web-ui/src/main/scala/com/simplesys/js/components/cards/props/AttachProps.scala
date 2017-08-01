@@ -115,6 +115,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             src = Common.attach.opt
                                             progressBar = _progressBar.opt
                                             record = _record.opt
+                                            showDisabledIcon = false.opt
                                             okFunction = {
                                                 (thiz: classHandler) ⇒
                                                     thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)))
@@ -157,14 +158,17 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             }.toThisFunc.opt
                                             click = {
                                                 (thizTop: classHandler) ⇒
+                                                    val url = thizTop.actionURL
+
                                                     WindowUploadDialog.create(
                                                         new WindowUploadDialogProps {
-                                                            action = thizTop.actionURL.opt
+                                                            action = url.opt
                                                             okFunction = {
                                                                 (thiz: classHandler) ⇒
                                                                     thizTop.disable()
                                                                     thizTop.okFunction()
-                                                                    thiz.form.foreach(_.submitForm())
+                                                                    //thiz.form.foreach(_.submitForm())
+                                                                    thiz.markForDestroy()
                                                             }.toThisFunc.opt
                                                         }
                                                     )

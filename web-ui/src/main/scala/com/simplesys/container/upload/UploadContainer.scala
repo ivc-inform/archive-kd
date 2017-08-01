@@ -196,8 +196,7 @@ object UploadContainer {
                     }
                     match {
                         case Success(out) ⇒
-                            channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)),
-                                channels = channelMessageEndUpload)))
+                            channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)), channels = channelMessageEndUpload)))
 
                             Out("Ok")
                         case Failure(e) ⇒

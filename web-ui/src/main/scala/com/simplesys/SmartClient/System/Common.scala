@@ -60,6 +60,7 @@ object Common {
     val abonents = "abonents.png"
     val admin = "admin.png"
     val attach = "attach.png"
+    val attachDisable = "attach_Disable.png"
     val request = "request.png"
     val password = "password.png"
     val guid = "guid.png"

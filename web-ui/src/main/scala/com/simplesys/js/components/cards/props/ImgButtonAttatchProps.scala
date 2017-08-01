@@ -34,9 +34,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
 
             thisTop.Super("initWidget", args)
-
-            def getAction(): UndefOr[String] = thisTop.record.map(item ⇒ item.id.map(id ⇒ s"logic/arx_attatch/Upload?p1=p1_${id}&")).flatten
-
+            
             thisTop.record.map {
                 _.id.map {
                     id ⇒
@@ -78,7 +76,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         thisTop.channelMessageError = getNo1
                         addParam("")
 
-                        thisTop.actionURL = s"/logic/arx_attatch/Upload?${getParams}"
+                        thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
                 }
             }
 
