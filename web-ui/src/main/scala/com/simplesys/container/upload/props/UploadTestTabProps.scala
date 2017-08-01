@@ -79,8 +79,6 @@ class UploadTestTabProps extends HLayoutProps {
                         ButtonItem(
                             new ButtonItemProps {
                                 disabled = true.opt
-                                //nameStrong = "upload".nameStrongOpt
-                                //colSpan = 2
                                 title = "Upload".ellipsis.opt
                                 nameStrong = "upload".nameStrongOpt
                                 click = {
