@@ -1,5 +1,6 @@
 package com.simplesys.js.components.cards.props
 
+import com.simplesys.SmartClient.Control.{ImgButton, Progressbar}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.UploadItem
 import com.simplesys.SmartClient.Forms.formsItems.props.UploadItemProps
@@ -12,10 +13,15 @@ import com.simplesys.System._
 import com.simplesys.function._
 import com.simplesys.js.components.cards.WindowUploadDialog
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
 class WindowUploadDialogProps extends WindowSSDialogProps {
     type classHandler <: WindowUploadDialog
+
+    var progressBar: ScOption[Progressbar] = ScNone
+    var attatchButton: ScOption[ImgButton] = ScNone
+    var record: ScOption[AttatchDataRecordExt] = ScNone
 
     title = "Загрузить файл".ellipsis.opt
     headerIconPath = Common.attach.opt
@@ -25,7 +31,7 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
     //autoSize = true.opt
 
     initWidget = {
-        (thisTop: classHandler, args: IscArray[JSAny]) ⇒
+        (thisTop: classHandler, args: IscArray[JSAny]) ⇒           
 
             thisTop addItem
               DynamicFormSS.create(

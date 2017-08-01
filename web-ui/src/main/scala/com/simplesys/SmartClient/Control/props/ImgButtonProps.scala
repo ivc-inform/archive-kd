@@ -1,5 +1,6 @@
 package com.simplesys.SmartClient.Control.props
 
+import com.simplesys.SmartClient.Control.ImgButton
 import com.simplesys.SmartClient.Foundation.props.ImgProps
 import com.simplesys.System.Types.void
 import com.simplesys.option.{ScNone, ScOption}
@@ -7,6 +8,8 @@ import com.simplesys.option.{ScNone, ScOption}
 import scala.scalajs.js
 
 class ImgButtonProps extends ImgProps {
+    type classHandler <: ImgButton
+
     var action: ScOption[js.Function1[void, _]] = ScNone
     var hiliteAccessKey: ScOption[Boolean] = ScNone
     var iconAlign: ScOption[String] = ScNone

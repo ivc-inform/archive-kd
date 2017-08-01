@@ -82,23 +82,25 @@ class AttachProps extends CommonListGridEditorComponentProps {
     height = 250
 
     createRecordComponent = {
-        (thiz: classHandler, record: AttatchDataRecordExt, colNum: Int) ⇒
+        (thiz: classHandler, _record: AttatchDataRecordExt, colNum: Int) ⇒
             thiz.getFieldName(colNum) match {
                 case fileNameField.name ⇒
-                    any2undefOrA(
+                    any2undefOrA {
+                        val _progressBar = Progressbar.create(
+                            new ProgressbarProps {
+                                //height = 20
+                                length = "*"
+                                title = _record.fileName.opt
+                                showTitle = true.opt
+                            }
+                        )
+
                         HLayoutSS.create(
                             new HLayoutSSProps {
                                 height = 20
                                 width = "100%"
                                 members = Seq(
-                                    Progressbar.create(
-                                        new ProgressbarProps {
-                                            //height = 20
-                                            length = "*"
-                                            title = record.fileName.opt
-                                            showTitle = true.opt
-                                        }
-                                    ),
+                                    _progressBar,
                                     ImgButton.create(
                                         new ImgButtonProps {
                                             showDown = false.opt
@@ -111,8 +113,10 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             click = {
                                                 (thiz: classHandler) ⇒
                                                     WindowUploadDialog.create(
-                                                        new WindowUploadDialogProps{
-
+                                                        new WindowUploadDialogProps {
+                                                            progressBar = _progressBar.opt
+                                                            attatchButton = thiz.opt
+                                                            record = _record.opt
                                                         }
                                                     )
                                                     false
@@ -121,7 +125,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                     )
                                 ).opt
                             }
-                        ))
+                        )
+                    }
 
                 /*case uploadFileField.name ⇒
                     any2undefOrA(

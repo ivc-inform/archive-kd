@@ -1,10 +1,13 @@
 package com.simplesys.SmartClient.Foundation.props
 
+import com.simplesys.SmartClient.Foundation.{Img, StatefulCanvas}
 import com.simplesys.System.Types.ImageStyle.ImageStyle
 import com.simplesys.System.Types.SCImgURL
 import com.simplesys.option.{ScNone, ScOption}
 
 class ImgProps extends StatefulCanvasProps {
+    type classHandler <: Img
+
     var activeAreaHTML: ScOption[String] = ScNone
     var altText: ScOption[String] = ScNone
     var imageHeight: ScOption[Int] = ScNone
