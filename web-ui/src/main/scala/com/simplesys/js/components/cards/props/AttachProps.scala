@@ -132,9 +132,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                     ))
 
                                                     def unsubscribe(): Unit = {
-                                                        //                isc.MessagingSS.unsubscribe(IscArray(channelMessageEndUpload, channelMessageError, channelMessageNextStep, channelMessageMaxValue, channelMessageRecordInBase))
-                                                        //                            val file = form getItem "file"
-                                                        //                            file.enable()
+                                                        isc.MessagingSS.unsubscribe(IscArray(thiz.channelMessageEndUpload, thiz.channelMessageError, thiz.channelMessageNextStep, thiz.channelMessageMaxValue, thiz.channelMessageRecordInBase))
+                                                        thiz.enable()
                                                     }
 
                                                     thiz.channelMessageEndUpload.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
@@ -159,6 +158,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                             action = thizTop.actionURL.opt
                                                             okFunction = {
                                                                 (thiz: classHandler) ⇒
+                                                                    thizTop.disable()
                                                                     thizTop.okFunction()
                                                                     thiz.form.foreach(_.submitForm())
                                                             }.toThisFunc.opt
