@@ -7,6 +7,7 @@ import com.simplesys.SmartClient.Forms.formsItems.props.UploadItemProps
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
 import com.simplesys.SmartClient.Layout.props.WindowSSDialogProps
+import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Encoding, URL}
 import com.simplesys.System._
@@ -31,6 +32,12 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
     height = 100
     isModal = true.opt
     //autoSize = true.opt
+
+    var channelMessageEndUpload: ScOption[String] = ScNone
+    var channelMessageNextStep: ScOption[String] = ScNone
+    var channelMessageMaxValue: ScOption[String] = ScNone
+    var channelMessageRecordInBase: ScOption[String] = ScNone
+    var channelMessageError: ScOption[String] = ScNone
 
     initWidget = {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
@@ -60,26 +67,27 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
                         def getNo = s"p${i}"
                         def getNo1 = s"${getNo}_${id}"
 
-                        val channelMessageEndUpload = getNo1
-                        addParam()
-
-                        i += 1 
-                        val channelMessageNextStep = getNo1
+                        thisTop.channelMessageEndUpload = getNo1
                         addParam()
 
                         i += 1
-                        val channelMessageMaxValue = getNo1
+                        thisTop.channelMessageNextStep = getNo1
                         addParam()
 
                         i += 1
-                        val channelMessageRecordInBase = getNo1
+                        thisTop.channelMessageMaxValue = getNo1
                         addParam()
 
                         i += 1
-                        val channelMessageError = getNo1
+                        thisTop.channelMessageRecordInBase = getNo1
+                        addParam()
+
+                        i += 1
+                        thisTop.channelMessageError = getNo1
                         addParam("")
 
                         val _action = s"/logic/arx_attatch/Upload?${getParams}"
+
                         thisTop addItem
                           DynamicFormSS.create(
                               new DynamicFormSSProps {
@@ -120,6 +128,13 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
 
             thisTop.Super("initWidget", args)
             thisTop.okCancelPanel.foreach(_ setHeight "*")
+
+    }.toThisFunc.opt
+
+    okFunction = {
+        (thiz: classHandler) ⇒
+            thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)))
+            thiz.channelMessageNextStep.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep()))
 
     }.toThisFunc.opt
 

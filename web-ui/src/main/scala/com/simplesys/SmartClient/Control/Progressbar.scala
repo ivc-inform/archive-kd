@@ -8,8 +8,12 @@ import scala.scalajs.js
 @js.native
 trait Progressbar extends StretchImg {
     var breadth: Int
+    var minValue: Double
+    var maxValue: Double
+    var oneStep: Double
     def getBreadth(): Int
     def getLength(): Int
+    def nextStep(): void
     val length: Int
     var percentChanged: js.Function1[void, _]
     var percentDone: Double
