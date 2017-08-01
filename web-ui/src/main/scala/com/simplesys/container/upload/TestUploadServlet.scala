@@ -4,6 +4,7 @@ import java.io.File
 import java.util.Properties
 
 import com.simplesys.annotation.RSTransfer
+import com.simplesys.app.SessionContextSupport
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
@@ -48,7 +49,7 @@ object UploadServlet {
 }
 
 @RSTransfer(urlPattern = "/TestUploadServlet")
-class TestUploadServlet(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends ServletActorDyn {
+class TestUploadServlet(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
     private val filePath: String = "web-ui/target/upload"
 
     def receive = {
@@ -66,11 +67,11 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
             }
             println(" ------------------------------------------------------- End Parametrs -------------------------------------------------------------------")
 
-            val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
-            val channelMessageError = request.Parameter("channelMessageError")
-            val channelMessageNextStep = request.Parameter("channelMessageNextStep")
-            val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
-            val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
+//            val channelMessageEndUpload = request.Parameter("channelMessageEndUpload")
+//            val channelMessageError = request.Parameter("channelMessageError")
+//            val channelMessageNextStep = request.Parameter("channelMessageNextStep")
+//            val channelMessageMaxValue = request.Parameter("channelMessageMaxValue")
+//            val channelMessageRecordInBase = request.Parameter("channelMessageRecordInBase")
 
             import UploadServlet._
 
@@ -79,21 +80,13 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
             } else {
 
                 val factory = new DiskFileItemFactory()
-                
+
                 val file = new File(s"./temp")
                 if (!file.exists() || !file.isDirectory)
                     file.mkdir()
 
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
-
-                val ds = new OracleDataSource
-
-                //ds.setURL("jdbc:oracle:thin:@//orapg.simplesys.lan:1521/test")
-                ds.setURL("jdbc:oracle:thin:@//localhost:1521/orcl")
-
-                ds.setUser("B404SP3DEMO")
-                ds.setPassword("dfqc2")
 
                 val conn = Option(ds.getConnection.asInstanceOf[OracleConnection])
 
@@ -129,17 +122,17 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                             val stepSize = pContentLength / 100
 
                             if (firstStep) {
-                                channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
+                                //channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
                                 firstStep = false
                             }
 
                             if (pBytesRead >= stepSize * step) {
                                 step += 1
-                                channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
+                                //channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
                             }
 
-                            if (pBytesRead == pContentLength)
-                                channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
+                            //if (pBytesRead == pContentLength)
+                            //channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
                         }
                     }
 
@@ -191,9 +184,9 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
 
                                         println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
 
-                                        pstmt.setBinaryStream(3, inputStream, fi.getSize)
+                                        //pstmt.setBinaryStream(3, inputStream, fi.getSize)
 
-                                        //pstmt.setBlob(3, inputStream, fi.getSize)
+                                        pstmt.setBlob(3, inputStream, fi.getSize)
                                         println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.executeUpdate")
@@ -224,13 +217,12 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                                 conn.close()
                         }
 
-                        channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)),
-                            channels = channelMessageEndUpload)))
+                        //channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)), channels = channelMessageEndUpload)))
 
                         Out("Ok")
                     case Failure(e) ⇒
 
-                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
+                        //channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
                         OutFailure(e)
                         conn.foreach(_.close())
                 }
