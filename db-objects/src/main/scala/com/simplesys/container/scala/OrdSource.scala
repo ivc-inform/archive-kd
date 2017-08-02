@@ -11,21 +11,21 @@ import oracle.sql.NUMBER
 object OrdSource {
 
     implicit def JOrdSource2SOrdSource(ordSource: JOrdSource): OrdSource = new OrdSource {
-        override val srcName: Option[String] = Option(ordSource.srcName)
-        override val srcLocation: Option[String] = Option(ordSource.srcLocation)
+        override val srcName: Option[String] = Option(Helper.asString(ordSource.srcName))
+        override val srcLocation: Option[String] = Option(Helper.asString(ordSource.srcLocation))
         override val updateTime: Option[LocalDateTime] = Option(ordSource.updateTime).map(_.toLocalDateTime)
         override val local: Option[BigDecimal] = Option(ordSource.local).map(Helper.asBigDecimal(_))
-        override val srcType: Option[String] = Option(ordSource.srcType)
+        override val srcType: Option[String] = Option(Helper.asString(ordSource.srcType))
         override val localData: Option[OracleBlob] = Option(ordSource.localData)
     }
 
     implicit def SOrdSource2JOrdSource(ordSource: OrdSource): JOrdSource = {
         val res = new JOrdSource {}
-        ordSource.srcName.foreach(res.srcName = _)
-        ordSource.srcLocation.foreach(res.srcLocation = _)
+        ordSource.srcName.foreach(srcName ⇒ res.srcName = Helper.asCHAR(srcName))
+        ordSource.srcLocation.foreach(srcLocation => res.srcLocation = Helper.asCHAR(srcLocation))
         ordSource.updateTime.foreach(localDateTime ⇒ res.updateTime = Timestamp.valueOf(localDateTime))
         ordSource.local.foreach(bigDeecimal ⇒ res.local = new NUMBER(bigDeecimal))
-        ordSource.srcType.foreach(res.srcType = _)
+        ordSource.srcType.foreach(srcType ⇒ res.srcType = Helper.asCHAR(srcType))
         ordSource.localData.foreach(res.localData = _)
         res
     }
@@ -38,7 +38,7 @@ trait OrdSource {
     val srcName: Option[String]
     val updateTime: Option[LocalDateTime]
     val local: Option[BigDecimal]
-    
+
     override def toString: String = {
         val res = new StringBuilder
         res append s"localData: $localData ,"

@@ -75,9 +75,9 @@ public class JOrdDoc implements OracleData, OracleDataFactory {
     return new JOrdDoc(
             (JOrdSource) new JOrdSource(
                     (BLOB) attributesOrdSource[0],
-                    (String) attributesOrdSource[1],
-                    (String) attributesOrdSource[2],
-                    (String) attributesOrdSource[3],
+                    Helper.asCHAR((String) attributesOrdSource[1]),
+                    Helper.asCHAR((String) attributesOrdSource[2]),
+                    Helper.asCHAR((String) attributesOrdSource[3]),
                     (Timestamp) attributesOrdSource[4],
                     (NUMBER) attributesOrdSource[5]
             ),

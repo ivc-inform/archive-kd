@@ -27,6 +27,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
                         override val localData: Option[OracleBlob] = Some(blob)
                     }
 
+
                 val ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
                     case Some(ordDoc) ⇒
                         val _source = ordDoc.source match {

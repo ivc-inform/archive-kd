@@ -5,6 +5,7 @@ import oracle.jdbc.OracleBlob;
 import oracle.jdbc.OracleData;
 import oracle.jdbc.OracleDataFactory;
 import oracle.jdbc.internal.OracleStruct;
+import oracle.sql.CHAR;
 import oracle.sql.NUMBER;
 
 import java.sql.Connection;
@@ -14,9 +15,9 @@ import java.sql.Timestamp;
 public class JOrdSource implements OracleData, OracleDataFactory {
 
   public OracleBlob localData;
-  public String srcType;
-  public String srcLocation;
-  public String srcName;
+  public CHAR srcType;
+  public CHAR srcLocation;
+  public CHAR srcName;
   public Timestamp updateTime;
   public NUMBER local;
 
@@ -39,9 +40,9 @@ public class JOrdSource implements OracleData, OracleDataFactory {
   }
 
   public JOrdSource(OracleBlob localData,
-                    String srcType,
-                    String srcLocation,
-                    String srcName,
+                    CHAR srcType,
+                    CHAR srcLocation,
+                    CHAR srcName,
                     Timestamp updateTime,
                     NUMBER local) {
     this.localData = localData;
@@ -66,9 +67,9 @@ public class JOrdSource implements OracleData, OracleDataFactory {
     Object[] attributes = ((OracleStruct) o).getOracleAttributes();
     return new JOrdSource(
             (OracleBlob) attributes[0],
-            (String) attributes[1],
-            (String) attributes[2],
-            (String) attributes[3],
+            (CHAR) attributes[1],
+            (CHAR) attributes[2],
+            (CHAR) attributes[3],
             (Timestamp) attributes[4],
             (NUMBER) attributes[5]);
   }
