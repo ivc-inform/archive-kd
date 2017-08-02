@@ -133,11 +133,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                     ))
 
                                                     def unsubscribe(): Unit = {
-                                                        thiz.channelMessageEndUpload.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
-                                                        thiz.channelMessageError.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
-                                                        thiz.channelMessageNextStep.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
-                                                        thiz.channelMessageMaxValue.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
-                                                        thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
+                                                        thiz.channelMessageEndUpload.foreach(isc.MessagingSS.unsubscribe(_ ))
+                                                        thiz.channelMessageError.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageNextStep.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageMaxValue.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.unsubscribe(_))
                                                         thiz.enable()
                                                     }
 
