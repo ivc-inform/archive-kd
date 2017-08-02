@@ -26,6 +26,16 @@ public class OrdDoc implements OracleData, OracleDataFactory {
 
   static final OrdDoc _ordDoc = new OrdDoc();
 
+  @Override
+  public String toString() {
+    try {
+      return "source: {" + source.toString() + "}, format: " + Helper.asString(format) + ", mimeType: " + Helper.asString(mimeType) + ", contentLength: " + Helper.asBigDecimal(contentLength).toString() + ", comments: " + Helper.clobToString(comments);
+    } catch (SQLException e) {
+      return e.getMessage();
+    }
+
+  }
+
   public OrdSource getSource() {
     return this.source;
   }

@@ -20,7 +20,7 @@ object OrdDoc {
         ordDoc.source.foreach(res.source = _)
         ordDoc.format.foreach(format ⇒ res.format = Helper.asCHAR(format))
         ordDoc.mimeType.foreach(mimeType ⇒ res.format = Helper.asCHAR(mimeType))
-        ordDoc.contentLength.foreach(contentLength ⇒ res.contentLength = new NUMBER(contentLength))
+        ordDoc.contentLength.foreach(contentLength ⇒ res.contentLength = new NUMBER(contentLength.bigDecimal))
         ordDoc.comments.foreach(comment ⇒ res.comments = new CLOB(connection, comment.map(_.toByte).toArray))
         res
     }
