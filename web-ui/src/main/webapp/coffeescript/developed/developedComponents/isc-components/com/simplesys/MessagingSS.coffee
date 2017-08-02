@@ -46,9 +46,9 @@ if not isc.module_RealtimeMessaging?
 				channels.forEach (channel) =>
 					if @_channels[channel]?
 						delete @_channels[channel]
-						return
+					return
 
-				if isc.isA.emptyArray(@_channels) is true
+				if isc.isA.emptyObject(@_channels) is true
 					@disconnect event
 
 				if unSubscribeCallback?
