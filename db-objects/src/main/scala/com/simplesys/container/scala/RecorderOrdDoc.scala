@@ -30,7 +30,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
 
                 val ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
                     case Some(ordDoc) ⇒
-                        val _source = ordDoc.source match {
+                        /*val _source = ordDoc.source match {
                             case Some(source) ⇒
                                 new OrdSource {
                                     override val srcName: Option[String] = Some(fiName)
@@ -42,23 +42,23 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
                                 }
                             case None ⇒
                                 getEmptySource
-                        }
+                        }*/
 
                         new OrdDoc {
-                            override val comments: Option[String] = Some("Updated by UploadContainer !!")
                             override val format: Option[String] = ordDoc.format
-                            override val source: Option[OrdSource] = Some(_source)
-                            override val mimeType: Option[String] = Some(fiContentType)
-                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+//                            override val source: Option[OrdSource] = Some(_source)
+//                            override val mimeType: Option[String] = Some(fiContentType)
+//                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+//                            override val comments: Option[String] = Some("Updated by UploadContainer !!")
                         }
 
                     case None ⇒
                         new OrdDoc {
-                            override val comments: Option[String] = Some("Inserted by UploadContainer !!")
                             override val format: Option[String] = None
-                            override val source: Option[OrdSource] = Some(getEmptySource)
-                            override val mimeType: Option[String] = Some(fiContentType)
-                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+//                            override val source: Option[OrdSource] = Some(getEmptySource)
+//                            override val mimeType: Option[String] = Some(fiContentType)
+//                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+//                            override val comments: Option[String] = Some("Inserted by UploadContainer !!")
                         }
                 }
 

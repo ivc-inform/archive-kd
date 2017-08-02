@@ -18,9 +18,10 @@ object TestRecord extends App {
             val ordDoc: JOrdDoc = item
             val file = new File(".idea/inspectionProfiles/Project_Default.xml")
             val fileInputStream = new FileInputStream(file)
+            println(ordDoc.toString)
 
             (new RecorderOrdDoc (Some(idAttatch), None)).writeOrdDoc(fileInputStream, file.getName, "application/xml")
-            println(ordDoc.toString)
+
     }
     println("Hello")
 }

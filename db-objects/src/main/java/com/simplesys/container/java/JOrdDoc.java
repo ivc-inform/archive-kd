@@ -16,26 +16,23 @@ import java.sql.Timestamp;
 
 public class JOrdDoc implements OracleData, OracleDataFactory {
 
-  public JOrdSource source;
   public CHAR format;
-  public CHAR mimeType;
-  public NUMBER contentLength;
-  public OracleClob comments;
+//  public CHAR mimeType;
+//  public NUMBER contentLength;
+//  public OracleClob comments;
+//  public JOrdSource source;
 
   static final JOrdDoc _ordDoc = new JOrdDoc();
 
   @Override
   public String toString() {
     try {
-      return "source: {" + source.toString() + "}, format: " + Helper.asString(format) + ", mimeType: " + Helper.asString(mimeType) + ", contentLength: " + Helper.asBigDecimal(contentLength).toString() + ", comments: " + Helper.clobToString(comments);
+      //return "source: {" + source.toString() + "}, format: " + Helper.asString(format) + ", mimeType: " + Helper.asString(mimeType) + ", contentLength: " + Helper.asBigDecimal(contentLength).toString() + ", comments: " + Helper.clobToString(comments);
+      return "format: " + Helper.asString(format);
     } catch (SQLException e) {
       return e.getMessage();
     }
 
-  }
-
-  public JOrdSource getSource() {
-    return this.source;
   }
 
   public static OracleDataFactory getOracleDataFactory() {
@@ -45,22 +42,22 @@ public class JOrdDoc implements OracleData, OracleDataFactory {
   public JOrdDoc() {
   }
 
-  public JOrdDoc(JOrdSource source,
-                 CHAR format,
+  public JOrdDoc(CHAR format/*,
                  CHAR mimeType,
                  NUMBER contentLength,
-                 OracleClob comments) {
-    this.source = source;
+                 OracleClob comments,
+                 JOrdSource source*/) {
     this.format = format;
-    this.mimeType = mimeType;
-    this.contentLength = contentLength;
-    this.comments = comments;
+//    this.source = source;
+//    this.mimeType = mimeType;
+//    this.contentLength = contentLength;
+//    this.comments = comments;
   }
 
 
   @Override
   public Object toJDBCObject(Connection connection) throws SQLException {
-    Object[] attributes = {source, format, mimeType, contentLength, comments};
+    Object[] attributes = {format/*, source, mimeType, contentLength, comments*/};
     Struct struct = connection.createStruct("ORDSYS.ORDDOC", attributes);
     return struct;
   }
@@ -73,6 +70,10 @@ public class JOrdDoc implements OracleData, OracleDataFactory {
     Object[] attributesOrdSource = ((OracleStruct) attributes[0]).getAttributes();
 
     return new JOrdDoc(
+            (CHAR) attributes[1]/*,
+            (CHAR) attributes[2],
+            (NUMBER) attributes[3],
+            (OracleClob) attributes[4],
             (JOrdSource) new JOrdSource(
                     (BLOB) attributesOrdSource[0],
                     Helper.asCHAR((String) attributesOrdSource[1]),
@@ -80,11 +81,7 @@ public class JOrdDoc implements OracleData, OracleDataFactory {
                     Helper.asCHAR((String) attributesOrdSource[3]),
                     (Timestamp) attributesOrdSource[4],
                     (NUMBER) attributesOrdSource[5]
-            ),
-            (CHAR) attributes[1],
-            (CHAR) attributes[2],
-            (NUMBER) attributes[3],
-            (OracleClob) attributes[4]
+            )*/
     );
   }
 }
