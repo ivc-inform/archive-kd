@@ -10,7 +10,7 @@ import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
 import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
 import com.simplesys.container.scala.OrdDoc._
-import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
+import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource, RecorderOrdDoc}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
@@ -40,69 +40,6 @@ trait UploadData extends JSObject {
 trait ErrorStr extends JSObject {
     val message: JSUndefined[String]
     val stack: JSUndefined[String]
-}
-
-class RecordHelper(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration])(implicit connection: OracleConnection) {
-    def recOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiSize: Long)(implicit connection: OracleConnection): Unit = {
-        idAttatch.foreach {
-            idAttatch ⇒
-                val blob = connection.createBlob().asInstanceOf[OracleBlob]
-                //blob.getBinaryStream(1).read()
-
-                def getEmptySource =
-                    new OrdSource {
-                        override val srcName: Option[String] = Some(fiName)
-                        override val srcLocation: Option[String] = None
-                        override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                        override val local: Option[BigDecimal] = None
-                        override val srcType: Option[String] = Some("FILE")
-                        override val localData: Option[OracleBlob] = Some(blob)
-                    }
-
-                val ordDoc: JOrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
-                    case Some(ordDoc) ⇒
-                        val _source = ordDoc.source match {
-                            case Some(source) ⇒
-                                new OrdSource {
-                                    override val srcName: Option[String] = Some(fiName)
-                                    override val srcLocation: Option[String] = None
-                                    override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                                    override val local: Option[BigDecimal] = source.local
-                                    override val srcType: Option[String] = source.srcType
-                                    override val localData: Option[OracleBlob] = Some(blob)
-                                }
-                            case None ⇒
-                                getEmptySource
-                        }
-
-                        new OrdDoc {
-                            override val comments: Option[String] = Some("Updated by UploadContainer !!")
-                            override val format: Option[String] = ordDoc.format
-                            override val source: Option[OrdSource] = Some(_source)
-                            override val mimeType: Option[String] = Some(fiContentType)
-                            override val contentLength: Option[BigDecimal] = Some(fiSize)
-                        }
-
-                    case None ⇒
-                        new OrdDoc {
-                            override val comments: Option[String] = Some("Inserted by UploadContainer !!")
-                            override val format: Option[String] = None
-                            override val source: Option[OrdSource] = Some(getEmptySource)
-                            override val mimeType: Option[String] = Some(fiContentType)
-                            override val contentLength: Option[BigDecimal] = Some(fiSize)
-                        }
-                }
-
-                prepareStatement(connection, "UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?") {
-                    preparedStatement ⇒
-                        preparedStatement.setObject(1, ordDoc)
-                        preparedStatement.setLong(2, idAttatch)
-                        preparedStatement.executeUpdate()
-
-                        dcr.foreach(connection unregisterDatabaseChangeNotification _)
-                }
-        }
-    }
 }
 
 object UploadContainer {
@@ -200,7 +137,7 @@ object UploadContainer {
 
                         upload setProgressListener progressListener
 
-                        upload.parseRequest(request).asScala.headOption.map{fi ⇒ /*new RecordHelper(idAttatch, dcr).recOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, fi.getSize);*/ fi}
+                        upload.parseRequest(request).asScala.headOption.map { fi ⇒ new RecorderOrdDoc(idAttatch, dcr).writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, fi.getSize); fi }
                     }
                     match {
                         case Success(fi) ⇒
