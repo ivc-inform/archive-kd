@@ -1,7 +1,8 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
-import com.simplesys.SmartClient.Control.props.{ImgButtonProps, ProgressbarProps}
+import com.simplesys.SmartClient.Control.props.ProgressbarProps
+import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.Messaging.MessageJS
@@ -17,20 +18,21 @@ import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
-import scala.scalajs.js.UndefOr
 import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
-    val fileName: JSUndefined[String]
-    val uploadFile: JSUndefined[String]
-    val vname: JSUndefined[String]
-    val viztname: JSUndefined[String]
+    var fileName: JSUndefined[String]
+    var contentLength: JSUndefined[String]
+    var vname: JSUndefined[String]
+    var viztname: JSUndefined[String]
 }
 
 object AttachProps extends JSObject {
     val fileNameField = "fileName".nameStrong
     val contentLength = "contentLength".nameStrong
     val mimeType = "mimeType".nameStrong
+
+    def getSize(size: BigDecimal): String = s"${(size / 1024 / 1024).setScale(4, BigDecimal.RoundingMode.HALF_UP)} MB"
 }
 
 class AttachProps extends CommonListGridEditorComponentProps {
@@ -85,8 +87,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
     height = 250
 
     createRecordComponent = {
-        (thiz: classHandler, _record: AttatchDataRecordExt, colNum: Int) ⇒
-            thiz.getFieldName(colNum) match {
+        (thisTop: classHandler, _record: AttatchDataRecordExt, colNum: Int) ⇒
+            thisTop.getFieldName(colNum) match {
                 case fileNameField.name ⇒
                     any2undefOrA {
                         val _progressBar = Progressbar.create(
@@ -155,7 +157,10 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 progressBar.foreach { progressBar ⇒
                                                                     progressBar setPercentDone 0.0
                                                                     _data.fileName.foreach(progressBar setTitle _)
-                                                                    //_data.fileSize.foreach(record setTitle _)
+
+                                                                    _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0):Double)
+                                                                    
+                                                                    thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
                                                                 }
                                                         }
                                                         unsubscribe()

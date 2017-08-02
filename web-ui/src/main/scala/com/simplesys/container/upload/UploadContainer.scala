@@ -33,7 +33,7 @@ import scala.util.{Failure, Success, Try}
 trait UploadData extends JSObject {
     val maxValue: JSUndefined[Double]
     val fileName: JSUndefined[String]
-    val fileSize: JSUndefined[Long]
+    val fileSize: JSUndefined[Double]
     val elapsedTime: JSUndefined[String]
 }
 
@@ -204,13 +204,13 @@ object UploadContainer {
                     }
                     match {
                         case Success(fi) ⇒
-                            fi.foreach(_.delete())
                             channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject(
                                 "elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString),
                                 "fileName" → JsonString(fi.get.getName),
-                                "fileZise" → JsonLong(fi.get.getSize)
+                                "fileSize" → JsonLong(fi.get.getSize)
                             ), channels = channelMessageEndUpload)))
 
+                            fi.foreach(_.delete())
                             Out("Ok")
                         case Failure(e) ⇒
 

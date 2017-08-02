@@ -25,6 +25,8 @@ import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS}
 
 import scalaz.{Failure, Success}
 
+
+
 trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with ServletActorDyn {
 
     /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////
@@ -100,7 +102,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                         ordDoc.source.foreach {
                                             ordSource ⇒
                                                 ordSource.srcName.foreach(srcName ⇒ record += ("fileName" → JsonString(srcName)))
-                                                ordDoc.contentLength.foreach(contentLength ⇒ record += ("contentLength" → JsonString(s"${(contentLength/ (1024 * 1024)).setScale(4, BigDecimal.RoundingMode.HALF_UP)} MB")))
+                                                ordDoc.contentLength.foreach(contentLength ⇒ record += ("contentLength" → JsonString(s"${(contentLength / 1024 / 1024).setScale(4, BigDecimal.RoundingMode.HALF_UP)} MB")))
                                                 ordDoc.mimeType.foreach(mimeType ⇒ record += ("mimeType" → JsonString(mimeType)))
                                         }
                                 }

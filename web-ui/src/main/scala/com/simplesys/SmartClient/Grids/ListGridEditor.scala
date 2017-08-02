@@ -83,7 +83,7 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     var selectionAppearance: SelectionAppearance
     def selectRecords(records: IscArray[R], newState: Boolean = js.native): void
     def setFields(newFields: IscArray[T] = js.native): void
-    def selectRecord(record: R, newState: Boolean = js.native): void
+    def selectRecord(record: R | js.Object, newState: Boolean = js.native): void
     def selectRecordByKey(keyValue: JSAny, newState: Boolean = js.native): void
     def fullRefresh(criteria: Criteria = js.native, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def invalidateCache(): void
@@ -105,11 +105,11 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     def getRecord(data: JSAny): R
     var dataPageSize: Int
     def getEditorType(field: T, values: JSObject): String
-    def deselectRecord(record: R | Int): void
+    def deselectRecord(record: R | Int | JSObject): void
     def deselectRecords(records: IscArray[R]): void
     def deselectAllRecords(): void
     def selectRecordsByKey(keyValues: JSAny, newState: Boolean = js.native): R
-    def getRowNum(record: R): Int
+    def getRowNum(record: R | JSObject): Int
     var dataSource: DataSource
     def setContextMenu(menu: MenuSS): void
     def getContextMenu(): MenuSS

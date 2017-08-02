@@ -217,7 +217,7 @@ trait DataSource extends Class {
     val serverType: DSServerType
     val serviceNamespace: URN
     def setCacheAllData(shouldCache: Boolean): void
-    def setCacheData(data: IscArray[Record]): void
+    def setCacheData(data: IscArray[Record]| Record): void
     def setClientOnly()
     def setTypeOperators(typeName: FieldType | String, operators: IscArray[OperatorId]): void
     val showLocalFieldsOnly: Boolean
