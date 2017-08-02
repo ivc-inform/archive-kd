@@ -21,10 +21,10 @@ import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
-import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener}
+import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener, DatabaseChangeRegistration}
 import oracle.jdbc.{OracleBlob, OracleConnection}
 import oracle.sql.BLOB
-import org.apache.commons.fileupload.ProgressListener
+import org.apache.commons.fileupload.{FileItem, ProgressListener}
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
 import org.apache.commons.io.IOUtils.copy
@@ -42,6 +42,68 @@ trait ErrorStr extends JSObject {
     val stack: JSUndefined[String]
 }
 
+class RecordHelper(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration])(implicit connection: OracleConnection) {
+    def recOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiSize: Long)(implicit connection: OracleConnection): Unit = {
+        idAttatch.foreach {
+            idAttatch ⇒
+                val blob = connection.createBlob().asInstanceOf[OracleBlob]
+                //blob.getBinaryStream(1).read()
+
+                def getEmptySource =
+                    new OrdSource {
+                        override val srcName: Option[String] = Some(fiName)
+                        override val srcLocation: Option[String] = None
+                        override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
+                        override val local: Option[BigDecimal] = None
+                        override val srcType: Option[String] = Some("FILE")
+                        override val localData: Option[OracleBlob] = Some(blob)
+                    }
+
+                val ordDoc: JOrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
+                    case Some(ordDoc) ⇒
+                        val _source = ordDoc.source match {
+                            case Some(source) ⇒
+                                new OrdSource {
+                                    override val srcName: Option[String] = Some(fiName)
+                                    override val srcLocation: Option[String] = None
+                                    override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
+                                    override val local: Option[BigDecimal] = source.local
+                                    override val srcType: Option[String] = source.srcType
+                                    override val localData: Option[OracleBlob] = Some(blob)
+                                }
+                            case None ⇒
+                                getEmptySource
+                        }
+
+                        new OrdDoc {
+                            override val comments: Option[String] = Some("Updated by UploadContainer !!")
+                            override val format: Option[String] = ordDoc.format
+                            override val source: Option[OrdSource] = Some(_source)
+                            override val mimeType: Option[String] = Some(fiContentType)
+                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+                        }
+
+                    case None ⇒
+                        new OrdDoc {
+                            override val comments: Option[String] = Some("Inserted by UploadContainer !!")
+                            override val format: Option[String] = None
+                            override val source: Option[OrdSource] = Some(getEmptySource)
+                            override val mimeType: Option[String] = Some(fiContentType)
+                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+                        }
+                }
+
+                prepareStatement(connection, "UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?") {
+                    preparedStatement ⇒
+                        preparedStatement.setObject(1, ordDoc)
+                        preparedStatement.setLong(2, idAttatch)
+                        preparedStatement.executeUpdate()
+
+                        dcr.foreach(connection unregisterDatabaseChangeNotification _)
+                }
+        }
+    }
+}
 
 object UploadContainer {
 
@@ -76,7 +138,7 @@ object UploadContainer {
                 val channelMessageMaxValue = request.Parameter("p4")
                 val channelMessageRecordInBase = request.Parameter("p5")
 
-                val dcr = {
+                val dcr: Option[DatabaseChangeRegistration] = {
                     connection setAutoCommit false
 
                     val prop = new Properties()
@@ -88,7 +150,7 @@ object UploadContainer {
                             ///?????
                         }
                     })
-                    dcr
+                    Some(dcr)
                 }
 
                 val factory = new DiskFileItemFactory()
@@ -132,67 +194,8 @@ object UploadContainer {
                         }
 
                         upload setProgressListener progressListener
-                        upload.parseRequest(request).asScala.headOption.foreach {
-                            fi ⇒
-                                idAttatch.foreach {
-                                    idAttatch ⇒
-                                        val blob: BLOB = connection.createBlob().asInstanceOf[BLOB]
-                                        blob.setBytes(fi.get())
 
-                                        def getEmptySource =
-                                            new OrdSource {
-                                                override val srcName: Option[String] = Some(fi.getName)
-                                                override val srcLocation: Option[String] = None
-                                                override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                                                override val local: Option[BigDecimal] = None
-                                                override val srcType: Option[String] = Some("FILE")
-                                                override val localData: Option[OracleBlob] = Some(blob)
-                                            }
-
-                                        val ordDoc: JOrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
-                                            case Some(ordDoc) ⇒
-                                                val _source = ordDoc.source match {
-                                                    case Some(source) ⇒
-                                                        new OrdSource {
-                                                            override val srcName: Option[String] = Some(fi.getName)
-                                                            override val srcLocation: Option[String] = None
-                                                            override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                                                            override val local: Option[BigDecimal] = source.local
-                                                            override val srcType: Option[String] = source.srcType
-                                                            override val localData: Option[OracleBlob] = Some(blob)
-                                                        }
-                                                    case None ⇒
-                                                        getEmptySource
-                                                }
-
-                                                new OrdDoc {
-                                                    override val comments: Option[String] = Some("Updated by UploadContainer !!")
-                                                    override val format: Option[String] = ordDoc.format
-                                                    override val source: Option[OrdSource] = Some(_source)
-                                                    override val mimeType: Option[String] = Some(fi.getContentType)
-                                                    override val contentLength: Option[BigDecimal] = Some(fi.getSize)
-                                                }
-
-                                            case None ⇒
-                                                new OrdDoc {
-                                                    override val comments: Option[String] = Some("Inserted by UploadContainer !!")
-                                                    override val format: Option[String] = None
-                                                    override val source: Option[OrdSource] = Some(getEmptySource)
-                                                    override val mimeType: Option[String] = Some(fi.getContentType)
-                                                    override val contentLength: Option[BigDecimal] = Some(fi.getSize)
-                                                }
-                                        }
-
-                                        prepareStatement(connection, "UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?") {
-                                            preparedStatement ⇒
-                                                preparedStatement.setObject(1, ordDoc)
-                                                preparedStatement.setLong(2, idAttatch)
-                                                preparedStatement.executeUpdate()
-
-                                                connection unregisterDatabaseChangeNotification dcr
-                                        }
-                                }
-                        }
+                        upload.parseRequest(request).asScala.headOption.foreach(fi ⇒ new RecordHelper(idAttatch, dcr).recOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, fi.getSize))
                     }
                     match {
                         case Success(out) ⇒
