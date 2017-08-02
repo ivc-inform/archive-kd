@@ -155,6 +155,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 progressBar.foreach { progressBar ⇒
                                                                     progressBar setPercentDone 0.0
                                                                     _data.fileName.foreach(progressBar setTitle _)
+                                                                    //_data.fileSize.foreach(record setTitle _)
                                                                 }
                                                         }
                                                         unsubscribe()
