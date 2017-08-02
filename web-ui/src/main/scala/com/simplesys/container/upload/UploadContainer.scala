@@ -8,7 +8,7 @@ import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
-import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
+import com.simplesys.container.java.{JOrdDoc ⇒ JOrdDoc}
 import com.simplesys.container.scala.OrdDoc._
 import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource, RecorderOrdDoc}
 import com.simplesys.isc.dataBinging.DSRequestDyn

@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class OrdSource implements OracleData, OracleDataFactory {
+public class JOrdSource implements OracleData, OracleDataFactory {
 
   public OracleBlob localData;
   public String srcType;
@@ -20,13 +20,13 @@ public class OrdSource implements OracleData, OracleDataFactory {
   public Timestamp updateTime;
   public NUMBER local;
 
-  static final OrdSource _ordSource = new OrdSource();
+  static final JOrdSource _ordSource = new JOrdSource();
 
   public static OracleDataFactory getOracleDataFactory() {
     return _ordSource;
   }
 
-  public OrdSource() {
+  public JOrdSource() {
   }
 
   @Override
@@ -38,12 +38,12 @@ public class OrdSource implements OracleData, OracleDataFactory {
     }
   }
 
-  public OrdSource(OracleBlob localData,
-                   String srcType,
-                   String srcLocation,
-                   String srcName,
-                   Timestamp updateTime,
-                   NUMBER local) {
+  public JOrdSource(OracleBlob localData,
+                    String srcType,
+                    String srcLocation,
+                    String srcName,
+                    Timestamp updateTime,
+                    NUMBER local) {
     this.localData = localData;
     this.srcType = srcType;
     this.srcLocation = srcLocation;
@@ -64,7 +64,7 @@ public class OrdSource implements OracleData, OracleDataFactory {
       return null;
 
     Object[] attributes = ((OracleStruct) o).getOracleAttributes();
-    return new OrdSource(
+    return new JOrdSource(
             (OracleBlob) attributes[0],
             (String) attributes[1],
             (String) attributes[2],

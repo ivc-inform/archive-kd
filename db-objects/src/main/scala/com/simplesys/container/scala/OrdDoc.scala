@@ -1,8 +1,7 @@
 package com.simplesys.container.scala
 
 import com.simplesys.container.Helper
-import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
-import com.simplesys.container.scala.OrdSource._
+import com.simplesys.container.java.JOrdDoc
 import oracle.jdbc.OracleConnection
 import oracle.sql.{CLOB, NUMBER}
 
@@ -15,9 +14,9 @@ object OrdDoc {
         override val comments: Option[String] = Option(Helper.clobToString(ordDoc.comments))
     }
 
-    implicit def SOrdSource2SOrdSource(ordDoc: OrdDoc)(implicit connection: OracleConnection): JOrdDoc = {
+    implicit def SOrdSource2JOrdSource(ordDoc: OrdDoc)(implicit connection: OracleConnection): JOrdDoc = {
         val res = new JOrdDoc
-        ordDoc.source.foreach(res.source = _)
+        ordDoc.source.foreach (res.source = _)
         ordDoc.format.foreach(format ⇒ res.format = Helper.asCHAR(format))
         ordDoc.mimeType.foreach(mimeType ⇒ res.format = Helper.asCHAR(mimeType))
         ordDoc.contentLength.foreach(contentLength ⇒ res.contentLength = new NUMBER(contentLength.bigDecimal))

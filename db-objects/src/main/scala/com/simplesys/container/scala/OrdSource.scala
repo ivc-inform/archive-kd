@@ -4,7 +4,7 @@ import java.sql.Timestamp
 import java.time.LocalDateTime
 
 import com.simplesys.container.Helper
-import com.simplesys.container.java.{OrdSource ⇒ JOrdSource}
+import com.simplesys.container.java.JOrdSource
 import oracle.jdbc.OracleBlob
 import oracle.sql.NUMBER
 

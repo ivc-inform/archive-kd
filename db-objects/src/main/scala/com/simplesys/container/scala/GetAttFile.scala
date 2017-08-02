@@ -2,7 +2,7 @@ package com.simplesys.container.scala
 
 import java.sql.Connection
 
-import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
+import com.simplesys.container.java.{JOrdDoc ⇒ JOrdDoc}
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
 import oracle.jdbc.{OracleConnection, OracleResultSet}
 

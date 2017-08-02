@@ -7,24 +7,22 @@ import oracle.jdbc.OracleDataFactory;
 import oracle.jdbc.internal.OracleStruct;
 import oracle.sql.BLOB;
 import oracle.sql.CHAR;
-import oracle.sql.CLOB;
 import oracle.sql.NUMBER;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Struct;
 import java.sql.Timestamp;
 
-public class OrdDoc implements OracleData, OracleDataFactory {
+public class JOrdDoc implements OracleData, OracleDataFactory {
 
-  public OrdSource source;
+  public JOrdSource source;
   public CHAR format;
   public CHAR mimeType;
   public NUMBER contentLength;
   public OracleClob comments;
 
-  static final OrdDoc _ordDoc = new OrdDoc();
+  static final JOrdDoc _ordDoc = new JOrdDoc();
 
   @Override
   public String toString() {
@@ -36,7 +34,7 @@ public class OrdDoc implements OracleData, OracleDataFactory {
 
   }
 
-  public OrdSource getSource() {
+  public JOrdSource getSource() {
     return this.source;
   }
 
@@ -44,14 +42,14 @@ public class OrdDoc implements OracleData, OracleDataFactory {
     return _ordDoc;
   }
 
-  public OrdDoc() {
+  public JOrdDoc() {
   }
 
-  public OrdDoc(OrdSource source,
-                CHAR format,
-                CHAR mimeType,
-                NUMBER contentLength,
-                OracleClob comments) {
+  public JOrdDoc(JOrdSource source,
+                 CHAR format,
+                 CHAR mimeType,
+                 NUMBER contentLength,
+                 OracleClob comments) {
     this.source = source;
     this.format = format;
     this.mimeType = mimeType;
@@ -74,8 +72,8 @@ public class OrdDoc implements OracleData, OracleDataFactory {
     Object[] attributes = ((OracleStruct) o).getOracleAttributes();
     Object[] attributesOrdSource = ((OracleStruct) attributes[0]).getAttributes();
 
-    return new OrdDoc(
-            (OrdSource) new OrdSource(
+    return new JOrdDoc(
+            (JOrdSource) new JOrdSource(
                     (BLOB) attributesOrdSource[0],
                     (String) attributesOrdSource[1],
                     (String) attributesOrdSource[2],

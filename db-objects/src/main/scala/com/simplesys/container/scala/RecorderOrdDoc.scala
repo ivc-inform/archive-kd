@@ -3,20 +3,21 @@ package com.simplesys.container.scala
 import java.io.InputStream
 import java.time.{Instant, LocalDateTime, ZoneId}
 
+import com.simplesys.container.java.{JOrdDoc, JOrdSource}
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
-import oracle.jdbc.{OracleBlob, OracleConnection}
 import oracle.jdbc.dcn.DatabaseChangeRegistration
-import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
-import OrdDoc._
+import oracle.jdbc.{OracleBlob, OracleConnection}
+import org.apache.commons.io.IOUtils._
 
-class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration])(implicit connection: OracleConnection) {
-    def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiSize: Long)(implicit connection: OracleConnection): Unit = {
+class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration] = None)(implicit connection: OracleConnection) {
+    def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String)(implicit connection: OracleConnection): Unit = {
         idAttatch.foreach {
             idAttatch ⇒
                 val blob = connection.createBlob().asInstanceOf[OracleBlob]
-                //blob.getBinaryStream(1).read(inputStream.)
 
-                def getEmptySource =
+                val fiSize = copyLarge(inputStream, blob.setBinaryStream(1))
+
+                def getEmptySource: OrdSource =
                     new OrdSource {
                         override val srcName: Option[String] = Some(fiName)
                         override val srcLocation: Option[String] = None
@@ -26,7 +27,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
                         override val localData: Option[OracleBlob] = Some(blob)
                     }
 
-                val ordDoc: JOrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
+                val ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
                     case Some(ordDoc) ⇒
                         val _source = ordDoc.source match {
                             case Some(source) ⇒
@@ -62,7 +63,8 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
 
                 prepareStatement(connection, "UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?") {
                     preparedStatement ⇒
-                        preparedStatement.setObject(1, ordDoc)
+                        val jOrdDoc: JOrdDoc = ordDoc
+                        preparedStatement.setObject(1, jOrdDoc)
                         preparedStatement.setLong(2, idAttatch)
                         preparedStatement.executeUpdate()
 
