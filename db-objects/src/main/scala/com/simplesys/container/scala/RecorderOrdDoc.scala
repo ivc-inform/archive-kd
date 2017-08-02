@@ -7,6 +7,7 @@ import com.simplesys.jdbc.control.SessionStructures.prepareStatement
 import oracle.jdbc.{OracleBlob, OracleConnection}
 import oracle.jdbc.dcn.DatabaseChangeRegistration
 import com.simplesys.container.java.{OrdDoc ⇒ JOrdDoc}
+import OrdDoc._
 
 class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration])(implicit connection: OracleConnection) {
     def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiSize: Long)(implicit connection: OracleConnection): Unit = {
