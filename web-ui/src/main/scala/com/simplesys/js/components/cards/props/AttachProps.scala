@@ -130,11 +130,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                             progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
                                                                     }
                                                             },
-                                                        () ⇒ println(s"subscribe p4: $channel")
+                                                        () ⇒ println(s"subscribe: $channel")
                                                     ))
                                                     thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                         (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis),
-                                                        () ⇒ println(s"subscribe p5: $channel")
+                                                        () ⇒ println(s"subscribe: $channel")
                                                     ))
                                                     thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                         (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep()),
