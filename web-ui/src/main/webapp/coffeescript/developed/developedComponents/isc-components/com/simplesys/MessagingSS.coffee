@@ -34,6 +34,8 @@ if not isc.module_RealtimeMessaging?
 
 				if executed is true
 					@_reconnect subscribeCallback, event
+					if subscribeCallback?
+						isc.MessagingSS.fireCallback(subscribeCallback)
 			return
 
 		_emptyChannelsObject: (object) ->

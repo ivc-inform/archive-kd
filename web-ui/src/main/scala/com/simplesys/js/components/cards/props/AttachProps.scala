@@ -118,9 +118,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             showDisabledIcon = false.opt
                                             okFunction = {
                                                 (thiz: classHandler) ⇒
-                                                    thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)))
-                                                    thiz.channelMessageNextStep.foreach(isc.MessagingSS.subscribe(_, (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep())))
-                                                    thiz.channelMessageMaxValue.foreach(isc.MessagingSS.subscribe(_,
+                                                    thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                         (e: MessageJS) ⇒
                                                             e.data.foreach {
                                                                 data ⇒
@@ -129,19 +127,28 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                             progressBar setPercentDone 0.0
                                                                             progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
                                                                     }
-                                                            }
+                                                            },
+                                                        () ⇒ println(s"subscribe p4: $channel")
+                                                    ))
+                                                    thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis),
+                                                        () ⇒ println(s"subscribe p5: $channel")
+                                                    ))
+                                                    thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep()),
+                                                        () ⇒ println(s"subscribe: $channel")
                                                     ))
 
                                                     def unsubscribe(): Unit = {
-                                                        thiz.channelMessageEndUpload.foreach(isc.MessagingSS.unsubscribe(_ ))
-                                                        thiz.channelMessageError.foreach(isc.MessagingSS.unsubscribe(_))
-                                                        thiz.channelMessageNextStep.foreach(isc.MessagingSS.unsubscribe(_))
-                                                        thiz.channelMessageMaxValue.foreach(isc.MessagingSS.unsubscribe(_))
-                                                        thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
+                                                        thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
+                                                        thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
+                                                        thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
+                                                        thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
                                                         thiz.enable()
                                                     }
 
-                                                    thiz.channelMessageEndUpload.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
+                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
                                                         e.data.foreach {
                                                             data ⇒
                                                                 val _data = data.asInstanceOf[UploadData]
@@ -151,15 +158,19 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 }
                                                         }
                                                         unsubscribe()
-                                                    }))
+                                                    },
+                                                        () ⇒ println(s"subscribe: $channel")
+                                                    ))
 
-                                                    thiz.channelMessageError.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
+                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
                                                         progressBar.foreach(_ setPercentDone 0.0)
 
                                                         val error = e.data.asInstanceOf[ErrorStr]
                                                         isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
                                                         unsubscribe()
-                                                    }))
+                                                    },
+                                                        () ⇒ println(s"subscribe: $channel")
+                                                    ))
 
 
                                             }.toThisFunc.opt
