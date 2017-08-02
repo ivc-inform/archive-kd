@@ -139,18 +139,23 @@ object UploadContainer {
                 val channelMessageRecordInBase = request.Parameter("p5")
 
                 val dcr: Option[DatabaseChangeRegistration] = {
-                    connection setAutoCommit false
+                    Try {
+                        connection setAutoCommit false
 
-                    val prop = new Properties()
-                    prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
-                    val dcr = connection.registerDatabaseChangeNotification(prop)
+                        val prop = new Properties()
+                        prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
+                        val dcr = connection.registerDatabaseChangeNotification(prop)
 
-                    dcr.addListener(new DatabaseChangeListener {
-                        def onDatabaseChangeNotification(dce: DatabaseChangeEvent): Unit = {
-                            ///?????
-                        }
-                    })
-                    Some(dcr)
+                        dcr.addListener(new DatabaseChangeListener {
+                            def onDatabaseChangeNotification(dce: DatabaseChangeEvent): Unit = {
+                                ///?????
+                            }
+                        })
+                        dcr
+                    } match {
+                        case Success(dcr) ⇒ Some(dcr)
+                        case Failure(e) ⇒ None
+                    }
                 }
 
                 val factory = new DiskFileItemFactory()
