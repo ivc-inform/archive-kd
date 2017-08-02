@@ -15,7 +15,7 @@ trait MessagingSS extends com.simplesys.SmartClient.System.Class {
 @js.native
 abstract trait AbstractMessagingSSCompanion extends AbstractClassCompanion {
     def subscribe(channels: IscArray[String] | String, callback: js.Function1[MessageJS, _], subscribeCallback: js.Function = js.native, target: JSAny = js.native, event: String = js.native): void = js.native
-    def unsubscribe(channels: IscArray[String] | String, unSubscribeCallback: js.Function1[MessageJS, _] = js.native, event: String = js.native): void = js.native
+    def unsubscribe(channels: IscArray[String] | String, unSubscribeCallback: js.Function0[_] = js.native, event: String = js.native): void = js.native
 }
 
 @js.native

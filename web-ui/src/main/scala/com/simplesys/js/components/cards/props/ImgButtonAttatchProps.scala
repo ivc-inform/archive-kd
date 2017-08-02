@@ -34,7 +34,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
 
             thisTop.Super("initWidget", args)
-            
+
             thisTop.record.map {
                 _.id.map {
                     id ⇒
@@ -45,36 +45,41 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         params append id
                         params append "&"
 
-                        def addParam(end: String = "&") {
+                        def addParam(end: String = "&", no1: String) {
                             params append getNo
                             params append "="
-                            params append getNo1
+                            params append no1
                             params append end
                         }
 
                         def getParams: String = params.toString()
 
                         def getNo = s"p${i}"
-                        def getNo1 = s"${getNo}_${id}_${simpleSyS.guid}"
+                        def getNo1(guid: String) = s"${getNo}_${id}_${guid}"
 
-                        thisTop.channelMessageEndUpload = getNo1
-                        addParam()
-
-                        i += 1
-                        thisTop.channelMessageNextStep = getNo1
-                        addParam()
+                        var no1 = getNo1(simpleSyS.guid)
+                        thisTop.channelMessageEndUpload = no1
+                        addParam(no1 = no1)
 
                         i += 1
-                        thisTop.channelMessageMaxValue = getNo1
-                        addParam()
+                        no1 = getNo1(simpleSyS.guid)
+                        thisTop.channelMessageError = no1
+                        addParam(no1 = no1)
 
                         i += 1
-                        thisTop.channelMessageRecordInBase = getNo1
-                        addParam()
+                        no1 = getNo1(simpleSyS.guid)
+                        thisTop.channelMessageNextStep = no1
+                        addParam(no1 = no1)
 
                         i += 1
-                        thisTop.channelMessageError = getNo1
-                        addParam("")
+                        no1 = getNo1(simpleSyS.guid)
+                        thisTop.channelMessageMaxValue = no1
+                        addParam(no1 = no1)
+
+                        i += 1
+                        no1 = getNo1(simpleSyS.guid)
+                        thisTop.channelMessageRecordInBase = no1
+                        addParam("", no1)
 
                         thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
                 }

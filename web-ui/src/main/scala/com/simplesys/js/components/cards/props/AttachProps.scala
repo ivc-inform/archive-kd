@@ -9,7 +9,7 @@ import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.app.{ImgButtonAttatch, WindowUploadDialog}
-import com.simplesys.container.upload.{ErrorStr, UploadTestData}
+import com.simplesys.container.upload.{ErrorStr, UploadData}
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Attach
 import com.simplesys.option.DoubleType._
@@ -127,22 +127,29 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                     thiz.progressBar.foreach {
                                                                         progressBar ⇒
                                                                             progressBar setPercentDone 0.0
-                                                                            progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue.getOrElse(0)
+                                                                            progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
                                                                     }
                                                             }
                                                     ))
 
                                                     def unsubscribe(): Unit = {
-                                                        thiz.channelMessageEndUpload.foreach(isc.MessagingSS.unsubscribe(_))
-                                                        thiz.channelMessageError.foreach(isc.MessagingSS.unsubscribe(_))
-                                                        thiz.channelMessageNextStep.foreach(isc.MessagingSS.unsubscribe(_))
-                                                        thiz.channelMessageMaxValue.foreach(isc.MessagingSS.unsubscribe(_))
-                                                        thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.unsubscribe(_))
+                                                        thiz.channelMessageEndUpload.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
+                                                        thiz.channelMessageError.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
+                                                        thiz.channelMessageNextStep.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
+                                                        thiz.channelMessageMaxValue.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
+                                                        thiz.channelMessageRecordInBase.foreach(isc.MessagingSS.unsubscribe(_, () ⇒ println(s"unsibscribe: ${thiz.channelMessageEndUpload}")))
                                                         thiz.enable()
                                                     }
 
                                                     thiz.channelMessageEndUpload.foreach(isc.MessagingSS.subscribe(_, { (e: MessageJS) ⇒
-                                                        progressBar.foreach(_ setPercentDone 0.0)
+                                                        e.data.foreach {
+                                                            data ⇒
+                                                                val _data = data.asInstanceOf[UploadData]
+                                                                progressBar.foreach { progressBar ⇒
+                                                                    progressBar setPercentDone 0.0
+                                                                    _data.fileName.foreach(progressBar setTitle _)
+                                                                }
+                                                        }
                                                         unsubscribe()
                                                     }))
 

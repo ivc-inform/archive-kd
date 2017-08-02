@@ -11,7 +11,7 @@ import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types._
 import com.simplesys.System._
-import com.simplesys.container.upload.{ErrorStr, UploadTestData, UploadTestTab}
+import com.simplesys.container.upload.{ErrorStr, UploadData, UploadTestTab}
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
@@ -106,7 +106,7 @@ class UploadTestTabProps extends HLayoutProps {
                             progressBar.foreach {
                                 progressBar ⇒
                                     progressBar setPercentDone 0.0
-                                    progressBar.maxValue = data.asInstanceOf[UploadTestData].maxValue.getOrElse(0)
+                                    progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
                             }
                     }
             )
@@ -122,7 +122,7 @@ class UploadTestTabProps extends HLayoutProps {
             isc.MessagingSS.subscribe(channelMessageEndUpload, { (e: MessageJS) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
-                val elapsedTime = e.data.map(_.asInstanceOf[UploadTestData].elapsedTime.getOrElse("")).getOrElse("")
+                val elapsedTime = e.data.map(_.asInstanceOf[UploadData].elapsedTime.getOrElse("")).getOrElse("")
                 val fileSize = progressBar.get.maxValue
 
                 isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")

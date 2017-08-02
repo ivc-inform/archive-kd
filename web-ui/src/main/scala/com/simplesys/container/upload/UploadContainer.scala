@@ -1,6 +1,6 @@
 package com.simplesys.container.upload
 
-import java.io.{File, InputStream, OutputStream}
+import java.io.{File, InputStream}
 import java.time.{Instant, LocalDateTime, ZoneId}
 import java.util.Properties
 
@@ -23,17 +23,16 @@ import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener, DatabaseChangeRegistration}
 import oracle.jdbc.{OracleBlob, OracleConnection}
-import oracle.sql.BLOB
-import org.apache.commons.fileupload.{FileItem, ProgressListener}
+import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
-import org.apache.commons.io.IOUtils.copy
 
 import scala.collection.JavaConverters._
 import scala.util.{Failure, Success, Try}
 
-trait UploadTestData extends JSObject {
+trait UploadData extends JSObject {
     val maxValue: JSUndefined[Double]
+    val fileName: JSUndefined[String]
     val elapsedTime: JSUndefined[String]
 }
 
@@ -200,11 +199,15 @@ object UploadContainer {
 
                         upload setProgressListener progressListener
 
-                        upload.parseRequest(request).asScala.headOption.foreach(fi ⇒ new RecordHelper(idAttatch, dcr).recOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, fi.getSize))
+                        upload.parseRequest(request).asScala.headOption.map{fi ⇒ /*new RecordHelper(idAttatch, dcr).recOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, fi.getSize);*/ fi}
                     }
                     match {
-                        case Success(out) ⇒
-                            channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)), channels = channelMessageEndUpload)))
+                        case Success(fi) ⇒
+                            fi.foreach(_.delete())
+                            channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject(
+                                "elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString),
+                                "fileName" → JsonString(fi.get.getName)
+                            ), channels = channelMessageEndUpload)))
 
                             Out("Ok")
                         case Failure(e) ⇒
