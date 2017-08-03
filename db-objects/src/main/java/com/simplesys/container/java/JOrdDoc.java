@@ -1,6 +1,7 @@
 package com.simplesys.container.java;
 
 import com.simplesys.container.Helper;
+import com.simplesys.container.scala.OrdDoc;
 import oracle.jdbc.OracleClob;
 import oracle.jdbc.OracleData;
 import oracle.jdbc.OracleDataFactory;
@@ -15,7 +16,7 @@ import java.sql.Struct;
 import java.sql.Timestamp;
 
 public class JOrdDoc implements OracleData, OracleDataFactory {
-
+  
   public CHAR format;
 //  public CHAR mimeType;
 //  public NUMBER contentLength;

@@ -28,44 +28,22 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
                     }
 
 
-                val ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
-                    case Some(ordDoc) ⇒
-                        /*val _source = ordDoc.source match {
-                            case Some(source) ⇒
-                                new OrdSource {
-                                    override val srcName: Option[String] = Some(fiName)
-                                    override val srcLocation: Option[String] = None
-                                    override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                                    override val local: Option[BigDecimal] = source.local
-                                    override val srcType: Option[String] = source.srcType
-                                    override val localData: Option[OracleBlob] = Some(blob)
-                                }
-                            case None ⇒
-                                getEmptySource
-                        }*/
-
-                        new OrdDoc {
-                            override val format: Option[String] = ordDoc.format
-//                            override val source: Option[OrdSource] = Some(_source)
-//                            override val mimeType: Option[String] = Some(fiContentType)
-//                            override val contentLength: Option[BigDecimal] = Some(fiSize)
-//                            override val comments: Option[String] = Some("Updated by UploadContainer !!")
-                        }
-
-                    case None ⇒
-                        new OrdDoc {
-                            override val format: Option[String] = None
-//                            override val source: Option[OrdSource] = Some(getEmptySource)
-//                            override val mimeType: Option[String] = Some(fiContentType)
-//                            override val contentLength: Option[BigDecimal] = Some(fiSize)
-//                            override val comments: Option[String] = Some("Inserted by UploadContainer !!")
-                        }
+                val ordDoc = new OrdDoc {
+                    override val format: Option[String] = Some("f1")
+                    //                            override val source: Option[OrdSource] = Some(getEmptySource)
+                    //                            override val mimeType: Option[String] = Some(fiContentType)
+                    //                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+                    //                            override val comments: Option[String] = Some("Inserted by UploadContainer !!")
                 }
 
                 prepareStatement(connection, "UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?") {
                     preparedStatement ⇒
                         val jOrdDoc: JOrdDoc = ordDoc
-                        preparedStatement.setObject(1, jOrdDoc)
+                        val myMap = connection.getTypeMap
+                        myMap put ("ORDSYS.ORDDOC", classOf[JOrdDoc])
+                        connection setTypeMap myMap
+                        
+                        preparedStatement.setObject(1, jOrdDoc.toJDBCObject(connection))
                         preparedStatement.setLong(2, idAttatch)
                         preparedStatement.executeUpdate()
 
