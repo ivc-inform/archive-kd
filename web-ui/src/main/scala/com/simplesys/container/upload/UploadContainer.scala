@@ -9,8 +9,8 @@ import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
 import com.simplesys.container.java.{JOrdDoc ⇒ JOrdDoc}
-import com.simplesys.container.scala.OrdDoc._
-import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource, RecorderOrdDoc}
+import com.simplesys.container.scala.SOrdDoc._
+import com.simplesys.container.scala.{GetAttFile, SOrdDoc, SOrdSource, RecorderOrdDoc}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement

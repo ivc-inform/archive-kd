@@ -69,6 +69,7 @@ object CommonDeps {
         val jettyVersion = "9.4.6.v20170531"
         val jdbcOracle11DriverVersion = "11.2.0.4"
         val jdbcOracle12DriverVersion = "12.2.0.1"
+        val ordimVersion = "12.2.0"
 
         val commonsFileuploadVersion = "1.3.3"
         val commonsIOVersion = "2.5"
@@ -124,6 +125,7 @@ object CommonDeps {
     val jdbcOracle12 = "com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion
     val jdbcOracle12UCP = "com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion
     val jdbcOracleN18_12 = "com.oracle.jdbc" % "orai18n" % versions.jdbcOracle12DriverVersion
+    val ordim = "com.oracle" % "ordim" % versions.ordimVersion
 
     val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
     val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion
