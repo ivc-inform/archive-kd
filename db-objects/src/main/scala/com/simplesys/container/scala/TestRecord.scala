@@ -14,12 +14,15 @@ object TestRecord extends App {
 
     GetAttFile.getOrdDoc(idAttatch).foreach {
         item ⇒
-            val ordDoc: OrdDoc = item
+            val ordDoc = item
             val file = new File(".idea/inspectionProfiles/Project_Default.xml")
             val fileInputStream = new FileInputStream(file)
-            println(ordDoc.toString)
+            println(ordDoc.getContentLength)
+            println(ordDoc.getFormat)
+            println(ordDoc.getMimeType)
+            println(ordDoc)
 
-            //(new RecorderOrdDoc (Some(idAttatch), None)).writeOrdDoc(fileInputStream, file.getName, "application/xml")
+            (new RecorderOrdDoc (Some(idAttatch), None)).writeOrdDoc1(fileInputStream, file.getName, "application/xml")
 
     }
     println("Hello")

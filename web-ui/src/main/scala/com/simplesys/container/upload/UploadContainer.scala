@@ -1,19 +1,15 @@
 package com.simplesys.container.upload
 
-import java.io.{File, InputStream}
-import java.time.{Instant, LocalDateTime, ZoneId}
+import java.io.File
 import java.util.Properties
 
 import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
-import com.simplesys.container.java.{JOrdDoc ⇒ JOrdDoc}
-import com.simplesys.container.scala.SOrdDoc._
-import com.simplesys.container.scala.{GetAttFile, SOrdDoc, SOrdSource, RecorderOrdDoc}
+import com.simplesys.container.java.JOrdDoc
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.jdbc.control.SessionStructures.prepareStatement
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
@@ -21,8 +17,8 @@ import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
+import oracle.jdbc.OracleConnection
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener, DatabaseChangeRegistration}
-import oracle.jdbc.{OracleBlob, OracleConnection}
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload

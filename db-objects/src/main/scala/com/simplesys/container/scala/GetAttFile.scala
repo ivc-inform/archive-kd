@@ -9,12 +9,9 @@ import oracle.ord.im.OrdDoc
 object GetAttFile {
     def getOrdDoc(id: BigDecimal)(implicit oracleConnection: Connection): Option[OrdDoc] = {
 
-        val selectSQL = "select ATTFILE from ARX_ATTATCH where ID = ?"
-
-        prepareStatement(oracleConnection, selectSQL) {
+        prepareStatement(oracleConnection, "select ATTFILE from ARX_ATTATCH where ID = ?") {
             preparedStatement ⇒
                 preparedStatement.setBigDecimal(1, id.bigDecimal)
-
                 val ors = preparedStatement.executeQuery().asInstanceOf[OracleResultSet]
 
                 if (ors.next()) 
