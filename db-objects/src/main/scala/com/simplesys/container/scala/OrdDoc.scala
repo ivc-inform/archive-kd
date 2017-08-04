@@ -2,7 +2,7 @@ package com.simplesys.container.scala
 
 import com.simplesys.container.Helper
 import com.simplesys.container.java.JOrdDoc
-import oracle.jdbc.OracleConnection
+import oracle.jdbc.{OracleClob, OracleConnection}
 import oracle.sql.{CLOB, NUMBER}
 
 object OrdDoc {
@@ -20,7 +20,11 @@ object OrdDoc {
         ordDoc.format.foreach(format ⇒ res.format = Helper.asCHAR(format))
         ordDoc.mimeType.foreach(mimeType ⇒ res.mimeType = Helper.asCHAR(mimeType))
         ordDoc.contentLength.foreach(contentLength ⇒ res.contentLength = new NUMBER(contentLength.bigDecimal))
-        ordDoc.comments.foreach(comment ⇒ res.comments = new CLOB(connection, comment.map(_.toByte).toArray))
+        ordDoc.comments.foreach(comment ⇒ res.comments = {
+            val clob = connection.createClob().asInstanceOf[OracleClob]
+            clob.setString(1, comment)
+            clob
+        })
         res
     }
 }
