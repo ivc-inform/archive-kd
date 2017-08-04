@@ -1,6 +1,7 @@
 package com.simplesys.container.java;
 
 import com.simplesys.container.Helper;
+import com.simplesys.container.scala.OrdSource;
 import oracle.jdbc.OracleClob;
 import oracle.jdbc.OracleData;
 import oracle.jdbc.OracleDataFactory;
@@ -9,6 +10,7 @@ import oracle.sql.BLOB;
 import oracle.sql.CHAR;
 import oracle.sql.NUMBER;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Struct;
@@ -72,15 +74,19 @@ public class JOrdDoc implements OracleData, OracleDataFactory {
     Object[] attributes = ((OracleStruct) o).getOracleAttributes();
     Object[] attributesOrdSource = ((OracleStruct) attributes[0]).getAttributes();
 
+    JOrdSource source = new JOrdSource(
+            (BLOB) attributesOrdSource[0],
+            Helper.asCHAR((String) attributesOrdSource[1]),
+            Helper.asCHAR((String) attributesOrdSource[2]),
+            Helper.asCHAR((String) attributesOrdSource[3]),
+            (Timestamp) attributesOrdSource[4],
+            (NUMBER) Helper.asNumber((BigDecimal) attributesOrdSource[5])
+    );
+
+    NUMBER a = (NUMBER) attributes[3];
+
     return new JOrdDoc(
-            (JOrdSource) new JOrdSource(
-                    (BLOB) attributesOrdSource[0],
-                    Helper.asCHAR((String) attributesOrdSource[1]),
-                    Helper.asCHAR((String) attributesOrdSource[2]),
-                    Helper.asCHAR((String) attributesOrdSource[3]),
-                    (Timestamp) attributesOrdSource[4],
-                    (NUMBER) attributesOrdSource[5]
-            ),
+            source,
             (CHAR) attributes[1],
             (CHAR) attributes[2],
             (NUMBER) attributes[3],

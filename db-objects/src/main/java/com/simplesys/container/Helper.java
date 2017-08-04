@@ -60,4 +60,11 @@ public class Helper {
     else
       return NUMBER.toBigDecimal(n.toBytes());
   }
+
+  public static NUMBER asNumber(BigDecimal bigDecimal) throws SQLException {
+    if (bigDecimal == null)
+      return null;
+    else
+      return new NUMBER(bigDecimal);
+  }
 }

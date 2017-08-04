@@ -6,7 +6,7 @@ import java.time.{Instant, LocalDateTime, ZoneId}
 import com.simplesys.container.java.{JOrdDoc, JOrdSource}
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
 import oracle.jdbc.dcn.DatabaseChangeRegistration
-import oracle.jdbc.{OracleBlob, OracleConnection}
+import oracle.jdbc.{OracleBlob, OracleClob, OracleConnection}
 import org.apache.commons.io.IOUtils._
 
 class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration] = None)(implicit connection: OracleConnection) {
@@ -14,6 +14,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
         idAttatch.foreach {
             idAttatch ⇒
                 val blob = connection.createBlob().asInstanceOf[OracleBlob]
+                val clob = connection.createClob().asInstanceOf[OracleClob]
 
                 val fiSize = copyLarge(inputStream, blob.setBinaryStream(1))
 
