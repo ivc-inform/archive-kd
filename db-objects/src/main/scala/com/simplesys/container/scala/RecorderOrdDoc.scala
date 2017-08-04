@@ -1,17 +1,15 @@
 package com.simplesys.container.scala
 
 import java.io.InputStream
-import java.sql.{CallableStatement, Timestamp, Types}
+import java.sql.{Timestamp, Types}
 import java.time.{Instant, LocalDateTime, ZoneId}
 
-import com.simplesys.container.Helper
 import com.simplesys.jdbc.control.SessionStructures.callableStatement
-import oracle.jdbc.dcn.DatabaseChangeRegistration
 import oracle.jdbc._
-import oracle.sql.CLOB
+import oracle.jdbc.dcn.DatabaseChangeRegistration
 import org.apache.commons.io.IOUtils._
 
-class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRegistration] = None)(implicit connection: OracleConnection) {
+class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration] = None)(implicit connection: OracleConnection) {
     def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiMimeType: Option[String] = None)(implicit connection: OracleConnection): Unit = {
         idAttatch.foreach {
             idAttatch ⇒
@@ -154,7 +152,7 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                         }
 
                         index += 1
-                        callableStatement.setBigDecimal(index, idAttatch.bigDecimal)
+                        callableStatement.setLong(index, idAttatch)
                         callableStatement.executeUpdate()
 
                         dcr.foreach(connection unregisterDatabaseChangeNotification _)

@@ -17,7 +17,8 @@ object TestRecord extends App {
         item ⇒
             val ordDoc: JOrdDoc = item
             //val file = new File(".idea/inspectionProfiles/Project_Default.xml")
-            val file = new File("/home/uandrew/2TB/andrew/MOVIES/Red_hot.mkv")
+            //val file = new File("/home/uandrew/2TB/andrew/MOVIES/Red_hot.mkv")
+            val file = new File("/home/uandrew/2TB/andrew/MOVIES/Афоня.avi")
             val fileInputStream = new FileInputStream(file)
 
             println(ordDoc.toString)

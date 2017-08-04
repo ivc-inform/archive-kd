@@ -137,7 +137,7 @@ object UploadContainer {
 
                         upload setProgressListener progressListener
 
-                        upload.parseRequest(request).asScala.headOption.map { fi ⇒ /*new RecorderOrdDoc(idAttatch, dcr).writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, fi.getSize);*/ fi }
+                        upload.parseRequest(request).asScala.headOption.map { fi ⇒ new RecorderOrdDoc(idAttatch, dcr).writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType); fi }
                     }
                     match {
                         case Success(fi) ⇒
