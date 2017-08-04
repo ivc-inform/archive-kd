@@ -12,7 +12,7 @@ import oracle.sql.CLOB
 import org.apache.commons.io.IOUtils._
 
 class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRegistration] = None)(implicit connection: OracleConnection) {
-    def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String)(implicit connection: OracleConnection): Unit = {
+    def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiMimeType: Option[String] = None)(implicit connection: OracleConnection): Unit = {
         idAttatch.foreach {
             idAttatch ⇒
                 val blob = connection.createBlob().asInstanceOf[OracleBlob]
@@ -51,7 +51,7 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                             override val comments: Option[String] = Some("Updated by UploadContainer !!")
                             override val format: Option[String] = Some(fiContentType)
                             override val source: Option[OrdSource] = Some(_source)
-                            override val mimeType: Option[String] = ordDoc.mimeType
+                            override val mimeType: Option[String] = fiMimeType
                             override val contentLength: Option[BigDecimal] = Some(fiSize)
                         }
 
@@ -60,7 +60,7 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                             override val comments: Option[String] = Some("Inserted by UploadContainer !!")
                             override val format: Option[String] = Some(fiContentType)
                             override val source: Option[OrdSource] = Some(getEmptySource)
-                            override val mimeType: Option[String] = None
+                            override val mimeType: Option[String] = fiMimeType
                             override val contentLength: Option[BigDecimal] = Some(fiSize)
                         }
                 }
