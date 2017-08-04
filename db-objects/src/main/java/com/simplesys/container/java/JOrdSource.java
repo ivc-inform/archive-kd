@@ -56,7 +56,7 @@ public class JOrdSource implements OracleData, OracleDataFactory {
   @Override
   public Object toJDBCObject(Connection connection) throws SQLException {
     Object[] attributes = {localData, srcType, srcLocation, srcName, updateTime, local};
-    return connection.createStruct("ORDSYS.ORDSOURCE", attributes);
+    return connection.createStruct("ORDSOURCE", attributes);
   }
 
   @Override

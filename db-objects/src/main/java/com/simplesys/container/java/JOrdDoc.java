@@ -61,7 +61,7 @@ public class JOrdDoc implements OracleData, OracleDataFactory {
   @Override
   public Object toJDBCObject(Connection connection) throws SQLException {
     Object[] attributes = {source, format, mimeType, contentLength, comments};
-    Struct struct = connection.createStruct("ORDSYS.ORDDOC", attributes);
+    Struct struct = connection.createStruct("ORDDOC", attributes);
     return struct;
   }
 
