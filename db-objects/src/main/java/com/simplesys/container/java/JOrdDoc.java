@@ -73,20 +73,16 @@ public class JOrdDoc implements OracleData, OracleDataFactory {
 
     Object[] attributes = ((OracleStruct) o).getOracleAttributes();
     Object[] attributesOrdSource = ((OracleStruct) attributes[0]).getAttributes();
-
-    JOrdSource source = new JOrdSource(
-            (BLOB) attributesOrdSource[0],
-            Helper.asCHAR((String) attributesOrdSource[1]),
-            Helper.asCHAR((String) attributesOrdSource[2]),
-            Helper.asCHAR((String) attributesOrdSource[3]),
-            (Timestamp) attributesOrdSource[4],
-            (NUMBER) Helper.asNumber((BigDecimal) attributesOrdSource[5])
-    );
-
-    NUMBER a = (NUMBER) attributes[3];
-
+    
     return new JOrdDoc(
-            source,
+            new JOrdSource(
+                    (BLOB) attributesOrdSource[0],
+                    Helper.asCHAR((String) attributesOrdSource[1]),
+                    Helper.asCHAR((String) attributesOrdSource[2]),
+                    Helper.asCHAR((String) attributesOrdSource[3]),
+                    (Timestamp) attributesOrdSource[4],
+                    (NUMBER) Helper.asNumber((BigDecimal) attributesOrdSource[5])
+            ),
             (CHAR) attributes[1],
             (CHAR) attributes[2],
             (NUMBER) attributes[3],

@@ -18,7 +18,7 @@ object GetAttFile {
                 val ors = preparedStatement.executeQuery().asInstanceOf[OracleResultSet]
 
                 if (ors.next())
-                    Option(ors.getORAData(1, JOrdDoc.getOracleDataFactory()).map(ordJDoc ⇒ ordJDoc: OrdDoc)
+                    Option(ors.getObject(1, JOrdDoc.getOracleDataFactory()).asInstanceOf[JOrdDoc]).map(ordJDoc ⇒ ordJDoc: OrdDoc)
                 else
                     None
         }

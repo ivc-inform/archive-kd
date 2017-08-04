@@ -11,7 +11,7 @@ object TestRecord extends App {
     val ds = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
     implicit val connection = ds.getConnection().asInstanceOf[OracleConnection]
 
-    val idAttatch = 134
+    val idAttatch = 136
 
     GetAttFile.getOrdDoc(idAttatch).foreach {
         item ⇒
