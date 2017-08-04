@@ -4,6 +4,7 @@ import java.io.InputStream
 import java.sql.{CallableStatement, Timestamp, Types}
 import java.time.{Instant, LocalDateTime, ZoneId}
 
+import com.simplesys.container.Helper
 import com.simplesys.jdbc.control.SessionStructures.callableStatement
 import oracle.jdbc.dcn.DatabaseChangeRegistration
 import oracle.jdbc._
@@ -38,7 +39,7 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                                     override val srcName: Option[String] = Some(fiName)
                                     override val srcLocation: Option[String] = None
                                     override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                                    override val local: Option[BigDecimal] = source.local
+                                    override val local: Option[BigDecimal] = Some(1)
                                     override val srcType: Option[String] = source.srcType
                                     override val localData: Option[OracleBlob] = Some(blob)
                                 }
@@ -48,18 +49,18 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
 
                         new OrdDoc {
                             override val comments: Option[String] = Some("Updated by UploadContainer !!")
-                            override val format: Option[String] = ordDoc.format
+                            override val format: Option[String] = Some(fiContentType)
                             override val source: Option[OrdSource] = Some(_source)
-                            override val mimeType: Option[String] = Some(fiContentType)
+                            override val mimeType: Option[String] = ordDoc.mimeType
                             override val contentLength: Option[BigDecimal] = Some(fiSize)
                         }
 
                     case None ⇒
                         new OrdDoc {
                             override val comments: Option[String] = Some("Inserted by UploadContainer !!")
-                            override val format: Option[String] = None
+                            override val format: Option[String] = Some(fiContentType)
                             override val source: Option[OrdSource] = Some(getEmptySource)
-                            override val mimeType: Option[String] = Some(fiContentType)
+                            override val mimeType: Option[String] = None
                             override val contentLength: Option[BigDecimal] = Some(fiSize)
                         }
                 }
@@ -147,6 +148,7 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                         ordDoc.comments match {
                             case Some(comments) ⇒
                                 clob.setString(1L, comments)
+                                //println(Helper.clobToString(clob))
                                 callableStatement.setClob(index, clob)
                             case None ⇒
                                 callableStatement.setNull(index, Types.CLOB)
