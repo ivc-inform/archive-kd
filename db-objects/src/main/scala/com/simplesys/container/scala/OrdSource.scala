@@ -24,7 +24,7 @@ object OrdSource {
         ordSource.srcName.foreach(srcName ⇒ res.srcName = Helper.asCHAR(srcName))
         ordSource.srcLocation.foreach(srcLocation => res.srcLocation = Helper.asCHAR(srcLocation))
         ordSource.updateTime.foreach(localDateTime ⇒ res.updateTime = Timestamp.valueOf(localDateTime))
-        ordSource.local.foreach(bigDeecimal ⇒ res.local = new NUMBER(bigDeecimal))
+        ordSource.local.foreach(bigDeecimal ⇒ res.local = new NUMBER(bigDeecimal.bigDecimal))
         ordSource.srcType.foreach(srcType ⇒ res.srcType = Helper.asCHAR(srcType))
         ordSource.localData.foreach(res.localData = _)
         res
