@@ -148,7 +148,6 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                         ordDoc.comments match {
                             case Some(comments) ⇒
                                 clob.setString(1L, comments)
-                                //println(Helper.clobToString(clob))
                                 callableStatement.setClob(index, clob)
                             case None ⇒
                                 callableStatement.setNull(index, Types.CLOB)
