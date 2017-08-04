@@ -16,7 +16,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
         idAttatch.foreach {
             idAttatch ⇒
                 println()
-                prepareStatement(connection, "select ATTFILE from ARX_ATTATCH where ID = ? for update") {
+                prepareStatement(connection, "select ATTFILE from ARX_ATTATCH where ID = ?") {
                     preparedStatement ⇒
                         val oraclePreparedStatement = preparedStatement.asInstanceOf[OraclePreparedStatement]
                         oraclePreparedStatement.setLong(1, idAttatch)
@@ -54,7 +54,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
     }
 
     def writeOrdDoc1(inputStream: InputStream, fiName: String, fiContentType: String)(implicit connection: OracleConnection): Unit = {
-        val pstmt = connection.prepareStatement("select ATTFILE from ARX_ATTATCH where ID = ? for update").asInstanceOf[OraclePreparedStatement]
+        val pstmt = connection.prepareStatement("select ATTFILE from ARX_ATTATCH where ID = ? FOR UPDATE").asInstanceOf[OraclePreparedStatement]
         pstmt.setLong(1, idAttatch.get)
 
         val rs = pstmt.executeQuery.asInstanceOf[OracleResultSet]
