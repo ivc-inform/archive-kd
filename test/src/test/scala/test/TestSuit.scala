@@ -1,9 +1,10 @@
 package test
 
+import com.simplesys.connectionStack.BoneCPStack
 import oracle.jdbc.pool.OracleDataSource
 import org.scalatest.FunSuite
 
-class TestSuit extends FunSuite {
+class TestSuit extends FunSuite with BoneCPStack {
     test("load to blob") {
         val ods = new OracleDataSource
 
@@ -22,9 +23,9 @@ class TestSuit extends FunSuite {
 
     test("Eqv array") {
         var a = Array("1", "2")
-        println(Array("1", "2").zipWithIndex.foreach {
+        println(Array("1", "2").zipWithIndex.foreach{
             case (item, index) ⇒
-                println(a(index) == item)
+              println(a(index) == item)
         })
     }
 }

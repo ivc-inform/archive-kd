@@ -1,77 +1,76 @@
 package com.simplesys.container.scala
 
 import java.io.InputStream
-import java.sql.{SQLException, Timestamp}
+import java.time.{Instant, LocalDateTime, ZoneId}
 
+import com.simplesys.container.java.{JOrdDoc, JOrdSource}
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
 import oracle.jdbc.dcn.DatabaseChangeRegistration
-import oracle.jdbc.{OracleConnection, OraclePreparedStatement, OracleResultSet}
-import oracle.ord.im.OrdDoc
-//import org.apache.commons.io.IOUtils._
+import oracle.jdbc.{OracleBlob, OracleConnection}
+import org.apache.commons.io.IOUtils._
 
 class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration] = None)(implicit connection: OracleConnection) {
-
-
     def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String)(implicit connection: OracleConnection): Unit = {
         idAttatch.foreach {
             idAttatch ⇒
-                println()
-                prepareStatement(connection, "select ATTFILE from ARX_ATTATCH where ID = ?") {
-                    preparedStatement ⇒
-                        val oraclePreparedStatement = preparedStatement.asInstanceOf[OraclePreparedStatement]
-                        oraclePreparedStatement.setLong(1, idAttatch)
+                val blob = connection.createBlob().asInstanceOf[OracleBlob]
 
-                        val ors = oraclePreparedStatement.executeQuery().asInstanceOf[OracleResultSet]
+                val fiSize = copyLarge(inputStream, blob.setBinaryStream(1))
 
-                        if (ors.next()) {
-                            val ordDoc = ors.getORAData(1, OrdDoc.getORADataFactory).asInstanceOf[OrdDoc]
+                def getEmptySource: OrdSource =
+                    new OrdSource {
+                        override val srcName: Option[String] = Some(fiName)
+                        override val srcLocation: Option[String] = None
+                        override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
+                        override val local: Option[BigDecimal] = None
+                        override val srcType: Option[String] = Some("FILE")
+                        override val localData: Option[OracleBlob] = Some(blob)
+                    }
 
-                            ordDoc.deleteContent()
-                            ordDoc.setLocal()
-                            ordDoc.setUpdateTime(null.asInstanceOf[Timestamp])
 
-                            //val length = copyLarge(inputStream, ordDoc.getBlobContent().setBinaryStream(1))
-
-                            ordDoc.loadDataFromInputStream(inputStream)
-                            ordDoc.setMimeType("application/xml")
-                            ordDoc.setFormat("FILE")
-
-                            prepareStatement(connection, "UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?") {
-                                preparedStatement ⇒
-                                    val oraclePreparedStatement = preparedStatement.asInstanceOf[OraclePreparedStatement]
-                                    oraclePreparedStatement.setORAData(1, ordDoc)
-                                    oraclePreparedStatement.setLong(2, idAttatch)
-                                    oraclePreparedStatement.executeUpdate()
-
-                                    dcr.foreach(connection unregisterDatabaseChangeNotification _)
-                            }
+                val ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
+                    case Some(ordDoc) ⇒
+                        val _source = ordDoc.source match {
+                            case Some(source) ⇒
+                                new OrdSource {
+                                    override val srcName: Option[String] = Some(fiName)
+                                    override val srcLocation: Option[String] = None
+                                    override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
+                                    override val local: Option[BigDecimal] = source.local
+                                    override val srcType: Option[String] = source.srcType
+                                    override val localData: Option[OracleBlob] = Some(blob)
+                                }
+                            case None ⇒
+                                getEmptySource
                         }
 
+                        new OrdDoc {
+                            override val comments: Option[String] = Some("Updated by UploadContainer !!")
+                            override val format: Option[String] = ordDoc.format
+                            override val source: Option[OrdSource] = Some(_source)
+                            override val mimeType: Option[String] = Some(fiContentType)
+                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+                        }
+
+                    case None ⇒
+                        new OrdDoc {
+                            override val comments: Option[String] = Some("Inserted by UploadContainer !!")
+                            override val format: Option[String] = None
+                            override val source: Option[OrdSource] = Some(getEmptySource)
+                            override val mimeType: Option[String] = Some(fiContentType)
+                            override val contentLength: Option[BigDecimal] = Some(fiSize)
+                        }
                 }
 
+                prepareStatement(connection, "UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?") {
+                    preparedStatement ⇒
+                        val jOrdDoc: JOrdDoc = ordDoc
+                        preparedStatement.setObject(1, jOrdDoc)
+                        preparedStatement.setLong(2, idAttatch)
+                        preparedStatement.executeUpdate()
 
-        }
-    }
-
-    def writeOrdDoc1(inputStream: InputStream, fiName: String, fiContentType: String)(implicit connection: OracleConnection): Unit = {
-        val pstmt = connection.prepareStatement("select ATTFILE from ARX_ATTATCH where ID = ? FOR UPDATE").asInstanceOf[OraclePreparedStatement]
-        pstmt.setLong(1, idAttatch.get)
-
-        val rs = pstmt.executeQuery.asInstanceOf[OracleResultSet]
-        if (rs.next() == false)
-            throw new SQLException()
-        else {
-            val ordDoc = rs.getORAData(1, OrdDoc.getORADataFactory).asInstanceOf[OrdDoc]
-
-            rs.close
-            pstmt.close
-
-            val pstmt1 = connection.prepareCall("UPDATE ARX_ATTATCH SET ATTFILE = ? WHERE ID = ?").asInstanceOf[OraclePreparedStatement]
-            pstmt1.setLong(2, idAttatch.get)
-            ordDoc.loadDataFromInputStream(inputStream)
-            pstmt1.setORAData(1, ordDoc)
-            pstmt1.execute
-            pstmt1.close
+                        dcr.foreach(connection unregisterDatabaseChangeNotification _)
+                }
         }
     }
 }

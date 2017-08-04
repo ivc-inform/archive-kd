@@ -2,23 +2,18 @@ package com.simplesys.container;
 
 import net.sf.saxon.serialize.charcode.CharacterSetFactory;
 import oracle.jdbc.OracleClob;
-import oracle.sql.BLOB;
 import oracle.sql.CHAR;
 import oracle.sql.CharacterSet;
 import oracle.sql.NUMBER;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import static oracle.sql.CharacterSet.CL8MSWIN1251_CHARSET;
 
 public class Helper {
-  private static int EOF = -1;
-
   public static String clobToString(OracleClob data) {
     if (data == null)
       return null;
@@ -64,13 +59,5 @@ public class Helper {
       return null;
     else
       return NUMBER.toBigDecimal(n.toBytes());
-  }
-
-  public static void printInputStream(final InputStream input)
-          throws IOException {
-    int n;
-    while (EOF != (n = input.read())) {
-      System.out.println(n);
-    }
   }
 }

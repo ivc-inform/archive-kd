@@ -104,7 +104,3 @@ drop user ORDPLUGINS cascade;
 drop user SI_INFORMTN_SCHEMA cascade;
 
 http://idea.imsxm.com/
-
-docker commit oracle-11x64g uandrew1965/oracle-11x64g:1.0.3
-docker push uandrew1965/oracle-11x64g:1.0.3
-docker tag oracle-11x64g:1.0.2 uandrew1965/oracle-11x64g:1.0.2
