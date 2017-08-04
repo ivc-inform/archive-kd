@@ -68,7 +68,6 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           CommonDeps.jdbcOracle12,
           CommonDeps.jdbcOracle12UCP,
           CommonDeps.jdbcOracleN18_12,
-          CommonDeps.ordim,
           CommonDeps.scalaTest % Test
       )
   ).settings(DevPlugin.devPluginGeneratorSettings).
