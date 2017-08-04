@@ -11,7 +11,7 @@ object TestRecord extends App {
     val ds = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
     implicit val connection = ds.getConnection().asInstanceOf[OracleConnection]
 
-    val idAttatch = 136
+    val idAttatch = 158
 
     GetAttFile.getOrdDoc(idAttatch).foreach {
         item ⇒
@@ -22,7 +22,7 @@ object TestRecord extends App {
             val fileInputStream = new FileInputStream(file)
 
             println(ordDoc.toString)
-            (new RecorderOrdDoc (Some(idAttatch), None)).writeOrdDoc(fileInputStream, file.getName, "MOVIE/mkv")
+            //(new RecorderOrdDoc (Some(idAttatch), None)).writeOrdDoc(fileInputStream, file.getName, "MOVIE/mkv")
     }
     println("Hello")
 }
