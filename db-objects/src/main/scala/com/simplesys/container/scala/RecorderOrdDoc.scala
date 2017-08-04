@@ -15,6 +15,7 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
         idAttatch.foreach {
             idAttatch ⇒
                 val blob = connection.createBlob().asInstanceOf[OracleBlob]
+                val clob = connection.createClob().asInstanceOf[OracleClob]
 
                 val fiSize = copyLarge(inputStream, blob.setBinaryStream(1))
 
@@ -62,10 +63,8 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                             override val contentLength: Option[BigDecimal] = Some(fiSize)
                         }
                 }
-
-                "begin recorddoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;"
-
-                callableStatement(connection, "begin recorddoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, fid => ?); end;") {
+                
+                callableStatement(connection, "begin recorddoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
                     callableStatement ⇒
                         var index = 1
 
@@ -144,16 +143,16 @@ class RecorderOrdDoc(idAttatch: Option[BigDecimal], dcr: Option[DatabaseChangeRe
                                 callableStatement.setNull(index, Types.INTEGER)
                         }
 
-                        /*index += 1
+                        index += 1
                         ordDoc.comments match {
                             case Some(comments) ⇒
-                                callableStatement.setClob(index, new CLOB(connection, comments.map(_.toByte).toArray))
+                                clob.setString(1L, comments)
+                                callableStatement.setClob(index, clob)
                             case None ⇒
-                                callableStatement.setClob(index, CLOB.getEmptyCLOB)
-                        }*/
+                                callableStatement.setNull(index, Types.CLOB)
+                        }
 
                         index += 1
-
                         callableStatement.setBigDecimal(index, idAttatch.bigDecimal)
                         callableStatement.executeUpdate()
 
