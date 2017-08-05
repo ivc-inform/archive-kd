@@ -121,7 +121,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             showDisabledIcon = false.opt
                                             okFunction = {
                                                 (thiz: classHandler) ⇒
-                                                    val a = Sse.checkExistsSSE()
+                                                    //val a = Sse.checkExistsSSE()
                                                     thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                         (e: MessageJS) ⇒
                                                             e.data.foreach {
