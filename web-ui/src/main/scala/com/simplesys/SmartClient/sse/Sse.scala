@@ -12,9 +12,9 @@ import scala.scalajs.js.Dictionary
 
 
 trait Channel extends JSObject {
-    val channel: String
-    val callback: SseCallBack
-    val event: String
+    val _channel: String
+    val _listener: SseCallBack
+    val _type: String
 }
 
 class Sse extends JSObject {
@@ -36,16 +36,16 @@ class Sse extends JSObject {
     }
 
 
-    def subscribe(channels: IscArray[String], _callback: SseCallBack, subscribeCallback: Option[Callback] = None, _event: String = "message", _reconnect: Boolean = true): Unit = {
-        val results: IscArray[Boolean] = IscArray(channels.map(channel ⇒ subscribe(channel, _callback, subscribeCallback, _event, false)): _*)
+    def subscribe(channels: IscArray[String], listener: SseCallBack, subscribeCallback: Option[Callback] = None, `type`: String = "message", _reconnect: Boolean = true): Unit = {
+        val results: IscArray[Boolean] = IscArray(channels.map(channel ⇒ subscribe(channel, listener, subscribeCallback, `type`, false)): _*)
     }
 
-    def subscribe(_channel: String, _callback: SseCallBack, subscribeCallback: Option[Callback] = None, _event: String = "message", _reconnect: Boolean = true): Boolean = {
+    def subscribe(channel: String, listener: SseCallBack, subscribeCallback: Option[Callback] = None, `type`: String = "message", _reconnect: Boolean = true): Boolean = {
         if (checkExistsSSE()) {
-            channels(_channel) = new Channel {
-                override val channel: String = _channel
-                override val callback: SseCallBack = _callback
-                override val event: String = _event
+            channels(channel) = new Channel {
+                override val _channel: String = _channel
+                override val _listener: SseCallBack = _listener
+                override val _type: String = _type
             }
 
             if (_reconnect)
