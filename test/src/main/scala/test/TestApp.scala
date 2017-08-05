@@ -10,7 +10,7 @@ object TestApp2 {
 
         val bufferSize = 1024 * 1024 * 100
 
-        val dataSource = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+        val dataSource = new OraclePoolDataSource("db-connection-stack.docker.oraclcePoolDataSource")
         implicit val conn: OracleConnection = dataSource.getConnection().asInstanceOf[OracleConnection]
         conn setAutoCommit false
 

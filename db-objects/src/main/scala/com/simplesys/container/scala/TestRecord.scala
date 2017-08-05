@@ -8,7 +8,7 @@ import OrdDoc._
 import oracle.jdbc.OracleConnection
 
 object TestRecord extends App {
-    val ds = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+    val ds = new OraclePoolDataSource("db-connection-stack.docker.oraclcePoolDataSource")
     implicit val connection = ds.getConnection().asInstanceOf[OracleConnection]
 
     val idAttatch = 158

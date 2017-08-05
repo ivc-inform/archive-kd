@@ -15,7 +15,7 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val ds = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+        val ds = new OraclePoolDataSource("db-connection-stack.docker.oraclcePoolDataSource")
 
         sce.ServletContext.Attribute("ds", Some(ds))
 
