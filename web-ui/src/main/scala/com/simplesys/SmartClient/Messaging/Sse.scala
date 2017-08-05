@@ -7,11 +7,22 @@ import org.scalajs.dom.window
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportStatic
-import scala.scalajs.js.|
+import scala.scalajs.js.{Dictionary, |}
+import Sse._
+import com.simplesys.System.Types.Callback
+
+
+trait Channel extends JSObject {
+    val callback: SseCallBack
+}
 
 class Sse extends JSObject
 
 object Sse {
+    type SseCallBack = js.Function1[MessageEvent, _]
+
+    private val channels = Dictionary.empty[SseCallBack]
+
     @JSExportStatic
     def checkExistsSSE(): Boolean = {
         if (!window.hasOwnProperty("EventSource")) {
@@ -22,9 +33,9 @@ object Sse {
     }
 
 
-    def subscribe(channel: String, callback: js.Function1[MessageEvent, _]): Unit = {
-        val eventSource = new EventSource("")
-        eventSource.onmessage
+    def subscribe(channel: String, callback: SseCallBack, subscribeCallback: Option[Callback] = None, event: Option[String] = None): Unit = {
+        //        val eventSource = new EventSource("")
+        //        eventSource.onmessage
     }
 }
 
