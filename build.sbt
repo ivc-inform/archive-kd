@@ -1,9 +1,7 @@
-import com.simplesys.json.{JsonList, JsonObject}
-import com.typesafe.sbt.SbtGit.git
-
 import com.simplesys.jrebel.JRebelPlugin
 import com.simplesys.jrebel.JRebelPlugin._
-
+import com.simplesys.json.{JsonList, JsonObject}
+import com.typesafe.sbt.SbtGit.git
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
 
@@ -46,7 +44,7 @@ lazy val common = Project(id = "common", base = file("common")).settings(
     )
 ).settings(CommonSettings.defaultProjectSettings)
 
-lazy val testModule = Project(id = "test", base = file("test")). 
+lazy val testModule = Project(id = "test", base = file("test")).
   dependsOn(dbObjects).
   settings(
       libraryDependencies ++= Seq(
@@ -97,13 +95,18 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     JRebelPlugin.jrebelSettings,
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
     jrebel.enabled := true,
-    
+
     javaOptions in Jetty ++= Seq(
         "-javaagent:/home/uandrew/jrebel/legacy/jrebel.jar",
         "-noverify",
         "-XX:+UseConcMarkSweepGC",
         "-XX:+CMSClassUnloadingEnabled"
     ),
+
+    scalacOptions ++= {
+        if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault")
+        else Nil
+    },
 
     libraryDependencies ++= Seq(
         CommonDeps.servletAPI % Provided,
