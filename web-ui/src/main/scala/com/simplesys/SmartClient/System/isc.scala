@@ -10,7 +10,7 @@ import com.simplesys.SmartClient.Forms.{AbstractDateChooserCompanion, AbstractDy
 import com.simplesys.SmartClient.Foundation.{AbstractCanvasCompanion, AbstractRichTextEditorCompanion}
 import com.simplesys.SmartClient.Grids._
 import com.simplesys.SmartClient.Layout._
-import com.simplesys.SmartClient.Messaging.{AbstractMessagingSSCompanion, SseAbstractCompanion}
+import com.simplesys.SmartClient.Messaging.AbstractMessagingSSCompanion
 import com.simplesys.SmartClient.RPC.AbstractRPCManagerCompanion
 import com.simplesys.SmartClient.System.date.{AbstractDateCompanion, AbstractTimeCompanion}
 import com.simplesys.SmartClient.Tools.EditContextCompanion
@@ -114,7 +114,6 @@ object isc extends JSObject {
     val SettingsEditor: AbstractSettingsEditorCompanion = js.native
     val _traceMarkers: JSUndefined[Boolean] = js.native
     val MessagingSS: AbstractMessagingSSCompanion = js.native
-    val Sse: SseAbstractCompanion = js.native
     val DataBoundComponent: AbstractDataBoundComponentCompanion = js.native
     val ListGrid: AbstractListGridCompanion = js.native
     val FormItem: AbstractFormItemCompanion = js.native

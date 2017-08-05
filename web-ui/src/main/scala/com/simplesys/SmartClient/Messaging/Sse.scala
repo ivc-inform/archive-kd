@@ -8,7 +8,8 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSGlobal
 
 @js.native
-abstract class SseAbstractCompanion extends JSObject {
+@JSGlobal
+class Sse extends JSObject {
     def checkExistsSSE(): Boolean = {
         if (!window.hasOwnProperty("EventSource")) {
             isc error ("Ваш браузер не поддерживает технологию SSE, что делает невозможным автоматическое получение сообщений от сервера. (Данная задача находится в доработке.)")
@@ -18,9 +19,6 @@ abstract class SseAbstractCompanion extends JSObject {
     }
 }
 
-@js.native
-@JSGlobal
-object Sse extends SseAbstractCompanion
 
 
 
