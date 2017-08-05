@@ -91,7 +91,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     addCommandAlias("debug-restart", "; jetty:stop ; fastOptJS ; package ; jetty:start"),
     addCommandAlias("reset", "; clean ; compile ; fastOptJS "),
 
-    scalacOptions += "-P:scalajs:sjsDefinedByDefault",
     JRebelPlugin.jrebelSettings,
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
     jrebel.enabled := true,

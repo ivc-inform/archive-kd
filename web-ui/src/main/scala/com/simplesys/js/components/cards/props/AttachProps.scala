@@ -5,7 +5,7 @@ import com.simplesys.SmartClient.Control.props.ProgressbarProps
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
-import com.simplesys.SmartClient.Messaging.MessageJS
+import com.simplesys.SmartClient.Messaging.{MessageJS, Sse}
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridFieldType}
 import com.simplesys.System._
@@ -120,6 +120,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             showDisabledIcon = false.opt
                                             okFunction = {
                                                 (thiz: classHandler) ⇒
+                                                    val a = Sse.checkExistsSSE()
                                                     thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                         (e: MessageJS) ⇒
                                                             e.data.foreach {

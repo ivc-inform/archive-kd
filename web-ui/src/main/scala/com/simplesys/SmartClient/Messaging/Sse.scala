@@ -1,16 +1,24 @@
 package com.simplesys.SmartClient.Messaging
 
-import com.simplesys.SmartClient.System.AbstractClassCompanion
+import com.simplesys.SmartClient.System.{AbstractClassCompanion, isc}
+import com.simplesys.System.JSObject
+import org.scalajs.dom.window
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.JSExportStatic
 import scala.scalajs.js.|
 
-@js.native
-trait Sse extends com.simplesys.SmartClient.System.Class {
-}
+class Sse extends JSObject
 
-@js.native
-abstract trait AbstractSseCompanion extends AbstractClassCompanion {
+object Sse {
+    @JSExportStatic
+    def checkExistsSSE(): Boolean = {
+        if (!window.hasOwnProperty("EventSource")) {
+            isc error ("Ваш браузер не поддерживает технологию SSE, что делает невозможным автоматическое получение сообщений от сервера. (Данная задача находится в доработке.)")
+            false
+        } else
+            true
+    }
 }
 
 
