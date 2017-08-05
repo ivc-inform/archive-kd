@@ -106,7 +106,7 @@ object CommonDeps {
     val ssysJDBCWrapper = "com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion
     val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
     val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion
-    //val ssysBoneCPWrapper = "com.simplesys.core" %% "bonecp-wrapper" % versions.ssysCoreVersion
+
     val poolsDataSources = "com.simplesys.core" %% "pools-datasources" % versions.ssysCoreVersion
     val ssysLogBackWrapper = "com.simplesys.core" %% "logback-wrapper" % versions.ssysCoreVersion
     val scalaJSWrapper = "com.simplesys" %% "common-types" % versions.scalaJSVersion
@@ -116,7 +116,6 @@ object CommonDeps {
     val jettyRuner = "org.eclipse.jetty" % "jetty-runner" % versions.jettyVersion
 
     val scalaTest = "org.scalatest" %% "scalatest" % versions.scalaTestVersion
-    //val jdbcOracle11Driver = "com.simplesys.jdbc.drivers" % "oracle" % versions.jdbcOracle11DriverVersion
 
     val jdbcOracle12 = "com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion
     val jdbcOracle12UCP = "com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion
