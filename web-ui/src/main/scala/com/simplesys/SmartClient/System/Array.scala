@@ -51,6 +51,7 @@ trait IscArray[A] extends IscList[A] {
     def getRect1(): Rect
     def Exists(index: Int): Boolean
     def notExists(index: Int): Boolean
+    def forEach[U](f: A ⇒ U): void
 }
 
 @js.native

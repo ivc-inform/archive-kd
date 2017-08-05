@@ -36,10 +36,10 @@ class Sse extends JSObject {
 
 
     def subscribe(channels: IscArray[String], _callback: SseCallBack, subscribeCallback: Option[Callback] = None, _event: Option[String] = None, _reconnect: Boolean = true): Unit = {
-       channels.
+        val results: IscArray[Boolean] = IscArray(channels.map(channel ⇒ subscribe(channel, _callback, subscribeCallback, _event, false)): _*)
     }
 
-    def subscribe(channel: String, _callback: SseCallBack, subscribeCallback: Option[Callback] = None, _event: Option[String] = None, _reconnect: Boolean = true): Unit = {
+    def subscribe(channel: String, _callback: SseCallBack, subscribeCallback: Option[Callback] = None, _event: Option[String] = None, _reconnect: Boolean = true): Boolean = {
         channels(channel) = new Channel {
             override val callback: SseCallBack = _callback
             override val event: Option[String] = _event
