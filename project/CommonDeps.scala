@@ -56,7 +56,7 @@ object CommonDeps {
 
         val scalaTestVersion = "3.0.1"
         val scalaTagsVersion = "0.6.5"
-        val scalaDomVersion = "0.9.3"
+        val scalaDomVersion = "0.9.4-SNAPSHOT"
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
