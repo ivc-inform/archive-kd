@@ -42,6 +42,8 @@ import com.simplesys.SmartClient.Layout.props.toolStrip.{ToolStripButtonProps, T
 import com.simplesys.SmartClient.Layout.sectionStack.SectionStackSection
 import com.simplesys.SmartClient.Layout.tabSet.Tab
 import com.simplesys.SmartClient.Layout.toolStrip.{ToolStripButton, ToolStripMenuButton, ToolStripSeparator}
+import com.simplesys.SmartClient.Messaging.Sse
+import com.simplesys.SmartClient.Messaging.props.SseProps
 import com.simplesys.SmartClient.RPC.props.{RPCRequestProps, RequestParamsProps}
 import com.simplesys.SmartClient.RPC.{RPCRequest, RequestParams}
 import com.simplesys.SmartClient.System.date.Date
@@ -279,6 +281,9 @@ package object System {
 
     object EditorUsers extends SCApply[EditorUsers, EditorUsersProps]
     object EditorUserGroups extends SCApply[EditorUserGroups, EditorUserGroupsProps]
+
+
+    object Sse extends SCApply[Sse, SseProps]
 
     val nbsp = """&nbsp;"""
 }

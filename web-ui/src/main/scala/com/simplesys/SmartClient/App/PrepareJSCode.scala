@@ -105,6 +105,8 @@ object PrepareJSCode extends StaticJSCode {
                 }
             )
         )
+        
+        isc.defineClass(Sse.getClass.getSimpleName, "Class")
     }
 }
 
