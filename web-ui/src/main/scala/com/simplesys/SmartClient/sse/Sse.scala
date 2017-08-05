@@ -1,18 +1,18 @@
-package com.simplesys.SmartClient.Messaging
+package com.simplesys.SmartClient.sse
 
-import com.simplesys.SmartClient.System.{AbstractClassCompanion, IscArray, isc}
-import com.simplesys.System.{JSArray, JSObject}
-import org.scalajs.dom.raw.{EventSource, MessageEvent}
+import com.simplesys.SmartClient.System.{IscArray, isc}
+import com.simplesys.SmartClient.sse.Sse._
+import com.simplesys.System.JSObject
+import com.simplesys.System.Types.Callback
+import org.scalajs.dom.raw.MessageEvent
 import org.scalajs.dom.window
 
 import scala.scalajs.js
-import scala.scalajs.js.annotation.JSExportStatic
-import scala.scalajs.js.{Dictionary, |}
-import Sse._
-import com.simplesys.System.Types.Callback
+import scala.scalajs.js.Dictionary
 
 
 trait Channel extends JSObject {
+    val channel: String
     val callback: SseCallBack
     val event: Option[String]
 }
