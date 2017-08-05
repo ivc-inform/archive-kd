@@ -20,6 +20,7 @@ trait Channel extends JSObject {
 class Sse extends JSObject {
     type SseCallBack = js.Function1[MessageEvent, _]
 
+    private val eventSources = IscArray.empty[EventSourceSS]
     private val channels = Dictionary.empty[Channel]
 
     private def checkExistsSSE(): Boolean = {
@@ -50,6 +51,7 @@ class Sse extends JSObject {
             if (_reconnect)
                 reconnect()
         }
+        true
     }
 }
 
