@@ -39,13 +39,7 @@ class Sse extends JSObject {
     private def reconnect(): Unit = {
 
     }
-
-
-    def subscribe(channels: IscArray[String], listener: SseCallBack, subscribeCallback: Option[Callback] = None, `type`: String = "message", _reconnect: Boolean = true): Unit = {
-        if (checkExistsSSE())
-            IscArray(channels.map(channel ⇒ subscribe(channel, listener, subscribeCallback, `type`, false)): _*)
-    }
-
+    
     def subscribe(channel: String, listener: SseCallBack, subscribeCallback: Option[Callback] = None, `type`: String = "message", _reconnect: Boolean = true): Boolean = {
         if (checkExistsSSE()) {
 
