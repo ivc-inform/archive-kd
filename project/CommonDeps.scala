@@ -56,7 +56,7 @@ object CommonDeps {
 
         val scalaTestVersion = "3.0.1"
         val scalaTagsVersion = "0.6.5"
-        val scalaDomVersion = "0.9.2"
+        val scalaDomVersion = "0.9.3"
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
@@ -78,10 +78,7 @@ object CommonDeps {
     }
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
-
-//    val jodaTime = "joda-time" % "joda-time" % versions.jodaVersion
-//    val jodaConvert = "org.joda" % "joda-convert" % versions.jodaConvertVersion
-
+    
     val akkaActor = "com.typesafe.akka" %% "akka-actor" % versions.akkaVersion
     val akkaSLF4J = "com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion
     val akkaPersistence = "com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion
