@@ -60,6 +60,7 @@ import com.simplesys.SmartClient.Tools.{EditContext, EditContextSS, EditProxy, P
 
 //Должны быть
 //import com.simplesys.macros.PropsToDictionary
+import com.simplesys.macros.PropsToDictionary
 
 package object System {
 
