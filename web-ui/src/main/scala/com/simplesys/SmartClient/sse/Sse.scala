@@ -41,6 +41,10 @@ class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
 
     }
 
+    private def messagingSubscribeURL() = s"${simpleSysContextPath.getOrElse(simpleSyS.simpleSysContextPath)}Message/Subscribe"
+
+    private def messagingSendURL() = s"${simpleSysContextPath.getOrElse(simpleSyS.simpleSysContextPath)}Message/Send"
+
     /*def removeEventSource(channel: String): Unit = {
         getEventSource(channel).filter(_.channels.length == 1)
     }*/
