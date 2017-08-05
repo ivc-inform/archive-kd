@@ -6,6 +6,7 @@ import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.http.HttpSession
 import com.simplesys.servlet.{ServletActor, ServletContext}
 import com.simplesys.sql.SQLDialect
+import oracle.jdbc.OracleConnection
 
 trait SessionContextSupport {
     this: ServletActor =>
@@ -16,7 +17,8 @@ trait SessionContextSupport {
     def getCaptionUser = sessionContext.getCaptionUser
     def getUserId = sessionContext.getUserId
 
-    implicit def ds = sessionContext.getDS  //Не убирать !!!
+    implicit def ds:OraclePoolDataSource = sessionContext.getDS.asInstanceOf[OraclePoolDataSource]  //Не убирать !!!
+    implicit val connection: OracleConnection = ds.getConnection().asInstanceOf[OracleConnection]
 }
 
 class SessionContext(protected val session: Option[HttpSession]) extends Logging {
