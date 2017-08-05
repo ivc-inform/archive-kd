@@ -1,6 +1,6 @@
 package com.simplesys.SmartClient.sse
 
-import com.simplesys.SmartClient.System.{IscArray, isc}
+import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
 import com.simplesys.SmartClient.sse.Sse._
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.Callback
@@ -16,7 +16,7 @@ trait ChannelStruct extends JSObject {
     val _type: String
 }
 
-class Sse extends JSObject {
+class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
     type SseCallBack = js.Function1[MessageEvent, _]
 
     private val eventSources = IscArray.empty[EventSourceSS]
@@ -32,6 +32,15 @@ class Sse extends JSObject {
             true
     }
 
+    private def checkSimpleSysContextPath(): Boolean = {
+        if (simpleSysContextPath.isEmpty && simpleSyS.simpleSysContextPath.isEmpty) {
+            isc error ("simpleSysContextPath undefined")
+            false
+        } else
+            true
+
+    }
+
     /*def removeEventSource(channel: String): Unit = {
         getEventSource(channel).filter(_.channels.length == 1)
     }*/
@@ -39,17 +48,17 @@ class Sse extends JSObject {
     private def reconnect(): Unit = {
 
     }
-    
-    def subscribe(channel: String, listener: SseCallBack, subscribeCallback: Option[Callback] = None, `type`: String = "message", _reconnect: Boolean = true): Boolean = {
-        if (checkExistsSSE()) {
 
-        }
-        true
+    def subscribe(channel: String, listener: SseCallBack, subscribeCallback: Option[Callback] = None, `type`: String = "message", _reconnect: Boolean = true): Boolean = {
+        if (checkExistsSSE() && checkSimpleSysContextPath()) {
+            true
+        } else
+            false
     }
 
-    def unsubscribe(channel: String, unsubscribeCallback: Option[Callback] = None, _reconnect: Boolean = true): Unit = {
-        if (checkExistsSSE()) {
-            getEventSource(channel).forEach {
+    def unsubscribe(channel: String, unsubscribeCallback: Option[Callback] = None, _reconnect: Boolean = true): Boolean = {
+        if (checkExistsSSE() && checkSimpleSysContextPath()) {
+            getEventSource(channel).map {
                 eventSource ⇒
                     if (eventSource.channels.length == 1) {
                         eventSource.close()
@@ -59,8 +68,10 @@ class Sse extends JSObject {
                         eventSource.channels.removeAt(eventSource.channels.map(_._channel).indexOf(channel))
                     }
                     unsubscribeCallback.foreach(isc.Class.fireCallback(_))
-            }
-        }
+                    true
+            }.filter(_ == true).length > 0
+        } else
+            false
     }
 }
 

@@ -42,7 +42,7 @@ object simpleSyS extends JSObject {
     var sizeIncrease: JSUndefined[Double] = js.native
     var expertMode: JSUndefined[Boolean] = js.native
     var scenarioTestMode: JSUndefined[Boolean] = js.native
-    val simpleSysContextPath: URL = js.native
+    val simpleSysContextPath: JSUndefined[URL] = js.native
     var qtyGraphCopies: JSUndefined[Int] = js.native
     val app: appStruct = js.native
 }
