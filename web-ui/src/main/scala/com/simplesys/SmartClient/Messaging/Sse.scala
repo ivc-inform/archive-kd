@@ -19,7 +19,7 @@ abstract class SseAbstractCompanion extends JSObject {
 }
 
 @js.native
-@JSGlobal("isc.Sse")
+@JSGlobal
 object Sse extends SseAbstractCompanion
 
 
