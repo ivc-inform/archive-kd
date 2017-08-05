@@ -1,7 +1,8 @@
 package com.simplesys.SmartClient.Messaging
 
-import com.simplesys.SmartClient.System.{AbstractClassCompanion, isc}
+import com.simplesys.SmartClient.System.{AbstractClassCompanion, IscArray, isc}
 import com.simplesys.System.JSObject
+import org.scalajs.dom.raw.{EventSource, MessageEvent}
 import org.scalajs.dom.window
 
 import scala.scalajs.js
@@ -18,6 +19,12 @@ object Sse {
             false
         } else
             true
+    }
+
+
+    def subscribe(channel: String, callback: js.Function1[MessageEvent, _]): Unit = {
+        val eventSource = new EventSource("")
+        eventSource.onmessage
     }
 }
 
