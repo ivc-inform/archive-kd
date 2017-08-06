@@ -9,7 +9,7 @@ import org.scalajs.dom.raw.EventSource
 
 import scala.scalajs.js
 
-trait ChannelStruct extends JSObject {
+trait ChannelObject extends JSObject {
     val channel: String
     val listener: SseCallBack
     val `type`: String
@@ -20,7 +20,7 @@ trait ConfigurationEventSourceSS extends JSObject {
     val withCredentials: JSUndefined[Boolean] = js.undefined
 }
 
-class EventSourceSS(val channelObject: ChannelStruct,
+class EventSourceSS(val channelObject: ChannelObject,
                     val messagingSubscribeURL: URL,
                     val configuration: Option[ConfigurationEventSourceSS] = None,
                     val useCapture: Option[Boolean] = None) extends JSObject {
@@ -36,5 +36,4 @@ class EventSourceSS(val channelObject: ChannelStruct,
 
     def close() = eventSource.close()
 
-    def removeEventListener(`type`: String, listener: js.Function1[MessageEvent, _], useCapture: Boolean = false): Unit = eventSource.removeEventListener(`type`, listener, useCapture)
 }

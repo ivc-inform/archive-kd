@@ -38,16 +38,17 @@ class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
 
     private def messagingSendURL() = s"${simpleSysContextPath.getOrElse(simpleSyS.simpleSysContextPath)}Message/Send"
 
-    /*def removeEventSource(channel: String): Unit = {
-        getEventSource(channel).filter(_.channels.length == 1)
-    }*/
-
-    private def reconnect(): Unit = {
-
-    }
-
-    def subscribe(channel: IscArray[String], listener: SseCallBack, subscribeCallback: Option[Callback] = None, `type`: String = "message", _reconnect: Boolean = true): Boolean = {
+    def subscribe(_channel: String, _listener: SseCallBack, subscribeCallback: Option[Callback] = None, _type: String = "message", _reconnect: Boolean = true): Boolean = {
         if (checkExistsSSE() && checkSimpleSysContextPath()) {
+            unsubscribe(_channel)
+            eventSources.push(new EventSourceSS(new ChannelObject {
+                override val isChannel: Boolean = true
+                override val channel: String = _channel
+                override val listener: SseCallBack = _listener
+                override val `type`: String = _type
+            }, messagingSubscribeURL()))
+
+            subscribeCallback.foreach(isc.Class.fireCallback(_))
             true
         } else
             false

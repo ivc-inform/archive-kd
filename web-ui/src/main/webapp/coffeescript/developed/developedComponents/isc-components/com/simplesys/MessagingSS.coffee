@@ -131,7 +131,8 @@ if not isc.module_RealtimeMessaging?
 
 			@_es.onerror = @_handleEventSourceError
 
-			@_es.addEventListener event, @_message, false
+			###@_es.addEventListener event, @_message, false###
+			@_es.addEventListener event, @_message
 			return
 
 		_message: (message) ->
