@@ -4,8 +4,7 @@ import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
 import com.simplesys.SmartClient.sse.Sse.SseCallBack
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.Callback
-import org.scalajs.dom.raw.MessageEvent
-import org.scalajs.dom.window
+import org.scalajs.dom.{MessageEvent, window}
 
 import scala.scalajs.js
 

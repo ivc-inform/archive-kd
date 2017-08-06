@@ -4,8 +4,7 @@ import com.simplesys.SmartClient.System.isc
 import com.simplesys.SmartClient.sse.Sse.SseCallBack
 import com.simplesys.System.Types.URL
 import com.simplesys.System.{JSDynamic, JSObject, JSUndefined}
-import org.scalajs.dom.MessageEvent
-import org.scalajs.dom.raw.EventSource
+import org.scalajs.dom.raw.{EventSource, MessageEvent}
 
 import scala.scalajs.js
 import scala.scalajs.js.Dictionary
