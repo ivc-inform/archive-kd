@@ -53,6 +53,7 @@ package object Types {
     type Color = String
     type HTMLString = String
     type URL = String
+    type URI = String
     type URN = String
     type SCImgURL = String
     type RelativeDateString = String

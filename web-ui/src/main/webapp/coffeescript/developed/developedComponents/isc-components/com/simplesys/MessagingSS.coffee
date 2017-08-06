@@ -121,7 +121,7 @@ if not isc.module_RealtimeMessaging?
 			data = subscribedChannels: isc.JSONSS.encode @_channels
 
 			for own fieldName, value of data
-				uriBuilder.setQueryParam fieldName, String data[fieldName]
+				uriBuilder.setQueryParam fieldName, data[fieldName]
 
 			uriBuilder.setQueryParam "eventStream", "true"
 

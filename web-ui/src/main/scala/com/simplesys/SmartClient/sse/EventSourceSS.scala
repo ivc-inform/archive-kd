@@ -1,26 +1,40 @@
 package com.simplesys.SmartClient.sse
 
-import com.simplesys.SmartClient.System.IscArray
-import com.simplesys.System.{JSDynamic, JSObject, JSUndefined, jSUndefined}
+import com.simplesys.SmartClient.System.isc
+import com.simplesys.SmartClient.sse.Sse.SseCallBack
+import com.simplesys.System.Types.URL
+import com.simplesys.System.{JSDynamic, JSObject, JSUndefined}
 import org.scalajs.dom.MessageEvent
-import org.scalajs.dom.raw.{Event, EventSource}
+import org.scalajs.dom.raw.EventSource
 
 import scala.scalajs.js
+
+trait ChannelStruct extends JSObject {
+    val channel: String
+    val listener: SseCallBack
+    val `type`: String
+    val isChannel: Boolean
+}
 
 trait ConfigurationEventSourceSS extends JSObject {
     val withCredentials: JSUndefined[Boolean] = js.undefined
 }
 
-class EventSourceSS(val url: String, val channels: IscArray[ChannelStruct], val configuration: ConfigurationEventSourceSS = null, val sse: Sse) extends JSObject {
-    /*def this(url: String, channel: ChannelStruct, configuration: ConfigurationEventSourceSS = null) {
-        this(url, IscArray(channel), configuration)
-    }*/
+class EventSourceSS(val channelObject: ChannelStruct,
+                    val messagingSubscribeURL: URL,
+                    val configuration: Option[ConfigurationEventSourceSS] = None,
+                    val useCapture: Option[Boolean] = None) extends JSObject {
 
-    private val eventSource = new EventSource(url, configuration.asInstanceOf[JSDynamic])
+
+    private val urlBuilder = isc.URIBuilder.create(isc.Page.getURL(messagingSubscribeURL))
+    urlBuilder.setQueryParam("subscribedChannels", isc.JSON.encode(channelObject))
+    urlBuilder.setQueryParam("eventStream", true)
+
+    private val eventSource = new EventSource(urlBuilder.uri, configuration.asInstanceOf[JSDynamic])
+    eventSource.onmessage = (message: MessageEvent) ⇒ isc.Log.logWarn(s"Medssage on error: ${message.data}")
+    useCapture.foreach(eventSource.addEventListener(channelObject.`type`, channelObject.listener, _))
 
     def close() = eventSource.close()
-
-    def addEventListener(`type`: String, listener: js.Function1[MessageEvent, _], useCapture: Boolean = false): Unit = eventSource.addEventListener(`type`, listener, useCapture)
 
     def removeEventListener(`type`: String, listener: js.Function1[MessageEvent, _], useCapture: Boolean = false): Unit = eventSource.removeEventListener(`type`, listener, useCapture)
 }

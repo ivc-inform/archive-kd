@@ -1,7 +1,6 @@
 package com.simplesys.SmartClient.sse
 
 import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
-import com.simplesys.SmartClient.sse.Sse._
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.Callback
 import org.scalajs.dom.raw.MessageEvent
@@ -10,18 +9,12 @@ import org.scalajs.dom.window
 import scala.scalajs.js
 
 
-trait ChannelStruct extends JSObject {
-    val _channel: String
-    val _listener: SseCallBack
-    val _type: String
-}
-
 class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
     type SseCallBack = js.Function1[MessageEvent, _]
 
     private val eventSources = IscArray.empty[EventSourceSS]
 
-    def getEventSource(channel: String): IscArray[EventSourceSS] = IscArray(eventSources.filter(eventSource ⇒ eventSource.channels.map(_._channel).contains(channel)): _*)
+    def getEventSource(channel: String): IscArray[EventSourceSS] = IscArray(eventSources.filter(_.channelObject.channel == channel): _*)
 
 
     private def checkExistsSSE(): Boolean = {
@@ -60,18 +53,12 @@ class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
             false
     }
 
-    def unsubscribe(channel: String, unsubscribeCallback: Option[Callback] = None, _reconnect: Boolean = true): Boolean = {
+    def unsubscribe(channel: String, unsubscribeCallback: Option[Callback] = None): Boolean = {
         if (checkExistsSSE() && checkSimpleSysContextPath()) {
             getEventSource(channel).map {
                 eventSource ⇒
-                    if (eventSource.channels.length == 1) {
-                        eventSource.close()
-                        eventSources.removeAt(eventSources.indexOf(eventSource))
-                        //isc.Log.
-                    } else {
-                        IscArray(eventSource.channels.filter(_._channel == channel): _*).forEach(channel ⇒ eventSource.removeEventListener(channel._type, channel._listener, false))
-                        eventSource.channels.removeAt(eventSource.channels.map(_._channel).indexOf(channel))
-                    }
+                    eventSource.close()
+                    eventSources.removeAt(eventSources.map(_.channelObject.channel).indexOf(channel))
                     unsubscribeCallback.foreach(isc.Class.fireCallback(_))
                     true
             }.filter(_ == true).length > 0

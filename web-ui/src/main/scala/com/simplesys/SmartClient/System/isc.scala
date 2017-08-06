@@ -13,6 +13,7 @@ import com.simplesys.SmartClient.Layout._
 import com.simplesys.SmartClient.Messaging.AbstractMessagingSSCompanion
 import com.simplesys.SmartClient.RPC.AbstractRPCManagerCompanion
 import com.simplesys.SmartClient.System.date.{AbstractDateCompanion, AbstractTimeCompanion}
+import com.simplesys.SmartClient.System.uRIBuilder.AbstractURIBuilderCompanion
 import com.simplesys.SmartClient.Tools.EditContextCompanion
 import com.simplesys.SmartClient.Tools.editProxy.{AbstractDrawItemEditProxyCompanion, AbstractDrawPaneEditProxyCompanion}
 import com.simplesys.SmartClient.math.AbstractAffineTransformCompanion
@@ -122,7 +123,8 @@ object isc extends JSObject {
     val CommonTreeListGridEditorComponent: AbstractCommonTreeListGridEditorComponentCompanion = js.native
     val FormItemWithButtons: AbstractFormItemWithButtonsCompanion = js.native
     val CommonListGridEditorComponent: AbstractCommonListGridEditorComponentCompanion = js.native
-
+    val Page: AbstractPageCompanion = js.native
+    val URIBuilder: AbstractURIBuilderCompanion = js.native
 
     def error(message: String, identifier: ID = js.native, callback: Callback = js.native): WindowSS = js.native
     def errorDetail(message: String, detailMessage: String, identifier: ID = js.native, detailIdentifier: ID = js.native): WindowSS = js.native
