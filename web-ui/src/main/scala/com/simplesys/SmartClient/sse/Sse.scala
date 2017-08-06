@@ -12,7 +12,7 @@ import scala.scalajs.js
 
 class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
 
-    private val eventSources = IscArray.empty[EventSourceSS]
+    private val eventSources = IscArray[EventSourceSS]()
 
     def getEventSource(channel: String): IscArray[EventSourceSS] = IscArray(eventSources.filter(_.channelObject.channel == channel): _*)
 
@@ -38,16 +38,18 @@ class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
 
     private def messagingSendURL() = s"${simpleSysContextPath.getOrElse(simpleSyS.simpleSysContextPath)}Message/Send"
 
-    def subscribe(_channel: String, _listener: SseCallBack, subscribeCallback: Option[Callback] = None, _type: String = "message", _reconnect: Boolean = true) {
+    def subscribe(_channel: String, _listener: SseCallBack, subscribeCallback: Option[Callback] = None, _type: String = "message") {
         if (checkExistsSSE() && checkSimpleSysContextPath()) {
             if (isc.Page.isLoaded()) {
-                unsubscribe(_channel)
-                eventSources.push(new EventSourceSS(new ChannelObject {
+                val channelObject = new ChannelObject {
                     override val isChannel: Boolean = true
                     override val channel: String = _channel
                     override val listener: SseCallBack = _listener
                     override val `type`: String = _type
-                }, messagingSubscribeURL()))
+                }
+
+                val eventSource = new EventSourceSS(channelObject, messagingSubscribeURL())
+                eventSources push eventSource
 
                 subscribeCallback.foreach(isc.Class.fireCallback(_))
             }
@@ -61,7 +63,11 @@ class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
             getEventSource(channel).map {
                 eventSource ⇒
                     eventSource.close()
-                    eventSources.removeAt(eventSources.map(_.channelObject.channel).indexOf(channel))
+                    val indexOf = eventSources.map(_.channelObject.channel).indexOf(channel)
+                    println(s"indexOf: $indexOf")
+
+                    val resultRemove = eventSources.removeAt(indexOf)
+                    println(s"resultRemove: $resultRemove")
                     unsubscribeCallback.foreach(isc.Class.fireCallback(_))
             }
         }
