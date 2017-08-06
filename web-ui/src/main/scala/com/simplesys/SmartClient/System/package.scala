@@ -46,7 +46,9 @@ import com.simplesys.SmartClient.RPC.props.{RPCRequestProps, RequestParamsProps}
 import com.simplesys.SmartClient.RPC.{RPCRequest, RequestParams}
 import com.simplesys.SmartClient.System.date.Date
 import com.simplesys.SmartClient.System.date.props.DateProps
-import com.simplesys.SmartClient.System.props.{TreeProps, URIBuilderProps}
+import com.simplesys.SmartClient.System.props.TreeProps
+import com.simplesys.SmartClient.System.uRIBuilder.URIBuilder
+import com.simplesys.SmartClient.System.uRIBuilder.props.URIBuilderProps
 import com.simplesys.SmartClient.Tools.editProxy.props.DrawItemEditProxyProps
 import com.simplesys.SmartClient.Tools.editProxy.{DrawItemEditProxy, DrawPaneEditProxy}
 import com.simplesys.SmartClient.Tools.palette._
@@ -58,6 +60,7 @@ import com.simplesys.SmartClient.Tools.{EditContext, EditContextSS, EditProxy, P
 
 //Должны быть
 //import com.simplesys.macros.PropsToDictionary
+import com.simplesys.macros.PropsToDictionary
 
 package object System {
 

@@ -1,6 +1,6 @@
-package com.simplesys.SmartClient.System
+package com.simplesys.SmartClient.System.uRIBuilder
 
-
+import com.simplesys.SmartClient.System.{AbstractClassCompanion, Class}
 import com.simplesys.System.Types.{URL, void}
 
 import scala.scalajs.js

@@ -67,7 +67,7 @@ class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
                     if (eventSource.channels.length == 1) {
                         eventSource.close()
                         eventSources.removeAt(eventSources.indexOf(eventSource))
-                        isc.Log.
+                        //isc.Log.
                     } else {
                         IscArray(eventSource.channels.filter(_._channel == channel): _*).forEach(channel ⇒ eventSource.removeEventListener(channel._type, channel._listener, false))
                         eventSource.channels.removeAt(eventSource.channels.map(_._channel).indexOf(channel))
