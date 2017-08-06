@@ -1,6 +1,7 @@
 package com.simplesys.SmartClient.sse
 
 import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
+import com.simplesys.SmartClient.sse.Sse.SseCallBack
 import com.simplesys.System.JSObject
 import com.simplesys.System.Types.Callback
 import org.scalajs.dom.raw.MessageEvent
@@ -10,7 +11,6 @@ import scala.scalajs.js
 
 
 class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
-    type SseCallBack = js.Function1[MessageEvent, _]
 
     private val eventSources = IscArray.empty[EventSourceSS]
 
@@ -38,38 +38,47 @@ class Sse(val simpleSysContextPath: Option[String] = None) extends JSObject {
 
     private def messagingSendURL() = s"${simpleSysContextPath.getOrElse(simpleSyS.simpleSysContextPath)}Message/Send"
 
-    def subscribe(_channel: String, _listener: SseCallBack, subscribeCallback: Option[Callback] = None, _type: String = "message", _reconnect: Boolean = true): Boolean = {
+    def subscribe(_channel: String, _listener: SseCallBack, subscribeCallback: Option[Callback] = None, _type: String = "message", _reconnect: Boolean = true) {
         if (checkExistsSSE() && checkSimpleSysContextPath()) {
-            unsubscribe(_channel)
-            eventSources.push(new EventSourceSS(new ChannelObject {
-                override val isChannel: Boolean = true
-                override val channel: String = _channel
-                override val listener: SseCallBack = _listener
-                override val `type`: String = _type
-            }, messagingSubscribeURL()))
+            if (isc.Page.isLoaded()) {
+                unsubscribe(_channel)
+                eventSources.push(new EventSourceSS(new ChannelObject {
+                    override val isChannel: Boolean = true
+                    override val channel: String = _channel
+                    override val listener: SseCallBack = _listener
+                    override val `type`: String = _type
+                }, messagingSubscribeURL()))
 
-            subscribeCallback.foreach(isc.Class.fireCallback(_))
-            true
-        } else
-            false
+                subscribeCallback.foreach(isc.Class.fireCallback(_))
+            }
+            else
+                isc.error("Page not loaded")
+        }
     }
 
-    def unsubscribe(channel: String, unsubscribeCallback: Option[Callback] = None): Boolean = {
+    def unsubscribe(channel: String, unsubscribeCallback: Option[Callback] = None) {
         if (checkExistsSSE() && checkSimpleSysContextPath()) {
             getEventSource(channel).map {
                 eventSource ⇒
                     eventSource.close()
                     eventSources.removeAt(eventSources.map(_.channelObject.channel).indexOf(channel))
                     unsubscribeCallback.foreach(isc.Class.fireCallback(_))
-                    true
-            }.filter(_ == true).length > 0
-        } else
-            false
+            }
+        }
+    }
+
+    def unsubscribes(channel: IscArray[String], unsubscribeCallback: Option[Callback] = None): Unit = {
+        if (checkExistsSSE() && checkSimpleSysContextPath()) {
+            channel.forEach(unsubscribe(_))
+            unsubscribeCallback.foreach(isc.Class.fireCallback(_))
+        }
     }
 }
 
 object Sse {
     type SseCallBack = js.Function1[MessageEvent, _]
+
+    val messaging = new Sse()
 }
 
 
