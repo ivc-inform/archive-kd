@@ -34,14 +34,10 @@ class UploadTestTabProps extends HLayoutProps {
 
             var progressBar: JSUndefined[ProgressbarItem] = jSUndefined
 
-            messaging.subscribe(channelMessageRecordInBase, {
+            /*messaging.subscribe(channelMessageRecordInBase, {
                 (e: MessageEvent) ⇒
                     progressBar.foreach(_ setTitle "Recording in base")
-            }.toFunc)
-
-            messaging.subscribe(channelMessageRecordInBase, { (e: MessageEvent) ⇒
-                progressBar.foreach(_ setTitle "Recording in base")
-            }.toFunc)
+            }.toFunc)*/
 
             val form = DynamicFormSS.create(
                 new DynamicFormSSProps {
@@ -97,16 +93,17 @@ class UploadTestTabProps extends HLayoutProps {
 
             progressBar = (form getItem "progressBar").asInstanceOf[ProgressbarItem]
 
-            messaging.subscribe(channelMessageNextStep, { (e: MessageEvent) ⇒
+            /*messaging.subscribe(channelMessageNextStep, { (e: MessageEvent) ⇒
                 progressBar.foreach(_.nextStep())
-            }.toFunc
-            )
+            }.toFunc)*/
 
             messaging.subscribe(channelMessageMaxValue, { (e: MessageEvent) ⇒
                 progressBar.foreach {
                     progressBar ⇒
                         progressBar setPercentDone 0.0
                         progressBar.maxValue = e.data.asInstanceOf[UploadData].maxValue.getOrElse(0)
+
+                        messaging.unsubscribe(channelMessageMaxValue)
                 }
             }.toFunc)
 
@@ -118,7 +115,7 @@ class UploadTestTabProps extends HLayoutProps {
                 file.enable()
             }
 
-            messaging.subscribe(channelMessageEndUpload, { (e: MessageEvent) ⇒
+            /*messaging.subscribe(channelMessageEndUpload, { (e: MessageEvent) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
                 val elapsedTime = e.data.asInstanceOf[UploadData].elapsedTime.getOrElse("")
@@ -126,15 +123,15 @@ class UploadTestTabProps extends HLayoutProps {
 
                 isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")
                 unsubscribe()
-            }.toFunc)
+            }.toFunc)*/
 
-            messaging.subscribe(channelMessageError, { (e: MessageEvent) ⇒
+            /*messaging.subscribe(channelMessageError, { (e: MessageEvent) ⇒
                 progressBar.foreach(_ setPercentDone 0.0)
 
                 val error = e.data.asInstanceOf[ErrorStr]
                 isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
                 unsubscribe()
-            }.toFunc)
+            }.toFunc)*/
 
     }.toThisFunc.opt
 }
