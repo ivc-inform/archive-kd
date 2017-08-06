@@ -116,13 +116,8 @@ if not isc.module_RealtimeMessaging?
 
 			_url = @messagingSubscribeURL()
 			
-			uriBuilder = isc.URIBuilder.create isc.Page.getURL _url
-			
-			data = subscribedChannels: isc.JSONSS.encode @_channels
-
-			for own fieldName, value of data
-				uriBuilder.setQueryParam fieldName, data[fieldName]
-
+			uriBuilder = isc.URIBuilder.create isc.Page.getURL _url					    			
+			uriBuilder.setQueryParam "subscribedChannels", isc.JSONSS.encode(@_channels)
 			uriBuilder.setQueryParam "eventStream", "true"
 
 			if uriBuilder.uri.length > 2000
