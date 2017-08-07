@@ -20,7 +20,7 @@ object TestApp2 {
         println(s"JDBC driver version is ${meta.getDriverVersion}")
         println(s"sqlDialect is ${oracelePool.sqlDialect}")
 
-        val ordDoc = GetAttFile.getOrdDocs((157 to 160).map(BigDecimal(_)): _*)
+        val ordDoc = GetAttFile.getOrdDocs((157 to 157).map(BigDecimal(_)): _*)
 
         ordDoc.foreach(ordDoc ⇒ println(s"ordDoc: {source: ${ordDoc.source}, format: ${ordDoc.format}, mimeType: ${ordDoc.mimeType}, contentLength: ${ordDoc.contentLength}, comments: ${ordDoc.comments}"))
     }
