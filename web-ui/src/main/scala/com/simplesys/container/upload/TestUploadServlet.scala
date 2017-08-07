@@ -88,9 +88,9 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
 
-                val conn = Option(oraclePool.getConnection.asInstanceOf[OracleConnection])
+                val connection = Option(oraclePool.getConnection.asInstanceOf[OracleConnection])
 
-                val dcr = conn.map {
+                val dcr = connection.map {
                     conn ⇒
                         conn setAutoCommit false
 
@@ -170,7 +170,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
 
                                 val sql = "INSERT INTO TEST_UPLOAD_FILES VALUES(?, ?, ?)"
 
-                                conn.foreach {
+                                connection.foreach {
                                     conn ⇒
                                         val pstmt = conn prepareStatement sql
 
@@ -212,7 +212,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                     out
                 } match {
                     case Success(out) ⇒
-                        conn.foreach {
+                        connection.foreach {
                             conn ⇒
                                 dcr.foreach(conn unregisterDatabaseChangeNotification _)
                                 conn.close()
@@ -225,7 +225,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
 
                         channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
                         OutFailure(e)
-                        conn.foreach(_.close())
+                        connection.foreach(_.close())
                 }
             }
 

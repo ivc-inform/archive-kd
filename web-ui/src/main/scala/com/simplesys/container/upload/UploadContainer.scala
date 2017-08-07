@@ -42,10 +42,11 @@ trait ErrorStr extends JSObject {
 object UploadContainer {
 
     @RSTransfer(urlPattern = "/logic/arx_attatch/Upload")
-    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
+    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn with RecorderOrdDoc{
 
         val requestData = new DSRequestDyn(request)
-        val connection: OracleConnection = oraclePool.getConnection().asInstanceOf[OracleConnection]
+        implicit val connection: OracleConnection = oraclePool.getConnection()
+
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
 
@@ -132,7 +133,11 @@ object UploadContainer {
 
                         upload setProgressListener progressListener
 
-                        upload.parseRequest(request).asScala.headOption.map { fi ⇒ new RecorderOrdDoc(idAttatch, dcr).writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType); fi }
+                        upload.parseRequest(request).asScala.headOption.map {
+                            fi ⇒                               
+                                writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, idAttatch, dcr)
+                                fi
+                        }
                     }
                     match {
                         case Success(fi) ⇒

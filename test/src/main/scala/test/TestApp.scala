@@ -5,7 +5,7 @@ import com.simplesys.oracle.pool.OraclePoolDataSource
 import oracle.jdbc.OracleConnection
 
 object TestApp2 {
-
+15
     def main(args: Array[String]): Unit = {
 
         val bufferSize = 1024 * 1024 * 100

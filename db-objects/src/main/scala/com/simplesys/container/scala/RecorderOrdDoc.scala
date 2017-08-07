@@ -10,10 +10,8 @@ import oracle.jdbc._
 import oracle.jdbc.dcn.DatabaseChangeRegistration
 import org.apache.commons.io.IOUtils._
 
-class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration] = None)(implicit oraclePool: OraclePoolDataSource) {
-    implicit val connection: OracleConnection = oraclePool.getConnection().asInstanceOf[OracleConnection]
-
-    def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiMimeType: Option[String] = None): Unit = {
+trait RecorderOrdDoc {
+    def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistration], fiMimeType: Option[String] = None)(implicit connection: OracleConnection): Unit = {
 
         idAttatch.foreach {
             idAttatch ⇒
@@ -162,7 +160,6 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
                                 callableStatement.executeUpdate()
 
                                 dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
-                                throw  new RuntimeException("point1")
                         }
                 }
 
