@@ -1,16 +1,18 @@
 package com.simplesys.container.upload
 
 import java.io.File
+import java.sql.{Timestamp, Types}
+import java.time.{Instant, LocalDateTime, ZoneId}
 import java.util.Properties
 
 import com.simplesys.System.{JSObject, JSUndefined}
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
-import com.simplesys.container.java.JOrdDoc
-import com.simplesys.container.scala.RecorderOrdDoc
+import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
+import com.simplesys.jdbc.control.SessionStructures.{callableStatement, transaction}
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
@@ -18,11 +20,12 @@ import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
-import oracle.jdbc.OracleConnection
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener, DatabaseChangeRegistration}
+import oracle.jdbc.{OracleBlob, OracleClob, OracleConnection}
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
+import org.apache.commons.io.IOUtils.copyLarge
 
 import scala.collection.JavaConverters._
 import scala.util.{Failure, Success, Try}
@@ -42,7 +45,7 @@ trait ErrorStr extends JSObject {
 object UploadContainer {
 
     @RSTransfer(urlPattern = "/logic/arx_attatch/Upload")
-    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn with RecorderOrdDoc{
+    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn  {
 
         val requestData = new DSRequestDyn(request)
         implicit val connection: OracleConnection = oraclePool.getConnection()
@@ -54,6 +57,8 @@ object UploadContainer {
 
         def receive = {
             case GetData => {
+                new RuntimeException("point1")
+
                 val startTime = System.currentTimeMillis()
 
                 val isMultipart = ServletFileUpload.isMultipartContent(request)
@@ -134,8 +139,160 @@ object UploadContainer {
                         upload setProgressListener progressListener
 
                         upload.parseRequest(request).asScala.headOption.map {
-                            fi ⇒                               
-                                writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, idAttatch, dcr)
+                            fi ⇒
+                                //writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, idAttatch, dcr)
+                                idAttatch.foreach {
+                                    idAttatch ⇒
+                                        val blob = connection.createBlob().asInstanceOf[OracleBlob]
+                                        val clob = connection.createClob().asInstanceOf[OracleClob]
+
+                                        val fiSize = copyLarge(fi.getInputStream, blob.setBinaryStream(1))
+
+                                        def getEmptySource: OrdSource =
+                                            new OrdSource {
+                                                override val srcName: Option[String] = Some(fi.getName)
+                                                override val srcLocation: Option[String] = None
+                                                override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
+                                                override val local: Option[BigDecimal] = None
+                                                override val srcType: Option[String] = Some("FILE")
+                                                override val localData: Option[OracleBlob] = Some(blob)
+                                            }
+
+
+                                        val ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
+                                            case Some(ordDoc) ⇒
+                                                val _source = ordDoc.source match {
+                                                    case Some(source) ⇒
+                                                        new OrdSource {
+                                                            override val srcName: Option[String] = Some(fi.getName)
+                                                            override val srcLocation: Option[String] = None
+                                                            override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
+                                                            override val local: Option[BigDecimal] = Some(1)
+                                                            override val srcType: Option[String] = source.srcType
+                                                            override val localData: Option[OracleBlob] = Some(blob)
+                                                        }
+                                                    case None ⇒
+                                                        getEmptySource
+                                                }
+
+                                                new OrdDoc {
+                                                    override val comments: Option[String] = Some("Updated by UploadContainer !!")
+                                                    override val format: Option[String] = Some(fi.getContentType)
+                                                    override val source: Option[OrdSource] = Some(_source)
+                                                    override val mimeType: Option[String] = None
+                                                    override val contentLength: Option[BigDecimal] = Some(fiSize)
+                                                }
+
+                                            case None ⇒
+                                                new OrdDoc {
+                                                    override val comments: Option[String] = Some("Inserted by UploadContainer !!")
+                                                    override val format: Option[String] = Some(fi.getContentType)
+                                                    override val source: Option[OrdSource] = Some(getEmptySource)
+                                                    override val mimeType: Option[String] = None
+                                                    override val contentLength: Option[BigDecimal] = Some(fiSize)
+                                                }
+                                        }
+
+                                        transaction(oraclePool) {
+                                            connection ⇒
+                                                callableStatement(connection, "begin recorddoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
+                                                    callableStatement ⇒
+                                                        var index = 1
+
+                                                        ordDoc.source.foreach {
+                                                            source ⇒
+
+                                                                source.srcName match {
+                                                                    case Some(srcName) ⇒
+                                                                        callableStatement.setString(index, srcName)
+                                                                    case None ⇒
+                                                                        callableStatement.setNull(index, Types.VARCHAR)
+                                                                }
+
+                                                                index += 1
+                                                                source.srcLocation match {
+                                                                    case Some(srcLocation) ⇒
+                                                                        callableStatement.setString(index, srcLocation)
+                                                                    case None ⇒
+                                                                        callableStatement.setNull(index, Types.VARCHAR)
+                                                                }
+
+                                                                index += 1
+                                                                source.updateTime match {
+                                                                    case Some(updateTime) ⇒
+                                                                        callableStatement.setTimestamp(index, Timestamp.valueOf(updateTime))
+                                                                    case None ⇒
+                                                                        callableStatement.setNull(index, Types.TIMESTAMP)
+                                                                }
+
+                                                                index += 1
+                                                                source.local match {
+                                                                    case Some(local) ⇒
+                                                                        callableStatement.setBigDecimal(index, local.bigDecimal)
+                                                                    case None ⇒
+                                                                        callableStatement.setNull(index, Types.INTEGER)
+                                                                }
+
+                                                                index += 1
+                                                                source.srcType match {
+                                                                    case Some(srcType) ⇒
+                                                                        callableStatement.setString(index, srcType)
+                                                                    case None ⇒
+                                                                        callableStatement.setNull(index, Types.VARCHAR)
+                                                                }
+
+                                                                index += 1
+                                                                source.localData match {
+                                                                    case Some(localData) ⇒
+                                                                        callableStatement.setBlob(index, localData)
+                                                                    case None ⇒
+                                                                        callableStatement.setNull(index, Types.BLOB)
+                                                                }
+                                                        }
+
+                                                        index += 1
+                                                        ordDoc.format match {
+                                                            case Some(format) ⇒
+                                                                callableStatement.setString(index, format)
+                                                            case None ⇒
+                                                                callableStatement.setNull(index, Types.VARCHAR)
+                                                        }
+
+                                                        index += 1
+                                                        ordDoc.mimeType match {
+                                                            case Some(mimeType) ⇒
+                                                                callableStatement.setString(index, mimeType)
+                                                            case None ⇒
+                                                                callableStatement.setNull(index, Types.VARCHAR)
+                                                        }
+
+                                                        index += 1
+                                                        ordDoc.contentLength match {
+                                                            case Some(contentLength) ⇒
+                                                                callableStatement.setBigDecimal(index, contentLength.bigDecimal)
+                                                            case None ⇒
+                                                                callableStatement.setNull(index, Types.INTEGER)
+                                                        }
+
+                                                        index += 1
+                                                        ordDoc.comments match {
+                                                            case Some(comments) ⇒
+                                                                clob.setString(1L, comments)
+                                                                callableStatement.setClob(index, clob)
+                                                            case None ⇒
+                                                                callableStatement.setNull(index, Types.CLOB)
+                                                        }
+
+                                                        index += 1
+                                                        callableStatement.setLong(index, idAttatch)
+                                                        callableStatement.executeUpdate()
+
+                                                        dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
+                                                }
+                                        }
+
+                                }
+
                                 fi
                         }
                     }

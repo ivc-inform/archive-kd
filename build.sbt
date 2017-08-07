@@ -90,6 +90,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
     addCommandAlias("debug-restart", "; jetty:stop ; fastOptJS ; package ; jetty:start"),
     addCommandAlias("reset", "; clean ; compile ; fastOptJS "),
+    addCommandAlias("full-reset", "; clean ; package ; fastOptJS "),
 
     JRebelPlugin.jrebelSettings,
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
