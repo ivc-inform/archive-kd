@@ -144,11 +144,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                     ))
 
                                                     def unsubscribe(): Unit = {
-                                                        thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
-                                                        thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
-                                                        thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
-                                                        thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
-                                                        thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel, () ⇒ println(s"unsubscribe: $channel")))
+                                                        thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
+                                                        thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
+                                                        thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
+                                                        thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
+                                                        thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
                                                         thiz.enable()
                                                     }
 

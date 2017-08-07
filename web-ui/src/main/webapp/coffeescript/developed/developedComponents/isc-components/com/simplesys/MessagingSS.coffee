@@ -117,7 +117,7 @@ if not isc.module_RealtimeMessaging?
 			_url = @messagingSubscribeURL()
 			
 			json = isc.JSONSS.encode(@_channels)
-			console.log "json (cs): #{json}"
+			###console.log "json (cs): #{json}"###
 			
 			uriBuilder = isc.URIBuilder.create isc.Page.getURL _url					    			
 			uriBuilder.setQueryParam "subscribedChannels", json
@@ -130,7 +130,7 @@ if not isc.module_RealtimeMessaging?
 
 			###todo В случае необходимости подключения большого кол-ва каналов, необходимо разбиение их на несколько EventSource###
 
-			console.log "uriBuilder.uri (cs): #{uriBuilder.uri}"
+			###console.log "uriBuilder.uri (cs): #{uriBuilder.uri}"###
 			@_es = new EventSource uriBuilder.uri
 
 			@_es.onerror = @_handleEventSourceError

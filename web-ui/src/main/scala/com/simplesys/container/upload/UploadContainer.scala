@@ -8,6 +8,7 @@ import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
 import com.simplesys.container.java.JOrdDoc
+import com.simplesys.container.scala.RecorderOrdDoc
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
@@ -131,7 +132,7 @@ object UploadContainer {
 
                         upload setProgressListener progressListener
 
-                        upload.parseRequest(request).asScala.headOption.map { fi ⇒ /*new RecorderOrdDoc(idAttatch, dcr).writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType);*/ fi }
+                        upload.parseRequest(request).asScala.headOption.map { fi ⇒ new RecorderOrdDoc(idAttatch, dcr).writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType); fi }
                     }
                     match {
                         case Success(fi) ⇒

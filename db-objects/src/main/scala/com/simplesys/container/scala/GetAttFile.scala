@@ -2,16 +2,17 @@ package com.simplesys.container.scala
 
 import java.sql.Connection
 
-import com.simplesys.container.java.{JOrdDoc ⇒ JOrdDoc}
+import com.simplesys.container.java.JOrdDoc
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
+import com.simplesys.oracle.pool.OraclePoolDataSource
 import oracle.jdbc.{OracleConnection, OracleResultSet}
 
 object GetAttFile {
-    def getOrdDoc(id: BigDecimal)(implicit oracleConnection: Connection): Option[OrdDoc] = {
+    def getOrdDoc(id: BigDecimal)(implicit oraclePool: OraclePoolDataSource): Option[OrdDoc] = {
 
         val selectSQL = "select ATTFILE from ARX_ATTATCH where ID = ?"
 
-        prepareStatement(oracleConnection, selectSQL) {
+        prepareStatement(oraclePool.getConnection(), selectSQL) {
             preparedStatement ⇒
                 preparedStatement.setBigDecimal(1, id.bigDecimal)
 
@@ -24,5 +25,5 @@ object GetAttFile {
         }
     }
 
-    def getOrdDocs(ids: BigDecimal*)(implicit oracleConnection: OracleConnection): Seq[OrdDoc] = ids.map(getOrdDoc).filter(_.nonEmpty).map(_.get)
+    def getOrdDocs(ids: BigDecimal*)(implicit oraclePool: OraclePoolDataSource): Seq[OrdDoc] = ids.map(getOrdDoc).filter(_.nonEmpty).map(_.get)
 }
