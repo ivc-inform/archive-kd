@@ -51,7 +51,7 @@ object UploadContainer {
     class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
 
         val requestData = new DSRequestDyn(request)
-        implicit val connection: OracleConnection = oraclePool.getConnection()
+        val connection: OracleConnection = oraclePool.getConnection()
 
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
