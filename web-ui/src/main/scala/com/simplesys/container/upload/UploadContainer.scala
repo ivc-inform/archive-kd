@@ -71,8 +71,6 @@ object UploadContainer {
 
                 val dcr: Option[DatabaseChangeRegistration] = {
                     Try {
-                        connection setAutoCommit false
-
                         val prop = new Properties()
                         prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
                         val dcr = connection.registerDatabaseChangeNotification(prop)
