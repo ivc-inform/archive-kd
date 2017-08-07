@@ -18,7 +18,7 @@ trait arx_attatchAttfile_SemiHandTrait_Update extends SessionContextSupport with
     
     logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = AttatchAttfileDS(ds)    
+    val dataSet = AttatchAttfileDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

@@ -18,7 +18,7 @@ trait arx_docizvstat_SemiHandTrait_Remove extends SessionContextSupport with Ser
     
     logger debug s"Request for Remove: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = DocizvstatDS(ds)    
+    val dataSet = DocizvstatDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

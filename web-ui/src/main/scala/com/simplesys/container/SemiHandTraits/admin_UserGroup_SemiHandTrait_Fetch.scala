@@ -18,7 +18,7 @@ trait admin_UserGroup_SemiHandTrait_Fetch extends SessionContextSupport with Ser
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = UserGroupDS(ds)    
+    val dataSet = UserGroupDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

@@ -18,7 +18,7 @@ trait admin_UserGroup_SemiHandTrait_Update extends SessionContextSupport with Se
     
     logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = UserGroupDS(ds)    
+    val dataSet = UserGroupDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

@@ -71,7 +71,7 @@ class ReLoginAxFilter extends AkkaPartialFilter {
             val password = requestData.getString("password")
 
 
-            val user = UserDS(sessionContext.getDS)
+            val user = UserDS(sessionContext.getOraclePool)
 
             logger trace "---------------------------------------------------------------------------------------------------------------------------------------"
             logger trace (s"login: ${login}")

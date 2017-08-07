@@ -18,7 +18,7 @@ trait arx_groupitem_SemiHandTrait_Add extends SessionContextSupport with Servlet
     
     logger debug s"Request for Add: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = GroupitemDS(ds)    
+    val dataSet = GroupitemDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

@@ -17,8 +17,7 @@ trait SessionContextSupport {
     def getCaptionUser = sessionContext.getCaptionUser
     def getUserId = sessionContext.getUserId
 
-    implicit def ds:OraclePoolDataSource = sessionContext.getDS.asInstanceOf[OraclePoolDataSource]  //Не убирать !!!
-    implicit val connection: OracleConnection = ds.getConnection().asInstanceOf[OracleConnection]
+    implicit lazy val oraclePool:OraclePoolDataSource = sessionContext.getOraclePool //Не убирать !!!
 }
 
 class SessionContext(protected val session: Option[HttpSession]) extends Logging {
@@ -35,10 +34,10 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
     private[this] var captionUser = strEmpty
     def getCaptionUser = captionUser
 
-    private[this] var ds: OraclePoolDataSource = null
-    def getDS = ds
+    private[this] var oraclePool: OraclePoolDataSource = null
+    def getOraclePool = oraclePool
 
-    def getSQLDialect: SQLDialect = ds.sqlDialect
+    def getSQLDialect: SQLDialect = oraclePool.sqlDialect
 
     /*private[this] var birtEngine: IReportEngine = null
     def getBirtEngine = birtEngine*/
@@ -70,7 +69,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
             case _ => strEmpty
         }
 
-        ds = servletContext.Attribute(s"ds") match {
+        oraclePool = servletContext.Attribute(s"ds") match {
             case Some(value: OraclePoolDataSource) => value
             case _ => throw new RuntimeException(s"Нет DS")
         }

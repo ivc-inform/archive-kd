@@ -18,7 +18,7 @@ trait arx_state_SemiHandTrait_Fetch extends SessionContextSupport with ServletAc
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = StateDS(ds)    
+    val dataSet = StateDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

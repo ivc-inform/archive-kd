@@ -73,7 +73,7 @@ class ReLoginFilter extends AkkaPartialFilter {
             logger trace (s"login: ${login}")
             logger trace (s"pasword: ${password}")
 
-            val user = UserDS(sessionContext.getDS)
+            val user = UserDS(sessionContext.getOraclePool)
 
             user.selectPOne(where = Where(user.loginUser === login) And (user.passwordUser === password)) result match {
                 case Success(item) =>

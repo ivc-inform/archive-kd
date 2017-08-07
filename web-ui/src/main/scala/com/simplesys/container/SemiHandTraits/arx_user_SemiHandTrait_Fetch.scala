@@ -18,7 +18,7 @@ trait arx_user_SemiHandTrait_Fetch extends SessionContextSupport with ServletAct
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = UserDS(ds)    
+    val dataSet = UserDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

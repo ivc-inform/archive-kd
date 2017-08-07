@@ -18,7 +18,7 @@ trait arx_state_SemiHandTrait_Add extends SessionContextSupport with ServletActo
     
     logger debug s"Request for Add: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = StateDS(ds)    
+    val dataSet = StateDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

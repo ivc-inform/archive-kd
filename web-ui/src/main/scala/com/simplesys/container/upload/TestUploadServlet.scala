@@ -88,7 +88,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                 factory setRepository file
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
 
-                val conn = Option(ds.getConnection.asInstanceOf[OracleConnection])
+                val conn = Option(oraclePool.getConnection.asInstanceOf[OracleConnection])
 
                 val dcr = conn.map {
                     conn ⇒

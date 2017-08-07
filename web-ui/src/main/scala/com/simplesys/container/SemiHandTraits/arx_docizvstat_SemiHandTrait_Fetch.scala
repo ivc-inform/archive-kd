@@ -18,7 +18,7 @@ trait arx_docizvstat_SemiHandTrait_Fetch extends SessionContextSupport with Serv
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = DocizvstatDS(ds)    
+    val dataSet = DocizvstatDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

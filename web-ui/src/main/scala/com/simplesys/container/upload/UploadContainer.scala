@@ -42,7 +42,9 @@ object UploadContainer {
 
     @RSTransfer(urlPattern = "/logic/arx_attatch/Upload")
     class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
+
         val requestData = new DSRequestDyn(request)
+        val connection: OracleConnection = oraclePool.getConnection().asInstanceOf[OracleConnection]
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
 

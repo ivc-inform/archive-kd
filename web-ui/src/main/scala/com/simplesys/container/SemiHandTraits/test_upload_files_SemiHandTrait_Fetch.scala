@@ -18,7 +18,7 @@ trait test_upload_files_SemiHandTrait_Fetch extends SessionContextSupport with S
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = Upload_filesDS(ds)    
+    val dataSet = Upload_filesDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

@@ -18,7 +18,7 @@ trait systemservice_SeqGenerator_SemiHandTrait_Fetch extends SessionContextSuppo
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = SeqGeneratorDS(ds)    
+    val dataSet = SeqGeneratorDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

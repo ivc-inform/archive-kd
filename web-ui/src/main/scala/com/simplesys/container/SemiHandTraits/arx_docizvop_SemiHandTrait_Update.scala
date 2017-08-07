@@ -18,7 +18,7 @@ trait arx_docizvop_SemiHandTrait_Update extends SessionContextSupport with Servl
     
     logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = DocizvopDS(ds)    
+    val dataSet = DocizvopDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

@@ -18,7 +18,7 @@ trait arx_doccats_SemiHandTrait_Add extends SessionContextSupport with ServletAc
     
     logger debug s"Request for Add: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = DoccatsDS(ds)    
+    val dataSet = DoccatsDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

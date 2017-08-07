@@ -34,10 +34,10 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
 
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
 
-    val dataSet = AttatchDS(ds)
+    val dataSet = AttatchDS(oraclePool)
     /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////
 
-    val dataSetDocIzv = DocizvDS(ds)
+    val dataSetDocIzv = DocizvDS(oraclePool)
 
     def receiveBase: Option[Actor.Receive] = Some(
         {
@@ -51,7 +51,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                 val qty: Int = requestData.EndRow.toInt - requestData.StartRow.toInt + 1
 
                 val select = dataSet.Fetch(dsRequest = DSRequest(sqlDialect = sessionContext.getSQLDialect, startRow = requestData.StartRow, endRow = requestData.EndRow, sortBy = requestData.SortBy, data = data, textMatchStyle = requestData.TextMatchStyle.toString))
-                implicit val oraConnection = ds.getConnection
+                implicit val oraConnection = oraclePool.getConnection
 
                 Out(classDyn = select.result match {
                     case Success(list) => {

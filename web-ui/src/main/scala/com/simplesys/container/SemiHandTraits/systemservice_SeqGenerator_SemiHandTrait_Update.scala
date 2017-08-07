@@ -18,7 +18,7 @@ trait systemservice_SeqGenerator_SemiHandTrait_Update extends SessionContextSupp
     
     logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = SeqGeneratorDS(ds)    
+    val dataSet = SeqGeneratorDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

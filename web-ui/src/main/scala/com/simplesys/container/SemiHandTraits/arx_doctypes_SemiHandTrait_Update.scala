@@ -18,7 +18,7 @@ trait arx_doctypes_SemiHandTrait_Update extends SessionContextSupport with Servl
     
     logger debug s"Request for Update: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = DoctypesDS(ds)    
+    val dataSet = DoctypesDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

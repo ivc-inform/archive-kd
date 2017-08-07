@@ -48,10 +48,10 @@ class IDGen(val nodeID: Int) extends Actor with Logging {
 }
 
 object Sequences {
-    def apply(ds: OraclePoolDataSource)(implicit actorSystem: ActorSystem) = new Sequences(ds)
+    def apply(oraclePool: OraclePoolDataSource)(implicit actorSystem: ActorSystem) = new Sequences(oraclePool)
 }
 
-class Sequences(ds: OraclePoolDataSource)(implicit val actorSystem: ActorSystem) extends AskSupport with Config {
+class Sequences(oraclePool: OraclePoolDataSource)(implicit val actorSystem: ActorSystem) extends AskSupport with Config {
     private val nodeId = getInt(s"topology.node-id")
 
     val actorBigDecimalSeq = actorSystem.actorOf(Props(new IDSSequence(nodeId)))
@@ -60,17 +60,17 @@ class Sequences(ds: OraclePoolDataSource)(implicit val actorSystem: ActorSystem)
         if (triggerName.isEmpty)
             throw new RuntimeException(s"TriggerName is Empty")
 
-        (actorBigDecimalSeq ?(ds, triggerName)).mapTo[BigDecimal]
+        (actorBigDecimalSeq ?(oraclePool, triggerName)).mapTo[BigDecimal]
     }
 
     def nextBigDecimal1(implicit triggerName: String): BigDecimal = {
         if (triggerName.isEmpty)
             throw new RuntimeException(s"TriggerName is Empty")
 
-        Await.result(actorBigDecimalSeq ?(ds, triggerName), timeout.duration).asInstanceOf[BigDecimal]
+        Await.result(actorBigDecimalSeq ?(oraclePool, triggerName), timeout.duration).asInstanceOf[BigDecimal]
     }
 
-    val actorLongSeq = actorSystem.actorOf(Props(new IDSeuenceGetLong(ds)))
+    val actorLongSeq = actorSystem.actorOf(Props(new IDSeuenceGetLong(oraclePool)))
 
     def nextLong(triggerName: String): Future[Long] = {
         if (triggerName.isEmpty)
@@ -87,14 +87,14 @@ class Sequences(ds: OraclePoolDataSource)(implicit val actorSystem: ActorSystem)
     }
 }
 
-class IDSeuenceGetLong(val ds: OraclePoolDataSource) extends IDGen {
+class IDSeuenceGetLong(val oraclePool: OraclePoolDataSource) extends IDGen {
 
     import com.simplesys.jdbc.control.classBO._
 
     override def receive = {
 
         case nameSeq: String =>
-            val seqGenerator = SeqGeneratorBo(ds)
+            val seqGenerator = SeqGeneratorBo(oraclePool)
 
             seqGenerator.selectPOne(where = Where(seqGenerator.nameSeq === nameSeq)).result match {
                 case Success(trigger) =>
@@ -126,8 +126,8 @@ class IDSSequence(override val nodeID: Int) extends IDGen(nodeID) with Logging {
 
     override def receive = {
 
-        case (ds: OraclePoolDataSource, nameSeq: String) =>
-            val seqGenerator = SeqGeneratorBo(ds)
+        case (oraclePool: OraclePoolDataSource, nameSeq: String) =>
+            val seqGenerator = SeqGeneratorBo(oraclePool)
 
             seqGenerator.selectPOne(where = Where(seqGenerator.nameSeq === nameSeq)).result match {
                 case Success(trigger) =>

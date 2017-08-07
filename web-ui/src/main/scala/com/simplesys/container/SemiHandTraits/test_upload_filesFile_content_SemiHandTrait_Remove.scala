@@ -18,7 +18,7 @@ trait test_upload_filesFile_content_SemiHandTrait_Remove extends SessionContextS
     
     logger debug s"Request for Remove: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = Upload_filesFile_contentDS(ds)    
+    val dataSet = Upload_filesFile_contentDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

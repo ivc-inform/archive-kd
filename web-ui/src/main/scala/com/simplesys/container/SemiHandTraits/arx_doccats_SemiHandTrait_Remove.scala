@@ -18,7 +18,7 @@ trait arx_doccats_SemiHandTrait_Remove extends SessionContextSupport with Servle
     
     logger debug s"Request for Remove: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = DoccatsDS(ds)    
+    val dataSet = DoccatsDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

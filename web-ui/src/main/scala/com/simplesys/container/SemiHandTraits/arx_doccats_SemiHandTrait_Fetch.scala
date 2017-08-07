@@ -18,7 +18,7 @@ trait arx_doccats_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = DoccatsDS(ds)    
+    val dataSet = DoccatsDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

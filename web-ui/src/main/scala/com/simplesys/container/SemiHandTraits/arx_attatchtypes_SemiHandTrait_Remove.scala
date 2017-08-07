@@ -18,7 +18,7 @@ trait arx_attatchtypes_SemiHandTrait_Remove extends SessionContextSupport with S
     
     logger debug s"Request for Remove: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = AttatchtypesDS(ds)    
+    val dataSet = AttatchtypesDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

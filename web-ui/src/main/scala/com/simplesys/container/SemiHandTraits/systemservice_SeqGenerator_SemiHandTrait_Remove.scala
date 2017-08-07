@@ -18,7 +18,7 @@ trait systemservice_SeqGenerator_SemiHandTrait_Remove extends SessionContextSupp
     
     logger debug s"Request for Remove: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = SeqGeneratorDS(ds)    
+    val dataSet = SeqGeneratorDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    

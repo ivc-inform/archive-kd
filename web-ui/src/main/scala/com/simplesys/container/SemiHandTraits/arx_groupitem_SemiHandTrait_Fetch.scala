@@ -18,7 +18,7 @@ trait arx_groupitem_SemiHandTrait_Fetch extends SessionContextSupport with Servl
     
     logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"    
     
-    val dataSet = GroupitemDS(ds)    
+    val dataSet = GroupitemDS(oraclePool)
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    
