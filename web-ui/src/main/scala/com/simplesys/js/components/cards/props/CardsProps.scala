@@ -7,18 +7,16 @@ import com.simplesys.SmartClient.Control.props.MenuSSProps
 import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.DataBinding.props.{AdvancedCriteriaProps, CriterionProps}
 import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Foundation.props.CanvasProps
-import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.{JSAny, JSUndefined}
 import com.simplesys.System.Types.OperatorId
+import com.simplesys.System.{JSAny, JSUndefined}
 import com.simplesys.app.Attach
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Cards
 import com.simplesys.js.components.cards.props.ExpandAttahes.ExpandAttahes
 import com.simplesys.option.DoubleType._
-import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.CardDataRecord
@@ -106,21 +104,22 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
         (thiz: classHandler, record: CardDataRecord) ⇒
             thiz.expandAttahes match {
                 case ExpandAttahes.attachments ⇒
-                    Attach.create(new AttachProps {
-                        initialCriteria = AdvancedCriteria(
-                            new AdvancedCriteriaProps {
-                                operator = OperatorId.and.opt
-                                criteria = Seq(
-                                    Criterion(
-                                        new CriterionProps {
-                                            fieldName = arx_attatch_idcard_NameStrong.name.opt
-                                            operator = OperatorId.equals.opt
-                                            value = record.id.getOrElse(0).asInstanceOf[JSAny].opt
-                                        })
-                                ).opt
-                            }
-                        ).opt
-                    })
+                    Attach.create(
+                        new AttachProps {
+                            initialCriteria = AdvancedCriteria(
+                                new AdvancedCriteriaProps {
+                                    operator = OperatorId.and.opt
+                                    criteria = Seq(
+                                        Criterion(
+                                            new CriterionProps {
+                                                fieldName = arx_attatch_idcard_NameStrong.name.opt
+                                                operator = OperatorId.equals.opt
+                                                value = record.id.getOrElse(0).asInstanceOf[JSAny].opt
+                                            })
+                                    ).opt
+                                }
+                            ).opt
+                        })
                 case _ ⇒
                     null
             }

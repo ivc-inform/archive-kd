@@ -131,16 +131,16 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                             progressBar setPercentDone 0.0
                                                                             progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
                                                                     }
-                                                            },
-                                                        () ⇒ println(s"subscribe: $channel")
+                                                            }/*,
+                                                        () ⇒ println(s"subscribe: $channel")*/
                                                     ))
                                                     thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis),
-                                                        () ⇒ println(s"subscribe: $channel")
+                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)/*,
+                                                        () ⇒ println(s"subscribe: $channel")*/
                                                     ))
                                                     thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep()),
-                                                        () ⇒ println(s"subscribe: $channel")
+                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep())/*,
+                                                        () ⇒ println(s"subscribe: $channel")*/
                                                     ))
 
                                                     def unsubscribe(): Unit = {
@@ -166,8 +166,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 }
                                                         }
                                                         unsubscribe()
-                                                    },
-                                                        () ⇒ println(s"subscribe: $channel")
+                                                    }/*,
+                                                        () ⇒ println(s"subscribe: $channel")*/
                                                     ))
 
                                                     thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
@@ -176,8 +176,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                         val error = e.data.asInstanceOf[ErrorStr]
                                                         isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
                                                         unsubscribe()
-                                                    },
-                                                        () ⇒ println(s"subscribe: $channel")
+                                                    }/*,
+                                                        () ⇒ println(s"subscribe: $channel")*/
                                                     ))
 
 

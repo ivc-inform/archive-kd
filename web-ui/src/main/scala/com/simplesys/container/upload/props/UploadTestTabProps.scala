@@ -25,11 +25,11 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
-            val channelMessageEndUpload = s"EU_${thiz.ID}_${simpleSyS.guid}"
-            val channelMessageError = s"Error_${thiz.ID}_${simpleSyS.guid}"
-            val channelMessageRecordInBase = s"RIB_${thiz.ID}_${simpleSyS.guid}"
-            val channelMessageNextStep = s"NS_${thiz.ID}_${simpleSyS.guid}"
-            val channelMessageMaxValue = s"MV_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageEndUpload = s"EU_${simpleSyS.guid}"
+            val channelMessageError = s"Error_${simpleSyS.guid}"
+            val channelMessageRecordInBase = s"RIB_${simpleSyS.guid}"
+            val channelMessageNextStep = s"NS_${simpleSyS.guid}"
+            val channelMessageMaxValue = s"MV_${simpleSyS.guid}"
 
             var progressBar: JSUndefined[ProgressbarItem] = jSUndefined
 
