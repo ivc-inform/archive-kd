@@ -14,6 +14,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
     implicit val connection: OracleConnection = oraclePool.getConnection().asInstanceOf[OracleConnection]
 
     def writeOrdDoc(inputStream: InputStream, fiName: String, fiContentType: String, fiMimeType: Option[String] = None): Unit = {
+
         idAttatch.foreach {
             idAttatch ⇒
                 val blob = connection.createBlob().asInstanceOf[OracleBlob]
@@ -161,6 +162,7 @@ class RecorderOrdDoc(idAttatch: Option[Long], dcr: Option[DatabaseChangeRegistra
                                 callableStatement.executeUpdate()
 
                                 dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
+                                throw  new RuntimeException("point1")
                         }
                 }
 

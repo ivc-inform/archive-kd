@@ -63,7 +63,7 @@ object UploadContainer {
                     case (key, value) ⇒
                         logger.debug(s"key: $key, value: ${value.getOrElse("None")}")
                 }
-                logger.debug(" ------------------------------------------------------- End Parametrs -------------------------------------------------------------------")
+                logger.debug(" ------------------------------------------------------- End Parametrs1 -------------------------------------------------------------------")
 
                 val idAttatch = request.Parameter("id").map(_.toLong)
                 val channelMessageEndUpload = request.Parameter("p1")
