@@ -1,7 +1,7 @@
 package com.simplesys.container.upload
 
 import java.io.File
-import java.sql.{Timestamp, Types}
+import java.sql.{BatchUpdateException, Connection, Timestamp, Types}
 import java.time.{Instant, LocalDateTime, ZoneId}
 import java.util.Properties
 
@@ -12,10 +12,13 @@ import com.simplesys.common.Strings.newLine
 import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.jdbc.control.SessionStructures.{callableStatement, transaction}
+import com.simplesys.jdbc.control.SessionStructures.{callableStatement, logger, transaction, tryCatch}
+import com.simplesys.jdbc.control.ValidationEx
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
+import com.simplesys.log.Logger
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
+import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
@@ -45,7 +48,7 @@ trait ErrorStr extends JSObject {
 object UploadContainer {
 
     @RSTransfer(urlPattern = "/logic/arx_attatch/Upload")
-    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn  {
+    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
 
         val requestData = new DSRequestDyn(request)
         implicit val connection: OracleConnection = oraclePool.getConnection()
@@ -57,7 +60,6 @@ object UploadContainer {
 
         def receive = {
             case GetData => {
-                new RuntimeException("point1")
 
                 val startTime = System.currentTimeMillis()
 
@@ -140,7 +142,6 @@ object UploadContainer {
 
                         upload.parseRequest(request).asScala.headOption.map {
                             fi ⇒
-                                //writeOrdDoc(fi.getInputStream, fi.getName, fi.getContentType, idAttatch, dcr)
                                 idAttatch.foreach {
                                     idAttatch ⇒
                                         val blob = connection.createBlob().asInstanceOf[OracleBlob]
@@ -159,7 +160,7 @@ object UploadContainer {
                                             }
 
 
-                                        val ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
+                                        def ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
                                             case Some(ordDoc) ⇒
                                                 val _source = ordDoc.source match {
                                                     case Some(source) ⇒
@@ -197,6 +198,7 @@ object UploadContainer {
                                             connection ⇒
                                                 callableStatement(connection, "begin recorddoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
                                                     callableStatement ⇒
+
                                                         var index = 1
 
                                                         ordDoc.source.foreach {
@@ -289,8 +291,10 @@ object UploadContainer {
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
                                                 }
+                                        }.result match {
+                                            case scalaz.Success(res) ⇒ res
+                                            case scalaz.Failure(e) ⇒ throw e
                                         }
-
                                 }
 
                                 fi
