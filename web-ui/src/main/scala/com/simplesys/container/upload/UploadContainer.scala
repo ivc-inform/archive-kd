@@ -194,7 +194,7 @@ object UploadContainer {
                                                 }
                                         }
 
-                                        transaction(oraclePool) {
+                                        transaction(connection) {
                                             connection ⇒
                                                 callableStatement(connection, "begin recorddoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
                                                     callableStatement ⇒
