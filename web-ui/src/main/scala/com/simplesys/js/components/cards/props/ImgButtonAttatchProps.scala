@@ -55,7 +55,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         def getParams: String = params.toString()
 
                         def getNo = s"p${i}"
-                        def getNo1(guid: String) = s"${getNo}_${id}_${guid}"
+                        def getNo1(guid: String) = s"${getNo}_${guid}"
 
                         var no1 = getNo1(simpleSyS.guid)
                         thisTop.channelMessageEndUpload = no1
