@@ -122,7 +122,6 @@ if not isc.module_RealtimeMessaging?
 			uriBuilder = isc.URIBuilder.create isc.Page.getURL _url					    			
 			uriBuilder.setQueryParam "subscribedChannels", json
 			uriBuilder.setQueryParam "eventStream", "true"
-			uriBuilder.setQueryParam "eventStream", "true"
 
 			if uriBuilder.uri.length > 2000
 				Log.logWarn "URI: #{uriBuilder.uri}"
