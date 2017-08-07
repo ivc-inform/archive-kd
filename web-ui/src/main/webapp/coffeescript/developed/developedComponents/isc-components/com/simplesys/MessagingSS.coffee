@@ -122,12 +122,14 @@ if not isc.module_RealtimeMessaging?
 			uriBuilder = isc.URIBuilder.create isc.Page.getURL _url					    			
 			uriBuilder.setQueryParam "subscribedChannels", json
 			uriBuilder.setQueryParam "eventStream", "true"
+			uriBuilder.setQueryParam "eventStream", "true"
 
 			if uriBuilder.uri.length > 2000
-				Log.logError "Слишком много каналов, uriBuilder.uri > 2000 символов"
-				return
+				Log.logWarn "URI: #{uriBuilder.uri}"
+				Log.logWarn "URI, БОЛЕЕ 2000 символов, это может быть опвсно"
+				###return###
 
-			##todo В случае необходимости подключения большого кол-ва каналов, необходимо разбиение их на несколько EventSource
+			###todo В случае необходимости подключения большого кол-ва каналов, необходимо разбиение их на несколько EventSource###
 
 			console.log "uriBuilder.uri (cs): #{uriBuilder.uri}"
 			@_es = new EventSource uriBuilder.uri

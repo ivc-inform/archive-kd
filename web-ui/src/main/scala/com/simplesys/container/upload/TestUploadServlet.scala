@@ -184,17 +184,17 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
 
                                         println(s"before pstmt.setBlob(3, inputStream, ${fi.getSize})")
 
-                                        //pstmt.setBlob(3, inputStream, fi.getSize)
+                                        pstmt.setBlob(3, inputStream, fi.getSize)
 
                                         println(s"after pstmt.setBlob(3, inputStream, ${fi.getSize}) ; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         println(s"before pstmt.executeUpdate")
 
-                                        //pstmt.executeUpdate()
+                                        pstmt.executeUpdate()
 
                                         println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
-                                        //conn.commit()
+                                        conn.commit()
                                         
                                         fi.delete()
 

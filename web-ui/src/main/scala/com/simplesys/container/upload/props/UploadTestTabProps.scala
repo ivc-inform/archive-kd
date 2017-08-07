@@ -5,7 +5,6 @@ import com.simplesys.SmartClient.Forms.formsItems.props._
 import com.simplesys.SmartClient.Forms.formsItems.{ButtonItem, ProgressbarItem, UploadItem}
 import com.simplesys.SmartClient.Forms.props.DynamicFormSSProps
 import com.simplesys.SmartClient.Foundation.props.IframeProps
-import com.simplesys.SmartClient.Layout.WindowSS
 import com.simplesys.SmartClient.Layout.props.HLayoutProps
 import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
@@ -15,7 +14,6 @@ import com.simplesys.container.upload.{ErrorStr, UploadData, UploadTestTab}
 import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
-import com.simplesys.option.{ScNone, ScOption}
 
 class UploadTestTabProps extends HLayoutProps {
     type classHandler <: UploadTestTab
@@ -27,11 +25,11 @@ class UploadTestTabProps extends HLayoutProps {
 
             thiz.Super("initWidget", arguments)
 
-            val channelMessageEndUpload = s"EndUpload_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageEndUpload = s"EU_${thiz.ID}_${simpleSyS.guid}"
             val channelMessageError = s"Error_${thiz.ID}_${simpleSyS.guid}"
-            val channelMessageRecordInBase = s"RecordInBase_${thiz.ID}_${simpleSyS.guid}"
-            val channelMessageNextStep = s"NextStep_${thiz.ID}_${simpleSyS.guid}"
-            val channelMessageMaxValue = s"MaxValue_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageRecordInBase = s"RIB_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageNextStep = s"NS_${thiz.ID}_${simpleSyS.guid}"
+            val channelMessageMaxValue = s"MV_${thiz.ID}_${simpleSyS.guid}"
 
             var progressBar: JSUndefined[ProgressbarItem] = jSUndefined
 
