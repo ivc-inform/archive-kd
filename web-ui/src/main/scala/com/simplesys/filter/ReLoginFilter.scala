@@ -1,9 +1,8 @@
 package com.simplesys.filter
 
-import javax.servlet.annotation.WebFilter
-
 import com.simplesys.akka.http.LoginedData1
 import com.simplesys.akka.http.filter.AkkaPartialFilter
+import com.simplesys.app.SessionContext.{loggedAttributeName, _}
 import com.simplesys.app._
 import com.simplesys.common.Strings._
 import com.simplesys.common.equality.SimpleEquality._
@@ -13,7 +12,6 @@ import com.simplesys.jdbc.exception.NoDataFoundException
 import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
-import com.simplesys.tuple.TupleSS6
 import ru.simplesys.defs.bo.admin.{User, UserDS}
 
 import scalaz.{Failure, Success}
@@ -78,11 +76,11 @@ class ReLoginFilter extends AkkaPartialFilter {
             user.selectPOne(where = Where(user.loginUser === login) And (user.passwordUser === password)) result match {
                 case Success(item) =>
                     for (_session <- session) {
-                        _session.Attribute("userId", Some(item.diUser))
-                        _session.Attribute("loginedUser", Some(item.loginUser))
-                        _session.Attribute("captionUser", Some(item.captionUser))
-                        _session.Attribute("loginedGroup", Some(item.groupUser))
-                        _session.Attribute("logged", Some(true))
+                        _session.Attribute(userIdAttributeName, Some(item.diUser))
+                        _session.Attribute(loginedUserAttributeName, Some(item.loginUser))
+                        _session.Attribute(captionUserAttributeName, Some(item.captionUser))
+                        _session.Attribute(loginedGroupAttributeName, Some(item.groupUser))
+                        _session.Attribute(loggedAttributeName, Some(true))
                     }
                     LoginedData1(strEmpty, login, item.diUser, item.captionUser, item.codeGroupUserGroup_Group)
 
@@ -90,21 +88,21 @@ class ReLoginFilter extends AkkaPartialFilter {
                     case e: NoDataFoundException =>
                         session match {
                             case Some(_session) =>
-                                _session RemoveAttribute "userId"
-                                _session RemoveAttribute "loginedUser"
-                                _session RemoveAttribute "captionUser"
-                                _session RemoveAttribute "loginedGroup"
-                                _session RemoveAttribute "logged"
+                                _session RemoveAttribute userIdAttributeName
+                                _session RemoveAttribute loginedUserAttributeName
+                                _session RemoveAttribute captionUserAttributeName
+                                _session RemoveAttribute loginedGroupAttributeName
+                                _session RemoveAttribute loggedAttributeName
 
                                 if (login === "root") {
-                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None,lastName = "root", password = "qwerty", active = true, group = None)) result match {
+                                    user.insertP(User(di = 0L, login = "root", firstName = None, secondName = None, lastName = "root", password = "qwerty", active = true, group = None)) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
-                                                _session.Attribute("userId", Some(0))
-                                                _session.Attribute("loginedUser", Some("root"))
-                                                _session.Attribute("captionUser", Some("root"))
-                                                _session.Attribute("loginedGroup", Some(strEmpty))
-                                                _session.Attribute("logged", Some(true))
+                                                _session.Attribute(userIdAttributeName, Some(0))
+                                                _session.Attribute(loginedUserAttributeName, Some("root"))
+                                                _session.Attribute(captionUserAttributeName, Some("root"))
+                                                _session.Attribute(loginedGroupAttributeName, Some(strEmpty))
+                                                _session.Attribute(loggedAttributeName, Some(true))
                                             }
                                             LoginedData1(strEmpty, "root")
                                         case Failure(e) =>

@@ -1,6 +1,7 @@
 package com.simplesys.app
 
 import com.simplesys.common.Strings._
+import com.simplesys.listener.AppLifeCycleEvent
 import com.simplesys.log.Logging
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.http.HttpSession
@@ -17,10 +18,21 @@ trait SessionContextSupport {
     def getCaptionUser = sessionContext.getCaptionUser
     def getUserId = sessionContext.getUserId
 
-    implicit lazy val oraclePool:OraclePoolDataSource = sessionContext.getOraclePool //Не убирать !!!
+    implicit val oraclePool: OraclePoolDataSource = sessionContext.getOraclePool //Не убирать !!!
+}
+
+object SessionContext {
+    val loggedAttributeName = "logged"
+    val userIdAttributeName = "userId"
+    val loginedUserAttributeName = "loginedUser"
+    val captionUserAttributeName = "captionUser"
+    val loginedGroupAttributeName = "loginedGroup"
 }
 
 class SessionContext(protected val session: Option[HttpSession]) extends Logging {
+
+    import AppLifeCycleEvent._
+    import SessionContext._
 
     private[this] var logged = false
     def getLoged = logged
@@ -33,6 +45,9 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
 
     private[this] var captionUser = strEmpty
     def getCaptionUser = captionUser
+
+    private[this] var loginedGroup = strEmpty
+    def getLoginedGroup = loginedGroup
 
     private[this] var oraclePool: OraclePoolDataSource = null
     def getOraclePool = oraclePool
@@ -49,29 +64,34 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
         _session.LogSession
         servletContext = _session.ServletContext
 
-        logged = _session.Attribute(s"logged") match {
+        logged = _session.Attribute(loggedAttributeName) match {
             case Some(value: Boolean) => value
             case _ => false
         }
 
-        userId = _session.Attribute(s"userId") match {
+        userId = _session.Attribute(userIdAttributeName) match {
             case Some(value: BigDecimal) => value
             case _ => 0.0
         }
 
-        loginedUser = _session.Attribute(s"loginedUser") match {
+        loginedUser = _session.Attribute(loginedUserAttributeName) match {
             case Some(str: String) => str
             case _ => strEmpty
         }
 
-        captionUser = _session.Attribute(s"captionUser") match {
+        captionUser = _session.Attribute(captionUserAttributeName) match {
             case Some(str: String) => str
             case _ => strEmpty
         }
 
-        oraclePool = servletContext.Attribute(s"ds") match {
+        loginedGroup = _session.Attribute(loginedGroupAttributeName) match {
+            case Some(str: String) => str
+            case _ => strEmpty
+        }
+
+        oraclePool = servletContext.Attribute(oraclePoolAttributeName) match {
             case Some(value: OraclePoolDataSource) => value
-            case _ => throw new RuntimeException(s"Нет DS")
+            case _ => throw new RuntimeException(s"Не найден $oraclePoolAttributeName")
         }
     }
 

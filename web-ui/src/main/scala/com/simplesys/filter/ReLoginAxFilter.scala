@@ -15,6 +15,7 @@ import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
 import com.simplesys.tuple.{TupleSS5, TupleSS6, TupleSS7}
 import ru.simplesys.defs.bo.arx.{User, UserBo, UserDS}
+import SessionContext._
 
 import scalaz.{Failure, Success}
 
@@ -84,11 +85,11 @@ class ReLoginAxFilter extends AkkaPartialFilter {
 
 
                     for (_session <- session) {
-                        _session.Attribute("userId", Some(item.idUser))
-                        _session.Attribute("loginedUser", Some(item.ploginUser))
-                        _session.Attribute("captionUser", Some(item.usnameUser))
-                        _session.Attribute("loginedGroup", item.groupUser.headOption)
-                        _session.Attribute("logged", Some(true))
+                        _session.Attribute(userIdAttributeName, Some(item.idUser))
+                        _session.Attribute(loginedUserAttributeName, Some(item.ploginUser))
+                        _session.Attribute(captionUserAttributeName, Some(item.usnameUser))
+                        _session.Attribute(loginedGroupAttributeName, item.groupUser.headOption)
+                        _session.Attribute(loggedAttributeName, Some(true))
                     }
                     LoginedData1(strEmpty, login, item.idUser, item.usnameUser.headOption.getOrElse("Unknown"), item.groupUser.headOption.getOrElse("Unknown"))
 
@@ -100,21 +101,21 @@ class ReLoginAxFilter extends AkkaPartialFilter {
 
                         session match {
                             case Some(_session) =>
-                                _session RemoveAttribute "userId"
-                                _session RemoveAttribute "loginedUser"
-                                _session RemoveAttribute "captionUser"
-                                _session RemoveAttribute "loginedGroup"
-                                _session RemoveAttribute "logged"
+                                _session RemoveAttribute userIdAttributeName
+                                _session RemoveAttribute loginedUserAttributeName
+                                _session RemoveAttribute captionUserAttributeName
+                                _session RemoveAttribute loginedGroupAttributeName
+                                _session RemoveAttribute loggedAttributeName
 
                                 if (login === "root") {
                                     user.insertP(User(bmain = Some(true), id = 0L, idprofile = None, password = password, plogin = "root", tdatein = None, uscode = None, usname = Some(login), usrdesc = None, group = Some("admins"))) result match {
                                         case Success(_) =>
                                             for (_session <- session) {
-                                                _session.Attribute("userId", Some(0))
-                                                _session.Attribute("loginedUser", Some("root"))
-                                                _session.Attribute("captionUser", Some("root"))
-                                                _session.Attribute("loginedGroup", Some(strEmpty))
-                                                _session.Attribute("logged", Some(true))
+                                                _session.Attribute(userIdAttributeName, Some(0))
+                                                _session.Attribute(loginedUserAttributeName, Some("root"))
+                                                _session.Attribute(captionUserAttributeName, Some("root"))
+                                                _session.Attribute(loginedGroupAttributeName, Some(strEmpty))
+                                                _session.Attribute(loggedAttributeName, Some(true))
                                             }
                                             LoginedData1(strEmpty, "root")
                                         case Failure(e) =>
