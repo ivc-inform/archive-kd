@@ -164,7 +164,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           //dev plugin
           sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",
           startPackageName in DevConfig := "ru.simplesys.defs",
-          contextPath in DevConfig := "archive-kd",
+          contextPath in DevConfig := "acrchive-kd",
           maxArity in DevConfig := 254,
           quoted in DevConfig := true,
           sourceGenerators in Compile += (generateScalaCode in DevConfig),
@@ -198,7 +198,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
 
           containerPort := 8080,
-          containerArgs := Seq("--path", "/archive-kd"),
+          containerArgs := Seq("--path", "/acrchive-kd"),
           containerLibs in Jetty := Seq(
               CommonDeps.jettyRuner intransitive()
           ),
