@@ -197,7 +197,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
           merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
 
-          containerPort := 8083,
+          containerPort := 8080,
           containerArgs := Seq("--path", "/archive-kd"),
           containerLibs in Jetty := Seq(
               CommonDeps.jettyRuner intransitive()
