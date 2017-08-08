@@ -209,7 +209,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
                   from("uandrew1965/java-sdk:1.8.0.144-b01")
 
                   // add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-                  runShell(
+                  run(
                       "groupadd -r jetty",
                       "useradd -r -g jetty jetty"
                   )
