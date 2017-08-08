@@ -17,7 +17,7 @@ object PluginDeps {
 
         val scalaJSPluginVersion = "0.6.19"
         val jrabelPluginVersion = "0.10.1"
-        val dockerPluginVersion = "1.4.1"
+        val dockerPluginVersion = "1.4.2-SNAPSHOT"
         val macroParadiseVersion = "2.1.0"
     }
 

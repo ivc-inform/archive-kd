@@ -209,7 +209,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
                   from("uandrew1965/java-sdk:1.8.0.144-b01")
 
                   // add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-                  run(
+                  runShell(
                       "groupadd -r jetty",
                       "useradd -r -g jetty jetty"
                   )
@@ -224,7 +224,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
                   env("JETTY_TGZ_URL", "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz")
 
-                  run(
+                  runShell(
                       "set -xe",
                       "sed -i -e 's/us.archive.ubuntu.com/archive.ubuntu.com/g' /etc/apt/sources.list",
                       "apt-get update",
@@ -240,10 +240,10 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
                   )
 
                   env("JETTY_BASE", "/var/lib/jetty")
-                  run("mkdir -p \"$JETTY_BASE\"")
+                  runShell("mkdir -p \"$JETTY_BASE\"")
                   workDir("$JETTY_BASE")
 
-                  run(
+                  runShell(
                       "set -xe",
                       "java -jar \"$JETTY_HOME/start.jar\" --create-startd --add-to-start=\"server,http,deploy,jsp,jstl,ext,resources,websocket,setuid\"",
                       "chown -R jetty:jetty \"$JETTY_BASE\"",
@@ -251,7 +251,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
                   )
 
                   env("TMPDIR", "/tmp/jetty")
-                  run(
+                  runShell(
                       "set -xe",
                       "mkdir -p \"$TMPDIR\"",
                       "chown -R jetty:jetty \"$TMPDIR\""
@@ -261,6 +261,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
                   expose(8080)
 
                   entryPoint("/docker-entrypoint.sh")
+                  copyRaw("docker-entrypoint.sh", "/")
                   copy(appDir, targetDir)
                   cmd(
                       "java",
