@@ -29,4 +29,6 @@ object CommonSettings {
   val defaultProjectSettings: Seq[Setting[_]] = {
     aether.AetherPlugin.autoImport.overridePublishSettings
   }
+
+  val dockerGroupName = "uandrew1965"
 }
