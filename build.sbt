@@ -217,7 +217,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
                   env("JETTY_HOME", "/usr/local/jetty")
                   env("PATH", "$JETTY_HOME/bin:$PATH")
-                  run("mkdir -p \"$JETTY_HOME\"")
+                  runShell("mkdir -p \"$JETTY_HOME\"")
                   workDir("$JETTY_HOME")
 
                   env("JETTY_VERSION", "9.4.6.v2017053")
@@ -262,7 +262,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
                   entryPoint("/docker-entrypoint.sh")
                   copyRaw("docker-entrypoint.sh", "/")
-                  copy(appDir, targetDir)
+                  copyRaw(s"${targetDir}/webapp/", "123")
                   cmd(
                       "java",
                       "-jar",
