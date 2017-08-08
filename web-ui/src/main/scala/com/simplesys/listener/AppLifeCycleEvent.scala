@@ -20,8 +20,8 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        //val oraclePool = new OraclePoolDataSource("db-connection-stack.docker.oraclcePoolDataSource")
-        val oraclePool = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+        val oraclePool = new OraclePoolDataSource("db-connection-stack.docker.oraclcePoolDataSource")
+        //val oraclePool = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
 
         try {
             oraclePool.getConnection().close()
@@ -29,8 +29,10 @@ class AppLifeCycleEvent extends CommonWebAppListener {
             sce.ServletContext.Attribute(oraclePoolAttributeName, Some(oraclePool))
         }
         catch {
-            case ex: SQLException => throw new RuntimeException(s"Not database conection ${oraclePool.settings.user}")
-            case ex: Throwable => throw ex
+            case ex: SQLException =>
+                throw ex
+            case ex: Throwable =>
+                throw ex
         }
 
         logger.trace(s"DriverClass: ${oraclePool.settings.className}")
