@@ -83,7 +83,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
-      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin
+      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, sbtdocker.DockerPlugin, JavaAppPackaging
   ).dependsOn(
     dbObjects
 ).aggregate(dbObjects).settings(
@@ -206,6 +206,74 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
               a.name + "." + a.extension
           },
           webappWebInfClasses := true,
+
+          dockerfile in docker := {
+              val appDir = stage.value
+              val targetDir = name.value
+
+              new Dockerfile {
+                  from("uandrew1965/java-sdk:1.8.0.144-b01")
+
+                  // add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+                  run("groupadd -r jetty && useradd -r -g jetty jetty")
+
+
+                  env("JETTY_HOME", "/usr/local/jetty")
+                  env("PATH", "$JETTY_HOME/bin:$PATH")
+                  run("mkdir -p \"$JETTY_HOME\"")
+                  workDir("$JETTY_HOME")
+
+                  env("JETTY_VERSION", "9.4.6.v2017053")
+
+                  env("JETTY_TGZ_URL", "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz")
+
+                  run(
+                      "set -xe",
+                      "sed -i -e 's/us.archive.ubuntu.com/archive.ubuntu.com/g' /etc/apt/sources.list",
+                      "apt-get update",
+                      "apt-get install -y curl mc nano",
+                      "curl -SL \"$JETTY_TGZ_URL\" -o jetty.tar.gz",
+                      "curl -SL \"$JETTY_TGZ_URL.asc\" -o jetty.tar.gz.asc",
+                      "export GNUPGHOME=\"$(mktemp -d)\"",
+                      "rm -rf \"$GNUPGHOME\"",
+                      "tar -xvf jetty.tar.gz --strip-components=1",
+                      "sed -i '/jetty-logging/d' etc/jetty.conf",
+                      "rm jetty.tar.gz*",
+                      "rm -rf /tmp/hsperfdata_root"
+                  )
+
+                  env("JETTY_BASE", "/var/lib/jetty")
+                  run("mkdir -p \"$JETTY_BASE\"")
+                  workDir("$JETTY_BASE")
+
+                  run(
+                      "set -xe",
+                      "java -jar \"$JETTY_HOME/start.jar\" --create-startd --add-to-start=\"server,http,deploy,jsp,jstl,ext,resources,websocket,setuid\"",
+                      "chown -R jetty:jetty \"$JETTY_BASE\"",
+                      "rm -rf /tmp/hsperfdata_root"
+                  )
+
+                  env("TMPDIR", "/tmp/jetty")
+                  run(
+                      "set -xe",
+                      "mkdir -p \"$TMPDIR\"",
+                      "chown -R jetty:jetty \"$TMPDIR\""
+                  )
+
+                  copyRaw("docker-entrypoint.sh", "/")
+                  expose(8080)
+
+                  entryPoint("/docker-entrypoint.sh")
+                  copy(appDir, targetDir)
+                  cmd(
+                      "java",
+                      "-jar",
+                      "/usr/local/jetty/start.jar"
+                  )
+              }
+          },
+
+          buildOptions in docker := BuildOptions(cache = false),
 
           (resourceGenerators in Compile) += task[Seq[File]] {
 
