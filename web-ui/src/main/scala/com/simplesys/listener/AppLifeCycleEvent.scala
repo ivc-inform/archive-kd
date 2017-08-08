@@ -20,8 +20,10 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val oraclePool = new OraclePoolDataSource("db-connection-stack.docker.oraclcePoolDataSource")
-        //val oraclePool = new OraclePoolDataSource("db-connection-stack.prod.oraclcePoolDataSource")
+        val dbPoolDefault = config.getString("dbPool.default")
+        logger trace s"dbPoolDefault: $dbPoolDefault"
+
+        val oraclePool = new OraclePoolDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
 
         try {
             oraclePool.getConnection().close()
