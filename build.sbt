@@ -12,13 +12,11 @@ lazy val root = (project in file(".")).
   //enablePlugins(GitVersioning).
   aggregate(dbObjects, webUI, common, testModule).
   settings(
-      name := "acrchive-kd",
-      version := "1.0.0.0",
-      
       inThisBuild(Seq(
           //git.baseVersion := CommonSettings.settingValues.baseVersion,
           scalaVersion := CommonSettings.settingValues.scalaVersion,
-
+          version := CommonSettings.settingValues.version,
+          name := CommonSettings.settingValues.name,
           liquibaseUsername in DevConfig := "eakd",
           liquibasePassword in DevConfig := "eakd",
           liquibaseDriver in DevConfig := "oracle.jdbc.OracleDriver",
@@ -202,7 +200,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         },
         webappWebInfClasses := true,
 
-        packageName in Docker := s"${CommonSettings.dockerGroupName}/${name.value.toLowerCase}",
         dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
         daemonUser := "uandrew",
         daemonGroup in Docker := "uandrew",
@@ -220,10 +217,12 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerCmd := Seq("java", "-jar", "/usr/local/jetty/start.jar"),
         dockerExposedPorts in Docker := Seq(8080),
 
-        version in Docker := version.value,
+        version := version.value,
+        packageName in Docker := CommonSettings.settingValues.name,
+        dockerUsername in Docker := Some("uandrew1965"),
         dockerRepository in Docker := Some("hub.docker.com"),
         dockerUpdateLatest in Docker := true,
-        dockerAlias in Docker := DockerAlias(dockerRepository.value, None, (packageName in Docker).value, Some(version.value)),
+        dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
 
 
         /*dockerfile in docker := {
