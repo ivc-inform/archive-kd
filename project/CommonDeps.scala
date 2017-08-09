@@ -12,12 +12,10 @@ object PluginDeps {
 
         val sbtAspectJVersion = "0.10.2"
         val xsbtWebVersion = "3.0.1.1"
-        //val xsbtWebVersion = "0.9.1"
         val sbtNativePackagerVersion = "1.2.1"
 
         val scalaJSPluginVersion = "0.6.19"
         val jrabelPluginVersion = "0.10.1"
-        val dockerPluginVersion = "1.4.2-SNAPSHOT"
         val macroParadiseVersion = "2.1.0"
     }
 
@@ -31,7 +29,6 @@ object PluginDeps {
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
     val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
     val jrebelPlugin = addSbtPlugin("com.simplesys" % "jrebel-plugin" % versions.jrabelPluginVersion)
-    val dockerPlugin = addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % versions.dockerPluginVersion)
 }
 
 object CommonDeps {

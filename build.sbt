@@ -1,7 +1,6 @@
 import com.simplesys.jrebel.JRebelPlugin
 import com.simplesys.jrebel.JRebelPlugin._
 import com.simplesys.json.{JsonList, JsonObject}
-import com.typesafe.sbt.SbtGit.git
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
 
@@ -77,7 +76,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
-      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, sbtdocker.DockerPlugin, JavaAppPackaging
+      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, JavaAppPackaging, DockerPlugin
   ).dependsOn(
     dbObjects
 ).aggregate(dbObjects).settings(
@@ -201,7 +200,15 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           },
           webappWebInfClasses := true,
 
-          dockerfile in docker := {
+          packageName in Docker := s"${CommonSettings.dockerGroupName}/${name.value.toLowerCase}",
+          maintainer in Docker := "Andrey Yudin <uandrew1965@gmail.com>",
+          dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
+
+          dockerRepository := Some("hub.docker.com"),
+          dockerUpdateLatest := true,
+          dockerAlias := DockerAlias(dockerRepository.value, None, (packageName in Docker).value, Some(version.value)),
+
+          /*dockerfile in docker := {
               val appDir = stage.value
               val targetDir = name.value
 
@@ -268,9 +275,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
                       "/usr/local/jetty/start.jar"
                   )
               }
-          },
+          },*/
 
-          buildOptions in docker := BuildOptions(cache = false),
+          /*buildOptions in docker := BuildOptions(cache = false),*/
 
           (resourceGenerators in Compile) += task[Seq[File]] {
 
