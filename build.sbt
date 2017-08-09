@@ -5,7 +5,7 @@ import com.typesafe.sbt.packager.Keys.executableScriptName
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
-import com.typesafe.sbt.DockerPlugin._
+import com.typesafe.sbt.packager.docker.DockerPlugin._
 
 name := "acrchive-kd"
 
@@ -204,19 +204,15 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
         packageName in Docker := s"${CommonSettings.dockerGroupName}/${name.value.toLowerCase}",
         dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
-        //defaultLinuxInstallLocation in Docker := "/rootDockerDir",
+        defaultLinuxInstallLocation in Docker := "/rootDockerDir",
         daemonUser in Docker := "uandrew1965",
+        dockerDocfileCommands := Seq(
+            RUN("groupadd", "-r", "jetty"),
+            RUN("useradd", "-r", "-g", "jetty", "jetty")
+        ),
         dockerEntrypoint := Seq("/docker-entrypoint.sh"),
         dockerCmd := Seq("java", "-jar", "/usr/local/jetty/start.jar"),
-
-        dockerCommands := dockerCommands.value ++ Seq (
-            ExecCmd("RUN", "groupadd", "-r", "jetty"),
-            makeUser("")
-        ),
-
-        /*dockerExecCommands := Seq(
-            ExecCmd("RUN", "groupadd", "-r", "jetty")
-        ),*/
+        dockerExposedPorts in Docker := Seq(8080),
 
 
         dockerRepository in Docker := Some("hub.docker.com"),
