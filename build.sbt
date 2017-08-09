@@ -6,15 +6,15 @@ import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
 import com.typesafe.sbt.packager.docker.DockerPlugin._
-
-name := "acrchive-kd"
-
-version := "1.0.0.0"
+import sbt.Keys.version
 
 lazy val root = (project in file(".")).
   //enablePlugins(GitVersioning).
   aggregate(dbObjects, webUI, common, testModule).
   settings(
+      name := "acrchive-kd",
+      version := "1.0.0.0",
+      
       inThisBuild(Seq(
           //git.baseVersion := CommonSettings.settingValues.baseVersion,
           scalaVersion := CommonSettings.settingValues.scalaVersion,
@@ -79,7 +79,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
-      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, JavaAppPackaging, DockerPlugin
+      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, DockerPlugin
   ).dependsOn(
     dbObjects
 ).aggregate(dbObjects).settings(
@@ -204,8 +204,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
         packageName in Docker := s"${CommonSettings.dockerGroupName}/${name.value.toLowerCase}",
         dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
-        defaultLinuxInstallLocation in Docker := "/rootDockerDir",
-        daemonUser in Docker := "uandrew1965",
+        daemonUser := "uandrew",
+        daemonGroup in Docker := "uandrew",
         dockerDocfileCommands := Seq(
             RUN("groupadd", "-r", "jetty"),
             RUN("useradd", "-r", "-g", "jetty", "jetty"),
@@ -213,14 +213,14 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
             ENV("PATH", "/usr/local/jetty"),
             RUN$("mkdir", "-p", "$JETTY_HOME"),
             WORKDIR("$JETTY_HOME"),
-            ENV("JETTY_VERSION", "\"9.4.6.v20170531\""),
+            ENV("JETTY_VERSION", "9.4.6.v20170531"),
             ENV("JETTY_TGZ_URL", "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz")
         ),
         dockerEntrypoint := Seq("/docker-entrypoint.sh"),
         dockerCmd := Seq("java", "-jar", "/usr/local/jetty/start.jar"),
         dockerExposedPorts in Docker := Seq(8080),
 
-
+        version in Docker := version.value,
         dockerRepository in Docker := Some("hub.docker.com"),
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, None, (packageName in Docker).value, Some(version.value)),
