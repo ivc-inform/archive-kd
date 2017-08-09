@@ -104,3 +104,6 @@ drop user ORDPLUGINS cascade;
 drop user SI_INFORMTN_SCHEMA cascade;
 
 http://idea.imsxm.com/
+
+sudo ln -s /home/uandrew/2TB/andrew/var/lib/docker  /rootDockerDir
+sudo chmod 777 /rootDockerDir

@@ -203,6 +203,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
           packageName in Docker := s"${CommonSettings.dockerGroupName}/${name.value.toLowerCase}",
           maintainer in Docker := "Andrey Yudin <uandrew1965@gmail.com>",
           dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
+          defaultLinuxInstallLocation = "",
 
           dockerRepository := Some("hub.docker.com"),
           dockerUpdateLatest := true,

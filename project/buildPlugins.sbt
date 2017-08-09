@@ -8,7 +8,7 @@ import sbt._
 //lazy val devPlugin = uri("../../sbt-plugins/dev-plugin")
 //lazy val scalaFmtPlugin = uri("../../sbt-plugins/scala-fmt")
 //lazy val transpileCoffeeScript = uri("../../sbt-plugins/transpile-coffeescript")
- lazy val sbtNativePackager = uri("/home/uandrew/JOB/sbt-native-packager")
+ lazy val sbtNativePackager = uri("../../sbt-native-packager")
 
 lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*/ /*devPlugin*/  /*transpileCoffeeScript*/ sbtNativePackager).
   settings(inThisBuild(CommonSettings.defaultSettings ++ Seq(
