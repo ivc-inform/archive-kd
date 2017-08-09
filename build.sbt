@@ -208,7 +208,13 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         daemonUser in Docker := "uandrew1965",
         dockerDocfileCommands := Seq(
             RUN("groupadd", "-r", "jetty"),
-            RUN("useradd", "-r", "-g", "jetty", "jetty")
+            RUN("useradd", "-r", "-g", "jetty", "jetty"),
+            ENV("JETTY_HOME", "/usr/local/jetty"),
+            ENV("PATH", "/usr/local/jetty"),
+            RUN$("mkdir", "-p", "$JETTY_HOME"),
+            WORKDIR("$JETTY_HOME"),
+            ENV("JETTY_VERSION", "9.4.6.v20170531"),
+            ENV("JETTY_TGZ_URL" "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz")
         ),
         dockerEntrypoint := Seq("/docker-entrypoint.sh"),
         dockerCmd := Seq("java", "-jar", "/usr/local/jetty/start.jar"),
