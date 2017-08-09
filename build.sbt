@@ -1,8 +1,11 @@
 import com.simplesys.jrebel.JRebelPlugin
 import com.simplesys.jrebel.JRebelPlugin._
 import com.simplesys.json.{JsonList, JsonObject}
+import com.typesafe.sbt.packager.Keys.executableScriptName
+import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
+import com.typesafe.sbt.DockerPlugin._
 
 name := "acrchive-kd"
 
@@ -133,201 +136,213 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDepsScalaJS.scalaDom.value
 
     )
-).settings(DevPlugin.devPluginGeneratorSettings).
-  settings({
-      import com.simplesys.mergewebapp.MergeWebappPlugin._
-      import com.typesafe.sbt.coffeescript.TranspileCoffeeScript.autoImport._
-      import com.typesafe.sbt.web.Import.WebKeys._
-      import com.typesafe.sbt.web.SbtWeb.autoImport._
-      import ru.simplesys.plugins.sourcegen.DevPlugin._
+).settings({
+    import com.simplesys.mergewebapp.MergeWebappPlugin._
+    import com.typesafe.sbt.coffeescript.TranspileCoffeeScript.autoImport._
+    import com.typesafe.sbt.web.Import.WebKeys._
+    import com.typesafe.sbt.web.SbtWeb.autoImport._
+    import ru.simplesys.plugins.sourcegen.DevPlugin._
 
-      Seq(
-          //scala.js
-          crossTarget in fastOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
-          crossTarget in fullOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
-          crossTarget in packageJSDependencies := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
+    Seq(
+        //scala.js
+        crossTarget in fastOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
+        crossTarget in fullOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
+        crossTarget in packageJSDependencies := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
 
-          //coffeeScript
-          CoffeeScriptKeys.sourceMap := false,
-          CoffeeScriptKeys.bare := false,
-          webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
-          sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
-          (managedResources in Compile) ++= CoffeeScriptKeys.csTranspile.value,
+        //coffeeScript
+        CoffeeScriptKeys.sourceMap := false,
+        CoffeeScriptKeys.bare := false,
+        webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
+        sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
+        (managedResources in Compile) ++= CoffeeScriptKeys.csTranspile.value,
 
-          //dev plugin
-          sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",
-          startPackageName in DevConfig := "ru.simplesys.defs",
-          contextPath in DevConfig := "acrchive-kd",
-          maxArity in DevConfig := 254,
-          quoted in DevConfig := true,
-          sourceGenerators in Compile += (generateScalaCode in DevConfig),
+        //dev plugin
+        sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",
+        startPackageName in DevConfig := "ru.simplesys.defs",
+        contextPath in DevConfig := "acrchive-kd",
+        maxArity in DevConfig := 254,
+        quoted in DevConfig := true,
+        sourceGenerators in Compile += (generateScalaCode in DevConfig),
 
-          //merger
-          mergeMapping in MergeWebappConfig := Seq(
-              ("com.simplesys.core", "common-webapp") -> Seq(
-                  Seq("webapp", "javascript", "generated", "generatedComponents", "coffeescript") -> Some(Seq("webapp", "managed", "javascript", "common-webapp", "generated", "generatedComponents", "coffeescript")),
-                  Seq("webapp", "javascript", "developed") -> Some(Seq("webapp", "managed", "javascript", "common-webapp", "developed")),
-                  Seq("webapp", "coffeescript", "developed") -> Some(Seq("webapp", "managed", "coffeescript", "common-webapp", "developed")),
-                  Seq("webapp", "css") -> Some(Seq("webapp", "managed", "css", "common-webapp")),
-                  Seq("webapp", "html") -> Some(Seq("webapp", "managed", "html", "common-webapp")),
-                  Seq("webapp", "images") -> Some(Seq("webapp", "managed", "images", "common-webapp"))
-              ),
-              ("com.simplesys.core", "isc-components") -> Seq(
-                  Seq("webapp", "javascript", "generated", "generatedComponents") -> Some(Seq("webapp", "managed", "javascript", "isc-components", "generated", "generatedComponents")),
-                  Seq("webapp", "javascript", "generated", "generatedComponents", "coffeescript") -> Some(Seq("webapp", "managed", "javascript", "isc-components", "generated", "generatedComponents", "coffeescript")),
-                  Seq("javascript", "com", "simplesys") -> Some(Seq("webapp", "managed", "javascript", "isc-components", "developed", "developedComponents")),
-                  Seq("coffeescript") -> Some(Seq("webapp", "managed", "coffeescript", "isc-components", "developed", "developedComponents"))
-              ),
-              ("com.simplesys.core", "isc-misc") -> Seq(
-                  Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "isc-misc"))
-              ),
-              ("com.simplesys", "smartclient-js") -> Seq(
-                  Seq("isomorphic") -> Some(Seq("webapp", "isomorphic"))
-              )
-          ),
-          currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
-          currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
-          currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
-          merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
+        //merger
+        mergeMapping in MergeWebappConfig := Seq(
+            ("com.simplesys.core", "common-webapp") -> Seq(
+                Seq("webapp", "javascript", "generated", "generatedComponents", "coffeescript") -> Some(Seq("webapp", "managed", "javascript", "common-webapp", "generated", "generatedComponents", "coffeescript")),
+                Seq("webapp", "javascript", "developed") -> Some(Seq("webapp", "managed", "javascript", "common-webapp", "developed")),
+                Seq("webapp", "coffeescript", "developed") -> Some(Seq("webapp", "managed", "coffeescript", "common-webapp", "developed")),
+                Seq("webapp", "css") -> Some(Seq("webapp", "managed", "css", "common-webapp")),
+                Seq("webapp", "html") -> Some(Seq("webapp", "managed", "html", "common-webapp")),
+                Seq("webapp", "images") -> Some(Seq("webapp", "managed", "images", "common-webapp"))
+            ),
+            ("com.simplesys.core", "isc-components") -> Seq(
+                Seq("webapp", "javascript", "generated", "generatedComponents") -> Some(Seq("webapp", "managed", "javascript", "isc-components", "generated", "generatedComponents")),
+                Seq("webapp", "javascript", "generated", "generatedComponents", "coffeescript") -> Some(Seq("webapp", "managed", "javascript", "isc-components", "generated", "generatedComponents", "coffeescript")),
+                Seq("javascript", "com", "simplesys") -> Some(Seq("webapp", "managed", "javascript", "isc-components", "developed", "developedComponents")),
+                Seq("coffeescript") -> Some(Seq("webapp", "managed", "coffeescript", "isc-components", "developed", "developedComponents"))
+            ),
+            ("com.simplesys.core", "isc-misc") -> Seq(
+                Seq("javascript") -> Some(Seq("webapp", "managed", "javascript", "isc-misc"))
+            ),
+            ("com.simplesys", "smartclient-js") -> Seq(
+                Seq("isomorphic") -> Some(Seq("webapp", "isomorphic"))
+            )
+        ),
+        currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
+        currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
+        currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
+        merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
 
-          containerPort := 8080,
-          containerArgs := Seq("--path", "/acrchive-kd"),
-          containerLibs in Jetty := Seq(
-              CommonDeps.jettyRuner intransitive()
-          ),
-          artifactName := { (v: ScalaVersion, m: ModuleID, a: Artifact) =>
-              a.name + "." + a.extension
-          },
-          webappWebInfClasses := true,
+        containerPort := 8080,
+        containerArgs := Seq("--path", "/acrchive-kd"),
+        containerLibs in Jetty := Seq(
+            CommonDeps.jettyRuner intransitive()
+        ),
+        artifactName := { (v: ScalaVersion, m: ModuleID, a: Artifact) =>
+            a.name + "." + a.extension
+        },
+        webappWebInfClasses := true,
 
-          packageName in Docker := s"${CommonSettings.dockerGroupName}/${name.value.toLowerCase}",
-          maintainer in Docker := "Andrey Yudin <uandrew1965@gmail.com>",
-          dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
-          defaultLinuxInstallLocation = "",
+        packageName in Docker := s"${CommonSettings.dockerGroupName}/${name.value.toLowerCase}",
+        dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
+        //defaultLinuxInstallLocation in Docker := "/rootDockerDir",
+        daemonUser in Docker := "uandrew1965",
+        dockerEntrypoint := Seq("/docker-entrypoint.sh"),
+        dockerCmd := Seq("java", "-jar", "/usr/local/jetty/start.jar"),
 
-          dockerRepository := Some("hub.docker.com"),
-          dockerUpdateLatest := true,
-          dockerAlias := DockerAlias(dockerRepository.value, None, (packageName in Docker).value, Some(version.value)),
+        dockerCommands := dockerCommands.value ++ Seq (
+            ExecCmd("RUN", "groupadd", "-r", "jetty"),
+            makeUser("")
+        ),
 
-          /*dockerfile in docker := {
-              val appDir = stage.value
-              val targetDir = name.value
-
-              new Dockerfile {
-                  from("uandrew1965/java-sdk:1.8.0.144-b01")
-
-                  // add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-                  runShell(
-                      "groupadd -r jetty",
-                      "useradd -r -g jetty jetty"
-                  )
+        /*dockerExecCommands := Seq(
+            ExecCmd("RUN", "groupadd", "-r", "jetty")
+        ),*/
 
 
-                  env("JETTY_HOME", "/usr/local/jetty")
-                  env("PATH", "$JETTY_HOME/bin:$PATH")
-                  runShell("mkdir -p \"$JETTY_HOME\"")
-                  workDir("$JETTY_HOME")
+        dockerRepository in Docker := Some("hub.docker.com"),
+        dockerUpdateLatest in Docker := true,
+        dockerAlias in Docker := DockerAlias(dockerRepository.value, None, (packageName in Docker).value, Some(version.value)),
 
-                  env("JETTY_VERSION", "9.4.6.v2017053")
 
-                  env("JETTY_TGZ_URL", "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz")
+        /*dockerfile in docker := {
+            val appDir = stage.value
+            val targetDir = name.value
 
-                  runShell(
-                      "set -xe",
-                      "sed -i -e 's/us.archive.ubuntu.com/archive.ubuntu.com/g' /etc/apt/sources.list",
-                      "apt-get update",
-                      "apt-get install -y curl mc nano",
-                      "curl -SL \"$JETTY_TGZ_URL\" -o jetty.tar.gz",
-                      "curl -SL \"$JETTY_TGZ_URL.asc\" -o jetty.tar.gz.asc",
-                      "export GNUPGHOME=\"$(mktemp -d)\"",
-                      "rm -rf \"$GNUPGHOME\"",
-                      "tar -xvf jetty.tar.gz --strip-components=1",
-                      "sed -i '/jetty-logging/d' etc/jetty.conf",
-                      "rm jetty.tar.gz*",
-                      "rm -rf /tmp/hsperfdata_root"
-                  )
+            new Dockerfile {
+                from("uandrew1965/java-sdk:1.8.0.144-b01")
 
-                  env("JETTY_BASE", "/var/lib/jetty")
-                  runShell("mkdir -p \"$JETTY_BASE\"")
-                  workDir("$JETTY_BASE")
+                // add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+                runShell(
+                    "groupadd -r jetty",
+                    "useradd -r -g jetty jetty"
+                )
 
-                  runShell(
-                      "set -xe",
-                      "java -jar \"$JETTY_HOME/start.jar\" --create-startd --add-to-start=\"server,http,deploy,jsp,jstl,ext,resources,websocket,setuid\"",
-                      "chown -R jetty:jetty \"$JETTY_BASE\"",
-                      "rm -rf /tmp/hsperfdata_root"
-                  )
 
-                  env("TMPDIR", "/tmp/jetty")
-                  runShell(
-                      "set -xe",
-                      "mkdir -p \"$TMPDIR\"",
-                      "chown -R jetty:jetty \"$TMPDIR\""
-                  )
+                env("JETTY_HOME", "/usr/local/jetty")
+                env("PATH", "$JETTY_HOME/bin:$PATH")
+                runShell("mkdir -p \"$JETTY_HOME\"")
+                workDir("$JETTY_HOME")
 
-                  copyRaw("docker-entrypoint.sh", "/")
-                  expose(8080)
+                env("JETTY_VERSION", "9.4.6.v2017053")
 
-                  entryPoint("/docker-entrypoint.sh")
-                  copyRaw("docker-entrypoint.sh", "/")
-                  cmd(
-                      "java",
-                      "-jar",
-                      "/usr/local/jetty/start.jar"
-                  )
-              }
-          },*/
+                env("JETTY_TGZ_URL", "https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$JETTY_VERSION/jetty-home-$JETTY_VERSION.tar.gz")
 
-          /*buildOptions in docker := BuildOptions(cache = false),*/
+                runShell(
+                    "set -xe",
+                    "sed -i -e 's/us.archive.ubuntu.com/archive.ubuntu.com/g' /etc/apt/sources.list",
+                    "apt-get update",
+                    "apt-get install -y curl mc nano",
+                    "curl -SL \"$JETTY_TGZ_URL\" -o jetty.tar.gz",
+                    "curl -SL \"$JETTY_TGZ_URL.asc\" -o jetty.tar.gz.asc",
+                    "export GNUPGHOME=\"$(mktemp -d)\"",
+                    "rm -rf \"$GNUPGHOME\"",
+                    "tar -xvf jetty.tar.gz --strip-components=1",
+                    "sed -i '/jetty-logging/d' etc/jetty.conf",
+                    "rm jetty.tar.gz*",
+                    "rm -rf /tmp/hsperfdata_root"
+                )
 
-          (resourceGenerators in Compile) += task[Seq[File]] {
+                env("JETTY_BASE", "/var/lib/jetty")
+                runShell("mkdir -p \"$JETTY_BASE\"")
+                workDir("$JETTY_BASE")
 
-              val aboutFile: File = (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "MakeAboutData.js"
+                runShell(
+                    "set -xe",
+                    "java -jar \"$JETTY_HOME/start.jar\" --create-startd --add-to-start=\"server,http,deploy,jsp,jstl,ext,resources,websocket,setuid\"",
+                    "chown -R jetty:jetty \"$JETTY_BASE\"",
+                    "rm -rf /tmp/hsperfdata_root"
+                )
 
-              val list = JsonList()
+                env("TMPDIR", "/tmp/jetty")
+                runShell(
+                    "set -xe",
+                    "mkdir -p \"$TMPDIR\"",
+                    "chown -R jetty:jetty \"$TMPDIR\""
+                )
 
-              import scala.reflect.ClassTag
-              import scala.reflect.runtime.universe._
-              import scala.reflect.runtime.{universe ⇒ ru}
+                copyRaw("docker-entrypoint.sh", "/")
+                expose(8080)
 
-              def makeVersionList[T: TypeTag : ClassTag](e: T): Unit = {
+                entryPoint("/docker-entrypoint.sh")
+                copyRaw("docker-entrypoint.sh", "/")
+                cmd(
+                    "java",
+                    "-jar",
+                    "/usr/local/jetty/start.jar"
+                )
+            }
+        },*/
 
-                  val classLoaderMirror = ru.runtimeMirror(this.getClass.getClassLoader)
-                  val `type`: ru.Type = ru.typeOf[T]
+        /*buildOptions in docker := BuildOptions(cache = false),*/
 
-                  val classSymbol = `type`.typeSymbol.asClass
+        (resourceGenerators in Compile) += task[Seq[File]] {
 
-                  val decls = `type`.declarations.sorted.filter(_.isMethod).filter(!_.name.toString.contains("<init>"))
-                  val im = classLoaderMirror reflect e
+            val aboutFile: File = (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "MakeAboutData.js"
 
-                  decls.foreach {
-                      item =>
+            val list = JsonList()
 
-                          val shippingTermSymb = `type`.declaration(ru.newTermName(item.name.toString)).asTerm
-                          val shippingFieldMirror = im reflectField shippingTermSymb
-                          val res = shippingFieldMirror.get.toString()
+            import scala.reflect.ClassTag
+            import scala.reflect.runtime.universe._
+            import scala.reflect.runtime.{universe ⇒ ru}
 
-                          list += JsonObject("libName" -> item.name.toString, "libVersion" -> res)
-                  }
-              }
+            def makeVersionList[T: TypeTag : ClassTag](e: T): Unit = {
 
-              list ++= Seq(
-                  JsonObject("libName" -> "Разработка :", "libVersion" -> "АО ИВЦ \"Информ\" (info@ivc-inform.ru)"),
-                  JsonObject("libName" -> "Версия :", "libVersion" -> version.value)
-              )
+                val classLoaderMirror = ru.runtimeMirror(this.getClass.getClassLoader)
+                val `type`: ru.Type = ru.typeOf[T]
 
-              makeVersionList(CommonDeps.versions)
-              makeVersionList(PluginDeps.versions)
+                val classSymbol = `type`.typeSymbol.asClass
 
-              IO.write(aboutFile, s"simpleSyS.aboutData = ${list.toPrettyString}")
-              Seq()
-          }
+                val decls = `type`.declarations.sorted.filter(_.isMethod).filter(!_.name.toString.contains("<init>"))
+                val im = classLoaderMirror reflect e
 
-      )
-  },
-      skip in packageJSDependencies := false,
-      jsDependencies += "org.webjars" % "jquery" % "3.2.0" / "3.2.0/jquery.js"
-  ).settings(CommonSettings.defaultProjectSettings)
+                decls.foreach {
+                    item =>
+
+                        val shippingTermSymb = `type`.declaration(ru.newTermName(item.name.toString)).asTerm
+                        val shippingFieldMirror = im reflectField shippingTermSymb
+                        val res = shippingFieldMirror.get.toString()
+
+                        list += JsonObject("libName" -> item.name.toString, "libVersion" -> res)
+                }
+            }
+
+            list ++= Seq(
+                JsonObject("libName" -> "Разработка :", "libVersion" -> "АО ИВЦ \"Информ\" (info@ivc-inform.ru)"),
+                JsonObject("libName" -> "Версия :", "libVersion" -> version.value)
+            )
+
+            makeVersionList(CommonDeps.versions)
+            makeVersionList(PluginDeps.versions)
+
+            IO.write(aboutFile, s"simpleSyS.aboutData = ${list.toPrettyString}")
+            Seq()
+        }
+
+    )
+},
+    skip in packageJSDependencies := false,
+    jsDependencies += "org.webjars" % "jquery" % "3.2.0" / "3.2.0/jquery.js"
+).settings(CommonSettings.defaultProjectSettings)
 
 
 
