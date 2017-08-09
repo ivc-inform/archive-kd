@@ -262,7 +262,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
                   entryPoint("/docker-entrypoint.sh")
                   copyRaw("docker-entrypoint.sh", "/")
-                  copyRaw(s"${targetDir}/webapp/", "123")
                   cmd(
                       "java",
                       "-jar",
