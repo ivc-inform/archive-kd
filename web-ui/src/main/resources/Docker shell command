@@ -1,2 +1,2 @@
 docker build --no-cache -t acrchive-kd:1.0.0.0 .
-docker run --name acrchive-kd_1000 acrchive-kd:1.0.0.0
+docker run -it -d --name acrchive-kd1000 acrchive-kd:1.0.0.0

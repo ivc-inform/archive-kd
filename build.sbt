@@ -201,10 +201,10 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         },
         webappWebInfClasses := true,
 
-        defaultLinuxInstallLocation in Docker := ".",
+        defaultLinuxInstallLocation in Docker := "",
         dockerBaseImage := "uandrew1965/java-sdk:1.8.0.144-b01",
-        daemonUser := "uandrew",
-        daemonGroup in Docker := "uandrew",
+        daemonUser in Docker := "",
+        daemonGroup in Docker := "",
         dockerDocfileCommands := Seq(
             RUN("groupadd", "-r", "jetty"),
             RUN("useradd", "-r", "-g", "jetty", "jetty"),
@@ -220,14 +220,14 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
             RUN("apt-get", "install", "-y", "curl", "mc", "nano")*/
         ),
         //dockerEntrypoint := Seq("/docker-entrypoint.sh"),
-        dockerEntrypoint := Seq(""),
+        dockerEntrypoint := Seq(),
         //dockerCmd := Seq("java", "-jar", "/usr/local/jetty/start.jar"),
-        dockerCmd := Seq("/bin/bash", "-c", "echo Hello Worls !"),
+        dockerCmd := Seq(),
         dockerExposedPorts in Docker := Seq(8080),
 
         version := version.value,
         packageName in Docker := CommonSettings.settingValues.name,
-        dockerUsername in Docker := Some("uandrew1965"),
+        dockerUsername in Docker := None,
         dockerRepository in Docker := Some("hub.docker.com"),
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
