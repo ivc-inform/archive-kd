@@ -217,7 +217,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
-            COPY(target.value.getAbsolutePath, "$JETTY_BASE/webapps/" + CommonSettings.settingValues.name)
+            COPY(s"${target.value.getAbsolutePath}", s"${"$JETTY_BASE/webapps/"}${CommonSettings.settingValues.name}/")
         ),
         (resourceGenerators in Compile) += task[Seq[File]] {
 
