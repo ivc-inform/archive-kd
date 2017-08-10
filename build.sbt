@@ -8,6 +8,8 @@ import ru.simplesys.plugins.sourcegen.DevPlugin._
 import com.typesafe.sbt.packager.docker.DockerPlugin._
 import sbt.Keys.version
 
+name := CommonSettings.settingValues.name
+
 lazy val root = (project in file(".")).
   //enablePlugins(GitVersioning).
   aggregate(dbObjects, webUI, common, testModule).
@@ -16,7 +18,6 @@ lazy val root = (project in file(".")).
           //git.baseVersion := CommonSettings.settingValues.baseVersion,
           scalaVersion := CommonSettings.settingValues.scalaVersion,
           version := CommonSettings.settingValues.version,
-          name := CommonSettings.settingValues.name,
           liquibaseUsername in DevConfig := "eakd",
           liquibasePassword in DevConfig := "eakd",
           liquibaseDriver in DevConfig := "oracle.jdbc.OracleDriver",
