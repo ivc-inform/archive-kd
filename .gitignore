@@ -6,9 +6,7 @@ project/target
 .idea
 generated/
 journal/
-!processing-core/src/main/scala/ru/simplesys/dmprocess/persistence/stub/journal/
-snapshots/
-TestTokenizer.txt
+*.tar
 *.ignore
 
 # src/main/web-ui/webapp/isomorphic/
