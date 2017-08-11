@@ -202,7 +202,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         webappWebInfClasses := true,
 
         defaultLinuxInstallLocation in Docker := "",
-        dockerBaseImage := "uandrew1965/jetty:9.4.6.v20170531",
+        dockerBaseImage := "ivcinform/jetty:9.4.6.v20170531",
         daemonUser in Docker := "",
         daemonGroup in Docker := "",
         dockerDocfileCommands := Seq(),
@@ -217,7 +217,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
-            COPY(s"${target.value.getAbsolutePath}/", s"${"$JETTY_BASE/webapps/"}${CommonSettings.settingValues.name}")
+            COPY(s"${target.value.getAbsolutePath}/webapp", s"${"$JETTY_BASE/webapps/"}${CommonSettings.settingValues.name}")
         ),
         (resourceGenerators in Compile) += task[Seq[File]] {
 
