@@ -8,7 +8,7 @@ object CommonSettings {
 
     val scalaVersion = "2.12.3"
     val organization = "com.ivc-inform.archive"
-    val name = "acrchive-kd"
+    val name = "archive-kd"
     val version = "1.0.0.0"
     val scalacOptions = Seq(
       "-feature",

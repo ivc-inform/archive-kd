@@ -108,7 +108,7 @@ http://idea.imsxm.com/
 sudo ln -s /home/uandrew/2TB/andrew/var/lib/docker  /rootDockerDir
 sudo chmod 777 /rootDockerDir
 
-docker build --force-rm --no-cache --pull -t acrchive-kd:1.0.0.0 -f /home/uandrew/JOB/archive-kd/web-ui/target/docker/Dockerfile .
-docker run -it --name acrchive-kd acrchive-kd:1.0.0.0 /bin/bush
+docker build --force-rm --no-cache --pull -t archive-kd:1.0.0.0 -f /home/uandrew/JOB/archive-kd/web-ui/target/docker/Dockerfile .
+docker run -it --name archive-kd archive-kd:1.0.0.0 /bin/bush
 
 
