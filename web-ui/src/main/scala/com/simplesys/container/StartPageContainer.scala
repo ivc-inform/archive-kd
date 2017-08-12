@@ -7,7 +7,7 @@ import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, ServletActor, ServletContext}
 import com.simplesys.SmartClient.System._
 
-//http://localhost:8080/archive-kd/StartPage
+//http://localhost:8083/archive-kd/StartPage
 @RSTransfer(urlPattern = "/StartPage")
 class StartPageContainer(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends ServletActor {
 
@@ -28,14 +28,14 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
             //logger debug html
             Out(html)
 
-            selfStop()
+            selfStop()                                            
         }
         case x =>
             throw new RuntimeException(s"Bad branch $x")
     }
 }
 
-//http://localhost:8080/archive-kd/StartUploadPage
+//http://localhost:8083/archive-kd/StartUploadPage
 @RSTransfer(urlPattern = "/StartUploadPage")
 class StartUploadPageContainer(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends ServletActor {
 
