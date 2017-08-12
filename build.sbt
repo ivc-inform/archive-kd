@@ -12,7 +12,7 @@ name := CommonSettings.settingValues.name
 
 lazy val root = (project in file(".")).
   //enablePlugins(GitVersioning).
-  aggregate(dbObjects, webUI, common, testModule).
+  aggregate(dbObjects, webUI, common/*, testModule*/).
   settings(
       inThisBuild(Seq(
           //git.baseVersion := CommonSettings.settingValues.baseVersion,
@@ -85,7 +85,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
     addCommandAlias("debug-restart", "; jetty:stop ; clean ; fastOptJS ; package ; jetty:start"),
     addCommandAlias("reset", "; clean ; compile ; fastOptJS "),
-    addCommandAlias("full-reset", "; clean ; fastOptJS ; package "),
+    addCommandAlias("full-reset", "; clean ; package ; fastOptJS "),
 
     JRebelPlugin.jrebelSettings,
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
@@ -216,6 +216,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerRepository in Docker := Some("hub.docker.com"),
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
+        //IO.copyDirectory(new File(s"${target.value.getAbsolutePath}/webapp"), stage.value ),
         dockerDocfileCommands := Seq(
             /*RUN("groupadd", "-r", "jetty"),
             RUN("useradd", "-r", "-g", "jetty", "jetty"),
@@ -237,7 +238,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
             RUN("curl -SL \"$JETTY_TGZ_URL\" -o jetty.tar.gz"),
             RUN("curl -SL \"$JETTY_TGZ_URL.asc\" -o jetty.tar.gz.asc"),
             RUN("export GNUPGHOME=\"$(mktemp -d)\""),
-            RUN("rm -rf \"$GNUPGHOME\""),
+            RUN("rm -rf $GNUPGHOME"),
             RUN("tar -xvf jetty.tar.gz --strip-components=1"),
             RUN("sed -i '/jetty-logging/d' etc/jetty.conf"),
             RUN("rm jetty.tar.gz*"),
@@ -248,7 +249,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
             WORKDIR("$JETTY_BASE"),
             RUN("set -xe"),
             RUN("java -jar \"$JETTY_HOME/start.jar\" --create-startd --add-to-start=\"server,http,deploy,jsp,jstl,ext,resources,websocket,setuid\""),
-            RUN("chown -R jetty:jetty \"$JETTY_BASE\""),
+            RUN("chown -R jetty:jetty $JETTY_BASE"),
             RUN("rm -rf /tmp/hsperfdata_root"),
 
             ENV("TMPDIR", "/tmp/jetty"),
@@ -257,7 +258,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
             RUN$("chown -R jetty:jetty $TMPDIR"),
 
             COPY("docker-entrypoint.sh /"),*/
-            COPY(s"web-ui/${target.value.getName}/webapp", s"${"$JETTY_BASE/webapps/"}${CommonSettings.settingValues.name}") //,
+            //RUN$(s"mkdir -p ${"$JETTY_BASE"}/webapps/${CommonSettings.settingValues.name}"),
+            //WORKDIR(s"${target.value.getAbsolutePath}"),
+            COPY(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") //,
             /*EXPOSE(8080),
             ENTRYPOINT("/docker-entrypoint.sh"),
             CMD("java", "-jar", "/usr/local/jetty/start.jar")*/
