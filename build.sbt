@@ -216,7 +216,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerRepository in Docker := Some("hub.docker.com"),
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
-        //IO.copyDirectory(new File(s"${target.value.getAbsolutePath}/webapp"), stage.value ),
         dockerDocfileCommands := Seq(
             /*RUN("groupadd", "-r", "jetty"),
             RUN("useradd", "-r", "-g", "jetty", "jetty"),
@@ -260,10 +259,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
             COPY("docker-entrypoint.sh /"),*/
             //RUN$(s"mkdir -p ${"$JETTY_BASE"}/webapps/${CommonSettings.settingValues.name}"),
             //WORKDIR(s"${target.value.getAbsolutePath}"),
-            COPY(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") //,
-            /*EXPOSE(8080),
-            ENTRYPOINT("/docker-entrypoint.sh"),
-            CMD("java", "-jar", "/usr/local/jetty/start.jar")*/
+            COPY(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") ,
+            //EXPOSE(8080),
+            ENTRYPOINT("/docker-entrypoint.sh")
         ),
         (resourceGenerators in Compile) += task[Seq[File]] {
 
