@@ -1,13 +1,13 @@
 package com.simplesys.app
 
 import com.simplesys.common.Strings._
+import com.simplesys.db.pool.PoolDataSource
 import com.simplesys.listener.AppLifeCycleEvent
 import com.simplesys.log.Logging
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.http.HttpSession
 import com.simplesys.servlet.{ServletActor, ServletContext}
 import com.simplesys.sql.SQLDialect
-import oracle.jdbc.OracleConnection
 
 trait SessionContextSupport {
     this: ServletActor =>
@@ -18,7 +18,7 @@ trait SessionContextSupport {
     def getCaptionUser = sessionContext.getCaptionUser
     def getUserId = sessionContext.getUserId
 
-    implicit val oraclePool: OraclePoolDataSource = sessionContext.getOraclePool //Не убирать !!!
+    implicit val oraclePool: PoolDataSource = sessionContext.getOraclePool //Не убирать !!!
 }
 
 object SessionContext {
@@ -49,7 +49,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
     private[this] var loginedGroup = strEmpty
     def getLoginedGroup = loginedGroup
 
-    private[this] var oraclePool: OraclePoolDataSource = null
+    private[this] var oraclePool: PoolDataSource = null
     def getOraclePool = oraclePool
 
     def getSQLDialect: SQLDialect = oraclePool.sqlDialect
@@ -90,7 +90,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
         }
 
         oraclePool = servletContext.Attribute(oraclePoolAttributeName) match {
-            case Some(value: OraclePoolDataSource) => value
+            case Some(value: PoolDataSource) => value
             case _ => throw new RuntimeException(s"Не найден $oraclePoolAttributeName")
         }
     }
