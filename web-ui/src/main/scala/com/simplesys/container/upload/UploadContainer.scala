@@ -1,7 +1,7 @@
 package com.simplesys.container.upload
 
 import java.io.File
-import java.sql.{BatchUpdateException, Connection, Timestamp, Types}
+import java.sql.{Timestamp, Types}
 import java.time.{Instant, LocalDateTime, ZoneId}
 import java.util.Properties
 
@@ -12,13 +12,10 @@ import com.simplesys.common.Strings.newLine
 import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.jdbc.control.SessionStructures.{callableStatement, logger, transaction, tryCatch}
-import com.simplesys.jdbc.control.ValidationEx
+import com.simplesys.jdbc.control.SessionStructures.{callableStatement, transaction}
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
-import com.simplesys.log.Logger
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
-import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
@@ -51,7 +48,7 @@ object UploadContainer {
     class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
 
         val requestData = new DSRequestDyn(request)
-        val connection: OracleConnection = oraclePool.getConnection()
+        val connection = oraclePool.getConnection()
 
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
@@ -84,7 +81,7 @@ object UploadContainer {
                     Try {
                         val prop = new Properties()
                         prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
-                        val dcr = connection.registerDatabaseChangeNotification(prop)
+                        val dcr = connection.asInstanceOf[OracleConnection].registerDatabaseChangeNotification(prop)
 
                         dcr.addListener(new DatabaseChangeListener {
                             def onDatabaseChangeNotification(dce: DatabaseChangeEvent): Unit = {
@@ -289,7 +286,7 @@ object UploadContainer {
                                                         callableStatement.setLong(index, idAttatch)
                                                         callableStatement.executeUpdate()
 
-                                                        dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
+                                                        //dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
                                                 }
                                         }.result match {
                                             case scalaz.Success(res) ⇒ res

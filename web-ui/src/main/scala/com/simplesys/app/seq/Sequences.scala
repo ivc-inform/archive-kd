@@ -6,8 +6,8 @@ import akka.actor.{Actor, ActorSystem, Props}
 import com.simplesys.akka.event.Logging
 import com.simplesys.akka.pattern.AskSupport
 import com.simplesys.config.Config
+import com.simplesys.db.pool.PoolDataSource
 import com.simplesys.jdbc.exception.NoDataFoundException
-import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.tuple.TupleSS2
 import ru.simplesys.defs.bo.systemservice.SeqGeneratorBo
 
@@ -48,10 +48,10 @@ class IDGen(val nodeID: Int) extends Actor with Logging {
 }
 
 object Sequences {
-    def apply(oraclePool: OraclePoolDataSource)(implicit actorSystem: ActorSystem) = new Sequences(oraclePool)
+    def apply(oraclePool: PoolDataSource)(implicit actorSystem: ActorSystem) = new Sequences(oraclePool)
 }
 
-class Sequences(oraclePool: OraclePoolDataSource)(implicit val actorSystem: ActorSystem) extends AskSupport with Config {
+class Sequences(oraclePool: PoolDataSource)(implicit val actorSystem: ActorSystem) extends AskSupport with Config {
     private val nodeId = getInt(s"topology.node-id")
 
     val actorBigDecimalSeq = actorSystem.actorOf(Props(new IDSSequence(nodeId)))
@@ -87,7 +87,7 @@ class Sequences(oraclePool: OraclePoolDataSource)(implicit val actorSystem: Acto
     }
 }
 
-class IDSeuenceGetLong(val oraclePool: OraclePoolDataSource) extends IDGen {
+class IDSeuenceGetLong(val oraclePool: PoolDataSource) extends IDGen {
 
     import com.simplesys.jdbc.control.classBO._
 
@@ -126,7 +126,7 @@ class IDSSequence(override val nodeID: Int) extends IDGen(nodeID) with Logging {
 
     override def receive = {
 
-        case (oraclePool: OraclePoolDataSource, nameSeq: String) =>
+        case (oraclePool: PoolDataSource, nameSeq: String) =>
             val seqGenerator = SeqGeneratorBo(oraclePool)
 
             seqGenerator.selectPOne(where = Where(seqGenerator.nameSeq === nameSeq)).result match {

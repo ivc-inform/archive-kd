@@ -4,7 +4,6 @@ import com.simplesys.common.Strings._
 import com.simplesys.db.pool.PoolDataSource
 import com.simplesys.listener.AppLifeCycleEvent
 import com.simplesys.log.Logging
-import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.http.HttpSession
 import com.simplesys.servlet.{ServletActor, ServletContext}
 import com.simplesys.sql.SQLDialect

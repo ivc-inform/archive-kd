@@ -3,12 +3,13 @@ package com.simplesys.container.scala
 import java.sql.Connection
 
 import com.simplesys.container.java.JOrdDoc
+import com.simplesys.db.pool.PoolDataSource
 import com.simplesys.jdbc.control.SessionStructures.prepareStatement
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import oracle.jdbc.{OracleConnection, OracleResultSet}
 
 object GetAttFile {
-    def getOrdDoc(id: BigDecimal)(implicit oraclePool: OraclePoolDataSource): Option[OrdDoc] = {
+    def getOrdDoc(id: BigDecimal)(implicit oraclePool: PoolDataSource): Option[OrdDoc] = {
 
         val selectSQL = "select ATTFILE from ARX_ATTATCH where ID = ?"
 

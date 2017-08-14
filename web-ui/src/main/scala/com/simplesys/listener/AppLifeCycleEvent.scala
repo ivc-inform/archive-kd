@@ -3,7 +3,6 @@ package com.simplesys.listener
 import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
-import com.simplesys.hikari.OracleHikariDataSource
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ServletContextEvent
 
@@ -23,7 +22,8 @@ class AppLifeCycleEvent extends CommonWebAppListener {
         val dbPoolDefault = config.getString("dbPool.default")
         logger trace s"dbPoolDefault: $dbPoolDefault"
 
-        val oraclePool = new OracleHikariDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
+        //val oraclePool = new OracleHikariDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
+        val oraclePool = new OraclePoolDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
 
         try {
             oraclePool.getConnection().close()
