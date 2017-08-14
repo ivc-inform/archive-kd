@@ -217,8 +217,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
-            COPY(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") ,
-            ENTRYPOINT("/docker-entrypoint.sh")
+            copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") ,
+            entrypoint("/docker-entrypoint.sh")
         ),
         (resourceGenerators in Compile) += task[Seq[File]] {
 
