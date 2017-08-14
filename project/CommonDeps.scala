@@ -12,7 +12,8 @@ object PluginDeps {
 
         val sbtAspectJVersion = "0.10.2"
         val xsbtWebVersion = "3.0.1.1"
-        val sbtNativePackagerVersion = "1.2.1"
+        //val sbtNativePackagerVersion = "1.2.1"
+        val sbtNativePackagerVersion = "1.2.2-SNAPSHOT"
 
         val scalaJSPluginVersion = "0.6.19"
         val jrabelPluginVersion = "0.10.1"
