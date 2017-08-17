@@ -1,5 +1,4 @@
 import com.typesafe.sbt.GitVersioning
-import com.typesafe.sbt.SbtGit.git
 import ru.simplesys.eakd.sbtbuild.{CommonSettings, PluginDeps}
 import sbt._
 
