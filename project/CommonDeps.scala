@@ -40,8 +40,8 @@ object CommonDeps {
         //val smartclientVersion = "10.1.1"
         val smartclientVersion = "11.1-v20170703.1"
 
-        val akkaVersion = "2.5.4"
-        val akkaHttpVersion = "10.0.9"
+        /*val akkaVersion = "2.5.4"
+        val akkaHttpVersion = "10.0.9"*/
 
         val servletAPIVersion = "3.1.0"
 
@@ -70,7 +70,7 @@ object CommonDeps {
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
     
-    val akkaActor = "com.typesafe.akka" %% "akka-actor" % versions.akkaVersion
+    /*val akkaActor = "com.typesafe.akka" %% "akka-actor" % versions.akkaVersion
     val akkaSLF4J = "com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion
     val akkaPersistence = "com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion
 
@@ -79,7 +79,7 @@ object CommonDeps {
     val akkaHttp = "com.typesafe.akka" %% "akka-http" % versions.akkaHttpVersion
     val akkaHttpXml = "com.typesafe.akka" %% "akka-http-xml" % versions.akkaHttpVersion
     val akkaHttpSprayJson = "com.typesafe.akka" %% "akka-http-spray-json" % versions.akkaHttpVersion
-    val akkaQuery = "com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion
+    val akkaQuery = "com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion*/
 
     val smartclient = "com.simplesys" % "smartclient-js" % versions.smartclientVersion
 
