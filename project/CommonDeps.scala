@@ -12,6 +12,8 @@ object PluginDeps {
         val sbtNativePackagerVersion = "1.2.3-SNAPSHOT"
         val scalaJSPluginVersion = "0.6.19"
         val jrabelPluginVersion = "0.11.0-SNAPSHOT"
+        //val macroParadiseVersion = "2.1.0"
+        val macroParadiseVersion = "3.0.0-M4"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
@@ -21,6 +23,7 @@ object PluginDeps {
     val sbtNativePackager = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtNativePackagerVersion)
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
     val jrebelPlugin = addSbtPlugin("com.simplesys" % "jrebel-plugin" % versions.jrabelPluginVersion)
+    val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion)
 }
 
 object CommonDeps {
