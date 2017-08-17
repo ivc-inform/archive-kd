@@ -5,19 +5,18 @@ import sbt._
 
 object PluginDeps {
     object versions {
-        val devPluginVersion = "1.3.12-SNAPSHOT"
+        val devPluginVersion = "1.3.11-SNAPSHOT"
         //val transpileCoffeScriptVersion = "1.0.10"
-        val transpileCoffeScriptVersion = "1.12.0-SNAPSHOT"
+        val transpileCoffeScriptVersion = "1.11.0-SNAPSHOT"
         val mergeJSVersion = "1.0.10-SNAPSHOT"
 
-        //val sbtAspectJVersion = "0.10.2"
-        val xsbtWebVersion = "4.0.0"
+        val xsbtWebVersion = "3.0.1.1"
         //val sbtNativePackagerVersion = "1.2.1"
         val sbtNativePackagerVersion = "1.2.2-SNAPSHOT"
 
         val scalaJSPluginVersion = "0.6.19"
-        val jrabelPluginVersion = "0.11.0-SNAPSHOT"
-        //val macroParadiseVersion = "2.1.0"
+        val jrabelPluginVersion = "0.10.1"
+        val macroParadiseVersion = "2.1.0"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
@@ -28,8 +27,8 @@ object PluginDeps {
     val sbtNativePackager = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtNativePackagerVersion)
 
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
-    //val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
     val jrebelPlugin = addSbtPlugin("com.simplesys" % "jrebel-plugin" % versions.jrabelPluginVersion)
+    val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
 }
 
 object CommonDeps {
@@ -43,11 +42,11 @@ object CommonDeps {
 
         val doobieVersion = "0.4.1"
 
-        val ssysCoreVersion = "1.4-SNAPSHOT"
+        val ssysCoreVersion = "1.3-SNAPSHOT"
         //val ssysCoreVersion = "1.2.98"
 
         //val smartclientVersion = "10.1.1"
-        val smartclientVersion = "11.1-v20170703.1"
+        val smartclientVersion = "11.1-v20170703"
 
         val akkaVersion = "2.5.4"
         val akkaHttpVersion = "10.0.9"
@@ -60,7 +59,7 @@ object CommonDeps {
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
-        val scalaJSVersion = "1.4-SNAPSHOT"
+        val scalaJSVersion = "1.3-SNAPSHOT"
         //val scalaJSVersion = "1.3.5"
 
         val scalajsDOMVersion = "0.9.1"
