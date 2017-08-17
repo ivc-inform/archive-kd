@@ -7,7 +7,7 @@ object PluginDeps {
     object versions {
         val devPluginVersion = "1.3.12-SNAPSHOT"
         //val transpileCoffeScriptVersion = "1.0.10"
-        val transpileCoffeScriptVersion = "1.12.0-SNAPSHOT"
+        val transpileCoffeScriptVersion = "1.0.12-SNAPSHOT"
         val mergeJSVersion = "1.0.10-SNAPSHOT"
 
         //val sbtAspectJVersion = "0.10.2"
