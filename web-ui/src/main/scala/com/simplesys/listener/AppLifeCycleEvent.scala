@@ -3,58 +3,47 @@ package com.simplesys.listener
 import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
-import com.simplesys.bonecp.BoneCPDataSource
+import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ServletContextEvent
+
+object AppLifeCycleEvent {
+    val oraclePoolAttributeName = "oraclePool"
+}
 
 @WebListener
 class AppLifeCycleEvent extends CommonWebAppListener {
 
+    import AppLifeCycleEvent._
+    override val loadSchemas = com.simplesys.app.loadSchemas
     override def UserContextInitialized(sce: ServletContextEvent) {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val ds: BoneCPDataSource = getString("dbPool.default") match {
-            case x@"oracleMFMS" => cpStack OracleDataSource x
-            case any => throw new RuntimeException(s"Bad: ${any}")
-        }
+        val dbPoolDefault = config.getString("dbPool.default")
+        logger trace s"dbPoolDefault: $dbPoolDefault"
 
-        //        val dsProd: BoneCPDataSource = getString("dbPool.defaultProd") match {
-        //            case x@"oracleMFMSProd" => cpStack OracleDataSource x
-        //            case any => throw new RuntimeException(s"Bad: ${any}")
-        //        }
-        //
-        //        val dsSave: BoneCPDataSource = getString("dbPool.defaultSave") match {
-        //            case x@"oracleMFMSSave" => cpStack OracleDataSource x
-        //            case any => throw new RuntimeException(s"Bad: ${any}")
-        //        }
-        //
-        //        val dsConfig: BoneCPDataSource = getString("dbPool.defaultConfig") match {
-        //            case x@"oracleMFMSConfig" => cpStack OracleDataSource x
-        //            case any => throw new RuntimeException(s"Bad: ${any}")
-        //        }
-
-        sce.ServletContext.Attribute("ds", Some(ds))
-        //        sce.ServletContext.Attribute("dsProd", Some(dsProd))
-        //        sce.ServletContext.Attribute("dsSave", Some(dsSave))
-        //        sce.ServletContext.Attribute("dsConfig", Some(dsConfig))
+        //val oraclePool = new OracleHikariDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
+        val oraclePool = new OraclePoolDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
 
         try {
-            //ds.Connection.close()
-            logger trace "ds checked"
-            sce.ServletContext.Attribute("ds", Some(ds))
+            oraclePool.getConnection().close()
+            logger trace s"$oraclePoolAttributeName checked"
+            sce.ServletContext.Attribute(oraclePoolAttributeName, Some(oraclePool))
         }
         catch {
-            case ex: SQLException => throw new RuntimeException(s"Not database conection ${ds.getUsername}")
-            case ex: Throwable => throw ex
+            case ex: SQLException =>
+                throw ex
+            case ex: Throwable =>
+                throw ex
         }
 
-        logger.trace(s"DriverClass: ${ds.getDriverClass}")
+        logger.trace(s"DriverClass: ${oraclePool.settings.className}")
 
         super.UserContextInitialized(sce)
     }
 
 
     override def ContextDestroyed1(sce: ServletContextEvent) {
-        cpStack.Close()
+        
     }
 }

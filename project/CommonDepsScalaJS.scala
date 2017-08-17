@@ -5,13 +5,13 @@ import sbt._
 
 object CommonDepsScalaJS {
 
-    //val smartclientScalaJSWrapper = Def.setting("com.simplesys" %%% "smartclient-wrapper" % versions.scalaJSVersion)
-    val scalaJSWrapper = Def.setting("com.simplesys" %%% "common-types" % CommonDeps.versions.scalaJSVersion)
+    val useFullSmartClientWrapper = false
 
-    val jointJS = Def.setting("com.simplesys" %%% "joint-js" % CommonDeps.versions.scalaJSVersion)
-    val backboneJS = Def.setting("com.simplesys" %%% "backbone-js" % CommonDeps.versions.scalaJSVersion)
-    val underscoreJS = Def.setting("com.simplesys" %%% "underscore-js" % CommonDeps.versions.scalaJSVersion)
-    val scalajsDOM = Def.setting("org.scala-js" %%% "scalajs-dom" % CommonDeps.versions.scalajsDOMVersion)
-    val scalajsJQuey = Def.setting("be.doeraene" %%% "scalajs-jquery" % CommonDeps.versions.scalajsJQueryVersion)
+    val macroJS = Def.setting("com.simplesys" %%% "macrojs" % CommonDeps.versions.scalaJSVersion)
+    val smartClientWrapper = if (useFullSmartClientWrapper) Def.setting("com.simplesys" %%% "smartclient-wrapper" % CommonDeps.versions.scalaJSVersion) else Def.setting("com.simplesys" %%% "common-types" % CommonDeps.versions.scalaJSVersion)
 
+    val uPickleJS = Def.setting("com.lihaoyi" %%% "upickle" % CommonDeps.versions.uPickleVersion)
+    val scalaTags = Def.setting("com.lihaoyi" %%% "scalatags" % CommonDeps.versions.scalaTagsVersion)
+    val scalaDom = Def.setting("org.scala-js" %%% "scalajs-dom" % CommonDeps.versions.scalaDomVersion)
+    val jQuery = Def.setting("be.doeraene" %%% "scalajs-jquery" % CommonDeps.versions.jQueryVersion)
 }

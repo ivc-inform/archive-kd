@@ -4,10 +4,11 @@ import sbt.Setting
 
 object CommonSettings {
   object settingValues {
-    val baseVersion = "1.0"
 
-    val scalaVersion = "2.11.8"
-    val organization = "com.simplesys.dmprocessing"
+    val scalaVersion = "2.12.3"
+    val organization = "com.ivc-inform.archive"
+    val name = "archive-kd"
+    val version = "1.0.0.1"
     val scalacOptions = Seq(
       "-feature",
       "-language:higherKinds",

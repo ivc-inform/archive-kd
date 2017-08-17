@@ -51,6 +51,12 @@
 			<isc:ID>
 				<xsl:value-of select="concat($dataSourecId, '_DS')"/>
 			</isc:ID>
+			<isc:fullClassName>
+				<xsl:value-of select="@fullClassName"/>
+			</isc:fullClassName>
+			<isc:lobName>
+				<xsl:value-of select="@lobName"/>
+			</isc:lobName>
 			<isc:Identifier>
 				<xsl:value-of select="concat($dataSourecId, '_DS')"/>
 			</isc:Identifier>
@@ -74,7 +80,7 @@
 				<xsl:variable name="currentGroup" as="xs:string" select="@group"/>
 
 				<xsl:for-each select="bo:attrs/bo:attr">
-					<xsl:sort select="@name"/>
+					<!--<xsl:sort select="@name"/>-->
 					<xsl:variable as="xs:string" name="fieldName" select="@name"/>
 					<xsl:call-template name="bo:recField">
 						<xsl:with-param name="bo" select="$bo" tunnel="yes"/>
@@ -99,8 +105,7 @@
 							<xsl:for-each select="$bo1/bo:defaults/bo:showAttrs/bo:attrName">
 								<xsl:variable as="xs:string" name="fieldName1" select="text()"/>
 								<xsl:for-each select="$bo1/bo:attrs/bo:attr[@name=$fieldName1]">
-									<xsl:sort select="@name"/>
-
+									<!--<xsl:sort select="@name"/>-->
 									<xsl:call-template name="bo:recField">
 										<xsl:with-param name="bo" select="$bo1" tunnel="yes"/>
 										<xsl:with-param name="fieldName" select="$fieldName1"/>
@@ -174,8 +179,7 @@
 							<xsl:for-each select="$bo1/bo:defaults/bo:showAttrs/bo:attrName">
 								<xsl:variable as="xs:string" name="fieldName1" select="text()"/>
 								<xsl:for-each select="$bo1/bo:attrs/bo:attr[@name=$fieldName1]">
-									<xsl:sort select="@name"/>
-
+									<!--<xsl:sort select="@name"/>-->
 									<xsl:variable name="fieldName" as="xs:string" select="@name"/>
 									<xsl:variable name="fieldType" as="xs:string" select="@type"/>
 									<xsl:variable name="fieldMandatory" as="xs:boolean" select="@mandatory"/>
@@ -245,7 +249,7 @@
 					</xsl:if>
 				</xsl:when>
 				<xsl:otherwise>
-					<isc:CanEdit>false</isc:CanEdit>
+					<isc:CanEdit>true</isc:CanEdit>
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:if test="$fieldLookup='no'">

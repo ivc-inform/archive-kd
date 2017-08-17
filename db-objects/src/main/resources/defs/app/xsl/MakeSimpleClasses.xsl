@@ -10,8 +10,8 @@
 
 	<xsl:output indent="yes" method="xml" encoding="UTF-8" name="format"/>
 
-	<xsl:param name="resFile" as="xs:string" select="'F:\target\scala-2.10\src_managed\main\defs\app\tmp\SimpleTypes.xml'"/>
-	<xsl:param name="inputBoFile" as="xs:string" select="'F:\target\scala-2.10\src_managed\main\defs\app\tmp\domains.xml'"/>
+	<xsl:param name="resFile" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp/SimpleTypes.xml'"/>
+	<xsl:param name="inputBoFile" as="xs:string" select="'file:///f:/target/scala-2.11/src_managed/main/defs/app/tmp/domains.xml'"/>
 
 	<xsl:variable name="FileSource" select="doc($inputBoFile)"/>
 

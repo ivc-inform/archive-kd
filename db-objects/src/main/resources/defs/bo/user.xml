@@ -8,7 +8,7 @@
 					<attr name="codeGroup" type="sCaption" mandatory="true" caption="Код группы" genBySeq="true"/>
 					<attr name="captionGroup" type="sCode" mandatory="false" caption="Наименование группы"/>
 					<attr name="descriptionGroup" type="sDescription" mandatory="false" caption="Описание группы"/>
-					<attr name="active" type="bBoolean" caption="Активность" mandatory="false"/>
+					<attr name="active" type="bBoolean" caption="Активность" mandatory="true"/>
 				</attrs>
 				<constraints>
 					<uc uniqueType="pk">
@@ -23,7 +23,7 @@
 				</constraints>
 				<defaults>
 					<showAttrs>
-						<attrName>codeGroup</attrName>
+						<attrName>codeGroup</attrName>                                          	
 						<attrName>captionGroup</attrName>
 					</showAttrs>
 					<uiSettings uiFormType="singleTreeGrid"/>
@@ -56,7 +56,7 @@
 					<uc uniqueType="pk">
 						<attrName>di</attrName>
 					</uc>
-					<fk parent="UserGroup" linkType="refIsOwner" mandatory="true">
+					<fk parent="UserGroup" linkType="refIsOwner" mandatory="false">
 						<mapping attrNameLocal="group" attrNameRemote="di"/>
 					</fk>
 					<uc uniqueType="uq">

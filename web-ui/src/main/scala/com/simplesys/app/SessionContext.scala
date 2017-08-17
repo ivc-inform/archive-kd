@@ -1,10 +1,12 @@
 package com.simplesys.app
 
-import com.simplesys.bonecp.BoneCPDataSource
 import com.simplesys.common.Strings._
+import com.simplesys.db.pool.PoolDataSource
+import com.simplesys.listener.AppLifeCycleEvent
 import com.simplesys.log.Logging
 import com.simplesys.servlet.http.HttpSession
 import com.simplesys.servlet.{ServletActor, ServletContext}
+import com.simplesys.sql.SQLDialect
 
 trait SessionContextSupport {
     this: ServletActor =>
@@ -15,13 +17,21 @@ trait SessionContextSupport {
     def getCaptionUser = sessionContext.getCaptionUser
     def getUserId = sessionContext.getUserId
 
-    implicit def ds = sessionContext.getDS  //Не убирать !!!
-    def dsProd = sessionContext.getDSProd
-    def dsSave = sessionContext.getDSSave
-    def dsConfig = sessionContext.getDSConfig
+    implicit val oraclePool: PoolDataSource = sessionContext.getOraclePool //Не убирать !!!
+}
+
+object SessionContext {
+    val loggedAttributeName = "logged"
+    val userIdAttributeName = "userId"
+    val loginedUserAttributeName = "loginedUser"
+    val captionUserAttributeName = "captionUser"
+    val loginedGroupAttributeName = "loginedGroup"
 }
 
 class SessionContext(protected val session: Option[HttpSession]) extends Logging {
+
+    import AppLifeCycleEvent._
+    import SessionContext._
 
     private[this] var logged = false
     def getLoged = logged
@@ -31,80 +41,57 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
 
     private[this] var loginedUser = strEmpty
     def getLoginedUser = loginedUser
-    //def setLoginedUser (loginedUser:String) = this.loginedUser = loginedUser
 
     private[this] var captionUser = strEmpty
     def getCaptionUser = captionUser
 
-    private[this] var ds: BoneCPDataSource = null
-    def getDS = ds
+    private[this] var loginedGroup = strEmpty
+    def getLoginedGroup = loginedGroup
 
-    private[this] var dsProd: BoneCPDataSource = null
-    def getDSProd = dsProd
+    private[this] var oraclePool: PoolDataSource = null
+    def getOraclePool = oraclePool
 
-    private[this] var dsSave: BoneCPDataSource = null
-    def getDSSave = dsSave
-
-    private[this] var dsConfig: BoneCPDataSource = null
-    def getDSConfig = dsConfig
-
-    def getSQLDialect = ds.SQLDialect
+    def getSQLDialect: SQLDialect = oraclePool.sqlDialect
 
     /*private[this] var birtEngine: IReportEngine = null
     def getBirtEngine = birtEngine*/
 
     private[this] var servletContext: ServletContext = null
-    def getServletContext = servletContext
+    //def getServletContext = servletContext
 
     for (_session <- session) {
         _session.LogSession
         servletContext = _session.ServletContext
 
-        logged = _session.Attribute(s"logged") match {
+        logged = _session.Attribute(loggedAttributeName) match {
             case Some(value: Boolean) => value
             case _ => false
         }
 
-        userId = _session.Attribute(s"userId") match {
+        userId = _session.Attribute(userIdAttributeName) match {
             case Some(value: BigDecimal) => value
             case _ => 0.0
         }
 
-        loginedUser = _session.Attribute(s"loginedUser") match {
+        loginedUser = _session.Attribute(loginedUserAttributeName) match {
             case Some(str: String) => str
             case _ => strEmpty
         }
 
-        captionUser = _session.Attribute(s"captionUser") match {
+        captionUser = _session.Attribute(captionUserAttributeName) match {
             case Some(str: String) => str
             case _ => strEmpty
         }
 
-        servletContext = _session.ServletContext
-        ds = servletContext.Attribute(s"ds") match {
-            case Some(value: BoneCPDataSource) => value
-            case _ => throw new RuntimeException(s"Нет DS")
+        loginedGroup = _session.Attribute(loginedGroupAttributeName) match {
+            case Some(str: String) => str
+            case _ => strEmpty
         }
 
-        dsProd = servletContext.Attribute("dsProd") match {
-            case Some(value: BoneCPDataSource) => value
-            case _ => throw new RuntimeException(s"Нет DSProd")
+        oraclePool = servletContext.Attribute(oraclePoolAttributeName) match {
+            case Some(value: PoolDataSource) => value
+            case _ => throw new RuntimeException(s"Не найден $oraclePoolAttributeName")
         }
-
-        dsSave = servletContext.Attribute("dsSave") match {
-            case Some(value: BoneCPDataSource) => value
-            case _ => throw new RuntimeException(s"Нет DSSave")
-        }
-
-        dsConfig = servletContext.Attribute("dsConfig") match {
-            case Some(value: BoneCPDataSource) => value
-            case _ => throw new RuntimeException(s"Нет dsConfig")
-        }
-
-        /*birtEngine = servletContext.Attribute(s"birtEngine") match {
-          case Some(value: IReportEngine) => value
-          case _ => throw new RuntimeException(s"Нет birtEngine/IReportEngine")
-        }*/
     }
 
     def Invalidate() {
