@@ -1,18 +1,16 @@
 import com.simplesys.jrebel.JRebelPlugin
 import com.simplesys.jrebel.JRebelPlugin._
 import com.simplesys.json.{JsonList, JsonObject}
-import com.typesafe.sbt.packager.Keys.executableScriptName
-import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
+import com.typesafe.sbt.packager.docker.DockerPlugin._
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
-import com.typesafe.sbt.packager.docker.DockerPlugin._
 import sbt.Keys.version
 
 name := CommonSettings.settingValues.name
 
 lazy val root = (project in file(".")).
   //enablePlugins(GitVersioning).
-  aggregate(dbObjects, webUI, common/*, testModule*/).
+  aggregate(dbObjects, webUI, common /*, testModule*/).
   settings(
       inThisBuild(Seq(
           //git.baseVersion := CommonSettings.settingValues.baseVersion,
@@ -218,7 +216,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
-            copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") ,
+            copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}"),
             entrypoint("/docker-entrypoint.sh")
         ),
         (resourceGenerators in Compile) += task[Seq[File]] {

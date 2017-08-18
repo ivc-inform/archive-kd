@@ -19,6 +19,5 @@ lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(Git
       PluginDeps.xsbtWeb,
       PluginDeps.sbtNativePackager,
       PluginDeps.jrebelPlugin,
-      PluginDeps.macroParadise,
       PluginDeps.scalaJSPlugin
   )
