@@ -39,9 +39,7 @@ class StartPage[Builder, Output <: FragT, FragT](val _title: String, val bundle:
 
                 script(src := s"${subPaths.subPath}/coffeescript/PreDefined.js"),
                 script(src := s"${subPaths.subPath}/MakeAboutData.js"),
-
-                /// coffeescript / com / simplesys / system / ArraySS.js
-
+                
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/ArraySS.js"),
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/LogSS.js"),
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/RPCManagerSS.js"),
