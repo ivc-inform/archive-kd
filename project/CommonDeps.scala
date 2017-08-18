@@ -35,13 +35,9 @@ object CommonDeps {
 
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
-
-        val kamonVersion = "0.5.2"
-
-        val doobieVersion = "0.4.1"
-
-        val ssysCoreVersion = "1.4-SNAPSHOT"
-        val smartclientVersion = "11.1-v20170703.1"
+        
+        val ssysCoreVersion = "1.3-SNAPSHOT"
+        val smartclientVersion = "11.1-v20170703"
 
         val servletAPIVersion = "3.1.0"
 
@@ -51,7 +47,7 @@ object CommonDeps {
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
-        val scalaJSVersion = "1.4-SNAPSHOT"
+        val scalaJSVersion = "1.3-SNAPSHOT"
         //val scalaJSVersion = "1.3.5"
 
         val scalajsDOMVersion = "0.9.1"
@@ -102,9 +98,6 @@ object CommonDeps {
     val jdbcOracle12 = "com.oracle.jdbc" % "ojdbc8" % versions.jdbcOracle12DriverVersion
     val jdbcOracle12UCP = "com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion
     val jdbcOracleN18_12 = "com.oracle.jdbc" % "orai18n" % versions.jdbcOracle12DriverVersion
-
-    val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
-    val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion
 
     val commonsFileupload = "commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion
     val commonsIO = "commons-io" % "commons-io" % versions.commonsIOVersion
