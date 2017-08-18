@@ -2,12 +2,14 @@ package com.simplesys.app.http
 
 import scalatags.generic.Bundle
 
-class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: Bundle[Builder, Output, FragT]) {
+case class paths(subPath: String, subPath1: String)
+
+class StartPage[Builder, Output <: FragT, FragT](val _title: String, val bundle: Bundle[Builder, Output, FragT]) {
     def bodyHTML(lastScript: String, fullOpt: Boolean = false) = {
         import bundle.all._
 
-        //val subPath = "javascript/generated/generatedComponents"
-        val subPath = "javascript/generated/generatedComponents"
+        //val subPath = paths(subPath = "javascript/generated/generatedComponents", subPath1 = "isc-components/")
+        val subPaths = paths(subPath = "managed/javascript/isc-components/generated/generatedComponents", subPath1 = "")
         html(lang := "en",
             head(
                 bundle.tags2.title(_title),
@@ -35,59 +37,62 @@ class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: 
                 script(src := "managed/javascript/isc-misc/beautify.js"),
                 script(src := "managed/javascript/common-webapp/generated/generatedComponents/coffeescript/common.js"),
 
-                script(src := s"$subPath/coffeescript/PreDefined.js"),
-                script(src := s"$subPath/MakeAboutData.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/system/ArraySS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/system/LogSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/RPCManagerSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DataSourceSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/commons.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/OfflineSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/RestDataSourceSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/JSONSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/system/ClassSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/foundation/CanvasSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/foundation/JoinJSCanvas.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/LayoutSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/LayoutSpacerSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/DynamicFormSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/HTMLPaneItem.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/FormItems/IButtonItem.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/TabSetSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VStackSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/HStackSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/VLayoutSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/HLayoutSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/HTMLPaneSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/IconMenuButtonSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/control/IButtonSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/FormItems/ComboboxItemWithButtons.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/FormItems/ComboboxItemWithClearButton.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/IconButtonSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/WindowSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/control/MenuSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/PortletSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/PortalLayoutSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/ListGridSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/ErrorDetailMessage.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/ErrorMessage.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/HPanelSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/OkCancelPanel.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/FunctionPanel.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/OkCancelFunctionPanel.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/OkCancelPanelWithOutOwnerDestroy.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/OkCancelFunctionPanelWithOutOwnerDestroy.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/layout/ChainMasterDetail.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/ListGridEditor.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/TreeGridEditor.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/TreeListGridEditor.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/LoginWindow.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/MessagingSS.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/WindowWrapper.js"),
-                script(src := s"$subPath/coffeescript/isc-components/com/simplesys/LookupEditor.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/PreDefined.js"),
+                script(src := s"${subPaths.subPath}/MakeAboutData.js"),
+
+                /// coffeescript / com / simplesys / system / ArraySS.js
+
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/ArraySS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/LogSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/RPCManagerSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/DataSourceSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/commons.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/OfflineSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/RestDataSourceSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/JSONSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/ClassSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/foundation/CanvasSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/foundation/JoinJSCanvas.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/LayoutSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/LayoutSpacerSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/DynamicFormSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/HTMLPaneItem.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/FormItems/IButtonItem.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/TabSetSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/VStackSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/HStackSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/VLayoutSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/HLayoutSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/HTMLPaneSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/IconMenuButtonSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/control/IButtonSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/FormItems/ComboboxItemWithButtons.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/FormItems/ComboboxItemWithClearButton.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/IconButtonSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/WindowSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/control/MenuSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/PortletSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/PortalLayoutSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/ListGridSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/ErrorDetailMessage.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/ErrorMessage.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/HPanelSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/OkCancelPanel.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/FunctionPanel.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/OkCancelFunctionPanel.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/OkCancelPanelWithOutOwnerDestroy.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/OkCancelFunctionPanelWithOutOwnerDestroy.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/layout/ChainMasterDetail.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/ListGridEditor.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/TreeGridEditor.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/TreeListGridEditor.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/LoginWindow.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/MessagingSS.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/WindowWrapper.js"),
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/LookupEditor.js"),
 
                 script(src := s"javascript/generated/generatedComponentsJS/${if (fullOpt) "web-ui-opt.js" else "web-ui-fastopt.js"}"),
-                
+
                 link(href := "managed/css/common-webapp/logging_styles.css", rel := "stylesheet", `type` := "text/css"),
                 script(lastScript)
             )
