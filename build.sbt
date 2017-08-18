@@ -79,7 +79,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
-      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, DockerPlugin
+      DevPlugin, MergeWebappPlugin, /*TranspileCoffeeScript,*/ ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, DockerPlugin
   ).dependsOn(
     dbObjects
 ).aggregate(dbObjects).settings(
@@ -138,9 +138,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     )
 ).settings({
     import com.simplesys.mergewebapp.MergeWebappPlugin._
-    import com.typesafe.sbt.coffeescript.TranspileCoffeeScript.autoImport._
-    import com.typesafe.sbt.web.Import.WebKeys._
-    import com.typesafe.sbt.web.SbtWeb.autoImport._
+    //import com.typesafe.sbt.coffeescript.TranspileCoffeeScript.autoImport._
+    //import com.typesafe.sbt.web.Import.WebKeys._
+    //import com.typesafe.sbt.web.SbtWeb.autoImport._
     import ru.simplesys.plugins.sourcegen.DevPlugin._
 
     Seq(
@@ -190,7 +190,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
         currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
         currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
-        merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
+        //merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
 
         containerPort := 8083,
         containerArgs := Seq("--path", "/archive-kd"),
