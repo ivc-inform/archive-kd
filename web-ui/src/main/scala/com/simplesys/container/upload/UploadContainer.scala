@@ -28,6 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload
 import org.apache.commons.io.IOUtils.copyLarge
 
 import scala.collection.JavaConverters._
+import scala.compat.Platform.EOL
 import scala.util.{Failure, Success, Try}
 
 trait UploadData extends JSObject {
@@ -309,7 +310,7 @@ object UploadContainer {
                             Out("Ok")
                         case Failure(e) ⇒
 
-                            channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
+                            channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
                             OutFailure(e)
                     }
                 }
