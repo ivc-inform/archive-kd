@@ -12,7 +12,7 @@ name := CommonSettings.settingValues.name
 
 lazy val root = (project in file(".")).
   //enablePlugins(GitVersioning).
-  aggregate(dbObjects, webUI, common/*, testModule*/).
+  aggregate(dbObjects, webUI, common /*, testModule*/).
   settings(
       inThisBuild(Seq(
           //git.baseVersion := CommonSettings.settingValues.baseVersion,
@@ -150,11 +150,11 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         crossTarget in packageJSDependencies := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
 
         //coffeeScript
-        CoffeeScriptKeys.sourceMap := false,
-        CoffeeScriptKeys.bare := false,
-        webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
-        sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
-        (managedResources in Compile) ++= CoffeeScriptKeys.csTranspile.value,
+        //CoffeeScriptKeys.sourceMap := false,
+        //CoffeeScriptKeys.bare := false,
+        //webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
+        //sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
+        //(managedResources in Compile) ++= CoffeeScriptKeys.csTranspile.value,
 
         //dev plugin
         sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",
@@ -218,7 +218,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
-            copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") ,
+            copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}"),
             entrypoint("/docker-entrypoint.sh")
         ),
         (resourceGenerators in Compile) += task[Seq[File]] {

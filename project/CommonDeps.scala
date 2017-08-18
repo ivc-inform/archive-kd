@@ -16,7 +16,6 @@ object PluginDeps {
 
         val scalaJSPluginVersion = "0.6.19"
         val jrabelPluginVersion = "0.10.1"
-        val macroParadiseVersion = "2.1.0"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
@@ -28,7 +27,6 @@ object PluginDeps {
 
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
     val jrebelPlugin = addSbtPlugin("com.simplesys" % "jrebel-plugin" % versions.jrabelPluginVersion)
-    val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
 }
 
 object CommonDeps {

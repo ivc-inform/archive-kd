@@ -9,11 +9,13 @@ import sbt._
 //lazy val transpileCoffeeScript = uri("../../sbt-plugins/transpile-coffeescript")
 // lazy val sbtNativePackager = uri("../../sbt-native-packager")
 
-lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*/ /*devPlugin*/  /*transpileCoffeeScript*//* sbtNativePackager*/).
+lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*/
+    /*devPlugin*/
+    /*transpileCoffeeScript*//* sbtNativePackager*/).
   settings(inThisBuild(CommonSettings.defaultSettings)).
   settings(
       PluginDeps.devPlugin,
-      PluginDeps.transpileCoffeeScript,
+      //PluginDeps.transpileCoffeeScript,
       PluginDeps.mergeJS,
       PluginDeps.xsbtWeb,
       PluginDeps.sbtNativePackager,
