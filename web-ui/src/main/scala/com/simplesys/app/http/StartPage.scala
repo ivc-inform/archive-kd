@@ -6,6 +6,7 @@ class StartPage[Builder, Output <: FragT, FragT](val _title:String, val bundle: 
     def bodyHTML(lastScript: String, fullOpt: Boolean = false) = {
         import bundle.all._
 
+        //val subPath = "javascript/generated/generatedComponents"
         val subPath = "javascript/generated/generatedComponents"
         html(lang := "en",
             head(
