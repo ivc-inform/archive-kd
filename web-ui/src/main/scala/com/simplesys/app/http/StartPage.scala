@@ -37,8 +37,8 @@ class StartPage[Builder, Output <: FragT, FragT](val _title: String, val bundle:
                 script(src := "managed/javascript/isc-misc/beautify.js"),
                 script(src := "managed/javascript/common-webapp/generated/generatedComponents/coffeescript/common.js"),
 
-                script(src := s"${subPaths.subPath}/coffeescript/PreDefined.js"),
-                script(src := s"${subPaths.subPath}/MakeAboutData.js"),
+                script(src := s"javascript/generated/generatedComponents/coffeescript/PreDefined.js"),
+                script(src := s"javascript/generated/generatedComponents/MakeAboutData.js"),
                 
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/ArraySS.js"),
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/LogSS.js"),
