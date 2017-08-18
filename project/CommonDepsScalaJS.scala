@@ -5,9 +5,7 @@ import sbt._
 
 object CommonDepsScalaJS {
 
-    val useFullSmartClientWrapper = false
-
-    val macroJS = Def.setting("com.simplesys" %%% "macrojs" % CommonDeps.versions.scalaJSVersion)
+    //val macroJS = Def.setting("com.simplesys" %%% "macrojs" % CommonDeps.versions.scalaJSVersion)
     val smartClientWrapper = Def.setting("com.simplesys" %%% "smartclient-wrapper" % CommonDeps.versions.scalaJSVersion)
     //val smartClientWrapper = Def.setting("com.simplesys" %%% "common-types" % CommonDeps.versions.scalaJSVersion)
 
