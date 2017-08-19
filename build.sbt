@@ -114,11 +114,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
         CommonDeps.smartclient,
 
-        /*CommonDeps.akkaActor,
-        CommonDeps.akkaHttp,
-        CommonDeps.akkaHttpCore,
-        CommonDeps.akkaHttpXml,
-        CommonDeps.akkaHttpSprayJson,*/
         CommonDeps.commonsFileupload,
         CommonDeps.commonsIO,
 
