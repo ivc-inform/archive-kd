@@ -107,7 +107,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.servletAPI % Provided,
         CommonDeps.ssysCommon,
         CommonDeps.ssysCommonWebapp,
-        CommonDeps.ssysIscComponents,
+        //CommonDeps.ssysIscComponents,
         CommonDeps.ssysXMLExtender,
         CommonDeps.ssysJsonExtender,
         CommonDeps.ssysIscMisc,
@@ -185,6 +185,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
         merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
 
+        //xsbtWeb
         containerPort := 8083,
         containerArgs := Seq("--path", "/archive-kd"),
         containerLibs in Jetty := Seq(
