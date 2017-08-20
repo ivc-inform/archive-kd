@@ -8,8 +8,8 @@ class StartPage[Builder, Output <: FragT, FragT](val _title: String, val bundle:
     def bodyHTML(lastScript: String, fullOpt: Boolean = false) = {
         import bundle.all._
 
-        //val subPath = paths(subPath = "javascript/generated/generatedComponents", subPath1 = "isc-components/")
-        val subPaths = paths(subPath = "managed/javascript/isc-components/generated/generatedComponents", subPath1 = "")
+        val subPaths = paths(subPath = "javascript/generated/generatedComponents", subPath1 = "coffeeScript/main/isc-components/")
+        //val subPaths = paths(subPath = "managed/javascript/isc-components/generated/generatedComponents", subPath1 = "")
         html(lang := "en",
             head(
                 bundle.tags2.title(_title),
@@ -35,11 +35,11 @@ class StartPage[Builder, Output <: FragT, FragT](val _title: String, val bundle:
                 script(src := "isomorphic/client/modules/ISC_FileLoader.js"),
 
                 script(src := "managed/javascript/isc-misc/beautify.js"),
-                script(src := "managed/javascript/common-webapp/generated/generatedComponents/coffeescript/common.js"),
+                script(src := "managed/javascript/common-webapp/generated/generatedComponents/coffeescript/coffeeScript/main/common.js"),
 
-                script(src := s"javascript/generated/generatedComponents/coffeescript/PreDefined.js"),
                 script(src := s"javascript/generated/generatedComponents/MakeAboutData.js"),
-                
+
+                script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/PreDefined.js"),
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/ArraySS.js"),
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/system/LogSS.js"),
                 script(src := s"${subPaths.subPath}/coffeescript/${subPaths.subPath1}com/simplesys/RPCManagerSS.js"),
