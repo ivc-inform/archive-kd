@@ -9,7 +9,7 @@ import com.simplesys.SmartClient.DataBinding.props.{AdvancedCriteriaProps, Crite
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.OperatorId
+import com.simplesys.System.Types.{ListGridEditEvent, OperatorId}
 import com.simplesys.System.{JSAny, JSUndefined}
 import com.simplesys.app.Attach
 import com.simplesys.function._
@@ -42,6 +42,8 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
 
     canExpandRecords = true.opt
+
+    editEvent = ListGridEditEvent.none.opt
 
     var expandAttahes: ScOption[ExpandAttahes] = ExpandAttahes.none.opt
 
