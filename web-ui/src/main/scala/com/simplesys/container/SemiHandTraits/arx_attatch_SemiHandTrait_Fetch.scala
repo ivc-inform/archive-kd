@@ -23,6 +23,7 @@ import org.joda.time.LocalDateTime
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS}
 
+import scala.compat.Platform.EOL
 import scalaz.{Failure, Success}
 
 
@@ -93,7 +94,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                                 record += (arx_docizvtype_viztname_NameStrong.name → JsonString(item.viztnameDocizvtype_Idtypiz.headOption.getOrElse("")))
                                         }
                                     case Failure(e) ⇒
-                                        logger error e.getStackTraceString
+                                        logger error e.getStackTrace().mkString("", EOL, EOL)
                                 }
 
                                 GetAttFile.getOrdDoc(idAttatch).foreach {

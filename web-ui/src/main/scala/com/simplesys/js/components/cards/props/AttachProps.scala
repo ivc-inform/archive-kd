@@ -8,7 +8,8 @@ import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.Messaging.MessageJS
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.sse.Sse
-import com.simplesys.System.Types.{Alignment, ListGridFieldType}
+import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
+import com.simplesys.System.Types.{Alignment, ListGridEditEvent, ListGridFieldType}
 import com.simplesys.System._
 import com.simplesys.app.{ImgButtonAttatch, WindowUploadDialog}
 import com.simplesys.container.upload.{ErrorStr, UploadData}
@@ -53,6 +54,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     showRecordComponents = true.opt
     showRecordComponentsByCell = true.opt
+    
+    editEvent = ListGridEditEvent.none.opt
 
     replacingFields = Seq(
         new ListGridFieldProps {

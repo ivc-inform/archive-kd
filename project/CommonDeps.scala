@@ -1,34 +1,25 @@
 package ru.simplesys.eakd.sbtbuild
 
-import sbt.Keys._
 import sbt._
 
 object PluginDeps {
     object versions {
-        val devPluginVersion = "1.3.11-SNAPSHOT"
-        //val transpileCoffeScriptVersion = "1.0.10"
-        val transpileCoffeScriptVersion = "1.11.0-SNAPSHOT"
-        val mergeJSVersion = "1.0.9"
-
-        val xsbtWebVersion = "3.0.1.1"
-        //val sbtNativePackagerVersion = "1.2.1"
-        val sbtNativePackagerVersion = "1.2.2-SNAPSHOT"
-
+        val devPluginVersion = "1.3.12-SNAPSHOT"
+        val sbtCoffeScriptVersion = "1.1.3-SNAPSHOT"
+        val mergeJSVersion = "1.0.10-SNAPSHOT"
+        val xsbtWebVersion = "4.0.1-SNAPSHOT"
+        val sbtNativePackagerVersion = "1.2.3-SNAPSHOT"
         val scalaJSPluginVersion = "0.6.19"
-        val jrabelPluginVersion = "0.10.1"
-        val macroParadiseVersion = "2.1.0"
+        val jrabelPluginVersion = "0.11.0-SNAPSHOT"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
     val mergeJS = addSbtPlugin("ru.simplesys" % "merge-js" % versions.mergeJSVersion)
-    val transpileCoffeeScript = addSbtPlugin("ru.simplesys" % "transpile-coffeescript" % versions.transpileCoffeScriptVersion)
-
-    val xsbtWeb = addSbtPlugin("com.simplesys" % "xsbt-web-plugin" % versions.xsbtWebVersion)
+    val sbtCoffeeScript = addSbtPlugin("com.typesafe.sbt" % "sbt-coffeescript" % versions.sbtCoffeScriptVersion)
+    val xsbtWeb = addSbtPlugin("com.earldouglas" % "xsbt-web-plugin" % versions.xsbtWebVersion)
     val sbtNativePackager = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtNativePackagerVersion)
-
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
     val jrebelPlugin = addSbtPlugin("com.simplesys" % "jrebel-plugin" % versions.jrabelPluginVersion)
-    val macroParadise = addCompilerPlugin("org.scalamacros" %% "paradise" % versions.macroParadiseVersion cross CrossVersion.full)
 }
 
 object CommonDeps {
@@ -42,14 +33,8 @@ object CommonDeps {
 
         val doobieVersion = "0.4.1"
 
-        val ssysCoreVersion = "1.3-SNAPSHOT"
-        //val ssysCoreVersion = "1.2.98"
-
-        //val smartclientVersion = "10.1.1"
-        val smartclientVersion = "11.1-v20170703"
-
-        val akkaVersion = "2.5.4"
-        val akkaHttpVersion = "10.0.9"
+        val ssysCoreVersion = "1.4-SNAPSHOT"
+        val smartclientVersion = "11.1-v20170703.1"
 
         val servletAPIVersion = "3.1.0"
 
@@ -59,7 +44,7 @@ object CommonDeps {
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
-        val scalaJSVersion = "1.3-SNAPSHOT"
+        val scalaJSVersion = "1.4-SNAPSHOT"
         //val scalaJSVersion = "1.3.5"
 
         val scalajsDOMVersion = "0.9.1"
@@ -73,28 +58,18 @@ object CommonDeps {
         val commonsIOVersion = "2.5"
         val scalaURIVersion = "0.4.16"
         val slickVersion = "3.2.1"
-        val configWrapperVersion= "0.4.4"
+        val configWrapperVersion = "0.4.4"
     }
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
-    
-    val akkaActor = "com.typesafe.akka" %% "akka-actor" % versions.akkaVersion
-    val akkaSLF4J = "com.typesafe.akka" %% "akka-slf4j" % versions.akkaVersion
-    val akkaPersistence = "com.typesafe.akka" %% "akka-persistence" % versions.akkaVersion
-
-    val akkaTestKit = "com.typesafe.akka" %% "akka-testkit" % versions.akkaVersion
-    val akkaHttpCore = "com.typesafe.akka" %% "akka-http-core" % versions.akkaHttpVersion
-    val akkaHttp = "com.typesafe.akka" %% "akka-http" % versions.akkaHttpVersion
-    val akkaHttpXml = "com.typesafe.akka" %% "akka-http-xml" % versions.akkaHttpVersion
-    val akkaHttpSprayJson = "com.typesafe.akka" %% "akka-http-spray-json" % versions.akkaHttpVersion
-    val akkaQuery = "com.typesafe.akka" %% "akka-persistence-query-experimental" % versions.akkaVersion
 
     val smartclient = "com.simplesys" % "smartclient-js" % versions.smartclientVersion
 
-    val ssysIscMisc = "com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion
     val ssysIscComponents = "com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion
-    val ssysXMLExtender = "com.simplesys.core" %% "xml-extender" % versions.ssysCoreVersion
     val ssysCommonWebapp = "com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion
+
+    val ssysIscMisc = "com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion
+    val ssysXMLExtender = "com.simplesys.core" %% "xml-extender" % versions.ssysCoreVersion
     val ssysCoreLibrary = "com.simplesys.core" %% "core-library" % versions.ssysCoreVersion
     val ssysCoreUtils = "com.simplesys.core" %% "core-utils" % versions.ssysCoreVersion
     val ssysAkkaExtender = "com.simplesys.core" %% "akka-extender" % versions.ssysCoreVersion

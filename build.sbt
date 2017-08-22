@@ -1,21 +1,17 @@
 import com.simplesys.jrebel.JRebelPlugin
 import com.simplesys.jrebel.JRebelPlugin._
 import com.simplesys.json.{JsonList, JsonObject}
-import com.typesafe.sbt.packager.Keys.executableScriptName
-import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
+import com.typesafe.sbt.packager.docker.DockerPlugin._
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
 import ru.simplesys.plugins.sourcegen.DevPlugin._
-import com.typesafe.sbt.packager.docker.DockerPlugin._
 import sbt.Keys.version
 
 name := CommonSettings.settingValues.name
 
 lazy val root = (project in file(".")).
-  //enablePlugins(GitVersioning).
-  aggregate(dbObjects, webUI, common/*, testModule*/).
+  aggregate(dbObjects, webUI, common).
   settings(
       inThisBuild(Seq(
-          //git.baseVersion := CommonSettings.settingValues.baseVersion,
           scalaVersion := CommonSettings.settingValues.scalaVersion,
           version := CommonSettings.settingValues.version,
           liquibaseUsername in DevConfig := "eakd",
@@ -79,7 +75,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
-      DevPlugin, MergeWebappPlugin, TranspileCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, DockerPlugin
+      DevPlugin, MergeWebappPlugin, SbtCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, DockerPlugin
   ).dependsOn(
     dbObjects
 ).aggregate(dbObjects).settings(
@@ -116,11 +112,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
         CommonDeps.smartclient,
 
-        CommonDeps.akkaActor,
-        CommonDeps.akkaHttp,
-        CommonDeps.akkaHttpCore,
-        CommonDeps.akkaHttpXml,
-        CommonDeps.akkaHttpSprayJson,
         CommonDeps.commonsFileupload,
         CommonDeps.commonsIO,
 
@@ -138,7 +129,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     )
 ).settings({
     import com.simplesys.mergewebapp.MergeWebappPlugin._
-    import com.typesafe.sbt.coffeescript.TranspileCoffeeScript.autoImport._
+    import com.typesafe.sbt.coffeescript.SbtCoffeeScript.autoImport._
     import com.typesafe.sbt.web.Import.WebKeys._
     import com.typesafe.sbt.web.SbtWeb.autoImport._
     import ru.simplesys.plugins.sourcegen.DevPlugin._
@@ -154,7 +145,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CoffeeScriptKeys.bare := false,
         webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
         sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
-        (managedResources in Compile) ++= CoffeeScriptKeys.csTranspile.value,
+        (managedResources in Compile) ++= CoffeeScriptKeys.coffeeScript.value,
 
         //dev plugin
         sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",
@@ -190,8 +181,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
         currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
         currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
-        merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(TranspileCoffeeScript.autoImport.CoffeeScriptKeys.csTranspile in Assets).value,
+        merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(CoffeeScriptKeys.coffeeScript in Assets).value,
 
+        //xsbtWeb
         containerPort := 8083,
         containerArgs := Seq("--path", "/archive-kd"),
         containerLibs in Jetty := Seq(
@@ -218,7 +210,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
-            copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}") ,
+            copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}"),
             entrypoint("/docker-entrypoint.sh")
         ),
         (resourceGenerators in Compile) += task[Seq[File]] {

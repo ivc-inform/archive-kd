@@ -25,6 +25,8 @@ import com.simplesys.function._
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 
+import scala.scalajs.js.annotation.JSExport
+
 trait WebTabSetApp extends TabSetStack {
 
     self =>
@@ -67,7 +69,7 @@ trait WebTabSetApp extends TabSetStack {
     protected val managedUsersGroups: Seq[RibbonGroupSS]
     protected val progectManagedDevsGroups: Seq[RibbonGroupSS]
 
-    //@JSExport
+    @JSExport
     def getUIContent() {
         val fontIncrease = isc.getParams().fontIncrease.getOrElse(isc.OfflineSS.getNumber(s"fontIncrease$identifier", 0.0))
         simpleSyS.fontIncrease = fontIncrease

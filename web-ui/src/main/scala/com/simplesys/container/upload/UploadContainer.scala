@@ -28,6 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload
 import org.apache.commons.io.IOUtils.copyLarge
 
 import scala.collection.JavaConverters._
+import scala.compat.Platform.EOL
 import scala.util.{Failure, Success, Try}
 
 trait UploadData extends JSObject {
@@ -79,7 +80,7 @@ object UploadContainer {
 
                 val dcr: Option[DatabaseChangeRegistration] = {
                     Try {
-                        val prop = new Properties()
+                        val prop = new Properties()                                             
                         prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
                         val dcr = connection.asInstanceOf[OracleConnection].registerDatabaseChangeNotification(prop)
 
@@ -286,7 +287,7 @@ object UploadContainer {
                                                         callableStatement.setLong(index, idAttatch)
                                                         callableStatement.executeUpdate()
 
-                                                        //dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
+                                                        dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
                                                 }
                                         }.result match {
                                             case scalaz.Success(res) ⇒ res
@@ -309,7 +310,7 @@ object UploadContainer {
                             Out("Ok")
                         case Failure(e) ⇒
 
-                            channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
+                            channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
                             OutFailure(e)
                     }
                 }

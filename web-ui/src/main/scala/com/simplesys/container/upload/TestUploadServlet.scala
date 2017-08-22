@@ -21,6 +21,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
 
 import scala.collection.JavaConverters._
+import scala.compat.Platform.EOL
 import scala.util.{Failure, Success, Try}
 import scala.xml.{Elem, Node, Null}
 
@@ -223,7 +224,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                         Out("Ok")
                     case Failure(e) ⇒
 
-                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTraceString)), channels = channelMessageError)))
+                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
                         OutFailure(e)
                         connection.foreach(_.close())
                 }

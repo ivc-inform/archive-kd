@@ -1,19 +1,19 @@
-import com.typesafe.sbt.GitVersioning
 import ru.simplesys.eakd.sbtbuild.{CommonSettings, PluginDeps}
 import sbt._
+import sbt.Project._
 
 
-//lazy val scenarioPlugin = uri("../../sbt-plugins/scenario-plugin")
 //lazy val devPlugin = uri("../../sbt-plugins/dev-plugin")
-//lazy val scalaFmtPlugin = uri("../../sbt-plugins/scala-fmt")
-//lazy val transpileCoffeeScript = uri("../../sbt-plugins/transpile-coffeescript")
-// lazy val sbtNativePackager = uri("../../sbt-native-packager")
+//lazy val sbtCoffeeScript = uri("../../sbt-plugins/sbt-coffeescript")
+//lazy val sbtNativePackager = uri("../../sbt-plugins/sbt-native-packager")
+//lazy val mergeJS = uri("../../sbt-plugins/merge-js")
 
-lazy val root = Project(id = "buildPlugins", base = file(".")).enablePlugins(GitVersioning).dependsOn(/*scenarioPlugin*//*, scalaFmtPlugin,*/ /*devPlugin*/  /*transpileCoffeeScript*//* sbtNativePackager*/).
-  settings(inThisBuild(CommonSettings.defaultSettings)).
+lazy val root = Project(id = "buildPlugins", base = file(".")).dependsOn(/*RootProject(devPlugin)*/  /*RootProject(sbtCoffeeScript)*/ /* RootProject(sbtNativePackager)*/ /*RootProject(mergeJS)*/).
+  settings(sbt.inThisBuild(CommonSettings.defaultSettings)).
   settings(
+      classpathTypes += "maven-plugin",
       PluginDeps.devPlugin,
-      PluginDeps.transpileCoffeeScript,
+      PluginDeps.sbtCoffeeScript,
       PluginDeps.mergeJS,
       PluginDeps.xsbtWeb,
       PluginDeps.sbtNativePackager,
