@@ -8,11 +8,11 @@ docker rm $(docker ps -a -q)
 
 docker run --name oracle221_eakd -p 1521:1521 -p 5500:5500 -e ORACLE_PDB=test_pdb -e ORACLE_SID=test ivcinform/oracle-database:12.2.0.1-ee
 
-docker exec oracle221_eakd ./setPassword.sh dfqc2
-
 sudo docker stop oracle221_eakd
 sudo docker start oracle221_eakd
 
+sqlplus / as sysdba
+ALTER USER SYS IDENTIFIED BY dfqc2
 sqlplus system/dfqc2@test_pdb
 
 sqlplus sys/dfqc2@test_pdb as sysdba
