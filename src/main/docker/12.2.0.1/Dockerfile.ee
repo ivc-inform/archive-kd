@@ -16,7 +16,7 @@
 # -----------------------
 # Put all downloaded files in the same directory as this Dockerfile
 # Run: 
-#      $ docker build -t oracle/database:12.2.0.1-ee . 
+#      $ docker build -t ivcinform/oarcle-database:12.2.0.1-ee .
 #
 # Pull base image
 # ---------------
