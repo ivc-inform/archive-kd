@@ -9,7 +9,7 @@ class StartPage[Builder, Output <: FragT, FragT](val _title: String, val bundle:
         import bundle.all._
 
         //val subPaths = paths(subPath = "javascript/generated/generatedComponents", subPath1 = "coffeeScript/main/isc-components/")
-        val subPaths = paths(subPath = "managed/javascript/isc-components/generated/generatedComponents", subPath1 = "")
+        val subPaths = paths(subPath = "managed/javascript/isc-components/generated/generatedComponents", subPath1 = "coffeeScript/main/")
         html(lang := "en",
             head(
                 bundle.tags2.title(_title),
