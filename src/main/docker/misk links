@@ -125,3 +125,4 @@ docker build --force-rm --no-cache --pull -t archive-kd:1.0.0.0 -f /home/uandrew
 docker run -it --name archive-kd archive-kd:1.0.0.0 /bin/bush
 
 
+tank.ssys.lan 192.168.115.202
