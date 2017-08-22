@@ -12,8 +12,8 @@ sudo docker stop oracle221_eakd
 sudo docker start oracle221_eakd
 
 sqlplus / as sysdba
-ALTER USER SYS IDENTIFIED BY dfqc2
-ALTER USER SYSTEM IDENTIFIED BY dfqc2
+ALTER USER SYS IDENTIFIED BY dfqc2;
+ALTER USER SYSTEM IDENTIFIED BY dfqc2;
 sqlplus system/dfqc2@test_pdb
 
 sqlplus sys/dfqc2@test_pdb as sysdba
