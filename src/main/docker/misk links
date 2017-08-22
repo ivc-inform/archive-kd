@@ -13,9 +13,9 @@ docker exec oracle221_eakd ./setPassword.sh dfqc2
 sudo docker stop oracle221_eakd
 sudo docker start oracle221_eakd
 
-sqlplus system/dfqc2
+sqlplus system/dfqc2@test_pdb
 
-sqlplus sys/dfqc2 as sysdba
+sqlplus sys/dfqc2@test_pdb as sysdba
 
 docker exec -it oracle221_eakd sqlplus system/dfqc2@//localhost:1521/test
 
@@ -27,21 +27,33 @@ docker exec -it -u 0 oracle221_eakd bash
 ------ DEFAULT TABLESPACE [tablespace] QUOTA целое число [K][M] ON [tablespace] -----
 ------ TEMPORARY TABLESPACE [tablespace] QUOTA  целое число [K][M] ON [tablespace] --
 
-CREATE USER B404SP3  IDENTIFIED BY B404SP3
-DEFAULT TABLESPACE USERS QUOTA 100G ON USERS
+CREATE USER B404SP3DEMO  IDENTIFIED BY dfqc2;
+
+SELECT USERNAME, TABLESPACE_NAME, MAX_BYTES "Max Quota"
+from DBA_TS_QUOTAS
+WHERE USERNAME='B404SP3'
+
+DEFAULT TABLESPACE USERS QUOTA 100G ON USERS;
+
+ALTER USER SYS IDENTIFIED BY dfqc2
+ALTER USER B404SP3 IDENTIFIED BY dfqc2
+
+ALTER USER SYSTEM IDENTIFIED BY dfqc2
 
 ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2
 ALTER USER system IDENTIFIED BY dfqc2;
 
-GRANT CREATE SESSION TO B404SP3DEMO;
-DROP USER B404SP3DEMO cascade;
+GRANT CREATE SESSION TO B404SP3;
+GRANT DBA TO B404SP3DEMO;
+GRANT DBA TO B404SP3;
+DROP USER B404SP3 cascade;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 
-GRANT READ, WRITE ON DIRECTORY dumps TO  B404SP3;
+GRANT READ, WRITE ON DIRECTORY dumps TO  B404SP3DEMO;
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
+impdp system/dfqc2@test_pdb dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
 
 select * from dba_directories;
 
