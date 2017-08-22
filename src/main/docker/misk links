@@ -126,3 +126,11 @@ docker run -it --name archive-kd archive-kd:1.0.0.0 /bin/bush
 
 
 tank.ssys.lan 192.168.115.202
+
+CREATE TABLE
+    SVC_SEQGENERATOR
+    (
+        NMAXVALUE INTEGER NOT NULL,
+        SNAMESEQ VARCHAR2(255) NOT NULL,
+        CONSTRAINT PK_SVC_SEQGENERATOR_NAMESEQ PRIMARY KEY (SNAMESEQ)
+    );
