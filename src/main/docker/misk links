@@ -6,7 +6,7 @@ docker rm $(docker ps -a -q)
 
 ./buildDockerImage.sh -v 12.2.0.1 -e
 
-docker run --name oracle221_eakd -p 1521:1521 -p 5500:5500 -e ORACLE_PDB=test_pdb -e ORACLE_SID=test ivcinform/database:12.2.0.1-ee
+docker run --name oracle221_eakd -p 1521:1521 -p 5500:5500 -e ORACLE_PDB=test_pdb -e ORACLE_SID=test ivcinform/oracle-database:12.2.0.1-ee
 
 docker exec oracle221_eakd ./setPassword.sh dfqc2
 
