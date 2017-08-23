@@ -152,6 +152,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                             thiz.progressBar.foreach {
                                                                 progressBar ⇒
                                                                     if (!progressBar.destroyed.getOrElse(false))
+                                                                        progressBar setPercentDone 100
                                                                         progressBar setTitle "Запись в БД".ellipsis
                                                             }
                                                     ))
