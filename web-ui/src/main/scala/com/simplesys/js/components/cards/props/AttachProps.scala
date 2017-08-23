@@ -97,12 +97,6 @@ class AttachProps extends CommonListGridEditorComponentProps {
             thisTop.getFieldName(colNum) match {
                 case fileNameField.name ⇒
 
-                    /*println(s"record: ${
-                        isc.JSON.encode(_record, JSONEncoder(new JSONEncoderProps {
-                            prettyPrint = true.opt
-                        }))
-                    }")*/
-
                     any2undefOrA {
                         val _progressBar = Progressbar.create(
                             new ProgressbarProps {
@@ -113,7 +107,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             }
                         )
 
-                        if (_record.status.getOrElse(0) == 1) {
+                        if (_record.status.getOrElse(0) == 2) {
                             _progressBar setPercentDone 100
                             _progressBar setTitle "Запись в БД".ellipsis
                         }
@@ -132,31 +126,41 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             prompt = "Прикрепить файл".ellipsis.opt
                                             height = 18
                                             width = 18
-                                            disabled = (_record.status.getOrElse(0) != 0).opt
                                             src = Common.attach.opt
                                             progressBar = _progressBar.opt
                                             record = _record.opt
                                             showDisabledIcon = false.opt
-                                            okFunction = {
+                                            subscribeFunction = {
                                                 (thiz: classHandler) ⇒
-                                                    //val a = Sse.checkExistsSSE()
+
                                                     thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                         (e: MessageJS) ⇒
                                                             e.data.foreach {
                                                                 data ⇒
                                                                     thiz.progressBar.foreach {
                                                                         progressBar ⇒
-                                                                            progressBar setTitle "Перенос данных..."
-                                                                            progressBar setPercentDone 0.0
-                                                                            progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
+                                                                            if (!progressBar.destroyed.getOrElse(false)) {
+                                                                                progressBar setTitle "Перенос данных..."
+                                                                                progressBar setPercentDone 0.0
+                                                                                progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
+                                                                            }
                                                                     }
                                                             }
                                                     ))
                                                     thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)
+                                                        (e: MessageJS) ⇒
+                                                            thiz.progressBar.foreach {
+                                                                progressBar ⇒
+                                                                    if (!progressBar.destroyed.getOrElse(false))
+                                                                        progressBar setPercentDone 100
+                                                                        progressBar setTitle "Запись в БД".ellipsis
+                                                            }
                                                     ))
                                                     thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep())
+                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach { progressBar ⇒
+                                                            if (!progressBar.destroyed.getOrElse(false))
+                                                                progressBar.nextStep()
+                                                        }
                                                     ))
 
                                                     def unsubscribe(): Unit = {
@@ -173,11 +177,12 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                             data ⇒
                                                                 val _data = data.asInstanceOf[UploadData]
                                                                 progressBar.foreach { progressBar ⇒
-                                                                    progressBar setPercentDone 0.0
-                                                                    _data.fileName.foreach(progressBar setTitle _)
+                                                                    if (!progressBar.destroyed.getOrElse(false)) {
+                                                                        progressBar setPercentDone 0.0
+                                                                        _data.fileName.foreach(progressBar setTitle _)
+                                                                    }
 
                                                                     _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
-
                                                                     thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
                                                                 }
                                                         }
@@ -204,7 +209,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                             okFunction = {
                                                                 (thiz: classHandler) ⇒
                                                                     thizTop.disable()
-                                                                    thizTop.okFunction()
+                                                                    thizTop.subscribeFunction()
                                                                     thiz.form.foreach(_.submitForm())
                                                                     thiz.markForDestroy()
                                                             }.toThisFunc.opt

@@ -25,7 +25,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
     var record: ScOption[AttatchDataRecordExt] = ScNone
     var actionURL: ScOption[URL] = ScNone
 
-    var okFunction: ScOption[ThisFunction0[classHandler, _]] = {
+    var subscribeFunction: ScOption[ThisFunction0[classHandler, _]] = {
         (thiz: classHandler) ⇒
             isc info "Нет реализации."
     }.toThisFunc.opt
@@ -86,6 +86,14 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                                 thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
                         }
                 }
+            }
+
+            thisTop.record.foreach {
+                record ⇒
+                    if (record.status.getOrElse(0) != 0) {
+                        thisTop.disable()
+                        thisTop.subscribeFunction()
+                    }
             }
 
 

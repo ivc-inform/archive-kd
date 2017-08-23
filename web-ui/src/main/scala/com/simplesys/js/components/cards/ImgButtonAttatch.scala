@@ -19,7 +19,7 @@ trait ImgButtonAttatch extends ImgButton {
     val record: JSUndefined[AttatchDataRecordExt]
     var actionURL: JSUndefined[String]
 
-    def okFunction ():void
+    def subscribeFunction():void
 }
 
 @js.native
