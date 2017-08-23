@@ -153,7 +153,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 progressBar ⇒
                                                                     if (!progressBar.destroyed.getOrElse(false))
                                                                         progressBar setPercentDone 100
-                                                                        progressBar setTitle "Запись в БД".ellipsis
+                                                                    progressBar setTitle "Запись в БД".ellipsis
                                                             }
                                                     ))
                                                     thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
@@ -201,20 +201,29 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             }.toThisFunc.opt
                                             click = {
                                                 (thizTop: classHandler) ⇒
-                                                    val url = thizTop.actionURL
+                                                    thizTop.record.foreach {
+                                                        record ⇒
+                                                            record.status.getOrElse(0) match {
+                                                                case 0 ⇒
+                                                                    val url = thizTop.actionURL
 
-                                                    WindowUploadDialog.create(
-                                                        new WindowUploadDialogProps {
-                                                            action = url.opt
-                                                            okFunction = {
-                                                                (thiz: classHandler) ⇒
-                                                                    thizTop.disable()
-                                                                    thizTop.subscribeFunction()
-                                                                    thiz.form.foreach(_.submitForm())
-                                                                    thiz.markForDestroy()
-                                                            }.toThisFunc.opt
-                                                        }
-                                                    )
+                                                                    WindowUploadDialog.create(
+                                                                        new WindowUploadDialogProps {
+                                                                            action = url.opt
+                                                                            okFunction = {
+                                                                                (thiz: classHandler) ⇒
+                                                                                    thizTop.disable()
+                                                                                    thizTop.subscribeFunction()
+                                                                                    thiz.form.foreach(_.submitForm())
+                                                                                    thiz.markForDestroy()
+                                                                            }.toThisFunc.opt
+                                                                        }
+                                                                    )
+                                                                case 2 ⇒
+                                                                    isc info "case 2"
+                                                            }
+                                                    }
+
                                                     false
                                             }.toThisFunc.opt
                                         }
