@@ -2,6 +2,8 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.props.ProgressbarProps
+import com.simplesys.SmartClient.DataBinding.props.JSONEncoderProps
+import com.simplesys.SmartClient.DataBinding.{JSON, JSONEncoder}
 import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
@@ -94,6 +96,13 @@ class AttachProps extends CommonListGridEditorComponentProps {
         (thisTop: classHandler, _record: AttatchDataRecordExt, colNum: Int) ⇒
             thisTop.getFieldName(colNum) match {
                 case fileNameField.name ⇒
+
+                    println(s"record: ${
+                        isc.JSON.encode(_record, JSONEncoder(new JSONEncoderProps {
+                            prettyPrint = true.opt
+                        }))
+                    }")
+
                     any2undefOrA {
                         val _progressBar = Progressbar.create(
                             new ProgressbarProps {
@@ -103,6 +112,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                 showTitle = true.opt
                             }
                         )
+
+                        if (_record.status.getOrElse(0) == 1) {
+                            _progressBar setPercentDone 100
+                            _progressBar setTitle "Запись в БД".ellipsis
+                        }
 
                         HLayoutSS.create(
                             new HLayoutSSProps {
@@ -126,15 +140,13 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             okFunction = {
                                                 (thiz: classHandler) ⇒
                                                     //val a = Sse.checkExistsSSE()
-                                                    if (_record.status.getOrElse(0) == 1)
-                                                        thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)
-
                                                     thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                         (e: MessageJS) ⇒
                                                             e.data.foreach {
                                                                 data ⇒
                                                                     thiz.progressBar.foreach {
                                                                         progressBar ⇒
+                                                                            progressBar setTitle "Перенос данных..."
                                                                             progressBar setPercentDone 0.0
                                                                             progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
                                                                     }

@@ -13,6 +13,7 @@ import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.jdbc.control.SessionStructures._
+import com.simplesys.jdbc.control.classBO.Where
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
@@ -26,6 +27,7 @@ import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
 import org.apache.commons.io.IOUtils.copyLarge
+import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo, AttatchDS}
 
 import scala.collection.JavaConverters._
 import scala.compat.Platform.EOL
@@ -51,6 +53,7 @@ object UploadContainer {
         val requestData = new DSRequestDyn(request)
         val connection = oraclePool.getConnection()
 
+        val dataSetBo = AttatchBo(oraclePool)
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
 
@@ -192,6 +195,13 @@ object UploadContainer {
                                                 }
                                         }
 
+                                        val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
+                                            case scalaz.Success(attach) ⇒ attach
+                                            case scalaz.Failure(e) ⇒ throw e
+                                        }
+
+                                        dataSetBo.updateP(value = attachRecord.copy(status = Some(1)), where = Where(dataSetBo.id === idAttatch))
+
                                         transaction(connection) {
                                             connection ⇒
                                                 callableStatement(connection, "begin Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
@@ -290,8 +300,11 @@ object UploadContainer {
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
                                                 }
                                         }.result match {
-                                            case scalaz.Success(res) ⇒ res
-                                            case scalaz.Failure(e) ⇒ throw e
+                                            case scalaz.Success(res) ⇒
+                                                dataSetBo.updateP(value = attachRecord.copy(status = Some(0)), where = Where(dataSetBo.id === idAttatch))
+                                            case scalaz.Failure(e) ⇒
+                                                dataSetBo.updateP(value = attachRecord.copy(status = Some(0)), where = Where(dataSetBo.id === idAttatch))
+                                                throw e
                                         }
                                 }
 
