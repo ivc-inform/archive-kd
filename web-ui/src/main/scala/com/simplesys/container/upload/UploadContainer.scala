@@ -285,7 +285,6 @@ object UploadContainer {
 
                                                         index += 1
                                                         callableStatement.setLong(index, idAttatch)
-                                                        
                                                         callableStatement.executeUpdate()
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
