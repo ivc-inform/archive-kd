@@ -2,7 +2,7 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.Control.{ImgButton, Progressbar}
 import com.simplesys.SmartClient.Control.props.ImgButtonProps
-import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
+import com.simplesys.SmartClient.System.{Common, IscArray, isc, simpleSyS}
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.URL
 import com.simplesys.function._

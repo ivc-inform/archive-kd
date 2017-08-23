@@ -126,7 +126,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             prompt = "Прикрепить файл".ellipsis.opt
                                             height = 18
                                             width = 18
-                                            src = Common.attach.opt
+                                            src = (if(_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
                                             progressBar = _progressBar.opt
                                             record = _record.opt
                                             showDisabledIcon = false.opt
