@@ -2,7 +2,7 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.Control.{ImgButton, Progressbar}
 import com.simplesys.SmartClient.Control.props.ImgButtonProps
-import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
+import com.simplesys.SmartClient.System.{Common, IscArray, isc, simpleSyS}
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.URL
 import com.simplesys.function._
@@ -90,8 +90,11 @@ class ImgButtonAttatchProps extends ImgButtonProps {
 
             thisTop.record.foreach {
                 record ⇒
-                    if (record.status.getOrElse(0) != 0) {
-                        thisTop.disable()
+                    val status = record.status.getOrElse(0)
+
+                    if (status != 0) {
+                        if (status != 2)
+                            thisTop.disable()
                         thisTop.subscribeFunction()
                     }
             }

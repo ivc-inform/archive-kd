@@ -58,8 +58,6 @@ object UploadContainer {
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
 
-        //val dataSet = DocizvopDS(ds)
-
         def receive = {
             case GetData => {
 
@@ -338,6 +336,34 @@ object UploadContainer {
                             }
                     }
                 }
+                selfStop()
+            }
+            case x =>
+                throw new RuntimeException(s"Bad branch $x")
+        }
+    }
+
+    @RSTransfer(urlPattern = "/logic/arx_attatch/StopUpload")
+    class StopUpload(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
+
+        val requestData = new DSRequestDyn(request)
+        val connection = oraclePool.getConnection()
+
+        logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
+
+
+        def receive = {
+            case GetData => {
+                def recStatus(status: Long, id: Long) = {
+                    prepareStatement(connection, "update arx_attatch set status = ? where id = ?") {
+                        preparedStatement ⇒
+                            preparedStatement.setLong(1, status)
+                            preparedStatement.setLong(2, id)
+                            preparedStatement.executeUpdate()
+                    }
+                }
+
+                Out("Ok")
                 selfStop()
             }
             case x =>
