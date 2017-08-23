@@ -8,6 +8,8 @@ import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.Messaging.MessageJS
+import com.simplesys.SmartClient.RPC.{RPCManagerSS, RPCRequest, RPCResponse}
+import com.simplesys.SmartClient.RPC.props.{RPCRequestProps, RPCResponseProps}
 import com.simplesys.SmartClient.System._
 import com.simplesys.SmartClient.sse.Sse
 import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
@@ -22,6 +24,7 @@ import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
+import scala.scalajs.js
 import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
@@ -126,7 +129,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             prompt = "Прикрепить файл".ellipsis.opt
                                             height = 18
                                             width = 18
-                                            src = (if(_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
+                                            src = (if (_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
                                             progressBar = _progressBar.opt
                                             record = _record.opt
                                             showDisabledIcon = false.opt
@@ -220,7 +223,20 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                         }
                                                                     )
                                                                 case 2 ⇒
-                                                                    isc info "case 2"
+                                                                    RPCManagerSS.sendRequest(
+                                                                        RPCRequest(
+                                                                            new RPCRequestProps {
+                                                                                actionURL = "logic/arx_attatch/StopUpload".opt
+                                                                                data = js.Dictionary("record.status" → record.status).opt
+                                                                                callback = {
+                                                                                    (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
+                                                                                        thizTop.progressBar.foreach(_ setTitle record.)
+                                                                                        thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+
+                                                                                }.toFunc.opt
+                                                                            }
+                                                                        )
+                                                                    )
                                                             }
                                                     }
 
