@@ -97,11 +97,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
             thisTop.getFieldName(colNum) match {
                 case fileNameField.name ⇒
 
-                    println(s"record: ${
+                    /*println(s"record: ${
                         isc.JSON.encode(_record, JSONEncoder(new JSONEncoderProps {
                             prettyPrint = true.opt
                         }))
-                    }")
+                    }")*/
 
                     any2undefOrA {
                         val _progressBar = Progressbar.create(

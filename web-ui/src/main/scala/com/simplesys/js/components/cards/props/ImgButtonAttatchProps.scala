@@ -55,33 +55,36 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         def getParams: String = params.toString()
 
                         def getNo = s"p${i}"
-                        def getNo1(guid: String) = s"${getNo}_${guid}"
+                        def getNo1(id: Double) = s"${getNo}_$id"
 
-                        var no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageEndUpload = no1
-                        addParam(no1 = no1)
+                        record.foreach {
+                            record ⇒
+                                var no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageEndUpload = no1
+                                addParam(no1 = no1)
 
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageError = no1
-                        addParam(no1 = no1)
+                                i += 1
+                                no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageError = no1
+                                addParam(no1 = no1)
 
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageNextStep = no1
-                        addParam(no1 = no1)
+                                i += 1
+                                no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageNextStep = no1
+                                addParam(no1 = no1)
 
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageMaxValue = no1
-                        addParam(no1 = no1)
+                                i += 1
+                                no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageMaxValue = no1
+                                addParam(no1 = no1)
 
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageRecordInBase = no1
-                        addParam("", no1)
+                                i += 1
+                                no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageRecordInBase = no1
+                                addParam("", no1)
 
-                        thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
+                                thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
+                        }
                 }
             }
 

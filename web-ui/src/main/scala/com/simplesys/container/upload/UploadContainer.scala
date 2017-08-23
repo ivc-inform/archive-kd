@@ -52,6 +52,7 @@ object UploadContainer {
 
         val requestData = new DSRequestDyn(request)
         val connection = oraclePool.getConnection()
+        val connection1 = oraclePool.getConnection()
 
         val dataSetBo = AttatchBo(oraclePool)
 
@@ -83,7 +84,7 @@ object UploadContainer {
 
                 val dcr: Option[DatabaseChangeRegistration] = {
                     Try {
-                        val prop = new Properties()                                             
+                        val prop = new Properties()
                         prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
                         val dcr = connection.asInstanceOf[OracleConnection].registerDatabaseChangeNotification(prop)
 
@@ -145,6 +146,21 @@ object UploadContainer {
                             fi ⇒
                                 idAttatch.foreach {
                                     idAttatch ⇒
+                                        val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
+                                            case scalaz.Success(attach) ⇒ attach
+                                            case scalaz.Failure(e) ⇒ throw e
+                                        }
+
+                                        def recStatus(status:Long, id: Long) = {
+                                            prepareStatement(connection1, "update arx_attatch set status = ? where id = ?") {
+                                                preparedStatement ⇒
+                                                    preparedStatement.setLong(1, status)
+                                                    preparedStatement.setLong(2, id)
+                                                    preparedStatement.executeUpdate()
+                                            }
+                                        }
+                                        recStatus(1, idAttatch)
+
                                         val blob = connection.createBlob().asInstanceOf[OracleBlob]
                                         val clob = connection.createClob().asInstanceOf[OracleClob]
 
@@ -194,13 +210,6 @@ object UploadContainer {
                                                     override val contentLength: Option[BigDecimal] = Some(fiSize)
                                                 }
                                         }
-
-                                        val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
-                                            case scalaz.Success(attach) ⇒ attach
-                                            case scalaz.Failure(e) ⇒ throw e
-                                        }
-
-                                        dataSetBo.updateP(value = attachRecord.copy(status = Some(1)), where = Where(dataSetBo.id === idAttatch))
 
                                         transaction(connection) {
                                             connection ⇒
@@ -301,9 +310,9 @@ object UploadContainer {
                                                 }
                                         }.result match {
                                             case scalaz.Success(res) ⇒
-                                                dataSetBo.updateP(value = attachRecord.copy(status = Some(0)), where = Where(dataSetBo.id === idAttatch))
+                                                recStatus(0, idAttatch)
                                             case scalaz.Failure(e) ⇒
-                                                dataSetBo.updateP(value = attachRecord.copy(status = Some(0)), where = Where(dataSetBo.id === idAttatch))
+                                                recStatus(0, idAttatch)
                                                 throw e
                                         }
                                 }
