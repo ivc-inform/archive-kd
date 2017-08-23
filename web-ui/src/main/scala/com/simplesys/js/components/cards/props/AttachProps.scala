@@ -106,12 +106,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                 showTitle = true.opt
                             }
                         )
-
-                        if (_record.status.getOrElse(0) == 1) {
-                            _progressBar setPercentDone 100
-                            _progressBar setTitle "Запись в БД".ellipsis
-                        }
-
+                        
                         HLayoutSS.create(
                             new HLayoutSSProps {
                                 height = 20

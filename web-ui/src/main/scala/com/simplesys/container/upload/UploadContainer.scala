@@ -114,54 +114,54 @@ object UploadContainer {
                     OutFailure(new RuntimeException("No file uploaded"))
                     connection.close()
                 } else {
-                    val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
-                        case scalaz.Success(attach) ⇒ attach
-                        case scalaz.Failure(e) ⇒ throw e
-                    }
+                    idAttatch.foreach {
+                        idAttatch ⇒
 
-                    def recStatus(status: Long, id: Long) = {
-                        prepareStatement(connection1, "update arx_attatch set status = ? where id = ?") {
-                            preparedStatement ⇒
-                                preparedStatement.setLong(1, status)
-                                preparedStatement.setLong(2, id)
-                                preparedStatement.executeUpdate()
-                        }
-                    }
-
-                    Try {
-
-                        val progressListener = new ProgressListener() {
-                            private var megaBytes = -1L
-                            private var step = 1
-
-                            private var firstStep = true
-
-                            override def update(pBytesRead: Long, pContentLength: Long, pItems: Int): Unit = {
-                                val stepSize = pContentLength / 100
-
-                                if (firstStep) {
-                                    channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
-                                    firstStep = false
-                                }
-
-                                if (pBytesRead >= stepSize * step) {
-                                    step += 1
-                                    channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
-                                }
-
-                                if (pBytesRead == pContentLength)
-                                    channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
+                            val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
+                                case scalaz.Success(attach) ⇒ attach
+                                case scalaz.Failure(e) ⇒ throw e
                             }
-                        }
 
-                        upload setProgressListener progressListener
+                            def recStatus(status: Long, id: Long) = {
+                                prepareStatement(connection1, "update arx_attatch set status = ? where id = ?") {
+                                    preparedStatement ⇒
+                                        preparedStatement.setLong(1, status)
+                                        preparedStatement.setLong(2, id)
+                                        preparedStatement.executeUpdate()
+                                }
+                            }
 
-                        upload.parseRequest(request).asScala.headOption.map {
-                            fi ⇒
-                                idAttatch.foreach {
-                                    idAttatch ⇒
-                                        recStatus(1, idAttatch)
+                            Try {
 
+                                val progressListener = new ProgressListener() {
+                                    private var megaBytes = -1L
+                                    private var step = 1
+
+                                    private var firstStep = true
+
+                                    override def update(pBytesRead: Long, pContentLength: Long, pItems: Int): Unit = {
+                                        val stepSize = pContentLength / 100
+
+                                        if (firstStep) {
+                                            channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
+                                            firstStep = false
+                                        }
+
+                                        if (pBytesRead >= stepSize * step) {
+                                            step += 1
+                                            channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
+                                        }
+
+                                        if (pBytesRead == pContentLength)
+                                            channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
+                                    }
+                                }
+
+                                upload setProgressListener progressListener
+
+                                recStatus(1, idAttatch)
+                                upload.parseRequest(request).asScala.headOption.map {
+                                    fi ⇒
                                         val blob = connection.createBlob().asInstanceOf[OracleBlob]
                                         val clob = connection.createClob().asInstanceOf[OracleClob]
 
@@ -311,33 +311,32 @@ object UploadContainer {
                                                 }
                                         }.result match {
                                             case scalaz.Success(res) ⇒
-                                                recStatus(0, idAttatch)
                                             case scalaz.Failure(e) ⇒
-                                                recStatus(0, idAttatch)
                                                 throw e
                                         }
+
+                                        fi
                                 }
+                            }
+                            match {
+                                case Success(fi) ⇒
+                                    channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject(
+                                        "elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString),
+                                        "fileName" → JsonString(fi.get.getName),
+                                        "fileSize" → JsonLong(fi.get.getSize)
+                                    ), channels = channelMessageEndUpload)))
 
-                                fi
-                        }
-                    }
-                    match {
-                        case Success(fi) ⇒
-                            channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject(
-                                "elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString),
-                                "fileName" → JsonString(fi.get.getName),
-                                "fileSize" → JsonLong(fi.get.getSize)
-                            ), channels = channelMessageEndUpload)))
+                                    fi.foreach(_.delete())
+                                    recStatus(0, idAttatch)
+                                    Out("Ok")
+                                case Failure(e) ⇒
 
-                            fi.foreach(_.delete())
-                            Out("Ok")
-                        case Failure(e) ⇒
-
-                            channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
-                            OutFailure(e)
+                                    channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
+                                    recStatus(0, idAttatch)
+                                    OutFailure(e)
+                            }
                     }
                 }
-
                 selfStop()
             }
             case x =>
