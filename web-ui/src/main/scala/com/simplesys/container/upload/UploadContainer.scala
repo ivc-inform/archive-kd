@@ -304,6 +304,7 @@ object UploadContainer {
                                                         }
 
                                                         index += 1
+                                                        recStatus(2, idAttatch)
                                                         callableStatement.setLong(index, idAttatch)
                                                         callableStatement.executeUpdate()
 
