@@ -12,7 +12,8 @@ import com.simplesys.common.Strings.newLine
 import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.jdbc.control.SessionStructures.{callableStatement, transaction}
+import com.simplesys.jdbc.control.SessionStructures._
+import com.simplesys.jdbc.control.classBO.Where
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
@@ -26,6 +27,7 @@ import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
 import org.apache.commons.io.IOUtils.copyLarge
+import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo, AttatchDS}
 
 import scala.collection.JavaConverters._
 import scala.compat.Platform.EOL
@@ -50,7 +52,9 @@ object UploadContainer {
 
         val requestData = new DSRequestDyn(request)
         val connection = oraclePool.getConnection()
+        val connection1 = oraclePool.getConnection()
 
+        val dataSetBo = AttatchBo(oraclePool)
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
 
@@ -80,7 +84,7 @@ object UploadContainer {
 
                 val dcr: Option[DatabaseChangeRegistration] = {
                     Try {
-                        val prop = new Properties()                                             
+                        val prop = new Properties()
                         prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
                         val dcr = connection.asInstanceOf[OracleConnection].registerDatabaseChangeNotification(prop)
 
@@ -142,6 +146,21 @@ object UploadContainer {
                             fi ⇒
                                 idAttatch.foreach {
                                     idAttatch ⇒
+                                        val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
+                                            case scalaz.Success(attach) ⇒ attach
+                                            case scalaz.Failure(e) ⇒ throw e
+                                        }
+
+                                        def recStatus(status:Long, id: Long) = {
+                                            prepareStatement(connection1, "update arx_attatch set status = ? where id = ?") {
+                                                preparedStatement ⇒
+                                                    preparedStatement.setLong(1, status)
+                                                    preparedStatement.setLong(2, id)
+                                                    preparedStatement.executeUpdate()
+                                            }
+                                        }
+                                        recStatus(1, idAttatch)
+
                                         val blob = connection.createBlob().asInstanceOf[OracleBlob]
                                         val clob = connection.createClob().asInstanceOf[OracleClob]
 
@@ -194,7 +213,7 @@ object UploadContainer {
 
                                         transaction(connection) {
                                             connection ⇒
-                                                callableStatement(connection, "begin recorddoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
+                                                callableStatement(connection, "begin Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
                                                     callableStatement ⇒
 
                                                         var index = 1
@@ -290,8 +309,11 @@ object UploadContainer {
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
                                                 }
                                         }.result match {
-                                            case scalaz.Success(res) ⇒ res
-                                            case scalaz.Failure(e) ⇒ throw e
+                                            case scalaz.Success(res) ⇒
+                                                recStatus(0, idAttatch)
+                                            case scalaz.Failure(e) ⇒
+                                                recStatus(0, idAttatch)
+                                                throw e
                                         }
                                 }
 
