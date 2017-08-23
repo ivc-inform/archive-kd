@@ -114,6 +114,20 @@ object UploadContainer {
                     OutFailure(new RuntimeException("No file uploaded"))
                     connection.close()
                 } else {
+                    val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
+                        case scalaz.Success(attach) ⇒ attach
+                        case scalaz.Failure(e) ⇒ throw e
+                    }
+
+                    def recStatus(status: Long, id: Long) = {
+                        prepareStatement(connection1, "update arx_attatch set status = ? where id = ?") {
+                            preparedStatement ⇒
+                                preparedStatement.setLong(1, status)
+                                preparedStatement.setLong(2, id)
+                                preparedStatement.executeUpdate()
+                        }
+                    }
+
                     Try {
 
                         val progressListener = new ProgressListener() {
@@ -146,19 +160,6 @@ object UploadContainer {
                             fi ⇒
                                 idAttatch.foreach {
                                     idAttatch ⇒
-                                        val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
-                                            case scalaz.Success(attach) ⇒ attach
-                                            case scalaz.Failure(e) ⇒ throw e
-                                        }
-
-                                        def recStatus(status:Long, id: Long) = {
-                                            prepareStatement(connection1, "update arx_attatch set status = ? where id = ?") {
-                                                preparedStatement ⇒
-                                                    preparedStatement.setLong(1, status)
-                                                    preparedStatement.setLong(2, id)
-                                                    preparedStatement.executeUpdate()
-                                            }
-                                        }
                                         recStatus(1, idAttatch)
 
                                         val blob = connection.createBlob().asInstanceOf[OracleBlob]
