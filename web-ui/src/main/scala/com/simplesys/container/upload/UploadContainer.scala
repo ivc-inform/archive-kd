@@ -12,7 +12,7 @@ import com.simplesys.common.Strings.newLine
 import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
 import com.simplesys.isc.dataBinging.DSRequestDyn
 import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.jdbc.control.SessionStructures.{callableStatement, transaction}
+import com.simplesys.jdbc.control.SessionStructures._
 import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
@@ -285,6 +285,7 @@ object UploadContainer {
 
                                                         index += 1
                                                         callableStatement.setLong(index, idAttatch)
+                                                        
                                                         callableStatement.executeUpdate()
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)

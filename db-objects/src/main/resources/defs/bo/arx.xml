@@ -9,6 +9,7 @@
 					<attr caption="Дата " name="ddatein" type="dDate" useDbPrefix="false"></attr>
 					<attr caption="Описание" name="vatdescr" type="sDescription" useDbPrefix="false"></attr>
 					<attr caption="Инв.номер ЭНЗ" name="invnumenz" type="sCaption" useDbPrefix="false"></attr>
+					<attr caption="Код статуса" name="status" type="nInt" useDbPrefix="false" hidden="true"></attr>
 				</attrs>
 				<defaults>
 					<showAttrs>

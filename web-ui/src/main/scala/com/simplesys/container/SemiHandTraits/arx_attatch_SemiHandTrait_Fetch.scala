@@ -17,7 +17,7 @@ import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
 import com.simplesys.json.{JsonDouble, JsonString}
 import com.simplesys.servlet.GetData
-import com.simplesys.tuple.TupleSS14
+import com.simplesys.tuple.{TupleSS14, TupleSS15}
 import oracle.jdbc.OracleConnection
 import org.joda.time.LocalDateTime
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
@@ -25,7 +25,6 @@ import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS}
 
 import scala.compat.Platform.EOL
 import scalaz.{Failure, Success}
-
 
 
 trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with ServletActorDyn {
@@ -56,21 +55,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                 Out(classDyn = select.result match {
                     case Success(list) => {
                         list foreach {
-                            case TupleSS14(
-                            ddateinAttatch: Array[LocalDateTime],
-                            idAttatch: Long,
-                            idattypesAttatch: Array[Long],
-                            idcardAttatch: Long,
-                            idizvAttatch: Array[Long],
-                            invnumenzAttatch: Array[String],
-                            vatcodeAttatch: Array[String],
-                            vatdescrAttatch: Array[String],
-                            idAttatchtypes: Long,
-                            vattypenameAttatchtypes: String,
-                            idCard: Long,
-                            vcrcodeCard: Array[String],
-                            idDocizv: Long,
-                            vizcodeDocizv: Array[String]) ⇒
+                            case TupleSS15(ddateinAttatch: Array[LocalDateTime], idAttatch: Long, idattypesAttatch: Array[Long], idcardAttatch: Long, idizvAttatch: Array[Long], invnumenzAttatch: Array[String], statusAttatch: Array[Long], vatcodeAttatch: Array[String], vatdescrAttatch: Array[String], idAttatchtypes: Long, vattypenameAttatchtypes: String, idCard: Long, vcrcodeCard: Array[String], idDocizv: Long, vizcodeDocizv: Array[String]) ⇒
 
                                 val record = RecordDyn(
                                     arx_attatch_id_NameStrong.name → idAttatch,
@@ -83,7 +68,8 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                     arx_attatch_idcard_NameStrong.name → idcardAttatch,
                                     arx_attatch_vizcode_NameStrong.name → vizcodeDocizv,
                                     arx_attatch_vattypename_NameStrong.name → vattypenameAttatchtypes,
-                                    arx_attatch_vcrcode_NameStrong.name → vcrcodeCard
+                                    arx_attatch_vcrcode_NameStrong.name → vcrcodeCard,
+                                    arx_attatch_status_NameStrong.name → statusAttatch
                                 )
 
                                 dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)).result match {
