@@ -230,8 +230,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                                 data = js.Dictionary("record.status" → record.status).opt
                                                                                 callback = {
                                                                                     (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
-                                                                                        thizTop.progressBar.foreach(_ setTitle record.)
-                                                                                        thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+                                                                                        thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
+                                                                                        thizTop setSrc Common.attach
 
                                                                                 }.toFunc.opt
                                                                             }
