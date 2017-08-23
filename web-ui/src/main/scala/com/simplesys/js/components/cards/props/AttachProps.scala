@@ -130,54 +130,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             progressBar = _progressBar.opt
                                             record = _record.opt
                                             showDisabledIcon = false.opt
-                                            initWidget = {
-                                                (thiz: classHandler, args: IscArray[JSAny]) ⇒
-                                                    thiz.Super("initWidget", args)
-                                                    if (_record.status.getOrElse(0) != 0){
-                                                        thiz disable()
-                                                        thiz.subscribeOnEnRecording.foreach(_())
-                                                    }
-
-                                            }.toThisFunc.opt
-                                            subscribeOnEnRecording = {
-                                                (thiz: classHandler) ⇒
-                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
-                                                        e.data.foreach {
-                                                            data ⇒
-                                                                val _data = data.asInstanceOf[UploadData]
-                                                                progressBar.foreach { progressBar ⇒
-                                                                    if (!progressBar.destroyed.getOrElse(false)) {
-                                                                        progressBar setPercentDone 0.0
-                                                                        _data.fileName.foreach(progressBar setTitle _)
-                                                                    }
-
-                                                                    _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
-                                                                    thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
-                                                                }
-                                                        }
-                                                        thiz.unsubscribe.foreach(_())
-                                                    }))
-
-                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
-                                                        progressBar.foreach(_ setPercentDone 0.0)
-
-                                                        val error = e.data.asInstanceOf[ErrorStr]
-                                                        isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
-                                                        thiz.unsubscribe.foreach(_())
-                                                    }))
-                                            }.toThisFunc.opt
-
-                                            unsubscribe = {
-                                                (thiz: classHandler) ⇒
-                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                    thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                    thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                    thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                    thiz.enable()
-                                            }.toThisFunc.opt
-
-                                            okFunction = {
+                                            subscribeFunction = {
                                                 (thiz: classHandler) ⇒
 
                                                     thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
@@ -209,7 +162,40 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                         }
                                                     ))
 
-                                                    thiz.subscribeOnEnRecording.foreach(_())
+                                                    def unsubscribe(): Unit = {
+                                                        thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                        thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                        thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                        thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                        thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                        thiz.enable()
+                                                    }
+
+                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
+                                                        e.data.foreach {
+                                                            data ⇒
+                                                                val _data = data.asInstanceOf[UploadData]
+                                                                progressBar.foreach { progressBar ⇒
+                                                                    if (!progressBar.destroyed.getOrElse(false)) {
+                                                                        progressBar setPercentDone 0.0
+                                                                        _data.fileName.foreach(progressBar setTitle _)
+                                                                    }
+
+                                                                    _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
+                                                                    thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+                                                                }
+                                                        }
+                                                        unsubscribe()
+                                                    }))
+
+                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
+                                                        progressBar.foreach(_ setPercentDone 0.0)
+
+                                                        val error = e.data.asInstanceOf[ErrorStr]
+                                                        isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
+                                                        unsubscribe()
+                                                    }))
+
 
                                             }.toThisFunc.opt
                                             click = {
@@ -222,7 +208,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                             okFunction = {
                                                                 (thiz: classHandler) ⇒
                                                                     thizTop.disable()
-                                                                    thizTop.okFunction()
+                                                                    thizTop.subscribeFunction()
                                                                     thiz.form.foreach(_.submitForm())
                                                                     thiz.markForDestroy()
                                                             }.toThisFunc.opt

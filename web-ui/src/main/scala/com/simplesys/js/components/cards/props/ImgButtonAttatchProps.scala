@@ -10,7 +10,7 @@ import com.simplesys.js.components.cards.ImgButtonAttatch
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
 
-import scala.scalajs.js.{ThisFunction0, ThisFunction1, UndefOr}
+import scala.scalajs.js.{ThisFunction0, UndefOr}
 
 class ImgButtonAttatchProps extends ImgButtonProps {
     type classHandler <: ImgButtonAttatch
@@ -20,14 +20,12 @@ class ImgButtonAttatchProps extends ImgButtonProps {
     var channelMessageMaxValue: ScOption[String] = ScNone
     var channelMessageRecordInBase: ScOption[String] = ScNone
     var channelMessageError: ScOption[String] = ScNone
-    var subscribeOnEnRecording: ScOption[ThisFunction0[classHandler, _]] = ScNone
-    var unsubscribe: ScOption[ThisFunction0[classHandler, _]] = ScNone
 
     var progressBar: ScOption[Progressbar] = ScNone
     var record: ScOption[AttatchDataRecordExt] = ScNone
     var actionURL: ScOption[URL] = ScNone
 
-    var okFunction: ScOption[ThisFunction0[classHandler, _]] = {
+    var subscribeFunction: ScOption[ThisFunction0[classHandler, _]] = {
         (thiz: classHandler) ⇒
             isc info "Нет реализации."
     }.toThisFunc.opt
@@ -88,6 +86,14 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                                 thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
                         }
                 }
+            }
+
+            thisTop.record.foreach {
+                record ⇒
+                    if (record.status.getOrElse(0) != 0) {
+                        thisTop.disable()
+                        thisTop.subscribeFunction()
+                    }
             }
 
 

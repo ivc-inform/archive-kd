@@ -14,14 +14,12 @@ trait ImgButtonAttatch extends ImgButton {
     var channelMessageMaxValue: JSUndefined[String]
     var channelMessageRecordInBase: JSUndefined[String]
     var channelMessageError: JSUndefined[String]
-    def subscribeOnEnRecording: JSUndefined[js.Function0[_]]
-    var unsubscribe: JSUndefined[js.Function0[_]]
 
     val progressBar: JSUndefined[Progressbar]
     val record: JSUndefined[AttatchDataRecordExt]
     var actionURL: JSUndefined[String]
 
-    def okFunction ():void
+    def subscribeFunction():void
 }
 
 @js.native
