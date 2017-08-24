@@ -2,6 +2,8 @@
 
 package ru.simplesys.defs.app.scala.container.arx
 
+import java.sql.Types
+
 import akka.actor.Actor
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings._
@@ -13,9 +15,10 @@ import com.simplesys.isc.grids.RecordsDynList
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
+import com.simplesys.jdbc.control.SessionStructures.{callableStatement, prepareStatement}
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
-import com.simplesys.json.{JsonDouble, JsonString}
+import com.simplesys.json.{JsonDouble, JsonLong, JsonString}
 import com.simplesys.servlet.GetData
 import com.simplesys.tuple.{TupleSS14, TupleSS15}
 import oracle.jdbc.OracleConnection
@@ -52,6 +55,18 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
 
                 val select = dataSet.Fetch(dsRequest = DSRequest(sqlDialect = sessionContext.getSQLDialect, startRow = requestData.StartRow, endRow = requestData.EndRow, sortBy = requestData.SortBy, data = data, textMatchStyle = requestData.TextMatchStyle.toString))
 
+                def checkStatus(id: Long): Int = {
+                    callableStatement(oraclePool.getConnection(), "begin ? := record_doc.check_loc_record(fid => :fid); end;") {
+                        callableStatement ⇒
+                            callableStatement.registerOutParameter(1, Types.NUMERIC)
+                            callableStatement.setLong(2, id)
+                            callableStatement.executeUpdate()
+                            val status = callableStatement.getInt(1)
+                            logger debug s"Status: $status for id: $id"
+                            status
+                    }
+                }
+
                 Out(classDyn = select.result match {
                     case Success(list) => {
                         list foreach {
@@ -69,7 +84,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                     arx_attatch_vizcode_NameStrong.name → vizcodeDocizv,
                                     arx_attatch_vattypename_NameStrong.name → vattypenameAttatchtypes,
                                     arx_attatch_vcrcode_NameStrong.name → vcrcodeCard,
-                                    arx_attatch_status_NameStrong.name → statusAttatch
+                                    arx_attatch_status_NameStrong.name → statusAttatch.headOption.map(status ⇒ if (status == 2) checkStatus(idAttatch) else status)
                                 )
 
                                 dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)).result match {

@@ -147,7 +147,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         showDown = false.opt
                                         showRollOver = false.opt
                                         layoutAlign = Alignment.center
-                                        prompt = "Прикрепить файл".ellipsis.opt
+                                        prompt = (if (_record.status.getOrElse(0) == 2) "Снять зависшую блокировку".ellipsis else "Прикрепить файл".ellipsis).opt
                                         height = 18
                                         width = 18
                                         src = (if (_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
@@ -156,6 +156,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         showDisabledIcon = false.opt
                                         subscribeFunction = {
                                             (thiz: classHandler) ⇒
+                                                thiz.disable()
                                                 thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                     (e: MessageJS) ⇒
                                                         thiz.progressBar.foreach {
@@ -201,6 +202,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
                                                                 thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
                                                                 thiz setSrc Common.attach
+                                                                thiz.enable()
                                                             }
                                                     }
                                                     unsubscribe()
@@ -220,7 +222,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             (thizTop: classHandler) ⇒
                                                 thizTop.record.foreach {
                                                     record ⇒
-                                                        record.status.getOrElse(0) match {
+                                                        val status = record.status.getOrElse(0)
+                                                        status match {
                                                             case 0 ⇒
                                                                 val url = thizTop.actionURL
 
@@ -237,21 +240,27 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 )
                                                             //todo 3 заменить на константу
                                                             case 3 ⇒
-                                                                isc info "Нет реализации..."
-                                                            /*RPCManagerSS.sendRequest(
-                                                                RPCRequest(
-                                                                    new RPCRequestProps {
-                                                                        actionURL = "logic/arx_attatch/StopUpload".opt
-                                                                        data = js.Dictionary("record.status" → record.status).opt
-                                                                        callback = {
-                                                                            (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
-                                                                                thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
-                                                                                thizTop setSrc Common.attach
+                                                                thizTop.record.foreach {
+                                                                    record ⇒
+                                                                        RPCManagerSS.sendRequest(
+                                                                            RPCRequest(
+                                                                                new RPCRequestProps {
+                                                                                    actionURL = "logic/arx_attatch/StopUpload".opt
+                                                                                    data = js.Dictionary("id" → record.id, "status" → 0).opt
+                                                                                    timeout = 60000.opt
+                                                                                    sendNoQueue = true.opt
+                                                                                    callback = {
+                                                                                        (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
+                                                                                            if (resp.httpResponseCode == 200) {
+                                                                                                thizTop setSrc Common.attach
+                                                                                                thizTop.record.asInstanceOf[JSDynamic].updateDynamic("status")(0)
+                                                                                            }
 
-                                                                        }.toFunc.opt
-                                                                    }
-                                                                )
-                                                            )*/
+                                                                                    }.toFunc.opt
+                                                                                }
+                                                                            )
+                                                                        )
+                                                                }
                                                         }
                                                 }
 
@@ -262,14 +271,19 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             }
                         )
 
-                        _record.status.getOrElse(0) match {
+                        val status = _record.status.getOrElse(0)
+                        status match {
                             case 0 ⇒
                             case 1 ⇒
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Запись в БД".ellipsis
                             case 2 ⇒
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
                                 _progressBar setPercentDone 100
                                 _progressBar setTitle "Запись в БД".ellipsis
+                            case 3 ⇒
+                                component.imgButtonAttatch.foreach(_.setSrc(Common.cancel))
                         }
 
                         component

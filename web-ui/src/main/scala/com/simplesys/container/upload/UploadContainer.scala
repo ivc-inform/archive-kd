@@ -150,7 +150,7 @@ object UploadContainer {
                                         }
 
                                         if (pBytesRead >= stepSize * step) {
-                                            channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = JsonObject("percentsDone" → JsonLong(step)) , channels = channelMessageUploadPercent)))
+                                            channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = JsonObject("percentsDone" → JsonLong(step)), channels = channelMessageUploadPercent)))
                                             step += 1
                                         }
 
@@ -369,7 +369,10 @@ object UploadContainer {
                     }
                 }
 
-                Out("Ok")
+                val requestData = new DSRequestDyn(request)
+                recStatus(requestData.getLong("status"), requestData.getLong("id"))
+
+                OutOk
                 selfStop()
             }
             case x =>
