@@ -156,6 +156,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         showDisabledIcon = false.opt
                                         subscribeFunction = {
                                             (thiz: classHandler) ⇒
+                                                thiz.disable()
                                                 thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                     (e: MessageJS) ⇒
                                                         thiz.progressBar.foreach {
@@ -247,7 +248,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                                     timeout = 60000.opt
                                                                                     sendNoQueue = true.opt
                                                                                     callback = {
-                                                                                        (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒                                                                                           
+                                                                                        (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
                                                                                             if (resp.httpResponseCode == 200) {
                                                                                                 thizTop setSrc Common.attach
                                                                                                 thizTop.record.asInstanceOf[JSDynamic].updateDynamic("status")(0)
