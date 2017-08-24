@@ -31,7 +31,7 @@ trait GridEditor[T <: ListGridField, R <: JSAny, S <: JSAny] extends VLayoutSS {
     var autoFitFieldWidth: Boolean
     var canResizeFields: Boolean
     def findByKey(keyValue: JSAny): JSUndefined[R]
-    def getLiveRecordComponent(record: R, fieldName: String, bodyID: ID = js.native): JSUndefined[R]
+    def getLiveRecordComponent[C <: Canvas](record: R, fieldName: String, bodyID: ID = js.native): JSUndefined[C]
     def removeData(removeRecord: R, callback: DSCallback = js.native, requestProperties: DSRequest = js.native): void
     def saveAllEdits(): void
     def selectAllRecords(visibleNodesOnly: Boolean): void

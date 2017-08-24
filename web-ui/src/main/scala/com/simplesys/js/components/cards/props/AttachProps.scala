@@ -22,7 +22,7 @@ import com.simplesys.System._
 import com.simplesys.app.{AttachRowComponent, ImgButtonAttatch, WindowUploadDialog}
 import com.simplesys.container.upload.{ErrorStr, UploadData}
 import com.simplesys.function._
-import com.simplesys.js.components.cards.Attach
+import com.simplesys.js.components.cards.{Attach, AttachRowComponent}
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.{ScNone, ScOption}
 import com.simplesys.option.ScOption._
@@ -30,6 +30,7 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
 import scala.scalajs.js
+import scala.scalajs.js.UndefOr
 import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
@@ -113,8 +114,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                         dt ⇒
                             val data = dt.asInstanceOf[UploadData]
                             val record = thisTop.findByKey(data.idAttatch)
-                            val component = record.map(record ⇒ thisTop.getLiveRecordComponent(record, fileNameField.name))
-                            println(component)
+                            val component = record.map(record ⇒ thisTop.getLiveRecordComponent[AttachRowComponent](record, fileNameField.name)).flatten
+                            component.foreach(_.imgButtonAttatch.foreach(_.subscribeFunction()))
                     }
             ))
     }.toThisFunc.opt
