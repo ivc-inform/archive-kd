@@ -222,7 +222,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                             (thizTop: classHandler) ⇒
                                                 thizTop.record.foreach {
                                                     record ⇒
-                                                        record.status.getOrElse(0) match {
+                                                        val status = record.status.getOrElse(0)
+                                                        status match {
                                                             case 0 ⇒
                                                                 val url = thizTop.actionURL
 
@@ -275,6 +276,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             case 0 ⇒
                             case 1 ⇒
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Запись в БД".ellipsis
                             case 2 ⇒
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
                                 _progressBar setPercentDone 100
