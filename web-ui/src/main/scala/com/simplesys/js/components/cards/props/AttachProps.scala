@@ -270,6 +270,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
                                 _progressBar setPercentDone 100
                                 _progressBar setTitle "Запись в БД".ellipsis
+                            case 3 ⇒
+                                component.imgButtonAttatch.foreach(_.setSrc(Common.cancel))
                         }
 
                         component
