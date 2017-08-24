@@ -222,21 +222,23 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                             }.toThisFunc.opt
                                                                         }
                                                                     )
-                                                                case 2 ⇒
-                                                                    RPCManagerSS.sendRequest(
-                                                                        RPCRequest(
-                                                                            new RPCRequestProps {
-                                                                                actionURL = "logic/arx_attatch/StopUpload".opt
-                                                                                data = js.Dictionary("record.status" → record.status).opt
-                                                                                callback = {
-                                                                                    (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
-                                                                                        thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
-                                                                                        thizTop setSrc Common.attach
+                                                                //todo 3 заменить на константу
+                                                                case 3 ⇒
+                                                                    isc info "Нет реализации..."
+                                                                /*RPCManagerSS.sendRequest(
+                                                                    RPCRequest(
+                                                                        new RPCRequestProps {
+                                                                            actionURL = "logic/arx_attatch/StopUpload".opt
+                                                                            data = js.Dictionary("record.status" → record.status).opt
+                                                                            callback = {
+                                                                                (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
+                                                                                    thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
+                                                                                    thizTop setSrc Common.attach
 
-                                                                                }.toFunc.opt
-                                                                            }
-                                                                        )
+                                                                            }.toFunc.opt
+                                                                        }
                                                                     )
+                                                                )*/
                                                             }
                                                     }
 
