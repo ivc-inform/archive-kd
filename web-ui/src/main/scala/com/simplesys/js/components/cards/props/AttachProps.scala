@@ -136,12 +136,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             }
                         )
 
-                        if (_record.status.getOrElse(0) == 2) {
-                            _progressBar setPercentDone 100
-                            _progressBar setTitle "Запись в БД".ellipsis
-                        }
-
-                        AttachRowComponent.create(
+                        val component = AttachRowComponent.create(
                             new AttachRowComponentProps {
                                 height = 20
                                 width = "100%"
@@ -176,7 +171,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                             data ⇒
                                                                 val _data = data.asInstanceOf[UploadData]
                                                                 if (!progressBar.destroyed.getOrElse(false))
-                                                                    _data.percentsDone.foreach{
+                                                                    _data.percentsDone.foreach {
                                                                         percentsDone ⇒
                                                                             progressBar setPercentDone percentsDone
                                                                             progressBar setTitle s"Перенос данных: $percentsDone %"
@@ -205,6 +200,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
                                                                 _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
                                                                 thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+                                                                thiz setSrc Common.attach
                                                             }
                                                     }
                                                     unsubscribe()
@@ -265,6 +261,18 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                 ).opt
                             }
                         )
+
+                        _record.status.getOrElse(0) match {
+                            case 0 ⇒
+                            case 1 ⇒
+                                component.imgButtonAttatch.foreach(_.subscribeFunction())
+                            case 2 ⇒
+                                component.imgButtonAttatch.foreach(_.subscribeFunction())
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Запись в БД".ellipsis
+                        }
+
+                        component
                     }
                 case _ ⇒
                     jSUndefined
