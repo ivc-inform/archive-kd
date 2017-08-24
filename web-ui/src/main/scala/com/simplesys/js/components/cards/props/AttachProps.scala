@@ -112,10 +112,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                     e.data.foreach {
                         dt ⇒
                             val data = dt.asInstanceOf[UploadData]
-                            val record = thisTop.findByKey(data.idAttatch).asInstanceOf[AttatchDataRecordExt]
-                            if (record != null) {
-                                
-                            }
+                            val record = thisTop.findByKey(data.idAttatch)
+                            val component = record.map(record ⇒ thisTop.getLiveRecordComponent(record, fileNameField.name))
                     }
             ))
     }.toThisFunc.opt

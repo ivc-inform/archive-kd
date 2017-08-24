@@ -7,6 +7,7 @@ isc.defineClass("ListGridEditor", isc.VLayoutSS, isc.GridEditorInterface).addPro
 	"canResizeFields"            : true
 	"selectionType"              : "single"
 	"findByKey"                  : (keyValue) -> @grid.findByKey keyValue
+	"getLiveRecordComponent"     : (record, fieldName, bodyID) -> @grid.getLiveRecordComponent record, fieldName, bodyID
 	"removeData"                 : (removeRecord, callback, requestProperties) ->
 		@grid.removeData removeRecord, callback, requestProperties
 		return
