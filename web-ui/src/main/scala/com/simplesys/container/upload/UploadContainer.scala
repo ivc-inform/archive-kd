@@ -149,8 +149,8 @@ object UploadContainer {
                                         }
 
                                         if (pBytesRead >= stepSize * step) {
-                                            step += 1
                                             channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = JsonObject("percentsDone" → JsonLong(step)) , channels = channelMessageUploadPercent)))
+                                            step += 1
                                         }
 
                                         if (pBytesRead == pContentLength)
