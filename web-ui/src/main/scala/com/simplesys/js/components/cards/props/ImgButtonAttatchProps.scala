@@ -87,7 +87,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                     val status = record.status.getOrElse(0)
 
                     if (status != 0) {
-                        if (status != 2)
+                        if (status != 3)
                             thisTop.disable()
                         thisTop.subscribeFunction()
                     }
