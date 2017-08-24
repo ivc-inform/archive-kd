@@ -270,7 +270,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             }
                         )
 
-                        _record.status.getOrElse(0) match {
+                        val status = _record.status.getOrElse(0)
+                        status match {
                             case 0 ⇒
                             case 1 ⇒
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
