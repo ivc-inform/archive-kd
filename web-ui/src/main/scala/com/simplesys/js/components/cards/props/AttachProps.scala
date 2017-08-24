@@ -147,7 +147,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         showDown = false.opt
                                         showRollOver = false.opt
                                         layoutAlign = Alignment.center
-                                        prompt = "Прикрепить файл".ellipsis.opt
+                                        prompt = (if (_record.status.getOrElse(0) == 2) "Снять зависшую блокировку".ellipsis else "Прикрепить файл".ellipsis).opt
                                         height = 18
                                         width = 18
                                         src = (if (_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
@@ -244,11 +244,14 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                                 new RPCRequestProps {
                                                                                     actionURL = "logic/arx_attatch/StopUpload".opt
                                                                                     data = js.Dictionary("id" → record.id, "status" → 0).opt
+                                                                                    timeout = 60000.opt
+                                                                                    sendNoQueue = true.opt
                                                                                     callback = {
-                                                                                        (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
-                                                                                            thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
-                                                                                            if (resp.status == 0)
+                                                                                        (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒                                                                                           
+                                                                                            if (resp.httpResponseCode == 200) {
                                                                                                 thizTop setSrc Common.attach
+                                                                                                thizTop.record.asInstanceOf[JSDynamic].updateDynamic("status")(0)
+                                                                                            }
 
                                                                                     }.toFunc.opt
                                                                                 }
