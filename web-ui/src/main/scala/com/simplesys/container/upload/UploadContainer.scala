@@ -266,6 +266,7 @@ object UploadContainer {
                                                                 index += 1
                                                                 source.localData match {
                                                                     case Some(localData) ⇒
+                                                                        recStatus(2, idAttatch)
                                                                         callableStatement.setBlob(index, localData)
                                                                     case None ⇒
                                                                         callableStatement.setNull(index, Types.BLOB)
@@ -299,6 +300,7 @@ object UploadContainer {
                                                         index += 1
                                                         ordDoc.comments match {
                                                             case Some(comments) ⇒
+                                                                recStatus(2, idAttatch)
                                                                 clob.setString(1L, comments)
                                                                 callableStatement.setClob(index, clob)
                                                             case None ⇒
@@ -306,8 +308,8 @@ object UploadContainer {
                                                         }
 
                                                         index += 1
-                                                        recStatus(2, idAttatch)
                                                         callableStatement.setLong(index, idAttatch)
+                                                        recStatus(2, idAttatch)
                                                         callableStatement.executeUpdate()
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
