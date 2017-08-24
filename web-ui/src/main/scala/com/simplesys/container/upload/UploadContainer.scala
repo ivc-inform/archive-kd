@@ -34,7 +34,7 @@ import scala.compat.Platform.EOL
 import scala.util.{Failure, Success, Try}
 
 trait UploadData extends JSObject {
-    val maxValue: JSUndefined[Double]
+    val idAttatch: JSUndefined[Double]
     val fileName: JSUndefined[String]
     val fileSize: JSUndefined[Double]
     val elapsedTime: JSUndefined[String]
@@ -73,12 +73,14 @@ object UploadContainer {
                 }
                 logger.debug(" ------------------------------------------------------- End Parametrs1 -------------------------------------------------------------------")
 
+
                 val idAttatch = request.Parameter("id").map(_.toLong)
+                val channelSubscribeToChannel = "12DC1876-F489-3172-1297-729FFB73B575" //Не менять используется в AttachProps !!!
+
                 val channelMessageEndUpload = request.Parameter("p1")
                 val channelMessageError = request.Parameter("p2")
                 val channelMessageNextStep = request.Parameter("p3")
-                val channelMessageMaxValue = request.Parameter("p4")
-                val channelMessageRecordInBase = request.Parameter("p5")
+                val channelMessageRecordInBase = request.Parameter("p4")
 
                 val dcr: Option[DatabaseChangeRegistration] = {
                     Try {
@@ -141,7 +143,7 @@ object UploadContainer {
                                         val stepSize = pContentLength / 100
 
                                         if (firstStep) {
-                                            channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
+                                            SendMessage(Message(data = JsonObject("idAttatch" → JsonLong(idAttatch)), channels = channelSubscribeToChannel))
                                             firstStep = false
                                         }
 

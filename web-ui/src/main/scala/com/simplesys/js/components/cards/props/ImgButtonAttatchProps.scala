@@ -17,7 +17,6 @@ class ImgButtonAttatchProps extends ImgButtonProps {
 
     var channelMessageEndUpload: ScOption[String] = ScNone
     var channelMessageNextStep: ScOption[String] = ScNone
-    var channelMessageMaxValue: ScOption[String] = ScNone
     var channelMessageRecordInBase: ScOption[String] = ScNone
     var channelMessageError: ScOption[String] = ScNone
 
@@ -72,12 +71,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                                 no1 = getNo1(record.id.getOrElse(0))
                                 thisTop.channelMessageNextStep = no1
                                 addParam(no1 = no1)
-
-                                i += 1
-                                no1 = getNo1(record.id.getOrElse(0))
-                                thisTop.channelMessageMaxValue = no1
-                                addParam(no1 = no1)
-
+                                
                                 i += 1
                                 no1 = getNo1(record.id.getOrElse(0))
                                 thisTop.channelMessageRecordInBase = no1
@@ -93,7 +87,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                     val status = record.status.getOrElse(0)
 
                     if (status != 0) {
-                        if (status != 2)
+                        if (status != 3)
                             thisTop.disable()
                         thisTop.subscribeFunction()
                     }
