@@ -237,21 +237,24 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 )
                                                             //todo 3 заменить на константу
                                                             case 3 ⇒
-                                                                isc info "Нет реализации..."
-                                                            /*RPCManagerSS.sendRequest(
-                                                                RPCRequest(
-                                                                    new RPCRequestProps {
-                                                                        actionURL = "logic/arx_attatch/StopUpload".opt
-                                                                        data = js.Dictionary("record.status" → record.status).opt
-                                                                        callback = {
-                                                                            (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
-                                                                                thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
-                                                                                thizTop setSrc Common.attach
+                                                                thizTop.record.foreach {
+                                                                    record ⇒
+                                                                        RPCManagerSS.sendRequest(
+                                                                            RPCRequest(
+                                                                                new RPCRequestProps {
+                                                                                    actionURL = "logic/arx_attatch/StopUpload".opt
+                                                                                    data = js.Dictionary("id" → record.id, "status" → 0).opt
+                                                                                    callback = {
+                                                                                        (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
+                                                                                            thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
+                                                                                            if (resp.status == 0)
+                                                                                                thizTop setSrc Common.attach
 
-                                                                        }.toFunc.opt
-                                                                    }
-                                                                )
-                                                            )*/
+                                                                                    }.toFunc.opt
+                                                                                }
+                                                                            )
+                                                                        )
+                                                                }
                                                         }
                                                 }
 

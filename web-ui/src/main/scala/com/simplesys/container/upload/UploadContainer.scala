@@ -369,7 +369,10 @@ object UploadContainer {
                     }
                 }
 
-                Out("Ok")
+                val requestData = new DSRequestDyn(request)
+                recStatus(requestData.getLong("status"), requestData.getLong("id"))
+
+                OutOk
                 selfStop()
             }
             case x =>
