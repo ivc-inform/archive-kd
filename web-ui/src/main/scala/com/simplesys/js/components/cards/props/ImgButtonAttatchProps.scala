@@ -16,7 +16,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
     type classHandler <: ImgButtonAttatch
 
     var channelMessageEndUpload: ScOption[String] = ScNone
-    var channelMessageNextStep: ScOption[String] = ScNone
+    var channelMessageUploadPercent: ScOption[String] = ScNone
     var channelMessageRecordInBase: ScOption[String] = ScNone
     var channelMessageError: ScOption[String] = ScNone
 
@@ -69,7 +69,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
 
                                 i += 1
                                 no1 = getNo1(record.id.getOrElse(0))
-                                thisTop.channelMessageNextStep = no1
+                                thisTop.channelMessageUploadPercent = no1
                                 addParam(no1 = no1)
                                 
                                 i += 1

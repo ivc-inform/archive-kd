@@ -35,6 +35,7 @@ import scala.util.{Failure, Success, Try}
 
 trait UploadData extends JSObject {
     val idAttatch: JSUndefined[Double]
+    val percentsDone: JSUndefined[Double]
     val fileName: JSUndefined[String]
     val fileSize: JSUndefined[Double]
     val elapsedTime: JSUndefined[String]
@@ -79,7 +80,7 @@ object UploadContainer {
 
                 val channelMessageEndUpload = request.Parameter("p1")
                 val channelMessageError = request.Parameter("p2")
-                val channelMessageNextStep = request.Parameter("p3")
+                val channelMessageUploadPercent = request.Parameter("p3")
                 val channelMessageRecordInBase = request.Parameter("p4")
 
                 val dcr: Option[DatabaseChangeRegistration] = {
@@ -149,7 +150,7 @@ object UploadContainer {
 
                                         if (pBytesRead >= stepSize * step) {
                                             step += 1
-                                            channelMessageNextStep.foreach(channelMessageNextStep ⇒ SendMessage(Message(channels = channelMessageNextStep)))
+                                            channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = JsonObject("percentsDone" → JsonLong(step)) , channels = channelMessageUploadPercent)))
                                         }
 
                                         if (pBytesRead == pContentLength)
