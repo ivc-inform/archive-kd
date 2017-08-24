@@ -16,7 +16,8 @@ import com.simplesys.SmartClient.RPC.props.{RPCRequestProps, RPCResponseProps}
 import com.simplesys.SmartClient.System.{HLayoutSS, _}
 import com.simplesys.SmartClient.sse.Sse
 import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
-import com.simplesys.System.Types.{Alignment, ListGridEditEvent, ListGridFieldType}
+import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPoolingMode
+import com.simplesys.System.Types.{Alignment, ListGridEditEvent, ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.System._
 import com.simplesys.app.{ImgButtonAttatch, WindowUploadDialog}
 import com.simplesys.container.upload.{ErrorStr, UploadData}
@@ -53,6 +54,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     simpleTable = false.opt
     //autoFetchData = false.opt
+    recordComponentPoolingMode = RecordComponentPoolingMode.viewport.opt
 
     itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
 
@@ -110,6 +112,10 @@ class AttachProps extends CommonListGridEditorComponentProps {
                     e.data.foreach {
                         dt ⇒
                             val data = dt.asInstanceOf[UploadData]
+                            val record = thisTop.findByKey(data.idAttatch).asInstanceOf[AttatchDataRecordExt]
+                            if (record != null) {
+                                
+                            }
                     }
             ))
     }.toThisFunc.opt
@@ -142,6 +148,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                     _progressBar,
                                     ImgButtonAttatch.create(
                                         new ImgButtonAttatchProps {
+                                            identifier = "imageButton".opt
                                             showDown = false.opt
                                             showRollOver = false.opt
                                             layoutAlign = Alignment.center
@@ -256,12 +263,5 @@ class AttachProps extends CommonListGridEditorComponentProps {
                     jSUndefined
 
             }
-    }.toThisFunc.opt
-
-    updateRecordComponent = {
-        (thisTop: classHandler, _record: AttatchDataRecordExt, colNum: Int, component: HLayoutSS, recordChanged: Boolean) ⇒
-
-            any2undefOrA(Canvas.create(new CanvasProps))
-
     }.toThisFunc.opt
 }
