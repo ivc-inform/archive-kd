@@ -34,7 +34,7 @@ import scala.compat.Platform.EOL
 import scala.util.{Failure, Success, Try}
 
 trait UploadData extends JSObject {
-    val maxValue: JSUndefined[Double]
+    val id4Subscribe: JSUndefined[Double]
     val fileName: JSUndefined[String]
     val fileSize: JSUndefined[Double]
     val elapsedTime: JSUndefined[String]

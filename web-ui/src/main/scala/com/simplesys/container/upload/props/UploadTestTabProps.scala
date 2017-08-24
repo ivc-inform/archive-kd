@@ -104,7 +104,7 @@ class UploadTestTabProps extends HLayoutProps {
                             progressBar.foreach {
                                 progressBar ⇒
                                     progressBar setPercentDone 0.0
-                                    progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
+                                    progressBar.maxValue = data.asInstanceOf[UploadData].id4Subscribe.getOrElse(0)
                             }
                     }
             )

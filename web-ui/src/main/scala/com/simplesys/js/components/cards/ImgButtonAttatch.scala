@@ -11,7 +11,6 @@ import scala.scalajs.js
 trait ImgButtonAttatch extends ImgButton {
     var channelMessageEndUpload: JSUndefined[String]
     var channelMessageNextStep: JSUndefined[String]
-    var channelMessageMaxValue: JSUndefined[String]
     var channelMessageRecordInBase: JSUndefined[String]
     var channelMessageError: JSUndefined[String]
 
