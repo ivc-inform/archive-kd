@@ -35,6 +35,7 @@ import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
     var fileName: JSUndefined[String]
+    var percentsDone: JSUndefined[Double]
     var contentLength: JSUndefined[String]
     var vname: JSUndefined[String]
     var viztname: JSUndefined[String]
@@ -169,17 +170,25 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 progressBar setTitle "Запись в БД".ellipsis
                                                         }
                                                 ))
-                                                thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                                                thiz.channelMessageUploadPercent.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                     (e: MessageJS) ⇒ thiz.progressBar.foreach { progressBar ⇒
-                                                        if (!progressBar.destroyed.getOrElse(false))
-                                                            progressBar.nextStep()
+                                                        e.data.foreach {
+                                                            data ⇒
+                                                                val _data = data.asInstanceOf[UploadData]
+                                                                if (!progressBar.destroyed.getOrElse(false))
+                                                                    _data.percentsDone.foreach{
+                                                                        percentsDone ⇒
+                                                                            progressBar setPercentDone percentsDone
+                                                                            progressBar setTitle s"Перенос данных: $percentsDone %"
+                                                                    }
+                                                        }
                                                     }
                                                 ))
 
                                                 def unsubscribe(): Unit = {
                                                     thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
                                                     thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                    thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.channelMessageUploadPercent.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
                                                     thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
                                                     thiz.enable()
                                                 }
