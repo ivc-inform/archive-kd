@@ -8,6 +8,7 @@ import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.DataBinding.props.{AdvancedCriteriaProps, CriterionProps}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
+import com.simplesys.SmartClient.System
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{ListGridEditEvent, OperatorId}
 import com.simplesys.System.{JSAny, JSUndefined}
@@ -27,7 +28,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
 
     type classHandler <: Cards
 
-    editWindowProperties = WindowSS(
+    editWindowProperties = System.WindowSS(
         new WindowSSProps {
             width = 290
             height = 645

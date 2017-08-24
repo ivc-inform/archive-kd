@@ -19,7 +19,7 @@ import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
 import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPoolingMode
 import com.simplesys.System.Types.{Alignment, ListGridEditEvent, ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.System._
-import com.simplesys.app.{ImgButtonAttatch, WindowUploadDialog}
+import com.simplesys.app.{AttachRowComponent, ImgButtonAttatch, WindowUploadDialog}
 import com.simplesys.container.upload.{ErrorStr, UploadData}
 import com.simplesys.function._
 import com.simplesys.js.components.cards.Attach
@@ -114,6 +114,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             val data = dt.asInstanceOf[UploadData]
                             val record = thisTop.findByKey(data.idAttatch)
                             val component = record.map(record ⇒ thisTop.getLiveRecordComponent(record, fileNameField.name))
+                            println(component)
                     }
             ))
     }.toThisFunc.opt
@@ -138,121 +139,119 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             _progressBar setTitle "Запись в БД".ellipsis
                         }
 
-                        HLayoutSS.create(
-                            new HLayoutSSProps {
+                        AttachRowComponent.create(
+                            new AttachRowComponentProps {
                                 height = 20
                                 width = "100%"
-                                members = Seq(
-                                    _progressBar,
-                                    ImgButtonAttatch.create(
-                                        new ImgButtonAttatchProps {
-                                            identifier = "imageButton".opt
-                                            showDown = false.opt
-                                            showRollOver = false.opt
-                                            layoutAlign = Alignment.center
-                                            prompt = "Прикрепить файл".ellipsis.opt
-                                            height = 18
-                                            width = 18
-                                            src = (if (_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
-                                            progressBar = _progressBar.opt
-                                            record = _record.opt
-                                            showDisabledIcon = false.opt
-                                            subscribeFunction = {
-                                                (thiz: classHandler) ⇒
-                                                    thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒
-                                                            thiz.progressBar.foreach {
-                                                                progressBar ⇒
-                                                                    if (!progressBar.destroyed.getOrElse(false))
-                                                                        progressBar setPercentDone 100
-                                                                    progressBar setTitle "Запись в БД".ellipsis
-                                                            }
-                                                    ))
-                                                    thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach { progressBar ⇒
-                                                            if (!progressBar.destroyed.getOrElse(false))
-                                                                progressBar.nextStep()
+                                progressBar = _progressBar.opt
+                                imgButtonAttatch = ImgButtonAttatch.create(
+                                    new ImgButtonAttatchProps {
+                                        identifier = "imageButton".opt
+                                        showDown = false.opt
+                                        showRollOver = false.opt
+                                        layoutAlign = Alignment.center
+                                        prompt = "Прикрепить файл".ellipsis.opt
+                                        height = 18
+                                        width = 18
+                                        src = (if (_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
+                                        progressBar = _progressBar.opt
+                                        record = _record.opt
+                                        showDisabledIcon = false.opt
+                                        subscribeFunction = {
+                                            (thiz: classHandler) ⇒
+                                                thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                                                    (e: MessageJS) ⇒
+                                                        thiz.progressBar.foreach {
+                                                            progressBar ⇒
+                                                                if (!progressBar.destroyed.getOrElse(false))
+                                                                    progressBar setPercentDone 100
+                                                                progressBar setTitle "Запись в БД".ellipsis
                                                         }
-                                                    ))
-
-                                                    def unsubscribe(): Unit = {
-                                                        thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                        thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                        thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                        thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
-                                                        thiz.enable()
+                                                ))
+                                                thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                                                    (e: MessageJS) ⇒ thiz.progressBar.foreach { progressBar ⇒
+                                                        if (!progressBar.destroyed.getOrElse(false))
+                                                            progressBar.nextStep()
                                                     }
+                                                ))
 
-                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
-                                                        e.data.foreach {
-                                                            data ⇒
-                                                                val _data = data.asInstanceOf[UploadData]
-                                                                progressBar.foreach { progressBar ⇒
-                                                                    if (!progressBar.destroyed.getOrElse(false)) {
-                                                                        progressBar setPercentDone 0.0
-                                                                        _data.fileName.foreach(progressBar setTitle _)
-                                                                    }
+                                                def unsubscribe(): Unit = {
+                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.enable()
+                                                }
 
-                                                                    _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
-                                                                    thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+                                                thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
+                                                    e.data.foreach {
+                                                        data ⇒
+                                                            val _data = data.asInstanceOf[UploadData]
+                                                            progressBar.foreach { progressBar ⇒
+                                                                if (!progressBar.destroyed.getOrElse(false)) {
+                                                                    progressBar setPercentDone 0.0
+                                                                    _data.fileName.foreach(progressBar setTitle _)
                                                                 }
-                                                        }
-                                                        unsubscribe()
-                                                    }))
 
-                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
-                                                        progressBar.foreach(_ setPercentDone 0.0)
-
-                                                        val error = e.data.asInstanceOf[ErrorStr]
-                                                        isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
-                                                        unsubscribe()
-                                                    }))
-
-
-                                            }.toThisFunc.opt
-                                            click = {
-                                                (thizTop: classHandler) ⇒
-                                                    thizTop.record.foreach {
-                                                        record ⇒
-                                                            record.status.getOrElse(0) match {
-                                                                case 0 ⇒
-                                                                    val url = thizTop.actionURL
-
-                                                                    WindowUploadDialog.create(
-                                                                        new WindowUploadDialogProps {
-                                                                            action = url.opt
-                                                                            okFunction = {
-                                                                                (thiz: classHandler) ⇒
-                                                                                    thizTop.disable()
-                                                                                    thiz.form.foreach(_.submitForm())
-                                                                                    thiz.markForDestroy()
-                                                                            }.toThisFunc.opt
-                                                                        }
-                                                                    )
-                                                                //todo 3 заменить на константу
-                                                                case 3 ⇒
-                                                                    isc info "Нет реализации..."
-                                                                /*RPCManagerSS.sendRequest(
-                                                                    RPCRequest(
-                                                                        new RPCRequestProps {
-                                                                            actionURL = "logic/arx_attatch/StopUpload".opt
-                                                                            data = js.Dictionary("record.status" → record.status).opt
-                                                                            callback = {
-                                                                                (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
-                                                                                    thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
-                                                                                    thizTop setSrc Common.attach
-
-                                                                            }.toFunc.opt
-                                                                        }
-                                                                    )
-                                                                )*/
+                                                                _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
+                                                                thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
                                                             }
                                                     }
+                                                    unsubscribe()
+                                                }))
 
-                                                    false
-                                            }.toThisFunc.opt
-                                        }
-                                    )
+                                                thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
+                                                    progressBar.foreach(_ setPercentDone 0.0)
+
+                                                    val error = e.data.asInstanceOf[ErrorStr]
+                                                    isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
+                                                    unsubscribe()
+                                                }))
+
+
+                                        }.toThisFunc.opt
+                                        click = {
+                                            (thizTop: classHandler) ⇒
+                                                thizTop.record.foreach {
+                                                    record ⇒
+                                                        record.status.getOrElse(0) match {
+                                                            case 0 ⇒
+                                                                val url = thizTop.actionURL
+
+                                                                WindowUploadDialog.create(
+                                                                    new WindowUploadDialogProps {
+                                                                        action = url.opt
+                                                                        okFunction = {
+                                                                            (thiz: classHandler) ⇒
+                                                                                thizTop.disable()
+                                                                                thiz.form.foreach(_.submitForm())
+                                                                                thiz.markForDestroy()
+                                                                        }.toThisFunc.opt
+                                                                    }
+                                                                )
+                                                            //todo 3 заменить на константу
+                                                            case 3 ⇒
+                                                                isc info "Нет реализации..."
+                                                            /*RPCManagerSS.sendRequest(
+                                                                RPCRequest(
+                                                                    new RPCRequestProps {
+                                                                        actionURL = "logic/arx_attatch/StopUpload".opt
+                                                                        data = js.Dictionary("record.status" → record.status).opt
+                                                                        callback = {
+                                                                            (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
+                                                                                thizTop.progressBar.foreach(_ setTitle record.fileName.getOrElse("unknown"))
+                                                                                thizTop setSrc Common.attach
+
+                                                                        }.toFunc.opt
+                                                                    }
+                                                                )
+                                                            )*/
+                                                        }
+                                                }
+
+                                                false
+                                        }.toThisFunc.opt
+                                    }
                                 ).opt
                             }
                         )
