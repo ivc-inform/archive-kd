@@ -129,6 +129,7 @@ object UploadContainer {
                                         preparedStatement.setLong(1, status)
                                         preparedStatement.setLong(2, id)
                                         preparedStatement.executeUpdate()
+                                        logger debug s"Set status: $status, for id: $id"
                                 }
                             }
 

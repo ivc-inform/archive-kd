@@ -200,6 +200,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
                                                                 _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
                                                                 thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+                                                                thiz setSrc Common.attach
                                                             }
                                                     }
                                                     unsubscribe()
