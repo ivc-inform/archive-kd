@@ -15,7 +15,7 @@ import com.simplesys.isc.grids.RecordsDynList
 import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.jdbc._
 import com.simplesys.jdbc.control.DSRequest
-import com.simplesys.jdbc.control.SessionStructures.callableStatement
+import com.simplesys.jdbc.control.SessionStructures.{callableStatement, prepareStatement}
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
 import com.simplesys.json.{JsonDouble, JsonLong, JsonString}
@@ -56,7 +56,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                 val select = dataSet.Fetch(dsRequest = DSRequest(sqlDialect = sessionContext.getSQLDialect, startRow = requestData.StartRow, endRow = requestData.EndRow, sortBy = requestData.SortBy, data = data, textMatchStyle = requestData.TextMatchStyle.toString))
 
                 def checkStatus(id: Long): Int = {
-                    callableStatement(dataSet.dataSource.getConnection(), "begin ? := record_doc.check_loc_record(fid => :fid); end;") {
+                    callableStatement(oraclePool.getConnection(), "begin ? := record_doc.check_loc_record(fid => :fid); end;") {
                         callableStatement ⇒
                             callableStatement.registerOutParameter(1, Types.NUMERIC)
                             callableStatement.setLong(2, id)
