@@ -1,4 +1,5 @@
 docker run -d -p 1521:1521 --name b404_112 ivcinform/oracle-11x64g:1.0.0
+docker run -d -p 1521:1521 --name b404_112 ivcinform/oracle-11x64g:1.0.1
 docker exec -u oracle  -it b404_112 bash
 
 sqlplus / as sysdba
@@ -10,11 +11,11 @@ show parameter DB_CACHE_SIZE;
 show parameter STREAMS_POOL_SIZE;
 show parameter SGA_TARGET;
 
-ALTER SYSTEM SET SGA_TARGET=80G scope=spfile;
-ALTER SYSTEM SET SHARED_POOL_SIZE=10G scope=spfile;
-ALTER SYSTEM SET LARGE_POOL_SIZE=10G scope=spfile;
+ALTER SYSTEM SET SGA_TARGET=50G scope=spfile;
+ALTER SYSTEM SET SHARED_POOL_SIZE=5G scope=spfile;
+ALTER SYSTEM SET LARGE_POOL_SIZE=5G scope=spfile;
 ALTER SYSTEM SET JAVA_POOL_SIZE=500M scope=spfile;
-ALTER SYSTEM SET DB_CACHE_SIZE=35G scope=spfile;
+ALTER SYSTEM SET DB_CACHE_SIZE=30G scope=spfile;
 ALTER SYSTEM SET STREAMS_POOL_SIZE=5G scope=spfile;
 
 shutdown immediate;
@@ -22,10 +23,11 @@ startup;
 
 ALTER USER SYS IDENTIFIED BY dfqc2;
 ALTER USER SYSTEM IDENTIFIED BY dfqc2;
+ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 
-@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql; #1
+@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql; #1                                              
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;    #2
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; #3
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; #3    
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql; #4
 @/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX; #5
 ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
@@ -45,6 +47,8 @@ docker cp /home/uandrew/b404sp3demo_2017.dmp b404_112:/home/oracle/dumps;
 
 impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
 
+select 0 from dual;
+
 CREATE TABLE
     SVC_SEQGENERATOR
     (
@@ -54,7 +58,7 @@ CREATE TABLE
     );
 
 
-  ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/o1_mf_users_dpdslolf_.dbf' RESIZE 32767M;
-  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users02.dbf' size 32767M;
-  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32767M;
+  ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/o1_mf_users_dpdslolf_.dbf' RESIZE 32000M;
+  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users02.dbf' size 32000M;
+  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32000M;
 
