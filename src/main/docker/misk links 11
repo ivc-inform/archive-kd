@@ -25,17 +25,29 @@ ALTER USER SYS IDENTIFIED BY dfqc2;
 ALTER USER SYSTEM IDENTIFIED BY dfqc2;
 ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 
-@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql; #1                                              
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;    #2
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; #3    
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql; #4
-@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX; #5
+@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql;
+
+
+@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES;
+
+
 ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES; #6
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES; #7
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql; #8
-@/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql; #9
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql; #10
+GRANT EXECUTE ON utl_file TO xdb;
+GRANT EXECUTE ON dbms_lob TO xdb;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql;
+SHUTDOWN IMMEDIATE;
+STARTUP UPGRADE;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql;
+SHUTDOWN IMMEDIATE;
+STARTUP
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql;
+@/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
+@/u01/app/oracle/product/11.2/db_1/ord//im/admin/imchk.sql;      --???????? ?????????
+
 
 sudo mkdir dumps;
 
