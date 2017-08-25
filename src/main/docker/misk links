@@ -42,7 +42,7 @@ ALTER USER B404SP3 IDENTIFIED BY dfqc2
 
 ALTER USER SYSTEM IDENTIFIED BY dfqc2
 
-ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2
+ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 ALTER USER system IDENTIFIED BY dfqc2;
 
 GRANT CREATE SESSION TO B404SP3;
@@ -108,4 +108,5 @@ CREATE TABLE
     );
 
 
- alter tablespace USERS add datafile '/opt/oracle/oradata/test/test_pdb/users02.dbf' size 32000M
+ alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users02.dbf' size 32767M;
+ alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32767M;

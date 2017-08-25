@@ -37,7 +37,7 @@ ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
 
 sudo mkdir dumps;
 
-CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps';
+CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
 scp ayudin@tank.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
@@ -53,3 +53,5 @@ CREATE TABLE
         CONSTRAINT PK_SVC_SEQGENERATOR_NAMESEQ PRIMARY KEY (SNAMESEQ)
     );
 
+
+ alter tablespace USERS add datafile '/opt/oracle/oradata/test/test_pdb/users02.dbf' size 32000M
