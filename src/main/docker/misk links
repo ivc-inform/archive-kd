@@ -107,6 +107,5 @@ CREATE TABLE
         CONSTRAINT PK_SVC_SEQGENERATOR_NAMESEQ PRIMARY KEY (SNAMESEQ)
     );
 
+alter tablespace USERS add datafile '/opt/oracle/oradata/test/test_pdb/users02.dbf' size 32000M
 
- alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users02.dbf' size 32767M;
- alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32767M;

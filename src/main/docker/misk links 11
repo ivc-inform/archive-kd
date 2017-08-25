@@ -54,4 +54,7 @@ CREATE TABLE
     );
 
 
- alter tablespace USERS add datafile '/opt/oracle/oradata/test/test_pdb/users02.dbf' size 32000M
+  ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/o1_mf_users_dpdslolf_.dbf' RESIZE 32767M;
+  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users02.dbf' size 32767M;
+  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32767M;
+
