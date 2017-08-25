@@ -3,6 +3,23 @@ docker exec -u oracle  -it b404_112 bash
 
 sqlplus / as sysdba
 
+show parameter SHARED_POOL_SIZE;
+show parameter LARGE_POOL_SIZE;
+show parameter JAVA_POOL_SIZE;
+show parameter DB_CACHE_SIZE;
+show parameter STREAMS_POOL_SIZE;
+show parameter SGA_TARGET;
+
+ALTER SYSTEM SET SGA_TARGET=80G scope=spfile;
+ALTER SYSTEM SET SHARED_POOL_SIZE=10G scope=spfile;
+ALTER SYSTEM SET LARGE_POOL_SIZE=10G scope=spfile;
+ALTER SYSTEM SET JAVA_POOL_SIZE=500M scope=spfile;
+ALTER SYSTEM SET DB_CACHE_SIZE=35G scope=spfile;
+ALTER SYSTEM SET STREAMS_POOL_SIZE=5G scope=spfile;
+
+shutdown immediate;
+startup;
+
 ALTER USER SYS IDENTIFIED BY dfqc2;
 ALTER USER SYSTEM IDENTIFIED BY dfqc2;
 
@@ -14,10 +31,9 @@ ALTER USER SYSTEM IDENTIFIED BY dfqc2;
 ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES; #6
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES; #7
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql;
-
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql;
-@/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql; #8
+@/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql; #9
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql; #10
 
 sudo mkdir dumps;
 
