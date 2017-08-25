@@ -1,0 +1,17 @@
+docker run -d -p 1521:1521 --name b404_112 ivcinform/oracle-11x64g:1.0.0
+docker exec -u oracle  -it b404_112 bash
+
+sqlplus / as sysdba
+ALTER USER SYS IDENTIFIED BY dfqc2;
+ALTER USER SYSTEM IDENTIFIED BY dfqc2;
+
+sqlplus sys/dfqc2 as sysdba;
+
+CREATE TABLE
+    SVC_SEQGENERATOR
+    (
+        NMAXVALUE INTEGER NOT NULL,
+        SNAMESEQ VARCHAR2(255) NOT NULL,
+        CONSTRAINT PK_SVC_SEQGENERATOR_NAMESEQ PRIMARY KEY (SNAMESEQ)
+    );
+
