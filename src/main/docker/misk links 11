@@ -24,6 +24,7 @@ startup;
 ALTER USER SYS IDENTIFIED BY dfqc2;
 ALTER USER SYSTEM IDENTIFIED BY dfqc2;
 ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
+GRANT DBA TO B404SP3DEMO;
 
 @/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
 @/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql;
@@ -57,7 +58,7 @@ CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
 scp ayudin@tank.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
-docker cp /home/uandrew/b404sp3demo_2017.dmp b404_112:/u01/app/oracle/product/11.2/db_1/dumps;
+docker cp b404sp3demo_2017.dmp b404_112:/u01/app/oracle/product/11.2/db_1/dumps;
 
 impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
 
