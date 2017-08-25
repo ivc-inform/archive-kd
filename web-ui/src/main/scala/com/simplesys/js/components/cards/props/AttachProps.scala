@@ -1,7 +1,7 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
-import com.simplesys.SmartClient.Control.props.ProgressbarProps
+import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps, ProgressbarProps}
 import com.simplesys.SmartClient.DataBinding.props.JSONEncoderProps
 import com.simplesys.SmartClient.DataBinding.{JSON, JSONEncoder}
 import com.simplesys.SmartClient.Foundation.Canvas
@@ -108,6 +108,16 @@ class AttachProps extends CommonListGridEditorComponentProps {
     initWidget = {
         (thisTop: classHandler, args: IscArray[JSAny]) ⇒
             thisTop.Super("initWidget", args)
+
+            val funcMenu = ListGridContextMenu.create(
+                new ListGridContextMenuProps {
+                    owner = thisTop.opt
+                    itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
+                }
+            )
+
+            thisTop setFuncMenu funcMenu
+            thisTop setContextMenu funcMenu
 
             thisTop.channelSubscribeToChannel.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                 (e: MessageJS) ⇒
