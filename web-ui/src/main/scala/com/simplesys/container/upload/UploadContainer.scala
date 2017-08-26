@@ -361,7 +361,7 @@ object UploadContainer {
         def receive = {
             case GetData => {
                 def recStatus(status: Long, id: Long) = {
-                    prepareStatement(connection, "update arx_attatch set status = ? where id = ?") {
+                    prepareStatement(connection, "update arx_attatch set status = ?, attfile = null where id = ?") {
                         preparedStatement ⇒
                             preparedStatement.setLong(1, status)
                             preparedStatement.setLong(2, id)

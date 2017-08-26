@@ -227,6 +227,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
                                                                 thiz setSrc Common.attach
                                                                 thiz.enable()
+
+                                                                _data.elapsedTime.foreach(elapsedTime ⇒ _data.fileSize.foreach(fileSize ⇒ isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")))
                                                             }
                                                     }
                                                     unsubscribe()
@@ -278,6 +280,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                                         (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
                                                                                             if (resp.httpResponseCode == 200) {
                                                                                                 thizTop setSrc Common.attach
+                                                                                                thizTop.progressBar.foreach{
+                                                                                                    progressBar ⇒
+                                                                                                        progressBar setTitle ""
+                                                                                                        progressBar setPercentDone 0
+                                                                                                }
                                                                                                 thizTop.record.asInstanceOf[JSDynamic].updateDynamic("status")(0)
                                                                                             }
 
@@ -307,7 +314,9 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
                                 _progressBar setPercentDone 100
                                 _progressBar setTitle "Запись в БД".ellipsis
-                            case any ⇒
+                            case 3 ⇒
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Прерванная запись в БД".ellipsis
                         }
 
                         component

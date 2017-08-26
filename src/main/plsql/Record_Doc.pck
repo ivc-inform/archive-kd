@@ -42,8 +42,9 @@ create or replace package body Record_Doc is
     update arx_attatch
     set    attfile = ord_doc
     where  id = fid;
-		exception when others then
-			null;
+  /*exception
+    when others then
+      null;*/
   end;
 
   function check_loc_record(fid integer) return integer is
