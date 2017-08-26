@@ -205,9 +205,10 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerExposedPorts in Docker := Seq(8080),
 
         version := version.value,
-        packageName in Docker := s"ivcinform/${CommonSettings.settingValues.name}",
+        packageName in Docker := CommonSettings.settingValues.name,
         dockerUsername in Docker := None,
         dockerRepository in Docker := Some("hub.docker.com"),
+        dockerRepository := Some("ivcinform"),
         dockerUpdateLatest in Docker := true,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
