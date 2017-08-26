@@ -257,6 +257,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                         okFunction = {
                                                                             (thiz: classHandler) ⇒
                                                                                 thizTop.disable()
+                                                                                thizTop.prompt = "Заблокирован"
                                                                                 thiz.form.foreach(_.submitForm())
                                                                                 thiz.markForDestroy()
                                                                         }.toThisFunc.opt
