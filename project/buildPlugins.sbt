@@ -20,5 +20,3 @@ lazy val root = Project(id = "buildPlugins", base = file(".")).dependsOn(/*RootP
       PluginDeps.jrebelPlugin,
       PluginDeps.scalaJSPlugin
   )
-
-//docker.io/ivcinform/b404
