@@ -39,6 +39,7 @@ trait UploadData extends JSObject {
     val fileName: JSUndefined[String]
     val fileSize: JSUndefined[Double]
     val elapsedTime: JSUndefined[String]
+    val title: JSUndefined[String]
 }
 
 trait ErrorStr extends JSObject {
@@ -153,9 +154,6 @@ object UploadContainer {
                                             channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = JsonObject("percentsDone" → JsonLong(step)), channels = channelMessageUploadPercent)))
                                             step += 1
                                         }
-
-                                        if (pBytesRead == pContentLength)
-                                            channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
                                     }
                                 }
 
@@ -214,6 +212,8 @@ object UploadContainer {
                                                 }
                                         }
 
+                                        def sendMessageTypeRecordInBase(title:String) = channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(data = JsonObject("title" → title), channels = channelMessageRecordInBase)))
+
                                         transaction(connection) {
                                             connection ⇒
                                                 callableStatement(connection, "begin Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
@@ -266,6 +266,7 @@ object UploadContainer {
                                                                 index += 1
                                                                 source.localData match {
                                                                     case Some(localData) ⇒
+                                                                        sendMessageTypeRecordInBase("Операция: SetBlob")
                                                                         recStatus(2, idAttatch)
                                                                         callableStatement.setBlob(index, localData)
                                                                     case None ⇒
@@ -301,6 +302,7 @@ object UploadContainer {
                                                         ordDoc.comments match {
                                                             case Some(comments) ⇒
                                                                 recStatus(2, idAttatch)
+                                                                sendMessageTypeRecordInBase("Операция: SetClob")
                                                                 clob.setString(1L, comments)
                                                                 callableStatement.setClob(index, clob)
                                                             case None ⇒
@@ -310,6 +312,7 @@ object UploadContainer {
                                                         index += 1
                                                         callableStatement.setLong(index, idAttatch)
                                                         recStatus(2, idAttatch)
+                                                        sendMessageTypeRecordInBase("Завпись в БД ...")
                                                         callableStatement.executeUpdate()
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)

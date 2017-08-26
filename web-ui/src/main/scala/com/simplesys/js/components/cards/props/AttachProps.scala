@@ -183,11 +183,16 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                 thiz.disable()
                                                 thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                     (e: MessageJS) ⇒
-                                                        thiz.progressBar.foreach {
-                                                            progressBar ⇒
-                                                                if (!progressBar.destroyed.getOrElse(false))
-                                                                    progressBar setPercentDone 100
-                                                                progressBar setTitle "Запись в БД".ellipsis
+                                                        e.data.foreach {
+                                                            data ⇒
+                                                                val _data = data.asInstanceOf[UploadData]
+                                                                thiz.progressBar.foreach {
+                                                                    progressBar ⇒
+                                                                        if (!progressBar.destroyed.getOrElse(false)) {
+                                                                            progressBar setPercentDone 100
+                                                                            _data.title.foreach(progressBar setTitle _)
+                                                                        }
+                                                                }
                                                         }
                                                 ))
                                                 thiz.channelMessageUploadPercent.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
