@@ -81,19 +81,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         }
                 }
             }
-
-            thisTop.record.foreach {
-                record ⇒
-                    val status = record.status.getOrElse(0)
-
-                    if (status != 0) {
-                        if (status != 3)
-                            thisTop.disable()
-                        thisTop.subscribeFunction()
-                    }
-            }
-
-
+            
     }.toThisFunc.opt
 
 

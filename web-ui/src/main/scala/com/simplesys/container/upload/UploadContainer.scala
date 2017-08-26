@@ -27,7 +27,7 @@ import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
 import org.apache.commons.io.IOUtils.copyLarge
-import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo, AttatchDS}
+import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo}
 
 import scala.collection.JavaConverters._
 import scala.compat.Platform.EOL

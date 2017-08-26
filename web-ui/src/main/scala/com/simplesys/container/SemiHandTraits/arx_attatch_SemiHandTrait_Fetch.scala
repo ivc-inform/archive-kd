@@ -84,7 +84,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                     arx_attatch_vizcode_NameStrong.name → vizcodeDocizv,
                                     arx_attatch_vattypename_NameStrong.name → vattypenameAttatchtypes,
                                     arx_attatch_vcrcode_NameStrong.name → vcrcodeCard,
-                                    arx_attatch_status_NameStrong.name → statusAttatch.headOption.map{status ⇒ status match {
+                                    arx_attatch_status_NameStrong.name → statusAttatch.headOption.map{_ match {
                                         case 1 ⇒ checkStatus(idAttatch)
                                         case 2 ⇒ checkStatus(idAttatch)
                                         case status ⇒ status
