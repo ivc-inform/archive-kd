@@ -23,11 +23,12 @@ import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener, DatabaseChangeRegistration}
 import oracle.jdbc.{OracleBlob, OracleClob, OracleConnection}
+import oracle.sql.BLOB
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
-import org.apache.commons.io.IOUtils.copyLarge
-import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo, AttatchDS}
+import org.apache.commons.io.IOUtils._
+import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo}
 
 import scala.collection.JavaConverters._
 import scala.compat.Platform.EOL
@@ -39,6 +40,7 @@ trait UploadData extends JSObject {
     val fileName: JSUndefined[String]
     val fileSize: JSUndefined[Double]
     val elapsedTime: JSUndefined[String]
+    val title: JSUndefined[String]
 }
 
 trait ErrorStr extends JSObject {
@@ -52,7 +54,7 @@ object UploadContainer {
     class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
 
         val requestData = new DSRequestDyn(request)
-        val connection = oraclePool.getConnection()
+        val connection = oraclePool.getConnection().asInstanceOf[OracleConnection]
         val connection1 = oraclePool.getConnection()
 
         val dataSetBo = AttatchBo(oraclePool)
@@ -153,13 +155,12 @@ object UploadContainer {
                                             channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = JsonObject("percentsDone" → JsonLong(step)), channels = channelMessageUploadPercent)))
                                             step += 1
                                         }
-
-                                        if (pBytesRead == pContentLength)
-                                            channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(channels = channelMessageRecordInBase)))
                                     }
                                 }
 
                                 upload setProgressListener progressListener
+
+                                def sendMessageTypeRecordInBase(title: String) = channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(data = JsonObject("title" → JsonString(title)), channels = channelMessageRecordInBase)))
 
                                 recStatus(1, idAttatch)
                                 upload.parseRequest(request).asScala.headOption.map {
@@ -167,7 +168,8 @@ object UploadContainer {
                                         val blob = connection.createBlob().asInstanceOf[OracleBlob]
                                         val clob = connection.createClob().asInstanceOf[OracleClob]
 
-                                        val fiSize = copyLarge(fi.getInputStream, blob.setBinaryStream(1))
+                                        sendMessageTypeRecordInBase("Преобразование данных ...")
+                                        val fiSize = copy(fi.getInputStream, blob.setBinaryStream(1), 100 * 1024 * 1024)
 
                                         def getEmptySource: OrdSource =
                                             new OrdSource {
@@ -266,6 +268,7 @@ object UploadContainer {
                                                                 index += 1
                                                                 source.localData match {
                                                                     case Some(localData) ⇒
+                                                                        sendMessageTypeRecordInBase("Операция: SetBlob")
                                                                         recStatus(2, idAttatch)
                                                                         callableStatement.setBlob(index, localData)
                                                                     case None ⇒
@@ -301,6 +304,7 @@ object UploadContainer {
                                                         ordDoc.comments match {
                                                             case Some(comments) ⇒
                                                                 recStatus(2, idAttatch)
+                                                                sendMessageTypeRecordInBase("Операция: SetClob")
                                                                 clob.setString(1L, comments)
                                                                 callableStatement.setClob(index, clob)
                                                             case None ⇒
@@ -310,6 +314,7 @@ object UploadContainer {
                                                         index += 1
                                                         callableStatement.setLong(index, idAttatch)
                                                         recStatus(2, idAttatch)
+                                                        sendMessageTypeRecordInBase("Запись в БД ...")
                                                         callableStatement.executeUpdate()
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
@@ -361,7 +366,7 @@ object UploadContainer {
         def receive = {
             case GetData => {
                 def recStatus(status: Long, id: Long) = {
-                    prepareStatement(connection, "update arx_attatch set status = ? where id = ?") {
+                    prepareStatement(connection, "update arx_attatch set status = ?, attfile = null where id = ?") {
                         preparedStatement ⇒
                             preparedStatement.setLong(1, status)
                             preparedStatement.setLong(2, id)

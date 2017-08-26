@@ -1,22 +1,12 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
-import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ListGridContextMenuWithFormProps, ProgressbarProps}
-import com.simplesys.SmartClient.DataBinding.props.JSONEncoderProps
-import com.simplesys.SmartClient.DataBinding.{JSON, JSONEncoder}
-import com.simplesys.SmartClient.Foundation.Canvas
-import com.simplesys.SmartClient.Foundation.props.CanvasProps
-import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
+import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ProgressbarProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
-import com.simplesys.SmartClient.Layout.HLayoutSS
-import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.Messaging.MessageJS
+import com.simplesys.SmartClient.RPC.props.RPCRequestProps
 import com.simplesys.SmartClient.RPC.{RPCManagerSS, RPCRequest, RPCResponse}
-import com.simplesys.SmartClient.RPC.props.{RPCRequestProps, RPCResponseProps}
-import com.simplesys.SmartClient.System.{HLayoutSS, _}
-import com.simplesys.SmartClient.sse.Sse
-import com.simplesys.System.Types.ListGridEditEvent.ListGridEditEvent
-import com.simplesys.System.Types.RecordComponentPoolingMode.RecordComponentPoolingMode
+import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridEditEvent, ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.System._
 import com.simplesys.app.{AttachRowComponent, ImgButtonAttatch, WindowUploadDialog}
@@ -24,13 +14,12 @@ import com.simplesys.container.upload.{ErrorStr, UploadData}
 import com.simplesys.function._
 import com.simplesys.js.components.cards.{Attach, AttachRowComponent}
 import com.simplesys.option.DoubleType._
-import com.simplesys.option.{ScNone, ScOption}
+import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
 import scala.scalajs.js
-import scala.scalajs.js.UndefOr
 import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
@@ -157,10 +146,35 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         showDown = false.opt
                                         showRollOver = false.opt
                                         layoutAlign = Alignment.center
-                                        prompt = (if (_record.status.getOrElse(0) == 2) "Снять зависшую блокировку".ellipsis else "Прикрепить файл".ellipsis).opt
+                                        prompt = {
+                                            _record.status.getOrElse(0) match {
+                                                case 0 ⇒ "Прикрепить файл".ellipsis
+                                                case 1 ⇒ "Заблокирован"
+                                                case 2 ⇒ "Заблокирован"
+                                                case 3 ⇒ "Снять зависшую блокировку"
+                                                case _ ⇒ "Неизвестное состояние"
+                                            }
+                                        }.opt
+                                        disabled = {
+                                            _record.status.getOrElse(0) match {
+                                                case 0 ⇒ false
+                                                case 1 ⇒ true
+                                                case 2 ⇒ true
+                                                case 3 ⇒ false
+                                                case _ ⇒ true
+                                            }
+                                        }.opt
                                         height = 18
                                         width = 18
-                                        src = (if (_record.status.getOrElse(0) == 2) Common.cancel else Common.attach).opt
+                                        src = {
+                                            _record.status.getOrElse(0) match {
+                                                case 0 ⇒ Common.attach
+                                                case 1 ⇒ ""
+                                                case 2 ⇒ ""
+                                                case 3 ⇒ Common.cancel
+                                                case _ ⇒ ""
+                                            }
+                                        }.opt
                                         progressBar = _progressBar.opt
                                         record = _record.opt
                                         showDisabledIcon = false.opt
@@ -169,11 +183,16 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                 thiz.disable()
                                                 thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
                                                     (e: MessageJS) ⇒
-                                                        thiz.progressBar.foreach {
-                                                            progressBar ⇒
-                                                                if (!progressBar.destroyed.getOrElse(false))
-                                                                    progressBar setPercentDone 100
-                                                                progressBar setTitle "Запись в БД".ellipsis
+                                                        e.data.foreach {
+                                                            data ⇒
+                                                                val _data = data.asInstanceOf[UploadData]
+                                                                thiz.progressBar.foreach {
+                                                                    progressBar ⇒
+                                                                        if (!progressBar.destroyed.getOrElse(false)) {
+                                                                            progressBar setPercentDone 100
+                                                                            _data.title.foreach(progressBar setTitle _)
+                                                                        }
+                                                                }
                                                         }
                                                 ))
                                                 thiz.channelMessageUploadPercent.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
@@ -213,6 +232,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                 thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
                                                                 thiz setSrc Common.attach
                                                                 thiz.enable()
+
+                                                                _data.elapsedTime.foreach(elapsedTime ⇒ _data.fileSize.foreach(fileSize ⇒ isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")))
                                                             }
                                                     }
                                                     unsubscribe()
@@ -243,6 +264,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                         okFunction = {
                                                                             (thiz: classHandler) ⇒
                                                                                 thizTop.disable()
+                                                                                thizTop.prompt = "Заблокирован"
                                                                                 thiz.form.foreach(_.submitForm())
                                                                                 thiz.markForDestroy()
                                                                         }.toThisFunc.opt
@@ -263,6 +285,11 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                                         (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
                                                                                             if (resp.httpResponseCode == 200) {
                                                                                                 thizTop setSrc Common.attach
+                                                                                                thizTop.progressBar.foreach{
+                                                                                                    progressBar ⇒
+                                                                                                        progressBar setTitle ""
+                                                                                                        progressBar setPercentDone 0
+                                                                                                }
                                                                                                 thizTop.record.asInstanceOf[JSDynamic].updateDynamic("status")(0)
                                                                                             }
 
@@ -293,7 +320,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                 _progressBar setPercentDone 100
                                 _progressBar setTitle "Запись в БД".ellipsis
                             case 3 ⇒
-                                component.imgButtonAttatch.foreach(_.setSrc(Common.cancel))
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Прерванная запись в БД".ellipsis
                         }
 
                         component
