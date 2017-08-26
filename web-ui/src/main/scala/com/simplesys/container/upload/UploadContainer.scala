@@ -165,7 +165,7 @@ object UploadContainer {
                                 recStatus(1, idAttatch)
                                 upload.parseRequest(request).asScala.headOption.map {
                                     fi ⇒
-                                        val blob = connection.createBlob().asInstanceOf[BLOB]
+                                        val blob = connection.createBlob().asInstanceOf[OracleBlob]
                                         val clob = connection.createClob().asInstanceOf[OracleClob]
 
                                         sendMessageTypeRecordInBase("Преобразование данных ...")
