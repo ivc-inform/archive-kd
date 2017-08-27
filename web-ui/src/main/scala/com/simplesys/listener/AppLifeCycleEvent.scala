@@ -19,7 +19,11 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val dbPoolDefault = config.getString("dbPool.default")
+        val dbPoolDefault =  sys.env.get("dbPool.default") match {
+            case None ⇒ config.getString("dbPool.default")
+            case Some(value) ⇒ value
+        }
+        
         logger trace s"dbPoolDefault: $dbPoolDefault"
 
         //val oraclePool = new OracleHikariDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
