@@ -3,6 +3,7 @@ package com.simplesys.listener
 import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
+import com.simplesys.hikari.OracleHikariDataSource
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ServletContextEvent
 
@@ -19,10 +20,12 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val dbPoolDefault =  sys.env.get("dbPool.default") match {
+        /*val dbPoolDefault =  sys.env.get("dbPool.default") match {
             case None ⇒ config.getString("dbPool.default")
             case Some(value) ⇒ value
-        }
+        }*/
+
+        val dbPoolDefault =   config.getString("dbPool.default")
         
         logger trace s"dbPoolDefault: $dbPoolDefault"
 
