@@ -32,7 +32,7 @@ ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 GRANT DBA TO B404SP3DEMO;
 
 @/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql;
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; 
 @/u01/app/oracle/product/11.2/db_1/xdk/admin/xmlja.sql;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql;
