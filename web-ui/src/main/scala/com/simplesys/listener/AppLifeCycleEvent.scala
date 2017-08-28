@@ -15,18 +15,17 @@ object AppLifeCycleEvent {
 class AppLifeCycleEvent extends CommonWebAppListener {
 
     import AppLifeCycleEvent._
+
     override val loadSchemas = com.simplesys.app.loadSchemas
     override def UserContextInitialized(sce: ServletContextEvent) {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        /*val dbPoolDefault =  sys.env.get("dbPool.default") match {
+        val dbPoolDefault = sys.env.get("dbPool.default") match {
             case None ⇒ config.getString("dbPool.default")
             case Some(value) ⇒ value
-        }*/
+        }
 
-        val dbPoolDefault =   config.getString("dbPool.default")
-        
         logger trace s"dbPoolDefault: $dbPoolDefault"
 
         //val oraclePool = new OracleHikariDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
@@ -51,6 +50,6 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
 
     override def ContextDestroyed1(sce: ServletContextEvent) {
-        
+
     }
 }
