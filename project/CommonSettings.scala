@@ -15,7 +15,7 @@ object CommonSettings {
       "-language:implicitConversions",
       "-language:existentials",
       "-language:postfixOps",
-      //"-deprecation",
+      "-deprecation",
       "-unchecked")
   }
 
