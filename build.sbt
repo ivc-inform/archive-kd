@@ -263,8 +263,3 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     skip in packageJSDependencies := false,
     jsDependencies += "org.webjars" % "jquery" % "3.2.1" / "3.2.1/jquery.js"
 ).settings(CommonSettings.defaultProjectSettings)
-
-
-
-
-
