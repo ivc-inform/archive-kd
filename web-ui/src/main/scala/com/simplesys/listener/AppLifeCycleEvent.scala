@@ -22,10 +22,7 @@ class AppLifeCycleEvent extends CommonWebAppListener {
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
         logger trace s"================================= dbPool.default -> ${sys.env.get("dbPool.default")} =================================================="
-        val dbPoolDefault = sys.env.get("dbPool.default") match {
-            case None ⇒ config.getString("dbPool.default")
-            case Some(value) ⇒ value
-        }
+        val dbPoolDefault = sys.env.get("dbPool.default").getOrElse(config.getString("dbPool.default"))
 
         logger trace s"dbPoolDefault: $dbPoolDefault"
 
