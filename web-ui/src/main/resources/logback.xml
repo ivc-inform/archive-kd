@@ -41,7 +41,7 @@
     <logger name="ru.simplesys.defs.bo.arx.CardDS" level="debug"/>
 
     <!--Вывод регистрации сервлетов-->
-    <logger name="com.simplesys.listener.AppLifeCycleEvent" level="debug"/>
+    <logger name="com.simplesys.listener.AppLifeCycleEvent" level="trace"/>
     <logger name="com.simplesys.listener.CommonWebAppListener" level="debug"/>
 
     <!--<logger name="com.simplesys.mfms.containers.ManagerOfFixedTemplates_FetchTemplateActor" level="debug" additivity="false">

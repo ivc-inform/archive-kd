@@ -84,7 +84,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     addCommandAlias("reset", "; clean ; compile ; fastOptJS "),
     addCommandAlias("full-reset", "; clean ; package ; fastOptJS "),
     addCommandAlias("buildDockerImage", "; clean ; fastOptJS ; package; docker:publishLocal"),
-    addCommandAlias("buildAndPublishDockerImage", "; clean ; fastOptJS ; package; docker:publish"),
+    //addCommandAlias("buildAndPublishDockerImage", "; clean ; fastOptJS ; package; docker:publish"),
 
     JRebelPlugin.jrebelSettings,
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
