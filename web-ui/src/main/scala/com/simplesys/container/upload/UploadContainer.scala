@@ -166,7 +166,7 @@ object UploadContainer {
                                         val clob = connection.createClob().asInstanceOf[OracleClob]
 
                                         sendMessageTypeRecordInBase("Преобразование данных ...")
-                                        val fiSize = copy(fi.getInputStream, blob.setBinaryStream(1), 100 * 1024 * 1024)
+                                        val fiSize = copyLarge(fi.getInputStream, blob.setBinaryStream(1))
 
                                         def getEmptySource: OrdSource =
                                             new OrdSource {
