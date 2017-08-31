@@ -37,6 +37,7 @@
 
     <logger name="com.simplesys.filter.ReLoginAxFilter" level="debug"/>
     <logger name="ru.simplesys.defs.bo.arx.CardDS" level="debug"/>
+    <logger name="com.simplesys.oracle.pool.OraclePoolDataSource" level="trace"/>
 
     <!--Вывод регистрации сервлетов-->
     <logger name="com.simplesys.listener.AppLifeCycleEvent" level="debug"/>
