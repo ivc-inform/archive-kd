@@ -22,12 +22,10 @@ import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
 import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
 import com.simplesys.util.DT
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener, DatabaseChangeRegistration}
-import oracle.jdbc.{OracleBlob, OracleClob, OracleConnection}
-import oracle.sql.BLOB
+import oracle.jdbc.{OracleBlob, OracleConnection}
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
-import org.apache.commons.io.IOUtils._
 import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo}
 
 import scala.collection.JavaConverters._
@@ -162,12 +160,6 @@ object UploadContainer {
                                 recStatus(1, idAttatch)
                                 upload.parseRequest(request).asScala.headOption.map {
                                     fi ⇒
-                                        val blob = connection.createBlob().asInstanceOf[OracleBlob]
-                                        val clob = connection.createClob().asInstanceOf[OracleClob]
-
-                                        sendMessageTypeRecordInBase("Преобразование данных ...")
-                                        val fiSize = copyLarge(fi.getInputStream, blob.setBinaryStream(1))
-
                                         def getEmptySource: OrdSource =
                                             new OrdSource {
                                                 override val srcName: Option[String] = Some(fi.getName)
@@ -175,7 +167,7 @@ object UploadContainer {
                                                 override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
                                                 override val local: Option[BigDecimal] = None
                                                 override val srcType: Option[String] = Some("FILE")
-                                                override val localData: Option[OracleBlob] = Some(blob)
+                                                override val localData: Option[OracleBlob] = None
                                             }
 
 
@@ -189,7 +181,7 @@ object UploadContainer {
                                                             override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
                                                             override val local: Option[BigDecimal] = Some(1)
                                                             override val srcType: Option[String] = source.srcType
-                                                            override val localData: Option[OracleBlob] = Some(blob)
+                                                            override val localData: Option[OracleBlob] = None
                                                         }
                                                     case None ⇒
                                                         getEmptySource
@@ -200,7 +192,7 @@ object UploadContainer {
                                                     override val format: Option[String] = Some(fi.getContentType)
                                                     override val source: Option[OrdSource] = Some(_source)
                                                     override val mimeType: Option[String] = None
-                                                    override val contentLength: Option[BigDecimal] = Some(fiSize)
+                                                    override val contentLength: Option[BigDecimal] = Some(fi.getSize)
                                                 }
 
                                             case None ⇒
@@ -209,7 +201,7 @@ object UploadContainer {
                                                     override val format: Option[String] = Some(fi.getContentType)
                                                     override val source: Option[OrdSource] = Some(getEmptySource)
                                                     override val mimeType: Option[String] = None
-                                                    override val contentLength: Option[BigDecimal] = Some(fiSize)
+                                                    override val contentLength: Option[BigDecimal] = Some(fi.getSize)
                                                 }
                                         }
 
@@ -218,6 +210,9 @@ object UploadContainer {
                                                 callableStatement(connection, "begin Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
                                                     callableStatement ⇒
 
+                                                        recStatus(2, idAttatch)
+                                                        sendMessageTypeRecordInBase("Запись в БД ...")
+                                                        
                                                         var index = 1
 
                                                         ordDoc.source.foreach {
@@ -263,14 +258,7 @@ object UploadContainer {
                                                                 }
 
                                                                 index += 1
-                                                                source.localData match {
-                                                                    case Some(localData) ⇒
-                                                                        sendMessageTypeRecordInBase("Операция: SetBlob")
-                                                                        recStatus(2, idAttatch)
-                                                                        callableStatement.setBlob(index, localData)
-                                                                    case None ⇒
-                                                                        callableStatement.setNull(index, Types.BLOB)
-                                                                }
+                                                                callableStatement.setBlob(index, fi.getInputStream)
                                                         }
 
                                                         index += 1
@@ -300,19 +288,13 @@ object UploadContainer {
                                                         index += 1
                                                         ordDoc.comments match {
                                                             case Some(comments) ⇒
-                                                                recStatus(2, idAttatch)
-                                                                sendMessageTypeRecordInBase("Операция: SetClob")
-                                                                //clob.setString(1L, comments)
-                                                                //callableStatement.setClob(index, clob)
                                                                 callableStatement.setString(index, comments)
                                                             case None ⇒
-                                                                callableStatement.setNull(index, Types.CLOB)
+                                                                callableStatement.setString(index, "Recorded by Archive-KD")
                                                         }
 
                                                         index += 1
                                                         callableStatement.setLong(index, idAttatch)
-                                                        recStatus(2, idAttatch)
-                                                        sendMessageTypeRecordInBase("Запись в БД ...")
                                                         callableStatement.executeUpdate()
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
