@@ -52,8 +52,6 @@ object UploadContainer {
     class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
 
         val requestData = new DSRequestDyn(request)
-        val connection = oraclePool.getConnection().asInstanceOf[OracleConnection]
-
         val dataSetBo = AttatchBo(oraclePool)
 
         logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
@@ -82,24 +80,6 @@ object UploadContainer {
                 val channelMessageUploadPercent = request.Parameter("p3")
                 val channelMessageRecordInBase = request.Parameter("p4")
 
-                val dcr: Option[DatabaseChangeRegistration] = {
-                    Try {
-                        val prop = new Properties()
-                        prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
-                        val dcr = connection.asInstanceOf[OracleConnection].registerDatabaseChangeNotification(prop)
-
-                        dcr.addListener(new DatabaseChangeListener {
-                            def onDatabaseChangeNotification(dce: DatabaseChangeEvent): Unit = {
-                                ///?????
-                            }
-                        })
-                        dcr
-                    } match {
-                        case Success(dcr) ⇒ Some(dcr)
-                        case Failure(e) ⇒ None
-                    }
-                }
-
                 val factory = new DiskFileItemFactory()
                 val file = new File(s"./temp")
 
@@ -109,7 +89,6 @@ object UploadContainer {
                 if (!isMultipart) {
                     channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString("No file uploaded"), "stack" → JsonString("No file uploaded")), channels = channelMessageError)))
                     OutFailure(new RuntimeException("No file uploaded"))
-                    connection.close()
                 } else {
                     idAttatch.foreach {
                         idAttatch ⇒
@@ -153,7 +132,7 @@ object UploadContainer {
 
                                 def sendMessageTypeRecordInBase(title: String) = channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(data = JsonObject("title" → JsonString(title)), channels = channelMessageRecordInBase)))
 
-                                transaction(oraclePool.getConnection().asInstanceOf[OracleConnection]) {
+                                transaction(oraclePool.getConnection()) {
                                     connectionBlock ⇒
                                         recordLock(connectionBlock, idAttatch)
                                         upload.parseRequest(request).asScala.headOption.map {
@@ -203,9 +182,27 @@ object UploadContainer {
                                                         }
                                                 }
 
-                                                transaction(connectionBlock) {
-                                                    connection ⇒
-                                                        callableStatement(connection, "begin Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
+                                                transaction(oraclePool.getConnection()) {
+                                                    mainConnection ⇒
+                                                        val dcr: Option[DatabaseChangeRegistration] = {
+                                                            Try {
+                                                                val prop = new Properties()
+                                                                prop.setProperty(OracleConnection.DCN_NOTIFY_ROWIDS, "true")
+                                                                val dcr = mainConnection.asInstanceOf[OracleConnection].registerDatabaseChangeNotification(prop)
+
+                                                                dcr.addListener(new DatabaseChangeListener {
+                                                                    def onDatabaseChangeNotification(dce: DatabaseChangeEvent): Unit = {
+                                                                        ///?????
+                                                                    }
+                                                                })
+                                                                dcr
+                                                            } match {
+                                                                case Success(dcr) ⇒ Some(dcr)
+                                                                case Failure(e) ⇒ None
+                                                            }
+                                                        }
+
+                                                        callableStatement(mainConnection, "begin Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
                                                             callableStatement ⇒
 
                                                                 sendMessageTypeRecordInBase("Запись в БД ...")
@@ -294,11 +291,12 @@ object UploadContainer {
                                                                 callableStatement.setLong(index, idAttatch)
                                                                 callableStatement.executeUpdate()
 
-                                                                dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
+                                                                dcr.foreach(mainConnection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
                                                         }
                                                 }.result match {
                                                     case scalaz.Success(res) ⇒
                                                     case scalaz.Failure(e) ⇒
+                                                        fi.delete()
                                                         throw e
                                                 }
 
