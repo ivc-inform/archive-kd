@@ -92,12 +92,7 @@ object UploadContainer {
                 } else {
                     idAttatch.foreach {
                         idAttatch ⇒
-
-                            val attachRecord: Attatch = dataSetBo.selectPOne(where = Where(dataSetBo.id === idAttatch)) result match {
-                                case scalaz.Success(attach) ⇒ attach
-                                case scalaz.Failure(e) ⇒ throw e
-                            }
-
+                          
                             def recordLock(connection: Connection, id: Long) = {
                                 callableStatement(connection, "begin record_doc.set_lock_record(fid => ?); end;") {
                                     callableStatement ⇒
