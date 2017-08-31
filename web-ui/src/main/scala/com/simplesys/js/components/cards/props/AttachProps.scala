@@ -165,7 +165,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         src = {
                                             _record.status.getOrElse(0) match {
                                                 case 0 ⇒ Common.attach
-                                                case 2 ⇒ Common.attachDisable
+                                                case 2 ⇒ Common.attach
                                                 case _ ⇒ Common.iconUnknown
                                             }
                                         }.opt
