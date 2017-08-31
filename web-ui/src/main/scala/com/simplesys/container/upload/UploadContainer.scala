@@ -207,13 +207,14 @@ object UploadContainer {
 
                                         transaction(connection) {
                                             connection ⇒
-                                                callableStatement(connection, "begin Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
+                                                callableStatement(connection, "begin result := Record_Doc.MainRecOrdDoc(source_srcname => ?, source_srclocation => ?, source_updatetime => ?, source_local => ?, source_srctype => ?,source_localdata => ?, orddoc_format => ?, orddoc_mimetype => ?, orddoc_contentlength => ?, orddoc_comments => ?, fid => ?); end;") {
                                                     callableStatement ⇒
 
                                                         recStatus(2, idAttatch)
                                                         sendMessageTypeRecordInBase("Запись в БД ...")
-                                                        
-                                                        var index = 1
+
+                                                        callableStatement.registerOutParameter(1, Types.NUMERIC)
+                                                        var index = 2
 
                                                         ordDoc.source.foreach {
                                                             source ⇒
@@ -296,6 +297,7 @@ object UploadContainer {
                                                         index += 1
                                                         callableStatement.setLong(index, idAttatch)
                                                         callableStatement.executeUpdate()
+                                                        val result = callableStatement.getInt(1)
 
                                                         dcr.foreach(connection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
                                                 }

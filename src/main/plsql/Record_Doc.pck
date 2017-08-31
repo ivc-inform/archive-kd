@@ -1,32 +1,32 @@
 create or replace package Record_Doc is
-  procedure MainRecOrdDoc(source_srcName       varchar2,
-                          source_srcLocation   varchar2,
-                          source_updateTime    date,
-                          source_local         integer,
-                          source_srcType       varchar2,
-                          source_localData     blob,
-                          orddoc_format        varchar2,
-                          orddoc_mimeType      varchar2,
-                          orddoc_contentLength integer,
-                          orddoc_comments      clob,
-                          fid                  number);
+  function MainRecOrdDoc(source_srcName       varchar2,
+                         source_srcLocation   varchar2,
+                         source_updateTime    date,
+                         source_local         integer,
+                         source_srcType       varchar2,
+                         source_localData     blob,
+                         orddoc_format        varchar2,
+                         orddoc_mimeType      varchar2,
+                         orddoc_contentLength integer,
+                         orddoc_comments      clob,
+                         fid                  number) return integer;
 
   function check_loc_record(fid integer) return integer;
 
 end Record_Doc;
 /
 create or replace package body Record_Doc is
-  procedure MainRecOrdDoc(source_srcName       varchar2,
-                          source_srcLocation   varchar2,
-                          source_updateTime    date,
-                          source_local         integer,
-                          source_srcType       varchar2,
-                          source_localData     blob,
-                          orddoc_format        varchar2,
-                          orddoc_mimeType      varchar2,
-                          orddoc_contentLength integer,
-                          orddoc_comments      clob,
-                          fid                  number) as
+  function MainRecOrdDoc(source_srcName       varchar2,
+                         source_srcLocation   varchar2,
+                         source_updateTime    date,
+                         source_local         integer,
+                         source_srcType       varchar2,
+                         source_localData     blob,
+                         orddoc_format        varchar2,
+                         orddoc_mimeType      varchar2,
+                         orddoc_contentLength integer,
+                         orddoc_comments      clob,
+                         fid                  number) return integer as
     ord_doc ordsys.orddoc;
     edit_id number;
   begin
@@ -42,9 +42,11 @@ create or replace package body Record_Doc is
     update arx_attatch
     set    attfile = ord_doc
     where  id = fid;
-  /*exception
+  
+    return 0;
+  exception
     when others then
-      null;*/
+      return 2;
   end;
 
   function check_loc_record(fid integer) return integer is
