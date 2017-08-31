@@ -162,11 +162,12 @@ object UploadContainer {
                                 recStatus(1, idAttatch)
                                 upload.parseRequest(request).asScala.headOption.map {
                                     fi ⇒
-                                        val blob = connection.createBlob().asInstanceOf[OracleBlob]
-                                        val clob = connection.createClob().asInstanceOf[OracleClob]
+                                        /*val blob = connection.createBlob().asInstanceOf[OracleBlob]
+                                        val clob = connection.createClob().asInstanceOf[OracleClob]*/
 
-                                        sendMessageTypeRecordInBase("Преобразование данных ...")
-                                        val fiSize = copyLarge(fi.getInputStream, blob.setBinaryStream(1))
+                                        //sendMessageTypeRecordInBase("Преобразование данных ...")
+                                        //val fiSize = copyLarge(fi.getInputStream, blob.setBinaryStream(1))
+                                        val fiSize = fi.getSize
 
                                         def getEmptySource: OrdSource =
                                             new OrdSource {
@@ -175,7 +176,8 @@ object UploadContainer {
                                                 override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
                                                 override val local: Option[BigDecimal] = None
                                                 override val srcType: Option[String] = Some("FILE")
-                                                override val localData: Option[OracleBlob] = Some(blob)
+                                                //override val localData: Option[OracleBlob] = Some(blob)
+                                                override val localData: Option[OracleBlob] = None
                                             }
 
 
@@ -189,7 +191,8 @@ object UploadContainer {
                                                             override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
                                                             override val local: Option[BigDecimal] = Some(1)
                                                             override val srcType: Option[String] = source.srcType
-                                                            override val localData: Option[OracleBlob] = Some(blob)
+                                                            //override val localData: Option[OracleBlob] = Some(blob)
+                                                            override val localData: Option[OracleBlob] = None
                                                         }
                                                     case None ⇒
                                                         getEmptySource
@@ -267,7 +270,8 @@ object UploadContainer {
                                                                     case Some(localData) ⇒
                                                                         sendMessageTypeRecordInBase("Операция: SetBlob")
                                                                         recStatus(2, idAttatch)
-                                                                        callableStatement.setBlob(index, localData)
+                                                                        //callableStatement.setBlob(index, localData)
+                                                                        callableStatement.setBinaryStream(index, fi.getInputStream)
                                                                     case None ⇒
                                                                         callableStatement.setNull(index, Types.BLOB)
                                                                 }
@@ -302,8 +306,9 @@ object UploadContainer {
                                                             case Some(comments) ⇒
                                                                 recStatus(2, idAttatch)
                                                                 sendMessageTypeRecordInBase("Операция: SetClob")
-                                                                clob.setString(1L, comments)
-                                                                callableStatement.setClob(index, clob)
+                                                                //clob.setString(1L, comments)
+                                                                //callableStatement.setClob(index, clob)
+                                                                callableStatement.setString(index, comments)
                                                             case None ⇒
                                                                 callableStatement.setNull(index, Types.CLOB)
                                                         }
