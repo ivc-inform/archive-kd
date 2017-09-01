@@ -127,42 +127,6 @@ object UploadContainer {
 
                                 def sendMessageTypeRecordInBase(title: String) = channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(data = JsonObject("title" → JsonString(title)), channels = channelMessageRecordInBase)))
 
-<<<<<<< HEAD
-                                recStatus(1, idAttatch)
-                                upload.parseRequest(request).asScala.headOption.map {
-                                    fi ⇒
-                                        /*val blob = connection.createBlob().asInstanceOf[OracleBlob]
-                                        val clob = connection.createClob().asInstanceOf[OracleClob]*/
-
-                                        //sendMessageTypeRecordInBase("Преобразование данных ...")
-                                        //val fiSize = copyLarge(fi.getInputStream, blob.setBinaryStream(1))
-                                        val fiSize = fi.getSize
-
-                                        def getEmptySource: OrdSource =
-                                            new OrdSource {
-                                                override val srcName: Option[String] = Some(fi.getName)
-                                                override val srcLocation: Option[String] = None
-                                                override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                                                override val local: Option[BigDecimal] = None
-                                                override val srcType: Option[String] = Some("FILE")
-                                                //override val localData: Option[OracleBlob] = Some(blob)
-                                                override val localData: Option[OracleBlob] = None
-                                            }
-
-
-                                        def ordDoc: OrdDoc = GetAttFile.getOrdDoc(idAttatch) match {
-                                            case Some(ordDoc) ⇒
-                                                val _source = ordDoc.source match {
-                                                    case Some(source) ⇒
-                                                        new OrdSource {
-                                                            override val srcName: Option[String] = Some(fi.getName)
-                                                            override val srcLocation: Option[String] = None
-                                                            override val updateTime: Option[LocalDateTime] = Some(Instant.ofEpochMilli(System.currentTimeMillis()).atZone(ZoneId.systemDefault).toLocalDateTime)
-                                                            override val local: Option[BigDecimal] = Some(1)
-                                                            override val srcType: Option[String] = source.srcType
-                                                            //override val localData: Option[OracleBlob] = Some(blob)
-                                                            override val localData: Option[OracleBlob] = None
-=======
                                 transaction(oraclePool.getConnection()) {
                                     connectionBlock ⇒
                                         recordLock(connectionBlock, idAttatch)
@@ -193,9 +157,7 @@ object UploadContainer {
                                                                 }
                                                             case None ⇒
                                                                 getEmptySource
->>>>>>> bd89c98a5f124645c23818b9f978e09865689cac
                                                         }
-
                                                         new OrdDoc {
                                                             override val comments: Option[String] = Some("Updated by UploadContainer !!")
                                                             override val format: Option[String] = Some(fi.getContentType)
