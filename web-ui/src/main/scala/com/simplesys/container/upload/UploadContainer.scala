@@ -158,6 +158,7 @@ object UploadContainer {
                                                             case None ⇒
                                                                 getEmptySource
                                                         }
+
                                                         new OrdDoc {
                                                             override val comments: Option[String] = Some("Updated by UploadContainer !!")
                                                             override val format: Option[String] = Some(fi.getContentType)
@@ -282,58 +283,10 @@ object UploadContainer {
                                                                 }
 
                                                                 index += 1
-<<<<<<< HEAD
-                                                                source.localData match {
-                                                                    case Some(localData) ⇒
-                                                                        sendMessageTypeRecordInBase("Операция: SetBlob")
-                                                                        recStatus(2, idAttatch)
-                                                                        //callableStatement.setBlob(index, localData)
-                                                                        callableStatement.setBinaryStream(index, fi.getInputStream)
-                                                                    case None ⇒
-                                                                        callableStatement.setNull(index, Types.BLOB)
-                                                                }
-                                                        }
-
-                                                        index += 1
-                                                        ordDoc.format match {
-                                                            case Some(format) ⇒
-                                                                callableStatement.setString(index, format)
-                                                            case None ⇒
-                                                                callableStatement.setNull(index, Types.VARCHAR)
-                                                        }
-
-                                                        index += 1
-                                                        ordDoc.mimeType match {
-                                                            case Some(mimeType) ⇒
-                                                                callableStatement.setString(index, mimeType)
-                                                            case None ⇒
-                                                                callableStatement.setNull(index, Types.VARCHAR)
-                                                        }
-
-                                                        index += 1
-                                                        ordDoc.contentLength match {
-                                                            case Some(contentLength) ⇒
-                                                                callableStatement.setBigDecimal(index, contentLength.bigDecimal)
-                                                            case None ⇒
-                                                                callableStatement.setNull(index, Types.INTEGER)
-                                                        }
-
-                                                        index += 1
-                                                        ordDoc.comments match {
-                                                            case Some(comments) ⇒
-                                                                recStatus(2, idAttatch)
-                                                                sendMessageTypeRecordInBase("Операция: SetClob")
-                                                                //clob.setString(1L, comments)
-                                                                //callableStatement.setClob(index, clob)
-                                                                callableStatement.setString(index, comments)
-                                                            case None ⇒
-                                                                callableStatement.setNull(index, Types.CLOB)
-=======
                                                                 callableStatement.setLong(index, idAttatch)
                                                                 callableStatement.executeUpdate()
 
                                                                 dcr.foreach(mainConnection.asInstanceOf[OracleConnection] unregisterDatabaseChangeNotification _)
->>>>>>> bd89c98a5f124645c23818b9f978e09865689cac
                                                         }
                                                 }.result match {
                                                     case scalaz.Success(res) ⇒
