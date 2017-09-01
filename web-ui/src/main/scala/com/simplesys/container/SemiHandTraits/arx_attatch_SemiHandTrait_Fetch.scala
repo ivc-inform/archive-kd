@@ -2,7 +2,7 @@
 
 package ru.simplesys.defs.app.scala.container.arx
 
-import java.sql.Types
+import java.sql.{Connection, Types}
 
 import akka.actor.Actor
 import com.simplesys.app.SessionContextSupport
@@ -55,8 +55,9 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
 
                 val select = dataSet.Fetch(dsRequest = DSRequest(sqlDialect = sessionContext.getSQLDialect, startRow = requestData.StartRow, endRow = requestData.EndRow, sortBy = requestData.SortBy, data = data, textMatchStyle = requestData.TextMatchStyle.toString))
 
-                def checkStatus(id: Long): Int = {
-                    callableStatement(oraclePool.getConnection(), "begin ? := record_doc.check_loc_record(fid => :fid); end;") {
+                lazy val connection = oraclePool.getConnection()
+                def checkStatus(connection: Connection, id: Long): Int = {
+                    callableStatement(connection, "begin ? := record_doc.get_lock_record(fid => ?); end;") {
                         callableStatement ⇒
                             callableStatement.registerOutParameter(1, Types.NUMERIC)
                             callableStatement.setLong(2, id)
@@ -84,11 +85,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                     arx_attatch_vizcode_NameStrong.name → vizcodeDocizv,
                                     arx_attatch_vattypename_NameStrong.name → vattypenameAttatchtypes,
                                     arx_attatch_vcrcode_NameStrong.name → vcrcodeCard,
-                                    arx_attatch_status_NameStrong.name → statusAttatch.headOption.map{_ match {
-                                        case 1 ⇒ checkStatus(idAttatch)
-                                        case 2 ⇒ checkStatus(idAttatch)
-                                        case status ⇒ status
-                                    }}
+                                    arx_attatch_status_NameStrong.name → checkStatus(connection, idAttatch)
                                 )
 
                                 dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)).result match {
