@@ -29,10 +29,6 @@ object CommonDeps {
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
 
-        val kamonVersion = "0.5.2"
-
-        val doobieVersion = "0.4.1"
-
         //val ssysCoreVersion = "1.4-SNAPSHOT"
         val ssysCoreVersion = "1.4.0.2"
         val smartclientVersion = "11.1-v20170703.1"
@@ -58,7 +54,6 @@ object CommonDeps {
         val commonsFileuploadVersion = "1.3.3"
         val commonsIOVersion = "2.5"
         val scalaURIVersion = "0.4.16"
-        val slickVersion = "3.2.1"
         val configWrapperVersion = "0.4.4"
     }
 
@@ -97,15 +92,10 @@ object CommonDeps {
     val jdbcOracle12UCP = "com.oracle.jdbc" % "ucp" % versions.jdbcOracle12DriverVersion
     val jdbcOracleN18_12 = "com.oracle.jdbc" % "orai18n" % versions.jdbcOracle12DriverVersion
 
-    val doobieCore = "org.tpolecat" %% "doobie-core" % versions.doobieVersion
-    val doobieCoreCats = "org.tpolecat" %% "doobie-core-cats" % versions.doobieVersion
-
     val commonsFileupload = "commons-fileupload" % "commons-fileupload" % versions.commonsFileuploadVersion
     val commonsIO = "commons-io" % "commons-io" % versions.commonsIOVersion
 
     val scalaURI = "com.netaporter" %% "scala-uri" % versions.scalaURIVersion
-    val slick = "com.typesafe.slick" %% "slick" % versions.slickVersion
-
     val configWrapper = "com.github.kxbmap" %% "configs" % versions.configWrapperVersion
 
 }
