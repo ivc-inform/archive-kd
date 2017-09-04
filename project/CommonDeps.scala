@@ -9,7 +9,7 @@ object PluginDeps {
         val mergeJSVersion = "1.0.10-SNAPSHOT"
         val xsbtWebVersion = "4.0.1-SNAPSHOT"
         val sbtNativePackagerVersion = "1.2.3-SNAPSHOT"
-        val scalaJSPluginVersion = "0.6.19"
+        val scalaJSPluginVersion = "0.6.20"
         val jrabelPluginVersion = "0.11.0-SNAPSHOT"
     }
 
