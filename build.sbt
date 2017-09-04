@@ -97,10 +97,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     ),
 
     //scalacOptions += "-P:scalajs:sjsDefinedByDefault",
-    scalacOptions ++= {
-        if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault")
-        else Nil
-    },
+    scalacOptions ++= (if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault")else Nil),
 
     libraryDependencies ++= Seq(
         CommonDeps.servletAPI % Provided,
