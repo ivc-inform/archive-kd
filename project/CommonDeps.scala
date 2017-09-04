@@ -33,7 +33,8 @@ object CommonDeps {
 
         val doobieVersion = "0.4.1"
 
-        val ssysCoreVersion = "1.4-SNAPSHOT"
+        //val ssysCoreVersion = "1.4-SNAPSHOT"
+        val ssysCoreVersion = "1.4.0.2"
         val smartclientVersion = "11.1-v20170703.1"
 
         val servletAPIVersion = "3.1.0"
