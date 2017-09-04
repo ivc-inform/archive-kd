@@ -5,12 +5,12 @@ import sbt._
 object PluginDeps {
     object versions {
         val devPluginVersion = "1.3.12-SNAPSHOT"
-        val sbtCoffeScriptVersion = "1.1.3-SNAPSHOT"
-        val mergeJSVersion = "1.0.10-SNAPSHOT"
-        val xsbtWebVersion = "4.0.1-SNAPSHOT"
-        val sbtNativePackagerVersion = "1.2.3-SNAPSHOT"
+        val sbtCoffeScriptVersion = "1.1.4"
+        val mergeJSVersion = "1.0.11"
+        val xsbtWebVersion = "4.0.2"
+        val sbtNativePackagerVersion = "1.2.4"
         val scalaJSPluginVersion = "0.6.20"
-        val jrabelPluginVersion = "0.11.0-SNAPSHOT"
+        val jrabelPluginVersion = "0.11.1"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
