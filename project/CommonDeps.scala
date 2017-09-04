@@ -38,7 +38,7 @@ object CommonDeps {
 
         val servletAPIVersion = "3.1.0"
 
-        val scalaTestVersion = "3.0.1"
+        val scalaTestVersion = "3.0.3"
         val scalaTagsVersion = "0.6.5"
         val scalaDomVersion = "0.9.4-SNAPSHOT"
         val jQueryVersion = "0.9.1"
