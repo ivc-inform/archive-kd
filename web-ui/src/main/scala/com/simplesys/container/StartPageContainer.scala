@@ -15,7 +15,7 @@ class StartPageContainer(val request: HttpServletRequest, val response: HttpServ
         case GetData => {
             val textHTML = new StartPage("Архив электронных документов".ellipsis, scalatags.Text)
 
-            val html = "<!DOCTYPE html>" +
+            val html: String = "<!DOCTYPE html>" +
               textHTML.bodyHTML(
                   "CreateSimpleTypes();" +
                     "CreateSmartClientJS();" +
