@@ -33,7 +33,7 @@ lazy val common = Project(id = "common", base = file("common")).settings(
         CommonDeps.ssysCommon,
         CommonDeps.scalaTest % Test
     )
-).settings(CommonSettings.defaultProjectSettings)
+)
 
 lazy val testModule = Project(id = "test", base = file("test")).
   dependsOn(dbObjects).
@@ -42,7 +42,7 @@ lazy val testModule = Project(id = "test", base = file("test")).
           CommonDeps.ssysJDBCWrapper,
           CommonDeps.scalaTest % Test
       )
-  ).settings(CommonSettings.defaultProjectSettings)
+  )
 
 lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
   dependsOn(common).
@@ -70,7 +70,7 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           quoted := true,
           sourceGenerators in Compile += (generateBoScalaCode in DevConfig)
       )
-  }).settings(CommonSettings.defaultProjectSettings)
+  })
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
@@ -260,4 +260,4 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 },
     skip in packageJSDependencies := false,
     jsDependencies += "org.webjars" % "jquery" % "3.2.1" / "3.2.1/jquery.js"
-).settings(CommonSettings.defaultProjectSettings)
+)
