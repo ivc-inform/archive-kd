@@ -140,10 +140,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CoffeeScriptKeys.sourceMap := false,
         CoffeeScriptKeys.bare := false,
         sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
-        (managedResources in Compile) ++= CoffeeScriptKeys.coffeeScript.value,
-
-        //sbtWeb
         webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
+        (managedResources in Compile) ++= CoffeeScriptKeys.coffeeScript.value,
 
         //dev plugin
         sourceSchemaDir in DevConfig := (resourceDirectory in(dbObjects, Compile)).value / "defs",

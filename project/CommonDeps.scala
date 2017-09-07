@@ -60,10 +60,10 @@ object CommonDeps {
 
     val smartclient = "com.simplesys" % "smartclient-js" % versions.smartclientVersion
 
-    val ssysIscComponents = "com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion
     val ssysCommonWebapp = "com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion
-
+    val ssysIscComponents = "com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion
     val ssysIscMisc = "com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion
+
     val ssysXMLExtender = "com.simplesys.core" %% "xml-extender" % versions.ssysCoreVersion
     val ssysCoreLibrary = "com.simplesys.core" %% "core-library" % versions.ssysCoreVersion
     val ssysCoreUtils = "com.simplesys.core" %% "core-utils" % versions.ssysCoreVersion
