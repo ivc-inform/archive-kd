@@ -71,7 +71,6 @@ object CommonDeps {
     val ssysConfigWrapper = "com.simplesys.core" %% "config-wrapper" % versions.ssysCoreVersion
     val ssysCommon = "com.simplesys.core" %% "common" % versions.ssysCoreVersion
     val ssysScalaIOExtender = "com.simplesys.core" %% "scala-io-extender" % versions.ssysCoreVersion
-    val ssysJsonExtender = "com.simplesys.core" %% "json-extender-typesafe" % versions.ssysCoreVersion
     val ssysJDBCWrapper = "com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion
     val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
     val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion
