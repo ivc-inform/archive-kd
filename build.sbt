@@ -105,7 +105,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.ssysIscComponents,
         CommonDeps.ssysScalaIOExtender,
         CommonDeps.ssysXMLExtender,
-        CommonDeps.ssysJsonExtender,
+        //CommonDeps.ssysJsonExtender,
         CommonDeps.ssysIscMisc,
 
         CommonDeps.smartclient,
