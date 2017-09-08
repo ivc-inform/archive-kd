@@ -201,6 +201,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         dockerCmd := Seq(),
         dockerExposedPorts in Docker := Seq(8080),
 
+        //docker
         version := CommonSettings.settingValues.version,
         packageName in Docker := CommonSettings.settingValues.name,
         dockerUsername in Docker := None,
