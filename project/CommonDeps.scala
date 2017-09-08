@@ -60,10 +60,10 @@ object CommonDeps {
 
     val smartclient = "com.simplesys" % "smartclient-js" % versions.smartclientVersion
 
-    val ssysIscComponents = "com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion
     val ssysCommonWebapp = "com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion
-
+    val ssysIscComponents = "com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion
     val ssysIscMisc = "com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion
+
     val ssysXMLExtender = "com.simplesys.core" %% "xml-extender" % versions.ssysCoreVersion
     val ssysCoreLibrary = "com.simplesys.core" %% "core-library" % versions.ssysCoreVersion
     val ssysCoreUtils = "com.simplesys.core" %% "core-utils" % versions.ssysCoreVersion
@@ -71,7 +71,6 @@ object CommonDeps {
     val ssysConfigWrapper = "com.simplesys.core" %% "config-wrapper" % versions.ssysCoreVersion
     val ssysCommon = "com.simplesys.core" %% "common" % versions.ssysCoreVersion
     val ssysScalaIOExtender = "com.simplesys.core" %% "scala-io-extender" % versions.ssysCoreVersion
-    val ssysJsonExtender = "com.simplesys.core" %% "json-extender-typesafe" % versions.ssysCoreVersion
     val ssysJDBCWrapper = "com.simplesys.core" %% "jdbc-wrapper" % versions.ssysCoreVersion
     val ssysCoreDomains = "com.simplesys.core" %% "core-domains" % versions.ssysCoreVersion
     val ssysScalaGen = "com.simplesys.core" %% "scala-gen" % versions.ssysCoreVersion

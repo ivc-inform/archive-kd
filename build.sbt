@@ -50,7 +50,6 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
   settings(
       libraryDependencies ++= Seq(
           CommonDeps.ssysCoreLibrary,
-          CommonDeps.ssysJsonExtender,
           CommonDeps.ssysJDBCWrapper,
           CommonDeps.oraclePoolDataSources,
           CommonDeps.hikariPoolDataSources,
@@ -105,7 +104,6 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.ssysIscComponents,
         CommonDeps.ssysScalaIOExtender,
         CommonDeps.ssysXMLExtender,
-        CommonDeps.ssysJsonExtender,
         CommonDeps.ssysIscMisc,
 
         CommonDeps.smartclient,
@@ -141,8 +139,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         //coffeeScript
         CoffeeScriptKeys.sourceMap := false,
         CoffeeScriptKeys.bare := false,
-        webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
         sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
+        webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
         (managedResources in Compile) ++= CoffeeScriptKeys.coffeeScript.value,
 
         //dev plugin
