@@ -38,7 +38,6 @@ GRANT DBA TO B404SP3DEMO;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql;
 
-
 @/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES;
