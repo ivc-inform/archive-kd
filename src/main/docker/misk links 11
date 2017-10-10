@@ -42,7 +42,6 @@ GRANT DBA TO B404SP3DEMO;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES;
 
-
 ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
 GRANT EXECUTE ON utl_file TO xdb;
 GRANT EXECUTE ON dbms_lob TO xdb;
@@ -54,8 +53,8 @@ SHUTDOWN IMMEDIATE;
 STARTUP
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql;
 @/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
-@/u01/app/oracle/product/11.2/db_1/ord/im/admin/imchk.sql;      
-
+@/u01/app/oracle/product/11.2/db_1/ord/im/admin/imchk.sql;
+      
 sudo mkdir dumps;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
