@@ -55,6 +55,7 @@ STARTUP
 @/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
 @/u01/app/oracle/product/11.2/db_1/ord/im/admin/imchk.sql;
       
+echo 'oracle ALL=(ALL) ALL' >> /etc/sudoers
 sudo mkdir dumps;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
