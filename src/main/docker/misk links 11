@@ -82,3 +82,7 @@ CREATE TABLE
   alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32000M;
 
 scp /home/uandrew/JOB/b404sp3/deploy/b404_Project1_b404.ear uandrew@176.117.127.137:/home/uandrew/.jdeveloper/system11.1.2.4.39.64.36.1/DefaultDomain/servers/DefaultServer/upload/b404_Project1_b404/app
+
+expdp system/dfqc2 DIRECTORY=DUMPS DUMPFILE=expdat.dmp SCHEMAS=aps
+
+
