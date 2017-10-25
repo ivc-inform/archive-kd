@@ -1,11 +1,9 @@
 package ru.simplesys.eakd.sbtbuild
 
-import sbt.Setting
-
 object CommonSettings {
   object settingValues {
 
-    val scalaVersion = "2.12.3"
+    val scalaVersion = "2.12.4"
     val organization = "com.ivc-inform"
     val name = "archive-kd"
     val version = "1.0.0.1"

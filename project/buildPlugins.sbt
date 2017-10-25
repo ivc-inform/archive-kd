@@ -1,6 +1,5 @@
 import ru.simplesys.eakd.sbtbuild.{CommonSettings, PluginDeps}
 import sbt._
-import sbt.Project._
 
 
 //lazy val devPlugin = uri("../../sbt-plugins/dev-plugin")
