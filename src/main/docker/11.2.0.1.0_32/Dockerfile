@@ -33,9 +33,6 @@ RUN chmod -R 775 /usr/local/bin/oracle.sh
 #
 RUN cd /tmp/install && unzip linux_11gR2_database_1of2.zip && unzip linux_11gR2_database_2of2.zip && rm *.zip
 #
-RUN groupadd -g 54321 oinstall && groupadd -g 54322 dba
-
-RUN useradd -m -u 54321 -g oinstall -G dba oracle
 RUN echo "oracle:oracle" | chpasswd
 #
 ENV ORACLE_SID ORCL
