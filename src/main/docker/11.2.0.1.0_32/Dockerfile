@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND "noninteractive"
 # Install OS needed packages
 ########################################
 RUN yum -y update
-RUN yum -y install wget sed unzip sudo mc glibc.i686
+RUN yum -y install wget sed unzip sudo mc glibc.i686 libaio
 
 RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
 RUN cd /etc/yum.repos.d
