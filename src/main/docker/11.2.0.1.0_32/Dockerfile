@@ -25,8 +25,8 @@ RUN yum clean all
 ########################################
 # Install ORACLE 11g Enterprise Edition
 ########################################
-ADD installation_files/linux.x64_11gR2_database_1of2.zip /tmp/install/linux_11gR2_database_1of2.zip
-ADD installation_files/linux.x64_11gR2_database_2of2.zip /tmp/install/linux_11gR2_database_2of2.zip
+ADD installation_files/linux_11gR2_database_1of2.zip /tmp/install/linux_11gR2_database_1of2.zip
+ADD installation_files/linux_11gR2_database_2of2.zip /tmp/install/linux_11gR2_database_2of2.zip
 ADD installation_files/oraInst.loc /etc/oraInst.loc
 ADD installation_files/oracle.sh /usr/local/bin/oracle.sh
 RUN chmod -R 775 /usr/local/bin/oracle.sh
