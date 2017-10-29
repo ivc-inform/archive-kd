@@ -67,43 +67,43 @@ RUN /tmp/install/database/runInstaller -silent -ignoreSysPrereqs -ignorePrereq -
     DECLINE_SECURITY_UPDATES=true \
     -waitforcompletion
 #
-#USER root
-#RUN rm -rf /tmp/install
+USER root
+RUN rm -rf /tmp/install
 
 # Run the root.sh script to execute the final steps after the installation
-#RUN $ORACLE_HOME/root.sh
+RUN $ORACLE_HOME/root.sh
 
-#EXPOSE 1521 1158
+EXPOSE 1521 1158
 
 ########################################
 # Create a new database
 ########################################
 # Copy all init scripts & files and create the ORCL instance
 
-#ADD database_files/oracle-.bashrc /home/oracle/.bashrc
-#ADD database_files/initORCL.ora $ORACLE_HOME/dbs/initORCL.ora
-#ADD database_files/createdb.sql $ORACLE_HOME/config/scripts/createdb.sql
-#ADD database_files/create.sh /tmp/create.sh
+ADD database_files/oracle-.bashrc /home/oracle/.bashrc
+ADD database_files/initORCL.ora $ORACLE_HOME/dbs/initORCL.ora
+ADD database_files/createdb.sql $ORACLE_HOME/config/scripts/createdb.sql
+ADD database_files/create.sh /tmp/create.sh
 #
-#RUN mkdir -p $ORACLE_BASE/oradata && \
-#  chown -R oracle:oinstall $ORACLE_BASE/oradata && \
-#  chmod -R 775 $ORACLE_BASE/oradata && \
-#  mkdir -p $ORACLE_BASE/fast_recovery_area && \
-#  chown -R oracle:oinstall $ORACLE_BASE/fast_recovery_area && \
-#  chmod -R 775 $ORACLE_BASE/fast_recovery_area
+RUN mkdir -p $ORACLE_BASE/oradata && \
+  chown -R oracle:oinstall $ORACLE_BASE/oradata && \
+  chmod -R 775 $ORACLE_BASE/oradata && \
+  mkdir -p $ORACLE_BASE/fast_recovery_area && \
+  chown -R oracle:oinstall $ORACLE_BASE/fast_recovery_area && \
+  chmod -R 775 $ORACLE_BASE/fast_recovery_area
 #
-#RUN  /tmp/create.sh && rm /tmp/create.sh && echo "ORCL:$ORACLE_HOME:Y" >> /etc/oratab
+RUN  /tmp/create.sh && rm /tmp/create.sh && echo "ORCL:$ORACLE_HOME:Y" >> /etc/oratab
 #
-#VOLUME [ \
-#  "$ORACLE_BASE/admin/docker/adump", \
-#  "$ORACLE_BASE/diag", \
-#  "$ORACLE_BASE/oradata/docker", \
-#  "$ORACLE_HOME/cfgtoollogs", \
-#  "$ORACLE_HOME/log", \
-#  "$ORACLE_HOME/rdbms/log" \
-#]
+VOLUME [ \
+  "$ORACLE_BASE/admin/docker/adump", \
+  "$ORACLE_BASE/diag", \
+  "$ORACLE_BASE/oradata/docker", \
+  "$ORACLE_HOME/cfgtoollogs", \
+  "$ORACLE_HOME/log", \
+  "$ORACLE_HOME/rdbms/log" \
+]
 
 ########################################
 # Start Oracle command
 ########################################
-#CMD oracle.sh
+CMD oracle.sh
