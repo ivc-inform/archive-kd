@@ -191,12 +191,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         webappWebInfClasses := true,
 
         defaultLinuxInstallLocation in Docker := "",
-        dockerBaseImage := "ivcinform/jetty:9.4.6.v20170531",
-        daemonUser in Docker := "",
-        daemonGroup in Docker := "",
-        dockerDocfileCommands := Seq(),
-        dockerEntrypoint := Seq(),
-        dockerCmd := Seq(),
+        dockerBaseImage := "ivcinform/jetty:9.4.7.v20170914",
         dockerExposedPorts in Docker := Seq(8080),
 
         //docker
