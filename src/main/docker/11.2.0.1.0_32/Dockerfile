@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND "noninteractive"
 # Install OS needed packages
 ########################################
 RUN yum -y update
-RUN yum -y install wget sed unzip sudo mc
+RUN yum -y install wget sed unzip sudo mc glibc.i686
 
 RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
 RUN cd /etc/yum.repos.d
@@ -53,19 +53,19 @@ USER oracle
 #
 RUN cd /tmp/install/database/
 
-#RUN /tmp/install/database/runInstaller -silent -ignoreSysPrereqs -ignorePrereq -force \
-#    oracle.install.option=INSTALL_DB_SWONLY \
-#    UNIX_GROUP_NAME=oinstall \
-#    INVENTORY_LOCATION=$ORACLE_INVENTORY \
-#    ORACLE_HOME=$ORACLE_HOME \
-#    ORACLE_HOME_NAME="OraDb11g_Home1" \
-#    ORACLE_BASE=$ORACLE_BASE \
-#    oracle.install.db.InstallEdition=SE \
-#    oracle.install.db.isCustomInstall=false \
-#    oracle.install.db.DBA_GROUP=dba \
-#    oracle.install.db.OPER_GROUP=dba \
-#    DECLINE_SECURITY_UPDATES=true \
-#    -waitforcompletion
+RUN /tmp/install/database/runInstaller -silent -ignoreSysPrereqs -ignorePrereq -force \
+    oracle.install.option=INSTALL_DB_SWONLY \
+    UNIX_GROUP_NAME=oinstall \
+    INVENTORY_LOCATION=$ORACLE_INVENTORY \
+    ORACLE_HOME=$ORACLE_HOME \
+    ORACLE_HOME_NAME="OraDb11g_Home1" \
+    ORACLE_BASE=$ORACLE_BASE \
+    oracle.install.db.InstallEdition=SE \
+    oracle.install.db.isCustomInstall=false \
+    oracle.install.db.DBA_GROUP=dba \
+    oracle.install.db.OPER_GROUP=dba \
+    DECLINE_SECURITY_UPDATES=true \
+    -waitforcompletion
 #
 #USER root
 #RUN rm -rf /tmp/install
