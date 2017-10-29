@@ -10,7 +10,7 @@ FROM oraclelinux:6-slim
 # Install OS needed packages
 ########################################
 RUN yum -y update
-RUN yum -y install wget sed unzip sudo
+RUN yum -y install wget sed unzip sudo mc
 
 RUN cd /etc/yum.repos.d
 RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
