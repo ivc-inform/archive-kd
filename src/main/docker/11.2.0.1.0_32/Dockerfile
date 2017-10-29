@@ -11,16 +11,17 @@ FROM ivcinform/ubuntu-32bit:xenial
 ENV DEBIAN_FRONTEND "noninteractive"
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get -y install wget sed unzip sudo mc
-RUN apt-get -y install yum
+RUN apt-get -y install mc
+RUN apt-get -y clean all
+#RUN apt-get -y install yu
 
-RUN mkdir /etc/yum.repos.d
-RUN cd /etc/yum.repos.d 
-RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
-RUN mv /public-yum-ol6.repo /etc/yum.repos.d
+#RUN mkdir /etc/yum.repos.d
+#RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
+#RUN mv /public-yum-ol6.repo /etc/yum.repos.d
+#RUN cd /etc/yum.repos.d
 
 # changing the field enabled=0 to enabled=1 to reflect repositories that correspond to the machine's operating system release.
-#RUN sed "s|enabled=0|enabled=1|g" public-yum-ol6.repo
+#RUN sed "s|enabled=0|enabled=1|g" /etc/yum.repos.d/public-yum-ol6.repo
 #
 #RUN yum -y install oracle-rdbms-server-11gR2-preinstall
 #
@@ -29,27 +30,27 @@ RUN mv /public-yum-ol6.repo /etc/yum.repos.d
 ########################################
 # Install ORACLE 11g Enterprise Edition
 ########################################
-#ADD installation_files/linux_11gR2_database_1of2.zip /tmp/install/linux_11gR2_database_1of2.zip
-#ADD installation_files/linux_11gR2_database_2of2.zip /tmp/install/linux_11gR2_database_2of2.zip
-#ADD installation_files/oraInst.loc /etc/oraInst.loc
-#ADD installation_files/oracle.sh /usr/local/bin/oracle.sh
-#RUN chmod -R 775 /usr/local/bin/oracle.sh
+ADD installation_files/linux_11gR2_database_1of2.zip /tmp/install/linux_11gR2_database_1of2.zip
+ADD installation_files/linux_11gR2_database_2of2.zip /tmp/install/linux_11gR2_database_2of2.zip
+ADD installation_files/oraInst.loc /etc/oraInst.loc
+ADD installation_files/oracle.sh /usr/local/bin/oracle.sh
+RUN chmod -R 775 /usr/local/bin/oracle.sh
 #
-#RUN cd /tmp/install && unzip linux_11gR2_database_1of2.zip && unzip linux_11gR2_database_2of2.zip && rm *.zip
+RUN cd /tmp/install && unzip linux_11gR2_database_1of2.zip && unzip linux_11gR2_database_2of2.zip && rm *.zip
 #
-##RUN groupadd -g 54321 oinstall && groupadd -g 54322 dba
+RUN groupadd -g 54321 oinstall && groupadd -g 54322 dba
 #RUN userdel oracle && rm -rf /home/oracle && rm /var/spool/mail/oracle
-#RUN useradd -m -u 54321 -g oinstall -G dba oracle
-#RUN echo "oracle:oracle" | chpasswd
+RUN useradd -m -u 54321 -g oinstall -G dba oracle
+RUN echo "oracle:oracle" | chpasswd
 #
-#ENV ORACLE_SID ORCL
-#ENV ORACLE_BASE /u01/app/oracle
-#ENV ORACLE_HOME $ORACLE_BASE/product/11.2/db_1
-#ENV ORACLE_INVENTORY $ORACLE_BASE/oraInventory
-#ENV PATH $ORACLE_HOME/bin:$PATH
+ENV ORACLE_SID ORCL
+ENV ORACLE_BASE /u01/app/oracle
+ENV ORACLE_HOME $ORACLE_BASE/product/11.2/db_1
+ENV ORACLE_INVENTORY $ORACLE_BASE/oraInventory
+ENV PATH $ORACLE_HOME/bin:$PATH
 #
-#RUN mkdir -p $ORACLE_BASE && chown -R oracle:oinstall $ORACLE_BASE && chmod -R 775 $ORACLE_BASE
-#RUN mkdir -p $ORACLE_INVENTORY && chown -R oracle:oinstall $ORACLE_INVENTORY && chmod -R 775 $ORACLE_INVENTORY
+RUN mkdir -p $ORACLE_BASE && chown -R oracle:oinstall $ORACLE_BASE && chmod -R 775 $ORACLE_BASE
+RUN mkdir -p $ORACLE_INVENTORY && chown -R oracle:oinstall $ORACLE_INVENTORY && chmod -R 775 $ORACLE_INVENTORY
 
 #ADD sysctl.conf /etc/sysctl.conf
 #RUN echo "oracle soft stack 10240" >> /etc/security/limits.conf
