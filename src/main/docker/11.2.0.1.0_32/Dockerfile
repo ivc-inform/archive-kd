@@ -9,6 +9,7 @@ FROM oraclelinux:latest
 ########################################
 # Install OS needed packages
 ########################################
+RUN yum -y update
 RUN yum -y install wget sed unzip sudo
 
 RUN cd /etc/yum.repos.d
