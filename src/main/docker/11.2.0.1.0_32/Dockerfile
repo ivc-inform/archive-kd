@@ -45,6 +45,7 @@ ENV PATH $ORACLE_HOME/bin:$PATH
 RUN mkdir -p $ORACLE_BASE && chown -R oracle:oinstall $ORACLE_BASE && chmod -R 775 $ORACLE_BASE
 RUN mkdir -p $ORACLE_INVENTORY && chown -R oracle:oinstall $ORACLE_INVENTORY && chmod -R 775 $ORACLE_INVENTORY
 
+ADD sysctl.conf /etc/sysctl.conf
 RUN echo "oracle soft stack 10240" >> /etc/security/limits.conf
 
 # To avoid error: sudo: sorry, you must have a tty to run sudo
