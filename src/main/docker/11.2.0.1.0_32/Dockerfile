@@ -3,7 +3,8 @@
 # DOCKERFILE FOR ORACLE DB 11g
 # --------------------------
 
-FROM oraclelinux:6.6
+#FROM oraclelinux:6.6
+FROM toopher/centos-i386:centos6
 
 ENV DEBIAN_FRONTEND "noninteractive"
 ########################################
