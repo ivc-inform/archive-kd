@@ -3,14 +3,22 @@
 # DOCKERFILE FOR ORACLE DB 11g
 # --------------------------
 
-FROM oraclelinux:6-slim
+FROM oraclelinux:6.6
 
 ENV DEBIAN_FRONTEND "noninteractive"
 ########################################
 # Install OS needed packages
 ########################################
 RUN yum -y update
-RUN yum -y install wget sed unzip sudo mc glibc.i686 libaio nano
+RUN yum -y install wget \
+                   sed \
+                   unzip \
+                   sudo \
+                   mc \
+                   glibc.i686 \
+                   libaio nano \
+                   compat-libcap1-1.10-1.i686 \
+                   compat-libstdc++-33-3.2.3-69.el6.i686
 
 RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
 RUN cd /etc/yum.repos.d
