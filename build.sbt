@@ -95,7 +95,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         "-XX:+CMSClassUnloadingEnabled"
     ),
 
-    scalacOptions ++= (if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault")else Nil),
+    scalacOptions ++= (if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault") else Nil),
 
     libraryDependencies ++= Seq(
         CommonDeps.servletAPI % Provided,
@@ -131,6 +131,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     import ru.simplesys.plugins.sourcegen.DevPlugin._
 
     Seq(
+
         //scala.js
         crossTarget in fastOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
         crossTarget in fullOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
@@ -190,12 +191,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         },
         webappWebInfClasses := true,
 
-        defaultLinuxInstallLocation in Docker := "",
+        //docker
         dockerBaseImage := "ivcinform/jetty:9.4.7.v20170914",
         dockerExposedPorts in Docker := Seq(8080),
-
-        //docker
-        version := CommonSettings.settingValues.version,
         packageName in Docker := CommonSettings.settingValues.name,
         dockerUsername in Docker := None,
         dockerRepository in Docker := Some("hub.docker.com"),
