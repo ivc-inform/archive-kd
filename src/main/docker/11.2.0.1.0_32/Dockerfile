@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND "noninteractive"
 ########################################
 # Install OS needed packages
 ########################################
-RUN yum -y update
+#RUN yum -y update
 RUN yum -y install wget \
                    sed \
                    unzip \
