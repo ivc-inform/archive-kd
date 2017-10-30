@@ -30,8 +30,7 @@ RUN yum -y install wget \
                    libaio-0.3.107-10.el6.i686 \
                    libaio-devel-0.3.107-10.el6.i686 \
                    make-3.81-19.el6.i686 \
-                   sysstat-9.0.4-11.el6.i686 \
-
+                   sysstat-9.0.4-11.el6.i686 
 
 #RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
 #RUN cd /etc/yum.repos.d
