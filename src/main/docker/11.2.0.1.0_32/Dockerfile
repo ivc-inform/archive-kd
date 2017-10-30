@@ -10,7 +10,22 @@ ENV DEBIAN_FRONTEND "noninteractive"
 # Install OS needed packages
 ########################################
 RUN yum -y update
-RUN yum -y install wget sed unzip sudo mc glibc.i686 libaio nano
+RUN yum -y install wget sed unzip sudo mc nano binutils-2.20.51.0.2-5.11.el6.i686 \
+                                               compat-libcap1-1.10-1.i686 \
+                                               compat-libstdc++-33-3.2.3-69.el6.i686 \
+                                               gcc-4.4.4-13.el6.i686 \
+                                               gcc-c++-4.4.4-13.el6.i686 \
+                                               glibc-2.12-1.7.el6.i686 \
+                                               glibc-devel-2.12-1.7.el6.i686 \
+                                               ksh \
+                                               libgcc-4.4.4-13.el6.i686 \
+                                               libstdc++-4.4.4-13.el6.i686 \
+                                               libstdc++-devel-4.4.4-13.el6.i686 \
+                                               libaio-0.3.107-10.el6.i686 \
+                                               libaio-devel-0.3.107-10.el6.i686 \
+                                               make-3.81-19.el6.i686 \
+                                               sysstat-9.0.4-11.el6.i686 \
+
 
 RUN wget http://public-yum.oracle.com/public-yum-ol6.repo
 RUN cd /etc/yum.repos.d
