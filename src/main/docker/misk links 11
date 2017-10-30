@@ -1,7 +1,7 @@
 docker run -d -p 8083:8080 --restart on-failure:5 --add-host uandrew-home:176.117.127.137 --name archive_112_1001 ivcinform/archive-kd:1.0.0.1
 docker run -d -p 9000:9000 --restart on-failure:5 --name portainer -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
 
-docker exec -u oracle  -it b404_112 bash
+docker exec -u oracle -it b404_112 bash
 
 sqlplus / as sysdba
 
