@@ -5,19 +5,20 @@ docker exec -u oracle -it b404_112 bash
 
 sqlplus / as sysdba
 
+show parameter SGA_TARGET;
 show parameter SHARED_POOL_SIZE;
 show parameter LARGE_POOL_SIZE;
 show parameter JAVA_POOL_SIZE;
 show parameter DB_CACHE_SIZE;
 show parameter STREAMS_POOL_SIZE;
-show parameter SGA_TARGET;
 
-ALTER SYSTEM SET SGA_TARGET=50G scope=spfile;
-ALTER SYSTEM SET SHARED_POOL_SIZE=5G scope=spfile;
-ALTER SYSTEM SET LARGE_POOL_SIZE=5G scope=spfile;
-ALTER SYSTEM SET JAVA_POOL_SIZE=500M scope=spfile;
-ALTER SYSTEM SET DB_CACHE_SIZE=30G scope=spfile;
-ALTER SYSTEM SET STREAMS_POOL_SIZE=5G scope=spfile;
+
+ALTER SYSTEM SET SGA_TARGET=3000M scope=spfile;
+//ALTER SYSTEM SET SHARED_POOL_SIZE=400M scope=spfile;
+//ALTER SYSTEM SET LARGE_POOL_SIZE=400M scope=spfile;
+ALTER SYSTEM SET JAVA_POOL_SIZE=100M scope=spfile;
+//ALTER SYSTEM SET DB_CACHE_SIZE=2500M scope=spfile;
+ALTER SYSTEM SET STREAMS_POOL_SIZE=100M scope=spfile;
 
 shutdown immediate;
 startup;
@@ -27,15 +28,15 @@ ALTER USER SYSTEM IDENTIFIED BY dfqc2;
 ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 GRANT DBA TO B404SP3DEMO;
 
-@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; 
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/xmlja.sql;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql;
+@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql; --
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; --
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/xmlja.sql;   --
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql; --
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql; --
 
-@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES;
+@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX; --
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES; --
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES; --
 
 ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
 GRANT EXECUTE ON utl_file TO xdb;
@@ -56,7 +57,6 @@ sudo mkdir dumps;
 CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-scp ayudin@tank.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
 docker cp b404sp3demo_2017.dmp b404_112:/u01/app/oracle/product/11.2/db_1/dumps;
 
 impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
