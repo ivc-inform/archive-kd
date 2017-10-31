@@ -5,7 +5,6 @@ import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
 import com.simplesys.file.Path
-import com.simplesys.hikari.OracleHikariDataSource
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ServletContextEvent
 
