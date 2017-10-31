@@ -10,7 +10,7 @@ object PluginDeps {
         val xsbtWebVersion = "4.0.1-SNAPSHOT"
         val sbtNativePackagerVersion = "1.2.3-SNAPSHOT"
         val scalaJSPluginVersion = "0.6.19"
-        val jrabelPluginVersion = "0.11.0-SNAPSHOT"
+        val jrabelPluginVersion = "0.11.1"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
