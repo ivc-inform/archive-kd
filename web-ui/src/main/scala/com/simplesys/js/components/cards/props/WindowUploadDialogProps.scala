@@ -43,6 +43,7 @@ class WindowUploadDialogProps extends WindowSSDialogProps {
                     items = Seq(
                         UploadItem(
                             new UploadItemProps {
+                                name = "uploadItem".opt
                                 showTitle = false.opt
                                 height = 30
                                 width = "100%"
