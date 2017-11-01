@@ -59,10 +59,11 @@ sudo mkdir dumps;
 CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-docker cp /home/uandrew/Job/archive-kd/src/main/dumps/b404sp3_2017.dmp oracle_1132:/u01/app/oracle/product/11.2/db_1/dumps;
+docker cp /home/uandrew/Job/archive-kd/src/main/dumps/b404sp3demo_01102017.dmp b404x86_112:/u01/app/oracle/product/11.2/db_1/dumps;
 
-impdp system/dfqc2 schemas=B404SP3DEMO dumpfile=b404sp3_2017.dmp directory=dumps logfile=main.log
+impdp system/dfqc2 schemas=B404SP3DEMO dumpfile=b404sp3demo_01102017.dmp directory=dumps logfile=main.log
 expdp system/dfqc2 schemas=B404SP3DEMO dumpfile=b404sp3demo_01102017.dmp directory=dumps logfile=main.log
+docker cp b404_112:/u01/app/oracle/product/11.2/db_1/dumps/b404sp3demo_01102017.dmp /home/uandrew/Job/archive-kd/src/main/dumps/
 
 select 0 from dual;
 
