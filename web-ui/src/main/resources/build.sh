@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 docker stop archive-kd:1.0.0.0
 docker rm archive-kd:1.0.0.0
 ##docker build --force-rm --no-cache --pull -f Dockerfile -t archive-kd:1.0.0.0 .

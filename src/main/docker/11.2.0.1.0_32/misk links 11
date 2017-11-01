@@ -30,25 +30,25 @@ ALTER USER SYSTEM IDENTIFIED BY dfqc2;
 ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 GRANT DBA TO B404SP3DEMO;
 
-@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql; --
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; --
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/xmlja.sql;   --
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql; --
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql; --
+@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql;
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/xmlja.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql;
 
-@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX; --
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES; --
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES; --
+@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES;
 
-ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both; --
-GRANT EXECUTE ON utl_file TO xdb;                                    --
-GRANT EXECUTE ON dbms_lob TO xdb;                                    --
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql;            --
-SHUTDOWN IMMEDIATE;                                                  --
-STARTUP UPGRADE;                                                     --
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql;          --
-SHUTDOWN IMMEDIATE;                                                  --
-STARTUP                                                              --
+ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
+GRANT EXECUTE ON utl_file TO xdb;
+GRANT EXECUTE ON dbms_lob TO xdb;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql;
+SHUTDOWN IMMEDIATE;
+STARTUP UPGRADE;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql;
+SHUTDOWN IMMEDIATE;
+STARTUP
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql;
 @/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
 @/u01/app/oracle/product/11.2/db_1/ord/im/admin/imchk.sql;
@@ -59,9 +59,11 @@ sudo mkdir dumps;
 CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-docker cp /home/uandrew/Job/archive-kd/src/main/dumps/b404sp3_2017.dmp oracle_1132:/u01/app/oracle/product/11.2/db_1/dumps;
+docker cp /home/uandrew/Job/archive-kd/src/main/dumps/b404sp3demo_01102017.dmp b404x86_112:/u01/app/oracle/product/11.2/db_1/dumps;
 
-impdp system/dfqc2 dumpfile=b404sp3_2017.dmp directory=dumps logfile=main.log
+impdp system/dfqc2 schemas=B404SP3DEMO dumpfile=b404sp3demo_01102017.dmp directory=dumps logfile=main.log
+expdp system/dfqc2 schemas=B404SP3DEMO dumpfile=b404sp3demo_01102017.dmp directory=dumps logfile=main.log
+docker cp b404_112:/u01/app/oracle/product/11.2/db_1/dumps/b404sp3demo_01102017.dmp /home/uandrew/Job/archive-kd/src/main/dumps/
 
 select 0 from dual;
 
