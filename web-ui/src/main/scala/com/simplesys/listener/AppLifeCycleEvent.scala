@@ -1,8 +1,10 @@
 package com.simplesys.listener
 
+import java.io.File
 import java.sql.SQLException
 import javax.servlet.annotation.WebListener
 
+import com.simplesys.file.Path
 import com.simplesys.oracle.pool.OraclePoolDataSource
 import com.simplesys.servlet.ServletContextEvent
 
@@ -14,12 +16,20 @@ object AppLifeCycleEvent {
 class AppLifeCycleEvent extends CommonWebAppListener {
 
     import AppLifeCycleEvent._
+
     override val loadSchemas = com.simplesys.app.loadSchemas
     override def UserContextInitialized(sce: ServletContextEvent) {
 
         com.simplesys.messages.ActorConfig.initSingletonActors(system)
 
-        val dbPoolDefault = config.getString("dbPool.default")
+        logger trace s"================================= dbPool.default -> ${sys.env.get("dbPool.default")} =================================================="
+        
+        val temp = Path(new File("./temp"))
+        temp.deleteRecursively(true)
+        temp.createDirectory()
+
+        val dbPoolDefault = sys.env.get("dbPool.default").getOrElse(config.getString("dbPool.default"))
+
         logger trace s"dbPoolDefault: $dbPoolDefault"
 
         //val oraclePool = new OracleHikariDataSource(s"$dbPoolDefault.oraclcePoolDataSource")
@@ -44,6 +54,6 @@ class AppLifeCycleEvent extends CommonWebAppListener {
 
 
     override def ContextDestroyed1(sce: ServletContextEvent) {
-        
+
     }
 }

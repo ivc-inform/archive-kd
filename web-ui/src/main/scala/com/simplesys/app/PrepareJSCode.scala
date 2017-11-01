@@ -29,6 +29,7 @@ object PrepareJSCode extends StaticJSCode {
 
         isc.defineClass(Cards.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)
         isc.defineClass(Attach.getClass.getSimpleName, CommonListGridEditorComponent.getClass.getSimpleName)
+        isc.defineClass(AttachRowComponent.getClass.getSimpleName, HLayoutSS.getClass.getSimpleName)
         isc.defineClass(ImgButtonAttatch.getClass.getSimpleName, ImgButton.getClass.getSimpleName)
         isc.defineClass(WindowUploadDialog.getClass.getSimpleName, WindowSSDialog.getClass.getSimpleName)
 

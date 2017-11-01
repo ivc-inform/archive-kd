@@ -8,8 +8,9 @@ import com.simplesys.SmartClient.Control.props.menu.MenuSSItemProps
 import com.simplesys.SmartClient.DataBinding.props.{AdvancedCriteriaProps, CriterionProps}
 import com.simplesys.SmartClient.Foundation.Canvas
 import com.simplesys.SmartClient.Layout.props.WindowSSProps
+import com.simplesys.SmartClient.System
 import com.simplesys.SmartClient.System._
-import com.simplesys.System.Types.OperatorId
+import com.simplesys.System.Types.{ListGridEditEvent, OperatorId}
 import com.simplesys.System.{JSAny, JSUndefined}
 import com.simplesys.app.Attach
 import com.simplesys.function._
@@ -22,12 +23,11 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.CardDataRecord
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
-    simpleTable = false.opt
     //selectionType = SelectionStyle.multiple.opt
 
     type classHandler <: Cards
 
-    editWindowProperties = WindowSS(
+    editWindowProperties = System.WindowSS(
         new WindowSSProps {
             width = 290
             height = 645
@@ -42,6 +42,8 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
 
     canExpandRecords = true.opt
+
+    editEvent = ListGridEditEvent.none.opt
 
     var expandAttahes: ScOption[ExpandAttahes] = ExpandAttahes.none.opt
 

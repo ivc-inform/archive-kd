@@ -1,0 +1,84 @@
+docker run -d -p 8083:8080 --restart on-failure:5 --add-host uandrew-home:176.117.127.137 --name archive_112_1001 ivcinform/archive-kd:1.0.0.1
+docker run -d -p 9000:9000 --restart on-failure:5 --name portainer -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+
+docker exec -u oracle -it b404_112 bash
+
+docker run -d -p 1521:1521 --restart on-failure:5 --name b404_112 ivcinform/b404:11.2-1.0.0.1
+
+sqlplus / as sysdba
+
+show parameter SHARED_POOL_SIZE;
+show parameter LARGE_POOL_SIZE;
+show parameter JAVA_POOL_SIZE;
+show parameter DB_CACHE_SIZE;
+show parameter STREAMS_POOL_SIZE;
+show parameter SGA_TARGET;
+
+ALTER SYSTEM SET SGA_TARGET=50G scope=spfile;
+ALTER SYSTEM SET SHARED_POOL_SIZE=5G scope=spfile;
+ALTER SYSTEM SET LARGE_POOL_SIZE=5G scope=spfile;
+ALTER SYSTEM SET JAVA_POOL_SIZE=500M scope=spfile;
+ALTER SYSTEM SET DB_CACHE_SIZE=30G scope=spfile;
+ALTER SYSTEM SET STREAMS_POOL_SIZE=5G scope=spfile;
+
+shutdown immediate;
+startup;
+
+ALTER USER SYS IDENTIFIED BY dfqc2;
+ALTER USER SYSTEM IDENTIFIED BY dfqc2;
+ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
+GRANT DBA TO B404SP3DEMO;
+
+@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; 
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/xmlja.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql;
+
+@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES;
+
+ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
+GRANT EXECUTE ON utl_file TO xdb;
+GRANT EXECUTE ON dbms_lob TO xdb;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql;
+SHUTDOWN IMMEDIATE;
+STARTUP UPGRADE;
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql;
+SHUTDOWN IMMEDIATE;
+STARTUP
+@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql;
+@/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
+@/u01/app/oracle/product/11.2/db_1/ord/im/admin/imchk.sql;
+      
+echo 'oracle ALL=(ALL) ALL' >> /etc/sudoers
+sudo mkdir dumps;
+
+CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
+GRANT READ, WRITE ON DIRECTORY dumps TO system;
+
+scp ayudin@tank.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
+docker cp b404sp3demo_2017.dmp b404_112:/u01/app/oracle/product/11.2/db_1/dumps;
+
+impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
+
+select 0 from dual;
+
+CREATE TABLE
+    SVC_SEQGENERATOR
+    (
+        NMAXVALUE INTEGER NOT NULL,
+        SNAMESEQ VARCHAR2(255) NOT NULL,
+        CONSTRAINT PK_SVC_SEQGENERATOR_NAMESEQ PRIMARY KEY (SNAMESEQ)
+    );
+
+
+  ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/o1_mf_users_dpdslolf_.dbf' RESIZE 32000M;
+  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users02.dbf' size 32000M;
+  alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32000M;
+
+scp /home/uandrew/JOB/b404sp3/deploy/b404_Project1_b404.ear uandrew@176.117.127.137:/home/uandrew/.jdeveloper/system11.1.2.4.39.64.36.1/DefaultDomain/servers/DefaultServer/upload/b404_Project1_b404/app
+
+
+

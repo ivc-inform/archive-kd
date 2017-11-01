@@ -6,16 +6,17 @@ docker rm $(docker ps -a -q)
 
 ./buildDockerImage.sh -v 12.2.0.1 -e
 
-docker run --name oracle221_eakd -p 1521:1521 -p 5500:5500 -e ORACLE_PDB=test_pdb -e ORACLE_SID=test oracle/database:12.2.0.1-ee
-
-docker exec oracle221_eakd ./setPassword.sh dfqc2
+docker run --name oracle221_eakd -p 1521:1521 -p 5500:5500 -e ORACLE_PDB=test_pdb -e ORACLE_SID=test ivcinform/oracle-database:12.2.0.1-ee
 
 sudo docker stop oracle221_eakd
 sudo docker start oracle221_eakd
 
-sqlplus system/dfqc2
+sqlplus / as sysdba
+ALTER USER SYS IDENTIFIED BY dfqc2;
+ALTER USER SYSTEM IDENTIFIED BY dfqc2;
+sqlplus system/dfqc2@test_pdb
 
-sqlplus sys/dfqc2 as sysdba
+sqlplus sys/dfqc2@test_pdb as sysdba
 
 docker exec -it oracle221_eakd sqlplus system/dfqc2@//localhost:1521/test
 
@@ -27,50 +28,47 @@ docker exec -it -u 0 oracle221_eakd bash
 ------ DEFAULT TABLESPACE [tablespace] QUOTA целое число [K][M] ON [tablespace] -----
 ------ TEMPORARY TABLESPACE [tablespace] QUOTA  целое число [K][M] ON [tablespace] --
 
-CREATE USER B404SP3  IDENTIFIED BY B404SP3
-DEFAULT TABLESPACE USERS QUOTA 100G ON USERS
+CREATE USER B404SP3DEMO  IDENTIFIED BY dfqc2;
+CREATE USER gate  IDENTIFIED BY gate;
 
-ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2
+SELECT USERNAME, TABLESPACE_NAME, MAX_BYTES "Max Quota"
+from DBA_TS_QUOTAS
+WHERE USERNAME='B404SP3'
+
+DEFAULT TABLESPACE USERS QUOTA 100G ON USERS;
+
+ALTER USER SYS IDENTIFIED BY dfqc2
+ALTER USER B404SP3 IDENTIFIED BY dfqc2
+
+ALTER USER SYSTEM IDENTIFIED BY dfqc2
+
+ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 ALTER USER system IDENTIFIED BY dfqc2;
 
-GRANT CREATE SESSION TO B404SP3DEMO;
+GRANT CREATE SESSION TO B404SP3;
+GRANT DBA TO B404SP3DEMO;
+GRANT EXECUTE ON ORDSYS.ordsource TO B404SP3DEMO;
+GRANT EXECUTE ON ordsys.orddoc TO B404SP3DEMO;
+GRANT DBA TO B404SP3;
+GRANT DBA TO gate;
 DROP USER B404SP3DEMO cascade;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/home/oracle/dumps'
 
-GRANT READ, WRITE ON DIRECTORY dumps TO  B404SP3;
+GRANT READ, WRITE ON DIRECTORY dumps TO  B404SP3DEMO;
 GRANT READ, WRITE ON DIRECTORY dumps TO system;
 
-impdp system/dfqc2 dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
+impdp system/dfqc2@test_pdb dumpfile=b404sp3demo_2017.dmp directory=dumps logfile=main.log
 
 select * from dba_directories;
 
-scp alustrov@orapg.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
-docker cp /home/uandrew/b404sp3demo_2017.dmp oracle-11x64g:/home/oracle/dumps;
+scp ayudin@tank.ssys.lan:/home/oracle/dumps/b404sp3demo_2017.dmp ./
+docker cp /home/uandrew/b404sp3demo_2017.dmp b404_112:/home/oracle/dumps;
 
-docker run -d -p 1521:1521 --name oracle-11x64g oracle-11x64g:1.0.0
-docker exec -u oracle  -it oracle-11x64g bash
-
-show parameter SHARED_POOL_SIZE;
-show parameter LARGE_POOL_SIZE;
-show parameter JAVA_POOL_SIZE;
-show parameter DB_CACHE_SIZE;
-show parameter STREAMS_POOL_SIZE;
-
-ALTER SYSTEM SET SGA_TARGET=50G scope=spfile;
-ALTER SYSTEM SET SHARED_POOL_SIZE=5G scope=spfile;
-ALTER SYSTEM SET LARGE_POOL_SIZE=5G scope=spfile;
-ALTER SYSTEM SET JAVA_POOL_SIZE=500M scope=spfile;
-ALTER SYSTEM SET DB_CACHE_SIZE=35G scope=spfile;
-ALTER SYSTEM SET STREAMS_POOL_SIZE=5G scope=spfile;
-
-ALTER DATABASE CHARACTER SET CL8MSWIN1251;
-ALTER DATABASE NATIONAL CHARACTER SET CL8MSWIN1251;
+docker run -d -p 1521:1521 --name b404_112 ivcinform/oracle-11x64g:1.0.0
+docker exec -u oracle  -it b404_112 bash
 
 show parameter control_file
-
-shutdown immediate;
-startup;
 
 CREATE TABLE
     TEST_UPLOAD_FILES
@@ -80,20 +78,7 @@ CREATE TABLE
         BLOB_VALUE BLOB
     );
 
-@/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/utlrp.sql;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/xsdbmig.sql;
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql;
 
-ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
-
-@/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
-
-
-@/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
-@/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
 
 SELECT comp_id, comp_name FROM dba_registry;
 
@@ -108,7 +93,20 @@ http://idea.imsxm.com/
 sudo ln -s /home/uandrew/2TB/andrew/var/lib/docker  /rootDockerDir
 sudo chmod 777 /rootDockerDir
 
-docker build --force-rm --no-cache --pull -t archive-kd:1.0.0.0 -f /home/uandrew/JOB/archive-kd/web-ui/target/docker/Dockerfile .
-docker run -it --name archive-kd archive-kd:1.0.0.0 /bin/bush
+docker build --force-rm --no-cache --tag archive-kd:1.0.0.1 -f web-ui/target/Dockerfile .
+docker run -it --name archive-kd archive-kd:1.0.0.1 /bin/bush
+docker run -d --name archive-kd archive-kd:1.0.0.1
 
+
+tank.ssys.lan 192.168.115.202
+
+CREATE TABLE
+    SVC_SEQGENERATOR
+    (
+        NMAXVALUE INTEGER NOT NULL,
+        SNAMESEQ VARCHAR2(255) NOT NULL,
+        CONSTRAINT PK_SVC_SEQGENERATOR_NAMESEQ PRIMARY KEY (SNAMESEQ)
+    );
+
+alter tablespace USERS add datafile '/opt/oracle/oradata/test/test_pdb/users02.dbf' size 32000M
 

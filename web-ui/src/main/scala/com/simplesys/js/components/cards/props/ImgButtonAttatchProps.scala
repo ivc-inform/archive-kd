@@ -2,7 +2,7 @@ package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.Control.{ImgButton, Progressbar}
 import com.simplesys.SmartClient.Control.props.ImgButtonProps
-import com.simplesys.SmartClient.System.{IscArray, isc, simpleSyS}
+import com.simplesys.SmartClient.System.{Common, IscArray, isc, simpleSyS}
 import com.simplesys.System.JSAny
 import com.simplesys.System.Types.URL
 import com.simplesys.function._
@@ -16,8 +16,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
     type classHandler <: ImgButtonAttatch
 
     var channelMessageEndUpload: ScOption[String] = ScNone
-    var channelMessageNextStep: ScOption[String] = ScNone
-    var channelMessageMaxValue: ScOption[String] = ScNone
+    var channelMessageUploadPercent: ScOption[String] = ScNone
     var channelMessageRecordInBase: ScOption[String] = ScNone
     var channelMessageError: ScOption[String] = ScNone
 
@@ -25,7 +24,7 @@ class ImgButtonAttatchProps extends ImgButtonProps {
     var record: ScOption[AttatchDataRecordExt] = ScNone
     var actionURL: ScOption[URL] = ScNone
 
-    var okFunction: ScOption[ThisFunction0[classHandler, _]] = {
+    var subscribeFunction: ScOption[ThisFunction0[classHandler, _]] = {
         (thiz: classHandler) ⇒
             isc info "Нет реализации."
     }.toThisFunc.opt
@@ -55,37 +54,34 @@ class ImgButtonAttatchProps extends ImgButtonProps {
                         def getParams: String = params.toString()
 
                         def getNo = s"p${i}"
-                        def getNo1(guid: String) = s"${getNo}_${guid}"
+                        def getNo1(id: Double) = s"${getNo}_$id"
 
-                        var no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageEndUpload = no1
-                        addParam(no1 = no1)
+                        record.foreach {
+                            record ⇒
+                                var no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageEndUpload = no1
+                                addParam(no1 = no1)
 
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageError = no1
-                        addParam(no1 = no1)
+                                i += 1
+                                no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageError = no1
+                                addParam(no1 = no1)
 
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageNextStep = no1
-                        addParam(no1 = no1)
+                                i += 1
+                                no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageUploadPercent = no1
+                                addParam(no1 = no1)
+                                
+                                i += 1
+                                no1 = getNo1(record.id.getOrElse(0))
+                                thisTop.channelMessageRecordInBase = no1
+                                addParam("", no1)
 
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageMaxValue = no1
-                        addParam(no1 = no1)
-
-                        i += 1
-                        no1 = getNo1(simpleSyS.guid)
-                        thisTop.channelMessageRecordInBase = no1
-                        addParam("", no1)
-
-                        thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
+                                thisTop.actionURL = s"logic/arx_attatch/Upload?${getParams}"
+                        }
                 }
             }
-
-
+            
     }.toThisFunc.opt
 
 

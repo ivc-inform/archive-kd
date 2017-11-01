@@ -1,28 +1,30 @@
 package com.simplesys.js.components.cards.props
 
 import com.simplesys.SmartClient.App.props._
-import com.simplesys.SmartClient.Control.props.ProgressbarProps
-import com.simplesys.SmartClient.Grids.listGrid.ListGridRecord
+import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ProgressbarProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
-import com.simplesys.SmartClient.Layout.props.HLayoutSSProps
 import com.simplesys.SmartClient.Messaging.MessageJS
+import com.simplesys.SmartClient.RPC.props.RPCRequestProps
+import com.simplesys.SmartClient.RPC.{RPCManagerSS, RPCRequest, RPCResponse}
 import com.simplesys.SmartClient.System._
-import com.simplesys.SmartClient.sse.Sse
-import com.simplesys.System.Types.{Alignment, ListGridFieldType}
+import com.simplesys.System.Types.{Alignment, ListGridEditEvent, ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.System._
-import com.simplesys.app.{ImgButtonAttatch, WindowUploadDialog}
+import com.simplesys.app.{AttachRowComponent, ImgButtonAttatch, WindowUploadDialog}
 import com.simplesys.container.upload.{ErrorStr, UploadData}
 import com.simplesys.function._
-import com.simplesys.js.components.cards.Attach
+import com.simplesys.js.components.cards.{Attach, AttachRowComponent}
 import com.simplesys.option.DoubleType._
+import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
+import scala.scalajs.js
 import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
     var fileName: JSUndefined[String]
+    var percentsDone: JSUndefined[Double]
     var contentLength: JSUndefined[String]
     var vname: JSUndefined[String]
     var viztname: JSUndefined[String]
@@ -43,6 +45,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     simpleTable = false.opt
     //autoFetchData = false.opt
+    recordComponentPoolingMode = RecordComponentPoolingMode.viewport.opt
 
     itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
 
@@ -53,6 +56,10 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     showRecordComponents = true.opt
     showRecordComponentsByCell = true.opt
+
+    var channelSubscribeToChannel: ScOption[String] = "12DC1876-F489-3172-1297-729FFB73B575".opt
+
+    editEvent = ListGridEditEvent.none.opt
 
     replacingFields = Seq(
         new ListGridFieldProps {
@@ -87,10 +94,37 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     height = 250
 
+    initWidget = {
+        (thisTop: classHandler, args: IscArray[JSAny]) ⇒
+            thisTop.Super("initWidget", args)
+
+            val funcMenu = ListGridContextMenu.create(
+                new ListGridContextMenuProps {
+                    owner = thisTop.opt
+                    itemsType = Seq(miNew(false), miCopy(false), miDelete(false), miEdit(false), miRefresh()).opt
+                }
+            )
+
+            thisTop setFuncMenu funcMenu
+            thisTop setContextMenu funcMenu
+
+            thisTop.channelSubscribeToChannel.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                (e: MessageJS) ⇒
+                    e.data.foreach {
+                        dt ⇒
+                            val data = dt.asInstanceOf[UploadData]
+                            val record = thisTop.findByKey(data.idAttatch)
+                            val component = record.map(record ⇒ thisTop.getLiveRecordComponent[AttachRowComponent](record, fileNameField.name)).flatten
+                            component.foreach(_.imgButtonAttatch.foreach(_.subscribeFunction()))
+                    }
+            ))
+    }.toThisFunc.opt
+
     createRecordComponent = {
         (thisTop: classHandler, _record: AttatchDataRecordExt, colNum: Int) ⇒
             thisTop.getFieldName(colNum) match {
                 case fileNameField.name ⇒
+
                     any2undefOrA {
                         val _progressBar = Progressbar.create(
                             new ProgressbarProps {
@@ -101,110 +135,190 @@ class AttachProps extends CommonListGridEditorComponentProps {
                             }
                         )
 
-                        HLayoutSS.create(
-                            new HLayoutSSProps {
+                        val component = AttachRowComponent.create(
+                            new AttachRowComponentProps {
                                 height = 20
                                 width = "100%"
-                                members = Seq(
-                                    _progressBar,
-                                    ImgButtonAttatch.create(
-                                        new ImgButtonAttatchProps {
-                                            showDown = false.opt
-                                            showRollOver = false.opt
-                                            layoutAlign = Alignment.center
-                                            prompt = "Изменить файл".ellipsis.opt
-                                            height = 18
-                                            width = 18
-                                            src = Common.attach.opt
-                                            progressBar = _progressBar.opt
-                                            record = _record.opt
-                                            showDisabledIcon = false.opt
-                                            okFunction = {
-                                                (thiz: classHandler) ⇒
-                                                    //val a = Sse.checkExistsSSE()
-                                                    thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒
-                                                            e.data.foreach {
-                                                                data ⇒
-                                                                    thiz.progressBar.foreach {
-                                                                        progressBar ⇒
-                                                                            progressBar setPercentDone 0.0
-                                                                            progressBar.maxValue = data.asInstanceOf[UploadData].maxValue.getOrElse(0)
-                                                                    }
-                                                            }/*,
-                                                        () ⇒ println(s"subscribe: $channel")*/
-                                                    ))
-                                                    thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_ setTitle "Запись в БД".ellipsis)/*,
-                                                        () ⇒ println(s"subscribe: $channel")*/
-                                                    ))
-                                                    thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
-                                                        (e: MessageJS) ⇒ thiz.progressBar.foreach(_.nextStep())/*,
-                                                        () ⇒ println(s"subscribe: $channel")*/
-                                                    ))
-
-                                                    def unsubscribe(): Unit = {
-                                                        thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
-                                                        thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
-                                                        thiz.channelMessageNextStep.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
-                                                        thiz.channelMessageMaxValue.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
-                                                        thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel/*, () ⇒ println(s"unsubscribe: $channel")*/))
-                                                        thiz.enable()
-                                                    }
-
-                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
+                                progressBar = _progressBar.opt
+                                imgButtonAttatch = ImgButtonAttatch.create(
+                                    new ImgButtonAttatchProps {
+                                        identifier = "imageButton".opt
+                                        showDown = false.opt
+                                        showRollOver = false.opt
+                                        layoutAlign = Alignment.center
+                                        prompt = {
+                                            _record.status.getOrElse(0) match {
+                                                case 0 ⇒ "Прикрепить файл".ellipsis
+                                                case 2 ⇒ "Заблокирован"
+                                                case _ ⇒ "Неизвестное состояние"
+                                            }
+                                        }.opt
+                                        disabled = {
+                                            _record.status.getOrElse(0) match {
+                                                case 0 ⇒ false
+                                                case 2 ⇒ true
+                                                case _ ⇒ true
+                                            }
+                                        }.opt
+                                        height = 18
+                                        width = 18
+                                        src = {
+                                            _record.status.getOrElse(0) match {
+                                                case 0 ⇒ Common.attach
+                                                case 2 ⇒ Common.attach
+                                                case _ ⇒ Common.iconUnknown
+                                            }
+                                        }.opt
+                                        progressBar = _progressBar.opt
+                                        record = _record.opt
+                                        showDisabledIcon = false.opt
+                                        subscribeFunction = {
+                                            (thiz: classHandler) ⇒
+                                                thiz.disable()
+                                                thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                                                    (e: MessageJS) ⇒
                                                         e.data.foreach {
                                                             data ⇒
                                                                 val _data = data.asInstanceOf[UploadData]
-                                                                progressBar.foreach { progressBar ⇒
-                                                                    progressBar setPercentDone 0.0
-                                                                    _data.fileName.foreach(progressBar setTitle _)
-
-                                                                    _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0):Double)
-                                                                    
-                                                                    thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+                                                                thiz.progressBar.foreach {
+                                                                    progressBar ⇒
+                                                                        if (!progressBar.destroyed.getOrElse(false)) {
+                                                                            progressBar setPercentDone 100
+                                                                            _data.title.foreach(progressBar setTitle _)
+                                                                        }
                                                                 }
                                                         }
-                                                        unsubscribe()
-                                                    }/*,
-                                                        () ⇒ println(s"subscribe: $channel")*/
-                                                    ))
-
-                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
-                                                        progressBar.foreach(_ setPercentDone 0.0)
-
-                                                        val error = e.data.asInstanceOf[ErrorStr]
-                                                        isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
-                                                        unsubscribe()
-                                                    }/*,
-                                                        () ⇒ println(s"subscribe: $channel")*/
-                                                    ))
-
-
-                                            }.toThisFunc.opt
-                                            click = {
-                                                (thizTop: classHandler) ⇒
-                                                    val url = thizTop.actionURL
-
-                                                    WindowUploadDialog.create(
-                                                        new WindowUploadDialogProps {
-                                                            action = url.opt
-                                                            okFunction = {
-                                                                (thiz: classHandler) ⇒
-                                                                    thizTop.disable()
-                                                                    thizTop.okFunction()
-                                                                    thiz.form.foreach(_.submitForm())
-                                                                    thiz.markForDestroy()
-                                                            }.toThisFunc.opt
+                                                ))
+                                                thiz.channelMessageUploadPercent.foreach(channel ⇒ isc.MessagingSS.subscribe(channel,
+                                                    (e: MessageJS) ⇒ thiz.progressBar.foreach { progressBar ⇒
+                                                        e.data.foreach {
+                                                            data ⇒
+                                                                val _data = data.asInstanceOf[UploadData]
+                                                                if (!progressBar.destroyed.getOrElse(false))
+                                                                    _data.percentsDone.foreach {
+                                                                        percentsDone ⇒
+                                                                            progressBar setPercentDone percentsDone
+                                                                            progressBar setTitle s"Перенос данных: $percentsDone %"
+                                                                    }
                                                         }
-                                                    )
-                                                    false
-                                            }.toThisFunc.opt
-                                        }
-                                    )
+                                                    }
+                                                ))
+
+                                                def unsubscribe(): Unit = {
+                                                    thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.channelMessageUploadPercent.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.channelMessageRecordInBase.foreach(channel ⇒ isc.MessagingSS.unsubscribe(channel))
+                                                    thiz.enable()
+                                                }
+
+                                                thiz.channelMessageEndUpload.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
+                                                    e.data.foreach {
+                                                        data ⇒
+                                                            val _data = data.asInstanceOf[UploadData]
+                                                            progressBar.foreach { progressBar ⇒
+                                                                if (!progressBar.destroyed.getOrElse(false)) {
+                                                                    progressBar setPercentDone 0.0
+                                                                    _data.fileName.foreach(progressBar setTitle _)
+                                                                }
+
+                                                                _record.contentLength = AttachProps.getSize(_data.fileSize.getOrElse(0.0): Double)
+                                                                thisTop.listGrid.refreshRow(thisTop.getRowNum(_record))
+                                                                thiz setSrc Common.attach
+                                                                thiz.enable()
+
+                                                                _data.elapsedTime.foreach(elapsedTime ⇒ _data.fileSize.foreach(fileSize ⇒ isc ok(s"Upload is done, fileSize: $fileSize, elapsedTime: $elapsedTime", "33BB2A90-9641-359E-8DD9-8159B3C614B9")))
+                                                            }
+                                                    }
+                                                    unsubscribe()
+                                                }))
+
+                                                thiz.channelMessageError.foreach(channel ⇒ isc.MessagingSS.subscribe(channel, { (e: MessageJS) ⇒
+                                                    progressBar.foreach(_ setPercentDone 0.0)
+
+                                                    val error = e.data.asInstanceOf[ErrorStr]
+                                                    isc errorDetail(error.message.getOrElse(""), error.stack.getOrElse(""), "33BB2A90-9641-359E-8DD9-8159B35814B9", "33BB2A90-9641-359E-8DD9-8159B3581219")
+                                                    unsubscribe()
+                                                }))
+
+
+                                        }.toThisFunc.opt
+                                        click = {
+                                            (thizTop: classHandler) ⇒
+                                                thizTop.record.foreach {
+                                                    record ⇒
+                                                        val status = record.status.getOrElse(0)
+                                                        status match {
+                                                            case 0 ⇒
+                                                                val url = thizTop.actionURL
+
+                                                                WindowUploadDialog.create(
+                                                                    new WindowUploadDialogProps {
+                                                                        action = url.opt
+                                                                        okFunction = {
+                                                                            (thiz: classHandler) ⇒
+                                                                                thizTop.disable()
+                                                                                thizTop.prompt = "Заблокирован"
+                                                                                thiz.form.foreach(_.submitForm())
+                                                                                thiz.markForDestroy()
+                                                                        }.toThisFunc.opt
+                                                                    }
+                                                                )
+                                                            //todo 3 заменить на константу
+                                                            /*case 3 ⇒
+                                                                thizTop.record.foreach {
+                                                                    record ⇒
+                                                                        RPCManagerSS.sendRequest(
+                                                                            RPCRequest(
+                                                                                new RPCRequestProps {
+                                                                                    actionURL = "logic/arx_attatch/StopUpload".opt
+                                                                                    data = js.Dictionary("id" → record.id, "status" → 0).opt
+                                                                                    timeout = 60000.opt
+                                                                                    sendNoQueue = true.opt
+                                                                                    callback = {
+                                                                                        (resp: RPCResponse, data: JSObject, req: RPCRequest) ⇒
+                                                                                            if (resp.httpResponseCode == 200) {
+                                                                                                thizTop setSrc Common.attach
+                                                                                                thizTop.progressBar.foreach{
+                                                                                                    progressBar ⇒
+                                                                                                        progressBar setTitle ""
+                                                                                                        progressBar setPercentDone 0
+                                                                                                }
+                                                                                                thizTop.record.asInstanceOf[JSDynamic].updateDynamic("status")(0)
+                                                                                            }
+
+                                                                                    }.toFunc.opt
+                                                                                }
+                                                                            )
+                                                                        )
+                                                                }*/
+                                                        }
+                                                }
+
+                                                false
+                                        }.toThisFunc.opt
+                                    }
                                 ).opt
                             }
                         )
+
+                        val status = _record.status.getOrElse(0)
+                        status match {
+                            case 0 ⇒
+                            /*case 1 ⇒
+                                component.imgButtonAttatch.foreach(_.subscribeFunction())
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Запись в БД".ellipsis*/
+                            case 2 ⇒
+                                component.imgButtonAttatch.foreach(_.subscribeFunction())
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Запись в БД".ellipsis
+                            case 3 ⇒
+                                _progressBar setPercentDone 100
+                                _progressBar setTitle "Прерванная запись в БД".ellipsis
+                        }
+
+                        component
                     }
                 case _ ⇒
                     jSUndefined
