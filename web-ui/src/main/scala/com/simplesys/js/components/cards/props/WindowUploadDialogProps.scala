@@ -1,6 +1,5 @@
 package com.simplesys.js.components.cards.props
 
-import com.simplesys.SmartClient.Control.{ImgButton, Progressbar}
 import com.simplesys.SmartClient.Forms.DynamicFormSS
 import com.simplesys.SmartClient.Forms.formsItems.UploadItem
 import com.simplesys.SmartClient.Forms.formsItems.props.UploadItemProps
@@ -15,8 +14,6 @@ import com.simplesys.js.components.cards.WindowUploadDialog
 import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption._
 import com.simplesys.option.{ScNone, ScOption}
-
-import scala.scalajs.js.{ThisFunction0, UndefOr}
 
 class WindowUploadDialogProps extends WindowSSDialogProps {
     type classHandler <: WindowUploadDialog

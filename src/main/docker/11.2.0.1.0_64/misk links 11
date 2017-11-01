@@ -1,8 +1,9 @@
-docker run -d -p 1521:1521 --name b404_112 ivcinform/oracle-11x64g:1.0.0
-docker run -d -p 1521:1521 --name b404_112 ivcinform/oracle-11x64g:1.0.1
-docker run -d -p 1521:1521 --name b404_112 ivcinform/b404:11.2-1.0.0
+docker run -d -p 8083:8080 --restart on-failure:5 --add-host uandrew-home:176.117.127.137 --name archive_112_1001 ivcinform/archive-kd:1.0.0.1
+docker run -d -p 9000:9000 --restart on-failure:5 --name portainer -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
 
-docker exec -u oracle  -it b404_112 bash
+docker exec -u oracle -it b404_112 bash
+
+docker run -d -p 1521:1521 --restart on-failure:5 --name b404_112 ivcinform/b404:11.2-1.0.0.1
 
 sqlplus / as sysdba
 
@@ -29,16 +30,14 @@ ALTER USER B404SP3DEMO IDENTIFIED BY dfqc2;
 GRANT DBA TO B404SP3DEMO;
 
 @/u01/app/oracle/product/11.2/db_1/javavm/install/initjvm.sql;
-@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql;
+@/u01/app/oracle/product/11.2/db_1/xdk/admin/initxml.sql; 
 @/u01/app/oracle/product/11.2/db_1/xdk/admin/xmlja.sql;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catjava.sql;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catexf.sql;
 
-
 @/u01/app/oracle/product/11.2/db_1/ord/admin/ordinst.sql SYSAUX SYSAUX;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql change_on_install SYSAUX TEMP YES;
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catqm.sql xdb change_on_install SYSAUX TEMP YES;
-
 
 ALTER SYSTEM SET DISPATCHERS="(PROTOCOL=TCP)(SERVICE=ORCLXDB)" SCOPE=both;
 GRANT EXECUTE ON utl_file TO xdb;
@@ -51,9 +50,9 @@ SHUTDOWN IMMEDIATE;
 STARTUP
 @/u01/app/oracle/product/11.2/db_1/rdbms/admin/catxdbj.sql;
 @/u01/app/oracle/product/11.2/db_1/ord/im/admin/iminst.sql;
-@/u01/app/oracle/product/11.2/db_1/ord/im/admin/imchk.sql;      
-
-
+@/u01/app/oracle/product/11.2/db_1/ord/im/admin/imchk.sql;
+      
+echo 'oracle ALL=(ALL) ALL' >> /etc/sudoers
 sudo mkdir dumps;
 
 CREATE OR REPLACE DIRECTORY dumps AS '/u01/app/oracle/product/11.2/db_1/dumps';
@@ -78,4 +77,8 @@ CREATE TABLE
   ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/ORCL/datafile/o1_mf_users_dpdslolf_.dbf' RESIZE 32000M;
   alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users02.dbf' size 32000M;
   alter tablespace USERS add datafile '/u01/app/oracle/oradata/ORCL/datafile/users03.dbf' size 32000M;
+
+scp /home/uandrew/JOB/b404sp3/deploy/b404_Project1_b404.ear uandrew@176.117.127.137:/home/uandrew/.jdeveloper/system11.1.2.4.39.64.36.1/DefaultDomain/servers/DefaultServer/upload/b404_Project1_b404/app
+
+
 

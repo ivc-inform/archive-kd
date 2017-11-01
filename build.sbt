@@ -33,17 +33,16 @@ lazy val common = Project(id = "common", base = file("common")).settings(
         CommonDeps.ssysCommon,
         CommonDeps.scalaTest % Test
     )
-).settings(CommonSettings.defaultProjectSettings)
+)
 
 lazy val testModule = Project(id = "test", base = file("test")).
   dependsOn(dbObjects).
   settings(
       libraryDependencies ++= Seq(
           CommonDeps.ssysJDBCWrapper,
-          CommonDeps.slick,
           CommonDeps.scalaTest % Test
       )
-  ).settings(CommonSettings.defaultProjectSettings)
+  )
 
 lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
   dependsOn(common).
@@ -51,14 +50,12 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
   settings(
       libraryDependencies ++= Seq(
           CommonDeps.ssysCoreLibrary,
-          CommonDeps.ssysJsonExtender,
           CommonDeps.ssysJDBCWrapper,
           CommonDeps.oraclePoolDataSources,
           CommonDeps.hikariPoolDataSources,
           CommonDeps.jdbcOracle12,
           CommonDeps.jdbcOracle12UCP,
           CommonDeps.jdbcOracleN18_12,
-          //CommonDeps.jdbcOracleOrDim,
           CommonDeps.scalaTest % Test
       )
   ).settings(DevPlugin.devPluginGeneratorSettings).
@@ -72,11 +69,11 @@ lazy val dbObjects = Project(id = "db-objects", base = file("db-objects")).
           quoted := true,
           sourceGenerators in Compile += (generateBoScalaCode in DevConfig)
       )
-  }).settings(CommonSettings.defaultProjectSettings)
+  })
 
 lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
   enablePlugins(
-      DevPlugin, MergeWebappPlugin, SbtCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, DockerPlugin
+      DevPlugin, MergeWebappPlugin, SbtCoffeeScript, ScalaJSPlugin, JettyPlugin, WarPlugin, WebappPlugin, JRebelPlugin, JavaAppPackaging
   ).dependsOn(
     dbObjects
 ).aggregate(dbObjects).settings(
@@ -84,6 +81,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     addCommandAlias("debug-restart", "; jetty:stop ; clean ; fastOptJS ; package ; jetty:start"),
     addCommandAlias("reset", "; clean ; compile ; fastOptJS "),
     addCommandAlias("full-reset", "; clean ; package ; fastOptJS "),
+    addCommandAlias("buildDockerImage", "; clean ; fastOptJS ; package; docker:buildImage"),
+    addCommandAlias("buildAndPublishDockerImage", "; clean ; fastOptJS ; package; docker:publishToCloud"),
 
     JRebelPlugin.jrebelSettings,
     jrebel.webLinks += (sourceDirectory in Compile).value / "webapp",
@@ -96,19 +95,15 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         "-XX:+CMSClassUnloadingEnabled"
     ),
 
-    scalacOptions += "-P:scalajs:sjsDefinedByDefault",
-    scalacOptions ++= {
-        if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault")
-        else Nil
-    },
+    scalacOptions ++= (if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault") else Nil),
 
     libraryDependencies ++= Seq(
         CommonDeps.servletAPI % Provided,
         CommonDeps.ssysCommon,
         CommonDeps.ssysCommonWebapp,
         CommonDeps.ssysIscComponents,
+        CommonDeps.ssysScalaIOExtender,
         CommonDeps.ssysXMLExtender,
-        CommonDeps.ssysJsonExtender,
         CommonDeps.ssysIscMisc,
 
         CommonDeps.smartclient,
@@ -136,6 +131,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     import ru.simplesys.plugins.sourcegen.DevPlugin._
 
     Seq(
+
         //scala.js
         crossTarget in fastOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
         crossTarget in fullOptJS := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponentsJS",
@@ -144,8 +140,8 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         //coffeeScript
         CoffeeScriptKeys.sourceMap := false,
         CoffeeScriptKeys.bare := false,
-        webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
         sourceDirectory in Assets := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed" / "developedComponents",
+        webTarget := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents" / "coffeescript",
         (managedResources in Compile) ++= CoffeeScriptKeys.coffeeScript.value,
 
         //dev plugin
@@ -195,21 +191,14 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         },
         webappWebInfClasses := true,
 
-        defaultLinuxInstallLocation in Docker := "",
-        dockerBaseImage := "ivcinform/jetty:9.4.6.v20170531",
-        daemonUser in Docker := "",
-        daemonGroup in Docker := "",
-        dockerDocfileCommands := Seq(),
-        dockerEntrypoint := Seq(),
-        dockerCmd := Seq(),
+        //docker
+        dockerBaseImage := "ivcinform/jetty:9.4.7.v20170914",
         dockerExposedPorts in Docker := Seq(8080),
-
-        version := CommonSettings.settingValues.version,
         packageName in Docker := CommonSettings.settingValues.name,
         dockerUsername in Docker := None,
         dockerRepository in Docker := Some("hub.docker.com"),
         dockerRepository := Some("ivcinform"),
-        dockerUpdateLatest in Docker := true,
+        dockerUpdateLatest := false,
         dockerAlias in Docker := DockerAlias(dockerRepository.value, (dockerUsername in Docker).value, CommonSettings.settingValues.name, Some(CommonSettings.settingValues.version)),
         dockerDocfileCommands := Seq(
             copy(s"webapp/", s"/var/lib/jetty/webapps/${CommonSettings.settingValues.name}"),
@@ -262,9 +251,4 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 },
     skip in packageJSDependencies := false,
     jsDependencies += "org.webjars" % "jquery" % "3.2.1" / "3.2.1/jquery.js"
-).settings(CommonSettings.defaultProjectSettings)
-
-
-
-
-
+)

@@ -23,7 +23,6 @@ import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.app.scala.container.arx.CardDataRecord
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
-    simpleTable = false.opt
     //selectionType = SelectionStyle.multiple.opt
 
     type classHandler <: Cards

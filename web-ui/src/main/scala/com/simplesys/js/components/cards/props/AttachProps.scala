@@ -149,18 +149,14 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         prompt = {
                                             _record.status.getOrElse(0) match {
                                                 case 0 ⇒ "Прикрепить файл".ellipsis
-                                                case 1 ⇒ "Заблокирован"
                                                 case 2 ⇒ "Заблокирован"
-                                                case 3 ⇒ "Снять зависшую блокировку"
                                                 case _ ⇒ "Неизвестное состояние"
                                             }
                                         }.opt
                                         disabled = {
                                             _record.status.getOrElse(0) match {
                                                 case 0 ⇒ false
-                                                case 1 ⇒ true
                                                 case 2 ⇒ true
-                                                case 3 ⇒ false
                                                 case _ ⇒ true
                                             }
                                         }.opt
@@ -169,10 +165,8 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                         src = {
                                             _record.status.getOrElse(0) match {
                                                 case 0 ⇒ Common.attach
-                                                case 1 ⇒ ""
-                                                case 2 ⇒ ""
-                                                case 3 ⇒ Common.cancel
-                                                case _ ⇒ ""
+                                                case 2 ⇒ Common.attach
+                                                case _ ⇒ Common.iconUnknown
                                             }
                                         }.opt
                                         progressBar = _progressBar.opt
@@ -271,7 +265,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                     }
                                                                 )
                                                             //todo 3 заменить на константу
-                                                            case 3 ⇒
+                                                            /*case 3 ⇒
                                                                 thizTop.record.foreach {
                                                                     record ⇒
                                                                         RPCManagerSS.sendRequest(
@@ -297,7 +291,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
                                                                                 }
                                                                             )
                                                                         )
-                                                                }
+                                                                }*/
                                                         }
                                                 }
 
@@ -311,10 +305,10 @@ class AttachProps extends CommonListGridEditorComponentProps {
                         val status = _record.status.getOrElse(0)
                         status match {
                             case 0 ⇒
-                            case 1 ⇒
+                            /*case 1 ⇒
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
                                 _progressBar setPercentDone 100
-                                _progressBar setTitle "Запись в БД".ellipsis
+                                _progressBar setTitle "Запись в БД".ellipsis*/
                             case 2 ⇒
                                 component.imgButtonAttatch.foreach(_.subscribeFunction())
                                 _progressBar setPercentDone 100
