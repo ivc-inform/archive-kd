@@ -4,12 +4,12 @@ import sbt._
 
 object PluginDeps {
     object versions {
-        val devPluginVersion = "1.3.13"
-        val sbtCoffeScriptVersion = "1.1.4"
-        val mergeJSVersion = "1.0.12"
+        val devPluginVersion = "1.3.16-SNAPSHOT"
+        val sbtCoffeScriptVersion = "1.1.5-SNAPSHOT"
+        val mergeJSVersion = "1.0.14-SNAPSHOT"
         val xsbtWebVersion = "4.0.2"
         val sbtNativePackagerVersion = "1.2.5-SNAPSHOT"
-        val scalaJSPluginVersion = "0.6.20"
+        val scalaJSPluginVersion = "0.6.21"
         val jrabelPluginVersion = "0.11.1"
     }
 
@@ -29,24 +29,24 @@ object CommonDeps {
         val jodaVersion = "2.8.2"
         val jodaConvertVersion = "1.7"
 
-        //val ssysCoreVersion = "1.4-SNAPSHOT"
-        val ssysCoreVersion = "1.4.0.2"
+        val ssysCoreVersion = "1.5-SNAPSHOT"
+        //val ssysCoreVersion = "1.4.0.2"
         val smartclientVersion = "11.1-v20170703.1"
 
-        val servletAPIVersion = "3.1.0"
+        val servletAPIVersion = "4.0.0"
 
-        val scalaTestVersion = "3.0.3"
+        val scalaTestVersion = "3.0.4"
         val scalaTagsVersion = "0.6.5"
         val jQueryVersion = "0.9.1"
         val uPickleVersion = "0.4.4"
 
-        //val scalaJSVersion = "1.4-SNAPSHOT"
-        val scalaJSVersion = "1.4.0.1"
+        val scalaJSVersion = "1.5-SNAPSHOT"
+        //val scalaJSVersion = "1.4.0.1"
 
         val scalajsDOMVersion = "0.9.3"
         val scalajsJQueryVersion = "0.9.0"
 
-        val jettyVersion = "9.4.7.v20170914"
+        val jettyVersion = "9.4.8.v20171121"
         val jdbcOracle12DriverVersion = "12.2.0.1"
 
         val commonsFileuploadVersion = "1.3.3"
