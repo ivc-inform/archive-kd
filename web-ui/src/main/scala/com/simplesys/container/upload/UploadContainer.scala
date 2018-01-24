@@ -316,7 +316,7 @@ object UploadContainer {
                                     ), channels = channelMessageEndUpload)))
 
                                     fi.foreach(_.delete())
-                                    Out("Ok")
+                                    OutOk
                                 case Failure(e) ⇒
 
                                     channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = obj("message" → fromString(e.getMessage), "stack" → fromString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
