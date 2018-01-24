@@ -4,9 +4,9 @@ import com.simplesys.common.Strings._
 import com.simplesys.db.pool.PoolDataSource
 import com.simplesys.listener.AppLifeCycleEvent
 import com.simplesys.log.Logging
+import com.simplesys.servlet.ServletContext
 import com.simplesys.servlet.http.HttpSession
-import com.simplesys.servlet.{ServletActor, ServletContext}
-import com.simplesys.sql.SQLDialect
+import com.simplesys.servlet.isc.ServletActor
 
 trait SessionContextSupport {
     this: ServletActor =>
@@ -51,7 +51,7 @@ class SessionContext(protected val session: Option[HttpSession]) extends Logging
     private[this] var oraclePool: PoolDataSource = null
     def getOraclePool = oraclePool
 
-    def getSQLDialect: SQLDialect = oraclePool.sqlDialect
+    def getSQLDialect: com.simplesys.sql.SQLDialect = oraclePool.sqlDialect
 
     /*private[this] var birtEngine: IReportEngine = null
     def getBirtEngine = birtEngine*/

@@ -1,4 +1,4 @@
-// This file is generated automatically (at 24.01.2018 12:13:07), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 24.01.2018 12:49:41), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
 package ru.simplesys.defs.app.scala.container.arx
 
@@ -17,7 +17,7 @@ import ru.simplesys.defs.bo.arx._
 trait arx_docizvtype_SemiHandTrait_Add extends SessionContextSupport with ServletActor {
     
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
-    val requestData = new DSRequest(request.JSONData)    
+    val requestData: DSRequest = request.JSONData.as[DSRequest].getOrElse(throw new RuntimeException ("Dont parsed Request JSON"))    
     
     logger debug s"Request for Add: ${newLine + requestData.asJson.toPrettyString}"    
     
