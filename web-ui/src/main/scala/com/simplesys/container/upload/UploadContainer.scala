@@ -10,23 +10,25 @@ import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
 import com.simplesys.common.Strings.newLine
 import com.simplesys.container.scala.{GetAttFile, OrdDoc, OrdSource}
-import com.simplesys.isc.dataBinging.DSRequestDyn
-import com.simplesys.isc.system.ServletActorDyn
 import com.simplesys.jdbc.control.SessionStructures._
-import com.simplesys.jdbc.control.classBO.Where
-import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
-import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
+import com.simplesys.servlet.{HTMLContent, ServletContext}
 import com.simplesys.util.DT
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener, DatabaseChangeRegistration}
 import oracle.jdbc.{OracleBlob, OracleConnection}
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
-import ru.simplesys.defs.bo.arx.{Attatch, AttatchBo}
+import ru.simplesys.defs.bo.arx.AttatchBo
+import com.simplesys.circe.Circe._
+import com.simplesys.isc.dataBinging.DSRequest
+import com.simplesys.servlet.isc.{GetData, ServletActor}
+import io.circe.generic.auto._
+import io.circe.syntax._
+import io.circe.Json._
 
 import scala.collection.JavaConverters._
 import scala.compat.Platform.EOL
@@ -49,12 +51,12 @@ trait ErrorStr extends JSObject {
 object UploadContainer {
 
     @RSTransfer(urlPattern = "/logic/arx_attatch/Upload")
-    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
+    class UploadActor(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActor {
 
-        val requestData = new DSRequestDyn(request)
+        val requestData: DSRequest = request.JSONData.as[DSRequest].getOrElse(throw new RuntimeException ("Dont parsed Request JSON"))
         val dataSetBo = AttatchBo(oraclePool)
 
-        logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
+        logger debug s"Request for Fetch: ${newLine + requestData.asJson.toPrettyString}"
 
         def receive = {
             case GetData => {
@@ -87,7 +89,7 @@ object UploadContainer {
                 val upload: ServletFileUpload = new ServletFileUpload(factory)
 
                 if (!isMultipart) {
-                    channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString("No file uploaded"), "stack" → JsonString("No file uploaded")), channels = channelMessageError)))
+                    channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = obj("message" → fromString("No file uploaded"), "stack" → fromString("No file uploaded")), channels = channelMessageError)))
                     OutFailure(new RuntimeException("No file uploaded"))
                 } else {
                     idAttatch.foreach {
@@ -112,12 +114,12 @@ object UploadContainer {
                                         val stepSize = pContentLength / 100
 
                                         if (firstStep) {
-                                            SendMessage(Message(data = JsonObject("idAttatch" → JsonLong(idAttatch)), channels = channelSubscribeToChannel))
+                                            SendMessage(Message(data = obj("idAttatch" → fromLong(idAttatch)), channels = channelSubscribeToChannel))
                                             firstStep = false
                                         }
 
                                         if (pBytesRead >= stepSize * step) {
-                                            channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = JsonObject("percentsDone" → JsonLong(step)), channels = channelMessageUploadPercent)))
+                                            channelMessageUploadPercent.foreach(channelMessageUploadPercent ⇒ SendMessage(Message(data = obj("percentsDone" → fromLong(step)), channels = channelMessageUploadPercent)))
                                             step += 1
                                         }
                                     }
@@ -125,7 +127,7 @@ object UploadContainer {
 
                                 upload setProgressListener progressListener
 
-                                def sendMessageTypeRecordInBase(title: String) = channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(data = JsonObject("title" → JsonString(title)), channels = channelMessageRecordInBase)))
+                                def sendMessageTypeRecordInBase(title: String) = channelMessageRecordInBase.foreach(channelMessageRecordInBase ⇒ SendMessage(Message(data = obj("title" → fromString(title)), channels = channelMessageRecordInBase)))
 
                                 transaction(oraclePool.getConnection()) {
                                     connectionBlock ⇒
@@ -307,17 +309,17 @@ object UploadContainer {
                             }
                             match {
                                 case Success(fi) ⇒
-                                    channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject(
-                                        "elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString),
-                                        "fileName" → JsonString(fi.get.getName),
-                                        "fileSize" → JsonLong(fi.get.getSize)
+                                    channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = obj(
+                                        "elapsedTime" → fromString(DT(System.currentTimeMillis() - startTime).toString),
+                                        "fileName" → fromString(fi.get.getName),
+                                        "fileSize" → fromLong(fi.get.getSize)
                                     ), channels = channelMessageEndUpload)))
 
                                     fi.foreach(_.delete())
                                     Out("Ok")
                                 case Failure(e) ⇒
 
-                                    channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
+                                    channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = obj("message" → fromString(e.getMessage), "stack" → fromString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
                                     OutFailure(e)
                             }
                     }
@@ -330,12 +332,12 @@ object UploadContainer {
     }
 
     @RSTransfer(urlPattern = "/logic/arx_attatch/StopUpload")
-    class StopUpload(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
+    class StopUpload(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActor {
 
-        val requestData = new DSRequestDyn(request)
+        val requestData: DSRequest = request.JSONData.as[DSRequest].getOrElse(throw new RuntimeException ("Dont parsed Request JSON"))
         val connection = oraclePool.getConnection()
 
-        logger debug s"Request for Fetch: ${newLine + requestData.toPrettyString}"
+        logger debug s"Request for Fetch: ${newLine + requestData.asJson.toPrettyString}"
 
 
         def receive = {
@@ -349,8 +351,7 @@ object UploadContainer {
                     }
                 }
 
-                val requestData = new DSRequestDyn(request)
-                recStatus(requestData.getLong("status"), requestData.getLong("id"))
+                recStatus(requestData.asJson.getLong("status"), requestData.asJson.getLong("id"))
 
                 OutOk
                 selfStop()
