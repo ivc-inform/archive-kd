@@ -4,8 +4,6 @@ import com.simplesys.SmartClient.App.props._
 import com.simplesys.SmartClient.Control.props.{ListGridContextMenuProps, ProgressbarProps}
 import com.simplesys.SmartClient.Grids.props.listGrid.ListGridFieldProps
 import com.simplesys.SmartClient.Messaging.MessageJS
-import com.simplesys.SmartClient.RPC.props.RPCRequestProps
-import com.simplesys.SmartClient.RPC.{RPCManagerSS, RPCRequest, RPCResponse}
 import com.simplesys.SmartClient.System._
 import com.simplesys.System.Types.{Alignment, ListGridEditEvent, ListGridFieldType, RecordComponentPoolingMode}
 import com.simplesys.System._
@@ -17,9 +15,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
-import ru.simplesys.defs.app.scala.container.arx.AttatchDataRecord
 
-import scala.scalajs.js
 import scala.scalajs.js.UndefOr._
 
 trait AttatchDataRecordExt extends AttatchDataRecord {
