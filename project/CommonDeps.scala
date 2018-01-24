@@ -11,6 +11,7 @@ object PluginDeps {
         val sbtNativePackagerVersion = "1.2.5-SNAPSHOT"
         val scalaJSPluginVersion = "0.6.21"
         val jrabelPluginVersion = "0.11.1"
+        val scalaCrossProjectPluginVersion = "0.3.3-SNAPSHOT"
     }
 
     val devPlugin = addSbtPlugin("ru.simplesys" % "dev-plugin" % versions.devPluginVersion)
@@ -20,6 +21,9 @@ object PluginDeps {
     val sbtNativePackager = addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % versions.sbtNativePackagerVersion)
     val scalaJSPlugin = addSbtPlugin("org.scala-js" % "sbt-scalajs" % versions.scalaJSPluginVersion)
     val jrebelPlugin = addSbtPlugin("com.simplesys" % "jrebel-plugin" % versions.jrabelPluginVersion)
+
+    val sbtCrossproject = addSbtPlugin("org.scala-native" % "sbt-scalajs-crossproject" % versions.scalaCrossProjectPluginVersion)
+    val crossproject = addSbtPlugin("org.scala-native" % "sbt-crossproject" % versions.scalaCrossProjectPluginVersion)
 }
 
 object CommonDeps {
