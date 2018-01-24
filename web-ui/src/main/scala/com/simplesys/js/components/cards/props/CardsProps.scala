@@ -20,7 +20,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
-import ru.simplesys.defs.app.scala.container.arx.CardDataRecord
+import ru.simplesys.defs.app.scala.container.ArxCardDataRecord
 
 class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     //selectionType = SelectionStyle.multiple.opt
@@ -48,7 +48,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     var expandAttahes: ScOption[ExpandAttahes] = ExpandAttahes.none.opt
 
     expandRecord = {
-        (thizTop: classHandler, record: CardDataRecord) ⇒
+        (thizTop: classHandler, record: ArxCardDataRecord) ⇒
             MenuSS.create(
                 new MenuSSProps {
                     items = Seq(
@@ -103,7 +103,7 @@ class CardsProps extends CommonListGridEditorComponentProps with Implicits {
     }.toThisFunc.opt
 
     getExpansionComponent = {
-        (thiz: classHandler, record: CardDataRecord) ⇒
+        (thiz: classHandler, record: ArxCardDataRecord) ⇒
             thiz.expandAttahes match {
                 case ExpandAttahes.attachments ⇒
                     Attach.create(

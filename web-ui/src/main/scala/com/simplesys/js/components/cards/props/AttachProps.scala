@@ -15,11 +15,11 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
-import ru.simplesys.defs.app.scala.container.AttatchDataRecord
+import ru.simplesys.defs.app.scala.container.ArxAttatchDataRecord
 
 import scala.scalajs.js.UndefOr._
 
-trait AttatchDataRecordExt extends AttatchDataRecord {
+trait AttatchDataRecordExt extends ArxAttatchDataRecord {
     var fileName: JSUndefined[String]
     var percentsDone: JSUndefined[Double]
     var contentLength: JSUndefined[String]
@@ -60,7 +60,7 @@ class AttachProps extends CommonListGridEditorComponentProps {
 
     replacingFields = Seq(
         new ListGridFieldProps {
-            nameStrong = arx_attatch_vcrcode_NameStrong.opt
+            nameStrong = arx_attatch_vcrcode_Idcard_NameStrong.opt
             hidden = true.opt
             `type` = ListGridFieldType.sCode_SimpleType.opt
         }).opt
