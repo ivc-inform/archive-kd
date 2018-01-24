@@ -15,6 +15,7 @@ import com.simplesys.option.DoubleType._
 import com.simplesys.option.ScOption
 import com.simplesys.option.ScOption._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
+import ru.simplesys.defs.app.scala.container.AttatchDataRecord
 
 import scala.scalajs.js.UndefOr._
 

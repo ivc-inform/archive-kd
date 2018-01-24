@@ -7,21 +7,21 @@ import java.time.LocalDateTime
 
 import akka.actor.Actor
 import com.simplesys.app.SessionContextSupport
+import com.simplesys.circe.Circe._
 import com.simplesys.common.Strings._
 import com.simplesys.container.scala.GetAttFile
+import com.simplesys.isc.dataBinging.DSResponse.DSResponseFailureEx
 import com.simplesys.isc.dataBinging.{DSRequest, DSResponse, RPCResponse}
+import com.simplesys.jdbc.control.DsRequest
 import com.simplesys.jdbc.control.SessionStructures.callableStatement
 import com.simplesys.jdbc.control.classBO._
 import com.simplesys.jdbc.control.clob._
 import com.simplesys.servlet.isc.{GetData, ServletActor}
-import io.circe.generic.auto._
-import io.circe.syntax._
-import com.simplesys.circe.Circe._
-import com.simplesys.isc.dataBinging.DSResponse.DSResponseFailureEx
-import com.simplesys.jdbc.control.DsRequest
 import com.simplesys.tuple.TupleSS15
 import io.circe.Json
 import io.circe.Json._
+import io.circe.generic.auto._
+import io.circe.syntax._
 import ru.simplesys.defs.app.gen.scala.ScalaJSGen._
 import ru.simplesys.defs.bo.arx.{AttatchDS, DocizvDS}
 
@@ -95,7 +95,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                             idDocizv_Idizv: Long,
                             vizcodeDocizv_Idizv: Array[String]) =>
 
-                                val record = obj(
+                                val record = ArrayBuffer[(String, Json)](
                                     arx_attatch_id_NameStrong.name → idAttatch,
                                     arx_attatch_vatcode_NameStrong.name → vatcodeAttatch,
                                     arx_attatch_ddatein_NameStrong.name → ddateinAttatch,
@@ -104,13 +104,13 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                     arx_attatch_idizv_NameStrong.name → idizvAttatch,
                                     arx_attatch_idattypes_NameStrong.name → idattypesAttatch,
                                     arx_attatch_idcard_NameStrong.name → idcardAttatch,
-                                    arx_attatch_vizcode_NameStrong.name → vizcodeDocizv,
-                                    arx_attatch_vattypename_NameStrong.name → vattypenameAttatchtypes,
-                                    arx_attatch_vcrcode_NameStrong.name → vcrcodeCard,
+                                    arx_attatch_vizcode_Idizv_NameStrong.name → vizcodeDocizv_Idizv,
+                                    arx_attatch_vattypename_Idattypes_NameStrong.name → vattypenameAttatchtypes_Idattypes,
+                                    arx_attatch_vcrcode_Idcard_NameStrong.name → vcrcodeCard_Idcard,
                                     arx_attatch_status_NameStrong.name → checkStatus(connection, idAttatch)
                                 )
 
-                                dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv)).result match {
+                                dataSetDocIzv.selectPList(where = Where(dataSetDocIzv.idDocizv === idDocizv_Idizv)).result match {
                                     case Success(list) ⇒
                                         list.foreach {
                                             item ⇒
@@ -131,7 +131,7 @@ trait arx_attatch_SemiHandTrait_Fetch extends SessionContextSupport with Servlet
                                         }
                                 }
 
-                                _data += record
+                                _data += obj(record :_*)
 
 
                             case x =>
