@@ -6,13 +6,13 @@ import com.simplesys.app.SessionContext.{loggedAttributeName, _}
 import com.simplesys.app._
 import com.simplesys.common.Strings._
 import com.simplesys.common.equality.SimpleEquality._
-import com.simplesys.isc.dataBinging.DSRequestDyn._
 import com.simplesys.jdbc.control.classBO.Where
 import com.simplesys.jdbc.exception.NoDataFoundException
 import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
 import ru.simplesys.defs.bo.admin.{User, UserDS}
+import com.simplesys.circe.Circe._
 
 import scalaz.{Failure, Success}
 
@@ -64,7 +64,7 @@ class ReLoginFilter extends AkkaPartialFilter {
 
         def getAutentification: LoginedData1 = {
 
-            val requestData = req.toDSRequest
+            val requestData = req.JSONData
             val login = requestData.getString("login")
             val password = requestData.getString("password")
 

@@ -4,18 +4,17 @@ import javax.servlet.annotation.WebFilter
 
 import com.simplesys.akka.http.LoginedData1
 import com.simplesys.akka.http.filter.AkkaPartialFilter
+import com.simplesys.app.SessionContext._
 import com.simplesys.app._
 import com.simplesys.common.Strings._
 import com.simplesys.common.equality.SimpleEquality._
-import com.simplesys.isc.dataBinging.DSRequestDyn._
 import com.simplesys.jdbc.control.classBO.Where
 import com.simplesys.jdbc.exception.NoDataFoundException
 import com.simplesys.messages.ActorConfig._
 import com.simplesys.messages.MessageExt
 import com.simplesys.servlet.{FilterChain, ServletRequest, ServletResponse}
-import com.simplesys.tuple.{TupleSS5, TupleSS6, TupleSS7}
-import ru.simplesys.defs.bo.arx.{User, UserBo, UserDS}
-import SessionContext._
+import ru.simplesys.defs.bo.arx.{User, UserDS}
+import com.simplesys.circe.Circe._
 
 import scalaz.{Failure, Success}
 
@@ -67,7 +66,7 @@ class ReLoginAxFilter extends AkkaPartialFilter {
 
         def getAutentification: LoginedData1 = {
 
-            val requestData = req.toDSRequest
+            val requestData = req.JSONData
             val login = requestData.getString("login")
             val password = requestData.getString("password")
 
