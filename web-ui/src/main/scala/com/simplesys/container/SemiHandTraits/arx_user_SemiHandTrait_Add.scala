@@ -26,5 +26,5 @@ trait arx_user_SemiHandTrait_Add extends SessionContextSupport with ServletActor
     
      def receiveBase: Option[Actor.Receive] = None    
     
-     def wrapperBlobGetter(blob: Blob): String = blob.asString
+     def wrapperBlobGetter(blob: Blob): String = inputStream2Sting(blob)
 }

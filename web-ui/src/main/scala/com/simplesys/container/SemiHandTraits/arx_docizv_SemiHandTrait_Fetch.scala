@@ -26,5 +26,5 @@ trait arx_docizv_SemiHandTrait_Fetch extends SessionContextSupport with ServletA
     
      def receiveBase: Option[Actor.Receive] = None    
     
-     def wrapperBlobGetter(blob: Blob): String = blob.asString
+     def wrapperBlobGetter(blob: Blob): String = inputStream2Sting(blob)
 }

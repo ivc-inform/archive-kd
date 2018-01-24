@@ -26,5 +26,5 @@ trait arx_attatch_SemiHandTrait_Update extends SessionContextSupport with Servle
     
      def receiveBase: Option[Actor.Receive] = None    
     
-     def wrapperBlobGetter(blob: Blob): String = blob.asString
+     def wrapperBlobGetter(blob: Blob): String = inputStream2Sting(blob)
 }

@@ -26,5 +26,5 @@ trait test_upload_files_SemiHandTrait_Fetch extends SessionContextSupport with S
     
      def receiveBase: Option[Actor.Receive] = None    
     
-     def wrapperBlobGetter(blob: Blob): String = blob.asString
+     def wrapperBlobGetter(blob: Blob): String = inputStream2Sting(blob)
 }
