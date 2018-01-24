@@ -2,7 +2,6 @@ import com.simplesys.jrebel.JRebelPlugin
 import com.simplesys.jrebel.JRebelPlugin._
 import com.typesafe.sbt.packager.docker.DockerPlugin._
 import ru.simplesys.eakd.sbtbuild.{CommonDeps, CommonDepsScalaJS, CommonSettings, PluginDeps}
-import ru.simplesys.plugins.sourcegen.DevPlugin._
 import sbt.Keys.version
 
 name := CommonSettings.settingValues.name
@@ -12,12 +11,7 @@ lazy val root = (project in file(".")).
   settings(
       inThisBuild(Seq(
           scalaVersion := CommonSettings.settingValues.scalaVersion,
-          version := CommonSettings.settingValues.version,
-          liquibaseUsername in DevConfig := "eakd",
-          liquibasePassword in DevConfig := "eakd",
-          liquibaseDriver in DevConfig := "oracle.jdbc.OracleDriver",
-          liquibaseUrl in DevConfig := "jdbc:oracle:thin:@orapg.simplesys.lan:1521/test"
-
+          version := CommonSettings.settingValues.version
       )
         ++ CommonSettings.defaultSettings),
       publishArtifact in(Compile, packageBin) := false,
@@ -174,9 +168,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
                 Seq("isomorphic") -> Some(Seq("webapp", "isomorphic"))
             )
         ),
-        currentProjectGenerationDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "generated" / "generatedComponents",
-        currentProjectDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "javascript" / "developed",
-        currentProjectCoffeeDevelopedDirPath in MergeWebappConfig := (sourceDirectory in Compile).value / "webapp" / "coffeescript" / "developed",
+        webAppDirPath in MergeWebappConfig := (sourceDirectory in Compile).value,
         merge in MergeWebappConfig := (merge in MergeWebappConfig).dependsOn(CoffeeScriptKeys.coffeeScript in Assets).value,
 
         //xsbtWeb
@@ -216,7 +208,7 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
 
                 val classLoaderMirror = ru.runtimeMirror(this.getClass.getClassLoader)
                 val `type`: ru.Type = ru.typeOf[T]
-                
+
                 val decls = `type`.declarations.sorted.filter(_.isMethod).filter(!_.name.toString.contains("<init>"))
                 val im = classLoaderMirror reflect e
 
