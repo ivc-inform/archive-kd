@@ -1,5 +1,6 @@
 package ru.simplesys.eakd.sbtbuild
 
+import CommonDeps.versions
 import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt._
 
@@ -13,4 +14,7 @@ object CommonDepsScalaJS {
     val scalaTags = Def.setting("com.lihaoyi" %%% "scalatags" % CommonDeps.versions.scalaTagsVersion)
     val scalaDom = Def.setting("org.scala-js" %%% "scalajs-dom" % CommonDeps.versions.scalajsDOMVersion)
     val jQuery = Def.setting("be.doeraene" %%% "scalajs-jquery" % CommonDeps.versions.jQueryVersion)
+
+    val circeExtender = Def.setting("com.simplesys.cross" %%% "circe-extender" % versions.ssCrossVersion)
+    val servletWrapper = Def.setting("com.simplesys.cross" %%% "servlet-wrapper" % versions.ssCrossVersion)
 }

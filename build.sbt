@@ -91,9 +91,11 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
     scalacOptions ++= (if (scalaJSVersion.startsWith("0.6.")) Seq("-P:scalajs:sjsDefinedByDefault") else Nil),
 
     libraryDependencies ++= Seq(
+        CommonDeps.circeExtender,
         CommonDeps.servletAPI % Provided,
         CommonDeps.ssysCommon,
         CommonDeps.ssysCommonWebapp,
+        CommonDeps.ssysServletWrapper,
         CommonDeps.ssysIscComponents,
         CommonDeps.ssysScalaIOExtender,
         CommonDeps.ssysXMLExtender,
@@ -109,6 +111,9 @@ lazy val webUI = Project(id = "web-ui", base = file("web-ui")).
         CommonDeps.scalaJSWrapper,
         CommonDeps.scalaTags,
         CommonDeps.scalaURI,
+
+        CommonDepsScalaJS.circeExtender.value,
+        CommonDepsScalaJS.servletWrapper.value,
         CommonDepsScalaJS.smartClientWrapper.value,
         CommonDepsScalaJS.macroJS.value,
         CommonDepsScalaJS.scalaTags.value,

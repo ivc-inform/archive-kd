@@ -57,6 +57,8 @@ object CommonDeps {
         val commonsIOVersion = "2.5"
         val scalaURIVersion = "0.4.16"
         val configWrapperVersion = "0.4.4"
+
+        val ssCrossVersion = "1.0.0.5-SNAPSHOT"
     }
 
     val servletAPI = "javax.servlet" % "javax.servlet-api" % versions.servletAPIVersion
@@ -64,6 +66,7 @@ object CommonDeps {
     val smartclient = "com.simplesys" % "smartclient-js" % versions.smartclientVersion
 
     val ssysCommonWebapp = "com.simplesys.core" %% "common-webapp" % versions.ssysCoreVersion
+    val ssysServletWrapper = "com.simplesys.core" %% "servlet-wrapper" % versions.ssysCoreVersion
     val ssysIscComponents = "com.simplesys.core" %% "isc-components" % versions.ssysCoreVersion
     val ssysIscMisc = "com.simplesys.core" %% "isc-misc" % versions.ssysCoreVersion
 
@@ -98,6 +101,8 @@ object CommonDeps {
 
     val scalaURI = "com.netaporter" %% "scala-uri" % versions.scalaURIVersion
     val configWrapper = "com.github.kxbmap" %% "configs" % versions.configWrapperVersion
+
+    val circeExtender = "com.simplesys.cross" %% "circe-extender" % versions.ssCrossVersion
 
 }
 

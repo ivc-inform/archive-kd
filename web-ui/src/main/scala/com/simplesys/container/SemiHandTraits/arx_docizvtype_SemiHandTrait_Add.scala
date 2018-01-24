@@ -1,24 +1,27 @@
-// This file is generated automatically (at 19.07.2017 10:33:04), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
+// This file is generated automatically (at 24.01.2018 12:13:07), do not spend any changes here, because they will be lost. Generator: "GenBOContainer, stage: #765"
 
 package ru.simplesys.defs.app.scala.container.arx
 
 import com.simplesys.app.SessionContextSupport
-import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.isc.dataBinging.DSRequestDyn
+import io.circe.generic.auto._
+import io.circe.syntax._
+import com.simplesys.circe.Circe._
+import com.simplesys.servlet.isc.ServletActor
 import com.simplesys.common.Strings._
 import com.simplesys.jdbc.control.clob._
+import com.simplesys.isc.dataBinging.DSRequest
 import akka.actor.Actor
 import ru.simplesys.defs.bo.arx._
 
  
-trait arx_docizvtype_SemiHandTrait_Add extends SessionContextSupport with ServletActorDyn {
+trait arx_docizvtype_SemiHandTrait_Add extends SessionContextSupport with ServletActor {
     
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!!!! DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
-    val requestData = new DSRequestDyn(request)    
+    val requestData = new DSRequest(request.JSONData)    
     
-    logger debug s"Request for Add: ${newLine + requestData.toPrettyString}"    
+    logger debug s"Request for Add: ${newLine + requestData.asJson.toPrettyString}"    
     
-    val dataSet = DocizvtypeDS(oraclePool)
+    val dataSet = DocizvtypeDS(oraclePool)    
 /////////////////////////////// !!!!!!!!!!!!!!!!!!!!!!!!!! END DON'T MOVE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////    
     
      def receiveBase: Option[Actor.Receive] = None    
