@@ -2,10 +2,11 @@ package com.simplesys.container
 
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.http.StartPage
+import com.simplesys.common.Strings._
 import com.simplesys.common._
+import com.simplesys.servlet.ServletContext
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
-import com.simplesys.servlet.{GetData, ServletActor, ServletContext}
-import com.simplesys.SmartClient.System._
+import com.simplesys.servlet.isc.{GetData, ServletActor}
 
 //http://localhost:8083/archive-kd/StartPage
 @RSTransfer(urlPattern = "/StartPage")

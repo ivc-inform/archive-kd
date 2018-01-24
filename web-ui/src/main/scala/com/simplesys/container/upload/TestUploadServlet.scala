@@ -5,25 +5,25 @@ import java.util.Properties
 
 import com.simplesys.annotation.RSTransfer
 import com.simplesys.app.SessionContextSupport
-import com.simplesys.isc.system.ServletActorDyn
-import com.simplesys.json.{JsonLong, JsonObject, JsonString}
 import com.simplesys.messages.ActorConfig.SendMessage
 import com.simplesys.messages.Message
 import com.simplesys.servlet.ContentType._
 import com.simplesys.servlet.http.{HttpServletRequest, HttpServletResponse}
-import com.simplesys.servlet.{GetData, HTMLContent, ServletContext}
+import com.simplesys.servlet.{HTMLContent, ServletContext}
 import com.simplesys.util.DT
 import oracle.jdbc.OracleConnection
 import oracle.jdbc.dcn.{DatabaseChangeEvent, DatabaseChangeListener}
-import oracle.jdbc.pool.OracleDataSource
 import org.apache.commons.fileupload.ProgressListener
 import org.apache.commons.fileupload.disk.DiskFileItemFactory
 import org.apache.commons.fileupload.servlet.ServletFileUpload
+import com.simplesys.servlet.isc.{GetData, ServletActor}
 
 import scala.collection.JavaConverters._
 import scala.compat.Platform.EOL
 import scala.util.{Failure, Success, Try}
 import scala.xml.{Elem, Node, Null}
+import io.circe.Json._
+import io.circe.Json
 
 object UploadServlet {
     implicit def node2Elem(node: Node): Elem = Elem(node.prefix, node.label, Null, node.scope, true, node.child: _*)
@@ -50,7 +50,7 @@ object UploadServlet {
 }
 
 @RSTransfer(urlPattern = "/TestUploadServlet")
-class TestUploadServlet(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActorDyn {
+class TestUploadServlet(val request: HttpServletRequest, val response: HttpServletResponse, val servletContext: ServletContext) extends SessionContextSupport with ServletActor {
     private val filePath: String = "web-ui/target/upload"
 
     def receive = {
@@ -123,7 +123,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                             val stepSize = pContentLength / 100
 
                             if (firstStep) {
-                                channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = JsonObject("maxValue" → JsonLong(pContentLength)), channels = channelMessageMaxValue)))
+                                channelMessageMaxValue.foreach(channelMessageMaxValue ⇒ SendMessage(Message(data = obj("maxValue" → fromLong(pContentLength)), channels = channelMessageMaxValue)))
                                 firstStep = false
                             }
 
@@ -196,7 +196,7 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                                         println(s"post pstmt.executeUpdate; elapsedTime: ${DT(System.currentTimeMillis() - startTime)}")
 
                                         conn.commit()
-                                        
+
                                         fi.delete()
 
                                         val elapsedTime = System.currentTimeMillis() - startTime
@@ -219,12 +219,12 @@ class TestUploadServlet(val request: HttpServletRequest, val response: HttpServl
                                 conn.close()
                         }
 
-                        channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = JsonObject("elapsedTime" → JsonString(DT(System.currentTimeMillis() - startTime).toString)), channels = channelMessageEndUpload)))
+                        channelMessageEndUpload.foreach(channelMessageEndUpload ⇒ SendMessage(Message(data = obj("elapsedTime" → fromString(DT(System.currentTimeMillis() - startTime).toString)), channels = channelMessageEndUpload)))
 
                         Out("Ok")
                     case Failure(e) ⇒
 
-                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = JsonObject("message" → JsonString(e.getMessage), "stack" → JsonString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
+                        channelMessageError.foreach(channelMessageError ⇒ SendMessage(Message(data = obj("message" → fromString(e.getMessage), "stack" → fromString(e.getStackTrace().mkString("", EOL, EOL))), channels = channelMessageError)))
                         OutFailure(e)
                         connection.foreach(_.close())
                 }
