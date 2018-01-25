@@ -98,8 +98,6 @@ docker run -it --name archive-kd archive-kd:1.0.0.1 /bin/bush
 docker run -d --name archive-kd archive-kd:1.0.0.1
 
 
-tank.ssys.lan 192.168.115.202
-
 CREATE TABLE
     SVC_SEQGENERATOR
     (
